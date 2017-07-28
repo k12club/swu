@@ -1,0 +1,20 @@
+﻿{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "amd",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outFile": "Scripts/app-bundles.js"
+  },
+  "files": [
+    "Scripts/app/app.ts",
+    "Scripts/const/const.ts",
+    "Scripts/app/app_routing.ts",
+    "Scripts/app/home/HomeController.ts"
+  ],
+  "exclude": [
+    "scripts/typings",
+    "node_modules"
+  ]
+}

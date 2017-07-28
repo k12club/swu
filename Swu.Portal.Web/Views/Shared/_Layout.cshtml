@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+
+</head>
+<body layout="column" ng-cloak>
+    <div layout="column" layout-fill>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/ng-lib")
+    @Scripts.Render("~/bundles/ng-app", "~/bundles/utilities-lib")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

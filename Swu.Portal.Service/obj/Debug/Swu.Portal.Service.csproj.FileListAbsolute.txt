@@ -1,0 +1,17 @@
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Swu.Portal.Service.dll.config
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Swu.Portal.Service.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Swu.Portal.Service.pdb
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\SharpRepository.Repository.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Swu.Portal.Data.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\EntityFramework.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Swu.Portal.Data.pdb
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\EntityFramework.xml
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\obj\Debug\Swu.Portal.Service.csprojResolveAssemblyReference.cache
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\obj\Debug\Swu.Portal.Service.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\obj\Debug\Swu.Portal.Service.pdb
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Autofac.Configuration.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Autofac.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\SharpRepository.Ioc.Autofac.dll
+D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Service\bin\Debug\Autofac.xml
