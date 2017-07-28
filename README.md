@@ -8,11 +8,11 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 Check out 
-[the installation instructions in the documentation.](https://github.com/chansak/swu/edit/master/docs/install.md)
+[the installation instructions in the documentation.](https://github.com/chansak/swu/tree/master/document/installation.md)
 
 ## Deployment
 
-[the installation instructions in the documentation.](https://github.com/chansak/swu/edit/master/docs/deployment.md)
+[the installation instructions in the documentation.](https://github.com/chansak/swu/tree/master/document/deployment.md)
 
 ## Built With
 
