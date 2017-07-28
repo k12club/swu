@@ -27,7 +27,7 @@ Check out
 * [underscore]
 
 ## Versioning
-⋅⋅* version: 1.0.0 , 1 August 2017
+* version: 1.0.0 , 1 August 2017
 
 ## Authors
  
