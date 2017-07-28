@@ -12,6 +12,7 @@ Check out
 
 ## Deployment
 
+Check out 
 [the installation instructions in the documentation.](https://github.com/chansak/swu/tree/master/document/deployment.md)
 
 ## Built With
