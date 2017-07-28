@@ -29,8 +29,4 @@ Check out
 
 ## Authors
  
-* **[Chansak kochasen](https://github.com/chansak)** Software developer and analysis
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* **[Chansak kochasen](https://github.com/chansak)** Full stack software developer
