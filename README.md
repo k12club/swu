@@ -28,6 +28,7 @@ Check out
 
 ## Versioning
 * version: 1.0.0 , 1 August 2017
+⋅⋅⋅ This version is just a initial version for setting up the project. Compose with folder stuctor and layer design.
 
 ## Authors
  
