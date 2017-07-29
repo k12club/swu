@@ -4,7 +4,7 @@
     export class HomeController {
         static $inject: Array<string> = ["$scope", "$state"];
         constructor() {
-            alert('HomeController');
+            //alert('HomeController');
         }
 
     }

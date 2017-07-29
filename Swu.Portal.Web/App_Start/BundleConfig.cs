@@ -59,6 +59,36 @@ namespace Swu.Portal.Web
 
             bundles.Add(new ScriptBundle("~/bundles/utilities-lib")
                 .Include("~/Scripts/utilities/moment.min.js"));
+
+            bundles.Add(new ScriptBundle("~/theme/js")
+                .Include("~/Content/js/jquery.js",
+                "~/Content/js/jquery-ui.min.js",
+                "~/Content/js/bootstrap.min.js",
+                "~/Content/js/bootsnav.js",
+                "~/Content/js/scrollto.js",
+                "~/Content/js/jquery-scrolltofixed-min.js",
+                "~/Content/js/jquery-SmoothScroll-min.js.js",
+                "~/Content/js/jquery.counterup.js",
+                "~/Content/js/fancybox.js",
+                "~/Content/js/wow.min.js",
+                "~/Content/js/jquery.masonry.min.js",
+                "~/Content/js/jquery.magnific-popup.min.js",
+                "~/Content/js/owl.carousel.min.js",
+                "~/Content/js/jquery.fitvids.js",
+                "~/Content/js/css3-animate-it.js",
+                "~/Content/js/swiper.min.js",
+                "~/Content/js/flipclock.min.js",
+                "~/Content/js/script.js",
+                "~/Content/js/init-js.js"));
+
+            bundles.Add(new ScriptBundle("~/ie9/js")
+               .Include("~/Content/js/html5shiv.min.js",
+               "~/Content/js/respond.min.js"));
+
+           bundles.Add(new StyleBundle("~/theme/css")
+                .Include("~/Content/css/bootstrap.min.css",
+                "~/Content/css/style.css",
+                "~/Content/css/responsive.css"));
         }
     }
 }

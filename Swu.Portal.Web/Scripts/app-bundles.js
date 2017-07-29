@@ -231,7 +231,6 @@ var Swu;
         .module("app", [
         "ui.router",
         "ngMaterial",
-        "ngGrid",
         "toastr",
         "ngMessages",
         "ngStorage"])
@@ -304,7 +303,6 @@ var Swu;
 (function (Swu) {
     var HomeController = (function () {
         function HomeController() {
-            alert('HomeController');
         }
         HomeController.$inject = ["$scope", "$state"];
         HomeController = __decorate([

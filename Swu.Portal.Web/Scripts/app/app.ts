@@ -4,7 +4,6 @@ module Swu {
         .module("app", [
             "ui.router",
             "ngMaterial",
-            "ngGrid",
             "toastr",
             "ngMessages",
             "ngStorage"])
