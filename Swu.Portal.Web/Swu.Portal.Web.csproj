@@ -581,8 +581,8 @@
     <Content Include="Content\js\fancybox.js" />
     <Content Include="Content\js\flipclock.min.js" />
     <Content Include="Content\js\googlemaps.js" />
+    <Content Include="Content\js\home.plugin.js" />
     <Content Include="Content\js\html5shiv.min.js" />
-    <Content Include="Content\js\init-js.js" />
     <Content Include="Content\js\jquery-scrolltofixed-min.js" />
     <Content Include="Content\js\jquery-SmoothScroll-min.js" />
     <Content Include="Content\js\jquery-ui.min.js" />
@@ -597,6 +597,7 @@
     <Content Include="Content\js\nivolightbox.js" />
     <Content Include="Content\js\owl.carousel.min.js" />
     <Content Include="Content\js\respond.min.js" />
+    <Content Include="Content\js\index.plugin.js" />
     <Content Include="Content\js\script.js" />
     <Content Include="Content\js\scrollto.js" />
     <Content Include="Content\js\swiper.min.js" />
@@ -643,7 +644,17 @@
     <Content Include="Scripts\angular\ui-bootstrap.js" />
     <Content Include="Scripts\angular\ui-date.js" />
     <Content Include="Scripts\angular\underscore.js" />
+    <Content Include="Scripts\app\home\campus-video.html" />
+    <Content Include="Scripts\app\home\clients.html" />
+    <Content Include="Scripts\app\home\education.html" />
+    <Content Include="Scripts\app\home\events.html" />
     <Content Include="Scripts\app\home\index.html" />
+    <Content Include="Scripts\app\home\main-slider.html" />
+    <Content Include="Scripts\app\home\news-letter.html" />
+    <Content Include="Scripts\app\home\news.html" />
+    <Content Include="Scripts\app\home\register.html" />
+    <Content Include="Scripts\app\home\services.html" />
+    <Content Include="Scripts\app\home\testimonials.html" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\filter\ComonFilter.js" />
@@ -683,7 +694,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\directive\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -730,6 +740,7 @@
     <TypeScriptCompile Include="Scripts\app\core\angular-ngAnnotations.ts" />
     <TypeScriptCompile Include="Scripts\app\home\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\const\const.ts" />
+    <TypeScriptCompile Include="Scripts\directive\owlCarousel.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-material\angular-material.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-route\index.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
@@ -754,6 +765,7 @@
     <TypeScriptCompile Include="Scripts\typings\ng-grid\ng-grid.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\ngprogress-lite\nprogress-lite.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\nprogress\NProgress.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\owlCarousel\index.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />
     <TypeScriptCompile Include="Scripts\_references.ts" />

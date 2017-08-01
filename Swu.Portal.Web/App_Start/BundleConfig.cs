@@ -78,8 +78,7 @@ namespace Swu.Portal.Web
                 "~/Content/js/css3-animate-it.js",
                 "~/Content/js/swiper.min.js",
                 "~/Content/js/flipclock.min.js",
-                "~/Content/js/script.js",
-                "~/Content/js/init-js.js"));
+                "~/Content/js/script.js"));
 
             bundles.Add(new ScriptBundle("~/ie9/js")
                .Include("~/Content/js/html5shiv.min.js",

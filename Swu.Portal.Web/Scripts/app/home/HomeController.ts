@@ -3,9 +3,14 @@
     @Controller({ name: "HomeController" })
     export class HomeController {
         static $inject: Array<string> = ["$scope", "$state"];
-        constructor() {
-            //alert('HomeController');
+        constructor(private $scope:ng.IScope,private $state:ng.ui.IState) {
+           
         }
+        showMessage(): void {
+            alert('test');
+        }
+        init(): void {
+        };
 
     }
 }

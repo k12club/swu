@@ -233,7 +233,8 @@ var Swu;
         "ngMaterial",
         "toastr",
         "ngMessages",
-        "ngStorage"])
+        "ngStorage",
+        "ngSanitize"])
         .config(function () {
     })
         .run(['$state', '$http', function ($state, $http) {
@@ -302,8 +303,16 @@ var Swu;
 var Swu;
 (function (Swu) {
     var HomeController = (function () {
-        function HomeController() {
+        function HomeController($scope, $state) {
+            this.$scope = $scope;
+            this.$state = $state;
         }
+        HomeController.prototype.showMessage = function () {
+            alert('test');
+        };
+        HomeController.prototype.init = function () {
+        };
+        ;
         HomeController.$inject = ["$scope", "$state"];
         HomeController = __decorate([
             Swu.Module("app"),

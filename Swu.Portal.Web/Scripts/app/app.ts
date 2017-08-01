@@ -6,7 +6,8 @@ module Swu {
             "ngMaterial",
             "toastr",
             "ngMessages",
-            "ngStorage"])
+            "ngStorage",
+            "ngSanitize"])
         .config(function () {
         })
         .run(['$state', '$http', function ($state: ng.ui.IStateService, $http: ng.IHttpService) {
