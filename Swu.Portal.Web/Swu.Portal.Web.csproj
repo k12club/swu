@@ -644,6 +644,7 @@
     <Content Include="Scripts\angular\ui-bootstrap.js" />
     <Content Include="Scripts\angular\ui-date.js" />
     <Content Include="Scripts\angular\underscore.js" />
+    <Content Include="Scripts\app\contact\contact.html" />
     <Content Include="Scripts\app\course\course_list.html" />
     <Content Include="Scripts\app\course\course_detail.html" />
     <Content Include="Scripts\app\home\campus-video.html" />
@@ -660,6 +661,7 @@
     <Content Include="Scripts\app\research\research_detail.html" />
     <Content Include="Scripts\app\research\research_list.html" />
     <Content Include="Scripts\app\teacher\teacher_detail.html" />
+    <Content Include="Scripts\app\teacher\teacher_list.html" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\filter\ComonFilter.js" />
@@ -742,6 +744,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\contact\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\contact\ContactUsController.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-experimental.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-ngAnnotations.ts" />
     <TypeScriptCompile Include="Scripts\app\course\app_routing.ts" />
@@ -754,6 +758,7 @@
     <TypeScriptCompile Include="Scripts\app\research\ResearchListController.ts" />
     <TypeScriptCompile Include="Scripts\app\teacher\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\teacher\TeacherController.ts" />
+    <TypeScriptCompile Include="Scripts\app\teacher\TeacherListController.ts" />
     <TypeScriptCompile Include="Scripts\const\const.ts" />
     <TypeScriptCompile Include="Scripts\directive\owlCarousel.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-material\angular-material.d.ts" />

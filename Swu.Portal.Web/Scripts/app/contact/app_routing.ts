@@ -9,15 +9,10 @@
             private $locationProvider: ng.ILocationProvider,
             private $httpProvider: ng.IHttpProvider) {
             $stateProvider
-                .state("teacher", {
-                    url: "/teacher/:id",
-                    templateUrl: "/Scripts/app/teacher/teacher_detail.html",
-                    controller: "TeacherController as vm"
-                })
-                .state("teacher-list", {
-                    url: "/teacher-list",
-                    templateUrl: "/Scripts/app/teacher/teacher_list.html",
-                    controller: "TeacherListController as vm"
+                .state("contact", {
+                    url: "/contact",
+                    templateUrl: "/Scripts/app/contact/contact.html",
+                    controller: "ContactUsController as vm"
                 });
         }
     }

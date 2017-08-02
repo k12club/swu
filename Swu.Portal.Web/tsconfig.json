@@ -18,9 +18,12 @@
     "Scripts/app/course/app_routing.ts",
     "Scripts/app/teacher/TeacherController.ts",
     "Scripts/app/teacher/app_routing.ts",
+    "Scripts/app/teacher/TeacherListController.ts",
     "Scripts/app/research/ResearchController.ts",
     "Scripts/app/research/ResearchListController.ts",
-    "Scripts/app/research/app_routing.ts"
+    "Scripts/app/research/app_routing.ts",
+    "Scripts/app/contact/ContactUsController.ts",
+    "Scripts/app/contact/app_routing.ts"
   ],
   "exclude": [
     "scripts/typings",

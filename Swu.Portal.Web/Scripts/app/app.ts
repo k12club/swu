@@ -10,7 +10,9 @@ module Swu {
             "ngSanitize"])
         .config(function () {
         })
-        .run(['$state', '$http', function ($state: ng.ui.IStateService, $http: ng.IHttpService) {
-
+        .run(['$state', '$http', '$rootScope', function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope:ng.IRootScopeService) {
+            $rootScope.$on('$stateChangeSuccess', function () {
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            });
         }]);
 }

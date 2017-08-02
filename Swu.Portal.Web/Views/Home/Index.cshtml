@@ -124,13 +124,8 @@
                                         <li><a href="#">Departments</a>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Education</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" ui-sref="course-list">Courses</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
+                                <li><a href="#" ui-sref="course-list">Courses</a></li>
+                                @*<li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Announcement</a></li>
@@ -138,17 +133,17 @@
                                         <li><a href="#">Events</a></li>
                                         <li><a href="#">Photo gallery</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
                                 <li><a href="#" ui-sref="research-list">Research</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Peoples</a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="page-become-teacher.html">Student Life</a></li>
-                                        <li><a href="page-teacher-details.html">Teacher List</a></li>
+                                        <li><a href="#">Student Life</a></li>
+                                        <li><a href="#" ui-sref="teacher-list">Teacher List</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"> <a href="#">Contact</a></li>
-                                <li><a href="#">FAQS</a></li>
+                                <li class="dropdown"> <a href="#" ui-sref="contact">Contact</a></li>
+                                @*<li><a href="#">FAQS</a></li>*@
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->
@@ -162,8 +157,7 @@
     <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
 
     <!-- Content Section -->
-    <div ui-view>
-    </div>
+    <div ui-view></div>
 
     <!-- Footer Section -->
     <section class="irs-footer">
