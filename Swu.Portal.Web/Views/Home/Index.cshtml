@@ -107,13 +107,13 @@
                         <!-- Start Header Navigation -->
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"> <i class="fa fa-bars"></i> </button>
-                            <a class="navbar-brand" href="#brand"><img src="~/Content/images/header-logo.png" class="logo" alt="header-logo.png"></a>
+                            <a class="navbar-brand" ui-sref="app"><img src="~/Content/images/header-logo.png" class="logo" alt="header-logo.png"></a>
                         </div>
                         <!-- End Header Navigation -->
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="navbar-menu">
                             <ul class="nav navbar-nav navbar-center">
-                                <li><a href="#">Home</a></li>
+                                <li><a ui-sref="app">Home</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us</a>
                                     <ul class="dropdown-menu">
@@ -127,7 +127,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Education</a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Courses</a></li>
+                                        <li><a href="#" ui-sref="course-list">Courses</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -139,7 +139,7 @@
                                         <li><a href="#">Photo gallery</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Research</a></li>
+                                <li><a href="#" ui-sref="research-list">Research</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Peoples</a>
                                     <ul class="dropdown-menu">

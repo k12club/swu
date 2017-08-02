@@ -284,6 +284,23 @@ var Swu;
             this.$urlRouterProvider = $urlRouterProvider;
             this.$locationProvider = $locationProvider;
             this.$httpProvider = $httpProvider;
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
             $urlRouterProvider.otherwise("/app");
             $stateProvider
                 .state("app", {
@@ -321,4 +338,193 @@ var Swu;
         return HomeController;
     }());
     Swu.HomeController = HomeController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CourseController = (function () {
+        function CourseController($scope, $state) {
+            this.$scope = $scope;
+            this.$state = $state;
+        }
+        CourseController.prototype.showMessage = function () {
+            alert('test');
+        };
+        CourseController.prototype.init = function () {
+        };
+        ;
+        CourseController.$inject = ["$scope", "$state"];
+        CourseController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CourseController" })
+        ], CourseController);
+        return CourseController;
+    }());
+    Swu.CourseController = CourseController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CourseListController = (function () {
+        function CourseListController($scope, $state) {
+            this.$scope = $scope;
+            this.$state = $state;
+        }
+        CourseListController.prototype.showMessage = function () {
+            alert('test');
+        };
+        CourseListController.prototype.init = function () {
+        };
+        ;
+        CourseListController.$inject = ["$scope", "$state"];
+        CourseListController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CourseListController" })
+        ], CourseListController);
+        return CourseListController;
+    }());
+    Swu.CourseListController = CourseListController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $stateProvider
+                .state("course", {
+                url: "/course/:id",
+                templateUrl: "/Scripts/app/course/course_detail.html",
+                controller: "CourseController as vm"
+            })
+                .state("course-list", {
+                url: "/course-list",
+                templateUrl: "/Scripts/app/course/course_list.html",
+                controller: "CourseListController as vm"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var TeacherController = (function () {
+        function TeacherController($scope, $state) {
+            this.$scope = $scope;
+            this.$state = $state;
+        }
+        TeacherController.prototype.showMessage = function () {
+            alert('test');
+        };
+        TeacherController.prototype.init = function () {
+        };
+        ;
+        TeacherController.$inject = ["$scope", "$state"];
+        TeacherController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "TeacherController" })
+        ], TeacherController);
+        return TeacherController;
+    }());
+    Swu.TeacherController = TeacherController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $stateProvider
+                .state("teacher", {
+                url: "/teacher/:id",
+                templateUrl: "/Scripts/app/teacher/teacher_detail.html",
+                controller: "TeacherController as vm"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var ResearchController = (function () {
+        function ResearchController($scope, $state) {
+            this.$scope = $scope;
+            this.$state = $state;
+        }
+        ResearchController.prototype.showMessage = function () {
+            alert('test');
+        };
+        ResearchController.prototype.init = function () {
+        };
+        ;
+        ResearchController.$inject = ["$scope", "$state"];
+        ResearchController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ResearchController" })
+        ], ResearchController);
+        return ResearchController;
+    }());
+    Swu.ResearchController = ResearchController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var ResearchListController = (function () {
+        function ResearchListController($scope, $state) {
+            this.$scope = $scope;
+            this.$state = $state;
+        }
+        ResearchListController.prototype.showMessage = function () {
+            alert('test');
+        };
+        ResearchListController.prototype.init = function () {
+        };
+        ;
+        ResearchListController.$inject = ["$scope", "$state"];
+        ResearchListController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ResearchListController" })
+        ], ResearchListController);
+        return ResearchListController;
+    }());
+    Swu.ResearchListController = ResearchListController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $stateProvider
+                .state("research", {
+                url: "/research/:id",
+                templateUrl: "/Scripts/app/research/research_detail.html",
+                controller: "CourseController as vm"
+            })
+                .state("research-list", {
+                url: "/research-list",
+                templateUrl: "/Scripts/app/research/research_list.html",
+                controller: "CourseListController as vm"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
 })(Swu || (Swu = {}));

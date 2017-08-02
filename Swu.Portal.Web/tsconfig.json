@@ -11,7 +11,16 @@
     "Scripts/app/app.ts",
     "Scripts/const/const.ts",
     "Scripts/app/app_routing.ts",
-    "Scripts/app/home/HomeController.ts"
+    "Scripts/app/home/app_routing.ts",
+    "Scripts/app/home/HomeController.ts",
+    "Scripts/app/course/CourseController.ts",
+    "Scripts/app/course/CourseListController.ts",
+    "Scripts/app/course/app_routing.ts",
+    "Scripts/app/teacher/TeacherController.ts",
+    "Scripts/app/teacher/app_routing.ts",
+    "Scripts/app/research/ResearchController.ts",
+    "Scripts/app/research/ResearchListController.ts",
+    "Scripts/app/research/app_routing.ts"
   ],
   "exclude": [
     "scripts/typings",

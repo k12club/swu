@@ -644,6 +644,8 @@
     <Content Include="Scripts\angular\ui-bootstrap.js" />
     <Content Include="Scripts\angular\ui-date.js" />
     <Content Include="Scripts\angular\underscore.js" />
+    <Content Include="Scripts\app\course\course_list.html" />
+    <Content Include="Scripts\app\course\course_detail.html" />
     <Content Include="Scripts\app\home\campus-video.html" />
     <Content Include="Scripts\app\home\clients.html" />
     <Content Include="Scripts\app\home\education.html" />
@@ -653,8 +655,11 @@
     <Content Include="Scripts\app\home\news-letter.html" />
     <Content Include="Scripts\app\home\news.html" />
     <Content Include="Scripts\app\home\register.html" />
-    <Content Include="Scripts\app\home\services.html" />
+    <Content Include="Scripts\app\home\courses.html" />
     <Content Include="Scripts\app\home\testimonials.html" />
+    <Content Include="Scripts\app\research\research_detail.html" />
+    <Content Include="Scripts\app\research\research_list.html" />
+    <Content Include="Scripts\app\teacher\teacher_detail.html" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\filter\ComonFilter.js" />
@@ -694,6 +699,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\app\student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -738,7 +744,16 @@
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-experimental.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-ngAnnotations.ts" />
+    <TypeScriptCompile Include="Scripts\app\course\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\course\CourseListController.ts" />
+    <TypeScriptCompile Include="Scripts\app\course\CourseController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\HomeController.ts" />
+    <TypeScriptCompile Include="Scripts\app\research\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\research\ResearchController.ts" />
+    <TypeScriptCompile Include="Scripts\app\research\ResearchListController.ts" />
+    <TypeScriptCompile Include="Scripts\app\teacher\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\teacher\TeacherController.ts" />
     <TypeScriptCompile Include="Scripts\const\const.ts" />
     <TypeScriptCompile Include="Scripts\directive\owlCarousel.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-material\angular-material.d.ts" />

@@ -8,6 +8,13 @@
             private $urlRouterProvider: ng.ui.IUrlRouterProvider,
             private $locationProvider: ng.ILocationProvider,
             private $httpProvider: ng.IHttpProvider) {
+            $urlRouterProvider.otherwise("/app");
+            $stateProvider
+                .state("app", {
+                    url: "/app",
+                    templateUrl: "/Scripts/app/home/index.html",
+                    controller: "HomeController as vm"
+                });
         }
     }
 } 

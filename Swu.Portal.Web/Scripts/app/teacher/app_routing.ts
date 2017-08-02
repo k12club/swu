@@ -8,6 +8,12 @@
             private $urlRouterProvider: ng.ui.IUrlRouterProvider,
             private $locationProvider: ng.ILocationProvider,
             private $httpProvider: ng.IHttpProvider) {
+            $stateProvider
+                .state("teacher", {
+                    url: "/teacher/:id",
+                    templateUrl: "/Scripts/app/teacher/teacher_detail.html",
+                    controller: "TeacherController as vm"
+                });
         }
     }
 } 
