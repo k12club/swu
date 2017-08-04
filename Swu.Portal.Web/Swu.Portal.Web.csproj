@@ -658,6 +658,9 @@
     <Content Include="Scripts\app\home\register.html" />
     <Content Include="Scripts\app\home\courses.html" />
     <Content Include="Scripts\app\home\testimonials.html" />
+    <Content Include="Scripts\app\settings\courses.html" />
+    <Content Include="Scripts\app\settings\default.html" />
+    <Content Include="Scripts\app\settings\main.html" />
     <Content Include="Scripts\app\research\research_detail.html" />
     <Content Include="Scripts\app\research\research_list.html" />
     <Content Include="Scripts\app\teacher\teacher_detail.html" />
@@ -753,6 +756,8 @@
     <TypeScriptCompile Include="Scripts\app\course\CourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\HomeController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\SettingCoursesController.ts" />
     <TypeScriptCompile Include="Scripts\app\research\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\research\ResearchController.ts" />
     <TypeScriptCompile Include="Scripts\app\research\ResearchListController.ts" />

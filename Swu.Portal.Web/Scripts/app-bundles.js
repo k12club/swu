@@ -597,3 +597,60 @@ var Swu;
         return StateConfig;
     }());
 })(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $stateProvider
+                .state("settings", {
+                url: "/settings",
+                views: {
+                    '': { templateUrl: '/Scripts/app/settings/main.html' },
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/default.html',
+                        controller: 'SettingCoursesController as vm'
+                    }
+                }
+            })
+                .state("settings.courses", {
+                parent: "settings",
+                url: "/courses",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/courses.html',
+                        controller: 'SettingCoursesController as vm'
+                    }
+                }
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var SettingCoursesController = (function () {
+        function SettingCoursesController($scope, $state) {
+            this.$scope = $scope;
+            this.$state = $state;
+        }
+        SettingCoursesController.prototype.init = function () {
+        };
+        ;
+        SettingCoursesController.$inject = ["$scope", "$state"];
+        SettingCoursesController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "SettingCoursesController" })
+        ], SettingCoursesController);
+        return SettingCoursesController;
+    }());
+    Swu.SettingCoursesController = SettingCoursesController;
+})(Swu || (Swu = {}));

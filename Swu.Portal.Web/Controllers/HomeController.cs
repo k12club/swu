@@ -19,5 +19,8 @@ namespace Swu.Portal.Web.Controllers
             var result = this._personalTestServices.GetAllData();
             return View();
         }
+        public ActionResult Personal() {
+            return View();
+        }
     }
 }

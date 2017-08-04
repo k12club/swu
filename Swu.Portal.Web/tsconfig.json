@@ -23,7 +23,9 @@
     "Scripts/app/research/ResearchListController.ts",
     "Scripts/app/research/app_routing.ts",
     "Scripts/app/contact/ContactUsController.ts",
-    "Scripts/app/contact/app_routing.ts"
+    "Scripts/app/contact/app_routing.ts",
+    "Scripts/app/settings/app_routing.ts",
+    "Scripts/app/settings/SettingCoursesController.ts"
   ],
   "exclude": [
     "scripts/typings",
