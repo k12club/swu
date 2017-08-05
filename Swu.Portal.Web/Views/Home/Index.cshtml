@@ -4,7 +4,7 @@
 }
 <div class="wrapper">
     <div class="preloader"></div>
-    <div class="irs-header-topped">
+    <div class="irs-header-topped" ng-controller="LoginController as vm">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-9 clearfix">
@@ -25,12 +25,12 @@
                     <div class="irs-log-reg">
                         <ul class="list-inline">
                             <li>
-                                <a href="#"><div data-toggle="modal" data-target=".bs-example-modal-lg">Login</div></a>
-                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+                                <a href="#"><div ng-click="ShowModalLogin(true)">Login</div></a>
+                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" login-modal="showModal" data-backdrop="static">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <button type="button" class="close" ng-click="ShowModalLogin(false)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title text-center" id="exampleModalLabel">Login or Register</h4>
                                                 <p class="irs-sign-reg-para text-center">Sign in or register today in oorder to have access to all our courses or purchase new ones.</p>
                                             </div>
@@ -46,7 +46,7 @@
                                                             <div class="form-group">
                                                                 <input type="password" class="form-control" placeholder="Password">
                                                             </div>
-                                                            <button type="submit" class="btn btn-default irs-button-styledark">Login to account</button>
+                                                            <input type="button" class="btn btn-default irs-button-styledark" value="Login to account" ng-click="Login()" />
                                                         </form>
                                                     </div>
                                                     <div class="col-md-6">
@@ -126,14 +126,14 @@
                                 </li>
                                 <li><a href="#" ui-sref="course-list">Courses</a></li>
                                 @*<li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Announcement</a></li>
-                                        <li><a href="#">Activities</a></li>
-                                        <li><a href="#">Events</a></li>
-                                        <li><a href="#">Photo gallery</a></li>
-                                    </ul>
-                                </li>*@
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Announcement</a></li>
+                                            <li><a href="#">Activities</a></li>
+                                            <li><a href="#">Events</a></li>
+                                            <li><a href="#">Photo gallery</a></li>
+                                        </ul>
+                                    </li>*@
                                 <li><a href="#" ui-sref="research-list">Research</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Peoples</a>
@@ -143,7 +143,6 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown"> <a href="#" ui-sref="contact">Contact</a></li>
-                                <li><a href="#" ui-sref="settings">Settings</a></li>
                                 @*<li><a href="#">FAQS</a></li>*@
                             </ul>
                         </div>

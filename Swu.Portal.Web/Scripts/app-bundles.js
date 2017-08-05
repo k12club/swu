@@ -227,6 +227,10 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var underscore = angular.module('underscore', []);
+    underscore.factory('_', ['$window', function ($window) {
+            return $window._;
+        }]);
     angular
         .module("app", [
         "ui.router",
@@ -234,14 +238,40 @@ var Swu;
         "toastr",
         "ngMessages",
         "ngStorage",
-        "ngSanitize"])
-        .config(function () {
-    })
-        .run(['$state', '$http', '$rootScope', function ($state, $http, $rootScope) {
+        "ngSanitize",
+        "underscore",
+        "ui.bootstrap"
+    ])
+        .run(['$state', '$http', '$rootScope', 'AppConstant', function ($state, $http, $rootScope, AppConstant) {
             $rootScope.$on('$stateChangeSuccess', function () {
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
+                var result = _.contains(exceptGotoTopStateList, $state.current.name);
+                if (!result) {
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                }
             });
         }]);
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var loginModal = (function () {
+        function loginModal() {
+            this.restric = "A";
+        }
+        loginModal.prototype.link = function (scope, element, attrs) {
+            scope.$watch(attrs.loginModal, function (value) {
+                if (value)
+                    element.modal('show');
+                else
+                    element.modal('hide');
+            });
+        };
+        loginModal = __decorate([
+            Swu.Module("app"),
+            Swu.Directive({ name: "loginModal" })
+        ], loginModal);
+        return loginModal;
+    }());
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -253,23 +283,10 @@ var Swu;
                 port: "8081",
                 versionName: "V1"
             };
-            this.gridOptions = {
-                showFilter: false,
-                multiSelect: false,
-                enableSorting: false,
-                enablePaging: true,
-                enableColumnResize: true,
-                showFooter: true,
-                enableCellSelection: false,
-                enableRowSelection: true,
-                selectedItems: [],
-                pagingOptions: {
-                    pageSizes: [5, 10, 50],
-                    pageSize: '5',
-                    currentPage: 1,
-                    totalServerItems: 0
-                }
-            };
+            this.exceptGotoTopStateList = [
+                "settings",
+                "settings.courses"
+            ];
         }
         AppConstant = __decorate([
             Swu.Module("app"),
@@ -653,4 +670,29 @@ var Swu;
         return SettingCoursesController;
     }());
     Swu.SettingCoursesController = SettingCoursesController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var LoginController = (function () {
+        function LoginController($scope, $state) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.$scope.showModal = false;
+            this.$scope.ShowModalLogin = function (flag) {
+                _this.$scope.showModal = flag;
+            };
+            this.$scope.Login = function () {
+                _this.$scope.showModal = false;
+                _this.$state.go("settings");
+            };
+        }
+        LoginController.$inject = ["$scope", "$state"];
+        LoginController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "LoginController" })
+        ], LoginController);
+        return LoginController;
+    }());
+    Swu.LoginController = LoginController;
 })(Swu || (Swu = {}));

@@ -9,6 +9,7 @@
   },
   "files": [
     "Scripts/app/app.ts",
+    "Scripts/directive/loginmodal.ts",
     "Scripts/const/const.ts",
     "Scripts/app/app_routing.ts",
     "Scripts/app/home/app_routing.ts",
@@ -25,7 +26,8 @@
     "Scripts/app/contact/ContactUsController.ts",
     "Scripts/app/contact/app_routing.ts",
     "Scripts/app/settings/app_routing.ts",
-    "Scripts/app/settings/SettingCoursesController.ts"
+    "Scripts/app/settings/SettingCoursesController.ts",
+    "Scripts/app/login/LoginController.ts"
   ],
   "exclude": [
     "scripts/typings",

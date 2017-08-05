@@ -756,6 +756,7 @@
     <TypeScriptCompile Include="Scripts\app\course\CourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\HomeController.ts" />
+    <TypeScriptCompile Include="Scripts\app\login\LoginController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\SettingCoursesController.ts" />
     <TypeScriptCompile Include="Scripts\app\research\app_routing.ts" />
@@ -765,7 +766,7 @@
     <TypeScriptCompile Include="Scripts\app\teacher\TeacherController.ts" />
     <TypeScriptCompile Include="Scripts\app\teacher\TeacherListController.ts" />
     <TypeScriptCompile Include="Scripts\const\const.ts" />
-    <TypeScriptCompile Include="Scripts\directive\owlCarousel.ts" />
+    <TypeScriptCompile Include="Scripts\directive\loginModal.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-material\angular-material.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-route\index.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />

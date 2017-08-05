@@ -1,5 +1,9 @@
 ﻿/// <reference path="../_references.ts" />
 module Swu {
+    var underscore = angular.module('underscore', []);
+    underscore.factory('_', ['$window', function ($window: any) {
+        return $window._;
+    }]);
     angular
         .module("app", [
             "ui.router",
@@ -7,12 +11,17 @@ module Swu {
             "toastr",
             "ngMessages",
             "ngStorage",
-            "ngSanitize"])
-        .config(function () {
-        })
-        .run(['$state', '$http', '$rootScope', function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope:ng.IRootScopeService) {
+            "ngSanitize",
+            "underscore",
+            "ui.bootstrap"
+        ])
+        .run(['$state', '$http', '$rootScope', 'AppConstant', function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: ng.IRootScopeService, AppConstant: AppConstant) {
             $rootScope.$on('$stateChangeSuccess', function () {
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
+                var result = _.contains(exceptGotoTopStateList, $state.current.name);
+                if (!result) {
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                }
             });
         }]);
 }
