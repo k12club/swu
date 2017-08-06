@@ -18,19 +18,15 @@ namespace Swu.Portal.Data.Migrations
         }
         protected override void Seed(SwuDBContext context)
         {
-            //var manager = new UserManager<ApplicationUser>(
-            //    new UserStore<ApplicationUser>(
-            //        new SwuDBContext()));
-
-            //// Create 4 test users:
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    var user = new ApplicationUser()
-            //    {
-            //        UserName = string.Format("User{0}", i.ToString())
-            //    };
-            //    manager.Create(user, string.Format("Password{0}", i.ToString()));
-            //}
+            var manager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(
+                    new SwuDBContext()));
+            manager.Create(new ApplicationUser
+            {
+                UserName = "chansak",
+                FirstName = "chansak",
+                LastName = "kochasen"
+            }, "password");
         }
     }
 }

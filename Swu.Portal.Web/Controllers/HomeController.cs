@@ -17,7 +17,6 @@ namespace Swu.Portal.Web.Controllers
         }
         public ActionResult Index()
         {
-            var user = this._applicationUserServices.VerifyAndGetUser("User0", "User0");
             return View();
         }
         // POST: /Account/JsonLogin
@@ -25,12 +24,14 @@ namespace Swu.Portal.Web.Controllers
         [HttpPost]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult JsonLogin(LoginViewModel model)
-        //public JsonResult JsonLogin(LoginViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            var user = this._applicationUserServices.GetUser("User1");
-            //}
+            //mockup data:
+            //username:chansak
+            //password:password
+            if (ModelState.IsValid)
+            {
+                var user = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
+            }
             return Json(null);
         }
     }
