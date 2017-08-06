@@ -11,8 +11,8 @@ namespace Swu.Portal.Web.Api.Extensions
 {
     public static class EntityExtension
     {
-        public static List<PersonalTestDataProxy> ToViewModel(this IEnumerable<PersonalTestData> data) {
-            return Mapper.Map<IEnumerable<PersonalTestDataProxy>>(data).ToList();
-        }
+        //public static List<PersonalTestDataProxy> ToViewModel(this IEnumerable<PersonalTestData> data) {
+        //    return Mapper.Map<IEnumerable<PersonalTestDataProxy>>(data).ToList();
+        //}
     }
 }

@@ -82,6 +82,7 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.Razor.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Deployment.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Data.pdb
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Service.pdb
@@ -106,6 +107,7 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.Razor.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.dll

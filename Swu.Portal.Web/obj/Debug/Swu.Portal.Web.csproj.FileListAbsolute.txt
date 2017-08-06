@@ -92,19 +92,18 @@ D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.pdb
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\bin\AutoMapper.dll
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\bin\AutoMapper.xml
-D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
-D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\Git\swu\Swu.Portal.Web\bin\roslyn\VBCSCompiler.exe.config
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\csc.exe
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.VisualBasic.Core.targets
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\System.Collections.Immutable.dll
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\System.Reflection.Metadata.dll
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\vbc.exe
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\VBCSCompiler.exe
+D:\Git\swu\Swu.Portal.Web\bin\roslyn\VBCSCompiler.exe.config
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Web.dll.config
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Web.dll
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Web.pdb
@@ -134,6 +133,7 @@ D:\Git\swu\Swu.Portal.Web\bin\Owin.dll
 D:\Git\swu\Swu.Portal.Web\bin\SharpRepository.EfRepository.dll
 D:\Git\swu\Swu.Portal.Web\bin\SharpRepository.Ioc.Autofac.dll
 D:\Git\swu\Swu.Portal.Web\bin\SharpRepository.Repository.dll
+D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Core.dll
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Data.dll
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Service.dll
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Web.Api.dll
@@ -149,6 +149,7 @@ D:\Git\swu\Swu.Portal.Web\bin\System.Web.WebPages.dll
 D:\Git\swu\Swu.Portal.Web\bin\System.Web.WebPages.Razor.dll
 D:\Git\swu\Swu.Portal.Web\bin\WebGrease.dll
 D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.dll
+D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Core.pdb
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Data.pdb
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Service.pdb
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Web.Api.pdb
@@ -184,5 +185,6 @@ D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.Google.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.xml
+D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.pdb

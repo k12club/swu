@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Swu.Portal.Service;
 using Swu.Portal.Data.Models;
 using Swu.Portal.Web.Api.Proxy;
 using AutoMapper;
@@ -13,17 +12,17 @@ namespace Swu.Portal.Web.Api.V1
     [RoutePrefix("V1/PersonalTestData")]
     public class PersonalTestDataController : ApiController
     {
-        private readonly IPersonalTestDataServices _service;
-        public PersonalTestDataController(IPersonalTestDataServices service)
-        {
-            this._service = service;
-        }
+        //private readonly IPersonalTestDataServices _service;
+        //public PersonalTestDataController(IPersonalTestDataServices service)
+        //{
+        //    this._service = service;
+        //}
 
-        [HttpGet, Route("getAllData")]
-        public IHttpActionResult GetAllData()
-        {
-            var ret = this._service.GetAllData();
-            return Json(ret.ToViewModel());
-        }
+        //[HttpGet, Route("getAllData")]
+        //public IHttpActionResult GetAllData()
+        //{
+        //    var ret = this._service.GetAllData();
+        //    return Json(ret.ToViewModel());
+        //}
     }
 }

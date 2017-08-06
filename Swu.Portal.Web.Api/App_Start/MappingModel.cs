@@ -8,8 +8,8 @@ namespace Swu.Portal.Web.Api.App_Start
     {
         static void ConfigureModelMapping() {
             Mapper.Initialize(cfg => {
-                cfg.CreateMap<PersonalTestData, PersonalTestDataProxy>();
-                cfg.CreateMap<PersonalTestDataProxy, PersonalTestData>();
+                //cfg.CreateMap<PersonalTestData, PersonalTestDataProxy>();
+                //cfg.CreateMap<PersonalTestDataProxy, PersonalTestData>();
             });
         }
 
