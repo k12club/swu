@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Swu.Portal.Data.Models;
-using Swu.Portal.Web.Api.Proxy;
 
 namespace Swu.Portal.Web.Api.App_Start
 {
@@ -8,8 +7,10 @@ namespace Swu.Portal.Web.Api.App_Start
     {
         static void ConfigureModelMapping() {
             Mapper.Initialize(cfg => {
-                //cfg.CreateMap<PersonalTestData, PersonalTestDataProxy>();
-                //cfg.CreateMap<PersonalTestDataProxy, PersonalTestData>();
+                cfg.CreateMap<ApplicationUser, UserLoginProxy>();
+                cfg.CreateMap<UserLoginProxy, ApplicationUser>();
+                cfg.CreateMap<ApplicationUser, UserProfile>();
+                cfg.CreateMap<UserProfile, ApplicationUser>();
             });
         }
 

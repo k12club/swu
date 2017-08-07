@@ -112,3 +112,5 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.dll
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.pdb
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.SqlServer.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.SqlServer.xml
