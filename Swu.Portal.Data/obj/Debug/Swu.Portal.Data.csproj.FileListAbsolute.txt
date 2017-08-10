@@ -32,3 +32,5 @@ D:\Git\swu\Swu.Portal.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.x
 D:\Git\swu\Swu.Portal.Data\obj\Debug\Swu.Portal.Data.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Data\obj\Debug\Swu.Portal.Data.dll
 D:\Git\swu\Swu.Portal.Data\obj\Debug\Swu.Portal.Data.pdb
+D:\Git\swu\Swu.Portal.Data\obj\Debug\Swu.Portal.Data.Migrations.add_new_account.resources
+D:\Git\swu\Swu.Portal.Data\obj\Debug\Swu.Portal.Data.csproj.GenerateResource.Cache

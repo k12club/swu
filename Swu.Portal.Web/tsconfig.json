@@ -9,25 +9,46 @@
   },
   "files": [
     "Scripts/app/app.ts",
-    "Scripts/directive/loginmodal.ts",
     "Scripts/const/const.ts",
+    "Scripts/app/core/apiServices.ts",
+
+    "Scripts/directive/loginmodal.ts",
+
+    "Scripts/app/login/LoginController.ts",
+    "Scripts/app/login/services/loginServices.ts",
+
     "Scripts/app/app_routing.ts",
     "Scripts/app/home/app_routing.ts",
-    "Scripts/app/home/HomeController.ts",
-    "Scripts/app/course/CourseController.ts",
-    "Scripts/app/course/CourseListController.ts",
     "Scripts/app/course/app_routing.ts",
-    "Scripts/app/teacher/TeacherController.ts",
     "Scripts/app/teacher/app_routing.ts",
-    "Scripts/app/teacher/TeacherListController.ts",
-    "Scripts/app/research/ResearchController.ts",
-    "Scripts/app/research/ResearchListController.ts",
     "Scripts/app/research/app_routing.ts",
-    "Scripts/app/contact/ContactUsController.ts",
     "Scripts/app/contact/app_routing.ts",
     "Scripts/app/settings/app_routing.ts",
+
+    "Scripts/app/home/controller/HomeController.ts",
+    "Scripts/app/home/controller/HomeCourseController.ts",
+    "Scripts/app/home/service/homeCourseService.ts",
+    "Scripts/app/home/model/course-card.ts",
+
+    "Scripts/app/course/CourseController.ts",
+    "Scripts/app/course/CourseListController.ts",
+
+    "Scripts/app/teacher/TeacherController.ts",
+    "Scripts/app/teacher/TeacherListController.ts",
+
+    "Scripts/app/research/ResearchController.ts",
+    "Scripts/app/research/ResearchListController.ts",
+
+    "Scripts/app/contact/ContactUsController.ts",
+
     "Scripts/app/settings/SettingCoursesController.ts",
-    "Scripts/app/login/LoginController.ts"
+
+    "Scripts/model/userprofile.ts",
+    "Scripts/model/userLogin.ts",
+    "Scripts/model/course.ts",
+    "Scripts/model/teacher.ts",
+    "Scripts/model/courseType.ts"
+
   ],
   "exclude": [
     "scripts/typings",

@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 clearfix">
                     <div class="irs-log-reg">
-                        <ul class="list-inline">
+                        <ul class="list-inline" ng-show="isLogin()==false">
                             <li>
                                 <a href="#"><div ng-click="ShowModalLogin(true)">Login</div></a>
                                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" login-modal="showModal" data-backdrop="static">
@@ -41,10 +41,10 @@
                                                             <h3>Login <span class="flaticon-padlock"></span></h3>
                                                             <p>Enter username and password to login:</p>
                                                             <div class="form-group">
-                                                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                                                <input type="text" ng-model="userName" class="form-control" id="email" placeholder="User Name">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="password" class="form-control" placeholder="Password">
+                                                                <input type="password" ng-model="password" class="form-control" placeholder="Password">
                                                             </div>
                                                             <input type="button" class="btn btn-default irs-button-styledark" value="Login to account" ng-click="Login()" />
                                                         </form>
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="#">.</a></li>
+                            <li><a href="#"></a></li>
                             <li class="irs-reg"><a href="#">Register</a></li>
                             <li class="irs-search">
                                 <div class="input-group">
@@ -90,6 +90,24 @@
                                     <input type="text" class="form-control" placeholder="Search...">
                                 </div>
                                 <!-- /input-group -->
+                            </li>
+                        </ul>
+                        <ul class="list-inline" ng-show="isLogin()==true">
+                            <li>
+                                <div class="dropdown">
+                                    <button class="account-button-label" type="button" data-toggle="dropdown" >
+                                        Signed in as &nbsp;&nbsp;{{userProfile.firstName}} {{userProfile.lastName}}
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" ui-sref="settings">You profile</a></li>
+                                        <li><a href="#" ui-sref="settings.courses">Create course</a></li>
+                                        <li><a href="#">Help</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Settings</a></li>
+                                        <li><a href="#">Sign out</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>

@@ -115,7 +115,6 @@ D:\Git\swu\Swu.Portal.Web\bin\Autofac.Integration.WebApi.dll
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.SqlServer.dll
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.Core.dll
-D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.Owin.dll
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.dll
@@ -148,6 +147,7 @@ D:\Git\swu\Swu.Portal.Web\bin\System.Web.WebPages.Deployment.dll
 D:\Git\swu\Swu.Portal.Web\bin\System.Web.WebPages.dll
 D:\Git\swu\Swu.Portal.Web\bin\System.Web.WebPages.Razor.dll
 D:\Git\swu\Swu.Portal.Web\bin\WebGrease.dll
+D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.dll
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Core.pdb
 D:\Git\swu\Swu.Portal.Web\bin\Swu.Portal.Data.pdb
@@ -159,7 +159,6 @@ D:\Git\swu\Swu.Portal.Web\bin\Autofac.Integration.Owin.xml
 D:\Git\swu\Swu.Portal.Web\bin\Autofac.Integration.WebApi.xml
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.SqlServer.xml
-D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Git\swu\Swu.Portal.Web\bin\System.Net.Http.Formatting.xml
 D:\Git\swu\Swu.Portal.Web\bin\System.Web.Http.xml
@@ -184,6 +183,7 @@ D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.Google.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.xml
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll

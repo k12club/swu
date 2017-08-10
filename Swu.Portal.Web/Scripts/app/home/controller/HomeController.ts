@@ -6,9 +6,6 @@
         constructor(private $scope:ng.IScope,private $state:ng.ui.IState) {
            
         }
-        showMessage(): void {
-            alert('test');
-        }
         init(): void {
         };
 

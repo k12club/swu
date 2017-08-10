@@ -1,0 +1,77 @@
+﻿<section class="irs-courses-one" ng-controller="HomeCourseController">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs irs-course-tab" role="tablist">
+                        <li class="irs-course-title pull-left"><h3>All Courses</h3></li>
+                        <li role="presentation"><a href="#toprate" aria-controls="toprate" role="tab" data-toggle="tab">Top Rated</a></li>
+                        <li role="presentation"><a href="#popular" aria-controls="popular" role="tab" data-toggle="tab">Most Popular</a></li>
+                        <li role="presentation" class="active"><a href="#recently" aria-controls="recently" role="tab" data-toggle="tab">Recently Added</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="toprate">
+                            <div class="col-xs-12 col-sm-6 col-md-3 irs-ext-pad animatedParent" ng-repeat="c in TopRateCourse">
+                                <div class="irs-courses-fstcol animated fadeIn delay-250">
+                                    <div class="irs-course-thumb"><img class="img-responsive img-fluid" ng-src="../../../{{c.course.imageUrl}}"></div>
+                                    <div class="irs-course-details">
+                                        <ul class="list-inline">
+                                            <li class="irs-user"><a href="#"><span class="flaticon-people-1"></span> {{c.course.numberOfRegistered}}</a></li>
+                                            <li class="irs-ccomment"><a href="#"><span class="flaticon-interface"></span> {{c.course.numberOfComments}}</a></li>
+                                            <li class="irs-course-price"><a href="#" class="text-thm2"><span class=""></span> {{c.course.price|currency}}</a></li>
+                                        </ul>
+                                        <h3><a href="#" ui-sref="course({ id: c.course.id })">{{c.course.name}}</a></h3>
+                                        <div class="irs-student-info">
+                                            <div class="irs-studend-thumb"> <img ng-src="../../../{{c.teacher.imageUrl}}"> </div>
+                                            <div class="irs-student-name"><a href="">with <span class="text-thm2">{{c.teacher.name}}</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="popular">
+                            <div class="col-xs-12 col-sm-6 col-md-3 irs-ext-pad animatedParent" ng-repeat="c in PopularCourse">
+                                <div class="irs-courses-fstcol animated fadeIn delay-250">
+                                    <div class="irs-course-thumb"><img class="img-responsive img-fluid" ng-src="../../../{{c.course.imageUrl}}"></div>
+                                    <div class="irs-course-details">
+                                        <ul class="list-inline">
+                                            <li class="irs-user"><a href="#"><span class="flaticon-people-1"></span> {{c.course.numberOfRegistered}}</a></li>
+                                            <li class="irs-ccomment"><a href="#"><span class="flaticon-interface"></span> {{c.course.numberOfComments}}</a></li>
+                                            <li class="irs-course-price"><a href="#" class="text-thm2"><span class=""></span> {{c.course.price|currency}}</a></li>
+                                        </ul>
+                                        <h3><a href="#" ui-sref="course({ id: c.course.id })">{{c.course.name}}</a></h3>
+                                        <div class="irs-student-info">
+                                            <div class="irs-studend-thumb"> <img ng-src="../../../{{c.teacher.imageUrl}}"> </div>
+                                            <div class="irs-student-name"><a href="">with <span class="text-thm2">{{c.teacher.name}}</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="recently">
+                            <div class="col-xs-12 col-sm-6 col-md-3 irs-ext-pad animatedParent" ng-repeat="c in RecentlyCourse">
+                                <div class="irs-courses-fstcol animated fadeIn delay-250">
+                                    <div class="irs-course-thumb"><img class="img-responsive img-fluid" ng-src="../../../{{c.course.imageUrl}}"></div>
+                                    <div class="irs-course-details">
+                                        <ul class="list-inline">
+                                            <li class="irs-user"><a href="#"><span class="flaticon-people-1"></span> {{c.course.numberOfRegistered}}</a></li>
+                                            <li class="irs-ccomment"><a href="#"><span class="flaticon-interface"></span> {{c.course.numberOfComments}}</a></li>
+                                            <li class="irs-course-price"><a href="#" class="text-thm2"><span class=""></span> {{c.course.price|currency}}</a></li>
+                                        </ul>
+                                        <h3><a href="#" ui-sref="course({ id: c.course.id })">{{c.course.name}}</a></h3>
+                                        <div class="irs-student-info">
+                                            <div class="irs-studend-thumb"> <img ng-src="../../../{{c.teacher.imageUrl}}"> </div>
+                                            <div class="irs-student-name"><a href="">with <span class="text-thm2">{{c.teacher.name}}</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

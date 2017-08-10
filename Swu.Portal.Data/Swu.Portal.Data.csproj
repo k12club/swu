@@ -63,6 +63,10 @@
   <ItemGroup>
     <Compile Include="Context\DbContextFactory.cs" />
     <Compile Include="Context\SwuDBContext.cs" />
+    <Compile Include="Migrations\201708080941569_add_new_account.cs" />
+    <Compile Include="Migrations\201708080941569_add_new_account.Designer.cs">
+      <DependentUpon>201708080941569_add_new_account.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MigrationsContextFactory.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -85,6 +89,11 @@
       <Project>{792beace-feb8-4532-b50d-b7aabef14c41}</Project>
       <Name>Swu.Portal.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708080941569_add_new_account.resx">
+      <DependentUpon>201708080941569_add_new_account.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
