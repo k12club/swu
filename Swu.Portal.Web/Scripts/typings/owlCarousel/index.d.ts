@@ -28,7 +28,7 @@ interface IOwlCarouselOptions {
     scrollPerPage?: boolean;
     pagination?: boolean;
     paginationNumbers?: boolean;
-    responsive?: boolean;
+    responsive?: any;
     responsiveRefreshRate?: number;
     responsiveBaseWidth?: JQuery | string;
     baseClass?: string;
@@ -44,6 +44,15 @@ interface IOwlCarouselOptions {
     touchDrag?: boolean;
     addClassActive?: boolean;
     transitionStyle?: any;
+
+    autoplay: boolean;
+    loop: boolean;
+    margin: number;
+    dots: boolean;
+    nav: boolean;
+    autoplayHoverPause: boolean;
+    smartSpeed: number;
+    navText: string[];
 
     // callbacks
     beforeUpdate?: (params?: any) => void;

@@ -758,8 +758,11 @@
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeCourseController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\MainSliderController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\course-card.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\model\slider.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\homeCourseService.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\model\course.ts" />
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />
     <TypeScriptCompile Include="Scripts\model\teacher.ts" />

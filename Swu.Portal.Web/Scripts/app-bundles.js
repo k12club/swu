@@ -589,9 +589,6 @@ var Swu;
             this.$scope = $scope;
             this.$state = $state;
         }
-        HomeController.prototype.showMessage = function () {
-            alert('test');
-        };
         HomeController.prototype.init = function () {
         };
         ;
@@ -640,6 +637,101 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var MainSliderController = (function () {
+        function MainSliderController($scope, $state, mainSliderService, $sce) {
+            this.$scope = $scope;
+            this.$state = $state;
+            this.mainSliderService = mainSliderService;
+            this.$sce = $sce;
+            this.$scope.sliders = [];
+            this.init();
+        }
+        MainSliderController.prototype.init = function () {
+            var _this = this;
+            this.mainSliderService.getSliders().then(function (response) {
+                console.log(response);
+                _.forEach(response, function (value, key) {
+                    _this.$scope.sliders.push({
+                        id: value.id,
+                        title: _this.$sce.trustAsHtml(value.title),
+                        description: value.description,
+                        imageUrl: value.imageUrl
+                    });
+                });
+                _this.renderSlide(_this.$scope.sliders);
+                _this.registerScript();
+            }, function (error) { });
+        };
+        ;
+        MainSliderController.prototype.renderSlide = function (sliders) {
+            var html = "";
+            _.forEach(sliders, function (value, key) {
+                var elements = "<div class='item'>\
+                <div class='caption animatedParent'>\
+                    <div class='irs-text-one animated fadeInUp delay-1250'>\
+                    " + value.title + "\
+                                </div>\
+                                <div class='irs-text-three animated fadeInUp delay-1500' >\
+                                <p>" + value.description + "</p>\
+                                    </div>\
+                                    <a href= '#' class='btn btn-lg irs-btn-thm irs-home-btn animated fadeInUp delay-1750' ><span>Check Courses</span> </a>\
+                                        </div>\
+                                        <img class='img-responsive' src= '../../../" + value.imageUrl + "' alt= '' >\
+                                            </div>";
+                html += elements;
+            });
+            $('#main-slider').html(html);
+        };
+        MainSliderController.prototype.registerScript = function () {
+            $('.irs-main-slider').owlCarousel({
+                loop: true,
+                margin: 0,
+                dots: false,
+                nav: false,
+                autoplayHoverPause: false,
+                autoplay: true,
+                autoHeight: false,
+                smartSpeed: 2000,
+                navText: [
+                    '<i class=""></i>',
+                    '<i class=""></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        center: false
+                    },
+                    480: {
+                        items: 1,
+                        center: false
+                    },
+                    600: {
+                        items: 1,
+                        center: false
+                    },
+                    768: {
+                        items: 1
+                    },
+                    992: {
+                        items: 1
+                    },
+                    1200: {
+                        items: 1
+                    }
+                }
+            });
+        };
+        MainSliderController.$inject = ["$scope", "$state", "mainSliderService", "$sce"];
+        MainSliderController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "MainSliderController" })
+        ], MainSliderController);
+        return MainSliderController;
+    }());
+    Swu.MainSliderController = MainSliderController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var homeCourseService = (function () {
         function homeCourseService(apiService, constant) {
             this.apiService = apiService;
@@ -652,6 +744,24 @@ var Swu;
         homeCourseService = __decorate([
             Swu.Module("app"),
             Swu.Factory({ name: "homeCourseService" })
+        ], homeCourseService);
+        return homeCourseService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var homeCourseService = (function () {
+        function homeCourseService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        homeCourseService.prototype.getSliders = function () {
+            return this.apiService.getData("course/getSlider");
+        };
+        homeCourseService.$inject = ['apiService', 'AppConstant'];
+        homeCourseService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "mainSliderService" })
         ], homeCourseService);
         return homeCourseService;
     }());

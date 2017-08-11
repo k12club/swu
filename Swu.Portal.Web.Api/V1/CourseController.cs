@@ -200,5 +200,32 @@ namespace Swu.Portal.Web.Api
             }
             return null;
         }
+        [HttpGet, Route("getSlider")]
+        public List<SliderProxy> GetSlider() {
+            return new List<SliderProxy> {
+                new SliderProxy {
+                    Id=1,
+                    Title=@"Receive a world-class <br>
+education in the heart of <br>
+the west.",
+                    Description="Top rated for combining academic quality and outdoor reacreation.",
+                    ImageUrl="Content/images/home/h1.jpg"
+                },
+                new SliderProxy {
+                    Id=1,
+                    Title=@"Want to experience how life is <br>
+on our campus?",
+                    Description="Learning Resources Centre, a student social space.",
+                    ImageUrl="Content/images/home/h2.jpg"
+                },
+                new SliderProxy {
+                    Id=1,
+                    Title=@" Make a bold decision today <br>
+and start a new fresh tomorrow. ",
+                    Description="Top rated for combining academic quality and outdoor reacreation.",
+                    ImageUrl="Content/images/home/h3.jpg"
+                }
+            };
+        }
     }
 }
