@@ -439,6 +439,7 @@ nav.navbar.bootsnav.yellow ul.nav > li > a {
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+    background-color:transparent !important;
 }
 
 nav.navbar.bootsnav.yellow ul.nav > li > a {

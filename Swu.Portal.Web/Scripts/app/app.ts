@@ -35,7 +35,7 @@ module Swu {
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                $rootScope.lang = AppConstant.defaultLang;
             });
+            $rootScope.lang = AppConstant.defaultLang;
         }]);
 }

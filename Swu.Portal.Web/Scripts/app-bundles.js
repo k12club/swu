@@ -352,8 +352,8 @@ var Swu;
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                $rootScope.lang = AppConstant.defaultLang;
             });
+            $rootScope.lang = AppConstant.defaultLang;
         }]);
 })(Swu || (Swu = {}));
 var Swu;
@@ -880,7 +880,7 @@ var Swu;
                     $scope.swapLanguage(newValue);
                     try {
                         var $owl = $('.owl-carousel');
-                        $owl.trigger('destroy.owl.carousel');
+                        $owl.data('owlCarousel').destroy();
                         $scope.renderSlide($scope.sliders);
                         $scope.registerScript();
                     }
