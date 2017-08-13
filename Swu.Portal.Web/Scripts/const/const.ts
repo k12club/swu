@@ -7,6 +7,7 @@ module Swu {
         constructor() {
 
         }
+        defaultLang = "en";
         api = {
             protocal: "http",
             ip: "localhost",

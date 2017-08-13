@@ -317,6 +317,7 @@
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\swiper.min.css" />
+    <Content Include="Content\css\translations.css" />
     <Content Include="Content\css\ytplayer\raster%402x.png" />
     <Content Include="Content\css\ytplayer\raster.png" />
     <Content Include="Content\css\ytplayer\raster_dot%402x.png" />
@@ -600,6 +601,7 @@
     <Content Include="Content\js\scrollto.js" />
     <Content Include="Content\js\swiper.min.js" />
     <Content Include="Content\js\wow.min.js" />
+    <Content Include="Content\images\languages.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -638,6 +640,13 @@
     <Content Include="Scripts\angular\ngStorage.min.js" />
     <Content Include="Scripts\angular\toastr.js" />
     <Content Include="Scripts\angular\toastr.min.js" />
+    <Content Include="Scripts\angular\angular-translate-handler-log.js" />
+    <Content Include="Scripts\angular\angular-translate-interpolation-messageformat.js" />
+    <Content Include="Scripts\angular\angular-translate-loader-static-files.js" />
+    <Content Include="Scripts\angular\angular-translate-loader-url.js" />
+    <Content Include="Scripts\angular\angular-translate-storage-cookie.js" />
+    <Content Include="Scripts\angular\angular-translate-storage-local.js" />
+    <Content Include="Scripts\angular\angular-translate.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-0.14.2.min.js" />
     <Content Include="Scripts\angular\ui-bootstrap.js" />
     <Content Include="Scripts\angular\ui-date.js" />
@@ -656,6 +665,8 @@
     <Content Include="Scripts\app\home\view\register.html" />
     <Content Include="Scripts\app\home\view\courses.html" />
     <Content Include="Scripts\app\home\view\testimonials.html" />
+    <Content Include="Scripts\app\login\view\login.html" />
+    <Content Include="Scripts\app\menu\view\nav.html" />
     <Content Include="Scripts\app\settings\courses.html" />
     <Content Include="Scripts\app\settings\default.html" />
     <Content Include="Scripts\app\settings\main.html" />
@@ -703,6 +714,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\student\" />
+    <Folder Include="Scripts\typings\angularl-translate\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
@@ -763,13 +775,15 @@
     <TypeScriptCompile Include="Scripts\app\home\model\slider.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\homeCourseService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
+    <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\course.ts" />
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />
+    <TypeScriptCompile Include="Scripts\model\event.ts" />
     <TypeScriptCompile Include="Scripts\model\teacher.ts" />
     <TypeScriptCompile Include="Scripts\model\userLogin.ts" />
     <TypeScriptCompile Include="Scripts\model\userProfile.ts" />
     <TypeScriptCompile Include="Scripts\app\login\services\loginServices.ts" />
-    <TypeScriptCompile Include="Scripts\app\login\LoginController.ts" />
+    <TypeScriptCompile Include="Scripts\app\login\controller\LoginController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\SettingCoursesController.ts" />
     <TypeScriptCompile Include="Scripts\app\research\app_routing.ts" />
@@ -780,6 +794,8 @@
     <TypeScriptCompile Include="Scripts\app\teacher\TeacherListController.ts" />
     <TypeScriptCompile Include="Scripts\const\const.ts" />
     <TypeScriptCompile Include="Scripts\directive\loginModal.ts" />
+    <TypeScriptCompile Include="Scripts\translate\translations.en.ts" />
+    <TypeScriptCompile Include="Scripts\translate\translations.th.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-material\angular-material.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-route\index.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />

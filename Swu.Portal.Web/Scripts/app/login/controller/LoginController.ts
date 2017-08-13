@@ -1,6 +1,8 @@
-﻿/// <reference path="../../_references.ts" />
+﻿/// <reference path="../../../_references.ts" />
+
 module Swu {
     interface ILoginScope extends ng.IScope {
+        appName: string;
         userName: string;
         password: string;
         userProfile: IUserProfile;
@@ -8,13 +10,13 @@ module Swu {
         ShowModalLogin(flag: boolean): void;
         Login(): void;
         isLogin(): boolean;
+        changeLanguage(lang: string): void;
     }
     @Module("app")
     @Controller({ name: "LoginController" })
     export class LoginController {
-        static $inject: Array<string> = ["$scope", "$state", "loginServices"];
-        constructor(private $scope: ILoginScope, private $state: ng.ui.IStateService, private loginServices: ILoginServices) {
-            this.$scope.showModal = false;
+        static $inject: Array<string> = ["$scope","$rootScope", "$state", "loginServices", "$translate"];
+        constructor(private $scope: ILoginScope,private $rootScope: IRootScope, private $state: ng.ui.IStateService, private loginServices: ILoginServices, private $translate: any) {
             this.$scope.ShowModalLogin = (flag: boolean) => {
                 this.$scope.showModal = flag;
             }
@@ -32,6 +34,14 @@ module Swu {
             this.$scope.isLogin = (): boolean => {
                 return !(this.$scope.userProfile == undefined || this.$scope.userProfile == null);
             }
+            this.$scope.changeLanguage = function (lang) {
+                $translate.use(lang);
+                $rootScope.lang = lang;
+            };
+        }
+        init = () => {
+            this.$scope.showModal = false;
+
         }
     }
 }

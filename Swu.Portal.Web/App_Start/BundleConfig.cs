@@ -51,6 +51,13 @@ namespace Swu.Portal.Web
                     .Include("~/Scripts/angular/ngprogress-lite.min.js")
                     .Include("~/Scripts/angular/ng-grid.min.js")
                     .Include("~/Scripts/angular/ngStorage.min.js")
+                    .Include("~/Scripts/angular/angular-translate-handler-log.js")
+                    .Include("~/Scripts/angular/angular-translate-interpolation-messageformat.js")
+                    .Include("~/Scripts/angular/angular-translate-loader-static-files.js")
+                    .Include("~/Scripts/angular/angular-translate-loader-url.js")
+                    .Include("~/Scripts/angular/angular-translate-storage-cookie.js")
+                    .Include("~/Scripts/angular/angular-translate-storage-local.js")
+                    .Include("~/Scripts/angular/angular-translate.js")
                 );
 
             bundles.Add(new ScriptBundle("~/bundles/ng-app")
@@ -87,7 +94,8 @@ namespace Swu.Portal.Web
            bundles.Add(new StyleBundle("~/theme/css")
                 .Include("~/Content/css/bootstrap.min.css",
                 "~/Content/css/style.css",
-                "~/Content/css/responsive.css"));
+                "~/Content/css/responsive.css",
+                "~/Content/css/translations.css"));
         }
     }
 }

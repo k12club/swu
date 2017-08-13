@@ -227,6 +227,102 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    Swu.translations_en = {
+        shared: {
+            applicationName: "SWU-Joint Medical",
+            address: "114 Sukhumvit 23Wattana, Bangkok 10110 Thailand",
+            phone: "+66 2649 5000"
+        },
+        login: {
+            anyQuestions: "Any Questions?",
+            callUs: "Call Us",
+            login: "Login",
+            register: "Register",
+            loginAs: "Loged in as",
+            loginOrRegister: "Login or Register",
+            description: "Sign in or register today in order to have access to all our courses or purchase new ones.",
+            loginTitle: "Enter username and password to login:",
+            registerTitle: "Join our community today:",
+            btnLogin: "Login to account",
+            btnRegister: "Sign Me Up",
+            userName: "User Name",
+            firstName: "First Name",
+            lastName: "Last Name",
+            password: "Password",
+            rePassword: "Re-Password",
+            email: "Email"
+        },
+        menu: {
+            home: "Home",
+            aboutUs: "About Us",
+            history: "History",
+            visionAndMission: "Vision And Mission",
+            ethics: "Ethics",
+            departments: "Departments",
+            courses: "Courses",
+            research: "Research",
+            ourPeoples: "OurPeoples",
+            teacher: "Teacher",
+            contact: "Contact"
+        },
+        home: {},
+        course: {},
+        research: {},
+        teacher: {},
+        student: {},
+        settings: {}
+    };
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    Swu.translations_th = {
+        shared: {
+            applicationName: "โครงการพัฒนาระบบประชาสัมพันธ์หลักสูตรแพทยศาสตรบัณฑิตโครงการร่วมนอตติงแฮม",
+            address: "อาคาร 15 คณะแพทยศาสตร์ 114 สุขุมวิท 23 กรุงเทพฯ 10110",
+            phone: "+66 2649 5000"
+        },
+        login: {
+            anyQuestions: "มีคำถามใช่ไหม?",
+            callUs: "โทรมาหาเรา",
+            login: "เข้าสู่ระบบ",
+            register: "ลงทะเบียนสมาชิก",
+            loginAs: "ใช้งานระบบในฐานะ",
+            loginOrRegister: "เข้าสู่ระบบหรือลงทะเบียน",
+            description: "เข้าสู่ระบบหรือลงทะเบียนวันนี้เพื่อรับสิทธิ์ในการเข้าถึงรายละเอียดทุกวิชาที่เปิดสอน.",
+            loginTitle: "ใส่ชิ่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ:",
+            registerTitle: "เข้าร่วมกับเรา:",
+            btnLogin: "เข้าสู่ระบบ",
+            btnRegister: "ลงทะเบียน",
+            userName: "ชื่อผู้ใช้",
+            firstName: "ชื่อ",
+            lastName: "นามสกุล",
+            password: "รหัสผ่าน",
+            rePassword: "ใส่รหัสผ่านอีกครั้ง",
+            email: "อีเมล์"
+        },
+        menu: {
+            home: "หน้าแรก",
+            aboutUs: "เกี่ยวกับเรา",
+            history: "ประวัติ",
+            visionAndMission: "วิสัยทัศน์",
+            ethics: "จริยธรรม",
+            departments: "แผนก",
+            courses: "วิชาที่เปิดสอน",
+            research: "งานวิจัย",
+            ourPeoples: "พวกเรา",
+            teacher: "รายชื่ออาจารย์",
+            contact: "ติดต่อเรา"
+        },
+        home: {},
+        course: {},
+        research: {},
+        teacher: {},
+        student: {},
+        settings: {}
+    };
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var underscore = angular.module('underscore', []);
     underscore.factory('_', ['$window', function ($window) {
             return $window._;
@@ -240,15 +336,23 @@ var Swu;
         "ngStorage",
         "ngSanitize",
         "underscore",
-        "ui.bootstrap"
+        "ui.bootstrap",
+        "pascalprecht.translate",
     ])
-        .run(['$state', '$http', '$rootScope', 'AppConstant', function ($state, $http, $rootScope, AppConstant) {
-            $rootScope.$on('$stateChangeSuccess', function () {
+        .config(["$translateProvider", "AppConstant", function ($translateProvider, AppConstant, $rootScope) {
+            $translateProvider.translations("en", Swu.translations_en);
+            $translateProvider.translations("th", Swu.translations_th);
+            $translateProvider.preferredLanguage(AppConstant.defaultLang);
+            $translateProvider.fallbackLanguage(AppConstant.defaultLang);
+        }])
+        .run(["$state", "$http", "$rootScope", "AppConstant", function ($state, $http, $rootScope, AppConstant) {
+            $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
+                $rootScope.lang = AppConstant.defaultLang;
             });
         }]);
 })(Swu || (Swu = {}));
@@ -256,6 +360,7 @@ var Swu;
 (function (Swu) {
     var AppConstant = (function () {
         function AppConstant() {
+            this.defaultLang = "en";
             this.api = {
                 protocal: "http",
                 ip: "localhost",
@@ -348,12 +453,16 @@ var Swu;
 var Swu;
 (function (Swu) {
     var LoginController = (function () {
-        function LoginController($scope, $state, loginServices) {
+        function LoginController($scope, $rootScope, $state, loginServices, $translate) {
             var _this = this;
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$state = $state;
             this.loginServices = loginServices;
-            this.$scope.showModal = false;
+            this.$translate = $translate;
+            this.init = function () {
+                _this.$scope.showModal = false;
+            };
             this.$scope.ShowModalLogin = function (flag) {
                 _this.$scope.showModal = flag;
             };
@@ -368,8 +477,12 @@ var Swu;
             this.$scope.isLogin = function () {
                 return !(_this.$scope.userProfile == undefined || _this.$scope.userProfile == null);
             };
+            this.$scope.changeLanguage = function (lang) {
+                $translate.use(lang);
+                $rootScope.lang = lang;
+            };
         }
-        LoginController.$inject = ["$scope", "$state", "loginServices"];
+        LoginController.$inject = ["$scope", "$rootScope", "$state", "loginServices", "$translate"];
         LoginController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "LoginController" })
@@ -604,29 +717,58 @@ var Swu;
 var Swu;
 (function (Swu) {
     var HomeCourseController = (function () {
-        function HomeCourseController($scope, $state, homeCourseService) {
+        function HomeCourseController($scope, $rootScope, $state, homeCourseService, $translate) {
+            var _this = this;
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$state = $state;
             this.homeCourseService = homeCourseService;
+            this.$translate = $translate;
             this.init();
+            this.$scope.courseGrouping = function () {
+                _this.$scope.TopRateCourse = _.filter(_this.$scope.CourseCards, function (card) {
+                    return card.cardType == Swu.CardType.topRate;
+                });
+                _this.$scope.PopularCourse = _.filter(_this.$scope.CourseCards, function (card) {
+                    return card.cardType == Swu.CardType.popular;
+                });
+                _this.$scope.RecentlyCourse = _.filter(_this.$scope.CourseCards, function (card) {
+                    return card.cardType == Swu.CardType.recently;
+                });
+            };
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map(_this.$scope.CourseCards, function (c) {
+                            c.course.name = c.course.name_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map(_this.$scope.CourseCards, function (c) {
+                            c.course.name = c.course.name_th;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.CourseCards != undefined || $scope.CourseCards != null) {
+                    $scope.swapLanguage(newValue);
+                    $scope.courseGrouping();
+                }
+            });
         }
         HomeCourseController.prototype.init = function () {
             var _this = this;
             this.homeCourseService.getCourses().then(function (response) {
                 _this.$scope.CourseCards = response;
-                _this.$scope.TopRateCourse = _.filter(_this.$scope.CourseCards, function (course) {
-                    return course.cardType == Swu.CardType.topRate;
-                });
-                _this.$scope.PopularCourse = _.filter(_this.$scope.CourseCards, function (course) {
-                    return course.cardType == Swu.CardType.popular;
-                });
-                _this.$scope.RecentlyCourse = _.filter(_this.$scope.CourseCards, function (course) {
-                    return course.cardType == Swu.CardType.recently;
-                });
+                _this.$scope.swapLanguage(_this.$rootScope.lang);
+                _this.$scope.courseGrouping();
             }, function (error) { });
         };
         ;
-        HomeCourseController.$inject = ["$scope", "$state", "homeCourseService"];
+        HomeCourseController.$inject = ["$scope", "$rootScope", "$state", "homeCourseService", "$translate"];
         HomeCourseController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "HomeCourseController" })
@@ -638,35 +780,36 @@ var Swu;
 var Swu;
 (function (Swu) {
     var MainSliderController = (function () {
-        function MainSliderController($scope, $state, mainSliderService, $sce) {
+        function MainSliderController($scope, $rootScope, $state, mainSliderService, $sce, $timeout) {
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$state = $state;
             this.mainSliderService = mainSliderService;
             this.$sce = $sce;
+            this.$timeout = $timeout;
             this.$scope.sliders = [];
-            this.init();
-        }
-        MainSliderController.prototype.init = function () {
-            var _this = this;
-            this.mainSliderService.getSliders().then(function (response) {
-                console.log(response);
-                _.forEach(response, function (value, key) {
-                    _this.$scope.sliders.push({
-                        id: value.id,
-                        title: _this.$sce.trustAsHtml(value.title),
-                        description: value.description,
-                        imageUrl: value.imageUrl
-                    });
-                });
-                _this.renderSlide(_this.$scope.sliders);
-                _this.registerScript();
-            }, function (error) { });
-        };
-        ;
-        MainSliderController.prototype.renderSlide = function (sliders) {
-            var html = "";
-            _.forEach(sliders, function (value, key) {
-                var elements = "<div class='item'>\
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map($scope.sliders, function (s) {
+                            s.title = $sce.trustAsHtml(s.title_en);
+                            s.description = s.description_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map($scope.sliders, function (s) {
+                            s.title = $sce.trustAsHtml(s.title_th);
+                            s.description = s.description_th;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$scope.renderSlide = function (sliders) {
+                var html = "";
+                _.forEach(sliders, function (value, key) {
+                    var elements = "<div class='item'>\
                 <div class='caption animatedParent'>\
                     <div class='irs-text-one animated fadeInUp delay-1250'>\
                     " + value.title + "\
@@ -678,50 +821,77 @@ var Swu;
                                         </div>\
                                         <img class='img-responsive' src= '../../../" + value.imageUrl + "' alt= '' >\
                                             </div>";
-                html += elements;
-            });
-            $('#main-slider').html(html);
-        };
-        MainSliderController.prototype.registerScript = function () {
-            $('.irs-main-slider').owlCarousel({
-                loop: true,
-                margin: 0,
-                dots: false,
-                nav: false,
-                autoplayHoverPause: false,
-                autoplay: true,
-                autoHeight: false,
-                smartSpeed: 2000,
-                navText: [
-                    '<i class=""></i>',
-                    '<i class=""></i>'
-                ],
-                responsive: {
-                    0: {
-                        items: 1,
-                        center: false
-                    },
-                    480: {
-                        items: 1,
-                        center: false
-                    },
-                    600: {
-                        items: 1,
-                        center: false
-                    },
-                    768: {
-                        items: 1
-                    },
-                    992: {
-                        items: 1
-                    },
-                    1200: {
-                        items: 1
+                    html += elements;
+                });
+                $('#main-slider').html(html);
+            };
+            this.$scope.registerScript = function () {
+                var $owl = $('.irs-main-slider');
+                $owl.owlCarousel({
+                    loop: true,
+                    margin: 0,
+                    dots: false,
+                    nav: false,
+                    autoplayHoverPause: false,
+                    autoplay: true,
+                    autoHeight: false,
+                    smartSpeed: 2000,
+                    navText: [
+                        '<i class=""></i>',
+                        '<i class=""></i>'
+                    ],
+                    responsive: {
+                        0: {
+                            items: 1,
+                            center: false
+                        },
+                        480: {
+                            items: 1,
+                            center: false
+                        },
+                        600: {
+                            items: 1,
+                            center: false
+                        },
+                        768: {
+                            items: 1
+                        },
+                        992: {
+                            items: 1
+                        },
+                        1200: {
+                            items: 1
+                        }
                     }
-                }
+                });
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                mainSliderService.getSliders().then(function (response) {
+                    _.forEach(response, function (value, key) {
+                        $scope.sliders.push({
+                            id: value.id,
+                            title_en: value.title_en,
+                            title_th: value.title_th,
+                            description_en: value.description_en,
+                            description_th: value.description_th,
+                            imageUrl: value.imageUrl
+                        });
+                    });
+                    $scope.swapLanguage(newValue);
+                    try {
+                        var $owl = $('.owl-carousel');
+                        $owl.trigger('destroy.owl.carousel');
+                        $scope.renderSlide($scope.sliders);
+                        $scope.registerScript();
+                    }
+                    catch (e) { }
+                });
             });
+        }
+        MainSliderController.prototype.init = function () {
         };
-        MainSliderController.$inject = ["$scope", "$state", "mainSliderService", "$sce"];
+        ;
+        MainSliderController.$inject = ["$scope", "$rootScope", "$state", "mainSliderService", "$sce", "$timeout"];
         MainSliderController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "MainSliderController" })

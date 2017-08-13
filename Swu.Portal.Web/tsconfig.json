@@ -14,7 +14,7 @@
 
     "Scripts/directive/loginmodal.ts",
 
-    "Scripts/app/login/LoginController.ts",
+    "Scripts/app/login/controller/LoginController.ts",
     "Scripts/app/login/services/loginServices.ts",
 
     "Scripts/app/app_routing.ts",
@@ -51,7 +51,8 @@
     "Scripts/model/userLogin.ts",
     "Scripts/model/course.ts",
     "Scripts/model/teacher.ts",
-    "Scripts/model/courseType.ts"
+    "Scripts/model/courseType.ts",
+    "Scripts/model/baseControllerScope.ts"
 
   ],
   "exclude": [

@@ -1,36 +1,37 @@
 ﻿module Swu {
-    interface IMainSliderScope extends ng.IScope {
+    interface IMainSliderScope extends baseControllerScope {
         sliders: ISlider[];
+        renderSlide(sliders: ISlider[]): void;
+        registerScript(): void;
     }
     @Module("app")
     @Controller({ name: "MainSliderController" })
     export class MainSliderController {
-        static $inject: Array<string> = ["$scope", "$state", "mainSliderService", "$sce"];
-        constructor(private $scope: IMainSliderScope, private $state: ng.ui.IState, private mainSliderService: ImainSliderService, private $sce: ng.ISCEService) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "mainSliderService", "$sce", "$timeout"];
+        constructor(private $scope: IMainSliderScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private mainSliderService: ImainSliderService, private $sce: ng.ISCEService, private $timeout: ng.ITimeoutService) {
             this.$scope.sliders = [];
-            this.init();
-        }
-        init(): void {
-            this.mainSliderService.getSliders().then((response) => {
-                console.log(response);
-                _.forEach(response, (value, key) => {
-                    this.$scope.sliders.push(
-                        {
-                            id: value.id,
-                            title: this.$sce.trustAsHtml(value.title),
-                            description: value.description,
-                            imageUrl: value.imageUrl
-                        }
-                    );
-                });
-                this.renderSlide(this.$scope.sliders);
-                this.registerScript();
-            }, (error) => { });
-        };
-        renderSlide(sliders: ISlider[]): void {
-            var html = "";
-            _.forEach(sliders, (value, key) => {
-                var elements = "<div class='item'>\
+            this.$scope.swapLanguage = (lang: string): void => {
+                switch (lang) {
+                    case "en": {
+                        _.map($scope.sliders, function (s) {
+                            s.title = $sce.trustAsHtml(s.title_en);
+                            s.description = s.description_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map($scope.sliders, function (s) {
+                            s.title = $sce.trustAsHtml(s.title_th);
+                            s.description = s.description_th;
+                        });
+                        break;
+                    }
+                }
+            }
+            this.$scope.renderSlide = (sliders: ISlider[]): void => {
+                var html = "";
+                _.forEach(sliders, (value, key) => {
+                    var elements = "<div class='item'>\
                 <div class='caption animatedParent'>\
                     <div class='irs-text-one animated fadeInUp delay-1250'>\
                     "+ value.title + "\
@@ -40,50 +41,78 @@
                                     </div>\
                                     <a href= '#' class='btn btn-lg irs-btn-thm irs-home-btn animated fadeInUp delay-1750' ><span>Check Courses</span> </a>\
                                         </div>\
-                                        <img class='img-responsive' src= '../../../"+ value.imageUrl +"' alt= '' >\
+                                        <img class='img-responsive' src= '../../../"+ value.imageUrl + "' alt= '' >\
                                             </div>";
-                html += elements;
-            });
-            $('#main-slider').html(html);
-        }
-        registerScript(): void {
-            $('.irs-main-slider').owlCarousel({
-                loop: true,
-                margin: 0,
-                dots: false,
-                nav: false,
-                autoplayHoverPause: false,
-                autoplay: true,
-                autoHeight: false,
-                smartSpeed: 2000,
-                navText: [
-                    '<i class=""></i>',
-                    '<i class=""></i>'
-                ],
-                responsive: {
-                    0: {
-                        items: 1,
-                        center: false
-                    },
-                    480: {
-                        items: 1,
-                        center: false
-                    },
-                    600: {
-                        items: 1,
-                        center: false
-                    },
-                    768: {
-                        items: 1
-                    },
-                    992: {
-                        items: 1
-                    },
-                    1200: {
-                        items: 1
+                    html += elements;
+                });
+                $('#main-slider').html(html);
+            };
+            this.$scope.registerScript = (): void => {
+                var $owl = $('.irs-main-slider');
+                $owl.owlCarousel({
+                    loop: true,
+                    margin: 0,
+                    dots: false,
+                    nav: false,
+                    autoplayHoverPause: false,
+                    autoplay: true,
+                    autoHeight: false,
+                    smartSpeed: 2000,
+                    navText: [
+                        '<i class=""></i>',
+                        '<i class=""></i>'
+                    ],
+                    responsive: {
+                        0: {
+                            items: 1,
+                            center: false
+                        },
+                        480: {
+                            items: 1,
+                            center: false
+                        },
+                        600: {
+                            items: 1,
+                            center: false
+                        },
+                        768: {
+                            items: 1
+                        },
+                        992: {
+                            items: 1
+                        },
+                        1200: {
+                            items: 1
+                        }
                     }
-                }
+                });
+            };
+            this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
+                mainSliderService.getSliders().then((response) => {
+                    _.forEach(response, (value, key) => {
+                        $scope.sliders.push(
+                            {
+                                id: value.id,
+                                title_en: value.title_en,
+                                title_th: value.title_th,
+                                description_en: value.description_en,
+                                description_th: value.description_th,
+                                imageUrl: value.imageUrl
+                            }
+                        );
+                    });
+                    $scope.swapLanguage(newValue);
+                    try {
+                        var $owl = $('.owl-carousel');
+                        $owl.trigger('destroy.owl.carousel');
+                        $scope.renderSlide($scope.sliders);
+                        $scope.registerScript();
+                    } catch (e) { }
+                });
             });
         }
+        init(): void {
+            
+        };
     }
 }

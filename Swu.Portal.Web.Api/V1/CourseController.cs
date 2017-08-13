@@ -27,7 +27,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -46,7 +47,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -65,7 +67,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -86,7 +89,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -105,7 +109,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -124,7 +129,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -144,7 +150,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -163,7 +170,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -182,7 +190,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name = "INDE 201: Practice of Medicine I",
+                            Name_TH = "INDE 201: ทดสอบยา 1",
+                            Name_EN = "INDE 201: Practice of Medicine I",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -205,24 +214,34 @@ namespace Swu.Portal.Web.Api
             return new List<SliderProxy> {
                 new SliderProxy {
                     Id=1,
-                    Title=@"Receive a world-class <br>
+                    Title_EN=@"Receive a world-class <br>
 education in the heart of <br>
 the west.",
-                    Description="Top rated for combining academic quality and outdoor reacreation.",
+                    Title_TH=@"ทดสอบทดสอบทดสอบทดสอบ <br>
+ทดสอบทดสอบทดสอบทดสอบทดสอบ <br>
+ทดสอบ.",
+                    Description_EN="Top rated for combining academic quality and outdoor reacreation.",
+                    Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
                     ImageUrl="Content/images/home/h1.jpg"
                 },
                 new SliderProxy {
                     Id=1,
-                    Title=@"Want to experience how life is <br>
+                    Title_EN=@"Want to experience how life is <br>
 on our campus?",
-                    Description="Learning Resources Centre, a student social space.",
+                    Title_TH=@"ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ <br>
+ทดสอบทดสอบทดสอบ?",
+                    Description_EN="Learning Resources Centre, a student social space.",
+                    Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ.",
                     ImageUrl="Content/images/home/h2.jpg"
                 },
                 new SliderProxy {
                     Id=1,
-                    Title=@" Make a bold decision today <br>
+                    Title_EN=@" Make a bold decision today <br>
 and start a new fresh tomorrow. ",
-                    Description="Top rated for combining academic quality and outdoor reacreation.",
+                    Title_TH=@" ทดสอบทดสอบทดสอบทดสอบทดสอบ <br>
+ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ. ",
+                    Description_EN="Top rated for combining academic quality and outdoor reacreation.",
+                    Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
                     ImageUrl="Content/images/home/h3.jpg"
                 }
             };

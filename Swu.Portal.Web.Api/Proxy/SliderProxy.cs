@@ -11,10 +11,18 @@ namespace Swu.Portal.Web.Api.Proxy
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+
+        [JsonProperty(PropertyName = "title_th")]
+        public string Title_TH { get; set; }
+        [JsonProperty(PropertyName = "title_en")]
+        public string Title_EN { get; set; }
+
+
+        [JsonProperty(PropertyName = "description_th")]
+        public string Description_TH { get; set; }
+        [JsonProperty(PropertyName = "description_en")]
+        public string Description_EN { get; set; }
+
         [JsonProperty(PropertyName = "imageUrl")]
         public string ImageUrl { get; set; }
     }
