@@ -28,8 +28,11 @@
     "Scripts/app/home/controller/HomeController.ts",
     "Scripts/app/home/controller/HomeCourseController.ts",
     "Scripts/app/home/controller/MainSliderController.ts",
+    "Scripts/app/home/controller/CommitmentController.ts",
+
     "Scripts/app/home/service/homeCourseService.ts",
     "Scripts/app/home/service/mainSliderService.ts",
+    "Scripts/app/home/service/commitmentService.ts",
 
     "Scripts/app/home/model/course-card.ts",
     "Scripts/app/home/model/slider.ts",
@@ -52,7 +55,8 @@
     "Scripts/model/course.ts",
     "Scripts/model/teacher.ts",
     "Scripts/model/courseType.ts",
-    "Scripts/model/baseControllerScope.ts"
+    "Scripts/model/baseControllerScope.ts",
+    "Scripts/model/commitment.ts"
 
   ],
   "exclude": [

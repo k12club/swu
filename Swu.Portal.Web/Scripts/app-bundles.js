@@ -880,7 +880,7 @@ var Swu;
                     $scope.swapLanguage(newValue);
                     try {
                         var $owl = $('.owl-carousel');
-                        $owl.data('owlCarousel').destroy();
+                        $owl.trigger('destroy.owl.carousel');
                         $scope.renderSlide($scope.sliders);
                         $scope.registerScript();
                     }
@@ -899,6 +899,86 @@ var Swu;
         return MainSliderController;
     }());
     Swu.MainSliderController = MainSliderController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CommitmentController = (function () {
+        function CommitmentController($scope, $rootScope, $state, commitmentService) {
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.commitmentService = commitmentService;
+            this.$scope.commitments = [];
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map($scope.commitments, function (s) {
+                            s.title = s.title_en;
+                            s.description = s.description_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map($scope.commitments, function (s) {
+                            s.title = s.title_th;
+                            s.description = s.description_th;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                $scope.commitments = [];
+                commitmentService.getCommitments().then(function (response) {
+                    _.forEach(response, function (value, key) {
+                        var mod = key % 2;
+                        var mod2 = (key + 1) % 4;
+                        var alignment = "";
+                        var columnCss = "";
+                        var delay = 0;
+                        var style = "";
+                        var commentCss = "";
+                        if (mod == 0) {
+                            alignment = "left";
+                            columnCss = "irs-commtmnt-column";
+                            commentCss = "irs-cmmt-details";
+                        }
+                        else {
+                            alignment = "right";
+                            columnCss = "irs-commtmnt-column2";
+                            commentCss = "irs-cmmt-details2";
+                        }
+                        if (mod2 == 1) {
+                            style = "style_one";
+                        }
+                        $scope.commitments.push({
+                            title_en: value.title_en,
+                            description_en: value.description_en,
+                            title_th: value.title_th,
+                            description_th: value.description_th,
+                            alignment: "text-" + alignment,
+                            iconCss: value.iconCss,
+                            columnCss: columnCss,
+                            style: style,
+                            commentCss: commentCss
+                        });
+                    });
+                    $scope.swapLanguage(newValue);
+                    console.log($scope.commitments);
+                }, function (error) { });
+            });
+        }
+        CommitmentController.prototype.init = function () {
+        };
+        ;
+        CommitmentController.$inject = ["$scope", "$rootScope", "$state", "commitmentService"];
+        CommitmentController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CommitmentController" })
+        ], CommitmentController);
+        return CommitmentController;
+    }());
+    Swu.CommitmentController = CommitmentController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -934,6 +1014,24 @@ var Swu;
             Swu.Factory({ name: "mainSliderService" })
         ], homeCourseService);
         return homeCourseService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var commitmentService = (function () {
+        function commitmentService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        commitmentService.prototype.getCommitments = function () {
+            return this.apiService.getData("shared/commitments");
+        };
+        commitmentService.$inject = ['apiService', 'AppConstant'];
+        commitmentService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "commitmentService" })
+        ], commitmentService);
+        return commitmentService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

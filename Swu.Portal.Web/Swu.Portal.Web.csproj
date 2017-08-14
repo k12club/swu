@@ -656,7 +656,7 @@
     <Content Include="Scripts\app\course\course_detail.html" />
     <Content Include="Scripts\app\home\view\campus-video.html" />
     <Content Include="Scripts\app\home\view\clients.html" />
-    <Content Include="Scripts\app\home\view\education.html" />
+    <Content Include="Scripts\app\home\view\commitment.html" />
     <Content Include="Scripts\app\home\view\events.html" />
     <Content Include="Scripts\app\home\index.html" />
     <Content Include="Scripts\app\home\view\main-slider.html" />
@@ -768,14 +768,17 @@
     <TypeScriptCompile Include="Scripts\app\course\CourseListController.ts" />
     <TypeScriptCompile Include="Scripts\app\course\CourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\CommitmentController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeCourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\MainSliderController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\course-card.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\slider.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\service\commitmentService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\homeCourseService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
+    <TypeScriptCompile Include="Scripts\model\commitment.ts" />
     <TypeScriptCompile Include="Scripts\model\course.ts" />
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />
     <TypeScriptCompile Include="Scripts\model\event.ts" />
