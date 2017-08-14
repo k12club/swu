@@ -803,7 +803,6 @@ var Swu;
             this.mainSliderService = mainSliderService;
             this.$sce = $sce;
             this.$timeout = $timeout;
-            this.$scope.sliders = [];
             this.$scope.swapLanguage = function (lang) {
                 switch (lang) {
                     case "en": {
@@ -853,6 +852,8 @@ var Swu;
                         autoplay: true,
                         autoHeight: false,
                         smartSpeed: 2000,
+                        touchDrag: false,
+                        mouseDrag: false,
                         navText: [
                             '<i class=""></i>',
                             '<i class=""></i>'
@@ -884,30 +885,42 @@ var Swu;
                 }
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                mainSliderService.getSliders().then(function (response) {
+                    _.forEach(response, function (value, key) {
+                        $scope.sliders.push({
+                            id: value.id,
+                            title_en: value.title_en,
+                            title_th: value.title_th,
+                            description_en: value.description_en,
+                            description_th: value.description_th,
+                            imageUrl: value.imageUrl
+                        });
+                    });
+                    $scope.swapLanguage(newValue);
+                    var $owl = $('.irs-main-slider');
+                    if ($scope.count == 0) {
+                        $scope.renderSlide($scope.sliders);
+                        $scope.registerScript();
+                        $scope.count += 1;
+                    }
+                    else {
+                        if ($owl.hasClass("owl-carousel")) {
+                            $owl.data('owlCarousel').destroy();
+                            $owl.removeClass('owl-carousel owl-loaded');
+                            $owl.find('.owl-stage-outer').children().unwrap();
+                            $owl.removeData();
+                            $scope.renderSlide($scope.sliders);
+                            $scope.registerScript();
+                        }
+                    }
+                    console.log($scope.count);
+                });
             });
             this.init();
         }
         MainSliderController.prototype.init = function () {
-            var _this = this;
-            this.mainSliderService.getSliders().then(function (response) {
-                _.forEach(response, function (value, key) {
-                    _this.$scope.sliders.push({
-                        id: value.id,
-                        title_en: value.title_en,
-                        title_th: value.title_th,
-                        description_en: value.description_en,
-                        description_th: value.description_th,
-                        imageUrl: value.imageUrl
-                    });
-                });
-                _this.$scope.swapLanguage('en');
-                try {
-                    var $owl = $('.owl-carousel');
-                    _this.$scope.renderSlide(_this.$scope.sliders);
-                    _this.$scope.registerScript();
-                }
-                catch (e) { }
-            });
+            this.$scope.sliders = [];
+            this.$scope.count = 0;
         };
         ;
         MainSliderController.$inject = ["$scope", "$rootScope", "$state", "mainSliderService", "$sce", "$timeout"];
@@ -983,7 +996,6 @@ var Swu;
                         });
                     });
                     $scope.swapLanguage(newValue);
-                    console.log($scope.commitments);
                 }, function (error) { });
             });
         }

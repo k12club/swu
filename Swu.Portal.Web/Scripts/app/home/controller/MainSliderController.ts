@@ -3,13 +3,13 @@
         sliders: ISlider[];
         renderSlide(sliders: ISlider[]): void;
         registerScript(): void;
+        count: number;
     }
     @Module("app")
     @Controller({ name: "MainSliderController" })
     export class MainSliderController {
         static $inject: Array<string> = ["$scope", "$rootScope", "$state", "mainSliderService", "$sce", "$timeout"];
         constructor(private $scope: IMainSliderScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private mainSliderService: ImainSliderService, private $sce: ng.ISCEService, private $timeout: ng.ITimeoutService) {
-            this.$scope.sliders = [];
             this.$scope.swapLanguage = (lang: string): void => {
                 switch (lang) {
                     case "en": {
@@ -59,6 +59,8 @@
                         autoplay: true,
                         autoHeight: false,
                         smartSpeed: 2000,
+                        touchDrag: false,
+                        mouseDrag: false,
                         navText: [
                             '<i class=""></i>',
                             '<i class=""></i>'
@@ -90,50 +92,43 @@
                 }
             };
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
-                //mainSliderService.getSliders().then((response) => {
-                //    _.forEach(response, (value, key) => {
-                //        $scope.sliders.push(
-                //            {
-                //                id: value.id,
-                //                title_en: value.title_en,
-                //                title_th: value.title_th,
-                //                description_en: value.description_en,
-                //                description_th: value.description_th,
-                //                imageUrl: value.imageUrl
-                //            }
-                //        );
-                //    });
-                //    $scope.swapLanguage(newValue);
-                //    try {
-                //        var $owl = $('.owl-carousel');
-                //        $scope.renderSlide($scope.sliders);
-                //        $scope.registerScript();
-                //    } catch (e) { }
-                //});
+                mainSliderService.getSliders().then((response) => {
+                    _.forEach(response, (value, key) => {
+                        $scope.sliders.push(
+                            {
+                                id: value.id,
+                                title_en: value.title_en,
+                                title_th: value.title_th,
+                                description_en: value.description_en,
+                                description_th: value.description_th,
+                                imageUrl: value.imageUrl
+                            }
+                        );
+                    });
+                    $scope.swapLanguage(newValue);
+                    var $owl = $('.irs-main-slider');
+                    if ($scope.count == 0) {
+                        $scope.renderSlide($scope.sliders);
+                        $scope.registerScript();
+                        $scope.count += 1;
+                    } else {
+                        if ($owl.hasClass("owl-carousel")) {
+                            $owl.data('owlCarousel').destroy();
+                            $owl.removeClass('owl-carousel owl-loaded');
+                            $owl.find('.owl-stage-outer').children().unwrap();
+                            $owl.removeData();
+                            $scope.renderSlide($scope.sliders);
+                            $scope.registerScript();
+                        }
+                    }
+                    console.log($scope.count);
+                });
             });
             this.init();
         }
         init(): void {
-            this.mainSliderService.getSliders().then((response) => {
-                _.forEach(response, (value, key) => {
-                    this.$scope.sliders.push(
-                        {
-                            id: value.id,
-                            title_en: value.title_en,
-                            title_th: value.title_th,
-                            description_en: value.description_en,
-                            description_th: value.description_th,
-                            imageUrl: value.imageUrl
-                        }
-                    );
-                });
-                this.$scope.swapLanguage('en');
-                try {
-                    var $owl = $('.owl-carousel');
-                    this.$scope.renderSlide(this.$scope.sliders);
-                    this.$scope.registerScript();
-                } catch (e) { }
-            });
+            this.$scope.sliders = [];
+            this.$scope.count = 0;
         };
     }
 }

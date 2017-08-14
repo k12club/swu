@@ -45,14 +45,14 @@ interface IOwlCarouselOptions {
     addClassActive?: boolean;
     transitionStyle?: any;
 
-    autoplay: boolean;
-    loop: boolean;
-    margin: number;
-    dots: boolean;
-    nav: boolean;
-    autoplayHoverPause: boolean;
-    smartSpeed: number;
-    navText: string[];
+    autoplay?: boolean;
+    loop?: boolean;
+    margin?: number;
+    dots?: boolean;
+    nav?: boolean;
+    autoplayHoverPause?: boolean;
+    smartSpeed?: number;
+    navText?: string[];
 
     // callbacks
     beforeUpdate?: (params?: any) => void;

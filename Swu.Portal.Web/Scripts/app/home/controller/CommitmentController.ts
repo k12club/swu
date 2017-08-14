@@ -62,7 +62,6 @@
                         });
                     });
                     $scope.swapLanguage(newValue);
-                    console.log($scope.commitments);
                 }, (error) => { });
             });
         }
