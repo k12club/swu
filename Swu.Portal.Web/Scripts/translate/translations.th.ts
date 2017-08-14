@@ -38,7 +38,15 @@
             contact: "ติดต่อเรา"
         },
         home: {},
-        course: {},
+        course: {
+            all: "วิชาที่เปิดสอนทั้งหมด",
+            topRated: "คะแนนสูง",
+            mostPopular: "ยอดนิยม",
+            recentlyAdded: "เพิ่มล่าสุด"
+        },
+        commitments: {
+            title: "ความมุ่งมั่น"
+        },
         research: {},
         teacher: {},
         student: {},

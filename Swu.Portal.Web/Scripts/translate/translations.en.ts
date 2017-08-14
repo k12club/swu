@@ -38,8 +38,16 @@
             contact:"Contact"
         },
         home: {},
-        course: {},
+        course: {
+            all:"All Courses",
+            topRated:"Top Rated",
+            mostPopular:"Most Popular",
+            recentlyAdded:"Recently Added"
+        },
         research: {},
+        commitments: {
+            title: "Commitment to Education"
+        },
         teacher: {},
         student: {},
         settings: {}
