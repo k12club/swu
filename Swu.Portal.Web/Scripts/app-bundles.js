@@ -842,69 +842,72 @@ var Swu;
                 $('#main-slider').html(html);
             };
             this.$scope.registerScript = function () {
-                var $owl = $('.irs-main-slider');
-                $owl.owlCarousel({
-                    loop: true,
-                    margin: 0,
-                    dots: false,
-                    nav: false,
-                    autoplayHoverPause: false,
-                    autoplay: true,
-                    autoHeight: false,
-                    smartSpeed: 2000,
-                    navText: [
-                        '<i class=""></i>',
-                        '<i class=""></i>'
-                    ],
-                    responsive: {
-                        0: {
-                            items: 1,
-                            center: false
-                        },
-                        480: {
-                            items: 1,
-                            center: false
-                        },
-                        600: {
-                            items: 1,
-                            center: false
-                        },
-                        768: {
-                            items: 1
-                        },
-                        992: {
-                            items: 1
-                        },
-                        1200: {
-                            items: 1
+                if ($('.irs-main-slider').length) {
+                    var $owl = $('.irs-main-slider');
+                    $owl.owlCarousel({
+                        loop: true,
+                        margin: 0,
+                        dots: false,
+                        nav: false,
+                        autoplayHoverPause: false,
+                        autoplay: true,
+                        autoHeight: false,
+                        smartSpeed: 2000,
+                        navText: [
+                            '<i class=""></i>',
+                            '<i class=""></i>'
+                        ],
+                        responsive: {
+                            0: {
+                                items: 1,
+                                center: false
+                            },
+                            480: {
+                                items: 1,
+                                center: false
+                            },
+                            600: {
+                                items: 1,
+                                center: false
+                            },
+                            768: {
+                                items: 1
+                            },
+                            992: {
+                                items: 1
+                            },
+                            1200: {
+                                items: 1
+                            }
                         }
-                    }
-                });
+                    });
+                }
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
-                mainSliderService.getSliders().then(function (response) {
-                    _.forEach(response, function (value, key) {
-                        $scope.sliders.push({
-                            id: value.id,
-                            title_en: value.title_en,
-                            title_th: value.title_th,
-                            description_en: value.description_en,
-                            description_th: value.description_th,
-                            imageUrl: value.imageUrl
-                        });
-                    });
-                    $scope.swapLanguage(newValue);
-                    try {
-                        var $owl = $('.owl-carousel');
-                        $owl.trigger('destroy.owl.carousel');
-                        $scope.renderSlide($scope.sliders);
-                        $scope.registerScript();
-                    }
-                    catch (e) { }
-                });
             });
+            this.init();
         }
         MainSliderController.prototype.init = function () {
+            var _this = this;
+            this.mainSliderService.getSliders().then(function (response) {
+                _.forEach(response, function (value, key) {
+                    _this.$scope.sliders.push({
+                        id: value.id,
+                        title_en: value.title_en,
+                        title_th: value.title_th,
+                        description_en: value.description_en,
+                        description_th: value.description_th,
+                        imageUrl: value.imageUrl
+                    });
+                });
+                _this.$scope.swapLanguage('en');
+                try {
+                    var $owl = $('.owl-carousel');
+                    _this.$scope.renderSlide(_this.$scope.sliders);
+                    _this.$scope.registerScript();
+                }
+                catch (e) { }
+            });
         };
         ;
         MainSliderController.$inject = ["$scope", "$rootScope", "$state", "mainSliderService", "$sce", "$timeout"];
