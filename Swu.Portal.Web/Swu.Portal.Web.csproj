@@ -28,6 +28,7 @@
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -769,12 +770,15 @@
     <TypeScriptCompile Include="Scripts\app\course\CourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\CommitmentController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\ExamRegistrationController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeCourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\MainSliderController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\course-card.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\model\exam-clock.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\slider.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\commitmentService.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\service\examRegistrationService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\homeCourseService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
@@ -782,6 +786,7 @@
     <TypeScriptCompile Include="Scripts\model\course.ts" />
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />
     <TypeScriptCompile Include="Scripts\model\event.ts" />
+    <TypeScriptCompile Include="Scripts\model\exam.ts" />
     <TypeScriptCompile Include="Scripts\model\teacher.ts" />
     <TypeScriptCompile Include="Scripts\model\userLogin.ts" />
     <TypeScriptCompile Include="Scripts\model\userProfile.ts" />
@@ -812,6 +817,7 @@
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\es6-promise\es6-promise.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\flipClock\flipClock.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery-validation-unobtrusive\jquery-validation-unobtrusive.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />

@@ -44,6 +44,11 @@
             mostPopular:"Most Popular",
             recentlyAdded:"Recently Added"
         },
+        registration: {
+            identityCardNumber: "IDENTITY CARD NUMBER",
+            fullName: "FULL NAME",
+            register:"Register today"
+        },
         research: {},
         commitments: {
             title: "Commitment to Education"

@@ -10,4 +10,5 @@
 /// <reference path="typings/moment/moment.d.ts" />
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/owlcarousel/index.d.ts" />
+/// <reference path="typings/flipclock/flipclock.d.ts" />
  

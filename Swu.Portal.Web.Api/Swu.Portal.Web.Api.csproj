@@ -156,15 +156,22 @@
     <Compile Include="Proxy\CommitmentProxy.cs" />
     <Compile Include="Proxy\CourseCardProxy.cs" />
     <Compile Include="Proxy\CourseProxy.cs" />
+    <Compile Include="Proxy\Exam.cs" />
+    <Compile Include="Proxy\ExamRegistrationProxy.cs" />
     <Compile Include="Proxy\SliderProxy.cs" />
     <Compile Include="Proxy\TeacherProxy.cs" />
     <Compile Include="Proxy\UserLoginProxy.cs" />
     <Compile Include="Proxy\UserProfile.cs" />
+    <Compile Include="V1\ExamRegistrationController.cs" />
     <Compile Include="V1\SharedController.cs" />
     <Compile Include="V1\CourseController.cs" />
     <Compile Include="V1\AccountController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Swu.Portal.Core\Swu.Portal.Core.csproj">
+      <Project>{792BEACE-FEB8-4532-B50D-B7AABEF14C41}</Project>
+      <Name>Swu.Portal.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Swu.Portal.Data\Swu.Portal.Data.csproj">
       <Project>{5267aa98-568d-40e5-abb5-eadff3fb8c72}</Project>
       <Name>Swu.Portal.Data</Name>
@@ -179,6 +186,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dependencies\" />
     <Folder Include="Securities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

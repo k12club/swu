@@ -4,6 +4,7 @@ using Autofac.Integration.WebApi;
 using Microsoft.Owin.Security;
 using Owin;
 using Swu.Portal.Core;
+using Swu.Portal.Core.Dependencies;
 using Swu.Portal.Data.Models;
 using Swu.Portal.Data.Repository;
 using Swu.Portal.Service;
@@ -24,8 +25,7 @@ namespace Swu.Portal.Web
 
             builder.RegisterType<ApplicationUserServices>().As<IApplicationUserServices>().InstancePerRequest();
             builder.RegisterType<ApplicationUserRepository>().As<IApplicationUserRepository>().InstancePerRequest();
-
-            //builder.RegisterType<IApplicationUserRepository>().As<IRepository<PersonalTestData>>().InstancePerRequest();
+            builder.RegisterType<DateTimeRepository>().As<IDateTimeRepository>().InstancePerRequest();
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);

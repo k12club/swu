@@ -1,12 +1,11 @@
-﻿<section class="irs-register">
+﻿<section class="irs-register" ng-controller="ExamRegistrationController as vm">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7">
                 <div class="irs-register-counter">
-                    <h1 class="fz-extre-lagre">Learn outside of the classroom</h1>
+                    <h1 class="fz-extre-lagre">{{exam.examInfo.title}}</h1>
                     <p>
-                        You can work in labs on and off campus or in the wild of Montana, or even <br>
-                        spend semesters overseas.
+                        {{exam.examInfo.description}}
                     </p>
                     <div class="irs-flip-clock">
                         <div class="clock" style="margin:2em;"></div>
@@ -18,17 +17,17 @@
                 <div class="irs-register-form text-center">
                     <div class="irs-form-header">
                         <span class="irs-re-icon fz-extre-lagre flaticon-pencil"></span>
-                        <h3>Exam Registration for INDE 201: Practice of Medicine I (Final)</h3>
+                        <h3>{{exam.examInfo.title}}</h3>
                     </div>
                     <div class="irs-form">
                         <form>
                             <div class="form-group">
-                                <input class="form-control" id="studentId" placeholder="STUDENT ID">
+                                <input class="form-control" id="studentId" placeholder="{{'registration.identityCardNumber'|translate}}">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="name" placeholder="CHANSAK KOCHASEN">
+                                <input class="form-control" id="name" placeholder="{{'registration.fullName'|translate}}">
                             </div>
-                            <button class="btn btn-default irs-button-styledark">Register Today</button>
+                            <input type="button" class="btn btn-default irs-button-styledark" value="{{'registration.register'|translate}}" />
                         </form>
                     </div>
                 </div>
@@ -36,7 +35,7 @@
         </div>
     </div>
 </section>
-<script>
+<!--<script>
     function flip_Clock() {
         var clock;
         var clock;
@@ -50,9 +49,9 @@
             }
         });
 
-        clock.setTime(8220880);
+        clock.setTime(86400);
         clock.setCountdown(true);
         clock.start();
     }
     this.flip_Clock();
-</script>
+</script>-->

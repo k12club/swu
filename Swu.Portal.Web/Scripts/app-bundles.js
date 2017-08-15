@@ -272,6 +272,11 @@ var Swu;
             mostPopular: "Most Popular",
             recentlyAdded: "Recently Added"
         },
+        registration: {
+            identityCardNumber: "IDENTITY CARD NUMBER",
+            fullName: "FULL NAME",
+            register: "Register today"
+        },
         research: {},
         commitments: {
             title: "Commitment to Education"
@@ -327,6 +332,11 @@ var Swu;
             topRated: "คะแนนสูง",
             mostPopular: "ยอดนิยม",
             recentlyAdded: "เพิ่มล่าสุด"
+        },
+        registration: {
+            identityCardNumber: "หมายเลขบัตรประชาชน",
+            fullName: "ชื่อ-นามสกุล",
+            register: "ลงทะเบียน"
         },
         commitments: {
             title: "ความมุ่งมั่น"
@@ -913,7 +923,6 @@ var Swu;
                             $scope.registerScript();
                         }
                     }
-                    console.log($scope.count);
                 });
             });
             this.init();
@@ -1013,6 +1022,71 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var ExamRegistrationController = (function () {
+        function ExamRegistrationController($scope, $rootScope, $state, examRegistrationService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.examRegistrationService = examRegistrationService;
+            this.$scope.getExam = function () {
+                _this.examRegistrationService.getExam().then(function (response) {
+                    $scope.register_flipClock(response.remainingTime);
+                }, function (error) { });
+            };
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        $scope.exam.examInfo.title = $scope.exam.examInfo.title_en;
+                        $scope.exam.examInfo.description = $scope.exam.examInfo.description_en;
+                        break;
+                    }
+                    case "th": {
+                        $scope.exam.examInfo.title = $scope.exam.examInfo.title_th;
+                        $scope.exam.examInfo.description = $scope.exam.examInfo.description_th;
+                        break;
+                    }
+                }
+            };
+            this.$scope.register_flipClock = function (remaining) {
+                var clock;
+                clock = $('.clock').FlipClock({
+                    clockFace: 'DailyCounter',
+                    autoStart: false,
+                    callbacks: {
+                        stop: function () {
+                            $('.message').html('The clock has stopped!');
+                        }
+                    }
+                });
+                clock.setTime(remaining);
+                clock.setCountdown(true);
+                clock.start();
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                examRegistrationService.getExam().then(function (response) {
+                    $scope.exam = response;
+                    $scope.swapLanguage(newValue);
+                    console.log($scope.exam);
+                }, function (error) { });
+            });
+            this.init();
+        }
+        ExamRegistrationController.prototype.init = function () {
+            this.$scope.getExam();
+        };
+        ;
+        ExamRegistrationController.$inject = ["$scope", "$rootScope", "$state", "examRegistrationService"];
+        ExamRegistrationController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ExamRegistrationController" })
+        ], ExamRegistrationController);
+        return ExamRegistrationController;
+    }());
+    Swu.ExamRegistrationController = ExamRegistrationController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var homeCourseService = (function () {
         function homeCourseService(apiService, constant) {
             this.apiService = apiService;
@@ -1063,6 +1137,24 @@ var Swu;
             Swu.Factory({ name: "commitmentService" })
         ], commitmentService);
         return commitmentService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var examRegistrationService = (function () {
+        function examRegistrationService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        examRegistrationService.prototype.getExam = function () {
+            return this.apiService.getData("exam/getExam");
+        };
+        examRegistrationService.$inject = ['apiService', 'AppConstant'];
+        examRegistrationService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "examRegistrationService" })
+        ], examRegistrationService);
+        return examRegistrationService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

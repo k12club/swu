@@ -29,13 +29,16 @@
     "Scripts/app/home/controller/HomeCourseController.ts",
     "Scripts/app/home/controller/MainSliderController.ts",
     "Scripts/app/home/controller/CommitmentController.ts",
+    "Scripts/app/home/controller/ExamRegistrationController.ts",
 
     "Scripts/app/home/service/homeCourseService.ts",
     "Scripts/app/home/service/mainSliderService.ts",
     "Scripts/app/home/service/commitmentService.ts",
+    "Scripts/app/home/service/examRegistrationService.ts",
 
     "Scripts/app/home/model/course-card.ts",
     "Scripts/app/home/model/slider.ts",
+    "Scripts/app/home/model/exam-clock.ts",
 
     "Scripts/app/course/CourseController.ts",
     "Scripts/app/course/CourseListController.ts",
@@ -56,7 +59,8 @@
     "Scripts/model/teacher.ts",
     "Scripts/model/courseType.ts",
     "Scripts/model/baseControllerScope.ts",
-    "Scripts/model/commitment.ts"
+    "Scripts/model/commitment.ts",
+    "Scripts/model/exam.ts"
 
   ],
   "exclude": [

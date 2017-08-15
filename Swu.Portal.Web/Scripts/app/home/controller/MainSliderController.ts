@@ -121,7 +121,6 @@
                             $scope.registerScript();
                         }
                     }
-                    console.log($scope.count);
                 });
             });
             this.init();

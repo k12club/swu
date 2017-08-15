@@ -44,6 +44,11 @@
             mostPopular: "ยอดนิยม",
             recentlyAdded: "เพิ่มล่าสุด"
         },
+        registration: {
+            identityCardNumber: "หมายเลขบัตรประชาชน",
+            fullName: "ชื่อ-นามสกุล",
+            register: "ลงทะเบียน"
+        },
         commitments: {
             title: "ความมุ่งมั่น"
         },
