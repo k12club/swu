@@ -1,18 +1,19 @@
-﻿<section class="irs-event">
+﻿<section class="irs-event" ng-controller="EventController as vm">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-8 col-lg-3 col-lg-offset-1">
                 <div class="irs-econtent-details">
                     <div class="irs-event-title">
-                        <h2>Our Edu Hub Events</h2>
+                        <h2 translate="event.title"></h2>
                     </div>
                     <div class="irs-epara">
-                        <p>Events listed here are open to everyone. Whether you want to listen to a lecture, learn a new skill, take in a concert or an exhibition, see a play staged by our university students or attend one of our sporting events.</p>
+                        <p translate="event.description"></p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-8">
                 <div class="irs-event-carousel">
+                    <!--
                     <div class="item">
                         <div class="irs-event-grid">
                             <div class="irs-evnt-thumb"><img class="img-responsive img-fluid" src="../../../Content/images/event/1.jpg" alt="1.jpg"></div>
@@ -84,60 +85,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
     </div>
 </section>
-<script>
-    if ($('.irs-event-carousel').length) {
-        $('.irs-event-carousel').owlCarousel({
-            autoplay: 5000,
-            loop: true,
-            margin: 0,
-            dots: false,
-            nav: true,
-            autoplayHoverPause: false,
-            autoplay: false,
-            autoHeight: false,
-            smartSpeed: 2000,
-            navText: [
-              '<span class="flaticon-arrows"></span>',
-              '<span class="flaticon-arrows-1"></span>'
-            ],
-            responsive: {
-                0: {
-                    items: 1,
-                    center: false
-                },
-                480: {
-                    items: 1,
-                    center: false
-                },
-                600: {
-                    items: 1,
-                    center: false
-                },
-                768: {
-                    items: 2
-                },
-                992: {
-                    items: 3
-                },
-                1200: {
-                    items: 3
-                },
-                1366: {
-                    items: 3
-                },
-                1440: {
-                    items: 1
-                },
-                1600: {
-                    items: 3
-                }
-            }
-        })
-    }
-</script>
