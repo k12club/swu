@@ -1,9 +1,9 @@
-﻿<section class="irs-campus">
+﻿<section class="irs-campus" ng-controller="VideoController as vm">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
                 <div class="irs-campus-title text-center">
-                    <h2>Campus Videos</h2>
+                    <h2 translate="video.title"></h2>
                     <img class="img-responsive" src="../../../Content/images/resource/commitment-title-img.png" alt="commitment-title-img.png">
                 </div>
             </div>
@@ -12,63 +12,7 @@
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 ">
                 <!-- Swiper -->
                 <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/1.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Studying at the University of Luxembourg" class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/3.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Taking a new approach to develop anti-fraud" class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/2.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Taking a new Physicists and Computer Scientists " class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/4.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Their idea is to use liquid crystals to produce" class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/1.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Studying at the University of Luxembourg" class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/2.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Taking a new Physicists and Computer Scientists" class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/3.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Taking a new approach to develop anti-fraud" class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
-                        <div class="irs-ss-item swiper-slide">
-                            <div class="irs-campus-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/campus/4.jpg" alt="">
-                                <div class="irs-campus-overlayer"><a title="Their idea is to use liquid crystals to produce" class="popup-youtube" href="https://www.youtube.com/watch?v=hYEnh4LuruQ"><span class="flaticon-play-1"></span></a></div>
-                                <p>Details On Hover Title</p>
-                            </div>
-                        </div>
+                    <div class="swiper-wrapper" id="main-video">
                     </div>
                     <!-- Add Pagination -->
                     <div class="irs-campus-ss swiper-pagination"></div>
@@ -82,13 +26,3 @@
         </div>
     </div>
 </section>
-<script>
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 2,
-        slidesPerColumn: 2,
-        paginationClickable: true,
-        spaceBetween: 20,
-        mousewheelControl: true
-    });
-</script>

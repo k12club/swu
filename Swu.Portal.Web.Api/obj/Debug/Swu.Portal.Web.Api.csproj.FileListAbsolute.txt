@@ -74,6 +74,7 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.Owin.Security.OAuth.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.Web.Infrastructure.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Newtonsoft.Json.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Owin.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Core.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Data.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Service.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Net.Http.Formatting.dll
@@ -85,6 +86,7 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.Razor.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Deployment.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Core.pdb
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Data.pdb
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Service.pdb
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Autofac.xml
@@ -114,5 +116,3 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Razor.xml
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.dll
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.pdb
-D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Core.dll
-D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Core.pdb

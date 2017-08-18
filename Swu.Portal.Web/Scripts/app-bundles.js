@@ -277,9 +277,16 @@ var Swu;
             fullName: "FULL NAME",
             register: "Register today"
         },
+        event: {
+            title: "Our Edu Hub Events",
+            description: "Events listed here are open to everyone. Whether you want to listen to a lecture, learn a new skill, take in a concert or an exhibition, see a play staged by our university students or attend one of our sporting events."
+        },
         research: {},
         commitments: {
             title: "Commitment to Education"
+        },
+        video: {
+            title: "Campus Videos"
         },
         teacher: {},
         student: {},
@@ -338,8 +345,15 @@ var Swu;
             fullName: "ชื่อ-นามสกุล",
             register: "ลงทะเบียน"
         },
+        event: {
+            title: "กิจกรมภายใน",
+            description: "ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ"
+        },
         commitments: {
             title: "ความมุ่งมั่น"
+        },
+        video: {
+            title: "วีดีโอ"
         },
         research: {},
         teacher: {},
@@ -1087,6 +1101,235 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var EventController = (function () {
+        function EventController($scope, $rootScope, $state, eventService, $sce, $timeout) {
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.eventService = eventService;
+            this.$sce = $sce;
+            this.$timeout = $timeout;
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map($scope.events, function (s) {
+                            s.title = s.title_en;
+                            s.place = s.place_en;
+                            s.description = s.description_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map($scope.events, function (s) {
+                            s.title = s.title_th;
+                            s.place = s.place_th;
+                            s.description = s.description_th;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$scope.renderSlide = function (event) {
+                var html = "";
+                _.forEach(event, function (value, key) {
+                    var elements = "<div class='item'>\
+                        <div class='irs-event-grid'>\
+                            <div class='irs-edetails irs-ext-pad'>\
+                                <div class='irs-ettl'>\
+                                    <h4>" + value.title + "</h4>\
+                                        </div>\
+                                        <div class='irs-edate-time'>\
+                                            <ul class='list-unstyled'>\
+                                                <li><a href='#'> <span class='flaticon-clock text-thm2'></span> Date: " + value.startDate + " </a></li>\
+                                                    <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: " + value.startDate + "</a></li>\
+                                                        <li><a href='#'> <span class='flaticon-buildings text-thm2' > </span> " + value.place + "</a></li>\
+                                                            </ul>\
+                                                            <p> " + value.description + "</p>\
+                                                                <div class='irs-evnticon'> <span class='flaticon-cross'> </span></div>\
+                                                                    </div>\
+                                                                    </div>\
+                                                                    </div>\
+                                                                    </div>";
+                    html += elements;
+                });
+                $('.irs-event-carousel').html(html);
+            };
+            this.$scope.registerScript = function () {
+                if ($('.irs-event-carousel').length) {
+                    $('.irs-event-carousel').owlCarousel({
+                        loop: true,
+                        margin: 0,
+                        dots: false,
+                        nav: true,
+                        autoplayHoverPause: false,
+                        autoPlay: false,
+                        autoHeight: false,
+                        smartSpeed: 2000,
+                        navText: [
+                            '<span class="flaticon-arrows"></span>',
+                            '<span class="flaticon-arrows-1"></span>'
+                        ],
+                        responsive: {
+                            0: {
+                                items: 1,
+                                center: false
+                            },
+                            480: {
+                                items: 1,
+                                center: false
+                            },
+                            600: {
+                                items: 1,
+                                center: false
+                            },
+                            768: {
+                                items: 2
+                            },
+                            992: {
+                                items: 3
+                            },
+                            1200: {
+                                items: 3
+                            },
+                            1366: {
+                                items: 3
+                            },
+                            1440: {
+                                items: 1
+                            },
+                            1600: {
+                                items: 3
+                            }
+                        }
+                    });
+                }
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                eventService.getEvents().then(function (response) {
+                    _.forEach(response, function (value, key) {
+                        $scope.events.push({
+                            title_en: value.title_en,
+                            place_en: value.place_en,
+                            description_en: value.description_en,
+                            title_th: value.title_th,
+                            place_th: value.place_th,
+                            description_th: value.description_th,
+                            imageUrl: value.imageUrl,
+                            startDate: value.startDate
+                        });
+                    });
+                    $scope.swapLanguage(newValue);
+                    var $owl = $('.irs-event-carousel');
+                    if ($scope.count == 0) {
+                        $scope.renderSlide($scope.events);
+                        $scope.registerScript();
+                        $scope.count += 1;
+                    }
+                    else {
+                        if ($owl.hasClass("owl-carousel")) {
+                            $owl.data('owlCarousel').destroy();
+                            $owl.removeClass('owl-carousel owl-loaded');
+                            $owl.find('.owl-stage-outer').children().unwrap();
+                            $owl.removeData();
+                            $scope.renderSlide($scope.events);
+                            $scope.registerScript();
+                        }
+                    }
+                });
+            });
+            this.init();
+        }
+        EventController.prototype.init = function () {
+            this.$scope.events = [];
+            this.$scope.count = 0;
+        };
+        ;
+        EventController.$inject = ["$scope", "$rootScope", "$state", "eventService", "$sce", "$timeout"];
+        EventController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "EventController" })
+        ], EventController);
+        return EventController;
+    }());
+    Swu.EventController = EventController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var VideoController = (function () {
+        function VideoController($scope, $rootScope, $state, videoService, $translate) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.videoService = videoService;
+            this.$translate = $translate;
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map(_this.$scope.videos, function (v) {
+                            v.title = v.title_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map(_this.$scope.videos, function (v) {
+                            v.title = v.title_th;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$scope.render = function (videos) {
+                var html = "";
+                _.forEach(videos, function (value, key) {
+                    var elements = "<div class='irs-ss-item swiper-slide'>\
+                    <div class='irs-campus-thumb'>\
+                        <img class='img-responsive img-fluid' src='../../../" + value.imageUrl + "' alt= '' >\
+                            <div class='irs-campus-overlayer' ><a class='popup-youtube' href= '" + value.videoUrl + "' > <span class='flaticon-play-1' > </span></a> </div>\
+                                <p> " + value.title + "</p>\
+                                    </div>\
+                                    </div>";
+                    html += elements;
+                });
+                $('#main-video').html(html);
+            };
+            this.$scope.registerScript = function () {
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    slidesPerView: 2,
+                    slidesPerColumn: 2,
+                    paginationClickable: true,
+                    spaceBetween: 20,
+                    mousewheelControl: true
+                });
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.videos != undefined || $scope.videos != null) {
+                    videoService.getVideos().then(function (response) {
+                        $scope.videos = response;
+                        $scope.swapLanguage($rootScope.lang);
+                        $scope.render($scope.videos);
+                        $scope.registerScript();
+                    }, function (error) { });
+                }
+            });
+            this.init();
+        }
+        VideoController.prototype.init = function () {
+            this.$scope.videos = [];
+        };
+        ;
+        VideoController.$inject = ["$scope", "$rootScope", "$state", "videoService", "$translate"];
+        VideoController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "VideoController" })
+        ], VideoController);
+        return VideoController;
+    }());
+    Swu.VideoController = VideoController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var homeCourseService = (function () {
         function homeCourseService(apiService, constant) {
             this.apiService = apiService;
@@ -1155,6 +1398,42 @@ var Swu;
             Swu.Factory({ name: "examRegistrationService" })
         ], examRegistrationService);
         return examRegistrationService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var eventService = (function () {
+        function eventService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        eventService.prototype.getEvents = function () {
+            return this.apiService.getData("event/all");
+        };
+        eventService.$inject = ['apiService', 'AppConstant'];
+        eventService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "eventService" })
+        ], eventService);
+        return eventService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var videoService = (function () {
+        function videoService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        videoService.prototype.getVideos = function () {
+            return this.apiService.getData("video/all");
+        };
+        videoService.$inject = ['apiService', 'AppConstant'];
+        videoService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "videoService" })
+        ], videoService);
+        return videoService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

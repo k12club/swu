@@ -773,14 +773,18 @@
     <TypeScriptCompile Include="Scripts\app\home\controller\ExamRegistrationController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeCourseController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\EventController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\MainSliderController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\VideoController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\course-card.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\exam-clock.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\slider.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\commitmentService.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\service\eventService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\examRegistrationService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\homeCourseService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\commitment.ts" />
     <TypeScriptCompile Include="Scripts\model\course.ts" />
@@ -802,6 +806,7 @@
     <TypeScriptCompile Include="Scripts\app\teacher\TeacherListController.ts" />
     <TypeScriptCompile Include="Scripts\const\const.ts" />
     <TypeScriptCompile Include="Scripts\directive\loginModal.ts" />
+    <TypeScriptCompile Include="Scripts\model\video.ts" />
     <TypeScriptCompile Include="Scripts\translate\translations.en.ts" />
     <TypeScriptCompile Include="Scripts\translate\translations.th.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-material\angular-material.d.ts" />
@@ -830,6 +835,7 @@
     <TypeScriptCompile Include="Scripts\typings\ngprogress-lite\nprogress-lite.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\nprogress\NProgress.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\owlCarousel\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\swiper\swiper.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />
     <TypeScriptCompile Include="Scripts\_references.ts" />
