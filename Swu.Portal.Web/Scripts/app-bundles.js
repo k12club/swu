@@ -290,6 +290,26 @@ var Swu;
         news: {
             title: "Edu Hub News"
         },
+        testimonials: {
+            title: "Our Happy Students",
+            description: "Our alumni are very content with our classes and 99% of them managed to find a job in their field. Check out our full testimonials from our best students worldwide.",
+            checkfaq: "Check our FAQ’s",
+            thumb1: {
+                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
+                by: "Jaqueline Smith",
+                position: "BA Hons Business Management"
+            },
+            thumb2: {
+                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
+                by: "Jaqueline Smith",
+                position: "BA Hons Business Management"
+            },
+            thumb3: {
+                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
+                by: "Jaqueline Smith",
+                position: "BA Hons Business Management"
+            }
+        },
         research: {},
         teacher: {},
         student: {},
@@ -360,6 +380,26 @@ var Swu;
         },
         news: {
             title: "ข่าวสาร"
+        },
+        testimonials: {
+            title: "สัมภาษณ์นักศึกษา",
+            description: "ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
+            checkfaq: "คำถามที่พบบ่อย",
+            thumb1: {
+                quote: "“ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ”",
+                by: "จาคิวลีน สมิท",
+                position: "การจัดการธุรกิจ"
+            },
+            thumb2: {
+                quote: "“ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ”",
+                by: "จาคิวลีน สมิท",
+                position: "การจัดการธุรกิจ"
+            },
+            thumb3: {
+                quote: "“ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ”",
+                by: "จาคิวลีน สมิท",
+                position: "การจัดการธุรกิจ"
+            }
         },
         research: {},
         teacher: {},
