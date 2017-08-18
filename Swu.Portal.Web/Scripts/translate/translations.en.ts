@@ -53,13 +53,16 @@
             title: "Our Edu Hub Events",
             description: "Events listed here are open to everyone. Whether you want to listen to a lecture, learn a new skill, take in a concert or an exhibition, see a play staged by our university students or attend one of our sporting events."
         },
-        research: {},
         commitments: {
             title: "Commitment to Education"
         },
         video: {
             title: "Campus Videos"
         },
+        news: {
+            title: "Edu Hub News"
+        },
+        research: {},
         teacher: {},
         student: {},
         settings: {}

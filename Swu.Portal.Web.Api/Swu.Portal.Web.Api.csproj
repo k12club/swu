@@ -159,11 +159,13 @@
     <Compile Include="Proxy\EventProxy.cs" />
     <Compile Include="Proxy\Exam.cs" />
     <Compile Include="Proxy\ExamRegistrationProxy.cs" />
+    <Compile Include="Proxy\NewsProxy.cs" />
     <Compile Include="Proxy\SliderProxy.cs" />
     <Compile Include="Proxy\TeacherProxy.cs" />
     <Compile Include="Proxy\UserLoginProxy.cs" />
     <Compile Include="Proxy\UserProfile.cs" />
     <Compile Include="Proxy\VideoProxy.cs" />
+    <Compile Include="V1\NewsController.cs" />
     <Compile Include="V1\VideoController.cs" />
     <Compile Include="V1\EventController.cs" />
     <Compile Include="V1\ExamRegistrationController.cs" />

@@ -774,6 +774,7 @@
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeCourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\EventController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\NewsController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\MainSliderController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\VideoController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\course-card.ts" />
@@ -783,6 +784,7 @@
     <TypeScriptCompile Include="Scripts\app\home\service\eventService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\examRegistrationService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\homeCourseService.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\service\newsService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
@@ -791,6 +793,7 @@
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />
     <TypeScriptCompile Include="Scripts\model\event.ts" />
     <TypeScriptCompile Include="Scripts\model\exam.ts" />
+    <TypeScriptCompile Include="Scripts\model\news.ts" />
     <TypeScriptCompile Include="Scripts\model\teacher.ts" />
     <TypeScriptCompile Include="Scripts\model\userLogin.ts" />
     <TypeScriptCompile Include="Scripts\model\userProfile.ts" />

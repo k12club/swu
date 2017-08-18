@@ -59,6 +59,9 @@
         video: {
             title: "วีดีโอ"
         },
+        news: {
+            title:"ข่าวสาร"
+        },
         research: {},
         teacher: {},
         student: {},

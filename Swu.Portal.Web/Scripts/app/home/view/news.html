@@ -1,15 +1,15 @@
-﻿<section class="irs-blog">
+﻿<section class="irs-blog" ng-controller="NewsController as vm">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
-                <h2>Edu Hub News</h2>
+                <h2 translate="news.title"></h2>
                 <img class="img-responsive" src="../../../Content/images/resource/commitment-title-img.png" alt="commitment-title-img.png">
             </div>
         </div>
         <div class="row irs-mrgnt">
             <div class="col-md-12">
-                <div class="irs-blog-slider">
-                    <div class="item">
+                <div class="irs-blog-slider" id="main-news">
+                    <!--<div class="item">
                         <div class="irs-blog-post">
                             <div class="irs-bp-thumb"> <img class="img-responsive img-fluid" src="../../../Content/images/blog/1.jpg" alt="blog/1.jpg"> </div>
                             <div class="irs-bp-details">
@@ -204,61 +204,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
     </div>
 </section>
-<script>
-    // Owl-News-carousel
-    if ($('.irs-blog-slider').length) {
-        $('.irs-blog-slider').owlCarousel({
-            autoplay: 5000,
-            loop: true,
-            margin: 0,
-            dots: false,
-            nav: true,
-            autoplayHoverPause: false,
-            autoplay: false,
-            autoHeight: false,
-            smartSpeed: 2000,
-            navText: [
-              '<span class="flaticon-arrows"></span>',
-              '<span class="flaticon-arrows-1"></span>'
-            ],
-            responsive: {
-                0: {
-                    items: 1,
-                    center: false
-                },
-                480: {
-                    items: 1,
-                    center: false
-                },
-                600: {
-                    items: 1,
-                    center: false
-                },
-                768: {
-                    items: 2
-                },
-                992: {
-                    items: 3
-                },
-                1200: {
-                    items: 3
-                },
-                1366: {
-                    items: 3
-                },
-                1440: {
-                    items: 3
-                },
-                1600: {
-                    items: 3
-                }
-            }
-        })
-    }
-</script>
