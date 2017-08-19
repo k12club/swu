@@ -22,11 +22,14 @@ module Swu {
             "ui.bootstrap",
             "pascalprecht.translate",
         ])
-        .config(["$translateProvider", "AppConstant", function ($translateProvider: any, AppConstant: AppConstant, $rootScope:any) {
+        .config(["$translateProvider", "AppConstant","$mdDateLocaleProvider", function ($translateProvider: any, AppConstant: AppConstant, $mdDateLocaleProvider: any) {
             $translateProvider.translations("en", translations_en);
             $translateProvider.translations("th", translations_th);
             $translateProvider.preferredLanguage(AppConstant.defaultLang);
             $translateProvider.fallbackLanguage(AppConstant.defaultLang);
+            $mdDateLocaleProvider.formatDate = function (date: any) {
+                return moment(date).format('DD/MM/YYYY');
+            };
         }])
         .run(["$state", "$http", "$rootScope", "AppConstant", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant) {
             $rootScope.$on("$stateChangeSuccess", function () {

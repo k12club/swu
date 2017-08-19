@@ -370,7 +370,7 @@ var Swu;
         },
         event: {
             title: "กิจกรมภายใน",
-            description: "ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ"
+            description: "กำหนดการต่างๆ เกี่ยวกับการสอบและกิจกรรมที่เกี่ยวข้อง"
         },
         commitments: {
             title: "ความมุ่งมั่น"
@@ -425,11 +425,14 @@ var Swu;
         "ui.bootstrap",
         "pascalprecht.translate",
     ])
-        .config(["$translateProvider", "AppConstant", function ($translateProvider, AppConstant, $rootScope) {
+        .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider, AppConstant, $mdDateLocaleProvider) {
             $translateProvider.translations("en", Swu.translations_en);
             $translateProvider.translations("th", Swu.translations_th);
             $translateProvider.preferredLanguage(AppConstant.defaultLang);
             $translateProvider.fallbackLanguage(AppConstant.defaultLang);
+            $mdDateLocaleProvider.formatDate = function (date) {
+                return moment(date).format('DD/MM/YYYY');
+            };
         }])
         .run(["$state", "$http", "$rootScope", "AppConstant", function ($state, $http, $rootScope, AppConstant) {
             $rootScope.$on("$stateChangeSuccess", function () {
@@ -446,7 +449,7 @@ var Swu;
 (function (Swu) {
     var AppConstant = (function () {
         function AppConstant() {
-            this.defaultLang = "en";
+            this.defaultLang = "th";
             this.api = {
                 protocal: "http",
                 ip: "localhost",
@@ -1156,12 +1159,16 @@ var Swu;
             this.$sce = $sce;
             this.$timeout = $timeout;
             this.$scope.swapLanguage = function (lang) {
+                moment.locale(lang);
+                console.log(moment().format('LT'));
                 switch (lang) {
                     case "en": {
                         _.map($scope.events, function (s) {
                             s.title = s.title_en;
                             s.place = s.place_en;
                             s.description = s.description_en;
+                            s.displayStartDate = moment(s.startDate).format("LL");
+                            s.displayStartTime = moment(s.startDate).format("LT");
                         });
                         break;
                     }
@@ -1170,6 +1177,8 @@ var Swu;
                             s.title = s.title_th;
                             s.place = s.place_th;
                             s.description = s.description_th;
+                            s.displayStartDate = moment(s.startDate).format("LL");
+                            s.displayStartTime = moment(s.startDate).format("LT");
                         });
                         break;
                     }
@@ -1186,8 +1195,8 @@ var Swu;
                                         </div>\
                                         <div class='irs-edate-time'>\
                                             <ul class='list-unstyled'>\
-                                                <li><a href='#'> <span class='flaticon-clock text-thm2'></span> Date: " + value.startDate + " </a></li>\
-                                                    <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: " + value.startDate + "</a></li>\
+                                                <li><a href='#'> <span class='flaticon-clock text-thm2'></span> Date: " + value.displayStartDate + " </a></li>\
+                                                    <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: " + value.displayStartTime + "</a></li>\
                                                         <li><a href='#'> <span class='flaticon-buildings text-thm2' > </span> " + value.place + "</a></li>\
                                                             </ul>\
                                                             <p> " + value.description + "</p>\
@@ -1203,7 +1212,7 @@ var Swu;
             this.$scope.registerScript = function () {
                 if ($('.irs-event-carousel').length) {
                     $('.irs-event-carousel').owlCarousel({
-                        loop: true,
+                        loop: false,
                         margin: 0,
                         dots: false,
                         nav: true,
@@ -1252,6 +1261,7 @@ var Swu;
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
                 eventService.getEvents().then(function (response) {
+                    console.log(response);
                     _.forEach(response, function (value, key) {
                         $scope.events.push({
                             title_en: value.title_en,

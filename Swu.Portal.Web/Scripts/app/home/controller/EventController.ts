@@ -11,12 +11,15 @@
         static $inject: Array<string> = ["$scope", "$rootScope", "$state", "eventService", "$sce", "$timeout"];
         constructor(private $scope: IEventScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private eventService: IeventService, private $sce: ng.ISCEService, private $timeout: ng.ITimeoutService) {
             this.$scope.swapLanguage = (lang: string): void => {
+                moment.locale(lang);
                 switch (lang) {
                     case "en": {
                         _.map($scope.events, function (s) {
                             s.title = s.title_en;
                             s.place = s.place_en;
                             s.description = s.description_en;
+                            s.displayStartDate = moment(s.startDate).format("LL");
+                            s.displayStartTime = moment(s.startDate).format("LT");
                         });
                         break;
                     }
@@ -25,6 +28,8 @@
                             s.title = s.title_th;
                             s.place = s.place_th;
                             s.description = s.description_th;
+                            s.displayStartDate = moment(s.startDate).format("LL");
+                            s.displayStartTime = moment(s.startDate).format("LT");
                         });
                         break;
                     }
@@ -41,8 +46,8 @@
                                         </div>\
                                         <div class='irs-edate-time'>\
                                             <ul class='list-unstyled'>\
-                                                <li><a href='#'> <span class='flaticon-clock text-thm2'></span> Date: "+ value.startDate + " </a></li>\
-                                                    <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: "+ value.startDate + "</a></li>\
+                                                <li><a href='#'> <span class='flaticon-clock text-thm2'></span> Date: "+ value.displayStartDate + " </a></li>\
+                                                    <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: "+ value.displayStartTime + "</a></li>\
                                                         <li><a href='#'> <span class='flaticon-buildings text-thm2' > </span> "+ value.place + "</a></li>\
                                                             </ul>\
                                                             <p> "+ value.description + "</p>\
@@ -58,7 +63,7 @@
             this.$scope.registerScript = (): void => {
                 if ($('.irs-event-carousel').length) {
                     $('.irs-event-carousel').owlCarousel({
-                        loop: true,
+                        loop: false,
                         margin: 0,
                         dots: false,
                         nav: true,
@@ -107,6 +112,7 @@
             };
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
                 eventService.getEvents().then((response) => {
+                    console.log(response);
                     _.forEach(response, (value, key) => {
                         $scope.events.push(
                             {

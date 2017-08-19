@@ -3,6 +3,8 @@
         title?: string;
         place?: string;
         description?: string;
+        displayStartDate?: string;
+        displayStartTime?: string;
 
         title_en: string;
         place_en: string;

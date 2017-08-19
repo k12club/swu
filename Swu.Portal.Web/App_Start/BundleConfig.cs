@@ -65,7 +65,9 @@ namespace Swu.Portal.Web
                 );
 
             bundles.Add(new ScriptBundle("~/bundles/utilities-lib")
-                .Include("~/Scripts/utilities/moment.min.js"));
+                .Include(
+                "~/Scripts/utilities/moment.min.js",
+                "~/Scripts/utilities/moment-with-locales.min.js"));
 
             bundles.Add(new ScriptBundle("~/theme/js")
                 .Include("~/Content/js/jquery.js",
