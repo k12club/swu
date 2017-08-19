@@ -10,7 +10,7 @@
             callUs: "Call Us",
             login: "Login",
             register: "Register",
-            loginAs: "Loged in as",
+            loginAs: "",
             loginOrRegister: "Login or Register",
             description: "Sign in or register today in order to have access to all our courses or purchase new ones.",
             loginTitle: "Enter username and password to login:",
