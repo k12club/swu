@@ -658,6 +658,7 @@
     <Content Include="Scripts\app\home\view\campus-video.html" />
     <Content Include="Scripts\app\home\view\clients.html" />
     <Content Include="Scripts\app\home\view\commitment.html" />
+    <Content Include="Scripts\app\committee\view\committee-list.html" />
     <Content Include="Scripts\app\home\view\events.html" />
     <Content Include="Scripts\app\home\index.html" />
     <Content Include="Scripts\app\home\view\main-slider.html" />
@@ -760,6 +761,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\committee\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\contact\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\contact\ContactUsController.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-experimental.ts" />

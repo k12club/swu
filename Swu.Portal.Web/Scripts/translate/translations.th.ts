@@ -35,7 +35,8 @@
             research: "งานวิจัย",
             ourPeoples:"พวกเรา",
             teacher: "รายชื่ออาจารย์",
-            contact: "ติดต่อเรา"
+            contact: "ติดต่อเรา",
+            committee: "กรรมการ"
         },
         home: {},
         course: {
@@ -54,7 +55,7 @@
             description: "กำหนดการต่างๆ เกี่ยวกับการสอบและกิจกรรมที่เกี่ยวข้อง"
         },
         commitments: {
-            title: "ความมุ่งมั่น"
+            title: "วัตถุประสงค์ของหลักสูตร"
         },
         video: {
             title: "วีดีโอ"
@@ -82,6 +83,9 @@
                 by: "จาคิวลีน สมิท",
                 position: "การจัดการธุรกิจ"
             }
+        },
+        committee: {
+            title: "คณะกรรมการ",
         },
         research: {},
         teacher: {},

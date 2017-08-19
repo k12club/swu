@@ -22,8 +22,8 @@ namespace Swu.Portal.Web.Api
         [HttpGet, Route("getExam")]
         public ExamRegistrationProxy GetExamRegistrationInfo()
         {
-            var examDate = this._datetimeRepository.Now().AddDays(3);
-            var remaining = (examDate - this._datetimeRepository.Now()).TotalSeconds;
+            var examDate = new DateTime(2017, 10, 14).ToUniversalTime();
+            var remaining = (examDate - this._datetimeRepository.Now().ToUniversalTime()).TotalSeconds;
             return new ExamRegistrationProxy
             {
                 ExamInfo = new Exam

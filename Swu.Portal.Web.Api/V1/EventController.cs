@@ -28,7 +28,7 @@ namespace Swu.Portal.Web.Api
                     Title_EN="War and Medicine- Lunchtime Talks Series",
                     Description_EN="On the last Friday of every month at lunchtime (13.00) there will be a series of talks examining the effect of the First World War on medicine.",
                     Place_EN="Venue: Hall B",
-                    Title_TH="รับสมัคร",
+                    Title_TH="รับสมัครสอบตรง",
                     Description_TH="",
                     Place_TH="http://admission.swu.acth",
                     ImageUrl="images/event/1.jpg",

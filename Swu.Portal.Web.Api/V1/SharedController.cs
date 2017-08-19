@@ -24,32 +24,25 @@ namespace Swu.Portal.Web.Api
             {
                 return new List<CommitmentProxy> {
                     new CommitmentProxy {
-                        Title_EN="Four Year Graduation Guarantee",
-                        Description_EN="By enrolling in the Four Bear Program, we guarantee you will graduate in four years with a bachelor’s degree.",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบ",
-                        Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
+                        Title_EN="More learning opportunity",
+                        Description_EN="To enhance the learning opportunity of medical programme from both national and international schools in Thailand",
+                        Title_TH="เพิ่มโอกาสการเรียนรู้",
+                        Description_TH="เพื่อเพิ่มโอกาสทางการศึกษาหลักสูตรแพทยศาสตรบัณฑิตจากสถานศึกษาในประเทศไทย",
                         IconCss="flaticon-clothes"
                     },
                     new CommitmentProxy {
-                        Title_EN="Best Value",
-                        Description_EN="A top 100 university based on research, service and social mobility, according to Washington Monthly.",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบ",
-                        Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
+                        Title_EN="Knowledgeable medical",
+                        Description_EN="To produce the knowledgeable medical graduates who can use the medical sciences knowledge from the UK and apply it to clinical practice in Thailand",
+                        Title_TH="เพื่อผลิตบัณฑิตแพทย์ที่มีความรู้ความสามารถ",
+                        Description_TH="เพื่อผลิตบัณฑิตแพทย์ที่มีความรู้ความสามารถ และนำความรู้ ประสบการณ์ทางการศึกษาด้านวิทยาศาสตร์การแพทย์จากสหราชอาณาจักร มาประยุกต์ใช้ควบคู่ไปกับความรู้ทางด้านคลินิกที่ศึกษาในประเทศไทย ในการดูแลผู้ป่วยแบบองค์รวม",
                         IconCss="flaticon-signs"
                     },
                     new CommitmentProxy {
-                        Title_EN="Small Class Sizes",
-                        Description_EN="76% of all undergraduate classes have fewer than 30 students so there´s plenty of room for everyone.",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบ",
-                        Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
+                        Title_EN="To produce medical graduates",
+                        Description_EN="To produce medical graduates who can provide the efficient health care services to the society both in government and private sectors",
+                        Title_TH="เพื่อผลิตบัณฑิตแพทย์ที่ดี",
+                        Description_TH="เพื่อผลิตบัณฑิตแพทย์ที่สามารถให้บริการทางด้านสาธารณสุขแก่สังคมได้อย่างมีประสิทธิภาพ ไม่ว่าจะปฏิบัติงานอยู่ในภาครัฐ หรือภาคเอกชน สามารถปฏิบัติงานร่วมกับผู้ร่วมงานได้อย่างมีประสิทธิภาพ มีคุณธรรม จริยธรรม มีความใฝ่รู้ มีความคิดริเริ่มสร้างสรรค์ รับผิดชอบ มีศีลธรรม มีความเสียสละ ทันต่อความก้าวหน้าทางวิชาการ สามารถวิเคราะห์ และแก้ไขปัญหาแบบวิทยาศาสตร์ และวิจัยปัญหาทางสุขภาพ เพื่อนำผลมาใช้ให้เกิดประโยชน์ด้านการพัฒนาการรักษาพยาบาลของสังคมไทย",
                         IconCss="flaticon-school"
-                    },
-                    new CommitmentProxy {
-                        Title_EN="Extraordinary Faculty",
-                        Description_EN="World-renowned researchers provide personal attention, with a 19:1 student-to-faculty ratio.",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบ",
-                        Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
-                        IconCss="flaticon-art"
                     }
                 };
             }

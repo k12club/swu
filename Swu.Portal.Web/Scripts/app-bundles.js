@@ -263,7 +263,8 @@ var Swu;
             research: "Research",
             ourPeoples: "OurPeoples",
             teacher: "Teacher",
-            contact: "Contact"
+            contact: "Contact",
+            committee: "Programme Commitee"
         },
         home: {},
         course: {
@@ -282,7 +283,7 @@ var Swu;
             description: "Events listed here are open to everyone. Whether you want to listen to a lecture, learn a new skill, take in a concert or an exhibition, see a play staged by our university students or attend one of our sporting events."
         },
         commitments: {
-            title: "Commitment to Education"
+            title: "Objectives"
         },
         video: {
             title: "Campus Videos"
@@ -309,6 +310,9 @@ var Swu;
                 by: "Jaqueline Smith",
                 position: "BA Hons Business Management"
             }
+        },
+        committee: {
+            title: "Program Committee"
         },
         research: {},
         teacher: {},
@@ -354,7 +358,8 @@ var Swu;
             research: "งานวิจัย",
             ourPeoples: "พวกเรา",
             teacher: "รายชื่ออาจารย์",
-            contact: "ติดต่อเรา"
+            contact: "ติดต่อเรา",
+            committee: "กรรมการ"
         },
         home: {},
         course: {
@@ -373,7 +378,7 @@ var Swu;
             description: "กำหนดการต่างๆ เกี่ยวกับการสอบและกิจกรรมที่เกี่ยวข้อง"
         },
         commitments: {
-            title: "ความมุ่งมั่น"
+            title: "วัตถุประสงค์ของหลักสูตร"
         },
         video: {
             title: "วีดีโอ"
@@ -400,6 +405,9 @@ var Swu;
                 by: "จาคิวลีน สมิท",
                 position: "การจัดการธุรกิจ"
             }
+        },
+        committee: {
+            title: "คณะกรรมการ"
         },
         research: {},
         teacher: {},
@@ -449,7 +457,7 @@ var Swu;
 (function (Swu) {
     var AppConstant = (function () {
         function AppConstant() {
-            this.defaultLang = "th";
+            this.defaultLang = "en";
             this.api = {
                 protocal: "http",
                 ip: "localhost",
@@ -786,6 +794,29 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $urlRouterProvider.otherwise("/app");
+            $stateProvider
+                .state("committee-list", {
+                url: "/committee-list",
+                templateUrl: "/Scripts/app/committee/view/committee-list.html"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var HomeController = (function () {
         function HomeController($scope, $state) {
             this.$scope = $scope;
@@ -905,7 +936,6 @@ var Swu;
                                 <div class='irs-text-three animated fadeInUp delay-1500' >\
                                 <p>" + value.description + "</p>\
                                     </div>\
-                                    <a href= '#' class='btn btn-lg irs-btn-thm irs-home-btn animated fadeInUp delay-1750' ><span>Check Courses</span> </a>\
                                         </div>\
                                         <img class='img-responsive' src= '../../../" + value.imageUrl + "' alt= '' >\
                                             </div>";
@@ -1052,9 +1082,6 @@ var Swu;
                             columnCss = "irs-commtmnt-column2";
                             commentCss = "irs-cmmt-details2";
                         }
-                        if (mod2 == 1) {
-                            style = "style_one";
-                        }
                         $scope.commitments.push({
                             title_en: value.title_en,
                             description_en: value.description_en,
@@ -1160,7 +1187,6 @@ var Swu;
             this.$timeout = $timeout;
             this.$scope.swapLanguage = function (lang) {
                 moment.locale(lang);
-                console.log(moment().format('LT'));
                 switch (lang) {
                     case "en": {
                         _.map($scope.events, function (s) {

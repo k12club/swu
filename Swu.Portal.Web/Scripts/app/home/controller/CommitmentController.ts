@@ -46,9 +46,9 @@
                             columnCss = "irs-commtmnt-column2";
                             commentCss = "irs-cmmt-details2";
                         }
-                        if (mod2 == 1) {
-                            style = "style_one";
-                        }
+                        //if (mod2 == 1) {
+                        //    style = "style_one";
+                        //}
                         $scope.commitments.push({
                             title_en: value.title_en,
                             description_en: value.description_en,

@@ -35,7 +35,8 @@
             research: "Research",
             ourPeoples: "OurPeoples",
             teacher: "Teacher",
-            contact: "Contact"
+            contact: "Contact",
+            committee:"Programme Commitee"
         },
         home: {},
         course: {
@@ -54,7 +55,7 @@
             description: "Events listed here are open to everyone. Whether you want to listen to a lecture, learn a new skill, take in a concert or an exhibition, see a play staged by our university students or attend one of our sporting events."
         },
         commitments: {
-            title: "Commitment to Education"
+            title: "Objectives"
         },
         video: {
             title: "Campus Videos"
@@ -82,6 +83,9 @@
                 by: "Jaqueline Smith",
                 position: "BA Hons Business Management"
             }
+        },
+        committee: {
+            title:"Program Committee",
         },
         research: {},
         teacher: {},

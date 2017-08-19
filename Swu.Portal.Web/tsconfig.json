@@ -24,6 +24,7 @@
     "Scripts/app/research/app_routing.ts",
     "Scripts/app/contact/app_routing.ts",
     "Scripts/app/settings/app_routing.ts",
+    "Scripts/app/committee/app_routing.ts",
 
     "Scripts/app/home/controller/HomeController.ts",
     "Scripts/app/home/controller/HomeCourseController.ts",

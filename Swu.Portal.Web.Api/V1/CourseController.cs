@@ -27,8 +27,8 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
+                            Name_TH = "A11BHS Behavioural Sciences",
+                            Name_EN = "A11BHS Behavioural Sciences",
                             ImageUrl = "Content/images/courses/1.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
@@ -37,7 +37,7 @@ namespace Swu.Portal.Web.Api
                         Teacher = new TeacherProxy
                         {
                             Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
+                            ImageUrl = "Content/images/resource/student2.png",
                             Name = "Jessica Hamson"
                         },
                         CardType=Enum.CardType.Popular
@@ -47,9 +47,9 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
+                            Name_TH = "A11EXT Structure, function and pharmacology of ExcitableTissues",
+                            Name_EN = "A11EXT Structure, function and pharmacology of ExcitableTissues",
+                            ImageUrl = "Content/images/courses/2.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
                             Price = 12
@@ -57,7 +57,7 @@ namespace Swu.Portal.Web.Api
                         Teacher = new TeacherProxy
                         {
                             Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
+                            ImageUrl = "Content/images/resource/student3.png",
                             Name = "Jessica Hamson"
                         },
                         CardType=Enum.CardType.Popular
@@ -67,9 +67,9 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
+                            Name_TH = "A11HDT Human Development and Tissue Differentiation",
+                            Name_EN = "A11HDT Human Development and Tissue Differentiation",
+                            ImageUrl = "Content/images/courses/13.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
                             Price = 12
@@ -77,7 +77,7 @@ namespace Swu.Portal.Web.Api
                         Teacher = new TeacherProxy
                         {
                             Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
+                            ImageUrl = "Content/images/resource/student4.png",
                             Name = "Jessica Hamson"
                         },
                         CardType=Enum.CardType.Popular
@@ -89,9 +89,9 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
+                            Name_TH = "A11MBM Molecular Basis of Medicine",
+                            Name_EN = "A11MBM Molecular Basis of Medicine",
+                            ImageUrl = "Content/images/courses/4.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
                             Price = 12
@@ -109,9 +109,9 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
+                            Name_TH = "A11CS1 Communication Skills (I)",
+                            Name_EN = "A11CS1 Communication Skills (I)",
+                            ImageUrl = "Content/images/courses/5.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
                             Price = 12
@@ -119,7 +119,7 @@ namespace Swu.Portal.Web.Api
                         Teacher = new TeacherProxy
                         {
                             Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
+                            ImageUrl = "Content/images/resource/student2.png",
                             Name = "Jessica Hamson"
                         },
                         CardType=Enum.CardType.TopRate
@@ -129,9 +129,9 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
+                            Name_TH = "A11CLS Clinical Laboratory Sciences (I)",
+                            Name_EN = "A11CLS Clinical Laboratory Sciences (I)",
+                            ImageUrl = "Content/images/courses/6.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
                             Price = 12
@@ -139,7 +139,7 @@ namespace Swu.Portal.Web.Api
                         Teacher = new TeacherProxy
                         {
                             Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
+                            ImageUrl = "Content/images/resource/student3.png",
                             Name = "Jessica Hamson"
                         },
                         CardType=Enum.CardType.TopRate
@@ -150,9 +150,29 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
+                            Name_TH = "A11CRH Cardiovascular, Respiratory and Haematology",
+                            Name_EN = "A11CRH Cardiovascular, Respiratory and Haematology",
+                            ImageUrl = "Content/images/courses/7.jpg",
+                            NumberOfRegistered = 123,
+                            NumberOfComments = 5,
+                            Price = 12
+                        },
+                        Teacher = new TeacherProxy
+                        {
+                            Id = 1,
+                            ImageUrl = "Content/images/resource/student4.png",
+                            Name = "Jessica Hamson"
+                        },
+                        CardType=Enum.CardType.Recently
+                    },
+                    new CourseCardProxy
+                    {
+                        Course = new CourseProxy
+                        {
+                            Id = 1,
+                            Name_TH = "A11SF1 Human Development Structure and Function (I)",
+                            Name_EN = "A11SF1 Human Development Structure and Function (I)",
+                            ImageUrl = "Content/images/courses/8.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
                             Price = 12
@@ -170,29 +190,9 @@ namespace Swu.Portal.Web.Api
                         Course = new CourseProxy
                         {
                             Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.Recently
-                    },
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "INDE 201: ทดสอบยา 1",
-                            Name_EN = "INDE 201: Practice of Medicine I",
-                            ImageUrl = "Content/images/courses/1.jpg",
+                            Name_TH = "A11PD1 Early Clinical and Professional Development (I)",
+                            Name_EN = "A11PD1 Early Clinical and Professional Development (I)",
+                            ImageUrl = "Content/images/courses/11.jpg",
                             NumberOfRegistered = 123,
                             NumberOfComments = 5,
                             Price = 12
@@ -217,31 +217,31 @@ namespace Swu.Portal.Web.Api
                     Title_EN=@"Receive a world-class <br>
 education in the heart of <br>
 the west.",
-                    Title_TH=@"ทดสอบทดสอบทดสอบทดสอบ <br>
-ทดสอบทดสอบทดสอบทดสอบทดสอบ <br>
-ทดสอบ.",
+                    Title_TH=@"Receive a world-class <br>
+education in the heart of <br>
+the west.",
                     Description_EN="Top rated for combining academic quality and outdoor reacreation.",
-                    Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
+                    Description_TH="Top rated for combining academic quality and outdoor reacreation.",
                     ImageUrl="Content/images/home/h1.jpg"
                 },
                 new SliderProxy {
                     Id=1,
                     Title_EN=@"Want to experience how life is <br>
 on our campus?",
-                    Title_TH=@"ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ <br>
-ทดสอบทดสอบทดสอบ?",
+                    Title_TH=@"Want to experience how life is <br>
+on our campus?",
                     Description_EN="Learning Resources Centre, a student social space.",
-                    Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ.",
+                    Description_TH="Learning Resources Centre, a student social space.",
                     ImageUrl="Content/images/home/h2.jpg"
                 },
                 new SliderProxy {
                     Id=1,
                     Title_EN=@" Make a bold decision today <br>
 and start a new fresh tomorrow. ",
-                    Title_TH=@" ทดสอบทดสอบทดสอบทดสอบทดสอบ <br>
-ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ. ",
+                    Title_TH=@" Make a bold decision today <br>
+and start a new fresh tomorrow. ",
                     Description_EN="Top rated for combining academic quality and outdoor reacreation.",
-                    Description_TH="ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
+                    Description_TH="Top rated for combining academic quality and outdoor reacreation.",
                     ImageUrl="Content/images/home/h3.jpg"
                 }
             };

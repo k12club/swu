@@ -39,7 +39,6 @@
                                 <div class='irs-text-three animated fadeInUp delay-1500' >\
                                 <p>"+ value.description + "</p>\
                                     </div>\
-                                    <a href= '#' class='btn btn-lg irs-btn-thm irs-home-btn animated fadeInUp delay-1750' ><span>Check Courses</span> </a>\
                                         </div>\
                                         <img class='img-responsive' src= '../../../"+ value.imageUrl + "' alt= '' >\
                                             </div>";

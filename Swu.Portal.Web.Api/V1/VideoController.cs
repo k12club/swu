@@ -25,26 +25,26 @@ namespace Swu.Portal.Web.Api
                     new VideoProxy {
                         ImageUrl="Content/images/campus/1.jpg",
                         VideoUrl="https://www.youtube.com/watch?v=hYEnh4LuruQ",
-                        Title_EN="Details On Hover Title",
-                        Title_TH="ทดสอบทดสอบทดสอบ"
+                        Title_EN="Campus Life",
+                        Title_TH="การใช้ชีวิต"
                     },
                     new VideoProxy {
-                        ImageUrl="Content/images/campus/1.jpg",
+                        ImageUrl="Content/images/campus/2.jpg",
                         VideoUrl="https://www.youtube.com/watch?v=hYEnh4LuruQ",
-                        Title_EN="Details On Hover Title",
-                        Title_TH="ทดสอบทดสอบทดสอบ"
+                        Title_EN="Interview",
+                        Title_TH="สัมภาษณ์"
                     },
                     new VideoProxy {
-                        ImageUrl="Content/images/campus/1.jpg",
+                        ImageUrl="Content/images/campus/3.jpg",
                         VideoUrl="https://www.youtube.com/watch?v=hYEnh4LuruQ",
-                        Title_EN="Details On Hover Title",
-                        Title_TH="ทดสอบทดสอบทดสอบ"
+                        Title_EN="Job fair",
+                        Title_TH="หางาน"
                     },
                     new VideoProxy {
-                        ImageUrl="Content/images/campus/1.jpg",
+                        ImageUrl="Content/images/campus/4.jpg",
                         VideoUrl="https://www.youtube.com/watch?v=hYEnh4LuruQ",
-                        Title_EN="Details On Hover Title",
-                        Title_TH="ทดสอบทดสอบทดสอบ"
+                        Title_EN="Sport day",
+                        Title_TH="กีฬาสี"
                     },
                 };
             }
