@@ -11,9 +11,5 @@ git clone https://github.com/chansak/swu.git
 
 Build system dependencies are:
 
- * Web application server
-  - .Net Framework 4.0 
-  - IIS 8
-
- * Database server
-  -MS SQL Server 2008 S2
+ * Web application server : .Net Framework 4.0  and IIS 8
+ * Database server : MS SQL Server 2008 S2
