@@ -457,7 +457,7 @@ var Swu;
 (function (Swu) {
     var AppConstant = (function () {
         function AppConstant() {
-            this.defaultLang = "en";
+            this.defaultLang = "th";
             this.api = {
                 protocal: "http",
                 ip: "localhost",
@@ -1082,6 +1082,9 @@ var Swu;
                             columnCss = "irs-commtmnt-column2";
                             commentCss = "irs-cmmt-details2";
                         }
+                        if (mod2 == 1) {
+                            style = "style_one";
+                        }
                         $scope.commitments.push({
                             title_en: value.title_en,
                             description_en: value.description_en,
@@ -1383,6 +1386,9 @@ var Swu;
                     paginationClickable: true,
                     spaceBetween: 20,
                     mousewheelControl: true
+                });
+                $('.popup-youtube').magnificPopup({
+                    type: 'iframe'
                 });
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {

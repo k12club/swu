@@ -48,6 +48,9 @@
                     spaceBetween: 20,
                     mousewheelControl: true
                 });
+                $('.popup-youtube').magnificPopup({
+                    type: 'iframe'
+                });
             }
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
                 if ($scope.videos != undefined || $scope.videos != null) {
