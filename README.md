@@ -27,6 +27,7 @@ Check out
 * [underscore]
 
 ## Versioning
+* version: v 1.1.0.0 , 20 August 2017 : multi language support
 * version: 1.0.0 , 1 August 2017
 ⋅⋅⋅ This version is just a initial version for setting up the project. Compose with folder structor and layer design.
 
