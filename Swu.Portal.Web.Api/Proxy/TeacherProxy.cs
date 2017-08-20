@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Web.Api.Proxy
 {
-    public class TeacherProxy
+    public class TeacherProxy : baseUser
     {
-        [JsonProperty(PropertyName = "Id")]
-        public int Id { get; set; }
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-        [JsonProperty(PropertyName = "imageUrl")]
-        public string ImageUrl { get; set; }
+        [JsonProperty(PropertyName = "position")]
+        public string Position { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
     }
 }

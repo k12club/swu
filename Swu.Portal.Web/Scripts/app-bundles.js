@@ -658,12 +658,12 @@ var Swu;
             $stateProvider
                 .state("course", {
                 url: "/course/:id",
-                templateUrl: "/Scripts/app/course/course_detail.html",
+                templateUrl: "/Scripts/app/course/view/course_detail.html",
                 controller: "CourseController as vm"
             })
                 .state("course-list", {
                 url: "/course-list",
-                templateUrl: "/Scripts/app/course/course_list.html",
+                templateUrl: "/Scripts/app/course/view/course_list.html",
                 controller: "CourseListController as vm"
             });
         }
@@ -1688,17 +1688,54 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseController = (function () {
-        function CourseController($scope, $state) {
+        function CourseController($scope, $state, courseService, $stateParams, $sce) {
+            var _this = this;
             this.$scope = $scope;
             this.$state = $state;
+            this.courseService = courseService;
+            this.$stateParams = $stateParams;
+            this.$sce = $sce;
+            this.$scope.id = this.$stateParams["id"];
+            this.$scope.getCourse = function (id) {
+                _this.courseService.getById(id).then(function (response) {
+                    _this.$scope.courseDetail = response;
+                    _this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(_this.$scope.courseDetail.course.fullDescription);
+                    _.map(_this.$scope.courseDetail.teachers, function (t) {
+                        t.description = $sce.trustAsHtml(t.description);
+                    });
+                    _.forEach(_this.$scope.courseDetail.students, function (value, key) {
+                        if (key < (_this.$scope.courseDetail.students.length / 2)) {
+                            _this.$scope.splitStudents1.push({
+                                id: value.id,
+                                number: key + 1,
+                                studentId: value.studentId,
+                                name: value.name,
+                                description: value.description,
+                                imageUrl: value.imageUrl
+                            });
+                        }
+                        else {
+                            _this.$scope.splitStudents2.push({
+                                id: value.id,
+                                number: key + 1,
+                                studentId: value.studentId,
+                                name: value.name,
+                                description: value.description,
+                                imageUrl: value.imageUrl
+                            });
+                        }
+                    });
+                }, function (error) { });
+            };
+            this.init();
         }
-        CourseController.prototype.showMessage = function () {
-            alert('test');
-        };
         CourseController.prototype.init = function () {
+            this.$scope.splitStudents1 = [];
+            this.$scope.splitStudents2 = [];
+            this.$scope.getCourse(this.$scope.id);
         };
         ;
-        CourseController.$inject = ["$scope", "$state"];
+        CourseController.$inject = ["$scope", "$state", "courseService", "$stateParams", "$sce"];
         CourseController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CourseController" })
@@ -1728,6 +1765,24 @@ var Swu;
         return CourseListController;
     }());
     Swu.CourseListController = CourseListController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var courseService = (function () {
+        function courseService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        courseService.prototype.getById = function (id) {
+            return this.apiService.getData("course/getById?id=" + id);
+        };
+        courseService.$inject = ['apiService', 'AppConstant'];
+        courseService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "courseService" })
+        ], courseService);
+        return courseService;
+    }());
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -1860,4 +1915,12 @@ var Swu;
         CardType[CardType["recently"] = 3] = "recently";
     })(Swu.CardType || (Swu.CardType = {}));
     var CardType = Swu.CardType;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    (function (CurriculumType) {
+        CurriculumType[CurriculumType["lecture"] = 1] = "lecture";
+        CurriculumType[CurriculumType["exam"] = 2] = "exam";
+    })(Swu.CurriculumType || (Swu.CurriculumType = {}));
+    var CurriculumType = Swu.CurriculumType;
 })(Swu || (Swu = {}));

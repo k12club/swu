@@ -209,6 +209,209 @@ namespace Swu.Portal.Web.Api
             }
             return null;
         }
+        [HttpGet, Route("getById")]
+        public CourseAllDetailProxy GetById(int id) {
+            return new CourseAllDetailProxy {
+                CourseInfo= new CourseDetailProxy {
+                    Id = 1,
+                    Name_TH = "A11BHS Behavioural Sciences",
+                    Name_EN = "A11BHS Behavioural Sciences",
+                    ImageUrl = "Content/images/courses/1.jpg",
+                    NumberOfRegistered = 123,
+                    NumberOfComments = 5,
+                    Price = 12,
+                    BigImageUrl= "Content/images/courses/cd1.jpg",
+                    FullDescription= @"<p>In your study of Linguistics, you will be introduced to the analysis of the nature and structure of human language (including topics such as how words and sentences are formed.</p>
+                                                    <p class='irs-mrgntp-thrty'>In your study of Linguistics, you will be introduced to the analysis of the nature and structure of human language (including topics such as how words and sentences are formed.</p>
+                                                    <ul class='list-unstyled irs-cdtls-spara'>
+                                                        <li><span class='text-thm2 flaticon-correct-symbol'> </span>Teach part time without interrupting your full-time career</li>
+                                                        <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
+                                                        <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
+                                                    </ul>"
+                },
+                Curriculums= new List<CurriculumProxy> {
+                    new CurriculumProxy {
+                        Name="Lecture 1.1 Practical language work",
+                        Type=Enum.CurriculumType.Lecture,
+                        Time="4 hrs."
+                    },
+                    new CurriculumProxy {
+                        Name="Lecture 1.2 Study of important works and/or topics",
+                        Type=Enum.CurriculumType.Lecture,
+                        Time="4 hrs."
+                    },
+                    new CurriculumProxy {
+                        Name="Lecture 1.3 Literature of the language",
+                        Type=Enum.CurriculumType.Lecture,
+                        Time="4 hrs."
+                    },
+                    new CurriculumProxy {
+                        Name="Quizzes History of the language test",
+                        Type=Enum.CurriculumType.Quize,
+                        Time="2 hrs."
+                    },
+                    new CurriculumProxy {
+                        Name="Lecture 1.4 General linguistics",
+                        Type=Enum.CurriculumType.Lecture,
+                        Time="4 hrs."
+                    },
+                    new CurriculumProxy {
+                        Name="Lecture 1.5 Phonetics and phonology ",
+                        Type=Enum.CurriculumType.Lecture,
+                        Time="4 hrs."
+                    },
+                    new CurriculumProxy {
+                        Name="Lecture 1.6 Grammatical analysis",
+                        Type=Enum.CurriculumType.Lecture,
+                        Time="4 hrs."
+                    },
+                    new CurriculumProxy {
+                        Name="Quizzes History of the language test",
+                        Type=Enum.CurriculumType.Quize,
+                        Time="2 hrs."
+                    },
+                },
+                Teacher = new List<TeacherProxy> {
+                    new TeacherProxy {
+                        Id=1,
+                        Name="Annie Thornburg",
+                        ImageUrl="Content/images/courses/s4.png",
+                        Position="History of Arts Teacher",
+                        Description="Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures."
+                    },
+                    new TeacherProxy {
+                        Id=2,
+                        Name="Miguel M. Ball",
+                        ImageUrl="Content/images/team/tsm2.png",
+                        Position="Physics and Philosophy Teacher",
+                        Description="Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures."
+                    }
+                },
+                Students= new List<StudentProxy> {
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    },
+                    new StudentProxy {
+                        Id=1,
+                        Name="Chansak Kochasen",
+                        ImageUrl="",
+                        StudentId="12345678",
+                    }
+                },
+                PhotosAlbum = new PhotoAlbumProxy { }
+            };
+        }
         [HttpGet, Route("getSlider")]
         public List<SliderProxy> GetSlider() {
             return new List<SliderProxy> {

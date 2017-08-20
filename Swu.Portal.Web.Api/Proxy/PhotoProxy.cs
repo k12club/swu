@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Web.Api.Proxy
 {
-    public class VideoProxy : IMultimedia
+    public class PhotoProxy : IMultimedia
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
         [JsonProperty(PropertyName = "imageUrl")]
         public string ImageUrl { get; set; }
-        [JsonProperty(PropertyName = "videoUrl")]
-        public string VideoUrl { get; set; }
-        [JsonProperty(PropertyName = "title_en")]
-        public string Title_EN { get; set; }
-        [JsonProperty(PropertyName = "title_th")]
-        public string Title_TH { get; set; }
+    }
+    public class PhotoAlbumProxy {
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
+        [JsonProperty(PropertyName = "photos")]
+        public List<PhotoProxy> Photos { get; set; }
     }
 }

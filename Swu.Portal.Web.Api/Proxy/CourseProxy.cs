@@ -24,4 +24,11 @@ namespace Swu.Portal.Web.Api.Proxy
         [JsonProperty(PropertyName = "price")]
         public decimal Price { get; set; }
     }
+    public class CourseDetailProxy :CourseProxy
+    {
+        [JsonProperty(PropertyName = "bigImageUrl")]
+        public string BigImageUrl { get; set; }
+        [JsonProperty(PropertyName = "fullDescription")]
+        public string FullDescription { get; set; }
+    }
 }
