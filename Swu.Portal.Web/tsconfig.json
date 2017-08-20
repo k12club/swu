@@ -34,7 +34,6 @@
     "Scripts/app/home/controller/EventController.ts",
     "Scripts/app/home/controller/VideoController.ts",
     "Scripts/app/home/controller/NewsController.ts",
-
     "Scripts/app/home/service/homeCourseService.ts",
     "Scripts/app/home/service/mainSliderService.ts",
     "Scripts/app/home/service/commitmentService.ts",
@@ -42,13 +41,15 @@
     "Scripts/app/home/service/eventService.ts",
     "Scripts/app/home/service/videoService.ts",
     "Scripts/app/home/service/newsService.ts",
-
     "Scripts/app/home/model/course-card.ts",
     "Scripts/app/home/model/slider.ts",
     "Scripts/app/home/model/exam-clock.ts",
 
-    "Scripts/app/course/CourseController.ts",
-    "Scripts/app/course/CourseListController.ts",
+    "Scripts/app/course/controller/CourseController.ts",
+    "Scripts/app/course/controller/CourseListController.ts",
+    "Scripts/app/course/service/courseService.ts",
+    "Scripts/app/course/model/courseAllDetail.ts",
+
 
     "Scripts/app/teacher/TeacherController.ts",
     "Scripts/app/teacher/TeacherListController.ts",
@@ -70,7 +71,11 @@
     "Scripts/model/exam.ts",
     "Scripts/model/event.ts",
     "Scripts/model/video.ts",
-    "Scripts/model/news.ts"
+    "Scripts/model/photo.ts",
+    "Scripts/model/news.ts",
+    "Scripts/model/curriculumType.ts",
+    "Scripts/model/student.ts",
+    "Scripts/model/baseUser.ts"
 
   ],
   "exclude": [

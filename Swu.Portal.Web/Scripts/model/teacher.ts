@@ -1,7 +1,6 @@
 ﻿module Swu {
-    export interface ITeacher {
-        id: number;
-        name: string;
-        imageUrl: string;
+    export interface ITeacher extends BaseUser {
+        position: string;
+        description: string;
     }
 }
