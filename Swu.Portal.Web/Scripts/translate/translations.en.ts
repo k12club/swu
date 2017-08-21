@@ -2,6 +2,7 @@
     export var translations_en = {
         shared: {
             applicationName: "SWU-Joint Medical",
+            name:"Srinakharinwirot University",
             address: "114 Sukhumvit 23Wattana, Bangkok 10110 Thailand",
             phone: "+66 2649 5000"
         },

@@ -23,15 +23,15 @@
         </div>
     </div>
 </section>
-<section class="irs-ip-details">
+<section class="irs-ip-details" ng-controller="CommitteeController as vm">
     <div class="container">
         <div class="row clearfix">
             <div class="col-sm-12 clearfix">
                 <div class="row clearfix">
-                    <div class="irs-cl-list">
+                    <div class="irs-cl-list" ng-repeat="c in committee">
                         <div class="col-xs-12 col-lg-2">
                             <div class="irs-ctds-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/team/tmd1.png" alt="cl1.png">
+                                <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}">
                                 <div class="irs-cl-overlay"></div>
                             </div>
                         </div>
@@ -39,107 +39,20 @@
                             <div class="irs-cl-details">
                                 <div class="irs-courses-td-sngle-dtls">
                                     <ul class="list-inline">
-                                        <li class="irs-name-tdsd">Advisory Board</li>
-                                        <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span> Vice President of Academic Affairs</li>
+                                        <li class="irs-name-tdsd">{{c.position}}</li>
+                                        <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span> {{c.description}}</li>
                                     </ul>
-                                    <h2>Prof.Pansiri Phunsuwan, PhD.</h2>
-                                    <!--<p>Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor. </p>-->
+                                    <h2>{{c.name}}</h2>
                                 </div>
                                 <ul class="list-inline irs-tctt">
-                                    <li><span class="text-thm2 flaticon-phone-receiver"></span> (012) 345 - 6789</li>
-                                    <li><span class="text-thm2 flaticon-key-1"></span>  Room 129</li>
-                                    <li><span class="text-thm2 flaticon-multimedia"></span> edward.wallen@edu-hub.com</li>
-                                    <!--<li><a href="#" ui-sref="teacher({id:1})" class="btn btn-default irs-btn-thm3"> View Profile</a></li>-->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="irs-cl-list">
-                        <div class="col-xs-12 col-lg-2">
-                            <div class="irs-ctds-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/team/tsm2.png" alt="cl1.png">
-                                <div class="irs-cl-overlay"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-10">
-                            <div class="irs-cl-details">
-                                <div class="irs-courses-td-sngle-dtls">
-                                    <ul class="list-inline">
-                                        <li class="irs-name-tdsd">Advisory Board</li>
-                                        <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span> Dean, Faculty of Medicine</li>
-                                    </ul>
-                                    <h2>Prof.Chairat Neruntarat MD.</h2>
-                                    <!--<p>Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor. </p>-->
-                                </div>
-                                <ul class="list-inline irs-tctt">
-                                    <li><span class="text-thm2 flaticon-phone-receiver"></span> (012) 345 - 6789</li>
-                                    <li><span class="text-thm2 flaticon-key-1"></span>  Room 129</li>
-                                    <li><span class="text-thm2 flaticon-multimedia"></span> edward.wallen@edu-hub.com</li>
-                                    <!--<li><a href="#" ui-sref="teacher({id:1})" class="btn btn-default irs-btn-thm3"> View Profile</a></li>-->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="irs-cl-list">
-                        <div class="col-xs-12 col-lg-2">
-                            <div class="irs-ctds-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/team/tsm2.png" alt="cl1.png">
-                                <div class="irs-cl-overlay"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-10">
-                            <div class="irs-cl-details">
-                                <div class="irs-courses-td-sngle-dtls">
-                                    <ul class="list-inline">
-                                        <li class="irs-name-tdsd">Advisory Board</li>
-                                        <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span></li>
-                                    </ul>
-                                    <h2>Assoc.Prof.Yothin Benjawang, MD.</h2>
-                                    <!--<p>Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor. </p>-->
-                                </div>
-                                <ul class="list-inline irs-tctt">
-                                    <li><span class="text-thm2 flaticon-phone-receiver"></span> (012) 345 - 6789</li>
-                                    <li><span class="text-thm2 flaticon-key-1"></span>  Room 129</li>
-                                    <li><span class="text-thm2 flaticon-multimedia"></span> edward.wallen@edu-hub.com</li>
-                                    <!--<li><a href="#" ui-sref="teacher({id:1})" class="btn btn-default irs-btn-thm3"> View Profile</a></li>-->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="irs-cl-list">
-                        <div class="col-xs-12 col-lg-2">
-                            <div class="irs-ctds-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/team/tsm3.png" alt="cl1.png">
-                                <div class="irs-cl-overlay"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-10">
-                            <div class="irs-cl-details">
-                                <div class="irs-courses-td-sngle-dtls">
-                                    <ul class="list-inline">
-                                        <li class="irs-name-tdsd">Vice Dean of Academic Affairs</li>
-                                        <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span></li>
-                                    </ul>
-                                    <h2> Dr.Nantana Chumchui, MD.</h2>
-                                    <!--<p>Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor. </p>-->
-                                </div>
-                                <ul class="list-inline irs-tctt">
-                                    <li><span class="text-thm2 flaticon-phone-receiver"></span> (012) 345 - 6789</li>
-                                    <li><span class="text-thm2 flaticon-key-1"></span>  Room 129</li>
-                                    <li><span class="text-thm2 flaticon-multimedia"></span> edward.wallen@edu-hub.com</li>
-                                    <!--<li><a href="#" ui-sref="teacher({id:1})" class="btn btn-default irs-btn-thm3"> View Profile</a></li>-->
+                                    <li><span class="text-thm2 flaticon-phone-receiver"></span>{{c.phone}}</li>
+                                    <li><span class="text-thm2 flaticon-key-1"></span>{{c.room}}</li>
+                                    <li><span class="text-thm2 flaticon-multimedia"></span>{{c.email}}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--<ul class="list-inline irs-ip-navigation clearfix">
-                    <li><span class="flaticon-arrows"></span></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><span class="flaticon-arrows-1"></span></li>
-                </ul>-->
             </div>
         </div>
     </div>

@@ -230,6 +230,7 @@ var Swu;
     Swu.translations_en = {
         shared: {
             applicationName: "SWU-Joint Medical",
+            name: "Srinakharinwirot University",
             address: "114 Sukhumvit 23Wattana, Bangkok 10110 Thailand",
             phone: "+66 2649 5000"
         },
@@ -325,6 +326,7 @@ var Swu;
     Swu.translations_th = {
         shared: {
             applicationName: "โครงการพัฒนาระบบประชาสัมพันธ์หลักสูตรแพทยศาสตรบัณฑิตโครงการร่วมนอตติงแฮม",
+            name: "มหาวิทยาลัยศรีนครินทร์วิโรฒ",
             address: "อาคาร 15 คณะแพทยศาสตร์ 114 สุขุมวิท 23 กรุงเทพฯ 10110",
             phone: "+66 2649 5000"
         },
@@ -1827,6 +1829,52 @@ var Swu;
             Swu.Factory({ name: "courseService" })
         ], courseService);
         return courseService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CommitteeController = (function () {
+        function CommitteeController($scope, $state, committeeService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.committeeService = committeeService;
+            this.$scope.getCommittee = function () {
+                _this.committeeService.getCommittees().then(function (response) {
+                    _this.$scope.committee = response;
+                }, function (error) { });
+            };
+            this.init();
+        }
+        CommitteeController.prototype.init = function () {
+            this.$scope.getCommittee();
+        };
+        ;
+        CommitteeController.$inject = ["$scope", "$state", "committeeService"];
+        CommitteeController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CommitteeController" })
+        ], CommitteeController);
+        return CommitteeController;
+    }());
+    Swu.CommitteeController = CommitteeController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var committeeService = (function () {
+        function committeeService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        committeeService.prototype.getCommittees = function () {
+            return this.apiService.getData("committee/all");
+        };
+        committeeService.$inject = ['apiService', 'AppConstant'];
+        committeeService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "committeeService" })
+        ], committeeService);
+        return committeeService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

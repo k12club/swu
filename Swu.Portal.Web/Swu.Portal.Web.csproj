@@ -768,6 +768,8 @@
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\committee\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\committee\controller\CommitteeController.ts" />
+    <TypeScriptCompile Include="Scripts\app\committee\service\committeeService.ts" />
     <TypeScriptCompile Include="Scripts\app\contact\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\contact\ContactUsController.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-experimental.ts" />
@@ -800,6 +802,8 @@
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\baseUser.ts" />
     <TypeScriptCompile Include="Scripts\model\commitment.ts" />
+    <TypeScriptCompile Include="Scripts\model\committee.ts" />
+    <TypeScriptCompile Include="Scripts\model\contract.ts" />
     <TypeScriptCompile Include="Scripts\model\course.ts" />
     <TypeScriptCompile Include="Scripts\model\curriculumType.ts" />
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />

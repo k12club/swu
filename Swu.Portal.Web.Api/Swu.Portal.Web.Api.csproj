@@ -156,6 +156,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy\baseUser.cs" />
     <Compile Include="Proxy\CommitmentProxy.cs" />
+    <Compile Include="Proxy\CommitteeProxy.cs" />
     <Compile Include="Proxy\CourseCardProxy.cs" />
     <Compile Include="Proxy\CourseDetailProxy.cs" />
     <Compile Include="Proxy\CourseProxy.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Proxy\UserLoginProxy.cs" />
     <Compile Include="Proxy\UserProfile.cs" />
     <Compile Include="Proxy\VideoProxy.cs" />
+    <Compile Include="V1\CommitteeController.cs" />
     <Compile Include="V1\NewsController.cs" />
     <Compile Include="V1\VideoController.cs" />
     <Compile Include="V1\EventController.cs" />

@@ -50,6 +50,9 @@
     "Scripts/app/course/service/courseService.ts",
     "Scripts/app/course/model/courseAllDetail.ts",
 
+    "Scripts/app/committee/controller/CommitteeController.ts",
+    "Scripts/app/committee/service/committeeService.ts",
+
 
     "Scripts/app/teacher/TeacherController.ts",
     "Scripts/app/teacher/TeacherListController.ts",
@@ -75,7 +78,9 @@
     "Scripts/model/news.ts",
     "Scripts/model/curriculumType.ts",
     "Scripts/model/student.ts",
-    "Scripts/model/baseUser.ts"
+    "Scripts/model/baseUser.ts",
+    "Scripts/model/committee.ts",
+    "Scripts/model/contract.ts"
 
   ],
   "exclude": [
