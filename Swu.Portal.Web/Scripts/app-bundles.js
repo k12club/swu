@@ -1703,6 +1703,9 @@ var Swu;
                     _.map(_this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
                     });
+                    _.map(_this.$scope.courseDetail.photosAlbum.photos, function (p) {
+                        p.displayPublishedDate = moment(p.publishedDate).format("LL");
+                    });
                     _.forEach(_this.$scope.courseDetail.students, function (value, key) {
                         if (key < (_this.$scope.courseDetail.students.length / 2)) {
                             _this.$scope.splitStudents1.push({
@@ -1725,7 +1728,49 @@ var Swu;
                             });
                         }
                     });
+                    _this.$scope.render(_this.$scope.courseDetail.photosAlbum.photos);
+                    _this.$scope.registerScript();
                 }, function (error) { });
+            };
+            this.$scope.render = function (photos) {
+                var html = "";
+                _.forEach(photos, function (value, key) {
+                    var elements = "<div class='col-md-4'>\
+                        <div class='resources-item' >\
+                            <div class='resources-category-image' >\
+                                <a href='../../../../" + value.imageUrl + "' title= '" + value.name + "' by='" + value.uploadBy + "'>\
+                                    <img class='img-responsive' alt= '' src= '../../../../" + value.imageUrl + "'>\
+                                        </a>\
+                                        </div>\
+                                        <div class='resources-description' >\
+                                            <p>" + value.displayPublishedDate + "</p>\
+                                                <h4>" + value.name + "</h4>\
+                                                </div>\
+                                                </div>\
+                                                </div>";
+                    html += elements;
+                });
+                html = "<div class='row'>" + html + "</div>";
+                $('.popup-gallery').html(html);
+            };
+            this.$scope.registerScript = function () {
+                $('.popup-gallery').magnificPopup({
+                    delegate: 'a',
+                    type: 'image',
+                    tLoading: 'Loading image #%curr%...',
+                    mainClass: 'mfp-img-mobile',
+                    gallery: {
+                        enabled: true,
+                        navigateByImgClick: true,
+                        preload: [0, 1]
+                    },
+                    image: {
+                        tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                        titleSrc: function (item) {
+                            return item.el.attr('title') + '<small> Upload by: ' + item.el.attr('by') + '</small>';
+                        }
+                    }
+                });
             };
             this.init();
         }

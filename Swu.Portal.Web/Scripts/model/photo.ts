@@ -3,6 +3,9 @@
         id: number;
         name: string;
         imageUrl: string;
+        publishedDate: Date;
+        displayPublishedDate: string;
+        uploadBy: string;
     }
     export interface IPhotoAlbum {
         id: number;

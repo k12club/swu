@@ -14,7 +14,13 @@ namespace Swu.Portal.Web.Api.Proxy
         public string Name { get; set; }
         [JsonProperty(PropertyName = "type")]
         public CurriculumType Type { get; set; }
+        [JsonProperty(PropertyName = "numberOfTime")]
+        public int NumberOfTime { get; set; }
         [JsonProperty(PropertyName = "time")]
-        public string Time { get; set; }
+        public string Time {
+            get {
+                return string.Format("{0} hrs.", NumberOfTime);
+            }
+        }
     }
 }

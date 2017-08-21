@@ -1,8 +1,13 @@
 ﻿//Magnific Popup Definition File
 interface ImagnificPopupOptions {
     items?: any;
-    type: string;
-    closeOnBgClick?:boolean;
+    type?: string;
+    closeOnBgClick?: boolean;
+    delegate?: string;
+    tLoading?: string;
+    mainClass?: string;
+    gallery?: any;
+    image?: any;
 }
 
 interface JQuery {

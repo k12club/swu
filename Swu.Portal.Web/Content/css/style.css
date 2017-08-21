@@ -32,6 +32,7 @@
 @import "../css/animations.css";
 @import "../css/swiper.min.css";
 @import "../css/flipclock.css";
+@import url('gallery.css');
 
 /* ========== Basic Structure ========== */
 body {

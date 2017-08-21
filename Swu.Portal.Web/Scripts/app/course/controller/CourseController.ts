@@ -5,6 +5,8 @@
         splitStudents1: IStudentDetail[];
         splitStudents2: IStudentDetail[];
         getCourse(id: number): void;
+        render(photos:IPhoto[]): void;
+        registerScript(): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
@@ -18,6 +20,9 @@
                     this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(this.$scope.courseDetail.course.fullDescription);
                     _.map(this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
+                    });
+                    _.map(this.$scope.courseDetail.photosAlbum.photos, function (p) {
+                        p.displayPublishedDate = moment(p.publishedDate).format("LL");
                     });
                     _.forEach(this.$scope.courseDetail.students, (value, key) => {
                         if (key < (this.$scope.courseDetail.students.length / 2)) {
@@ -40,8 +45,51 @@
                             });
                         }
                     });
+
+                    this.$scope.render(this.$scope.courseDetail.photosAlbum.photos);
+                    this.$scope.registerScript();
                 }, (error) => { });
             }
+            this.$scope.render = (photos: IPhoto[]) => {
+                var html = "";
+                _.forEach(photos, (value, key) => {
+                    var elements = "<div class='col-md-4'>\
+                        <div class='resources-item' >\
+                            <div class='resources-category-image' >\
+                                <a href='../../../../"+ value.imageUrl +"' title= '" + value.name + "' by='"+ value.uploadBy +"'>\
+                                    <img class='img-responsive' alt= '' src= '../../../../"+ value.imageUrl +"'>\
+                                        </a>\
+                                        </div>\
+                                        <div class='resources-description' >\
+                                            <p>"+ value.displayPublishedDate +"</p>\
+                                                <h4>"+ value.name +"</h4>\
+                                                </div>\
+                                                </div>\
+                                                </div>";
+                    html += elements;
+                });
+                html = "<div class='row'>" + html + "</div>";
+                $('.popup-gallery').html(html);
+            }
+            this.$scope.registerScript = () => {
+                $('.popup-gallery').magnificPopup({
+                    delegate: 'a',
+                    type: 'image',
+                    tLoading: 'Loading image #%curr%...',
+                    mainClass: 'mfp-img-mobile',
+                    gallery: {
+                        enabled: true,
+                        navigateByImgClick: true,
+                        preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+                    },
+                    image: {
+                        tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                        titleSrc: function (item: any) {
+                            return item.el.attr('title') + '<small> Upload by: ' + item.el.attr('by') + '</small>';
+                        }
+                    }
+                });
+            };
             this.init();
         }
         init(): void {

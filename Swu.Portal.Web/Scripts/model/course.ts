@@ -5,8 +5,14 @@
         name_th: string;
         name_en: string;
         imageUrl: string;
-        numberOfRegistered: number;
-        numberOfComments: number;
+        numberOfRegistered?: number;
+        numberOfComments?: number;
+        numberOfLectures?: number;
+        numberOfQuizes?: number;
+        numberOfTimes?: number;
+        numberOfStudents?: number;
+        numberOfTeachers?: number;
+        lang?: string;
         price: number;
     }
 }

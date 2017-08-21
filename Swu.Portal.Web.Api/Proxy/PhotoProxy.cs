@@ -15,6 +15,11 @@ namespace Swu.Portal.Web.Api.Proxy
         public string Name { get; set; }
         [JsonProperty(PropertyName = "imageUrl")]
         public string ImageUrl { get; set; }
+        [JsonProperty(PropertyName = "publishedDate")]
+        public DateTime PublishedDate { get; set; }
+        [JsonProperty(PropertyName = "uploadBy")]
+        public string UploadBy { get; set; }
+        
     }
     public class PhotoAlbumProxy {
         [JsonProperty(PropertyName = "id")]

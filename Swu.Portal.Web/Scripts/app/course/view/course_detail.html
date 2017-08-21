@@ -58,6 +58,7 @@
                                     <li role="presentation"><a data-target="#curriculum" aria-controls="curriculum" role="tab" data-toggle="tab">Curriculum</a></li>
                                     <li role="presentation"><a data-target="#teachers" aria-controls="teachers" role="tab" data-toggle="tab">Teachers</a></li>
                                     <li role="presentation"><a data-target="#students" aria-controls="students" role="tab" data-toggle="tab">Students</a></li>
+                                    <li role="presentation"><a data-target="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photo Album</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade in active" id="description">
@@ -66,25 +67,22 @@
                                                 <div class="irs-cdtls-feture-bot">
                                                     <ul class="list-group">
                                                         <li>
-                                                            <a class="list-group-item" href="#"><span class="flaticon-business text-thm2"></span> Lecture <span class="pull-right"> 12 </span></a>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-business text-thm2"></span> Lecture <span class="pull-right"> {{courseDetail.course.numberOfLectures}} </span></a>
                                                         </li>
                                                         <li>
-                                                            <a class="list-group-item" href="#"><span class="flaticon-clock-1 text-thm2"></span> Duration <span class="pull-right"> 2 hrs. </span></a>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-clock-1 text-thm2"></span> Duration <span class="pull-right"> {{courseDetail.course.numberOfTimes}} hrs. </span></a>
                                                         </li>
                                                         <li>
-                                                            <a class="list-group-item" href="#"><span class="flaticon-pen text-thm2"></span> Quizzes <span class="pull-right"> 3 </span></a>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-pen text-thm2"></span> Quizzes <span class="pull-right"> {{courseDetail.course.numberOfQuizes}} </span></a>
                                                         </li>
                                                         <li>
-                                                            <a class="list-group-item" href="#"><span class="flaticon-arrows-4 text-thm2"></span> Skill Level <span class="pull-right"> All </span></a>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-people-1 text-thm2"></span> Students <span class="pull-right"> {{courseDetail.course.numberOfStudents}} </span></a>
                                                         </li>
                                                         <li>
-                                                            <a class="list-group-item" href="#"><span class="flaticon-people-1 text-thm2"></span> Students <span class="pull-right"> 20 </span></a>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-school text-thm2"></span> Teachers <span class="pull-right"> {{courseDetail.course.numberOfTeachers}} </span></a>
                                                         </li>
                                                         <li>
-                                                            <a class="list-group-item" href="#"><span class="flaticon-globe text-thm2"></span> Language <span class="pull-right"> English </span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="list-group-item irs-bbn" href="#"><span class="flaticon-technology text-thm2"></span> Assessments <span class="pull-right"> self </span></a>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-globe text-thm2"></span> Language <span class="pull-right"> {{courseDetail.course.lang}} </span></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -94,89 +92,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--<div class="row">
-                                            <div class="col-md-12">
-                                                <p class="irs-cdtls-tt-title">weekly timetable</p>
-                                                <div class="row irs-cdtls-timetsble">
-                                                    <div class="col-md-2"><div class="irs-cdtls-ttbg">1st Year</div></div>
-                                                    <div class="col-md-4"><div class="irs-cc-tt">Courses</div></div>
-                                                    <div class="col-md-6"><div class="irs-cc-tt">Assessment</div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="row irs-all-course-bb irs-padb-twnty">
-                                                    <div class="col-md-4 col-md-offset-2">
-                                                        <div class="irs-cc-tt2">Modern Language</div>
-                                                        <ul class="list-unstyled irs-cd-listss">
-                                                            <li>Practical language work </li>
-                                                            <li>Study of important works and/or topics</li>
-                                                            <li>Literature of the language </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <h4 class="irs-cc-tt3">First University examinations:</h4>
-                                                        <p class="irs-firs-exm">Seven written papers, including translation and literature</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row irs-padb-twnty">
-                                                    <div class="col-md-4 col-md-offset-2">
-                                                        <div class="irs-cc-tt2">Linguistics</div>
-                                                        <ul class="list-unstyled irs-cd-listss">
-                                                            <li>General linguistics </li>
-                                                            <li>Phonetics and phonology</li>
-                                                            <li>Grammatical analysis </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <h4 class="irs-cc-tt3">First University examinations:</h4>
-                                                        <p class="irs-firs-exm">Seven written papers, including translation and literature</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="row irs-cdtls-timetsble">
-                                                    <div class="col-md-2"><div class="irs-cdtls-ttbg">2nd Year</div></div>
-                                                    <div class="col-md-4"><div class="irs-cc-tt">Courses</div></div>
-                                                    <div class="col-md-6"><div class="irs-cc-tt">Assessment</div></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="row irs-all-course-bb irs-padb-twnty">
-                                                    <div class="col-md-4 col-md-offset-2">
-                                                        <div class="irs-cc-tt2">Modern Language</div>
-                                                        <ul class="list-unstyled irs-cd-listss">
-                                                            <li>Practical language work </li>
-                                                            <li>Study of important works and/or topics</li>
-                                                            <li>Literature of the language </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <h4 class="irs-cc-tt3">First University examinations:</h4>
-                                                        <p class="irs-firs-exm">Seven written papers, including translation and literature</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row irs-padb-twnty">
-                                                    <div class="col-md-4 col-md-offset-2">
-                                                        <div class="irs-cc-tt2">Linguistics</div>
-                                                        <ul class="list-unstyled irs-cd-listss">
-                                                            <li>General linguistics </li>
-                                                            <li>Phonetics and phonology</li>
-                                                            <li>Grammatical analysis </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <h4 class="irs-cc-tt3">First University examinations:</h4>
-                                                        <p class="irs-firs-exm">Seven written papers, including translation and literature</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>-->
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="curriculum">
                                         <div class="col-md-12">
@@ -185,7 +100,11 @@
                                                     <li ng-show="c.type ===1">
                                                         <a class="list-group-item" href="#">
                                                             <ul class="list-inline">
-                                                                <li><span class="flaticon-business text-thm2"></span> {{c.name}}</li>
+                                                                <li>
+                                                                    <span class="flaticon-business text-thm2"></span> {{
+c.name
+                                                                    }}
+                                                                </li>
                                                                 <li class="pull-right">{{c.time}}</li>
                                                             </ul>
                                                         </a>
@@ -722,6 +641,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="photos">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="container">
+                                                    <div class="popup-gallery">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -729,7 +658,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>
 <script>
     if ($('.irs-lc-carousel').length) {
@@ -770,4 +698,21 @@
             }
         })
     }
+    //$('.popup-gallery').magnificPopup({
+    //    delegate: 'a',
+    //    type: 'image',
+    //    tLoading: 'Loading image #%curr%...',
+    //    mainClass: 'mfp-img-mobile',
+    //    gallery: {
+    //        enabled: true,
+    //        navigateByImgClick: true,
+    //        preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+    //    },
+    //    image: {
+    //        tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+    //        titleSrc: function (item) {
+    //            return item.el.attr('title') + '<small>by Solodev</small>';
+    //        }
+    //    }
+    //});
 </script>

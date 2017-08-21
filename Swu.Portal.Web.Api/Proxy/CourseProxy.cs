@@ -23,6 +23,20 @@ namespace Swu.Portal.Web.Api.Proxy
         public int NumberOfComments { get; set; }
         [JsonProperty(PropertyName = "price")]
         public decimal Price { get; set; }
+
+        [JsonProperty(PropertyName = "numberOfLectures")]
+        public int NumberOfLecture { get; set; }
+        [JsonProperty(PropertyName = "numberOfQuizes")]
+        public int NumberOfQuizes { get; set; }
+        [JsonProperty(PropertyName = "numberOfTimes")]
+        public int NumberOfTimes { get; set; }
+        [JsonProperty(PropertyName = "numberOfStudents")]
+        public int NumberOfStudents { get; set; }
+        [JsonProperty(PropertyName = "numberOfTeachers")]
+        public int NumberOfTeachers { get; set; }
+        [JsonProperty(PropertyName = "lang")]
+        public string Language { get; set; }
+
     }
     public class CourseDetailProxy :CourseProxy
     {
