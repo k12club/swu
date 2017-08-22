@@ -20,4 +20,11 @@ namespace Swu.Portal.Web.Api.Proxy
         [JsonProperty(PropertyName = "photosAlbum")]
         public PhotoAlbumProxy PhotosAlbum { get; set; }
     }
+    public class CourseBriefDetailProxy
+    {
+        [JsonProperty(PropertyName = "course")]
+        public CourseDetailProxy CourseInfo { get; set; }
+        [JsonProperty(PropertyName = "teachers")]
+        public List<TeacherProxy> Teacher { get; set; }
+    }
 }

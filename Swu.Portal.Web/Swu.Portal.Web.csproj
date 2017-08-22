@@ -684,7 +684,6 @@
     <Content Include="Scripts\app\teacher\teacher_list.html" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
-    <Content Include="Scripts\filter\ComonFilter.js" />
     <Content Include="Scripts\jquery\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery\jquery-1.10.2.min.map" />
@@ -722,6 +721,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\student\" />
+    <Folder Include="Scripts\filter\" />
     <Folder Include="Scripts\typings\angularl-translate\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Base\" />

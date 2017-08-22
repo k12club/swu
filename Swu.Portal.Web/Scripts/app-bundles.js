@@ -435,6 +435,14 @@ var Swu;
         "ui.bootstrap",
         "pascalprecht.translate",
     ])
+        .filter('range', function rangeFilter() {
+        return function (input, total) {
+            for (var i = 0; i < total; i++) {
+                input.push(i);
+            }
+            return input;
+        };
+    })
         .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider, AppConstant, $mdDateLocaleProvider) {
             $translateProvider.translations("en", Swu.translations_en);
             $translateProvider.translations("th", Swu.translations_th);
@@ -1794,17 +1802,47 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseListController = (function () {
-        function CourseListController($scope, $state) {
+        function CourseListController($scope, $state, courseService) {
+            var _this = this;
             this.$scope = $scope;
             this.$state = $state;
+            this.courseService = courseService;
+            this.$scope.getCourseByCriteria = function (criteria) {
+                _this.courseService.getCourseByCriteria(_this.$scope.criteria).then(function (response) {
+                    _this.$scope.courses = response;
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.paginate(_this.$scope.courses, _this.$scope.pageSize, _this.$scope.currentPage);
+                }, function (error) { });
+            };
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.courses.length) / _this.$scope.pageSize;
+            };
+            this.$scope.search = function () {
+                console.log(_this.$scope.criteria);
+                _this.$scope.getCourseByCriteria(_this.$scope.criteria);
+            };
+            this.$scope.paginate = function (courses, pageSize, currentPage) {
+                console.log(_this.$scope.courses.length);
+                _this.$scope.displayCourses = courses.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                console.log(_this.$scope.displayCourses.length);
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.courses, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.init();
         }
-        CourseListController.prototype.showMessage = function () {
-            alert('test');
-        };
         CourseListController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.courses = [];
+            this.$scope.criteria = {
+                name: ""
+            };
+            this.$scope.getCourseByCriteria(this.$scope.criteria);
         };
         ;
-        CourseListController.$inject = ["$scope", "$state"];
+        CourseListController.$inject = ["$scope", "$state", "courseService"];
         CourseListController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CourseListController" })
@@ -1822,6 +1860,9 @@ var Swu;
         }
         courseService.prototype.getById = function (id) {
             return this.apiService.getData("course/getById?id=" + id);
+        };
+        courseService.prototype.getCourseByCriteria = function (criteria) {
+            return this.apiService.getData("course/getCourseByCriteria?keyword=" + criteria.name);
         };
         courseService.$inject = ['apiService', 'AppConstant'];
         courseService = __decorate([

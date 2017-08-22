@@ -42,6 +42,8 @@ namespace Swu.Portal.Web.Api.Proxy
     {
         [JsonProperty(PropertyName = "bigImageUrl")]
         public string BigImageUrl { get; set; }
+        [JsonProperty(PropertyName = "shortDescription")]
+        public string ShortDescription { get; set; }
         [JsonProperty(PropertyName = "fullDescription")]
         public string FullDescription { get; set; }
     }

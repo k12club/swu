@@ -22,7 +22,15 @@ module Swu {
             "ui.bootstrap",
             "pascalprecht.translate",
         ])
-        .config(["$translateProvider", "AppConstant","$mdDateLocaleProvider", function ($translateProvider: any, AppConstant: AppConstant, $mdDateLocaleProvider: any) {
+        .filter('range', function rangeFilter() {
+            return function (input: number[], total: number) {
+                for (var i = 0; i < total; i++) {
+                    input.push(i);
+                }
+                return input;
+            };
+        })
+        .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider: any, AppConstant: AppConstant, $mdDateLocaleProvider: any) {
             $translateProvider.translations("en", translations_en);
             $translateProvider.translations("th", translations_th);
             $translateProvider.preferredLanguage(AppConstant.defaultLang);

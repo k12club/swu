@@ -26,7 +26,7 @@
     </div>
 </section>
 
-<section class="irs-ip-details">
+<section class="irs-ip-details" ng-controller="CourseListController as vm">
     <div class="container">
         <div class="row clearfix">
             <div class="col-sm-12 col-md-8 col-lg-9 clearfix">
@@ -37,17 +37,17 @@
                         <li><a href="#">Showing 1-2 of 39 results</a></li>
                     </ul>
                     <div class="input-group irs-nav-search-form">
-                        <input type="text" class="form-control pull-right" placeholder="Search courses">
+                        <input type="text" ng-model="criteria.name" class="form-control pull-right" placeholder="Search courses">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><span class="flaticon-musica-searcher"></span></button>
+                            <button class="btn btn-default" type="button" ng-click="search()"><span class="flaticon-musica-searcher"></span></button>
                         </span>
                     </div><!-- /input-group -->
                 </div>
                 <div class="row clearfix">
-                    <div class="irs-cl-list">
+                    <div class="irs-cl-list" ng-repeat="c in displayCourses">
                         <div class="col-xs-12 col-lg-4">
                             <div class="irs-cl-list-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/courses/cl1.png" alt="cl1.png">
+                                <img class="img-responsive img-fluid" ng-src="../../../{{c.course.imageUrl}}" alt="cl1.png">
                                 <div class="irs-cl-overlay"></div>
                                 <div class="irs-cl-price">Free</div>
                             </div>
@@ -55,119 +55,21 @@
                         <div class="col-xs-12 col-lg-8">
                             <div class="irs-cl-details">
                                 <ul class="list-inline irs-cl-teacher-info">
-                                    <li class="irs-cl-thumb"><img src="../../../Content/images/courses/s3.png" alt="s3.png"></li>
-                                    <li class="irs-cl-info">with <span class="text-thm2"> Jessica Hamson</span></li>
-                                    <li> <span class="text-thm2 flaticon-social-2"></span> 321</li>
-                                    <li> <span class="text-thm2 flaticon-interface-1"></span> 4</li>
+                                    <li class="irs-cl-thumb"><img ng-src="../../../{{c.teachers[0].imageUrl}}"></li>
+                                    <li class="irs-cl-info">with <span class="text-thm2"> {{c.teachers[0].name}}</span></li>
+                                    <li> <span class="text-thm2 flaticon-social-2"></span> {{c.course.numberOfRegistered}}</li>
+                                    <li> <span class="text-thm2 flaticon-interface-1"></span> {{c.course.numberOfComments}}</li>
                                 </ul>
-                                <h3>Applied Science and Best Technology (AST)</h3>
-                                <p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. </p>
+                                <h3>{{c.course.name_en}}</h3>
+                                <p>{{c.course.shortDescription}}</p>
                                 <a href="#" ui-sref="course({ id: 1 })" class="btn btn-default irs-btn-thm3" > Check Course</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row clearfix">
-                    <div class="irs-cl-list">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="irs-cl-list-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/courses/cl2.png" alt="cl2.png">
-                                <div class="irs-cl-overlay"></div>
-                                <div class="irs-cl-price">$39.99</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-8">
-                            <div class="irs-cl-details">
-                                <ul class="list-inline irs-cl-teacher-info">
-                                    <li class="irs-cl-thumb"><img src="../../../Content/images/courses/s4.png" alt="s4.png"></li>
-                                    <li class="irs-cl-info">with <span class="text-thm2"> Annie Thornburg</span></li>
-                                    <li> <span class="text-thm2 flaticon-social-2"></span> 189</li>
-                                    <li> <span class="text-thm2 flaticon-interface-1"></span> 10</li>
-                                </ul>
-                                <h3>Town & Country Planning and Landscape Design</h3>
-                                <p>Alongside that, Dr Schlissel wants academic scholars to step beyond a body of output addressing other scholars, and to offer their expertise. </p>
-                                <a href="#" ui-sref="course({ id: 1 })" class="btn btn-default irs-btn-thm3"> Check Course</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row clearfix">
-                    <div class="irs-cl-list">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="irs-cl-list-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/courses/cl3.png" alt="cl3.png">
-                                <div class="irs-cl-overlay"></div>
-                                <div class="irs-cl-price">$39.99</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-8">
-                            <div class="irs-cl-details">
-                                <ul class="list-inline irs-cl-teacher-info">
-                                    <li class="irs-cl-thumb"><img src="../../../Content/images/courses/s5.png" alt="s5.png"></li>
-                                    <li class="irs-cl-info">with <span class="text-thm2"> Jessica Hamson</span></li>
-                                    <li> <span class="text-thm2 flaticon-social-2"></span> 321</li>
-                                    <li> <span class="text-thm2 flaticon-interface-1"></span> 19</li>
-                                </ul>
-                                <h3>Russian & East European Languages</h3>
-                                <p>Much of the battle of ideas will now be about evidence, in an age where experts are treated with scepticism and highly dubious information. </p>
-                                <a href="#" ui-sref="course({ id: 1 })" class="btn btn-default irs-btn-thm3"> Check Course</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row clearfix">
-                    <div class="irs-cl-list">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="irs-cl-list-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/courses/cl4.png" alt="cl4.png">
-                                <div class="irs-cl-overlay"></div>
-                                <div class="irs-cl-price">$89.99</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-8">
-                            <div class="irs-cl-details">
-                                <ul class="list-inline irs-cl-teacher-info">
-                                    <li class="irs-cl-thumb"><img src="../../../Content/images/courses/s6.png" alt="s6.png"></li>
-                                    <li class="irs-cl-info">with <span class="text-thm2"> Jessica Hamson</span></li>
-                                    <li> <span class="text-thm2 flaticon-social-2"></span> 109</li>
-                                    <li> <span class="text-thm2 flaticon-interface-1"></span> 29</li>
-                                </ul>
-                                <h3>Pharmacology & Pharmacy</h3>
-                                <p>Teaching students to make appropriate use of the information tsunami is now one of the top priorities, to move from the idea that every bit. </p>
-                                <a href="#" ui-sref="course({ id: 1 })" class="btn btn-default irs-btn-thm3"> Check Course</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row clearfix">
-                    <div class="irs-cl-list">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="irs-cl-list-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/courses/cl5.png" alt="cl5.png">
-                                <div class="irs-cl-overlay"></div>
-                                <div class="irs-cl-price">$25.00</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-8">
-                            <div class="irs-cl-details">
-                                <ul class="list-inline irs-cl-teacher-info">
-                                    <li class="irs-cl-thumb"><img src="../../../Content/images/courses/s3.png" alt="s3.png"></li>
-                                    <li class="irs-cl-info">with <span class="text-thm2"> Jessica Hamson</span></li>
-                                    <li> <span class="text-thm2 flaticon-social-2"></span> 387</li>
-                                    <li> <span class="text-thm2 flaticon-interface-1"></span> 180</li>
-                                </ul>
-                                <h3>Land & Property Management</h3>
-                                <p>This is the territory where good citizenship, with the appropriate tools, needs to be rediscovered; and many of the tools are held by the higher. </p>
-                                <a href="#" ui-sref="course({ id: 1 })" class="btn btn-default irs-btn-thm3"> Check Course</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <ul class="list-inline irs-ip-navigation clearfix">
                     <li><span class="flaticon-arrows"></span></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
+                    <li  ng-repeat="number in []|range:totalPageNumber" ng-click="changePage($index)"><a>{{$index+1}}</a></li>
                     <li><span class="flaticon-arrows-1"></span></li>
                 </ul>
             </div>
