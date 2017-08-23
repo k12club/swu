@@ -15,8 +15,8 @@
     @Module("app")
     @Controller({ name: "CourseListController" })
     export class CourseListController {
-        static $inject: Array<string> = ["$scope", "$state", "courseService"];
-        constructor(private $scope: ICourseListScope, private $state: ng.ui.IState, private courseService: IcourseService) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "courseService"];
+        constructor(private $scope: ICourseListScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private courseService: IcourseService) {
             this.$scope.getCourseByCriteria = (criteria: CourseCritirea) => {
                 this.courseService.getCourseByCriteria(this.$scope.criteria).then((response) => {
                     this.$scope.courses = response;

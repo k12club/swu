@@ -461,6 +461,9 @@ var Swu;
                 }
             });
             $rootScope.lang = AppConstant.defaultLang;
+            $rootScope.scrollToToped = function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+            };
         }]);
 })(Swu || (Swu = {}));
 var Swu;
@@ -556,6 +559,18 @@ var Swu;
         ], loginModal);
         return loginModal;
     }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    function rangeFilter() {
+        return function (input, total) {
+            for (var i = 0; i < total; i++) {
+                input.push(i);
+            }
+            return input;
+        };
+    }
+    Swu.rangeFilter = rangeFilter;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -1802,9 +1817,10 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseListController = (function () {
-        function CourseListController($scope, $state, courseService) {
+        function CourseListController($scope, $rootScope, $state, courseService) {
             var _this = this;
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$state = $state;
             this.courseService = courseService;
             this.$scope.getCourseByCriteria = function (criteria) {
@@ -1842,7 +1858,7 @@ var Swu;
             this.$scope.getCourseByCriteria(this.$scope.criteria);
         };
         ;
-        CourseListController.$inject = ["$scope", "$state", "courseService"];
+        CourseListController.$inject = ["$scope", "$rootScope", "$state", "courseService"];
         CourseListController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CourseListController" })

@@ -9,6 +9,7 @@ module Swu {
     }]);
     export interface IRootScope extends ng.IRootScopeService {
         lang: string;
+        scrollToToped(): void;
     }
     angular
         .module("app", [
@@ -48,5 +49,8 @@ module Swu {
                 }
             });
             $rootScope.lang = AppConstant.defaultLang;
+            $rootScope.scrollToToped = () => {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+            };
         }]);
 }

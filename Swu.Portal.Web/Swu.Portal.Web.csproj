@@ -721,7 +721,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\student\" />
-    <Folder Include="Scripts\filter\" />
+    <Folder Include="Scripts\config\" />
+    <Folder Include="Scripts\run\" />
     <Folder Include="Scripts\typings\angularl-translate\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Base\" />
@@ -799,6 +800,7 @@
     <TypeScriptCompile Include="Scripts\app\home\service\newsService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
+    <TypeScriptCompile Include="Scripts\filter\range.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\baseUser.ts" />
     <TypeScriptCompile Include="Scripts\model\commitment.ts" />
