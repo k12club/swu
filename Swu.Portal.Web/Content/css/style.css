@@ -2581,6 +2581,10 @@ p.irs-fln-date {
             background-color: #eb553a;
             color: #fff;
         }
+        .irs-ip-navigation >li > a.active {
+            background-color: #eb553a;
+            color: #fff;
+        }
 
     .irs-ip-navigation > li:first-child > span,
     .irs-ip-navigation > li:last-child > span {

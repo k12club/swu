@@ -1827,7 +1827,7 @@ var Swu;
                 _this.courseService.getCourseByCriteria(_this.$scope.criteria).then(function (response) {
                     _this.$scope.courses = response;
                     _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
-                    _this.$scope.paginate(_this.$scope.courses, _this.$scope.pageSize, _this.$scope.currentPage);
+                    _this.$scope.paginate(_this.$scope.courses, _this.$scope.displayCourses, _this.$scope.pageSize, _this.$scope.currentPage);
                 }, function (error) { });
             };
             this.$scope.getTotalPageNumber = function () {
@@ -1837,14 +1837,26 @@ var Swu;
                 console.log(_this.$scope.criteria);
                 _this.$scope.getCourseByCriteria(_this.$scope.criteria);
             };
-            this.$scope.paginate = function (courses, pageSize, currentPage) {
-                console.log(_this.$scope.courses.length);
-                _this.$scope.displayCourses = courses.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
-                console.log(_this.$scope.displayCourses.length);
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayCourses = displayData;
             };
             this.$scope.changePage = function (page) {
                 _this.$scope.currentPage = page;
-                _this.$scope.paginate(_this.$scope.courses, _this.$scope.pageSize, _this.$scope.currentPage);
+                console.log('current page: ' + page);
+                _this.$scope.paginate(_this.$scope.courses, _this.$scope.displayCourses, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
             };
             this.init();
         }
