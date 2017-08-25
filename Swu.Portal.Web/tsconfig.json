@@ -25,6 +25,7 @@
     "Scripts/app/contact/app_routing.ts",
     "Scripts/app/settings/app_routing.ts",
     "Scripts/app/committee/app_routing.ts",
+    "Scripts/app/board/app_routing.ts",
 
     "Scripts/app/home/controller/HomeController.ts",
     "Scripts/app/home/controller/HomeCourseController.ts",
@@ -53,6 +54,10 @@
     "Scripts/app/committee/controller/CommitteeController.ts",
     "Scripts/app/committee/service/committeeService.ts",
 
+    "Scripts/app/board/controller/WebBoardController.ts",
+    "Scripts/app/board/controller/GeneralBoardController.ts",
+    "Scripts/app/board/controller/CourseBoardController.ts",
+    "Scripts/app/board/service/webboardService.ts",
 
     "Scripts/app/teacher/TeacherController.ts",
     "Scripts/app/teacher/TeacherListController.ts",
@@ -80,7 +85,8 @@
     "Scripts/model/student.ts",
     "Scripts/model/baseUser.ts",
     "Scripts/model/committee.ts",
-    "Scripts/model/contract.ts"
+    "Scripts/model/contract.ts",
+    "Scripts/model/boardType.ts"
 
   ],
   "exclude": [

@@ -212,6 +212,101 @@ namespace Swu.Portal.Web.Api
             }
             return null;
         }
+        [HttpGet, Route("allItems")]
+        public List<WebboardItemProxy> GetAllItems() {
+            return new List<WebboardItemProxy> {
+                new WebboardItemProxy {
+                    Id =1,
+                    Name = "Applied Science and Best Technology (AST)",
+                    ShortDescription= "However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information.",
+                    NumberOfComments=123,
+                    NumberOfView=321,
+                    Type=WebboardType.course,
+                    CategoryId=1,
+                    CreatorImageUrl="Content/images/resource/student1.png",
+                    CreateBy ="Chansak",
+                    ImageUrl = "Content/images/courses/1.jpg",
+                },
+                new WebboardItemProxy {
+                    Id =2,
+                    Name = "Applied Science and Best Technology (AST)",
+                    ShortDescription= "However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information.",
+                    NumberOfComments=123,
+                    NumberOfView=321,
+                    ImageUrl = "Content/images/courses/1.jpg",
+                    Type=WebboardType.course,
+                    CategoryId=1,
+                    CreatorImageUrl="Content/images/resource/student1.png",
+                    CreateBy ="Chansak"
+                },
+                new WebboardItemProxy {
+                    Id =3,
+                    Name = "Applied Science and Best Technology (AST)",
+                    ShortDescription= "However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information.",
+                    NumberOfComments=123,
+                    NumberOfView=321,
+                    ImageUrl = "Content/images/courses/1.jpg",
+                    Type=WebboardType.course,
+                    CategoryId=1,
+                    CreatorImageUrl="Content/images/resource/student1.png",
+                    CreateBy ="Chansak"
+                },
+                new WebboardItemProxy {
+                    Id =4,
+                    Name = "Applied Science and Best Technology (AST)",
+                    ShortDescription= "However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information.",
+                    NumberOfComments=123,
+                    NumberOfView=321,
+                    ImageUrl = "Content/images/courses/1.jpg",
+                    Type=WebboardType.course,
+                    CategoryId=1,
+                    CreatorImageUrl="Content/images/resource/student1.png",
+                    CreateBy ="Chansak"
+                },
+                new WebboardItemProxy {
+                    Id =5,
+                    Name = "Applied Science and Best Technology (AST)",
+                    ShortDescription= "However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information.",
+                    NumberOfComments=123,
+                    NumberOfView=321,
+                    ImageUrl = "Content/images/courses/1.jpg",
+                    Type=WebboardType.course,
+                    CategoryId=2,
+                    CreatorImageUrl="Content/images/resource/student1.png",
+                    CreateBy ="Chansak"
+                },
+                new WebboardItemProxy {
+                    Id =6,
+                    Name = "Applied Science and Best Technology (AST)",
+                    ShortDescription= "However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information.",
+                    NumberOfComments=123,
+                    NumberOfView=321,
+                    ImageUrl = "Content/images/courses/1.jpg",
+                    Type=WebboardType.course,
+                    CategoryId=3,
+                    CreatorImageUrl="Content/images/resource/student1.png",
+                    CreateBy ="Chansak"
+                }
+            };
+        }
+        [HttpGet, Route("category")]
+        public List<WebboardCategoryProxy> GetCategory()
+        {
+            return new List<WebboardCategoryProxy> {
+                new Proxy.WebboardCategoryProxy {
+                    Id =1,
+                    Title = "Category 1"
+                },
+                new Proxy.WebboardCategoryProxy {
+                    Id =2,
+                    Title = "Category 2"
+                },
+                new Proxy.WebboardCategoryProxy {
+                    Id =3,
+                    Title = "Category 3"
+                }
+            };
+        }
         [HttpGet, Route("getById")]
         public CourseAllDetailProxy GetById(int id)
         {

@@ -173,6 +173,9 @@
     <Compile Include="Proxy\UserLoginProxy.cs" />
     <Compile Include="Proxy\UserProfile.cs" />
     <Compile Include="Proxy\VideoProxy.cs" />
+    <Compile Include="Proxy\WebboardCategory.cs" />
+    <Compile Include="Proxy\WebboardItemProxy.cs" />
+    <Compile Include="Proxy\WebboardType.cs" />
     <Compile Include="V1\CommitteeController.cs" />
     <Compile Include="V1\NewsController.cs" />
     <Compile Include="V1\VideoController.cs" />

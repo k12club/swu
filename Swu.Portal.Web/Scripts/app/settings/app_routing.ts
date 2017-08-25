@@ -25,7 +25,7 @@
                     views: {
                         'subContent@settings': {
                             templateUrl: '/Scripts/app/settings/courses.html',
-                            controller: 'SettingCoursesController as vm'
+                            controller: 'GeneralBoardController as vm'
                         },
                     }
                 });

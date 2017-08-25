@@ -37,7 +37,8 @@
             ourPeoples: "OurPeoples",
             teacher: "Teacher",
             contact: "Contact",
-            committee:"Programme Commitee"
+            committee: "Programme Commitee",
+            board:"Web board"
         },
         home: {},
         course: {

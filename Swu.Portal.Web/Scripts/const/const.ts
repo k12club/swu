@@ -7,7 +7,7 @@ module Swu {
         constructor() {
 
         }
-        defaultLang = "th";
+        defaultLang = "en";
         api = {
             protocal: "http",
             ip: "localhost",
@@ -16,7 +16,10 @@ module Swu {
         };
         exceptGotoTopStateList = [
             "settings",
-            "settings.courses"
+            "settings.courses",
+            "board.forum",
+            "board.course",
+            "board.research"
         ];
     }
 }

@@ -265,7 +265,8 @@ var Swu;
             ourPeoples: "OurPeoples",
             teacher: "Teacher",
             contact: "Contact",
-            committee: "Programme Commitee"
+            committee: "Programme Commitee",
+            board: "Web board"
         },
         home: {},
         course: {
@@ -361,7 +362,8 @@ var Swu;
             ourPeoples: "พวกเรา",
             teacher: "รายชื่ออาจารย์",
             contact: "ติดต่อเรา",
-            committee: "กรรมการ"
+            committee: "กรรมการ",
+            board: "เว็บบอร์ด"
         },
         home: {},
         course: {
@@ -470,7 +472,7 @@ var Swu;
 (function (Swu) {
     var AppConstant = (function () {
         function AppConstant() {
-            this.defaultLang = "th";
+            this.defaultLang = "en";
             this.api = {
                 protocal: "http",
                 ip: "localhost",
@@ -479,7 +481,10 @@ var Swu;
             };
             this.exceptGotoTopStateList = [
                 "settings",
-                "settings.courses"
+                "settings.courses",
+                "board.forum",
+                "board.course",
+                "board.research"
             ];
         }
         AppConstant = __decorate([
@@ -804,7 +809,7 @@ var Swu;
                 views: {
                     'subContent@settings': {
                         templateUrl: '/Scripts/app/settings/courses.html',
-                        controller: 'SettingCoursesController as vm'
+                        controller: 'GeneralBoardController as vm'
                     }
                 }
             });
@@ -830,6 +835,54 @@ var Swu;
                 .state("committee-list", {
                 url: "/committee-list",
                 templateUrl: "/Scripts/app/committee/view/committee-list.html"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $stateProvider
+                .state("board", {
+                url: "/board/:type",
+                views: {
+                    '': { templateUrl: '/Scripts/app/board/view/board.html' },
+                    'subContent@board': {
+                        templateUrl: '/Scripts/app/board/view/default.html',
+                        controller: 'WebBoardController as vm'
+                    }
+                }
+            })
+                .state("board.forum", {
+                parent: "board",
+                url: "/forum/:id",
+                views: {
+                    'subContent@board': {
+                        templateUrl: '/Scripts/app/board/view/board-general.html',
+                        controller: 'GeneralBoardController as vm'
+                    }
+                }
+            })
+                .state("board.course", {
+                parent: "board",
+                url: "/course/:id",
+                views: {
+                    'subContent@board': {
+                        templateUrl: '/Scripts/app/board/view/board-course.html',
+                        controller: 'CourseBoardController as vm'
+                    }
+                }
             });
         }
         StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
@@ -1863,10 +1916,10 @@ var Swu;
         CourseListController.prototype.init = function () {
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
-            this.$scope.courses = [];
             this.$scope.criteria = {
                 name: ""
             };
+            this.$scope.courses = [];
             this.$scope.getCourseByCriteria(this.$scope.criteria);
         };
         ;
@@ -1944,6 +1997,274 @@ var Swu;
             Swu.Factory({ name: "committeeService" })
         ], committeeService);
         return committeeService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var WebBoardController = (function () {
+        function WebBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.webboardService = webboardService;
+            this.$stateParams = $stateParams;
+            this.$sce = $sce;
+            this.$scope.type = Number(this.$stateParams["type"]);
+            this.$scope.getTotalPageNumber = function () {
+                return Math.ceil((_this.$scope.items.length) / _this.$scope.pageSize);
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayItems = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.items, _this.$scope.displayItems, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.search = function () {
+                switch (_this.$scope.type) {
+                    case 1: {
+                        _this.$scope.categoryName = "Forums";
+                        _this.webboardService.getForumsCategory().then(function (response) {
+                            _this.$scope.categorys = response;
+                            _.map(_this.$scope.categorys, function (c) {
+                                c.link = "board.forum({id:" + c.id + "})";
+                            });
+                        }, function (error) { });
+                        _this.webboardService.getForumsItems().then(function (response) {
+                            _this.$scope.items = response;
+                            _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                            _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                                return item.type == Swu.BoardType.forums;
+                            });
+                        }, function (error) {
+                        });
+                        break;
+                    }
+                    case 2: {
+                        _this.$scope.categoryName = "Courses";
+                        _this.webboardService.getCourseCategory().then(function (response) {
+                            _this.$scope.categorys = response;
+                            _.map(_this.$scope.categorys, function (c) {
+                                c.link = "board.course({id:" + c.id + "})";
+                            });
+                        }, function (error) { });
+                        _this.webboardService.getCourseItems().then(function (response) {
+                            _this.$scope.items = response;
+                            _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                            _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                                return item.type == Swu.BoardType.course;
+                            });
+                        }, function (error) { });
+                        break;
+                    }
+                    case 3: {
+                        _this.$scope.categoryName = "Research";
+                        _this.$scope.categorys.push({
+                            id: 1,
+                            title: "research group1",
+                            link: "board.research({id:1})"
+                        });
+                        _this.$scope.categorys.push({
+                            id: 1,
+                            title: "research group2",
+                            link: "board.research({id:2})"
+                        });
+                        _this.$scope.categorys.push({
+                            id: 1,
+                            title: "research group3",
+                            link: "board.research({id:3})"
+                        });
+                        _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                            return item.type == Swu.BoardType.research;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.init();
+        }
+        ;
+        WebBoardController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.criteria = {
+                name: ""
+            };
+            this.$scope.categorys = [];
+            this.$scope.items = [];
+            this.$scope.search();
+        };
+        ;
+        WebBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
+        WebBoardController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "WebBoardController" })
+        ], WebBoardController);
+        return WebBoardController;
+    }());
+    Swu.WebBoardController = WebBoardController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var GeneralBoardController = (function () {
+        function GeneralBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.webboardService = webboardService;
+            this.$stateParams = $stateParams;
+            this.$sce = $sce;
+            this.$scope.id = this.$stateParams["id"];
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.displayItems.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayItems = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.items, _this.$scope.displayItems, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.search = function () {
+                _this.webboardService.getForumsItems().then(function (response) {
+                    _this.$scope.items = response;
+                    _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                        return item.type == Swu.BoardType.forums && item.categoryId == _this.$scope.id;
+                    });
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                }, function (error) { });
+            };
+            this.init();
+        }
+        GeneralBoardController.prototype.init = function () {
+            this.$scope.items = [];
+            this.$scope.displayItems = [];
+            this.$scope.search();
+        };
+        ;
+        GeneralBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
+        GeneralBoardController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "GeneralBoardController" })
+        ], GeneralBoardController);
+        return GeneralBoardController;
+    }());
+    Swu.GeneralBoardController = GeneralBoardController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CourseBoardController = (function () {
+        function CourseBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.webboardService = webboardService;
+            this.$stateParams = $stateParams;
+            this.$sce = $sce;
+            this.$scope.id = this.$stateParams["id"];
+            this.$scope.getTotalPageNumber = function () {
+                return Math.ceil((_this.$scope.displayItems.length) / _this.$scope.pageSize);
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayItems = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.items, _this.$scope.displayItems, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.search = function () {
+                _this.webboardService.getCourseItems().then(function (response) {
+                    _this.$scope.items = response;
+                    _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                        return item.type == Swu.BoardType.course && item.categoryId == _this.$scope.id;
+                    });
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                }, function (error) { });
+            };
+            this.init();
+        }
+        CourseBoardController.prototype.init = function () {
+            this.$scope.items = [];
+            this.$scope.displayItems = [];
+            this.$scope.search();
+        };
+        ;
+        CourseBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
+        CourseBoardController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CourseBoardController" })
+        ], CourseBoardController);
+        return CourseBoardController;
+    }());
+    Swu.CourseBoardController = CourseBoardController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var webboardService = (function () {
+        function webboardService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        webboardService.prototype.getCourseCategory = function () {
+            return this.apiService.getData("course/category");
+        };
+        webboardService.prototype.getCourseItems = function () {
+            return this.apiService.getData("course/allItems");
+        };
+        webboardService.prototype.getForumsCategory = function () {
+            return this.apiService.getData("course/category");
+        };
+        webboardService.prototype.getForumsItems = function () {
+            return this.apiService.getData("course/allItems");
+        };
+        webboardService.$inject = ['apiService', 'AppConstant'];
+        webboardService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "webboardService" })
+        ], webboardService);
+        return webboardService;
     }());
 })(Swu || (Swu = {}));
 var Swu;
@@ -2085,4 +2406,13 @@ var Swu;
         CurriculumType[CurriculumType["exam"] = 2] = "exam";
     })(Swu.CurriculumType || (Swu.CurriculumType = {}));
     var CurriculumType = Swu.CurriculumType;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    (function (BoardType) {
+        BoardType[BoardType["forums"] = 1] = "forums";
+        BoardType[BoardType["course"] = 2] = "course";
+        BoardType[BoardType["research"] = 3] = "research";
+    })(Swu.BoardType || (Swu.BoardType = {}));
+    var BoardType = Swu.BoardType;
 })(Swu || (Swu = {}));

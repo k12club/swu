@@ -9,10 +9,10 @@
         currentPage: number;
         pageSize: number;
         totalPageNumber: number;
-        criteria: CourseCritirea;
+        criteria: SearchCritirea;
         courses: ICourseBriefDetail[];
         displayCourses: ICourseBriefDetail[];
-        getCourseByCriteria(criteria: CourseCritirea): void;
+        getCourseByCriteria(criteria: SearchCritirea): void;
         getTotalPageNumber(): number;
         search(): void;
     }
@@ -21,7 +21,7 @@
     export class CourseListController {
         static $inject: Array<string> = ["$scope", "$rootScope", "$state", "courseService"];
         constructor(private $scope: ICourseListScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private courseService: IcourseService) {
-            this.$scope.getCourseByCriteria = (criteria: CourseCritirea) => {
+            this.$scope.getCourseByCriteria = (criteria: SearchCritirea) => {
                 this.courseService.getCourseByCriteria(this.$scope.criteria).then((response) => {
                     this.$scope.courses = response;
                     this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
@@ -67,10 +67,10 @@
         init(): void {
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
-            this.$scope.courses = [];
             this.$scope.criteria = {
                 name: ""
             };
+            this.$scope.courses = [];
             this.$scope.getCourseByCriteria(this.$scope.criteria);
         };
 

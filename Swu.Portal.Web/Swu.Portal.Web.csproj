@@ -658,6 +658,11 @@
     <Content Include="Scripts\angular\ui-bootstrap.js" />
     <Content Include="Scripts\angular\ui-date.js" />
     <Content Include="Scripts\angular\underscore.js" />
+    <Content Include="Scripts\app\board\view\board-course.html" />
+    <Content Include="Scripts\app\board\view\board-general.html" />
+    <Content Include="Scripts\app\board\view\board-research.html" />
+    <Content Include="Scripts\app\board\view\board.html" />
+    <Content Include="Scripts\app\board\view\default.html" />
     <Content Include="Scripts\app\contact\contact.html" />
     <Content Include="Scripts\app\course\view\course_list.html" />
     <Content Include="Scripts\app\course\view\course_detail.html" />
@@ -768,6 +773,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\board\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\board\controller\CourseBoardController.ts" />
+    <TypeScriptCompile Include="Scripts\app\board\controller\GeneralBoardController.ts" />
+    <TypeScriptCompile Include="Scripts\app\board\controller\WebBoardController.ts" />
+    <TypeScriptCompile Include="Scripts\app\board\service\webboardService.ts" />
     <TypeScriptCompile Include="Scripts\app\committee\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\committee\controller\CommitteeController.ts" />
     <TypeScriptCompile Include="Scripts\app\committee\service\committeeService.ts" />
@@ -803,6 +813,7 @@
     <TypeScriptCompile Include="Scripts\filter\range.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\baseUser.ts" />
+    <TypeScriptCompile Include="Scripts\model\boardType.ts" />
     <TypeScriptCompile Include="Scripts\model\commitment.ts" />
     <TypeScriptCompile Include="Scripts\model\committee.ts" />
     <TypeScriptCompile Include="Scripts\model\contract.ts" />

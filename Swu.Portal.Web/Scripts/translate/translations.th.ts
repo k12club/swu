@@ -37,7 +37,8 @@
             ourPeoples:"พวกเรา",
             teacher: "รายชื่ออาจารย์",
             contact: "ติดต่อเรา",
-            committee: "กรรมการ"
+            committee: "กรรมการ",
+            board: "เว็บบอร์ด"
         },
         home: {},
         course: {
