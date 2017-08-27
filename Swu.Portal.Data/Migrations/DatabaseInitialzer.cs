@@ -37,43 +37,50 @@ namespace Swu.Portal.Data.Migrations
             {
                 Name = "Lecture 1.1 Practical language work",
                 Type = CurriculumType.Lecture,
-                CourseId = CID1
+                CourseId = CID1,
+                NumberOfTime=2
             };
             var cur2 = new Curriculum
             {
                 Name = "Lecture 1.2 Study of important works and/or topics",
                 Type = CurriculumType.Lecture,
-                CourseId = CID1
+                CourseId = CID1,
+                NumberOfTime = 2
             };
             var cur3 = new Curriculum
             {
                 Name = "Lecture 1.3 Literature of the language",
                 Type = CurriculumType.Lecture,
-                CourseId = CID1
+                CourseId = CID1,
+                NumberOfTime = 2
             };
             var cur4 = new Curriculum
             {
                 Name = "Quizzes History of the language test",
                 Type = CurriculumType.Quize,
-                CourseId = CID1
+                CourseId = CID1,
+                NumberOfTime = 2
             };
             var cur5 = new Curriculum
             {
                 Name = "Lecture 1.4 General linguistics",
                 Type = CurriculumType.Lecture,
-                CourseId = CID1
+                CourseId = CID1,
+                NumberOfTime = 2
             };
             var cur6 = new Curriculum
             {
                 Name = "Lecture 1.5 Phonetics and phonology ",
                 Type = CurriculumType.Lecture,
-                CourseId = CID1
+                CourseId = CID1,
+                NumberOfTime = 2
             };
             var cur7 = new Curriculum
             {
                 Name = "Lecture 1.6 Grammatical analysis",
                 Type = CurriculumType.Lecture,
-                CourseId = CID1
+                CourseId = CID1,
+                NumberOfTime = 2
             };
             curriculums.Add(cur1);
             curriculums.Add(cur2);
@@ -243,6 +250,7 @@ namespace Swu.Portal.Data.Migrations
             students.Add(s19);
             students.Add(s20);
             #endregion
+            
             #region Course
             var c1 = new Course
             {

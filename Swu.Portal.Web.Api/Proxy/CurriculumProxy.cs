@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swu.Portal.Data.Models;
 using Swu.Portal.Web.Api.Enum;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Swu.Portal.Web.Api.Proxy
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
         [JsonProperty(PropertyName = "type")]
-        public CurriculumType Type { get; set; }
+        public Enum.CurriculumType Type { get; set; }
         [JsonProperty(PropertyName = "numberOfTime")]
         public int NumberOfTime { get; set; }
         [JsonProperty(PropertyName = "time")]
@@ -21,6 +22,11 @@ namespace Swu.Portal.Web.Api.Proxy
             get {
                 return string.Format("{0} hrs.", NumberOfTime);
             }
+        }
+        public CurriculumProxy(Curriculum c)
+        {
+            this.Name = c.Name;
+            this.Type = (Enum.CurriculumType)Convert.ToInt16(c.Type);
         }
     }
 }

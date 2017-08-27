@@ -28,14 +28,7 @@ namespace Swu.Portal.Web.Api.Proxy
                 Name_TH = c.Name_TH,
                 Price = c.Price,
             };
-            this.Teacher = new TeacherProxy
-            {
-                Id = c.Teachers.FirstOrDefault().Id,
-                Description = c.Teachers.FirstOrDefault().Description,
-                ImageUrl = c.Teachers.FirstOrDefault().ImageUrl,
-                Name = c.Teachers.FirstOrDefault().Name,
-                Position = c.Teachers.FirstOrDefault().Position
-            };
+            this.Teacher = new TeacherProxy(c.Teachers.FirstOrDefault());
             this.CardType = CardType.Recently;
         }
     }

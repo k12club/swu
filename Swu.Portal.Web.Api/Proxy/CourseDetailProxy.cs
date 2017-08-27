@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swu.Portal.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,38 @@ namespace Swu.Portal.Web.Api.Proxy
         public List<StudentProxy> Students { get; set; }
         [JsonProperty(PropertyName = "photosAlbum")]
         public PhotoAlbumProxy PhotosAlbum { get; set; }
+        public CourseAllDetailProxy(Course c)
+        {
+            this.Curriculums = new List<CurriculumProxy>();
+            this.Teacher = new List<TeacherProxy>();
+            this.Students = new List<StudentProxy>();
+            this.PhotosAlbum = new PhotoAlbumProxy();
+
+            this.CourseInfo = new CourseDetailProxy {
+                Id = c.Id,
+                ImageUrl = c.ImageUrl,
+                Language = c.Language,
+                Name_EN = c.Name_EN,
+                Name_TH = c.Name_TH,
+                Price = c.Price,
+                FullDescription = c.FullDescription,
+                BigImageUrl = c.BigImageUrl,
+                NumberOfLecture = c.Curriculums.Where(i => i.Type == CurriculumType.Lecture).Count(),
+                NumberOfQuizes = c.Curriculums.Where(i => i.Type == CurriculumType.Quize).Count(),
+                NumberOfStudents = c.Students.Count(),
+                NumberOfTeachers = c.Teachers.Count(),
+                NumberOfTimes = c.Curriculums.Sum(i => i.NumberOfTime),
+            };
+            foreach (var cur in c.Curriculums) {
+                this.Curriculums.Add(new CurriculumProxy(cur));
+            }
+            foreach (var t in c.Teachers) {
+                this.Teacher.Add(new TeacherProxy(t));
+            }
+            foreach (var s in c.Students) {
+                this.Students.Add(new StudentProxy(s));
+            }
+        }
     }
     public class CourseBriefDetailProxy
     {

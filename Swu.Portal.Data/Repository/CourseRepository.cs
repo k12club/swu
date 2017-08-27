@@ -49,7 +49,13 @@ namespace Swu.Portal.Data.Repository
 
         public Course FindById(string Id)
         {
-            var result = this.context.Courses.Where(i => i.Id == Id).FirstOrDefault();
+            var result = this.context
+                .Courses
+                .Include(i => i.Category)
+                .Include(i => i.Curriculums)
+                .Include(i => i.Students)
+                .Include(i => i.Teachers)
+                .Where(i => i.Id == Id).FirstOrDefault();
             return result;
         }
     }

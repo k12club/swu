@@ -19,6 +19,7 @@ namespace Swu.Portal.Data.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public CurriculumType Type { get; set; }
+        public int NumberOfTime { get; set; }
 
         public string CourseId { get; set; }
         [ForeignKey("CourseId")]
