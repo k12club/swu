@@ -16,6 +16,9 @@ namespace Swu.Portal.Data.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseCategory> CourseCategory { get; set; }
         public DbSet<Curriculum> Curriculums { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
@@ -39,6 +42,26 @@ namespace Swu.Portal.Data.Context
             modelBuilder.Entity<Course>();
             modelBuilder.Entity<CourseCategory>();
             modelBuilder.Entity<Curriculum>();
+            modelBuilder
+                .Entity<Student>()
+                .HasMany<Course>(c => c.Courses)
+                .WithMany(s => s.Students)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("StudentRefId");
+                    cs.MapRightKey("CourseRefId");
+                    cs.ToTable("StudentCourse");
+                });
+            modelBuilder
+                .Entity<Teacher>()
+                .HasMany<Course>(c => c.Courses)
+                .WithMany(t => t.Teachers)
+                .Map(ct =>
+                {
+                    ct.MapLeftKey("TeacherRefId");
+                    ct.MapRightKey("CourseRefId");
+                    ct.ToTable("TeacherCourse");
+                });
         }
     }
 }

@@ -22,14 +22,16 @@ namespace Swu.Portal.Data.Migrations
         private const string CID9 = "f8d9a209-fe7c-49c0-9c2b-4993d37bdf35";
         protected override void Seed(SwuDBContext context) {
 
-            this.AddCourses(context);
+            this.InitialDatabase(context);
             base.Seed(context);
         }
-        private void AddCourses(SwuDBContext context)
+        private void InitialDatabase(SwuDBContext context)
         {
             var categories = new List<CourseCategory>();
             var courses = new List<Course>();
             var curriculums = new List<Curriculum>();
+            var teachers = new List<Teacher>();
+            var students = new List<Student>();
             #region Curriculum
             var cur1 = new Curriculum
             {
@@ -100,6 +102,147 @@ namespace Swu.Portal.Data.Migrations
             categories.Add(cat3);
             #endregion
 
+            #region Teacher
+            var t1 = new Teacher
+            {
+                Name = "Annie Thornburg",
+                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                ImageUrl = "Content/images/courses/s4.png",
+                Position = "History of Arts Teacher"
+            };
+            var t2 = new Teacher
+            {
+                Name = "Miguel M. Ball",
+                ImageUrl = "Content/images/team/tsm2.png",
+                Position = "Physics and Philosophy Teacher",
+                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures."
+            };
+            teachers.Add(t1);
+            teachers.Add(t2);
+            #endregion
+
+            #region Student
+            var s1 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s2 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s3 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s4 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s5 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s6 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s7 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s8 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s9 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s10 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s11 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s12 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s13 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s14 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s15 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s16 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s17 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s18 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s19 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            var s20 = new Student
+            {
+                Name = "Chansak Kochasen",
+                StudentId = "12345678",
+            };
+            students.Add(s1);
+            students.Add(s2);
+            students.Add(s3);
+            students.Add(s4);
+            students.Add(s5);
+            students.Add(s6);
+            students.Add(s7);
+            students.Add(s8);
+            students.Add(s9);
+            students.Add(s10);
+            students.Add(s11);
+            students.Add(s12);
+            students.Add(s13);
+            students.Add(s14);
+            students.Add(s15);
+            students.Add(s16);
+            students.Add(s17);
+            students.Add(s18);
+            students.Add(s19);
+            students.Add(s20);
+            #endregion
             #region Course
             var c1 = new Course
             {
@@ -117,7 +260,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat1
+                Category = cat1,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c2 = new Course
             {
@@ -135,7 +284,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat1
+                Category = cat1,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c3 = new Course
             {
@@ -153,7 +308,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat1
+                Category = cat1,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c4 = new Course
             {
@@ -171,7 +332,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat2
+                Category = cat2,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c5 = new Course
             {
@@ -189,7 +356,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat2
+                Category = cat2,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c6 = new Course
             {
@@ -207,7 +380,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat2
+                Category = cat2,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c7 = new Course
             {
@@ -225,7 +404,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat3
+                Category = cat3,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c8 = new Course
             {
@@ -243,7 +428,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat3
+                Category = cat3,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             var c9 = new Course
             {
@@ -261,7 +452,13 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Know you’re making a difference sharing your wisdom with students </li>
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
-                Category = cat3
+                Category = cat3,
+                Teachers = new List<Teacher> {
+                    t1,t2
+                },
+                Students = new List<Student> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                }
             };
             courses.Add(c1);
             courses.Add(c2);
@@ -272,9 +469,15 @@ namespace Swu.Portal.Data.Migrations
             courses.Add(c7);
             courses.Add(c8);
             courses.Add(c9);
-            #endregion    
+            #endregion
 
             context.CourseCategory.AddRange(categories);
+            context.SaveChanges();
+
+            context.Teachers.AddRange(teachers);
+            context.SaveChanges();
+
+            context.Students.AddRange(students);
             context.SaveChanges();
 
             context.Courses.AddRange(courses);

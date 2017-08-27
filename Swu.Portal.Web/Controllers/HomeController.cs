@@ -24,6 +24,8 @@ namespace Swu.Portal.Web.Controllers
                 var courses = db.Courses
                     .Include(i => i.Category)
                     .Include(i=>i.Curriculums)
+                    .Include(i=>i.Students)
+                    .Include(i=>i.Teachers)
                     .ToList();
             }
             #endif
