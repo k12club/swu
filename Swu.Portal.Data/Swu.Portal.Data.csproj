@@ -63,13 +63,11 @@
   <ItemGroup>
     <Compile Include="Context\DbContextFactory.cs" />
     <Compile Include="Context\SwuDBContext.cs" />
-    <Compile Include="Migrations\201708230911544_updateDb.cs" />
-    <Compile Include="Migrations\201708230911544_updateDb.Designer.cs">
-      <DependentUpon>201708230911544_updateDb.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MigrationsContextFactory.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseCategory.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,11 +87,6 @@
       <Project>{792beace-feb8-4532-b50d-b7aabef14c41}</Project>
       <Name>Swu.Portal.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708230911544_updateDb.resx">
-      <DependentUpon>201708230911544_updateDb.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

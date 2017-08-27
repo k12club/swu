@@ -1,4 +1,7 @@
-﻿using Swu.Portal.Web.Api.App_Start;
+﻿using Swu.Portal.Data.Context;
+using Swu.Portal.Data.Migrations;
+using Swu.Portal.Web.Api.App_Start;
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
