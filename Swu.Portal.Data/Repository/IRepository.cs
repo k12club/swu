@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Repository
 {
-    public interface IRepository1<T> where T : IEntity
+    public interface IRepository<T> where T : IEntity
     {
 
         IEnumerable<T> List { get; }
