@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Swu.Portal.Data.Migrations;
 using Swu.Portal.Data.Models;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,14 +14,19 @@ namespace Swu.Portal.Data.Context
         //public DbSet<IdentityRole> Roles { get; set; }
         //public DbSet<IdentityUserRole> UserRole { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<CourseCategory> CourseCategory {get;set;}
-        public SwuDBContext():base("DefaultConnection")
+        public DbSet<CourseCategory> CourseCategory { get; set; }
+        public DbSet<Curriculum> Curriculums { get; set; }
+        public SwuDBContext() : base("DefaultConnection")
         {
+            Configuration.ProxyCreationEnabled = false;
+            Database.SetInitializer(new DatabaseInitializer());
+            this.Configuration.LazyLoadingEnabled = false;
         }
         public SwuDBContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             Configuration.ProxyCreationEnabled = false;
+            Database.SetInitializer(new DatabaseInitializer());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,7 +38,7 @@ namespace Swu.Portal.Data.Context
 
             modelBuilder.Entity<Course>();
             modelBuilder.Entity<CourseCategory>();
-
+            modelBuilder.Entity<Curriculum>();
         }
     }
 }

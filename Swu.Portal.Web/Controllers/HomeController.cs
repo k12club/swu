@@ -1,9 +1,11 @@
-﻿using Swu.Portal.Service;
+﻿using Swu.Portal.Data.Context;
+using Swu.Portal.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Swu.Portal.Web.Controllers
 {
@@ -16,6 +18,15 @@ namespace Swu.Portal.Web.Controllers
         }
         public ActionResult Index()
         {
+            #if DEBUG
+            using (var db = new SwuDBContext())
+            {
+                var courses = db.Courses
+                    .Include(i => i.Category)
+                    .Include(i=>i.Curriculums)
+                    .ToList();
+            }
+            #endif
             return View();
         }
     }

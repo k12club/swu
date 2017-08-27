@@ -8,13 +8,20 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Models
 {
-    public class CourseCategory :BaseModel
+    public enum CurriculumType {
+        Lecture = 1,
+        Quize = 2,
+    }
+    public class Curriculum
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
+        public CurriculumType Type { get; set; }
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public string CourseId { get; set; }
+        [ForeignKey("CourseId")]
+        public virtual Course Courses { get; set; }
     }
 }

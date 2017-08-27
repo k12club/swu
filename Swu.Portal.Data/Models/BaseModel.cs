@@ -10,9 +10,6 @@ namespace Swu.Portal.Data.Models
 {
     public class BaseModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [Column(TypeName = "datetime2")]
         public DateTime CreatedDate { get; set; }
         public string CreateUser { get; set; }

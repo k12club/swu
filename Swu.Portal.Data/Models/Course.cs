@@ -10,9 +10,8 @@ namespace Swu.Portal.Data.Models
 {
     public class Course : BaseModel
     {
-        [Key, Column(TypeName = "varchar"), MaxLength(50)]
-        public string CourseId { get; set; }
-
+        [Key]
+        public string Id { get; set; }
         public string ImageUrl { get; set; }
         public string BigImageUrl { get; set; }
         public string ShortDescription { get; set; }
@@ -26,5 +25,8 @@ namespace Swu.Portal.Data.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual CourseCategory Category { get; set; }
+
+        public virtual ICollection<Curriculum> Curriculums { get; set; }
+
     }
 }

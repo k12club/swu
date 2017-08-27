@@ -64,10 +64,12 @@
     <Compile Include="Context\DbContextFactory.cs" />
     <Compile Include="Context\SwuDBContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\DatabaseInitialzer.cs" />
     <Compile Include="Migrations\MigrationsContextFactory.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseCategory.cs" />
+    <Compile Include="Models\Curriculum.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
