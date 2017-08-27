@@ -1,4 +1,6 @@
 ﻿using Swu.Portal.Core.Dependencies;
+using Swu.Portal.Data.Models;
+using Swu.Portal.Data.Repository;
 using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
 using Swu.Portal.Web.Api.Proxy;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace Swu.Portal.Web.Api
 {
@@ -15,200 +18,27 @@ namespace Swu.Portal.Web.Api
     public class CourseController : ApiController
     {
         private readonly IDateTimeRepository _datetimeRepository;
-        public CourseController(IDateTimeRepository datetimeRepository)
+        private readonly IRepository2<Course> _courseRepository;
+        public CourseController(IDateTimeRepository datetimeRepository, IRepository2<Course> courseRepository)
         {
             this._datetimeRepository = datetimeRepository;
+            this._courseRepository = courseRepository;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
         {
             if (ModelState.IsValid)
             {
-                return new List<CourseCardProxy>{
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11BHS Behavioural Sciences",
-                            Name_EN = "A11BHS Behavioural Sciences",
-                            ImageUrl = "Content/images/courses/1.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student2.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.Popular
-                    },
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11EXT Structure, function and pharmacology of ExcitableTissues",
-                            Name_EN = "A11EXT Structure, function and pharmacology of ExcitableTissues",
-                            ImageUrl = "Content/images/courses/2.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student3.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.Popular
-                    },
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11HDT Human Development and Tissue Differentiation",
-                            Name_EN = "A11HDT Human Development and Tissue Differentiation",
-                            ImageUrl = "Content/images/courses/13.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student4.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.Popular
-                    },
-
-
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11MBM Molecular Basis of Medicine",
-                            Name_EN = "A11MBM Molecular Basis of Medicine",
-                            ImageUrl = "Content/images/courses/4.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.TopRate
-                    },
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11CS1 Communication Skills (I)",
-                            Name_EN = "A11CS1 Communication Skills (I)",
-                            ImageUrl = "Content/images/courses/5.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student2.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.TopRate
-                    },
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11CLS Clinical Laboratory Sciences (I)",
-                            Name_EN = "A11CLS Clinical Laboratory Sciences (I)",
-                            ImageUrl = "Content/images/courses/6.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student3.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.TopRate
-                    },
-
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11CRH Cardiovascular, Respiratory and Haematology",
-                            Name_EN = "A11CRH Cardiovascular, Respiratory and Haematology",
-                            ImageUrl = "Content/images/courses/7.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student4.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.Recently
-                    },
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11SF1 Human Development Structure and Function (I)",
-                            Name_EN = "A11SF1 Human Development Structure and Function (I)",
-                            ImageUrl = "Content/images/courses/8.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.Recently
-                    },
-                    new CourseCardProxy
-                    {
-                        Course = new CourseProxy
-                        {
-                            Id = 1,
-                            Name_TH = "A11PD1 Early Clinical and Professional Development (I)",
-                            Name_EN = "A11PD1 Early Clinical and Professional Development (I)",
-                            ImageUrl = "Content/images/courses/11.jpg",
-                            NumberOfRegistered = 123,
-                            NumberOfComments = 5,
-                            Price = 12
-                        },
-                        Teacher = new TeacherProxy
-                        {
-                            Id = 1,
-                            ImageUrl = "Content/images/resource/student1.png",
-                            Name = "Jessica Hamson"
-                        },
-                        CardType=Enum.CardType.Recently
-                    }
-                };
+                var cards = new List<CourseCardProxy>();
+                var courses = this._courseRepository.List.ToList();
+                foreach (var c in courses) {
+                    cards.Add(new CourseCardProxy(c));
+                }
+                var result = new List<CourseCardProxy>();
+                result.AddRange(cards.Where(i => i.CardType == Enum.CardType.Recently).Take(4));
+                result.AddRange(cards.Where(i => i.CardType == Enum.CardType.Popular).Take(4));
+                result.AddRange(cards.Where(i => i.CardType == Enum.CardType.TopRate).Take(4));
+                return result;
             }
             return null;
         }
@@ -502,7 +332,7 @@ namespace Swu.Portal.Web.Api
             {
                 CourseInfo = new CourseDetailProxy
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid().ToString(),
                     Name_TH = "A11BHS Behavioural Sciences",
                     Name_EN = "A11BHS Behavioural Sciences",
                     ImageUrl = "Content/images/courses/1.jpg",
@@ -594,7 +424,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11BHS Behavioural Sciences",
                             Name_EN = "A11BHS Behavioural Sciences",
                             ImageUrl = "Content/images/courses/1.jpg",
@@ -608,7 +438,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11BHS Behavioural Sciences",
                             Name_EN = "A11BHS Behavioural Sciences",
                             ImageUrl = "Content/images/courses/1.jpg",
@@ -622,7 +452,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11EXT Structure, function and pharmacology of ExcitableTissues",
                             Name_EN = "A11EXT Structure, function and pharmacology of ExcitableTissues",
                             ImageUrl = "Content/images/courses/2.jpg",
@@ -636,7 +466,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11HDT Human Development and Tissue Differentiation",
                             Name_EN = "A11HDT Human Development and Tissue Differentiation",
                             ImageUrl = "Content/images/courses/13.jpg",
@@ -650,7 +480,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11MBM Molecular Basis of Medicine",
                             Name_EN = "A11MBM Molecular Basis of Medicine",
                             ImageUrl = "Content/images/courses/4.jpg",
@@ -664,7 +494,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11CS1 Communication Skills (I)",
                             Name_EN = "A11CS1 Communication Skills (I)",
                             ImageUrl = "Content/images/courses/5.jpg",
@@ -678,7 +508,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11CLS Clinical Laboratory Sciences (I)",
                             Name_EN = "A11CLS Clinical Laboratory Sciences (I)",
                             ImageUrl = "Content/images/courses/6.jpg",
@@ -692,7 +522,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11CRH Cardiovascular, Respiratory and Haematology",
                             Name_EN = "A11CRH Cardiovascular, Respiratory and Haematology",
                             ImageUrl = "Content/images/courses/7.jpg",
@@ -706,7 +536,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11SF1 Human Development Structure and Function (I)",
                             Name_EN = "A11SF1 Human Development Structure and Function (I)",
                             ImageUrl = "Content/images/courses/8.jpg",
@@ -720,7 +550,7 @@ namespace Swu.Portal.Web.Api
                 new CourseBriefDetailProxy {
                     CourseInfo = new CourseDetailProxy
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid().ToString(),
                             Name_TH = "A11PD1 Early Clinical and Professional Development (I)",
                             Name_EN = "A11PD1 Early Clinical and Professional Development (I)",
                             ImageUrl = "Content/images/courses/11.jpg",

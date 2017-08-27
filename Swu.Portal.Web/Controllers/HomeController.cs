@@ -6,29 +6,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using Swu.Portal.Data.Repository;
+using Swu.Portal.Data.Models;
 
 namespace Swu.Portal.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IApplicationUserServices _applicationUserServices;
-        public HomeController(IApplicationUserServices applicationUserServices)
+        public HomeController(IApplicationUserServices applicationUserServices, IRepository2<Course> courseRepository)
         {
-            this._applicationUserServices = applicationUserServices;
         }
         public ActionResult Index()
         {
-            #if DEBUG
-            using (var db = new SwuDBContext())
-            {
-                var courses = db.Courses
-                    .Include(i => i.Category)
-                    .Include(i=>i.Curriculums)
-                    .Include(i=>i.Students)
-                    .Include(i=>i.Teachers)
-                    .ToList();
-            }
-            #endif
             return View();
         }
     }

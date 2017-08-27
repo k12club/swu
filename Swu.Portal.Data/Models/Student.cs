@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Models
 {
-    public class Student
+    public class Student : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

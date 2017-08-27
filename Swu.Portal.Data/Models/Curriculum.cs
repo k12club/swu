@@ -12,7 +12,7 @@ namespace Swu.Portal.Data.Models
         Lecture = 1,
         Quize = 2,
     }
-    public class Curriculum
+    public class Curriculum : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

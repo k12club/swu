@@ -10,7 +10,7 @@ namespace Swu.Portal.Web.Api.Proxy
     public class CourseProxy
     {
         [JsonProperty(PropertyName = "Id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "name_th")]
         public string Name_TH { get; set; }
         [JsonProperty(PropertyName = "name_en")]

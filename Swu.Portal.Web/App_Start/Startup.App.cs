@@ -13,7 +13,6 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 
-
 namespace Swu.Portal.Web
 {
     public partial class Startup
@@ -26,20 +25,16 @@ namespace Swu.Portal.Web
             builder.RegisterType<ApplicationUserServices>().As<IApplicationUserServices>().InstancePerRequest();
             builder.RegisterType<ApplicationUserRepository>().As<IApplicationUserRepository>().InstancePerRequest();
             builder.RegisterType<DateTimeRepository>().As<IDateTimeRepository>().InstancePerRequest();
+            builder.RegisterType<CourseRepository>().As<IRepository2<Course>>().InstancePerRequest();
 
-            // Register your Web API controllers.
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
-            // Register mvc controllers
             builder.RegisterControllers(typeof(Startup).Assembly);
 
             var container = builder.Build();
 
             app.UseAutofacMiddleware(container);
-            // set resolver for web api
             var config = GlobalConfiguration.Configuration;
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-
-            // set resolver for mvc
             DependencyResolver.SetResolver(new Autofac.Integration.Mvc.AutofacDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new Autofac.Integration.WebApi.AutofacWebApiDependencyResolver(container);
 

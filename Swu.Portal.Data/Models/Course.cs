@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Models
 {
-    public class Course : BaseModel
+    public class Course : IEntity
     {
         [Key]
         public string Id { get; set; }
