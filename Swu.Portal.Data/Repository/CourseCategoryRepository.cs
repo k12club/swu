@@ -5,46 +5,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
-    public class PhotoAlbumRepository : IRepository2<PhotoAlbum>
+    public class CourseCategoryRepository : IRepository<CourseCategory>
     {
         private SwuDBContext context;
-        public PhotoAlbumRepository()
+        public CourseCategoryRepository()
         {
             this.context = DbContextFactory.Instance.GetOrCreateContext();
         }
-        public IEnumerable<PhotoAlbum> List
+        public IEnumerable<CourseCategory> List
         {
             get
             {
-                return this.context.PhotoAlbums
-                    .Include(i => i.Photos)
+                return this.context.CourseCategory
                     .AsEnumerable();
             }
         }
-        public void Add(PhotoAlbum entity)
+        public void Add(CourseCategory entity)
         {
-            this.context.PhotoAlbums.Add(entity);
+            this.context.CourseCategory.Add(entity);
             this.context.SaveChanges();
         }
-        public void Delete(PhotoAlbum entity)
+        public void Delete(CourseCategory entity)
         {
-            this.context.PhotoAlbums.Remove(entity);
+            this.context.CourseCategory.Remove(entity);
             this.context.SaveChanges();
         }
-        public void Update(PhotoAlbum entity)
+        public void Update(CourseCategory entity)
         {
             this.context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             this.context.SaveChanges();
 
         }
-        public PhotoAlbum FindById(string Id)
+        public CourseCategory FindById(int Id)
         {
-            var result = this.context.PhotoAlbums
-                .Include(i => i.Photos)
+            var result = this.context.CourseCategory
                 .Where(i => i.Id == Id).FirstOrDefault();
             return result;
         }

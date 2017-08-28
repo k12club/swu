@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swu.Portal.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Swu.Portal.Web.Api.Proxy
     public class WebboardItemProxy
     {
         [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "imageUrl")]
         public string ImageUrl { get; set; }
         [JsonProperty(PropertyName = "name")]
@@ -29,5 +30,16 @@ namespace Swu.Portal.Web.Api.Proxy
         public WebboardType Type { get; set; }
         [JsonProperty(PropertyName = "categoryId")]
         public int CategoryId { get; set; }
+        public WebboardItemProxy(Course c)
+        {
+            this.Id = c.Id;
+            this.ImageUrl = c.ImageUrl;
+            this.Name = c.Name_EN;
+            this.ShortDescription = c.ShortDescription;
+            this.CreateBy = c.CreatedUser;
+            this.Type = WebboardType.course;
+            this.CategoryId = c.CategoryId;
+            this.CreatorImageUrl = "Content/images/resource/student1.png";
+        }
     }
 }

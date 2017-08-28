@@ -2043,15 +2043,16 @@ var Swu;
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
-                        }, function (error) { });
-                        _this.webboardService.getForumsItems().then(function (response) {
-                            _this.$scope.items = response;
-                            _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
-                            _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
-                                return item.type == Swu.BoardType.forums;
+                            _this.webboardService.getForumsItems().then(function (response) {
+                                _this.$scope.items = response;
+                                _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                                _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                                    return item.type == Swu.BoardType.forums;
+                                });
+                                _this.$scope.changePage(_this.$scope.currentPage);
+                            }, function (error) {
                             });
-                        }, function (error) {
-                        });
+                        }, function (error) { });
                         break;
                     }
                     case 2: {
@@ -2061,36 +2062,18 @@ var Swu;
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.course({id:" + c.id + "})";
                             });
-                        }, function (error) { });
-                        _this.webboardService.getCourseItems().then(function (response) {
-                            _this.$scope.items = response;
-                            _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
-                            _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
-                                return item.type == Swu.BoardType.course;
-                            });
+                            _this.webboardService.getCourseItems().then(function (response) {
+                                _this.$scope.items = response;
+                                _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                                _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                                    return item.type == Swu.BoardType.course;
+                                });
+                                _this.$scope.changePage(_this.$scope.currentPage);
+                            }, function (error) { });
                         }, function (error) { });
                         break;
                     }
                     case 3: {
-                        _this.$scope.categoryName = "Research";
-                        _this.$scope.categorys.push({
-                            id: 1,
-                            title: "research group1",
-                            link: "board.research({id:1})"
-                        });
-                        _this.$scope.categorys.push({
-                            id: 1,
-                            title: "research group2",
-                            link: "board.research({id:2})"
-                        });
-                        _this.$scope.categorys.push({
-                            id: 1,
-                            title: "research group3",
-                            link: "board.research({id:3})"
-                        });
-                        _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
-                            return item.type == Swu.BoardType.research;
-                        });
                         break;
                     }
                 }

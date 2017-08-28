@@ -34,20 +34,17 @@ namespace Swu.Portal.Data.Repository
             this.context.Courses.Add(entity);
             this.context.SaveChanges();
         }
-
         public void Delete(Course entity)
         {
             this.context.Courses.Remove(entity);
             this.context.SaveChanges();
         }
-
         public void Update(Course entity)
         {
             this.context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             this.context.SaveChanges();
 
         }
-
         public Course FindById(string Id)
         {
             var result = this.context

@@ -27,6 +27,7 @@ namespace Swu.Portal.Web
             builder.RegisterType<DateTimeRepository>().As<IDateTimeRepository>().InstancePerRequest();
             builder.RegisterType<CourseRepository>().As<IRepository2<Course>>().InstancePerRequest();
             builder.RegisterType<PhotoAlbumRepository>().As<IRepository2<PhotoAlbum>>().InstancePerRequest();
+            builder.RegisterType<CourseCategoryRepository>().As<IRepository<CourseCategory>>().InstancePerRequest();
 
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);
