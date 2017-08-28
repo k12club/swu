@@ -27,6 +27,7 @@ namespace Swu.Portal.Web.Api.Proxy
         {
             this.Name = c.Name;
             this.Type = (Enum.CurriculumType)Convert.ToInt16(c.Type);
+            this.NumberOfTime = c.NumberOfTime;
         }
     }
 }

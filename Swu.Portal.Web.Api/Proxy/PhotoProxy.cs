@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swu.Portal.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,29 @@ namespace Swu.Portal.Web.Api.Proxy
         public DateTime PublishedDate { get; set; }
         [JsonProperty(PropertyName = "uploadBy")]
         public string UploadBy { get; set; }
+        public PhotoProxy(Photo p)
+        {
+            this.Id = p.Id;
+            this.Name = p.Name;
+            this.ImageUrl = p.ImageUrl;
+            this.PublishedDate = p.PublishedDate;
+            this.UploadBy = p.UploadBy;
+        }
         
     }
     public class PhotoAlbumProxy {
         [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "photos")]
         public List<PhotoProxy> Photos { get; set; }
+        public PhotoAlbumProxy()
+        {
+
+        }
+        public PhotoAlbumProxy(PhotoAlbum album)
+        {
+            this.Id = album.Id;
+            this.Photos = new List<PhotoProxy>();
+        }
     }
 }

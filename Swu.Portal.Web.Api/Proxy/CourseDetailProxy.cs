@@ -51,6 +51,7 @@ namespace Swu.Portal.Web.Api.Proxy
             foreach (var s in c.Students) {
                 this.Students.Add(new StudentProxy(s));
             }
+            this.PhotosAlbum = new PhotoAlbumProxy(c.PhotoAlbums.FirstOrDefault());
         }
     }
     public class CourseBriefDetailProxy

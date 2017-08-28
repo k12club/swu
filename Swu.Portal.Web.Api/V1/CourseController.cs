@@ -19,10 +19,12 @@ namespace Swu.Portal.Web.Api
     {
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IRepository2<Course> _courseRepository;
-        public CourseController(IDateTimeRepository datetimeRepository, IRepository2<Course> courseRepository)
+        private readonly IRepository2<PhotoAlbum> _photoAlbumRepository;
+        public CourseController(IDateTimeRepository datetimeRepository, IRepository2<Course> courseRepository, IRepository2<PhotoAlbum> photoAlbumRepository)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
+            this._photoAlbumRepository = photoAlbumRepository;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -31,7 +33,8 @@ namespace Swu.Portal.Web.Api
             {
                 var cards = new List<CourseCardProxy>();
                 var courses = this._courseRepository.List.ToList();
-                foreach (var c in courses) {
+                foreach (var c in courses)
+                {
                     cards.Add(new CourseCardProxy(c));
                 }
                 var result = new List<CourseCardProxy>();
@@ -43,7 +46,8 @@ namespace Swu.Portal.Web.Api
             return null;
         }
         [HttpGet, Route("allItems")]
-        public List<WebboardItemProxy> GetAllItems() {
+        public List<WebboardItemProxy> GetAllItems()
+        {
             return new List<WebboardItemProxy> {
                 new WebboardItemProxy {
                     Id =1,
@@ -141,7 +145,13 @@ namespace Swu.Portal.Web.Api
         public CourseAllDetailProxy GetById(string id)
         {
             var course = this._courseRepository.FindById(id);
-            return new CourseAllDetailProxy(course);
+            var result = new CourseAllDetailProxy(course);
+            var photos = this._photoAlbumRepository.FindById(result.PhotosAlbum.Id);
+            foreach (var p in photos.Photos)
+            {
+                result.PhotosAlbum.Photos.Add(new PhotoProxy(p));
+            }
+            return result;
         }
         [HttpGet, Route("getCourseByCriteria")]
         public List<CourseBriefDetailProxy> getCourseByCriteria(string keyword)

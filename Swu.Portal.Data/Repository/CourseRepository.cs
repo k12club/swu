@@ -25,6 +25,7 @@ namespace Swu.Portal.Data.Repository
                     .Include(i => i.Curriculums)
                     .Include(i => i.Students)
                     .Include(i => i.Teachers)
+                    .Include(i=>i.PhotoAlbums)
                     .AsEnumerable();
             }
         }
@@ -55,6 +56,7 @@ namespace Swu.Portal.Data.Repository
                 .Include(i => i.Curriculums)
                 .Include(i => i.Students)
                 .Include(i => i.Teachers)
+                .Include(i=>i.PhotoAlbums)
                 .Where(i => i.Id == Id).FirstOrDefault();
             return result;
         }

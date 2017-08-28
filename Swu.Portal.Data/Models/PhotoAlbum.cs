@@ -8,21 +8,15 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Models
 {
-    public enum CurriculumType {
-        Lecture = 1,
-        Quize = 2,
-    }
-    public class Curriculum : IEntity
+    public class PhotoAlbum : IEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
-        public CurriculumType Type { get; set; }
-        public int NumberOfTime { get; set; }
 
         public string CourseId { get; set; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
+
+        public virtual ICollection<Photo> Photos { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace Swu.Portal.Data.Models
         [ForeignKey("CategoryId")]
         public virtual CourseCategory Category { get; set; }
 
+        public virtual ICollection<PhotoAlbum> PhotoAlbums { get; set; }
         public virtual ICollection<Curriculum> Curriculums { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }

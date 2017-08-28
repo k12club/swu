@@ -20,6 +20,8 @@ namespace Swu.Portal.Data.Migrations
         private const string CID7 = "e1b8d39e-333b-4af8-9c92-f744427bf3b5";
         private const string CID8 = "f0e86e6e-a1f7-45ee-961b-6addae78a5fe";
         private const string CID9 = "f8d9a209-fe7c-49c0-9c2b-4993d37bdf35";
+
+        private const string PID1 = "a8d9a209-fe7c-49c0-9c2b-4993d37bdf35";
         protected override void Seed(SwuDBContext context) {
 
             this.InitialDatabase(context);
@@ -32,6 +34,7 @@ namespace Swu.Portal.Data.Migrations
             var curriculums = new List<Curriculum>();
             var teachers = new List<Teacher>();
             var students = new List<Student>();
+            var photos = new List<Photo>();
             #region Curriculum
             var cur1 = new Curriculum
             {
@@ -479,6 +482,21 @@ namespace Swu.Portal.Data.Migrations
             courses.Add(c9);
             #endregion
 
+            #region PhotoAlbum
+            var album = new PhotoAlbum {
+                Id = PID1,
+                Name="default album",
+                CourseId = CID1
+            };
+            var p1 = new Photo {
+                PhotoAlbumId = PID1,
+                Name = "1.jpg",
+                ImageUrl= "Content/images/courses/2e172c30-ba70-4036-b609-91ecabbad3b7/1.jpg",
+                PublishedDate=new DateTime(2017,8,7),
+                UploadBy="chansak"
+            };
+            photos.Add(p1);
+            #endregion
             context.CourseCategory.AddRange(categories);
             context.SaveChanges();
 
@@ -492,6 +510,12 @@ namespace Swu.Portal.Data.Migrations
             context.SaveChanges();
 
             context.Curriculums.AddRange(curriculums);
+            context.SaveChanges();
+
+            context.PhotoAlbums.Add(album);
+            context.SaveChanges();
+
+            context.Photos.AddRange(photos);
             context.SaveChanges();
         }
     }

@@ -68,10 +68,10 @@
     <Compile Include="Migrations\MigrationsContextFactory.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseCategory.cs" />
-    <Compile Include="Models\CourseStudent.cs" />
-    <Compile Include="Models\CourseTeacher.cs" />
     <Compile Include="Models\Curriculum.cs" />
     <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\PhotoAlbum.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\User.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="Repository\ApplicationUserRepository.cs" />
     <Compile Include="Repository\CourseRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\PhotoAlbumRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extension\" />

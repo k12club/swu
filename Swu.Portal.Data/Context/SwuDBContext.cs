@@ -18,6 +18,8 @@ namespace Swu.Portal.Data.Context
         public DbSet<Curriculum> Curriculums { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         public SwuDBContext() : base("DefaultConnection")
         {
