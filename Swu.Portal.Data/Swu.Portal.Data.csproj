@@ -87,6 +87,8 @@
     <Compile Include="Repository\ForumRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\PhotoAlbumRepository.cs" />
+    <Compile Include="Repository\ResearchCategoryRepository.cs" />
+    <Compile Include="Repository\ResearchRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extension\" />

@@ -776,6 +776,9 @@
     <TypeScriptCompile Include="Scripts\app\board\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\board\controller\CourseBoardController.ts" />
     <TypeScriptCompile Include="Scripts\app\board\controller\GeneralBoardController.ts" />
+    <TypeScriptCompile Include="Scripts\app\board\controller\ResearchBoardController.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Scripts\app\board\controller\WebBoardController.ts" />
     <TypeScriptCompile Include="Scripts\app\board\service\webboardService.ts" />
     <TypeScriptCompile Include="Scripts\app\committee\app_routing.ts" />

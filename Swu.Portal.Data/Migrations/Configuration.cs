@@ -27,6 +27,8 @@ namespace Swu.Portal.Data.Migrations
         private const string FID2 = "518263c4-888d-48bc-b924-d2ccf9eb9937";
         private const string FID3 = "6a7040c9-ac77-4c5b-bb51-4e830eced91f";
         private const string FID4 = "a6533489-8ebe-45eb-ac86-b9c2a12840a5";
+
+        private const string RID3 = "6a7040c9-ac77-4c5b-bb51-4e830eced91f";
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -53,6 +55,8 @@ namespace Swu.Portal.Data.Migrations
             var photos = new List<Photo>();
             var fcategories = new List<ForumCategory>();
             var forums = new List<Forum>();
+            var rcategories = new List<ResearchCategory>();
+            var researchs = new List<Research>();
             #region Curriculum
             var cur1 = new Curriculum
             {
@@ -110,24 +114,6 @@ namespace Swu.Portal.Data.Migrations
             curriculums.Add(cur5);
             curriculums.Add(cur6);
             curriculums.Add(cur7);
-            #endregion
-
-            #region Course Category
-            var cat1 = new CourseCategory
-            {
-                Title = "Course Category 1"
-            };
-            var cat2 = new CourseCategory
-            {
-                Title = "Course Category 2"
-            };
-            var cat3 = new CourseCategory
-            {
-                Title = "Course Category 3"
-            };
-            categories.Add(cat1);
-            categories.Add(cat2);
-            categories.Add(cat3);
             #endregion
 
             #region Teacher
@@ -270,6 +256,34 @@ namespace Swu.Portal.Data.Migrations
             students.Add(s18);
             students.Add(s19);
             students.Add(s20);
+            #endregion
+
+            #region Course Category
+            var cat1 = new CourseCategory
+            {
+                Title = "ชั้นปี 1"
+            };
+            var cat2 = new CourseCategory
+            {
+                Title = "ชั้นปี 2"
+            };
+            var cat3 = new CourseCategory
+            {
+                Title = "ชั้นปี 3"
+            };
+            var cat4 = new CourseCategory
+            {
+                Title = "ชั้นปี 4"
+            };
+            var cat5 = new CourseCategory
+            {
+                Title = "ชั้นปี 5"
+            };
+            categories.Add(cat1);
+            categories.Add(cat2);
+            categories.Add(cat3);
+            categories.Add(cat4);
+            categories.Add(cat5);
             #endregion
 
             #region Course
@@ -521,19 +535,19 @@ namespace Swu.Portal.Data.Migrations
             #region Forum Category
             var fcat1 = new ForumCategory
             {
-                Title = "Announcement"
+                Title = "ข่าวประกาศ"
             };
             var fcat2 = new ForumCategory
             {
-                Title = "Q&A"
+                Title = "ถามตอบ"
             };
             var fcat3 = new ForumCategory
             {
-                Title = "Old Students"
+                Title = "สมาคมศิษย์เก่า"
             };
             var fcat4 = new ForumCategory
             {
-                Title = "General"
+                Title = "ทั่วไป"
             };
             fcategories.Add(fcat1);
             fcategories.Add(fcat2);
@@ -573,6 +587,32 @@ namespace Swu.Portal.Data.Migrations
             forums.Add(f2);
             forums.Add(f3);
             #endregion
+
+            #region Research Category
+            var rcat1 = new ResearchCategory
+            {
+                Title = "สมุนไพร"
+            };
+            var rcat2 = new ResearchCategory
+            {
+                Title = "วินิจฉัยโรค"
+            };
+            rcategories.Add(rcat1);
+            rcategories.Add(rcat2);
+            #endregion
+
+            #region Research
+            var r1 = new Research
+            {
+                Id = FID1,
+                Category = rcat1,
+                Name_TH = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
+                Name_EN = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
+                ShortDescription = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
+                ImageUrl = "Content/images/courses/1.jpg"
+            };
+            researchs.Add(r1);
+            #endregion
             context.CourseCategory.AddRange(categories);
             context.SaveChanges();
 
@@ -598,6 +638,12 @@ namespace Swu.Portal.Data.Migrations
             context.SaveChanges();
 
             context.Forums.AddRange(forums);
+            context.SaveChanges();
+
+            context.ResearchCategory.AddRange(rcategories);
+            context.SaveChanges();
+
+            context.Research.AddRange(researchs);
             context.SaveChanges();
         }
     }

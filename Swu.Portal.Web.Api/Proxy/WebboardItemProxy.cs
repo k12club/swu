@@ -52,5 +52,16 @@ namespace Swu.Portal.Web.Api.Proxy
             this.CategoryId = f.CategoryId;
             this.CreatorImageUrl = "Content/images/resource/student1.png";
         }
+        public WebboardItemProxy(Research r)
+        {
+            this.Id = r.Id;
+            this.ImageUrl = r.ImageUrl;
+            this.Name = r.Name_EN;
+            this.ShortDescription = r.ShortDescription;
+            this.CreateBy = r.CreatedUser;
+            this.Type = WebboardType.research;
+            this.CategoryId = r.CategoryId;
+            this.CreatorImageUrl = "Content/images/resource/student1.png";
+        }
     }
 }

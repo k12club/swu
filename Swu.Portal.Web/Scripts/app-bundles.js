@@ -2257,6 +2257,67 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var ResearchBoardController = (function () {
+        function ResearchBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.webboardService = webboardService;
+            this.$stateParams = $stateParams;
+            this.$sce = $sce;
+            this.$scope.id = this.$stateParams["id"];
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.displayItems.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayItems = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.items, _this.$scope.displayItems, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.search = function () {
+                _this.webboardService.getResearchItems(_this.$scope.criteria).then(function (response) {
+                    _this.$scope.items = response;
+                    _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                        return item.type == Swu.BoardType.research && item.categoryId == _this.$scope.id;
+                    });
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                }, function (error) { });
+            };
+            this.init();
+        }
+        ResearchBoardController.prototype.init = function () {
+            this.$scope.items = [];
+            this.$scope.displayItems = [];
+            this.$scope.search();
+        };
+        ;
+        ResearchBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
+        ResearchBoardController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ResearchBoardController" })
+        ], ResearchBoardController);
+        return ResearchBoardController;
+    }());
+    Swu.ResearchBoardController = ResearchBoardController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var webboardService = (function () {
         function webboardService(apiService, constant) {
             this.apiService = apiService;

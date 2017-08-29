@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Models
 {
-    public class ResearchCategory
+    public class ResearchCategory :IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

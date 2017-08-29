@@ -22,17 +22,19 @@ namespace Swu.Portal.Data.Context
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Forum> Forums { get; set; }
         public DbSet<ForumCategory> ForumCategory { get; set; }
+        public DbSet<Research> Research { get; set; }
+        public DbSet<ResearchCategory> ResearchCategory { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
-            //Database.SetInitializer(new DatabaseInitializer());
+            Database.SetInitializer(new DatabaseInitializer());
             this.Configuration.LazyLoadingEnabled = false;
         }
         public SwuDBContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             Configuration.ProxyCreationEnabled = false;
-            //Database.SetInitializer(new DatabaseInitializer());
+            Database.SetInitializer(new DatabaseInitializer());
             this.Configuration.LazyLoadingEnabled = false;
         }
 

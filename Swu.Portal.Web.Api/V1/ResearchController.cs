@@ -13,25 +13,25 @@ namespace Swu.Portal.Web.Api.V1
     [RoutePrefix("V1/Research")]
     public class ResearchController : ApiController
     {
-        private readonly IRepository2<Forum> _forumRepository;
-        private readonly IRepository<ForumCategory> _forumCategoryRepository;
-        public ResearchController(IRepository2<Forum> forumRepository, IRepository<ForumCategory> forumCategoryRepository)
+        private readonly IRepository2<Research> _researchRepository;
+        private readonly IRepository<ResearchCategory> _researchCategoryRepository;
+        public ResearchController(IRepository2<Research> researchRepository, IRepository<ResearchCategory> researchCategoryRepository)
         {
-            this._forumRepository = forumRepository;
-            this._forumCategoryRepository = forumCategoryRepository;
+            this._researchRepository = researchRepository;
+            this._researchCategoryRepository = researchCategoryRepository;
         }
         [HttpGet, Route("allItems")]
         public List<WebboardItemProxy> GetAllItems(string keyword)
         {
             var webboardItems = new List<WebboardItemProxy>();
-            var forums = new List<Forum>();
+            var forums = new List<Research>();
             if (keyword.Equals("*"))
             {
-                forums = this._forumRepository.List.ToList();
+                forums = this._researchRepository.List.ToList();
             }
             else
             {
-                forums = this._forumRepository.List.Where(i => i.Name_EN.ToLower().Contains(keyword.ToLower()) || i.Name_TH.ToLower().Contains(keyword.ToLower())).ToList();
+                forums = this._researchRepository.List.Where(i => i.Name_EN.ToLower().Contains(keyword.ToLower()) || i.Name_TH.ToLower().Contains(keyword.ToLower())).ToList();
             }
             foreach (var f in forums)
             {
@@ -43,7 +43,7 @@ namespace Swu.Portal.Web.Api.V1
         public List<WebboardCategoryProxy> GetCategory()
         {
             var webboardCategories = new List<WebboardCategoryProxy>();
-            var catgories = this._forumCategoryRepository.List.ToList();
+            var catgories = this._researchCategoryRepository.List.ToList();
             foreach (var c in catgories)
             {
                 webboardCategories.Add(new WebboardCategoryProxy(c));
