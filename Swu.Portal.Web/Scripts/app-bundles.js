@@ -2085,6 +2085,27 @@ var Swu;
                         break;
                     }
                     case 3: {
+                        _this.$scope.categoryName = "Research";
+                        _this.webboardService.getResearchCategory().then(function (response) {
+                            _this.$scope.categorys = response;
+                            _.map(_this.$scope.categorys, function (c) {
+                                c.link = "board.research({id:" + c.id + "})";
+                            });
+                            _this.webboardService.getResearchItems(_this.$scope.criteria).then(function (response) {
+                                _this.$scope.items = response;
+                                _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                                _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
+                                    return item.type == Swu.BoardType.research;
+                                });
+                                _.map(_this.$scope.categorys, function (c) {
+                                    var number = _.filter($scope.items, function (item) {
+                                        return item.type == Swu.BoardType.research && item.categoryId == c.id;
+                                    }).length;
+                                    c.numberofItems = number;
+                                });
+                                _this.$scope.changePage(_this.$scope.currentPage);
+                            }, function (error) { });
+                        }, function (error) { });
                         break;
                     }
                 }
@@ -2254,6 +2275,13 @@ var Swu;
         webboardService.prototype.getForumsItems = function (criteria) {
             var keyword = (criteria.name == "") ? "*" : criteria.name;
             return this.apiService.getData("forum/allItems?keyword=" + keyword);
+        };
+        webboardService.prototype.getResearchCategory = function () {
+            return this.apiService.getData("research/category");
+        };
+        webboardService.prototype.getResearchItems = function (criteria) {
+            var keyword = (criteria.name == "") ? "*" : criteria.name;
+            return this.apiService.getData("research/allItems?keyword=" + keyword);
         };
         webboardService.$inject = ['apiService', 'AppConstant'];
         webboardService = __decorate([

@@ -25,14 +25,15 @@ namespace Swu.Portal.Data.Context
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
-            Database.SetInitializer(new DatabaseInitializer());
+            //Database.SetInitializer(new DatabaseInitializer());
             this.Configuration.LazyLoadingEnabled = false;
         }
         public SwuDBContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             Configuration.ProxyCreationEnabled = false;
-            Database.SetInitializer(new DatabaseInitializer());
+            //Database.SetInitializer(new DatabaseInitializer());
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -66,6 +67,7 @@ namespace Swu.Portal.Data.Context
                     ct.ToTable("TeacherCourse");
                 });
             modelBuilder.Entity<Forum>();
+            modelBuilder.Entity<ForumCategory>();
         }
     }
 }
