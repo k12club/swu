@@ -883,6 +883,16 @@ var Swu;
                         controller: 'CourseBoardController as vm'
                     }
                 }
+            })
+                .state("board.research", {
+                parent: "board",
+                url: "/research/:id",
+                views: {
+                    'subContent@board': {
+                        templateUrl: '/Scripts/app/board/view/board-research.html',
+                        controller: 'ResearchBoardController as vm'
+                    }
+                }
             });
         }
         StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];

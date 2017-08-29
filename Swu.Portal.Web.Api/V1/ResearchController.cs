@@ -24,18 +24,18 @@ namespace Swu.Portal.Web.Api.V1
         public List<WebboardItemProxy> GetAllItems(string keyword)
         {
             var webboardItems = new List<WebboardItemProxy>();
-            var forums = new List<Research>();
+            var research = new List<Research>();
             if (keyword.Equals("*"))
             {
-                forums = this._researchRepository.List.ToList();
+                research = this._researchRepository.List.ToList();
             }
             else
             {
-                forums = this._researchRepository.List.Where(i => i.Name_EN.ToLower().Contains(keyword.ToLower()) || i.Name_TH.ToLower().Contains(keyword.ToLower())).ToList();
+                research = this._researchRepository.List.Where(i => i.Name_EN.ToLower().Contains(keyword.ToLower()) || i.Name_TH.ToLower().Contains(keyword.ToLower())).ToList();
             }
-            foreach (var f in forums)
+            foreach (var r in research)
             {
-                webboardItems.Add(new WebboardItemProxy(f));
+                webboardItems.Add(new WebboardItemProxy(r));
             }
             return webboardItems;
         }
