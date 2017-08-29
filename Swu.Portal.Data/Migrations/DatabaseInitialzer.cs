@@ -20,9 +20,15 @@ namespace Swu.Portal.Data.Migrations
         private const string CID7 = "e1b8d39e-333b-4af8-9c92-f744427bf3b5";
         private const string CID8 = "f0e86e6e-a1f7-45ee-961b-6addae78a5fe";
         private const string CID9 = "f8d9a209-fe7c-49c0-9c2b-4993d37bdf35";
-
         private const string PID1 = "a8d9a209-fe7c-49c0-9c2b-4993d37bdf35";
-        protected override void Seed(SwuDBContext context) {
+
+        private const string FID1 = "2e172c30-ba70-4036-b609-91ecabbad3b7";
+        private const string FID2 = "518263c4-888d-48bc-b924-d2ccf9eb9937";
+        private const string FID3 = "6a7040c9-ac77-4c5b-bb51-4e830eced91f";
+        private const string FID4 = "a6533489-8ebe-45eb-ac86-b9c2a12840a5";
+
+        protected override void Seed(SwuDBContext context)
+        {
 
             this.InitialDatabase(context);
             base.Seed(context);
@@ -35,13 +41,15 @@ namespace Swu.Portal.Data.Migrations
             var teachers = new List<Teacher>();
             var students = new List<Student>();
             var photos = new List<Photo>();
+            var fcategories = new List<ForumCategory>();
+            var forums = new List<Forum>();
             #region Curriculum
             var cur1 = new Curriculum
             {
                 Name = "Lecture 1.1 Practical language work",
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
-                NumberOfTime=2
+                NumberOfTime = 2
             };
             var cur2 = new Curriculum
             {
@@ -94,7 +102,7 @@ namespace Swu.Portal.Data.Migrations
             curriculums.Add(cur7);
             #endregion
 
-            #region Category
+            #region Course Category
             var cat1 = new CourseCategory
             {
                 Title = "Course Category 1"
@@ -253,7 +261,7 @@ namespace Swu.Portal.Data.Migrations
             students.Add(s19);
             students.Add(s20);
             #endregion
-            
+
             #region Course
             var c1 = new Course
             {
@@ -483,19 +491,77 @@ namespace Swu.Portal.Data.Migrations
             #endregion
 
             #region PhotoAlbum
-            var album = new PhotoAlbum {
+            var album = new PhotoAlbum
+            {
                 Id = PID1,
-                Name="default album",
+                Name = "default album",
                 CourseId = CID1
             };
-            var p1 = new Photo {
+            var p1 = new Photo
+            {
                 PhotoAlbumId = PID1,
                 Name = "1.jpg",
-                ImageUrl= "Content/images/courses/2e172c30-ba70-4036-b609-91ecabbad3b7/1.jpg",
-                PublishedDate=new DateTime(2017,8,7),
-                UploadBy="chansak"
+                ImageUrl = "Content/images/courses/2e172c30-ba70-4036-b609-91ecabbad3b7/1.jpg",
+                PublishedDate = new DateTime(2017, 8, 7),
+                UploadBy = "chansak"
             };
             photos.Add(p1);
+            #endregion
+
+            #region Forum Category
+            var fcat1 = new ForumCategory
+            {
+                Title = "Announcement"
+            };
+            var fcat2 = new ForumCategory
+            {
+                Title = "Q&A"
+            };
+            var fcat3 = new ForumCategory
+            {
+                Title = "Old Students"
+            };
+            var fcat4 = new ForumCategory
+            {
+                Title = "General"
+            };
+            fcategories.Add(fcat1);
+            fcategories.Add(fcat2);
+            fcategories.Add(fcat3);
+            fcategories.Add(fcat3);
+            #endregion
+
+            #region Forum
+            var f1 = new Forum
+            {
+                Id = FID1,
+                Category = fcat1,
+                Name_TH = "คณะทันตแพทยศาสตร์ มศว ต้อนรับนิสิตแลกเปลี่ยน คณะทันตแพทย์ จาก TMDU",
+                Name_EN = "คณะทันตแพทยศาสตร์ มศว ต้อนรับนิสิตแลกเปลี่ยน คณะทันตแพทย์ จาก TMDU",
+                ShortDescription = "คณะทันตแพทยศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) ต้อนรับนิสิตแลกเปลี่ยน คณะทันตแพทย์ จาก TMDU( Tokyo Medical and Dental University) ประเทศญี่ปุ่น โดยพานิสิตแลกเปลี่ยนเยี่ยมชมสถานที่สำคัญในมหาวิทยาลัย และบรรยายแลกเปลี่ยนประสบการณ์การจัดการเรียนการสอนและระบบสุขภาพในประเทศไทย ให้นิสิตแลกเปลี่ยนทั้ง 9 คน เมื่อวันที่ 28 สิงหาคม 2560",
+                ImageUrl = "Content/images/courses/1.jpg"
+            };
+            var f2 = new Forum
+            {
+                Id = FID2,
+                Category = fcat1,
+                Name_TH = "เปิดบ้านศิลปกรรมฯ มศว เส้นทางสู่อาชีพสร้างฝันน้องๆ ม.ปลาย ให้เป็นจริง",
+                Name_EN = "เปิดบ้านศิลปกรรมฯ มศว เส้นทางสู่อาชีพสร้างฝันน้องๆ ม.ปลาย ให้เป็นจริง",
+                ShortDescription = "คณะศิลปกรรมศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) นับเป็นอีกหนึ่งคณะของสถาบันการศึกษาอุดมศึกษาที่เป็นที่เรียนที่ใฝ่ฝันของน้องๆ นักเรียน ม.ปลาย เพราะมีเหล่าศิลปินนักแสดงรุ่นใหม่ในปัจจุบันจำนวนไม่น้อยที่จบจากรั้ว มศว เช่น นิวเยียร์ กิตติวัฒน์ / ซีซีน ภัสธราภรณ์ / ซีน ปัณณ์ญาณัช / ไต้ฝุ่น KPN / แอปเปิ้ล เดอะสตาร์ เป็นต้น ล่าสุดคณะศิลปกรรมศาสตร์ มศว จึงได้จัดกิจกรรมเปิดบ้านศิลปกรรมศาสตร์ มศว แนะนำหลักสูตรพร้อมนำรุ่นพี่ศิษย์เก่ามากความสามารถมาร่วมพูดคุย สร้างแรงบันดาลใจให้กับน้องๆ เหล่านักเรียน ม.ปลาย ที่อยากจะเข้าเรียนที่แห่งนี้ด้วยงาน “FOFA SWU : Open House 2017” แนะแนวการเตรียมตัวสอบด้วยระบบ TCAS ในปี 2561 ซึ่งก็ได้รับความสนใจจากน้องๆ นักเรียนทั้งในกรุงเทพฯ และมาจากต่างจังหวัดมากกว่า 600 คน ณ อาคารนวัตกรรม ศาสตราจารย์ ดร.สาโรช บัวศรี มศว ประสานมิตร สุขุมวิท 23",
+                ImageUrl = "Content/images/courses/1.jpg"
+            };
+            var f3 = new Forum
+            {
+                Id = FID3,
+                Category = fcat1,
+                Name_TH = "นิสิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ มศว ที่ได้รับ",
+                Name_EN = "นิสิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ มศว ที่ได้รับ",
+                ShortDescription = "มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) ขอแสดงความยินดีกับ ผศ.ดร.สุรศักดิ์ ละลอกน้ำ และนิสิตหลักสูตรการศึกษาบัณฑิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ ได้แก่ นายมารุตต์ แสงสุข นางสาวพิณพิชา เพียรมานะ นายนราธิป ปราโมทย์ นายภานุกร คงไสยะ นางสาวปัทมาพร น่าดู นางสาวสิรินญา ไพเราะ และนางสาววาสนา ไผ่งาม ที่ได้รับ รางวัลรองชนะเลิศอันดับหนึ่ง จากการเข้าร่วมประกวดผลงานประเภท นวัตกรรม จากผลงาน ชุดกิจกรรมวิทยาศาสตร์ เรื่อง 9 กิจกรรมวิทยาศาสตร์ตามแนวทางพระราชดำริ ใน การประชุมวิชาการวิจัยและนวัตกรรมสร้างสรรค์ครั้งที่ 4 และการประชุมสัมมนาวิชาการระดับนานาชาติ ด้านพลังงานไฟฟ้าแรงสูง พลาสมาและไมโครนาโนบับเบิลสำหรับเกษตรกรและการประมงขั้นสูง ครั้งที่ 2 จัดโดย มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ระหว่างวันที่ 26 - 27 กรกฎาคม 2560 ณ ศูนย์ประชุมนานาชาติ โรงแรมเชียงใหม่แกรนด์วิว จังหวัดเชียงใหม่",
+                ImageUrl = "Content/images/courses/1.jpg"
+            };
+            forums.Add(f1);
+            forums.Add(f2);
+            forums.Add(f3);
             #endregion
             context.CourseCategory.AddRange(categories);
             context.SaveChanges();
@@ -516,6 +582,12 @@ namespace Swu.Portal.Data.Migrations
             context.SaveChanges();
 
             context.Photos.AddRange(photos);
+            context.SaveChanges();
+
+            context.ForumCategory.AddRange(fcategories);
+            context.SaveChanges();
+
+            context.Forums.AddRange(forums);
             context.SaveChanges();
         }
     }

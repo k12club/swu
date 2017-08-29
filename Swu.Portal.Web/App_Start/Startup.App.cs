@@ -28,6 +28,8 @@ namespace Swu.Portal.Web
             builder.RegisterType<CourseRepository>().As<IRepository2<Course>>().InstancePerRequest();
             builder.RegisterType<PhotoAlbumRepository>().As<IRepository2<PhotoAlbum>>().InstancePerRequest();
             builder.RegisterType<CourseCategoryRepository>().As<IRepository<CourseCategory>>().InstancePerRequest();
+            builder.RegisterType<ForumRepository>().As<IRepository2<Forum>>().InstancePerRequest();
+            builder.RegisterType<ForumCategoryRepository>().As<IRepository<ForumCategory>>().InstancePerRequest();
 
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);

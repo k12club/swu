@@ -20,7 +20,8 @@ namespace Swu.Portal.Data.Context
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
         public DbSet<Photo> Photos { get; set; }
-
+        public DbSet<Forum> Forums { get; set; }
+        public DbSet<ForumCategory> ForumCategory { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
@@ -64,6 +65,7 @@ namespace Swu.Portal.Data.Context
                     ct.MapRightKey("CourseRefId");
                     ct.ToTable("TeacherCourse");
                 });
+            modelBuilder.Entity<Forum>();
         }
     }
 }

@@ -177,6 +177,7 @@
     <Compile Include="Proxy\WebboardItemProxy.cs" />
     <Compile Include="Proxy\WebboardType.cs" />
     <Compile Include="V1\CommitteeController.cs" />
+    <Compile Include="V1\ForumController.cs" />
     <Compile Include="V1\NewsController.cs" />
     <Compile Include="V1\VideoController.cs" />
     <Compile Include="V1\EventController.cs" />

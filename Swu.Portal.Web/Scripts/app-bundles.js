@@ -2043,15 +2043,20 @@ var Swu;
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
-                            _this.webboardService.getForumsItems().then(function (response) {
+                            _this.webboardService.getForumsItems(_this.$scope.criteria).then(function (response) {
                                 _this.$scope.items = response;
                                 _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
                                 _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
                                     return item.type == Swu.BoardType.forums;
                                 });
+                                _.map(_this.$scope.categorys, function (c) {
+                                    var number = _.filter($scope.items, function (item) {
+                                        return item.type == Swu.BoardType.forums && item.categoryId == c.id;
+                                    }).length;
+                                    c.numberofItems = number;
+                                });
                                 _this.$scope.changePage(_this.$scope.currentPage);
-                            }, function (error) {
-                            });
+                            }, function (error) { });
                         }, function (error) { });
                         break;
                     }
@@ -2067,6 +2072,12 @@ var Swu;
                                 _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
                                 _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
                                     return item.type == Swu.BoardType.course;
+                                });
+                                _.map(_this.$scope.categorys, function (c) {
+                                    var number = _.filter($scope.items, function (item) {
+                                        return item.type == Swu.BoardType.course && item.categoryId == c.id;
+                                    }).length;
+                                    c.numberofItems = number;
                                 });
                                 _this.$scope.changePage(_this.$scope.currentPage);
                             }, function (error) { });
@@ -2137,7 +2148,7 @@ var Swu;
                 }
             };
             this.$scope.search = function () {
-                _this.webboardService.getForumsItems().then(function (response) {
+                _this.webboardService.getForumsItems(_this.$scope.criteria).then(function (response) {
                     _this.$scope.items = response;
                     _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
                         return item.type == Swu.BoardType.forums && item.categoryId == _this.$scope.id;
@@ -2238,10 +2249,11 @@ var Swu;
             return this.apiService.getData("course/allItems?keyword=" + keyword);
         };
         webboardService.prototype.getForumsCategory = function () {
-            return this.apiService.getData("course/category");
+            return this.apiService.getData("forum/category");
         };
-        webboardService.prototype.getForumsItems = function () {
-            return this.apiService.getData("course/allItems");
+        webboardService.prototype.getForumsItems = function (criteria) {
+            var keyword = (criteria.name == "") ? "*" : criteria.name;
+            return this.apiService.getData("forum/allItems?keyword=" + keyword);
         };
         webboardService.$inject = ['apiService', 'AppConstant'];
         webboardService = __decorate([

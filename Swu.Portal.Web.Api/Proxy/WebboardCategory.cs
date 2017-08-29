@@ -19,5 +19,10 @@ namespace Swu.Portal.Web.Api.Proxy
             this.Id = c.Id;
             this.Title = c.Title;
         }
+        public WebboardCategoryProxy(ForumCategory f)
+        {
+            this.Id = f.Id;
+            this.Title = f.Title;
+        }
     }
 }

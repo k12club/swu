@@ -44,7 +44,7 @@
             //End Pagination section
 
             this.$scope.search = () => {
-                this.webboardService.getForumsItems().then((response) => {
+                this.webboardService.getForumsItems(this.$scope.criteria).then((response) => {
                     this.$scope.items = response;
                     this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
                         return item.type == BoardType.forums && item.categoryId == this.$scope.id;

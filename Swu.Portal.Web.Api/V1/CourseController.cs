@@ -73,7 +73,7 @@ namespace Swu.Portal.Web.Api
             }
             else
             {
-                courses = this._courseRepository.List.Where(i => i.Name_EN.Contains(keyword) || i.Name_TH.Contains(keyword)).ToList();
+                courses = this._courseRepository.List.Where(i => i.Name_EN.ToLower().Contains(keyword.ToLower()) || i.Name_TH.ToLower().Contains(keyword.ToLower())).ToList();
             }
             foreach (var c in courses)
             {
