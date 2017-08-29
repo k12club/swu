@@ -2062,7 +2062,7 @@ var Swu;
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.course({id:" + c.id + "})";
                             });
-                            _this.webboardService.getCourseItems().then(function (response) {
+                            _this.webboardService.getCourseItems(_this.$scope.criteria).then(function (response) {
                                 _this.$scope.items = response;
                                 _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
                                 _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
@@ -2198,7 +2198,7 @@ var Swu;
                 }
             };
             this.$scope.search = function () {
-                _this.webboardService.getCourseItems().then(function (response) {
+                _this.webboardService.getCourseItems(_this.$scope.criteria).then(function (response) {
                     _this.$scope.items = response;
                     _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
                         return item.type == Swu.BoardType.course && item.categoryId == _this.$scope.id;
@@ -2233,8 +2233,9 @@ var Swu;
         webboardService.prototype.getCourseCategory = function () {
             return this.apiService.getData("course/category");
         };
-        webboardService.prototype.getCourseItems = function () {
-            return this.apiService.getData("course/allItems");
+        webboardService.prototype.getCourseItems = function (criteria) {
+            var keyword = (criteria.name == "") ? "*" : criteria.name;
+            return this.apiService.getData("course/allItems?keyword=" + keyword);
         };
         webboardService.prototype.getForumsCategory = function () {
             return this.apiService.getData("course/category");

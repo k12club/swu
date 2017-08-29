@@ -5,6 +5,7 @@
         <li><a href="#">Showing {{currentPage+1}}-{{totalPageNumber}} of {{items.length}} results</a></li>
     </ul>
     <div class="input-group irs-nav-search-form">
+    {{criteria.name}}
         <input type="text" ng-model="criteria.name" class="form-control pull-right" placeholder="Search courses">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button" ng-click="search()"><span class="flaticon-musica-searcher"></span></button>

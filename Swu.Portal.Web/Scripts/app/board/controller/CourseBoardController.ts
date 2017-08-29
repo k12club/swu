@@ -44,7 +44,7 @@
             //End Pagination section
 
             this.$scope.search = () => {
-                this.webboardService.getCourseItems().then((response) => {
+                this.webboardService.getCourseItems(this.$scope.criteria).then((response) => {
                     this.$scope.items = response;
                     this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
                         return item.type == BoardType.course && item.categoryId == this.$scope.id;
