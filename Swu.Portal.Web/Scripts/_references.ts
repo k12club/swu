@@ -13,3 +13,4 @@
 /// <reference path="typings/flipclock/flipclock.d.ts" />
 /// <reference path="typings/swiper/swiper.d.ts" />
 /// <reference path="typings/magnific/magnific.d.ts" />
+/// <reference path="typings/summernote/summernote.d.ts" />

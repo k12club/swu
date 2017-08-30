@@ -38,7 +38,7 @@
             teacher: "Teacher",
             contact: "Contact",
             committee: "Programme Commitee",
-            board:"Web board"
+            board:"Webboard"
         },
         home: {},
         course: {

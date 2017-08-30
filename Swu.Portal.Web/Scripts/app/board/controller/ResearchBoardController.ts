@@ -19,7 +19,7 @@
             this.$scope.id = this.$stateParams["id"];
             //Pagination section
             this.$scope.getTotalPageNumber = (): number => {
-                return (this.$scope.displayItems.length) / this.$scope.pageSize;
+                return Math.ceil((this.$scope.displayItems.length) / this.$scope.pageSize);
             };
             this.$scope.paginate = (data: Webboarditems[], displayData: Webboarditems[], pageSize: number, currentPage: number) => {
                 displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);

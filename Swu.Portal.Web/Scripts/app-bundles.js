@@ -266,7 +266,7 @@ var Swu;
             teacher: "Teacher",
             contact: "Contact",
             committee: "Programme Commitee",
-            board: "Web board"
+            board: "Webboard"
         },
         home: {},
         course: {
@@ -893,6 +893,29 @@ var Swu;
                         controller: 'ResearchBoardController as vm'
                     }
                 }
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $stateProvider
+                .state("forum", {
+                url: "/forum/:id",
+                templateUrl: "/Scripts/app/forum/view/forum_detail.html",
+                controller: "ForumController as vm"
             });
         }
         StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
@@ -2156,7 +2179,7 @@ var Swu;
             this.$sce = $sce;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getTotalPageNumber = function () {
-                return (_this.$scope.displayItems.length) / _this.$scope.pageSize;
+                return Math.ceil((_this.$scope.displayItems.length) / _this.$scope.pageSize);
             };
             this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
                 displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
@@ -2278,7 +2301,7 @@ var Swu;
             this.$sce = $sce;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getTotalPageNumber = function () {
-                return (_this.$scope.displayItems.length) / _this.$scope.pageSize;
+                return Math.ceil((_this.$scope.displayItems.length) / _this.$scope.pageSize);
             };
             this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
                 displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
@@ -2484,6 +2507,32 @@ var Swu;
         return SettingCoursesController;
     }());
     Swu.SettingCoursesController = SettingCoursesController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var ForumController = (function () {
+        function ForumController($scope, $rootScope, $state, $stateParams, $sce) {
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.$stateParams = $stateParams;
+            this.$sce = $sce;
+            this.$scope.save = function () {
+                alert($('#comment').summernote('code'));
+            };
+            this.init();
+        }
+        ForumController.prototype.init = function () {
+        };
+        ;
+        ForumController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "$sce"];
+        ForumController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ForumController" })
+        ], ForumController);
+        return ForumController;
+    }());
+    Swu.ForumController = ForumController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {

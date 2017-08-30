@@ -666,6 +666,7 @@
     <Content Include="Scripts\app\contact\contact.html" />
     <Content Include="Scripts\app\course\view\course_list.html" />
     <Content Include="Scripts\app\course\view\course_detail.html" />
+    <Content Include="Scripts\app\forum\view\forum_detail.html" />
     <Content Include="Scripts\app\home\view\campus-video.html" />
     <Content Include="Scripts\app\home\view\clients.html" />
     <Content Include="Scripts\app\home\view\commitment.html" />
@@ -725,6 +726,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\app\forum\model\" />
+    <Folder Include="Scripts\app\forum\service\" />
     <Folder Include="Scripts\app\student\" />
     <Folder Include="Scripts\config\" />
     <Folder Include="Scripts\run\" />
@@ -794,6 +797,8 @@
     <TypeScriptCompile Include="Scripts\app\course\controller\CourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\course\model\courseAllDetail.ts" />
     <TypeScriptCompile Include="Scripts\app\course\service\courseService.ts" />
+    <TypeScriptCompile Include="Scripts\app\forum\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\forum\controller\ForumController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\CommitmentController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\ExamRegistrationController.ts" />
@@ -873,6 +878,7 @@
     <TypeScriptCompile Include="Scripts\typings\ngprogress-lite\nprogress-lite.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\nprogress\NProgress.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\owlCarousel\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\summernote\summernote.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\swiper\swiper.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />

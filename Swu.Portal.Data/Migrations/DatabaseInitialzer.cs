@@ -595,8 +595,8 @@ namespace Swu.Portal.Data.Migrations
             {
                 Id = FID1,
                 Category = rcat1,
-                Name_TH = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
-                Name_EN = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
+                Name_TH = "Yellow Head Virus - YHV",
+                Name_EN = "Yellow Head Virus - YHV",
                 ShortDescription = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
                 ImageUrl = "Content/images/courses/1.jpg"
             };
