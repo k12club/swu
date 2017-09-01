@@ -31,7 +31,7 @@ namespace Swu.Portal.Web.Api.V1
             }
             else
             {
-                forums = this._forumRepository.List.Where(i => i.Name_EN.ToLower().Contains(keyword.ToLower()) || i.Name_TH.ToLower().Contains(keyword.ToLower())).ToList();
+                forums = this._forumRepository.List.Where(i => i.Name.ToLower().Contains(keyword.ToLower())).ToList();
             }
             foreach (var f in forums)
             {
@@ -49,6 +49,11 @@ namespace Swu.Portal.Web.Api.V1
                 webboardCategories.Add(new WebboardCategoryProxy(c));
             }
             return webboardCategories;
+        }
+        [HttpGet, Route("getForumDetail")]
+        public ForumDetailProxy GetForumDetail(string id) {
+            var forum = this._forumRepository.FindById(id);
+            return null;
         }
     }
 }

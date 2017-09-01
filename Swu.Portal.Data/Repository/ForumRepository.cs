@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
@@ -20,6 +21,7 @@ namespace Swu.Portal.Data.Repository
             get
             {
                 return this.context.Forums
+                    .Include(i=>i.Comments)
                     .AsEnumerable();
             }
         }
@@ -42,6 +44,7 @@ namespace Swu.Portal.Data.Repository
         public Forum FindById(string Id)
         {
             var result = this.context.Forums
+                .Include(i => i.Comments)
                 .Where(i => i.Id == Id).FirstOrDefault();
             return result;
         }

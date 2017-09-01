@@ -36,7 +36,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.ImageUrl = c.ImageUrl;
             this.Name = c.Name_EN;
             this.ShortDescription = c.ShortDescription;
-            this.CreateBy = c.CreatedUser;
+            //this.CreateBy = c.CreatedUser;
             this.Type = WebboardType.course;
             this.CategoryId = c.CategoryId;
             this.CreatorImageUrl = "Content/images/resource/student1.png";
@@ -45,9 +45,9 @@ namespace Swu.Portal.Web.Api.Proxy
         {
             this.Id = f.Id;
             this.ImageUrl = f.ImageUrl;
-            this.Name = f.Name_EN;
+            this.Name = f.Name;
             this.ShortDescription = f.ShortDescription;
-            this.CreateBy = f.CreatedUser;
+            //this.CreateBy = f.CreatedUser;
             this.Type = WebboardType.forum;
             this.CategoryId = f.CategoryId;
             this.CreatorImageUrl = "Content/images/resource/student1.png";
@@ -58,7 +58,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.ImageUrl = r.ImageUrl;
             this.Name = r.Name_EN;
             this.ShortDescription = r.ShortDescription;
-            this.CreateBy = r.CreatedUser;
+            //this.CreateBy = r.CreatedUser;
             this.Type = WebboardType.research;
             this.CategoryId = r.CategoryId;
             this.CreatorImageUrl = "Content/images/resource/student1.png";

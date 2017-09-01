@@ -1,4 +1,6 @@
-﻿using Swu.Portal.Data.Context;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Swu.Portal.Data.Context;
 using Swu.Portal.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -31,7 +33,7 @@ namespace Swu.Portal.Data.Migrations
         protected override void Seed(SwuDBContext context)
         {
 
-            this.InitialDatabase(context);
+            //this.InitialDatabase(context);
             base.Seed(context);
         }
         private void InitialDatabase(SwuDBContext context)
@@ -44,57 +46,77 @@ namespace Swu.Portal.Data.Migrations
             var photos = new List<Photo>();
             var fcategories = new List<ForumCategory>();
             var forums = new List<Forum>();
+            var comments = new List<Comment>();
             var rcategories = new List<ResearchCategory>();
             var researchs = new List<Research>();
+            #region User
+            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
+            var defaultUser = new ApplicationUser
+            {
+                UserName = "chansak",
+                FirstName = "chansak",
+                LastName = "kochasen"
+            };
+            //manager.Create(defaultUser, "password");
+            #endregion
+
+
             #region Curriculum
             var cur1 = new Curriculum
             {
                 Name = "Lecture 1.1 Practical language work",
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
-                NumberOfTime = 2
+                NumberOfTime = 2,
+                ApplicationUser = defaultUser
             };
             var cur2 = new Curriculum
             {
                 Name = "Lecture 1.2 Study of important works and/or topics",
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
-                NumberOfTime = 2
+                NumberOfTime = 2,
+                ApplicationUser = defaultUser
             };
             var cur3 = new Curriculum
             {
                 Name = "Lecture 1.3 Literature of the language",
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
-                NumberOfTime = 2
+                NumberOfTime = 2,
+                ApplicationUser = defaultUser
             };
             var cur4 = new Curriculum
             {
                 Name = "Quizzes History of the language test",
                 Type = CurriculumType.Quize,
                 CourseId = CID1,
-                NumberOfTime = 2
+                NumberOfTime = 2,
+                ApplicationUser = defaultUser
             };
             var cur5 = new Curriculum
             {
                 Name = "Lecture 1.4 General linguistics",
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
-                NumberOfTime = 2
+                NumberOfTime = 2,
+                ApplicationUser = defaultUser
             };
             var cur6 = new Curriculum
             {
                 Name = "Lecture 1.5 Phonetics and phonology ",
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
-                NumberOfTime = 2
+                NumberOfTime = 2,
+                ApplicationUser = defaultUser
             };
             var cur7 = new Curriculum
             {
                 Name = "Lecture 1.6 Grammatical analysis",
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
-                NumberOfTime = 2
+                NumberOfTime = 2,
+                ApplicationUser = defaultUser
             };
             curriculums.Add(cur1);
             curriculums.Add(cur2);
@@ -111,14 +133,16 @@ namespace Swu.Portal.Data.Migrations
                 Name = "Annie Thornburg",
                 Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
                 ImageUrl = "Content/images/courses/s4.png",
-                Position = "History of Arts Teacher"
+                Position = "History of Arts Teacher",
+                ApplicationUser = defaultUser
             };
             var t2 = new Teacher
             {
                 Name = "Miguel M. Ball",
                 ImageUrl = "Content/images/team/tsm2.png",
                 Position = "Physics and Philosophy Teacher",
-                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures."
+                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                ApplicationUser = defaultUser
             };
             teachers.Add(t1);
             teachers.Add(t2);
@@ -129,101 +153,121 @@ namespace Swu.Portal.Data.Migrations
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s2 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s3 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s4 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s5 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s6 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s7 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s8 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s9 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s10 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s11 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s12 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s13 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s14 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s15 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s16 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s17 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s18 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s19 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             var s20 = new Student
             {
                 Name = "Chansak Kochasen",
                 StudentId = "12345678",
+                ApplicationUser = defaultUser
             };
             students.Add(s1);
             students.Add(s2);
@@ -250,23 +294,28 @@ namespace Swu.Portal.Data.Migrations
             #region Course Category
             var cat1 = new CourseCategory
             {
-                Title = "ชั้นปี 1"
+                Title = "ชั้นปี 1",
+                ApplicationUser = defaultUser
             };
             var cat2 = new CourseCategory
             {
-                Title = "ชั้นปี 2"
+                Title = "ชั้นปี 2",
+                ApplicationUser = defaultUser
             };
             var cat3 = new CourseCategory
             {
-                Title = "ชั้นปี 3"
+                Title = "ชั้นปี 3",
+                ApplicationUser = defaultUser
             };
             var cat4 = new CourseCategory
             {
-                Title = "ชั้นปี 4"
+                Title = "ชั้นปี 4",
+                ApplicationUser = defaultUser
             };
             var cat5 = new CourseCategory
             {
-                Title = "ชั้นปี 5"
+                Title = "ชั้นปี 5",
+                ApplicationUser = defaultUser
             };
             categories.Add(cat1);
             categories.Add(cat2);
@@ -298,7 +347,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c2 = new Course
             {
@@ -322,7 +372,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c3 = new Course
             {
@@ -346,7 +397,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c4 = new Course
             {
@@ -370,7 +422,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c5 = new Course
             {
@@ -394,7 +447,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c6 = new Course
             {
@@ -418,7 +472,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c7 = new Course
             {
@@ -442,7 +497,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c8 = new Course
             {
@@ -466,7 +522,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             var c9 = new Course
             {
@@ -490,7 +547,8 @@ namespace Swu.Portal.Data.Migrations
                 },
                 Students = new List<Student> {
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
-                }
+                },
+                ApplicationUser = defaultUser
             };
             courses.Add(c1);
             courses.Add(c2);
@@ -508,7 +566,8 @@ namespace Swu.Portal.Data.Migrations
             {
                 Id = PID1,
                 Name = "default album",
-                CourseId = CID1
+                CourseId = CID1,
+                ApplicationUser = defaultUser
             };
             var p1 = new Photo
             {
@@ -516,7 +575,8 @@ namespace Swu.Portal.Data.Migrations
                 Name = "1.jpg",
                 ImageUrl = "Content/images/courses/2e172c30-ba70-4036-b609-91ecabbad3b7/1.jpg",
                 PublishedDate = new DateTime(2017, 8, 7),
-                UploadBy = "chansak"
+                UploadBy = "chansak",
+                ApplicationUser = defaultUser
             };
             photos.Add(p1);
             #endregion
@@ -524,19 +584,23 @@ namespace Swu.Portal.Data.Migrations
             #region Forum Category
             var fcat1 = new ForumCategory
             {
-                Title = "ข่าวประกาศ"
+                Title = "ข่าวประกาศ",
+                ApplicationUser = defaultUser
             };
             var fcat2 = new ForumCategory
             {
-                Title = "ถามตอบ"
+                Title = "ถามตอบ",
+                ApplicationUser = defaultUser
             };
             var fcat3 = new ForumCategory
             {
-                Title = "สมาคมศิษย์เก่า"
+                Title = "สมาคมศิษย์เก่า",
+                ApplicationUser = defaultUser
             };
             var fcat4 = new ForumCategory
             {
-                Title = "ทั่วไป"
+                Title = "ทั่วไป",
+                ApplicationUser = defaultUser
             };
             fcategories.Add(fcat1);
             fcategories.Add(fcat2);
@@ -549,42 +613,92 @@ namespace Swu.Portal.Data.Migrations
             {
                 Id = FID1,
                 Category = fcat1,
-                Name_TH = "คณะทันตแพทยศาสตร์ มศว ต้อนรับนิสิตแลกเปลี่ยน คณะทันตแพทย์ จาก TMDU",
-                Name_EN = "คณะทันตแพทยศาสตร์ มศว ต้อนรับนิสิตแลกเปลี่ยน คณะทันตแพทย์ จาก TMDU",
+                Name = "คณะทันตแพทยศาสตร์ มศว ต้อนรับนิสิตแลกเปลี่ยน คณะทันตแพทย์ จาก TMDU",
                 ShortDescription = "คณะทันตแพทยศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) ต้อนรับนิสิตแลกเปลี่ยน คณะทันตแพทย์ จาก TMDU( Tokyo Medical and Dental University) ประเทศญี่ปุ่น โดยพานิสิตแลกเปลี่ยนเยี่ยมชมสถานที่สำคัญในมหาวิทยาลัย และบรรยายแลกเปลี่ยนประสบการณ์การจัดการเรียนการสอนและระบบสุขภาพในประเทศไทย ให้นิสิตแลกเปลี่ยนทั้ง 9 คน เมื่อวันที่ 28 สิงหาคม 2560",
-                ImageUrl = "Content/images/courses/1.jpg"
+                FullDescription = @"<p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. During my freshman year, I was looking for ways to get involved on campus. As it is currently the midst of finals season here in Cambridge, many here on campus can’t help but think about their Winter Break plans. </p>
+<p> Known as J - Term on campus,
+                Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
+<p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
+<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
+<p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
+<p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
+<p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
+                ImageUrl = "Content/images/courses/1.jpg",
+                ApplicationUser = defaultUser
             };
-            var f2 = new Forum
-            {
-                Id = FID2,
-                Category = fcat1,
-                Name_TH = "เปิดบ้านศิลปกรรมฯ มศว เส้นทางสู่อาชีพสร้างฝันน้องๆ ม.ปลาย ให้เป็นจริง",
-                Name_EN = "เปิดบ้านศิลปกรรมฯ มศว เส้นทางสู่อาชีพสร้างฝันน้องๆ ม.ปลาย ให้เป็นจริง",
-                ShortDescription = "คณะศิลปกรรมศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) นับเป็นอีกหนึ่งคณะของสถาบันการศึกษาอุดมศึกษาที่เป็นที่เรียนที่ใฝ่ฝันของน้องๆ นักเรียน ม.ปลาย เพราะมีเหล่าศิลปินนักแสดงรุ่นใหม่ในปัจจุบันจำนวนไม่น้อยที่จบจากรั้ว มศว เช่น นิวเยียร์ กิตติวัฒน์ / ซีซีน ภัสธราภรณ์ / ซีน ปัณณ์ญาณัช / ไต้ฝุ่น KPN / แอปเปิ้ล เดอะสตาร์ เป็นต้น ล่าสุดคณะศิลปกรรมศาสตร์ มศว จึงได้จัดกิจกรรมเปิดบ้านศิลปกรรมศาสตร์ มศว แนะนำหลักสูตรพร้อมนำรุ่นพี่ศิษย์เก่ามากความสามารถมาร่วมพูดคุย สร้างแรงบันดาลใจให้กับน้องๆ เหล่านักเรียน ม.ปลาย ที่อยากจะเข้าเรียนที่แห่งนี้ด้วยงาน “FOFA SWU : Open House 2017” แนะแนวการเตรียมตัวสอบด้วยระบบ TCAS ในปี 2561 ซึ่งก็ได้รับความสนใจจากน้องๆ นักเรียนทั้งในกรุงเทพฯ และมาจากต่างจังหวัดมากกว่า 600 คน ณ อาคารนวัตกรรม ศาสตราจารย์ ดร.สาโรช บัวศรี มศว ประสานมิตร สุขุมวิท 23",
-                ImageUrl = "Content/images/courses/1.jpg"
-            };
-            var f3 = new Forum
-            {
-                Id = FID3,
-                Category = fcat1,
-                Name_TH = "นิสิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ มศว ที่ได้รับ",
-                Name_EN = "นิสิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ มศว ที่ได้รับ",
-                ShortDescription = "มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) ขอแสดงความยินดีกับ ผศ.ดร.สุรศักดิ์ ละลอกน้ำ และนิสิตหลักสูตรการศึกษาบัณฑิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ ได้แก่ นายมารุตต์ แสงสุข นางสาวพิณพิชา เพียรมานะ นายนราธิป ปราโมทย์ นายภานุกร คงไสยะ นางสาวปัทมาพร น่าดู นางสาวสิรินญา ไพเราะ และนางสาววาสนา ไผ่งาม ที่ได้รับ รางวัลรองชนะเลิศอันดับหนึ่ง จากการเข้าร่วมประกวดผลงานประเภท นวัตกรรม จากผลงาน ชุดกิจกรรมวิทยาศาสตร์ เรื่อง 9 กิจกรรมวิทยาศาสตร์ตามแนวทางพระราชดำริ ใน การประชุมวิชาการวิจัยและนวัตกรรมสร้างสรรค์ครั้งที่ 4 และการประชุมสัมมนาวิชาการระดับนานาชาติ ด้านพลังงานไฟฟ้าแรงสูง พลาสมาและไมโครนาโนบับเบิลสำหรับเกษตรกรและการประมงขั้นสูง ครั้งที่ 2 จัดโดย มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ระหว่างวันที่ 26 - 27 กรกฎาคม 2560 ณ ศูนย์ประชุมนานาชาติ โรงแรมเชียงใหม่แกรนด์วิว จังหวัดเชียงใหม่",
-                ImageUrl = "Content/images/courses/1.jpg"
-            };
+            //            var f2 = new Forum
+            //            {
+            //                Id = FID2,
+            //                Category = fcat1,
+            //                Name = "เปิดบ้านศิลปกรรมฯ มศว เส้นทางสู่อาชีพสร้างฝันน้องๆ ม.ปลาย ให้เป็นจริง",
+            //                ShortDescription = "คณะศิลปกรรมศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) นับเป็นอีกหนึ่งคณะของสถาบันการศึกษาอุดมศึกษาที่เป็นที่เรียนที่ใฝ่ฝันของน้องๆ นักเรียน ม.ปลาย เพราะมีเหล่าศิลปินนักแสดงรุ่นใหม่ในปัจจุบันจำนวนไม่น้อยที่จบจากรั้ว มศว เช่น นิวเยียร์ กิตติวัฒน์ / ซีซีน ภัสธราภรณ์ / ซีน ปัณณ์ญาณัช / ไต้ฝุ่น KPN / แอปเปิ้ล เดอะสตาร์ เป็นต้น ล่าสุดคณะศิลปกรรมศาสตร์ มศว จึงได้จัดกิจกรรมเปิดบ้านศิลปกรรมศาสตร์ มศว แนะนำหลักสูตรพร้อมนำรุ่นพี่ศิษย์เก่ามากความสามารถมาร่วมพูดคุย สร้างแรงบันดาลใจให้กับน้องๆ เหล่านักเรียน ม.ปลาย ที่อยากจะเข้าเรียนที่แห่งนี้ด้วยงาน “FOFA SWU : Open House 2017” แนะแนวการเตรียมตัวสอบด้วยระบบ TCAS ในปี 2561 ซึ่งก็ได้รับความสนใจจากน้องๆ นักเรียนทั้งในกรุงเทพฯ และมาจากต่างจังหวัดมากกว่า 600 คน ณ อาคารนวัตกรรม ศาสตราจารย์ ดร.สาโรช บัวศรี มศว ประสานมิตร สุขุมวิท 23",
+            //                FullDescription = @"<p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. During my freshman year, I was looking for ways to get involved on campus. As it is currently the midst of finals season here in Cambridge, many here on campus can’t help but think about their Winter Break plans. </p>
+            //<p> Known as J - Term on campus,
+            //                Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
+            //<p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
+            //<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
+            //<p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
+            //<p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
+            //<p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
+            //                ImageUrl = "Content/images/courses/1.jpg",
+            //                //ApplicationUser = defaultUser
+            //            };
+            //            var f3 = new Forum
+            //            {
+            //                Id = FID3,
+            //                Category = fcat1,
+            //                Name = "นิสิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ มศว ที่ได้รับ",
+            //                ShortDescription = "มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) ขอแสดงความยินดีกับ ผศ.ดร.สุรศักดิ์ ละลอกน้ำ และนิสิตหลักสูตรการศึกษาบัณฑิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ ได้แก่ นายมารุตต์ แสงสุข นางสาวพิณพิชา เพียรมานะ นายนราธิป ปราโมทย์ นายภานุกร คงไสยะ นางสาวปัทมาพร น่าดู นางสาวสิรินญา ไพเราะ และนางสาววาสนา ไผ่งาม ที่ได้รับ รางวัลรองชนะเลิศอันดับหนึ่ง จากการเข้าร่วมประกวดผลงานประเภท นวัตกรรม จากผลงาน ชุดกิจกรรมวิทยาศาสตร์ เรื่อง 9 กิจกรรมวิทยาศาสตร์ตามแนวทางพระราชดำริ ใน การประชุมวิชาการวิจัยและนวัตกรรมสร้างสรรค์ครั้งที่ 4 และการประชุมสัมมนาวิชาการระดับนานาชาติ ด้านพลังงานไฟฟ้าแรงสูง พลาสมาและไมโครนาโนบับเบิลสำหรับเกษตรกรและการประมงขั้นสูง ครั้งที่ 2 จัดโดย มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ระหว่างวันที่ 26 - 27 กรกฎาคม 2560 ณ ศูนย์ประชุมนานาชาติ โรงแรมเชียงใหม่แกรนด์วิว จังหวัดเชียงใหม่",
+            //                FullDescription = @"<p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. During my freshman year, I was looking for ways to get involved on campus. As it is currently the midst of finals season here in Cambridge, many here on campus can’t help but think about their Winter Break plans. </p>
+            //<p> Known as J - Term on campus,
+            //                Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
+            //<p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
+            //<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
+            //<p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
+            //<p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
+            //<p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
+            //                ImageUrl = "Content/images/courses/1.jpg",
+            //                //ApplicationUser = defaultUser
+            //            };
             forums.Add(f1);
-            forums.Add(f2);
-            forums.Add(f3);
+            //forums.Add(f2);
+            //forums.Add(f3);
+            #endregion
+
+            #region Comment
+            var com1 = new Comment
+            {
+                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                Forum = f1,
+                ApplicationUser = defaultUser
+            };
+            var com2 = new Comment
+            {
+                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                Forum = f1,
+                ApplicationUser = defaultUser
+            };
+            var com3 = new Comment
+            {
+                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                Forum = f1,
+                ApplicationUser = defaultUser
+            };
+            comments.Add(com1);
+            comments.Add(com2);
+            comments.Add(com3);
             #endregion
 
             #region Research Category
             var rcat1 = new ResearchCategory
             {
-                Title = "สมุนไพร"
+                Title = "สมุนไพร",
+                ApplicationUser = defaultUser
             };
             var rcat2 = new ResearchCategory
             {
-                Title = "วินิจฉัยโรค"
+                Title = "วินิจฉัยโรค",
+                ApplicationUser = defaultUser
             };
             rcategories.Add(rcat1);
             rcategories.Add(rcat2);
@@ -598,7 +712,8 @@ namespace Swu.Portal.Data.Migrations
                 Name_TH = "Yellow Head Virus - YHV",
                 Name_EN = "Yellow Head Virus - YHV",
                 ShortDescription = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
-                ImageUrl = "Content/images/courses/1.jpg"
+                ImageUrl = "Content/images/courses/1.jpg",
+                ApplicationUser = defaultUser
             };
             researchs.Add(r1);
             #endregion
@@ -627,6 +742,9 @@ namespace Swu.Portal.Data.Migrations
             context.SaveChanges();
 
             context.Forums.AddRange(forums);
+            context.SaveChanges();
+
+            context.Comments.AddRange(comments);
             context.SaveChanges();
 
             context.ResearchCategory.AddRange(rcategories);

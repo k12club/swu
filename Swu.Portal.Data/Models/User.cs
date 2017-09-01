@@ -12,5 +12,7 @@ namespace Swu.Portal.Data.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public virtual ICollection<Forum> Forums { get; set; }
     }
 }

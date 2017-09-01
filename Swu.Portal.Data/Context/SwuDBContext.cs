@@ -24,17 +24,18 @@ namespace Swu.Portal.Data.Context
         public DbSet<ForumCategory> ForumCategory { get; set; }
         public DbSet<Research> Research { get; set; }
         public DbSet<ResearchCategory> ResearchCategory { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
-            Database.SetInitializer(new DatabaseInitializer());
+            //Database.SetInitializer(new DatabaseInitializer());
             this.Configuration.LazyLoadingEnabled = false;
         }
         public SwuDBContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             Configuration.ProxyCreationEnabled = false;
-            Database.SetInitializer(new DatabaseInitializer());
+            //Database.SetInitializer(new DatabaseInitializer());
             this.Configuration.LazyLoadingEnabled = false;
         }
 
@@ -69,7 +70,11 @@ namespace Swu.Portal.Data.Context
                     ct.ToTable("TeacherCourse");
                 });
             modelBuilder.Entity<Forum>();
+            //    .HasRequired(f => f.ApplicationUser)
+            //    .WithMany(u => u.Forums)
+            //    .Map(m => m.MapKey("UserName"));
             modelBuilder.Entity<ForumCategory>();
+            modelBuilder.Entity<Comment>();
         }
     }
 }

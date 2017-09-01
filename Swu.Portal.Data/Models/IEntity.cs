@@ -15,7 +15,11 @@ namespace Swu.Portal.Data.Models
         public bool IsDeleted { get; set; }
         [Column(TypeName = "datetime2")]
         public DateTime? CreatedDate { get; set; }
+
         public string CreatedUser { get; set; }
+        [ForeignKey("CreatedUser")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
         [Column(TypeName = "datetime2")]
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedUser { get; set; }

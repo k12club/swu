@@ -15,13 +15,14 @@ namespace Swu.Portal.Data.Models
         public string ImageUrl { get; set; }
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
-        public string Name_TH { get; set; }
-        public string Name_EN { get; set; }
+        public string Name { get; set; }
         public decimal Price { get; set; }
         public int NumberOfViews { get; set; }
 
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual ForumCategory Category { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
