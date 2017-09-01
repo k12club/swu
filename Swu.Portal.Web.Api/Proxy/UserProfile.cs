@@ -11,12 +11,15 @@ namespace Swu.Portal.Web.Api
     {
         [JsonProperty(PropertyName = "userName")]
         public string UserName { get; set; }
-        [JsonProperty(PropertyName = "firstName")]
-        public string FirstName { get; set; }
-        [JsonProperty(PropertyName = "lastName")]
-        public string LastName { get; set; }
+        [JsonProperty(PropertyName = "firstName_en")]
+        public string FirstName_EN { get; set; }
+        [JsonProperty(PropertyName = "lastName_en")]
+        public string LastName_EN { get; set; }
+        [JsonProperty(PropertyName = "firstName_th")]
+        public string FirstName_TH { get; set; }
+        [JsonProperty(PropertyName = "lastName_th")]
+        public string LastName_TH { get; set; }
         [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
-
     }
 }

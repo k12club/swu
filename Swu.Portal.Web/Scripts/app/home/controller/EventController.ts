@@ -112,7 +112,6 @@
             };
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
                 eventService.getEvents().then((response) => {
-                    console.log(response);
                     _.forEach(response, (value, key) => {
                         $scope.events.push(
                             {

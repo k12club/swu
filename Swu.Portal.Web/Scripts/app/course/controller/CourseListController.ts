@@ -33,7 +33,6 @@
                 return (this.$scope.courses.length) / this.$scope.pageSize;
             };
             this.$scope.search = () => {
-                console.log(this.$scope.criteria);
                 this.$scope.getCourseByCriteria(this.$scope.criteria);
             };
 
@@ -44,7 +43,6 @@
             };
             this.$scope.changePage = (page: number) => {
                 this.$scope.currentPage = page;
-                console.log('current page: '+page);
                 this.$scope.paginate<ICourseBriefDetail>(this.$scope.courses,this.$scope.displayCourses, this.$scope.pageSize, this.$scope.currentPage);
             };
             this.$scope.next = () => {

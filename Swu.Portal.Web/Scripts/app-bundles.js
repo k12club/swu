@@ -435,7 +435,7 @@ var Swu;
         "ngSanitize",
         "underscore",
         "ui.bootstrap",
-        "pascalprecht.translate",
+        "pascalprecht.translate"
     ])
         .filter('range', function rangeFilter() {
         return function (input, total) {
@@ -594,9 +594,9 @@ var Swu;
                 _this.$scope.showModal = flag;
             };
             this.$scope.Login = function () {
-                console.log({ "userName": _this.$scope.userName, "password": _this.$scope.password });
                 _this.loginServices.login({ "userName": _this.$scope.userName, "password": _this.$scope.password }).then(function (data) {
                     _this.$scope.userProfile = data;
+                    _this.$scope.swapLanguage(_this.$rootScope.lang);
                     _this.$scope.showModal = false;
                 }, function (error) {
                 });
@@ -604,9 +604,26 @@ var Swu;
             this.$scope.isLogin = function () {
                 return !(_this.$scope.userProfile == undefined || _this.$scope.userProfile == null);
             };
+            this.$scope.swapLanguage = function (lang) {
+                if ($scope.userProfile != null || $scope.userProfile != undefined) {
+                    switch (lang) {
+                        case "en": {
+                            $scope.userProfile.firstName = $scope.userProfile.firstName_en;
+                            $scope.userProfile.lastName = $scope.userProfile.lastName_en;
+                            break;
+                        }
+                        case "th": {
+                            $scope.userProfile.firstName = $scope.userProfile.firstName_th;
+                            $scope.userProfile.lastName = $scope.userProfile.lastName_th;
+                            break;
+                        }
+                    }
+                }
+            };
             this.$scope.changeLanguage = function (lang) {
                 $translate.use(lang);
                 $rootScope.lang = lang;
+                $scope.swapLanguage(lang);
             };
         }
         LoginController.$inject = ["$scope", "$rootScope", "$state", "loginServices", "$translate"];
@@ -948,13 +965,12 @@ var Swu;
 var Swu;
 (function (Swu) {
     var HomeCourseController = (function () {
-        function HomeCourseController($scope, $rootScope, $state, homeCourseService, $translate) {
+        function HomeCourseController($scope, $rootScope, $state, homeCourseService) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$state = $state;
             this.homeCourseService = homeCourseService;
-            this.$translate = $translate;
             this.init();
             this.$scope.courseGrouping = function () {
                 _this.$scope.TopRateCourse = _.filter(_this.$scope.CourseCards, function (card) {
@@ -999,7 +1015,7 @@ var Swu;
             }, function (error) { });
         };
         ;
-        HomeCourseController.$inject = ["$scope", "$rootScope", "$state", "homeCourseService", "$translate"];
+        HomeCourseController.$inject = ["$scope", "$rootScope", "$state", "homeCourseService"];
         HomeCourseController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "HomeCourseController" })
@@ -1271,7 +1287,6 @@ var Swu;
                 examRegistrationService.getExam().then(function (response) {
                     $scope.exam = response;
                     $scope.swapLanguage(newValue);
-                    console.log($scope.exam);
                 }, function (error) { });
             });
             this.init();
@@ -1401,7 +1416,6 @@ var Swu;
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
                 eventService.getEvents().then(function (response) {
-                    console.log(response);
                     _.forEach(response, function (value, key) {
                         $scope.events.push({
                             title_en: value.title_en,
@@ -1452,13 +1466,12 @@ var Swu;
 var Swu;
 (function (Swu) {
     var VideoController = (function () {
-        function VideoController($scope, $rootScope, $state, videoService, $translate) {
+        function VideoController($scope, $rootScope, $state, videoService) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$state = $state;
             this.videoService = videoService;
-            this.$translate = $translate;
             this.$scope.swapLanguage = function (lang) {
                 switch (lang) {
                     case "en": {
@@ -1518,7 +1531,7 @@ var Swu;
             this.$scope.videos = [];
         };
         ;
-        VideoController.$inject = ["$scope", "$rootScope", "$state", "videoService", "$translate"];
+        VideoController.$inject = ["$scope", "$rootScope", "$state", "videoService"];
         VideoController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "VideoController" })
@@ -1920,7 +1933,6 @@ var Swu;
                 return (_this.$scope.courses.length) / _this.$scope.pageSize;
             };
             this.$scope.search = function () {
-                console.log(_this.$scope.criteria);
                 _this.$scope.getCourseByCriteria(_this.$scope.criteria);
             };
             this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
@@ -1929,7 +1941,6 @@ var Swu;
             };
             this.$scope.changePage = function (page) {
                 _this.$scope.currentPage = page;
-                console.log('current page: ' + page);
                 _this.$scope.paginate(_this.$scope.courses, _this.$scope.displayCourses, _this.$scope.pageSize, _this.$scope.currentPage);
             };
             this.$scope.next = function () {

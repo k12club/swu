@@ -48,7 +48,6 @@
                 examRegistrationService.getExam().then((response) => {
                     $scope.exam = response;
                     $scope.swapLanguage(newValue);
-                    console.log($scope.exam);
                 }, (error) => { });
             });
             this.init();

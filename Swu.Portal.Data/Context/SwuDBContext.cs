@@ -25,6 +25,8 @@ namespace Swu.Portal.Data.Context
         public DbSet<Research> Research { get; set; }
         public DbSet<ResearchCategory> ResearchCategory { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<TeacherProfile> TeacherProfile { get; set; }
+        public DbSet<Contact> Contact { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
@@ -70,11 +72,10 @@ namespace Swu.Portal.Data.Context
                     ct.ToTable("TeacherCourse");
                 });
             modelBuilder.Entity<Forum>();
-            //    .HasRequired(f => f.ApplicationUser)
-            //    .WithMany(u => u.Forums)
-            //    .Map(m => m.MapKey("UserName"));
             modelBuilder.Entity<ForumCategory>();
             modelBuilder.Entity<Comment>();
+            modelBuilder.Entity<TeacherProfile>();
+            modelBuilder.Entity<Contact>();
         }
     }
 }

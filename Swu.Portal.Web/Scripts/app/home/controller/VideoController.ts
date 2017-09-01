@@ -7,8 +7,8 @@
     @Module("app")
     @Controller({ name: "VideoController" })
     export class VideoController {
-        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "videoService", "$translate"];
-        constructor(private $scope: IVideoScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private videoService: IvideoService, private $translate: any) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "videoService"];
+        constructor(private $scope: IVideoScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private videoService: IvideoService) {
             this.$scope.swapLanguage = (lang: string): void => {
                 switch (lang) {
                     case "en": {

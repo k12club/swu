@@ -9,8 +9,8 @@
     @Module("app")
     @Controller({ name: "HomeCourseController" })
     export class HomeCourseController {
-        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "homeCourseService", "$translate"];
-        constructor(private $scope: IHomeCourseScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private homeCourseService: IhomeCourseService, private $translate: any) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "homeCourseService"];
+        constructor(private $scope: IHomeCourseScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private homeCourseService: IhomeCourseService) {
             this.init();
             this.$scope.courseGrouping = (): void => {
                 this.$scope.TopRateCourse = _.filter(this.$scope.CourseCards, function (card) {

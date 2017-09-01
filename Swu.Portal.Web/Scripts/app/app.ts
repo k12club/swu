@@ -21,7 +21,7 @@ module Swu {
             "ngSanitize",
             "underscore",
             "ui.bootstrap",
-            "pascalprecht.translate",
+            "pascalprecht.translate"
         ])
         .filter('range', function rangeFilter() {
             return function (input: number[], total: number) {

@@ -33,11 +33,16 @@ namespace Swu.Portal.Data.Migrations
         protected override void Seed(SwuDBContext context)
         {
 
-            //this.InitialDatabase(context);
+            this.InitialDatabase(context);
             base.Seed(context);
         }
         private void InitialDatabase(SwuDBContext context)
         {
+            if (context.Database.Exists())
+            {
+                context.Database.ExecuteSqlCommand("ALTER DATABASE [" + context.Database.Connection.Database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+                context.Database.ExecuteSqlCommand("USE master DROP DATABASE [" + context.Database.Connection.Database + "]");
+            }
             var categories = new List<CourseCategory>();
             var courses = new List<Course>();
             var curriculums = new List<Curriculum>();
@@ -50,16 +55,36 @@ namespace Swu.Portal.Data.Migrations
             var rcategories = new List<ResearchCategory>();
             var researchs = new List<Research>();
             #region User
-            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new SwuDBContext()));
+            var roleNames = new List<string> { "Teacher", "Student", "Parent", "Admin", "Officer" };
+            var userRole = new IdentityRole { Name = "Admin", Id = Guid.NewGuid().ToString() };
             var defaultUser = new ApplicationUser
             {
-                UserName = "chansak",
-                FirstName = "chansak",
-                LastName = "kochasen"
-            };
-            //manager.Create(defaultUser, "password");
-            #endregion
+                UserName = "user1",
+                FirstName_EN = "default",
+                LastName_EN = "default",
+                Email = "test.test@test.com",
 
+            };
+            var admin = new ApplicationUser
+            {
+                UserName = "chansak",
+                FirstName_EN = "chansak",
+                LastName_EN = "kochasen",
+                FirstName_TH = "ชาญศักดิ์",
+                LastName_TH = "คชเสน",
+                Email = "chansak.kochasen@allianz.com",
+
+            };
+            userManager.Create(admin, "password");
+            foreach (var roleName in roleNames)
+            {
+                roleManager.Create(new IdentityRole { Name = roleName });
+            }
+            var user = userManager.FindByName(admin.UserName);
+            userManager.AddToRole(user.Id, "Admin");
+            #endregion
 
             #region Curriculum
             var cur1 = new Curriculum

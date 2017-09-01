@@ -51,12 +51,12 @@ namespace Swu.Portal.Web
                     .Include("~/Scripts/angular/ngprogress-lite.min.js")
                     .Include("~/Scripts/angular/ng-grid.min.js")
                     .Include("~/Scripts/angular/ngStorage.min.js")
-                    .Include("~/Scripts/angular/angular-translate-handler-log.js")
-                    .Include("~/Scripts/angular/angular-translate-interpolation-messageformat.js")
-                    .Include("~/Scripts/angular/angular-translate-loader-static-files.js")
-                    .Include("~/Scripts/angular/angular-translate-loader-url.js")
-                    .Include("~/Scripts/angular/angular-translate-storage-cookie.js")
-                    .Include("~/Scripts/angular/angular-translate-storage-local.js")
+                    //.Include("~/Scripts/angular/angular-translate-handler-log.js")
+                    //.Include("~/Scripts/angular/angular-translate-interpolation-messageformat.js")
+                    //.Include("~/Scripts/angular/angular-translate-loader-static-files.js")
+                    //.Include("~/Scripts/angular/angular-translate-loader-url.js")
+                    //.Include("~/Scripts/angular/angular-translate-storage-cookie.js")
+                    //.Include("~/Scripts/angular/angular-translate-storage-local.js")
                     .Include("~/Scripts/angular/angular-translate.js")
                 );
 
