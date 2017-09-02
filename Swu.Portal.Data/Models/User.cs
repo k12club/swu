@@ -14,7 +14,6 @@ namespace Swu.Portal.Data.Models
         public string FirstName_EN { get; set; }
         public string LastName_EN { get; set; }
 
-
         public string FirstName_TH { get; set; }
         public string LastName_TH { get; set; }
 

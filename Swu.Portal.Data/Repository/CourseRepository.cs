@@ -25,7 +25,7 @@ namespace Swu.Portal.Data.Repository
                     .Include(i => i.Curriculums)
                     .Include(i => i.Students)
                     .Include(i => i.Teachers)
-                    .Include(i=>i.PhotoAlbums)
+                    .Include(i =>i.PhotoAlbums)
                     .AsEnumerable();
             }
         }

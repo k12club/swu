@@ -23,5 +23,9 @@ namespace Swu.Portal.Web.Api.Proxy
         public decimal Price { get; set; }
         [JsonProperty(PropertyName = "numberOfViews")]
         public int NumberOfViews { get; set; }
+        [JsonProperty(PropertyName = "createdDate")]
+        public DateTime? CreatedDate { get; set; }
+        [JsonProperty(PropertyName = "creatorName")]
+        public String CreatorName { get; set; }
     }
 }

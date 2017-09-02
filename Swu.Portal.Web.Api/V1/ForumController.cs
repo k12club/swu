@@ -15,10 +15,12 @@ namespace Swu.Portal.Web.Api.V1
     {
         private readonly IRepository2<Forum> _forumRepository;
         private readonly IRepository<ForumCategory> _forumCategoryRepository;
-        public ForumController(IRepository2<Forum> forumRepository, IRepository<ForumCategory> forumCategoryRepository)
+        private readonly IRepository<Comment> _commentRepository;
+        public ForumController(IRepository2<Forum> forumRepository, IRepository<ForumCategory> forumCategoryRepository, IRepository<Comment> commentRepository)
         {
             this._forumRepository = forumRepository;
             this._forumCategoryRepository = forumCategoryRepository;
+            this._commentRepository = commentRepository;
         }
         [HttpGet, Route("allItems")]
         public List<WebboardItemProxy> GetAllItems(string keyword)
@@ -53,7 +55,22 @@ namespace Swu.Portal.Web.Api.V1
         [HttpGet, Route("getForumDetail")]
         public ForumDetailProxy GetForumDetail(string id) {
             var forum = this._forumRepository.FindById(id);
-            return null;
+            var comments = this._commentRepository.List.Where(i => i.ForumId == id)
+                .Select(c => new CommentProxy(c)).ToList();
+            return new ForumDetailProxy {
+                Forum= new ForumProxy {
+                    Id = forum.Id,
+                    Name = forum.Name,
+                    ShortDescription = forum.ShortDescription,
+                    FullDescription = forum.FullDescription,
+                    ImageUrl = forum.ImageUrl,
+                    NumberOfViews= comments.Count(),
+                    Price = forum.Price,
+                    CreatorName = forum.ApplicationUser.FirstName_EN + " " + forum.ApplicationUser.LastName_EN,
+                    CreatedDate = forum.CreatedDate
+                },
+                Comments = comments
+            };
         }
     }
 }

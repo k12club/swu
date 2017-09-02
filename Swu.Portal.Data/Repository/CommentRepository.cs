@@ -9,41 +9,41 @@ using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
-    public class ForumRepository :IRepository2<Forum>
+    public class CommentRepository : IRepository<Comment>
     {
         private SwuDBContext context;
-        public ForumRepository()
+        public CommentRepository()
         {
             this.context = DbContextFactory.Instance.GetOrCreateContext();
         }
-        public IEnumerable<Forum> List
+        public IEnumerable<Comment> List
         {
             get
             {
-                return this.context.Forums
+                return this.context.Comments
                     .Include(i=>i.ApplicationUser)
                     .AsEnumerable();
             }
         }
-        public void Add(Forum entity)
+        public void Add(Comment entity)
         {
-            this.context.Forums.Add(entity);
+            this.context.Comments.Add(entity);
             this.context.SaveChanges();
         }
-        public void Delete(Forum entity)
+        public void Delete(Comment entity)
         {
-            this.context.Forums.Remove(entity);
+            this.context.Comments.Remove(entity);
             this.context.SaveChanges();
         }
-        public void Update(Forum entity)
+        public void Update(Comment entity)
         {
             this.context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             this.context.SaveChanges();
 
         }
-        public Forum FindById(string Id)
+        public Comment FindById(int Id)
         {
-            var result = this.context.Forums
+            var result = this.context.Comments
                 .Include(i => i.ApplicationUser)
                 .Where(i => i.Id == Id).FirstOrDefault();
             return result;

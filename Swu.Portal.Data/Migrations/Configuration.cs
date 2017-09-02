@@ -58,10 +58,13 @@ namespace Swu.Portal.Data.Migrations
             var userRole = new IdentityRole { Name = "Admin",Id = Guid.NewGuid().ToString()};
             var defaultUser = new ApplicationUser
             {
-                UserName = "user1",
-                FirstName_EN = "default",
-                LastName_EN = "default",
+                UserName = "default",
+                FirstName_EN = "Emma",
+                LastName_EN = "Stone",
+                FirstName_TH = "Emma",
+                LastName_TH = "Stone",
                 Email = "test.test@test.com",
+                ImageUrl = "Content/images/courses/s4.png"
 
             };
             var admin = new ApplicationUser
@@ -640,12 +643,13 @@ namespace Swu.Portal.Data.Migrations
 <p> Known as J - Term on campus,
                 Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
 <p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
-<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
+<p><a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
 <p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
 <p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
 <p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
-                ImageUrl = "Content/images/courses/1.jpg",
-                ApplicationUser = defaultUser
+                ImageUrl = "Content/images/blog/blog-post-ip1.jpg",
+                ApplicationUser = defaultUser,
+                CreatedDate =  DateTime.Now
             };
 //            var f2 = new Forum
 //            {
@@ -691,19 +695,22 @@ namespace Swu.Portal.Data.Migrations
             {
                 Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
                 Forum = f1,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var com2 = new Comment
             {
                 Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
                 Forum = f1,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var com3 = new Comment
             {
                 Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
                 Forum = f1,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             comments.Add(com1);
             comments.Add(com2);

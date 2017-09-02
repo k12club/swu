@@ -32,6 +32,7 @@ namespace Swu.Portal.Web
             builder.RegisterType<ForumCategoryRepository>().As<IRepository<ForumCategory>>().InstancePerRequest();
             builder.RegisterType<ResearchRepository>().As<IRepository2<Research>>().InstancePerRequest();
             builder.RegisterType<ResearchCategoryRepository>().As<IRepository<ResearchCategory>>().InstancePerRequest();
+            builder.RegisterType<CommentRepository>().As<IRepository<Comment>>().InstancePerRequest();
 
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);

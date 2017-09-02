@@ -727,7 +727,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\forum\model\" />
-    <Folder Include="Scripts\app\forum\service\" />
     <Folder Include="Scripts\app\student\" />
     <Folder Include="Scripts\config\" />
     <Folder Include="Scripts\run\" />
@@ -799,6 +798,7 @@
     <TypeScriptCompile Include="Scripts\app\course\service\courseService.ts" />
     <TypeScriptCompile Include="Scripts\app\forum\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\forum\controller\ForumController.ts" />
+    <TypeScriptCompile Include="Scripts\app\forum\service\forumService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\CommitmentController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\ExamRegistrationController.ts" />
@@ -830,6 +830,7 @@
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />
     <TypeScriptCompile Include="Scripts\model\event.ts" />
     <TypeScriptCompile Include="Scripts\model\exam.ts" />
+    <TypeScriptCompile Include="Scripts\model\forumAndComments.ts" />
     <TypeScriptCompile Include="Scripts\model\news.ts" />
     <TypeScriptCompile Include="Scripts\model\photo.ts" />
     <TypeScriptCompile Include="Scripts\model\student.ts" />

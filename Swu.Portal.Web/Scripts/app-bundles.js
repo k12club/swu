@@ -445,6 +445,11 @@ var Swu;
             return input;
         };
     })
+        .filter('trustAsHtml', ['$sce', function ($sce) {
+            return function (html) {
+                return $sce.trustAsHtml(html);
+            };
+        }])
         .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider, AppConstant, $mdDateLocaleProvider) {
             $translateProvider.translations("en", Swu.translations_en);
             $translateProvider.translations("th", Swu.translations_th);
@@ -2522,21 +2527,29 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ForumController = (function () {
-        function ForumController($scope, $rootScope, $state, $stateParams, $sce) {
+        function ForumController($scope, $rootScope, $state, $stateParams, $sce, forumService) {
+            var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$state = $state;
             this.$stateParams = $stateParams;
             this.$sce = $sce;
+            this.forumService = forumService;
+            this.$scope.id = this.$stateParams["id"];
+            this.$scope.getForumAndComments = function (id) {
+                _this.forumService.getForumDetail(id).then(function (response) {
+                    _this.$scope.forumAndComments = response;
+                }, function (error) { });
+            };
             this.$scope.save = function () {
-                alert($('#comment').summernote('code'));
             };
             this.init();
         }
         ForumController.prototype.init = function () {
+            this.$scope.getForumAndComments(this.$scope.id);
         };
         ;
-        ForumController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "$sce"];
+        ForumController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "$sce", "forumService"];
         ForumController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ForumController" })
@@ -2544,6 +2557,24 @@ var Swu;
         return ForumController;
     }());
     Swu.ForumController = ForumController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var forumService = (function () {
+        function forumService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        forumService.prototype.getForumDetail = function (id) {
+            return this.apiService.getData("forum/getForumDetail?id=" + id);
+        };
+        forumService.$inject = ['apiService', 'AppConstant'];
+        forumService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "forumService" })
+        ], forumService);
+        return forumService;
+    }());
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {

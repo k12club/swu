@@ -31,6 +31,11 @@ module Swu {
                 return input;
             };
         })
+        .filter('trustAsHtml', ['$sce', function ($sce: ng.ISCEService) {
+            return function (html:any) {
+                return $sce.trustAsHtml(html);
+            };
+        }])
         .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider: any, AppConstant: AppConstant, $mdDateLocaleProvider: any) {
             $translateProvider.translations("en", translations_en);
             $translateProvider.translations("th", translations_th);
