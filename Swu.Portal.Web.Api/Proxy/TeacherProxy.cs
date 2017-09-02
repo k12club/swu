@@ -18,13 +18,12 @@ namespace Swu.Portal.Web.Api.Proxy
         {
 
         }
-        public TeacherProxy(Teacher t)
+        public TeacherProxy(ApplicationUser u)
         {
-            this.Id = t.Id;
-            this.Name = t.Name;
-            this.ImageUrl = t.ImageUrl;
-            this.Position = t.Position;
-            this.Description = t.Description;
-        }
+            this.Id = u.Id;
+            this.Name = u.FirstName_EN + " " + u.LastName_EN;
+            this.ImageUrl = u.ImageUrl;
+            this.Description = u.Description;
+        } 
     }
 }

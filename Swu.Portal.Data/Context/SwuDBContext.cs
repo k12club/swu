@@ -25,8 +25,10 @@ namespace Swu.Portal.Data.Context
         public DbSet<Research> Research { get; set; }
         public DbSet<ResearchCategory> ResearchCategory { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<TeacherProfile> TeacherProfile { get; set; }
-        public DbSet<Contact> Contact { get; set; }
+        //public DbSet<TeacherProfile> TeacherProfile { get; set; }
+        //public DbSet<Contact> Contact { get; set; }
+        //public DbSet<StudentProfile> StudentProfile { get; set; }
+        //public DbSet<ParentProfile> ParentProfile { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
@@ -52,8 +54,8 @@ namespace Swu.Portal.Data.Context
             modelBuilder.Entity<CourseCategory>();
             modelBuilder.Entity<Curriculum>();
             modelBuilder
-                .Entity<Student>()
-                .HasMany<Course>(c => c.Courses)
+                .Entity<ApplicationUser>()
+                .HasMany<Course>(c => c.StudentCourses)
                 .WithMany(s => s.Students)
                 .Map(cs =>
                 {
@@ -62,8 +64,8 @@ namespace Swu.Portal.Data.Context
                     cs.ToTable("StudentCourse");
                 });
             modelBuilder
-                .Entity<Teacher>()
-                .HasMany<Course>(c => c.Courses)
+                .Entity<ApplicationUser>()
+                .HasMany<Course>(c => c.TeacherCourses)
                 .WithMany(t => t.Teachers)
                 .Map(ct =>
                 {
@@ -74,8 +76,10 @@ namespace Swu.Portal.Data.Context
             modelBuilder.Entity<Forum>();
             modelBuilder.Entity<ForumCategory>();
             modelBuilder.Entity<Comment>();
-            modelBuilder.Entity<TeacherProfile>();
-            modelBuilder.Entity<Contact>();
+            //modelBuilder.Entity<TeacherProfile>();
+            //modelBuilder.Entity<Contact>();
+            //modelBuilder.Entity<StudentProfile>();
+            //modelBuilder.Entity<ParentProfile>();
         }
     }
 }

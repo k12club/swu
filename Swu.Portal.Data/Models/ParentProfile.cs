@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Models
 {
-    public class TeacherProfile
+    public class ParentProfile
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Position { get; set; }
-        public string Description { get; set; }
+
+        public string ChildId { get; set; }
+        [ForeignKey("ChildId")]
+        public virtual ApplicationUser Child { get; set; }
 
         public int ContactId { get; set; }
         [ForeignKey("ContactId")]

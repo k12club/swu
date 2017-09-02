@@ -28,8 +28,8 @@ namespace Swu.Portal.Data.Models
 
         public virtual ICollection<PhotoAlbum> PhotoAlbums { get; set; }
         public virtual ICollection<Curriculum> Curriculums { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<ApplicationUser> Students { get; set; }
+        public virtual ICollection<ApplicationUser> Teachers { get; set; }
 
     }
 }

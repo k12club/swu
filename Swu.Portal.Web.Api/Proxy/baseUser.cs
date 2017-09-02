@@ -10,7 +10,7 @@ namespace Swu.Portal.Web.Api.Proxy
     public class baseUser
     {
         [JsonProperty(PropertyName = "Id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
         [JsonProperty(PropertyName = "imageUrl")]

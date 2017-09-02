@@ -13,12 +13,16 @@ namespace Swu.Portal.Data.Models
     {
         public string FirstName_EN { get; set; }
         public string LastName_EN { get; set; }
-
         public string FirstName_TH { get; set; }
         public string LastName_TH { get; set; }
-
         public string ImageUrl { get; set; }
+        public string Description { get; set; }
+        public string StudentId { get; set; }
 
         public virtual ICollection<Forum> Forums { get; set; }
+
+        public virtual ICollection<Course> TeacherCourses { get; set; }
+
+        public virtual ICollection<Course> StudentCourses { get; set; }
     }
 }

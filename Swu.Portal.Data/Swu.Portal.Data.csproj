@@ -73,11 +73,13 @@
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ForumCategory.cs" />
     <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\ParentProfile.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PhotoAlbum.cs" />
     <Compile Include="Models\Research.cs" />
     <Compile Include="Models\ResearchCategory.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentProfile.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\TeacherProfile.cs" />
     <Compile Include="Models\User.cs" />

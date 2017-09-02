@@ -43,8 +43,8 @@ namespace Swu.Portal.Data.Migrations
             var categories = new List<CourseCategory>();
             var courses = new List<Course>();
             var curriculums = new List<Curriculum>();
-            var teachers = new List<Teacher>();
-            var students = new List<Student>();
+            var teachers = new List<ApplicationUser>();
+            var students = new List<ApplicationUser>();
             var photos = new List<Photo>();
             var fcategories = new List<ForumCategory>();
             var forums = new List<Forum>();
@@ -152,147 +152,135 @@ namespace Swu.Portal.Data.Migrations
             #endregion
 
             #region Teacher
-            var t1 = new Teacher
+            var t1 = new ApplicationUser
             {
-                Name = "Annie Thornburg",
-                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                UserName = "teacher1",
+                FirstName_EN = "teacher1",
+                LastName_EN = "teacher1",
+                FirstName_TH = "teacher1",
+                LastName_TH = "teacher1",
+                Email = "test.test@test.com",
                 ImageUrl = "Content/images/courses/s4.png",
-                Position = "History of Arts Teacher",
-                ApplicationUser = defaultUser
-            };
-            var t2 = new Teacher
-            {
-                Name = "Miguel M. Ball",
-                ImageUrl = "Content/images/team/tsm2.png",
-                Position = "Physics and Philosophy Teacher",
                 Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
-                ApplicationUser = defaultUser
+            };
+            var t2 = new ApplicationUser
+            {
+                UserName = "teacher2",
+                FirstName_EN = "teacher2",
+                LastName_EN = "teacher2",
+                FirstName_TH = "teacher2",
+                LastName_TH = "teacher2",
+                Email = "test.test@test.com",
+                ImageUrl = "Content/images/courses/s4.png",
+                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
             };
             teachers.Add(t1);
             teachers.Add(t2);
             #endregion
 
             #region Student
-            var s1 = new Student
+            var s1 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student1",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
+                
             };
-            var s2 = new Student
+            var s2 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student2",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s3 = new Student
+            var s3 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student3",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s4 = new Student
+            var s4 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student4",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s5 = new Student
+            var s5 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student5",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s6 = new Student
+            var s6 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student6",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s7 = new Student
+            var s7 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student7",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s8 = new Student
+            var s8 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student8",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s9 = new Student
+            var s9 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student9",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s10 = new Student
+            var s10 = new ApplicationUser
             {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
+                UserName = "student10",
+                FirstName_EN = "student",
+                LastName_EN = "student",
+                FirstName_TH = "student",
+                LastName_TH = "student",
+                Email = "test.test@test.com",
+                StudentId = "1234567"
             };
-            var s11 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s12 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s13 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s14 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s15 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s16 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s17 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s18 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s19 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
-            var s20 = new Student
-            {
-                Name = "Chansak Kochasen",
-                StudentId = "12345678",
-                ApplicationUser = defaultUser
-            };
+            
             students.Add(s1);
             students.Add(s2);
             students.Add(s3);
@@ -303,16 +291,6 @@ namespace Swu.Portal.Data.Migrations
             students.Add(s8);
             students.Add(s9);
             students.Add(s10);
-            students.Add(s11);
-            students.Add(s12);
-            students.Add(s13);
-            students.Add(s14);
-            students.Add(s15);
-            students.Add(s16);
-            students.Add(s17);
-            students.Add(s18);
-            students.Add(s19);
-            students.Add(s20);
             #endregion
 
             #region Course Category
@@ -366,11 +344,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat1,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -391,11 +369,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat1,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -416,11 +394,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat1,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -441,11 +419,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat2,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -466,11 +444,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat2,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -491,11 +469,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat2,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -516,11 +494,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat3,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -541,11 +519,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat3,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -566,11 +544,11 @@ namespace Swu.Portal.Data.Migrations
                                                         <li><span class='text-thm2 flaticon-correct-symbol'> </span>Connect with all of your students - in a classroom or online - with our smaller class sizes</li>
                                                     </ul>",
                 Category = cat3,
-                Teachers = new List<Teacher> {
+                Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<Student> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
                 },
                 ApplicationUser = defaultUser
             };
@@ -748,11 +726,11 @@ namespace Swu.Portal.Data.Migrations
             context.CourseCategory.AddRange(categories);
             context.SaveChanges();
 
-            context.Teachers.AddRange(teachers);
-            context.SaveChanges();
+            //context.Teachers.AddRange(teachers);
+            //context.SaveChanges();
 
-            context.Students.AddRange(students);
-            context.SaveChanges();
+            //context.Students.AddRange(students);
+            //context.SaveChanges();
 
             context.Courses.AddRange(courses);
             context.SaveChanges();
