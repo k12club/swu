@@ -16,8 +16,8 @@ namespace Swu.Portal.Data.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseCategory> CourseCategory { get; set; }
         public DbSet<Curriculum> Curriculums { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
+        //public DbSet<Student> Students { get; set; }
+        //public DbSet<Teacher> Teachers { get; set; }
         public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Forum> Forums { get; set; }
