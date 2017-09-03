@@ -820,6 +820,7 @@
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\service\userService.ts" />
     <TypeScriptCompile Include="Scripts\filter\range.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\baseUser.ts" />
@@ -835,6 +836,7 @@
     <TypeScriptCompile Include="Scripts\model\forumAndComments.ts" />
     <TypeScriptCompile Include="Scripts\model\news.ts" />
     <TypeScriptCompile Include="Scripts\model\photo.ts" />
+    <TypeScriptCompile Include="Scripts\model\role.ts" />
     <TypeScriptCompile Include="Scripts\model\student.ts" />
     <TypeScriptCompile Include="Scripts\model\teacher.ts" />
     <TypeScriptCompile Include="Scripts\model\userLogin.ts" />

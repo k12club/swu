@@ -24,6 +24,7 @@ namespace Swu.Portal.Web
 
             builder.RegisterType<ApplicationUserServices>().As<IApplicationUserServices>().InstancePerRequest();
             builder.RegisterType<ApplicationUserRepository>().As<IApplicationUserRepository>().InstancePerRequest();
+            builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerRequest();
             builder.RegisterType<DateTimeRepository>().As<IDateTimeRepository>().InstancePerRequest();
             builder.RegisterType<CourseRepository>().As<IRepository2<Course>>().InstancePerRequest();
             builder.RegisterType<PhotoAlbumRepository>().As<IRepository2<PhotoAlbum>>().InstancePerRequest();

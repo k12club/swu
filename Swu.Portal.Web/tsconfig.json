@@ -72,6 +72,7 @@
     "Scripts/app/settings/controller/SettingCoursesController.ts",
     "Scripts/app/settings/controller/UsersController.ts",
     "Scripts/app/settings/controller/UsersModalController.ts",
+    "Scripts/app/settings/service/userService.ts",
 
     "Scripts/app/forum/controller/ForumController.ts",
     "Scripts/app/forum/service/forumService.ts",
@@ -94,7 +95,8 @@
     "Scripts/model/committee.ts",
     "Scripts/model/contract.ts",
     "Scripts/model/boardType.ts",
-    "Scripts/model/forumAndComments.ts"
+    "Scripts/model/forumAndComments.ts",
+    "Scripts/model/role.ts"
 
   ],
   "exclude": [

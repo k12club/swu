@@ -94,6 +94,7 @@
     <Compile Include="Repository\PhotoAlbumRepository.cs" />
     <Compile Include="Repository\ResearchCategoryRepository.cs" />
     <Compile Include="Repository\ResearchRepository.cs" />
+    <Compile Include="Repository\RoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extension\" />

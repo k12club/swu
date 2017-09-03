@@ -2562,19 +2562,31 @@ var Swu;
 var Swu;
 (function (Swu) {
     var UsersModalController = (function () {
-        function UsersModalController($scope, $state) {
+        function UsersModalController($scope, $state, userService) {
+            var _this = this;
             this.$scope = $scope;
             this.$state = $state;
+            this.userService = userService;
             this.$scope.validate = function () {
                 $('form').validator();
+            };
+            this.$scope.getRoles = function () {
+                _this.userService.getRoles().then(function (response) {
+                    _this.$scope.roles = response;
+                    _this.$scope.selectedRole = _.first(_this.$scope.roles).id;
+                }, function (error) { });
+            };
+            this.$scope.submit = function () {
+                console.log(_this.$scope.user);
             };
             this.init();
         }
         UsersModalController.prototype.init = function () {
             this.$scope.validate();
+            this.$scope.getRoles();
         };
         ;
-        UsersModalController.$inject = ["$scope", "$state"];
+        UsersModalController.$inject = ["$scope", "$state", "userService"];
         UsersModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "UsersModalController" })
@@ -2582,6 +2594,24 @@ var Swu;
         return UsersModalController;
     }());
     Swu.UsersModalController = UsersModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var userService = (function () {
+        function userService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        userService.prototype.getRoles = function () {
+            return this.apiService.getData("role/all");
+        };
+        userService.$inject = ['apiService', 'AppConstant'];
+        userService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "userService" })
+        ], userService);
+        return userService;
+    }());
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {

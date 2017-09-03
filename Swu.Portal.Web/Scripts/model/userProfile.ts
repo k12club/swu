@@ -6,5 +6,6 @@
         lastName_en?: string;
         firstName_th?: string;
         lastName_th?: string;
+        password?: string;
     }
 }

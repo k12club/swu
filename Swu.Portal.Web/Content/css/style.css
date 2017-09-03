@@ -1595,7 +1595,7 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
     background-color: #313131;
     padding-bottom: 70px;
     padding-top: 70px;
-    z-index: 999999;
+    z-index: 100;
     position: relative;
 }
 

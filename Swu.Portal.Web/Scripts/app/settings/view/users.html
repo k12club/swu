@@ -32,6 +32,7 @@
                     <div class="row">
                         <button type="button" class="btn btn-link pull-left"  ng-click="ShowModalLogin(true)"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
                     </div>
+                    <!-- User modal dialog -->
                     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" login-modal="showModal" data-backdrop="static" ng-controller="UsersModalController as vm">
                         <div class="modal-dialog modal-md" role="document">
                             <div class="modal-content">
@@ -45,45 +46,53 @@
                                         <div class="col-md-12">
                                             <form id="form" class="form-horizontal" role="form" data-toggle="validator" ng-submit="submit()">
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="username">User Name</label>
+                                                    <label class="control-label col-sm-3" for="username">User Name: </label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="username" placeholder="Enter user name" required>
+                                                        <input type="text" class="form-control" id="username" ng-model="user.userName" placeholder="Enter user name" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="fname">First Name</label>
+                                                    <label class="control-label col-sm-3" for="fname">First Name: </label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+                                                        <input type="text" class="form-control" id="fname" ng-model="user.firstName_en" placeholder="Enter first name" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="lname">Last Name</label>
+                                                    <label class="control-label col-sm-3" for="lname">Last Name: </label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="lname" placeholder="Enter last name">
+                                                        <input type="text" class="form-control" id="lname" ng-model="user.lastName_en" placeholder="Enter last name" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="username">User Name</label>
+                                                    <label class="control-label col-sm-3" for="email">Email: </label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="username" placeholder="Enter User name">
+                                                        <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="email">Email:</label>
+                                                    <label class="control-label col-sm-3" for="role">Role: </label>
                                                     <div class="col-sm-8">
-                                                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                                        <select name="role" id="role" ng-model="selectedRole" class="form-control" required>
+                                                            <option ng-repeat="r in roles" value="{{r.id}}">{{r.name}}</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="pwd">Password:</label>
+                                                    <label class="control-label col-sm-3" for="pwd">Password: </label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+                                                        <input type="password" class="form-control" id="pwd" ng-model="user.password" placeholder="Enter password" 
+                                                               data-minlength="6"
+                                                               required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="pwd2">Re Password:</label>
+                                                    <label class="control-label col-sm-3" for="pwd2">Re Password: </label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="pwd2" placeholder="Enter re-password">
+                                                        <input type="password" class="form-control" id="pwd2" placeholder="Enter re-password" 
+                                                               data-minlength="6" 
+                                                               data-match="#pwd"
+                                                               data-match-error="Password is not match"
+                                                               required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -132,23 +141,6 @@
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="waiting">
-                    <!--<div class="row">
-                        <div class="col-md-12">
-                            <div class="irs-courses-shorting-heading clearfix">
-                                <ul class="list-inline pull-left">
-                                    <li><a href="#"><span class="flaticon-squares text-thm2"></span></a></li>
-                                    <li><a href="#"><span class="flaticon-signs-3"></span></a></li>
-                                    <li><a href="#">Showing 1-2 of 39 results</a></li>
-                                </ul>
-                                <div class="input-group irs-nav-search-form">
-                                    <input type="text" class="form-control pull-right" placeholder="Search courses">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><span class="flaticon-musica-searcher"></span></button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="row">
                         <table class="table">
                             <thead>
