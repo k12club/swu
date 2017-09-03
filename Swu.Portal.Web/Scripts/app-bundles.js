@@ -2537,20 +2537,53 @@ var Swu;
 var Swu;
 (function (Swu) {
     var UsersController = (function () {
-        function UsersController($scope, $state) {
+        function UsersController($scope, $state, userService) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
+            this.userService = userService;
             this.$scope.ShowModalLogin = function (flag) {
                 _this.$scope.showModal = flag;
+            };
+            this.$scope.getUsers = function () {
+                _this.userService.getAllUsers().then(function (response) {
+                    _this.$scope.users = _.filter(response, function (item, index) {
+                        return item.selectedRoleName != null;
+                    });
+                    _.map(_this.$scope.users, function (item, index) {
+                        switch (item.selectedRoleName) {
+                            case "Admin": {
+                                item.displayRoleName = "A";
+                                break;
+                            }
+                            case "Officer": {
+                                item.displayRoleName = "O";
+                                break;
+                            }
+                            case "Teacher": {
+                                item.displayRoleName = "T";
+                                break;
+                            }
+                            case "Student": {
+                                item.displayRoleName = "S";
+                                break;
+                            }
+                            case "Parent": {
+                                item.displayRoleName = "P";
+                                break;
+                            }
+                        }
+                    });
+                }, function (error) { });
             };
             this.init();
         }
         UsersController.prototype.init = function () {
             this.$scope.showModal = false;
+            this.$scope.getUsers();
         };
         ;
-        UsersController.$inject = ["$scope", "$state"];
+        UsersController.$inject = ["$scope", "$state", "userService"];
         UsersController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "UsersController" })
@@ -2562,13 +2595,17 @@ var Swu;
 var Swu;
 (function (Swu) {
     var UsersModalController = (function () {
-        function UsersModalController($scope, $state, userService) {
+        function UsersModalController($scope, $state, userService, toastr) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
             this.userService = userService;
+            this.toastr = toastr;
             this.$scope.validate = function () {
                 $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
             };
             this.$scope.getRoles = function () {
                 _this.userService.getRoles().then(function (response) {
@@ -2577,7 +2614,22 @@ var Swu;
                 }, function (error) { });
             };
             this.$scope.submit = function () {
-                console.log(_this.$scope.user);
+                if (_this.$scope.isValid()) {
+                    var _selectedRole = _.filter(_this.$scope.roles, function (item, index) {
+                        return item.id == $scope.selectedRole;
+                    });
+                    _this.$scope.user.selectedRoleName = _selectedRole[0].name;
+                    _this.userService.addNew(_this.$scope.user).then(function (response) {
+                        _this.$scope.$parent.showModal = false;
+                        if (response) {
+                            _this.toastr.success("Success");
+                        }
+                        else {
+                            _this.toastr.error("Error");
+                        }
+                        _this.$scope.user = {};
+                    }, function (error) { });
+                }
             };
             this.init();
         }
@@ -2586,7 +2638,7 @@ var Swu;
             this.$scope.getRoles();
         };
         ;
-        UsersModalController.$inject = ["$scope", "$state", "userService"];
+        UsersModalController.$inject = ["$scope", "$state", "userService", "toastr"];
         UsersModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "UsersModalController" })
@@ -2604,6 +2656,12 @@ var Swu;
         }
         userService.prototype.getRoles = function () {
             return this.apiService.getData("role/all");
+        };
+        userService.prototype.addNew = function (user) {
+            return this.apiService.postData(user, "Account/addNew");
+        };
+        userService.prototype.getAllUsers = function () {
+            return this.apiService.getData("Account/all");
         };
         userService.$inject = ['apiService', 'AppConstant'];
         userService = __decorate([

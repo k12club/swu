@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swu.Portal.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,9 @@ namespace Swu.Portal.Web.Api
         public string LastName_TH { get; set; }
         [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
+        [JsonProperty(PropertyName = "password")]
+        public string Password { get; set; }
+        [JsonProperty(PropertyName = "selectedRoleName")]
+        public string SelectedRoleName { get; set; }
     }
 }

@@ -13,6 +13,9 @@ namespace Swu.Portal.Service
     {
         ApplicationUser GetUser(string username);
         ApplicationUser VerifyAndGetUser(string username,string password);
+        bool AddNewUser(ApplicationUser user ,string password,string selectedRoleName);
+        List<ApplicationUser> GetAllUsers();
+        List<string> GetRolesByUserName(string userName);
     }
     public class ApplicationUserServices : IApplicationUserServices
     {
@@ -22,13 +25,26 @@ namespace Swu.Portal.Service
             this._applicationUserRepository = applicationUserRepository;
         }
 
+        public bool AddNewUser(ApplicationUser user, string password, string selectedRoleName)
+        {
+            return this._applicationUserRepository.AddNew(user, password,selectedRoleName);
+        }
+
+        public List<ApplicationUser> GetAllUsers()
+        {
+            return this._applicationUserRepository.GetAllUsers();
+        }
+
+        public List<string> GetRolesByUserName(string userName)
+        {
+            return this._applicationUserRepository.GetRolesByUserName(userName);
+        }
+
         public ApplicationUser GetUser(string username)
         {
             return this._applicationUserRepository.GetUser(username);
 
         }
-
-
         public ApplicationUser VerifyAndGetUser(string username, string password)
         {
             return this._applicationUserRepository.VerifyAndGetUser(username, password);

@@ -21,11 +21,11 @@ namespace Swu.Portal.Web
                       "~/Scripts/bootstrap/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/angular-material.css",
-                      "~/Content/material-icons.css",
-                      "~/Content/ng-grid.css",
-                      "~/Content/site.css",
+                      //"~/Content/bootstrap.css",
+                      //"~/Content/angular-material.css",
+                      //"~/Content/material-icons.css",
+                      //"~/Content/ng-grid.css",
+                      //"~/Content/site.css",
                       "~/Content/angular-toastr.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/ng-lib")

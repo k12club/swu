@@ -119,9 +119,9 @@
                                 </tr>
                             </thead>
                             <tbody class="irs-table-body style2">
-                                <tr>
-                                    <th scope="row">Chansak Kochasen</th>
-                                    <td><a href="#"><span class="badge badge-success">A</span></a><br></td>
+                                <tr ng-repeat="u in users">
+                                    <th scope="row">{{u.firstName_en}} {{u.lastName_en}}</th>
+                                    <td><a href="#"><span class="badge badge-success">{{u.displayRoleName}}</span></a><br></td>
                                     <td>Activated</td>
                                     <td>22/03/2017</td>
                                     <td></td>

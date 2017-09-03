@@ -1,4 +1,5 @@
-﻿using Swu.Portal.Service;
+﻿using Swu.Portal.Data.Models;
+using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,43 @@ namespace Swu.Portal.Web.Api
                 return user.ToUserProfileViewModel();
             }
             return null;
+        }
+        [HttpPost, Route("addNew")]
+        public bool AddNew(UserProfile model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = model.UserName,
+                    FirstName_EN = model.FirstName_EN,
+                    LastName_EN = model.LastName_EN,
+                    Email = model.Email,
+                };
+                return this._applicationUserServices.AddNewUser(user, model.Password, model.SelectedRoleName);
+            }
+            return false;
+        }
+        [HttpGet, Route("all")]
+        public List<UserProfile> GetAll()
+        {
+            var result = new List<UserProfile>();
+            var users = this._applicationUserServices.GetAllUsers().ToList();
+            foreach (var u in users)
+            {
+                var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
+                result.Add(new UserProfile
+                {
+                    UserName = u.UserName,
+                    FirstName_EN = u.FirstName_EN,
+                    LastName_EN = u.LastName_EN,
+                    FirstName_TH = u.FirstName_TH,
+                    LastName_TH = u.LastName_TH,
+                    Email = u.Email,
+                    SelectedRoleName = selectedRoleName
+                });
+            }
+            return result;
         }
     }
 }

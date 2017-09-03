@@ -7,5 +7,7 @@
         firstName_th?: string;
         lastName_th?: string;
         password?: string;
+        selectedRoleName?: string;
+        displayRoleName?: string;
     }
 }
