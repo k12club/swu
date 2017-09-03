@@ -2563,23 +2563,14 @@ var Swu;
 (function (Swu) {
     var UsersModalController = (function () {
         function UsersModalController($scope, $state) {
-            var _this = this;
             this.$scope = $scope;
             this.$state = $state;
             this.$scope.validate = function () {
                 $('form').validator();
             };
-            this.$scope.isValid = function () {
-                return $('form').validator('validate').has('.has-error').length == 0;
-            };
-            this.$scope.submit = function () {
-                if (_this.$scope.isValid()) {
-                    alert('the form is valid');
-                }
-            };
+            this.init();
         }
         UsersModalController.prototype.init = function () {
-            this.$scope.user = {};
             this.$scope.validate();
         };
         ;

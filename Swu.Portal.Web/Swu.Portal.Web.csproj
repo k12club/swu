@@ -687,7 +687,6 @@
     <Content Include="Scripts\app\settings\main.html" />
     <Content Include="Scripts\app\research\research_detail.html" />
     <Content Include="Scripts\app\research\research_list.html" />
-    <Content Include="Scripts\app\settings\view\userModal.html" />
     <Content Include="Scripts\app\settings\view\users.html" />
     <Content Include="Scripts\app\teacher\teacher_detail.html" />
     <Content Include="Scripts\app\teacher\teacher_list.html" />

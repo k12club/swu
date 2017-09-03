@@ -1,8 +1,5 @@
 ﻿module Swu {
     interface UserModalScope extends ng.IScope {
-        user: IUserProfile;
-        isValid(): boolean;
-        submit(): void;
         validate(): void;
     }
     @Module("app")
@@ -13,17 +10,9 @@
             this.$scope.validate = (): void => {
                 $('form').validator();
             };
-            this.$scope.isValid = ():boolean => {
-                return $('form').validator('validate').has('.has-error').length == 0;
-            }
-            this.$scope.submit = () => {
-                if (this.$scope.isValid()) {
-                    alert('the form is valid');
-                }
-            };
+            this.init();
         }
         init(): void {
-            this.$scope.user = {};
             this.$scope.validate();
         };
 
