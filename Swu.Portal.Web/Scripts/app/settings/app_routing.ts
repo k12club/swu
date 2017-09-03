@@ -19,13 +19,22 @@
                         },
                     }
                 })
+                .state("settings.users", {
+                    parent: "settings",
+                    url: "/users",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/users.html',
+                            controller: 'UsersController as vm'
+                        },
+                    }
+                })
                 .state("settings.courses", {
                     parent: "settings",
                     url: "/courses",
                     views: {
                         'subContent@settings': {
-                            templateUrl: '/Scripts/app/settings/courses.html',
-                            controller: 'GeneralBoardController as vm'
+                            templateUrl: '/Scripts/app/settings/view/courses.html',
                         },
                     }
                 });

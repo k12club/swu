@@ -69,7 +69,9 @@
 
     "Scripts/app/contact/ContactUsController.ts",
 
-    "Scripts/app/settings/SettingCoursesController.ts",
+    "Scripts/app/settings/controller/SettingCoursesController.ts",
+    "Scripts/app/settings/controller/UsersController.ts",
+    "Scripts/app/settings/controller/UsersModalController.ts",
 
     "Scripts/app/forum/controller/ForumController.ts",
     "Scripts/app/forum/service/forumService.ts",

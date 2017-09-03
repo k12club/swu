@@ -14,3 +14,4 @@
 /// <reference path="typings/swiper/swiper.d.ts" />
 /// <reference path="typings/magnific/magnific.d.ts" />
 /// <reference path="typings/summernote/summernote.d.ts" />
+/// <reference path="typings/bootstrap-validator/validator.d.ts" />

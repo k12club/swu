@@ -1,0 +1,109 @@
+﻿<div class="clearfix">
+    <div class="row">
+        <div class="irs-blog-post-title">
+            <h3>User Management</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="irs-cdetails-tab">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a data-target="#list" aria-controls="list" role="tab" data-toggle="tab">All Users</a></li>
+                <li role="presentation"><a data-target="#waiting" aria-controls="waiting" role="tab" data-toggle="tab">Waiting for approve</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="list">
+                    <!--<div class="row">
+                        <div class="col-md-12">
+                            <div class="irs-courses-shorting-heading clearfix">
+                                <ul class="list-inline pull-left">
+                                    <li><a href="#"><span class="flaticon-squares text-thm2"></span></a></li>
+                                    <li><a href="#"><span class="flaticon-signs-3"></span></a></li>
+                                    <li><a href="#">Showing 1-2 of 39 results</a></li>
+                                </ul>
+                                <div class="input-group irs-nav-search-form">
+                                    <input type="text" class="form-control pull-right" placeholder="Search courses">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="flaticon-musica-searcher"></span></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <button type="button" class="btn btn-link pull-left"  ng-click="ShowModalLogin(true)"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                    </div>
+                    <ng-include src="'Scripts/app/settings/view/userModal.html'"></ng-include>
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                                <tr class="irs-table-deading style2">
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Added</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody class="irs-table-body style2">
+                                <tr>
+                                    <th scope="row">Chansak Kochasen</th>
+                                    <td><a href="#"><span class="badge badge-success">A</span></a><br></td>
+                                    <td>Activated</td>
+                                    <td>22/03/2017</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <form class="form form-inline" role="form">
+                            <em>Badge explanation :</em>
+                            <label><span class="badge badge-success">A</span> : Admin</label> |
+                            <label><span class="badge badge-success">O</span> : Officer</label> |
+                            <label><span class="badge badge-success">T</span> : Teacher</label> |
+                            <label><span class="badge badge-success">S</span> : Student</label> |
+                            <label><span class="badge badge-success">P</span> : Parent</label>
+                        </form>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="waiting">
+                    <!--<div class="row">
+                        <div class="col-md-12">
+                            <div class="irs-courses-shorting-heading clearfix">
+                                <ul class="list-inline pull-left">
+                                    <li><a href="#"><span class="flaticon-squares text-thm2"></span></a></li>
+                                    <li><a href="#"><span class="flaticon-signs-3"></span></a></li>
+                                    <li><a href="#">Showing 1-2 of 39 results</a></li>
+                                </ul>
+                                <div class="input-group irs-nav-search-form">
+                                    <input type="text" class="form-control pull-right" placeholder="Search courses">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="flaticon-musica-searcher"></span></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                                <tr class="irs-table-deading style2">
+                                    <th>Email</th>
+                                    <th>Registered</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody class="irs-table-body style2">
+                                <tr>
+                                    <th scope="row">chansak.kochasen@allianz.com</th>
+                                    <td>22/03/2017</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

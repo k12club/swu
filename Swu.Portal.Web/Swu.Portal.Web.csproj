@@ -607,6 +607,7 @@
     <Content Include="Content\js\script.js" />
     <Content Include="Content\js\scrollto.js" />
     <Content Include="Content\js\swiper.min.js" />
+    <Content Include="Content\js\validator.min.js" />
     <Content Include="Content\js\wow.min.js" />
     <Content Include="Content\images\languages.png" />
     <Content Include="favicon.ico" />
@@ -681,11 +682,13 @@
     <Content Include="Scripts\app\home\view\testimonials.html" />
     <Content Include="Scripts\app\login\view\login.html" />
     <Content Include="Scripts\app\menu\view\nav.html" />
-    <Content Include="Scripts\app\settings\courses.html" />
+    <Content Include="Scripts\app\settings\view\courses.html" />
     <Content Include="Scripts\app\settings\default.html" />
     <Content Include="Scripts\app\settings\main.html" />
     <Content Include="Scripts\app\research\research_detail.html" />
     <Content Include="Scripts\app\research\research_list.html" />
+    <Content Include="Scripts\app\settings\view\userModal.html" />
+    <Content Include="Scripts\app\settings\view\users.html" />
     <Content Include="Scripts\app\teacher\teacher_detail.html" />
     <Content Include="Scripts\app\teacher\teacher_list.html" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
@@ -731,8 +734,6 @@
     <Folder Include="Scripts\config\" />
     <Folder Include="Scripts\run\" />
     <Folder Include="Scripts\typings\angularl-translate\" />
-    <Folder Include="Views\Account\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -818,6 +819,8 @@
     <TypeScriptCompile Include="Scripts\app\home\service\newsService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\UsersModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\UsersController.ts" />
     <TypeScriptCompile Include="Scripts\filter\range.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\baseUser.ts" />
@@ -840,7 +843,7 @@
     <TypeScriptCompile Include="Scripts\app\login\services\loginServices.ts" />
     <TypeScriptCompile Include="Scripts\app\login\controller\LoginController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\app_routing.ts" />
-    <TypeScriptCompile Include="Scripts\app\settings\SettingCoursesController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\SettingCoursesController.ts" />
     <TypeScriptCompile Include="Scripts\app\research\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\research\ResearchController.ts" />
     <TypeScriptCompile Include="Scripts\app\research\ResearchListController.ts" />
@@ -864,6 +867,7 @@
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap-validator\validator.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\es6-promise\es6-promise.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\flipClock\flipClock.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery-validation-unobtrusive\jquery-validation-unobtrusive.d.ts" />

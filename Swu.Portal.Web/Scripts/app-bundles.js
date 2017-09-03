@@ -485,11 +485,12 @@ var Swu;
                 versionName: "V1"
             };
             this.exceptGotoTopStateList = [
-                "settings",
-                "settings.courses",
                 "board.forum",
                 "board.course",
-                "board.research"
+                "board.research",
+                "settings",
+                "settings.courses",
+                "settings.users"
             ];
         }
         AppConstant = __decorate([
@@ -825,13 +826,22 @@ var Swu;
                     }
                 }
             })
+                .state("settings.users", {
+                parent: "settings",
+                url: "/users",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/users.html',
+                        controller: 'UsersController as vm'
+                    }
+                }
+            })
                 .state("settings.courses", {
                 parent: "settings",
                 url: "/courses",
                 views: {
                     'subContent@settings': {
-                        templateUrl: '/Scripts/app/settings/courses.html',
-                        controller: 'GeneralBoardController as vm'
+                        templateUrl: '/Scripts/app/settings/view/courses.html'
                     }
                 }
             });
@@ -2523,6 +2533,64 @@ var Swu;
         return SettingCoursesController;
     }());
     Swu.SettingCoursesController = SettingCoursesController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var UsersController = (function () {
+        function UsersController($scope, $state) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.$scope.ShowModalLogin = function (flag) {
+                _this.$scope.showModal = flag;
+            };
+            this.init();
+        }
+        UsersController.prototype.init = function () {
+            this.$scope.showModal = false;
+        };
+        ;
+        UsersController.$inject = ["$scope", "$state"];
+        UsersController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "UsersController" })
+        ], UsersController);
+        return UsersController;
+    }());
+    Swu.UsersController = UsersController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var UsersModalController = (function () {
+        function UsersModalController($scope, $state) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return $('form').validator('validate').has('.has-error').length == 0;
+            };
+            this.$scope.submit = function () {
+                if (_this.$scope.isValid()) {
+                    alert('the form is valid');
+                }
+            };
+        }
+        UsersModalController.prototype.init = function () {
+            this.$scope.user = {};
+            this.$scope.validate();
+        };
+        ;
+        UsersModalController.$inject = ["$scope", "$state"];
+        UsersModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "UsersModalController" })
+        ], UsersModalController);
+        return UsersModalController;
+    }());
+    Swu.UsersModalController = UsersModalController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {

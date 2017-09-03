@@ -15,11 +15,12 @@ module Swu {
             versionName: "V1",
         };
         exceptGotoTopStateList = [
-            "settings",
-            "settings.courses",
             "board.forum",
             "board.course",
-            "board.research"
+            "board.research",
+            "settings",
+            "settings.courses",
+            "settings.users"
         ];
     }
 }
