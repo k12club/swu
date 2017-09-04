@@ -10,6 +10,8 @@ namespace Swu.Portal.Web.Api
 {
     public class UserProfile
     {
+        [JsonProperty(PropertyName = "Id")]
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "userName")]
         public string UserName { get; set; }
         [JsonProperty(PropertyName = "firstName_en")]
@@ -24,6 +26,8 @@ namespace Swu.Portal.Web.Api
         public string Email { get; set; }
         [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
+        [JsonProperty(PropertyName = "selectedRoleId")]
+        public string SelectedRoleId { get; set; }
         [JsonProperty(PropertyName = "selectedRoleName")]
         public string SelectedRoleName { get; set; }
     }

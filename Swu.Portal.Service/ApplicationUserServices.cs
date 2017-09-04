@@ -16,6 +16,7 @@ namespace Swu.Portal.Service
         bool AddNewUser(ApplicationUser user ,string password,string selectedRoleName);
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
+        ApplicationUser getById(string id);
     }
     public class ApplicationUserServices : IApplicationUserServices
     {
@@ -33,6 +34,11 @@ namespace Swu.Portal.Service
         public List<ApplicationUser> GetAllUsers()
         {
             return this._applicationUserRepository.GetAllUsers();
+        }
+
+        public ApplicationUser getById(string id)
+        {
+            return this._applicationUserRepository.getById(id);
         }
 
         public List<string> GetRolesByUserName(string userName)

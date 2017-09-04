@@ -690,7 +690,6 @@ var Swu;
             if (user != null) {
                 user = JSON.parse(user);
             }
-            console.log(user);
             return user;
         };
         ;
@@ -2582,18 +2581,43 @@ var Swu;
 var Swu;
 (function (Swu) {
     var UsersController = (function () {
-        function UsersController($scope, $state, userService) {
+        function UsersController($scope, $state, userService, $uibModal) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
             this.userService = userService;
-            this.$scope.ShowModalLogin = function (flag) {
-                _this.$scope.showModal = flag;
+            this.$uibModal = $uibModal;
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/user.tmpl.html',
+                    controller: Swu.UsersModalController,
+                    resolve: {
+                        userId: function () {
+                            return "";
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () { });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/user.tmpl.html',
+                    controller: Swu.UsersModalController,
+                    resolve: {
+                        userId: function () {
+                            return id;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () { });
             };
             this.$scope.getUsers = function () {
                 _this.userService.getAllUsers().then(function (response) {
                     _this.$scope.users = _.filter(response, function (item, index) {
                         return item.selectedRoleName != null;
+                    });
+                    _this.$scope.waiting = _.filter(response, function (item, index) {
+                        return item.selectedRoleName == null;
                     });
                     _.map(_this.$scope.users, function (item, index) {
                         switch (item.selectedRoleName) {
@@ -2624,11 +2648,10 @@ var Swu;
             this.init();
         }
         UsersController.prototype.init = function () {
-            this.$scope.showModal = false;
             this.$scope.getUsers();
         };
         ;
-        UsersController.$inject = ["$scope", "$state", "userService"];
+        UsersController.$inject = ["$scope", "$state", "userService", "$uibModal"];
         UsersController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "UsersController" })
@@ -2640,51 +2663,47 @@ var Swu;
 var Swu;
 (function (Swu) {
     var UsersModalController = (function () {
-        function UsersModalController($scope, $state, userService, toastr) {
+        function UsersModalController($scope, $state, userService, toastr, $modalInstance, userId) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
             this.userService = userService;
             this.toastr = toastr;
-            this.$scope.validate = function () {
-                $('form').validator();
-            };
-            this.$scope.isValid = function () {
-                return ($('#form').validator('validate').has('.has-error').length === 0);
-            };
+            this.$modalInstance = $modalInstance;
+            this.userId = userId;
+            this.$scope.id = userId;
+            this.$scope.mode = (userId != "") ? Swu.actionMode.edit : Swu.actionMode.addNew;
+            if (this.$scope.mode == Swu.actionMode.edit) {
+                this.$scope.title = "Edit User";
+                this.userService.getById(this.$scope.id).then(function (response) {
+                    _this.$scope.user = response;
+                    console.log(_this.$scope.user);
+                }, function (error) { });
+            }
+            else {
+                this.$scope.title = "Add New User";
+            }
             this.$scope.getRoles = function () {
                 _this.userService.getRoles().then(function (response) {
                     _this.$scope.roles = response;
                     _this.$scope.selectedRole = _.first(_this.$scope.roles).id;
                 }, function (error) { });
             };
+            this.$scope.ok = function () {
+                _this.$modalInstance.close();
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
             this.$scope.submit = function () {
-                if (_this.$scope.isValid()) {
-                    var _selectedRole = _.filter(_this.$scope.roles, function (item, index) {
-                        return item.id == $scope.selectedRole;
-                    });
-                    _this.$scope.user.selectedRoleName = _selectedRole[0].name;
-                    _this.userService.addNew(_this.$scope.user).then(function (response) {
-                        _this.$scope.$parent.showModal = false;
-                        if (response) {
-                            _this.$scope.$parent.getUsers();
-                            _this.toastr.success("Success");
-                        }
-                        else {
-                            _this.toastr.error("Error");
-                        }
-                        _this.$scope.user = {};
-                    }, function (error) { });
-                }
             };
             this.init();
         }
         UsersModalController.prototype.init = function () {
-            this.$scope.validate();
             this.$scope.getRoles();
         };
         ;
-        UsersModalController.$inject = ["$scope", "$state", "userService", "toastr"];
+        UsersModalController.$inject = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId"];
         UsersModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "UsersModalController" })
@@ -2708,6 +2727,9 @@ var Swu;
         };
         userService.prototype.getAllUsers = function () {
             return this.apiService.getData("Account/all");
+        };
+        userService.prototype.getById = function (id) {
+            return this.apiService.getData("Account/getById?id=" + id);
         };
         userService.$inject = ['apiService', 'AppConstant'];
         userService = __decorate([
@@ -2794,4 +2816,12 @@ var Swu;
         BoardType[BoardType["research"] = 3] = "research";
     })(Swu.BoardType || (Swu.BoardType = {}));
     var BoardType = Swu.BoardType;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    (function (actionMode) {
+        actionMode[actionMode["addNew"] = 1] = "addNew";
+        actionMode[actionMode["edit"] = 2] = "edit";
+    })(Swu.actionMode || (Swu.actionMode = {}));
+    var actionMode = Swu.actionMode;
 })(Swu || (Swu = {}));

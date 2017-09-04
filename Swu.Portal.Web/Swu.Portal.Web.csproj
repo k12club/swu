@@ -236,6 +236,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\angular-material.css" />
+    <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\angular-toastr.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -611,6 +613,9 @@
     <Content Include="Content\js\validator.min.js" />
     <Content Include="Content\js\wow.min.js" />
     <Content Include="Content\images\languages.png" />
+    <Content Include="Content\material-icons.css" />
+    <Content Include="Content\MaterialIcons-Regular.ijmap.txt" />
+    <Content Include="Content\MaterialIcons-Regular.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -688,6 +693,7 @@
     <Content Include="Scripts\app\settings\main.html" />
     <Content Include="Scripts\app\research\research_detail.html" />
     <Content Include="Scripts\app\research\research_list.html" />
+    <Content Include="Scripts\app\settings\view\user.tmpl.html" />
     <Content Include="Scripts\app\settings\view\users.html" />
     <Content Include="Scripts\app\teacher\teacher_detail.html" />
     <Content Include="Scripts\app\teacher\teacher_list.html" />
@@ -762,6 +768,10 @@
     <Content Include="Content\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="Content\fonts\Pe-icon-7-stroke.ttf" />
     <Content Include="Content\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="Content\MaterialIcons-Regular.eot" />
+    <Content Include="Content\MaterialIcons-Regular.ttf" />
+    <Content Include="Content\MaterialIcons-Regular.woff" />
+    <Content Include="Content\MaterialIcons-Regular.woff2" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\angular\angular-animate.min.js.map" />
     <Content Include="Scripts\angular\angular-resource.min.js.map" />
@@ -835,6 +845,7 @@
     <TypeScriptCompile Include="Scripts\model\event.ts" />
     <TypeScriptCompile Include="Scripts\model\exam.ts" />
     <TypeScriptCompile Include="Scripts\model\forumAndComments.ts" />
+    <TypeScriptCompile Include="Scripts\model\actionMode.ts" />
     <TypeScriptCompile Include="Scripts\model\news.ts" />
     <TypeScriptCompile Include="Scripts\model\photo.ts" />
     <TypeScriptCompile Include="Scripts\model\role.ts" />

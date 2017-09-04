@@ -1,6 +1,4 @@
-﻿/// <reference path="../../../_references.ts" />
-
-module Swu {
+﻿module Swu {
     interface ILoginScope extends baseControllerScope {
         appName: string;
         userName: string;

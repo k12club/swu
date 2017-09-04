@@ -31,6 +31,7 @@ namespace Swu.Portal.Web.Api
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
                 return new UserProfile
                 {
+                    Id = u.Id,
                     UserName = u.UserName,
                     FirstName_EN = u.FirstName_EN,
                     LastName_EN = u.LastName_EN,
@@ -68,6 +69,7 @@ namespace Swu.Portal.Web.Api
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
                 result.Add(new UserProfile
                 {
+                    Id =u.Id,
                     UserName = u.UserName,
                     FirstName_EN = u.FirstName_EN,
                     LastName_EN = u.LastName_EN,
@@ -78,6 +80,23 @@ namespace Swu.Portal.Web.Api
                 });
             }
             return result;
+        }
+        [HttpGet, Route("getById")]
+        public UserProfile GetById(string id)
+        {
+            var u = this._applicationUserServices.getById(id);
+            var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
+            return new UserProfile
+            {
+                Id = u.Id,
+                UserName = u.UserName,
+                FirstName_EN = u.FirstName_EN,
+                LastName_EN = u.LastName_EN,
+                FirstName_TH = u.FirstName_TH,
+                LastName_TH = u.LastName_TH,
+                Email = u.Email,
+                SelectedRoleName = selectedRoleName
+            };
         }
     }
 }

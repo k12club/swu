@@ -96,7 +96,8 @@
     "Scripts/model/contract.ts",
     "Scripts/model/boardType.ts",
     "Scripts/model/forumAndComments.ts",
-    "Scripts/model/role.ts"
+    "Scripts/model/role.ts",
+    "Scripts/model/actionMode.ts"
 
   ],
   "exclude": [

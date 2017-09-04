@@ -3,6 +3,7 @@
         getRoles(): ng.IPromise<IRole[]>;
         addNew(user: IUserProfile): ng.IPromise<boolean>;
         getAllUsers(): ng.IPromise<IUserProfile[]>;
+        getById(id: string): ng.IPromise<IUserProfile>;
     }
     @Module("app")
     @Factory({ name: "userService" })
@@ -19,6 +20,9 @@
         }
         getAllUsers(): ng.IPromise<IUserProfile[]> {
             return this.apiService.getData<IUserProfile[]>("Account/all");
+        }
+        getById(id: string): ng.IPromise<IUserProfile> {
+            return this.apiService.getData<IUserProfile>("Account/getById?id=" + id);
         }
     }
 }

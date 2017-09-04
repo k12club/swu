@@ -42,7 +42,6 @@
             if (user != null) {
                 user = JSON.parse(user);
             }
-            console.log(user);
             return user;
         };
     }

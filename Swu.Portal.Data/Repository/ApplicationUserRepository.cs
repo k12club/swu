@@ -19,6 +19,7 @@ namespace Swu.Portal.Data.Repository
         bool AddNew(ApplicationUser user, string password, string selectedRoleName);
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
+        ApplicationUser getById(string id);
     }
     public class ApplicationUserRepository : IApplicationUserRepository
     {
@@ -72,6 +73,11 @@ namespace Swu.Portal.Data.Repository
         {
             var u = this._userManager.FindByName(userName);
             return this._userManager.GetRoles(u.Id).ToList();
+        }
+
+        public ApplicationUser getById(string id)
+        {
+            return this._userManager.FindById(id);
         }
     }
 }

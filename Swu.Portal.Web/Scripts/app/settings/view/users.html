@@ -30,10 +30,10 @@
                         </div>
                     </div>-->
                     <div class="row">
-                        <button type="button" class="btn btn-link pull-left"  ng-click="ShowModalLogin(true)"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                        <button type="button" class="btn btn-link pull-left"  ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
                     </div>
                     <!-- User modal dialog -->
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" login-modal="showModal" data-backdrop="static" ng-controller="UsersModalController as vm">
+                    <!--<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" login-modal="showModal" data-backdrop="static" ng-controller="UsersModalController as vm">
                         <div class="modal-dialog modal-md" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -44,7 +44,7 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form id="form" class="form-horizontal" role="form" data-toggle="validator" ng-submit="submit()">
+                                            <form id="form" name="form" class="form-horizontal" role="form" data-toggle="validator" ng-submit="submit()">
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-3" for="username">User Name: </label>
                                                     <div class="col-sm-8">
@@ -106,11 +106,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="row">
                         <table class="table">
                             <thead>
                                 <tr class="irs-table-deading style2">
+                                    <th>User Name</th>
                                     <th>Name</th>
                                     <th>Role</th>
                                     <th>Status</th>
@@ -120,7 +121,8 @@
                             </thead>
                             <tbody class="irs-table-body style2">
                                 <tr ng-repeat="u in users">
-                                    <th scope="row">{{u.firstName_en}} {{u.lastName_en}}</th>
+                                    <th><a href="" ng-click="edit(u.id)" >{{u.userName}}</a></th>
+                                    <th>{{u.firstName_en}} {{u.lastName_en}}</th>
                                     <td><a href="#"><span class="badge badge-success">{{u.displayRoleName}}</span></a><br></td>
                                     <td>Activated</td>
                                     <td>22/03/2017</td>
@@ -145,16 +147,18 @@
                         <table class="table">
                             <thead>
                                 <tr class="irs-table-deading style2">
+                                    <th>User Name</th>
                                     <th>Email</th>
                                     <th>Registered</th>
                                     <th>View</th>
                                 </tr>
                             </thead>
                             <tbody class="irs-table-body style2">
-                                <tr>
-                                    <th scope="row">chansak.kochasen@allianz.com</th>
+                                <tr ng-repeat="u in waiting">
+                                    <td>{{u.userName}}</td>
+                                    <td>{{u.firstName_en}} {{u.lastName_en}}</td>
+                                    <td>{{u.email}}</td>
                                     <td>22/03/2017</td>
-                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
