@@ -9,30 +9,24 @@ module Swu {
         showModal: boolean;
         ShowModalLogin(flag: boolean): void;
         Login(): void;
-        isLogin(): boolean;
+        Logout(): void;
         changeLanguage(lang: string): void;
     }
     @Module("app")
     @Controller({ name: "LoginController" })
     export class LoginController {
-        static $inject: Array<string> = ["$scope","$rootScope", "$state", "loginServices", "$translate"];
-        constructor(private $scope: ILoginScope,private $rootScope: IRootScope, private $state: ng.ui.IStateService, private loginServices: ILoginServices, private $translate: any) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "AuthServices", "$translate", "toastr"];
+        constructor(private $scope: ILoginScope, private $rootScope: IRootScope, private $state: ng.ui.IStateService, private auth: IAuthServices, private $translate: any, private toastr: Toastr) {
             this.$scope.ShowModalLogin = (flag: boolean) => {
                 this.$scope.showModal = flag;
             }
             this.$scope.Login = () => {
-                this.loginServices.login({ "userName": this.$scope.userName, "password": this.$scope.password }).then(
-                    (data: IUserProfile) => {
-                        this.$scope.userProfile = data;
-                        this.$scope.swapLanguage(this.$rootScope.lang);
-                        this.$scope.showModal = false;
-                        //this.$state.go("settings");
-                    },
-                    (error: any) => {
-                    });
+                this.auth.login({ "userName": this.$scope.userName, "password": this.$scope.password }, this.loginSuccess, this.loginFail);
             }
-            this.$scope.isLogin = (): boolean => {
-                return !(this.$scope.userProfile == undefined || this.$scope.userProfile == null);
+            this.$scope.Logout = () => {
+                this.auth.logout();
+                this.init();
+                console.log(this.$scope.userProfile);
             }
             this.$scope.swapLanguage = (lang: string): void => {
                 if ($scope.userProfile != null || $scope.userProfile != undefined) {
@@ -55,8 +49,21 @@ module Swu {
                 $rootScope.lang = lang;
                 $scope.swapLanguage(lang);
             };
+            this.init();
         }
+        loginSuccess = () => {
+            this.$scope.userProfile = this.auth.getCurrentUser();
+            this.$scope.showModal = false;
+            this.$scope.swapLanguage(this.$rootScope.lang);
+        };
+        loginFail = () => {
+            this.init();
+            this.toastr.error("Login failed");
+        };
         init = () => {
+            this.$scope.userProfile = this.auth.getCurrentUser();
+            this.$scope.userName = "";
+            this.$scope.password = "";
             this.$scope.showModal = false;
 
         }

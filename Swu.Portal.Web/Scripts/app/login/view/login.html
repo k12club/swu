@@ -17,7 +17,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 clearfix">
                 <div class="irs-log-reg">
-                    <ul class="list-inline" ng-show="isLogin()==false">
+                    <ul class="list-inline" ng-show="userProfile == null">
                         <li>
                             <a href="#"><div ng-click="ShowModalLogin(true)" translate="login.login"></div></a>
                             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" login-modal="showModal" data-backdrop="static">
@@ -77,11 +77,11 @@
                         <li><span class="lang-sm lang-lbl-en" lang="en" ng-click="changeLanguage('en')"></span></li>
                         <li><span class="lang-sm lang-lbl" lang="th" ng-click="changeLanguage('th')"></span></li>
                     </ul>
-                    <ul class="list-inline" ng-show="isLogin()==true">
+                    <ul class="list-inline" ng-show="userProfile != null">
                         <li>
                             <div class="dropdown">
                                 <button class="account-button-label" type="button" data-toggle="dropdown">
-                                    <span translate="login.loginAs"></span> &nbsp;&nbsp;{{userProfile.firstName}} {{userProfile.lastName}}
+                                    <span translate="login.loginAs"></span> &nbsp;&nbsp;{{userProfile.firstName_en}} {{userProfile.lastName_en}}
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -90,7 +90,7 @@
                                     <li><a href="#">Help</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Settings</a></li>
-                                    <li><a href="#">Sign out</a></li>
+                                    <li><a href="#" ng-click="Logout()">Sign out</a></li>
                                 </ul>
                             </div>
                         </li>

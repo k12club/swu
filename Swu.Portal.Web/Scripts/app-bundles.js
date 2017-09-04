@@ -435,7 +435,8 @@ var Swu;
         "ngSanitize",
         "underscore",
         "ui.bootstrap",
-        "pascalprecht.translate"
+        "pascalprecht.translate",
+        "ngCookies"
     ])
         .filter('range', function rangeFilter() {
         return function (input, total) {
@@ -459,12 +460,14 @@ var Swu;
                 return moment(date).format('DD/MM/YYYY');
             };
         }])
-        .run(["$state", "$http", "$rootScope", "AppConstant", function ($state, $http, $rootScope, AppConstant) {
+        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state, $http, $rootScope, AppConstant, AuthServices) {
             $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
+                }
+                if (AuthServices.isLoggedIn() == false) {
                 }
             });
             $rootScope.lang = AppConstant.defaultLang;
@@ -477,6 +480,7 @@ var Swu;
 (function (Swu) {
     var AppConstant = (function () {
         function AppConstant() {
+            this.timeoutExpired = 30;
             this.defaultLang = "en";
             this.api = {
                 protocal: "http",
@@ -586,29 +590,39 @@ var Swu;
 var Swu;
 (function (Swu) {
     var LoginController = (function () {
-        function LoginController($scope, $rootScope, $state, loginServices, $translate) {
+        function LoginController($scope, $rootScope, $state, auth, $translate, toastr) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$state = $state;
-            this.loginServices = loginServices;
+            this.auth = auth;
             this.$translate = $translate;
+            this.toastr = toastr;
+            this.loginSuccess = function () {
+                _this.$scope.userProfile = _this.auth.getCurrentUser();
+                _this.$scope.showModal = false;
+                _this.$scope.swapLanguage(_this.$rootScope.lang);
+            };
+            this.loginFail = function () {
+                _this.init();
+                _this.toastr.error("Login failed");
+            };
             this.init = function () {
+                _this.$scope.userProfile = _this.auth.getCurrentUser();
+                _this.$scope.userName = "";
+                _this.$scope.password = "";
                 _this.$scope.showModal = false;
             };
             this.$scope.ShowModalLogin = function (flag) {
                 _this.$scope.showModal = flag;
             };
             this.$scope.Login = function () {
-                _this.loginServices.login({ "userName": _this.$scope.userName, "password": _this.$scope.password }).then(function (data) {
-                    _this.$scope.userProfile = data;
-                    _this.$scope.swapLanguage(_this.$rootScope.lang);
-                    _this.$scope.showModal = false;
-                }, function (error) {
-                });
+                _this.auth.login({ "userName": _this.$scope.userName, "password": _this.$scope.password }, _this.loginSuccess, _this.loginFail);
             };
-            this.$scope.isLogin = function () {
-                return !(_this.$scope.userProfile == undefined || _this.$scope.userProfile == null);
+            this.$scope.Logout = function () {
+                _this.auth.logout();
+                _this.init();
+                console.log(_this.$scope.userProfile);
             };
             this.$scope.swapLanguage = function (lang) {
                 if ($scope.userProfile != null || $scope.userProfile != undefined) {
@@ -631,8 +645,9 @@ var Swu;
                 $rootScope.lang = lang;
                 $scope.swapLanguage(lang);
             };
+            this.init();
         }
-        LoginController.$inject = ["$scope", "$rootScope", "$state", "loginServices", "$translate"];
+        LoginController.$inject = ["$scope", "$rootScope", "$state", "AuthServices", "$translate", "toastr"];
         LoginController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "LoginController" })
@@ -644,17 +659,45 @@ var Swu;
 var Swu;
 (function (Swu) {
     var LoginServices = (function () {
-        function LoginServices(apiService, constant) {
+        function LoginServices(apiService, constant, $cookies) {
             this.apiService = apiService;
             this.constant = constant;
+            this.$cookies = $cookies;
         }
-        LoginServices.prototype.login = function (user) {
-            return this.apiService.postData(user, "account/login");
+        LoginServices.prototype.login = function (user, loginSuccessCallback, loginFailCallback) {
+            var _this = this;
+            this.apiService.postData(user, "account/login").then(function (response) {
+                _this.setCurrentUser(response);
+                loginSuccessCallback();
+            }, function (error) {
+                loginFailCallback();
+            });
         };
-        LoginServices.$inject = ['apiService', 'AppConstant'];
+        LoginServices.prototype.logout = function () {
+            this.$cookies.remove("currentUser");
+        };
+        ;
+        LoginServices.prototype.isLoggedIn = function () {
+            return this.getCurrentUser() != null;
+        };
+        ;
+        LoginServices.prototype.setCurrentUser = function (currentUser) {
+            this.$cookies.putObject("currentUser", JSON.stringify(currentUser), { expires: new Date(Date.now() + (60 * 1000 * this.constant.timeoutExpired)) });
+        };
+        ;
+        LoginServices.prototype.getCurrentUser = function () {
+            var user = this.$cookies.getObject("currentUser");
+            if (user != null) {
+                user = JSON.parse(user);
+            }
+            console.log(user);
+            return user;
+        };
+        ;
+        LoginServices.$inject = ['apiService', 'AppConstant', '$cookies'];
         LoginServices = __decorate([
             Swu.Module("app"),
-            Swu.Factory({ name: "loginServices" })
+            Swu.Factory({ name: "AuthServices" })
         ], LoginServices);
         return LoginServices;
     }());
@@ -961,14 +1004,16 @@ var Swu;
 var Swu;
 (function (Swu) {
     var HomeController = (function () {
-        function HomeController($scope, $state) {
+        function HomeController($scope, $state, auth) {
             this.$scope = $scope;
             this.$state = $state;
+            this.auth = auth;
+            this.init();
         }
         HomeController.prototype.init = function () {
         };
         ;
-        HomeController.$inject = ["$scope", "$state"];
+        HomeController.$inject = ["$scope", "$state", "AuthServices"];
         HomeController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "HomeController" })
@@ -2622,6 +2667,7 @@ var Swu;
                     _this.userService.addNew(_this.$scope.user).then(function (response) {
                         _this.$scope.$parent.showModal = false;
                         if (response) {
+                            _this.$scope.$parent.getUsers();
                             _this.toastr.success("Success");
                         }
                         else {

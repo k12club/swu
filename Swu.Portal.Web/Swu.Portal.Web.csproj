@@ -842,7 +842,7 @@
     <TypeScriptCompile Include="Scripts\model\teacher.ts" />
     <TypeScriptCompile Include="Scripts\model\userLogin.ts" />
     <TypeScriptCompile Include="Scripts\model\userProfile.ts" />
-    <TypeScriptCompile Include="Scripts\app\login\services\loginServices.ts" />
+    <TypeScriptCompile Include="Scripts\app\login\services\AuthServices.ts" />
     <TypeScriptCompile Include="Scripts\app\login\controller\LoginController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\SettingCoursesController.ts" />

@@ -15,7 +15,7 @@
     "Scripts/filter/range.ts",
 
     "Scripts/app/login/controller/LoginController.ts",
-    "Scripts/app/login/services/loginServices.ts",
+    "Scripts/app/login/services/AuthServices.ts",
 
     "Scripts/app/app_routing.ts",
     "Scripts/app/home/app_routing.ts",

@@ -7,6 +7,7 @@ module Swu {
         constructor() {
 
         }
+        timeoutExpired = 30;
         defaultLang = "en";
         api = {
             protocal: "http",

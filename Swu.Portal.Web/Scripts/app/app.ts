@@ -21,7 +21,8 @@ module Swu {
             "ngSanitize",
             "underscore",
             "ui.bootstrap",
-            "pascalprecht.translate"
+            "pascalprecht.translate",
+            "ngCookies"
         ])
         .filter('range', function rangeFilter() {
             return function (input: number[], total: number) {
@@ -45,12 +46,15 @@ module Swu {
                 return moment(date).format('DD/MM/YYYY');
             };
         }])
-        .run(["$state", "$http", "$rootScope", "AppConstant", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant) {
+        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant, AuthServices: IAuthServices) {
             $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
+                }
+                if (AuthServices.isLoggedIn() ==false) {
+                    //Todo: force to login before do any operation
                 }
             });
             $rootScope.lang = AppConstant.defaultLang;

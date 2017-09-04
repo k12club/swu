@@ -27,8 +27,18 @@ namespace Swu.Portal.Web.Api
             //password:password
             if (ModelState.IsValid)
             {
-                var user = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
-                return user.ToUserProfileViewModel();
+                var u = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
+                var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
+                return new UserProfile
+                {
+                    UserName = u.UserName,
+                    FirstName_EN = u.FirstName_EN,
+                    LastName_EN = u.LastName_EN,
+                    FirstName_TH = u.FirstName_TH,
+                    LastName_TH = u.LastName_TH,
+                    Email = u.Email,
+                    SelectedRoleName = selectedRoleName
+                };
             }
             return null;
         }
