@@ -2700,6 +2700,7 @@ var Swu;
             this.init();
         }
         UsersModalController.prototype.init = function () {
+            $("#form").validator();
             this.$scope.getRoles();
         };
         ;

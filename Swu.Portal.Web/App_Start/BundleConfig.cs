@@ -70,7 +70,8 @@ namespace Swu.Portal.Web
                 "~/Scripts/utilities/moment-with-locales.min.js"));
 
             bundles.Add(new ScriptBundle("~/theme/js")
-                .Include("~/Content/js/validator.min.js",
+                .Include(
+                "~/Content/js/validator.min.js",
                 "~/Content/js/jquery.js",
                 "~/Content/js/jquery-ui.min.js",
                 "~/Content/js/bootstrap.min.js",

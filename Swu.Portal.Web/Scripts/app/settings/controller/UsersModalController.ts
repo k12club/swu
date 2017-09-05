@@ -42,6 +42,7 @@
                 this.$modalInstance.dismiss("");
             }
             this.$scope.submit = () => {
+                
                 //if (this.$scope.isValid()) {
                     //var _selectedRole = _.filter(this.$scope.roles, function (item, index) {
                     //    return item.id == $scope.selectedRole;
@@ -62,6 +63,7 @@
             this.init();
         }
         init(): void {
+            $("#form").validator();
             this.$scope.getRoles();
         };
 

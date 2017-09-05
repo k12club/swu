@@ -74,7 +74,7 @@ namespace Swu.Portal.Data.Migrations
                 LastName_EN = "kochasen",
                 FirstName_TH = "ªÒ­ÈÑ¡´Ôì",
                 LastName_TH = "¤ªàÊ¹",
-                Email = "chansak.kochasen@allianz.com",
+                Email = "chansakcsc@gmail.com.com",
 
             };
             userManager.Create(admin, "password");

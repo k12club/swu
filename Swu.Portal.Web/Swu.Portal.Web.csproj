@@ -603,6 +603,7 @@
     <Content Include="Content\js\jquery.magnific-popup.min.js" />
     <Content Include="Content\js\jquery.masonry.min.js" />
     <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.validate.js" />
     <Content Include="Content\js\nivolightbox.js" />
     <Content Include="Content\js\owl.carousel.min.js" />
     <Content Include="Content\js\respond.min.js" />
