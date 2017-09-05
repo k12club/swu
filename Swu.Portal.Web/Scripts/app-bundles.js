@@ -622,7 +622,7 @@ var Swu;
             this.$scope.Logout = function () {
                 _this.auth.logout();
                 _this.init();
-                console.log(_this.$scope.userProfile);
+                _this.$state.go("app");
             };
             this.$scope.swapLanguage = function (lang) {
                 if ($scope.userProfile != null || $scope.userProfile != undefined) {
@@ -2594,6 +2594,9 @@ var Swu;
                     resolve: {
                         userId: function () {
                             return "";
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
                         }
                     }
                 };
@@ -2608,6 +2611,26 @@ var Swu;
                     resolve: {
                         userId: function () {
                             return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getUsers();
+                });
+            };
+            this.$scope.approve = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/user.tmpl.html',
+                    controller: Swu.UsersModalController,
+                    resolve: {
+                        userId: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.approve;
                         }
                     }
                 };
@@ -2667,7 +2690,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var UsersModalController = (function () {
-        function UsersModalController($scope, $state, userService, toastr, $modalInstance, userId) {
+        function UsersModalController($scope, $state, userService, toastr, $modalInstance, userId, mode) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -2675,21 +2698,33 @@ var Swu;
             this.toastr = toastr;
             this.$modalInstance = $modalInstance;
             this.userId = userId;
+            this.mode = mode;
             this.$scope.id = userId;
-            this.$scope.mode = (userId != "") ? Swu.actionMode.edit : Swu.actionMode.addNew;
-            if (this.$scope.mode == Swu.actionMode.edit) {
+            console.log(mode);
+            if (mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New User";
+            }
+            else if (mode == 2) {
                 this.$scope.title = "Edit User";
+                this.$scope.mode = Swu.actionMode.edit;
+            }
+            else {
+                this.$scope.title = "Add role to user";
+                this.$scope.mode = Swu.actionMode.approve;
+            }
+            console.log(this.$scope.mode);
+            if (this.$scope.mode == Swu.actionMode.edit || this.$scope.mode == Swu.actionMode.approve) {
                 this.userService.getById(this.$scope.id).then(function (response) {
                     _this.$scope.user = response;
                     _this.$scope.user.password = "dummypassword";
                     _this.$scope.user.rePassword = "dummypassword";
-                    _this.$scope.selectedRole = _.filter(_this.$scope.roles, function (item, index) {
-                        return item.name == $scope.user.selectedRoleName;
-                    })[0].id;
+                    if (_this.$scope.mode == Swu.actionMode.edit) {
+                        _this.$scope.selectedRole = _.filter(_this.$scope.roles, function (item, index) {
+                            return item.name == $scope.user.selectedRoleName;
+                        })[0].id;
+                    }
                 }, function (error) { });
-            }
-            else {
-                this.$scope.title = "Add New User";
             }
             this.$scope.validate = function () {
                 $('form').validator();
@@ -2730,7 +2765,7 @@ var Swu;
             this.$scope.getRoles();
         };
         ;
-        UsersModalController.$inject = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId"];
+        UsersModalController.$inject = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId", "mode"];
         UsersModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "UsersModalController" })
@@ -2849,6 +2884,7 @@ var Swu;
     (function (actionMode) {
         actionMode[actionMode["addNew"] = 1] = "addNew";
         actionMode[actionMode["edit"] = 2] = "edit";
+        actionMode[actionMode["approve"] = 3] = "approve";
     })(Swu.actionMode || (Swu.actionMode = {}));
     var actionMode = Swu.actionMode;
 })(Swu || (Swu = {}));

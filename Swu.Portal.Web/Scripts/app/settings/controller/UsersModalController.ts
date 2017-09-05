@@ -17,22 +17,32 @@
     @Module("app")
     @Controller({ name: "UsersModalController" })
     export class UsersModalController {
-        static $inject: Array<string> = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId"];
-        constructor(private $scope: UserModalScope, private $state: ng.ui.IState, private userService: IuserService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private userId: string) {
+        static $inject: Array<string> = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId","mode"];
+        constructor(private $scope: UserModalScope, private $state: ng.ui.IState, private userService: IuserService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private userId: string,private mode :number) {
             this.$scope.id = userId;
-            this.$scope.mode = (userId != "") ? actionMode.edit : actionMode.addNew;
-            if (this.$scope.mode == actionMode.edit) {
+            console.log(mode);
+            if (mode == 1) {
+                this.$scope.mode = actionMode.addNew;
+                this.$scope.title = "Add New User";
+            } else if (mode == 2) {
                 this.$scope.title = "Edit User";
+                this.$scope.mode = actionMode.edit;
+            } else {
+                this.$scope.title = "Add role to user";
+                this.$scope.mode = actionMode.approve;
+            }
+            console.log(this.$scope.mode);
+            if (this.$scope.mode == actionMode.edit || this.$scope.mode == actionMode.approve) {
                 this.userService.getById(this.$scope.id).then((response) => {
                     this.$scope.user = response;
                     this.$scope.user.password = "dummypassword";
                     this.$scope.user.rePassword = "dummypassword";
-                    this.$scope.selectedRole = _.filter(this.$scope.roles, function (item, index) {
-                        return item.name == $scope.user.selectedRoleName;
-                    })[0].id;
+                    if (this.$scope.mode == actionMode.edit) {
+                        this.$scope.selectedRole = _.filter(this.$scope.roles, function (item, index) {
+                            return item.name == $scope.user.selectedRoleName;
+                        })[0].id;
+                    }
                 }, (error) => { });
-            } else {
-                this.$scope.title = "Add New User";
             }
             this.$scope.validate = (): void => {
                 $('form').validator();

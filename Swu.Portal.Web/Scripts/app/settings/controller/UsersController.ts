@@ -5,6 +5,7 @@
         getUsers(): void;
         addNew(): void;
         edit(id: string): void;
+        approve(id: string): void;
     }
     @Module("app")
     @Controller({ name: "UsersController" })
@@ -18,6 +19,9 @@
                     resolve: {
                         userId: function () {
                             return "";
+                        },
+                        mode: function () {
+                            return actionMode.addNew;
                         }
                     }
                 };
@@ -32,6 +36,26 @@
                     resolve: {
                         userId: function () {
                             return id;
+                        },
+                        mode: function () {
+                            return actionMode.edit;
+                        }
+                    }
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getUsers();
+                });
+            };
+            this.$scope.approve = (id: string) => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/settings/view/user.tmpl.html',
+                    controller: UsersModalController,
+                    resolve: {
+                        userId: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return actionMode.approve;
                         }
                     }
                 };

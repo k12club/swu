@@ -24,7 +24,7 @@
             this.$scope.Logout = () => {
                 this.auth.logout();
                 this.init();
-                console.log(this.$scope.userProfile);
+                this.$state.go("app");
             }
             this.$scope.swapLanguage = (lang: string): void => {
                 if ($scope.userProfile != null || $scope.userProfile != undefined) {

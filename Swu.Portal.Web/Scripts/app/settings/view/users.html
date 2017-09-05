@@ -54,17 +54,17 @@
                             <thead>
                                 <tr class="irs-table-deading style2">
                                     <th>User Name</th>
+                                    <th>Name</th>
                                     <th>Email</th>
                                     <th>Registered</th>
-                                    <th>View</th>
                                 </tr>
                             </thead>
                             <tbody class="irs-table-body style2">
                                 <tr ng-repeat="u in waiting">
-                                    <td>{{u.userName}}</td>
+                                    <th><a href="" ng-click="approve(u.id)">{{u.userName}}</a></th>
                                     <td>{{u.firstName_en}} {{u.lastName_en}}</td>
                                     <td>{{u.email}}</td>
-                                    <td>22/03/2017</td>
+                                    <td>{{u.registrationDate|date:'dd/MM/yyyy hh:mm:ss'}}</td>
                                 </tr>
                             </tbody>
                         </table>
