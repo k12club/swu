@@ -21,7 +21,9 @@
                         }
                     }
                 };
-                this.$uibModal.open(options).result.then(() => { });
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getUsers();
+                });
             }
             this.$scope.edit = (id: string) => {
                 var options: ng.ui.bootstrap.IModalSettings = {
@@ -33,7 +35,9 @@
                         }
                     }
                 };
-                this.$uibModal.open(options).result.then(() => { });
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getUsers();
+                });
             };
             this.$scope.getUsers = (): void => {
                 this.userService.getAllUsers().then((response) => {

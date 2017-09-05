@@ -2597,7 +2597,9 @@ var Swu;
                         }
                     }
                 };
-                _this.$uibModal.open(options).result.then(function () { });
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getUsers();
+                });
             };
             this.$scope.edit = function (id) {
                 var options = {
@@ -2609,7 +2611,9 @@ var Swu;
                         }
                     }
                 };
-                _this.$uibModal.open(options).result.then(function () { });
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getUsers();
+                });
             };
             this.$scope.getUsers = function () {
                 _this.userService.getAllUsers().then(function (response) {
@@ -2677,30 +2681,52 @@ var Swu;
                 this.$scope.title = "Edit User";
                 this.userService.getById(this.$scope.id).then(function (response) {
                     _this.$scope.user = response;
-                    console.log(_this.$scope.user);
+                    _this.$scope.user.password = "dummypassword";
+                    _this.$scope.user.rePassword = "dummypassword";
+                    _this.$scope.selectedRole = _.filter(_this.$scope.roles, function (item, index) {
+                        return item.name == $scope.user.selectedRoleName;
+                    })[0].id;
                 }, function (error) { });
             }
             else {
                 this.$scope.title = "Add New User";
             }
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
             this.$scope.getRoles = function () {
                 _this.userService.getRoles().then(function (response) {
                     _this.$scope.roles = response;
                     _this.$scope.selectedRole = _.first(_this.$scope.roles).id;
                 }, function (error) { });
             };
-            this.$scope.ok = function () {
-                _this.$modalInstance.close();
-            };
             this.$scope.cancel = function () {
                 _this.$modalInstance.dismiss("");
             };
             this.$scope.submit = function () {
+                if (_this.$scope.isValid()) {
+                    var _selectedRole = _.filter(_this.$scope.roles, function (item, index) {
+                        return item.id == $scope.selectedRole;
+                    });
+                    _this.$scope.user.selectedRoleName = _selectedRole[0].name;
+                    _this.userService.addNewOrUpdate(_this.$scope.user).then(function (response) {
+                        if (response) {
+                            _this.$modalInstance.close();
+                            _this.toastr.success("Success");
+                        }
+                        else {
+                            _this.toastr.error("Error");
+                        }
+                        _this.$scope.user = {};
+                    }, function (error) { });
+                }
             };
             this.init();
         }
         UsersModalController.prototype.init = function () {
-            $("#form").validator();
             this.$scope.getRoles();
         };
         ;
@@ -2723,8 +2749,8 @@ var Swu;
         userService.prototype.getRoles = function () {
             return this.apiService.getData("role/all");
         };
-        userService.prototype.addNew = function (user) {
-            return this.apiService.postData(user, "Account/addNew");
+        userService.prototype.addNewOrUpdate = function (user) {
+            return this.apiService.postData(user, "Account/addNewOrUpdate");
         };
         userService.prototype.getAllUsers = function () {
             return this.apiService.getData("Account/all");

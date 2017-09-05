@@ -1,4 +1,5 @@
-﻿using Swu.Portal.Data.Models;
+﻿using Swu.Portal.Core.Dependencies;
+using Swu.Portal.Data.Models;
 using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
 using System;
@@ -14,9 +15,11 @@ namespace Swu.Portal.Web.Api
     public class AccountController : ApiController
     {
         private readonly IApplicationUserServices _applicationUserServices;
-        public AccountController(IApplicationUserServices applicationUserServices)
+        private readonly IDateTimeRepository _datetimeRepository;
+        public AccountController(IApplicationUserServices applicationUserServices, IDateTimeRepository datetimeRepository)
         {
             this._applicationUserServices = applicationUserServices;
+            this._datetimeRepository = datetimeRepository;
         }
         [HttpPost, Route("login")]
         public UserProfile Login(UserLoginProxy model)
@@ -43,8 +46,8 @@ namespace Swu.Portal.Web.Api
             }
             return null;
         }
-        [HttpPost, Route("addNew")]
-        public bool AddNew(UserProfile model)
+        [HttpPost, Route("addNewOrUpdate")]
+        public bool AddNewOrUpdate(UserProfile model)
         {
             if (ModelState.IsValid)
             {
@@ -53,9 +56,20 @@ namespace Swu.Portal.Web.Api
                     UserName = model.UserName,
                     FirstName_EN = model.FirstName_EN,
                     LastName_EN = model.LastName_EN,
+                    FirstName_TH = model.FirstName_TH,
+                    LastName_TH = model.LastName_TH,
                     Email = model.Email,
                 };
-                return this._applicationUserServices.AddNewUser(user, model.Password, model.SelectedRoleName);
+                var result = false;
+                if (string.IsNullOrWhiteSpace(model.Id)) {
+                    user.CreatedDate = this._datetimeRepository.Now();
+                    user.UpdatedDate = this._datetimeRepository.Now();
+                    result = this._applicationUserServices.AddNewUser(user, model.Password, model.SelectedRoleName);
+                } else {
+                    user.UpdatedDate = this._datetimeRepository.Now();
+                    result = this._applicationUserServices.Update(user, model.SelectedRoleName);
+                }
+                return result;
             }
             return false;
         }
@@ -76,7 +90,10 @@ namespace Swu.Portal.Web.Api
                     FirstName_TH = u.FirstName_TH,
                     LastName_TH = u.LastName_TH,
                     Email = u.Email,
-                    SelectedRoleName = selectedRoleName
+                    SelectedRoleName = selectedRoleName,
+                    CreatedDate = u.CreatedDate,
+                    UpdateDate = u.UpdatedDate,
+                    RegistrationDate = u.RegistrationDate
                 });
             }
             return result;

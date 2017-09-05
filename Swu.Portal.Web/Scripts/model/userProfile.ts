@@ -11,5 +11,8 @@
         rePassword?: string;
         selectedRoleName?: string;
         displayRoleName?: string;
+        createdDate?: Date;
+        updateDate?: Date;
+        registrationDate?: Date;
     }
 }

@@ -30,5 +30,13 @@ namespace Swu.Portal.Web.Api
         public string SelectedRoleId { get; set; }
         [JsonProperty(PropertyName = "selectedRoleName")]
         public string SelectedRoleName { get; set; }
+
+        [JsonProperty(PropertyName = "createdDate")]
+        public DateTime? CreatedDate { get; set; }
+        [JsonProperty(PropertyName = "updateDate")]
+        public DateTime? UpdateDate { get; set; }
+        [JsonProperty(PropertyName = "registrationDate")]
+        public DateTime? RegistrationDate { get; set; }
+
     }
 }

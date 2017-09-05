@@ -1,7 +1,7 @@
 ﻿module Swu {
     export interface IuserService {
         getRoles(): ng.IPromise<IRole[]>;
-        addNew(user: IUserProfile): ng.IPromise<boolean>;
+        addNewOrUpdate(user: IUserProfile): ng.IPromise<boolean>;
         getAllUsers(): ng.IPromise<IUserProfile[]>;
         getById(id: string): ng.IPromise<IUserProfile>;
     }
@@ -15,8 +15,8 @@
         getRoles(): ng.IPromise<IRole[]> {
             return this.apiService.getData<IRole[]>("role/all");
         }
-        addNew(user: IUserProfile): ng.IPromise<boolean> {
-            return this.apiService.postData<boolean>(user, "Account/addNew");
+        addNewOrUpdate(user: IUserProfile): ng.IPromise<boolean> {
+            return this.apiService.postData<boolean>(user, "Account/addNewOrUpdate");
         }
         getAllUsers(): ng.IPromise<IUserProfile[]> {
             return this.apiService.getData<IUserProfile[]>("Account/all");

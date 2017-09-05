@@ -19,6 +19,13 @@ namespace Swu.Portal.Data.Models
         public string Description { get; set; }
         public string StudentId { get; set; }
 
+        [Column(TypeName = "datetime2")]
+        public DateTime? CreatedDate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime? UpdatedDate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime? RegistrationDate { get; set; }
+
         public virtual ICollection<Forum> Forums { get; set; }
 
         public virtual ICollection<Course> TeacherCourses { get; set; }

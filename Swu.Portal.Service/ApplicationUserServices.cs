@@ -14,6 +14,7 @@ namespace Swu.Portal.Service
         ApplicationUser GetUser(string username);
         ApplicationUser VerifyAndGetUser(string username,string password);
         bool AddNewUser(ApplicationUser user ,string password,string selectedRoleName);
+        bool Update(ApplicationUser user, string selectedRoleName);
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
@@ -51,6 +52,12 @@ namespace Swu.Portal.Service
             return this._applicationUserRepository.GetUser(username);
 
         }
+
+        public bool Update(ApplicationUser user, string selectedRoleName)
+        {
+            return this._applicationUserRepository.Update(user, selectedRoleName);
+        }
+
         public ApplicationUser VerifyAndGetUser(string username, string password)
         {
             return this._applicationUserRepository.VerifyAndGetUser(username, password);

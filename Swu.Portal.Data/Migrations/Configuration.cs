@@ -75,6 +75,8 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "ªÒ­ÈÑ¡´Ôì",
                 LastName_TH = "¤ªàÊ¹",
                 Email = "chansakcsc@gmail.com.com",
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
 
             };
             userManager.Create(admin, "password");

@@ -17,6 +17,7 @@ namespace Swu.Portal.Data.Repository
         ApplicationUser VerifyAndGetUser(string username, string password);
         ApplicationUser GetUser(string username);
         bool AddNew(ApplicationUser user, string password, string selectedRoleName);
+        bool Update(ApplicationUser user, string selectedRoleName);
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
@@ -35,7 +36,7 @@ namespace Swu.Portal.Data.Repository
         {
             var addUserResult = false;
             var addToRoleResult = false;
-            addUserResult =  this._userManager.Create(user, password).Succeeded;
+            addUserResult = this._userManager.Create(user, password).Succeeded;
             if (addUserResult)
             {
                 var u = this._userManager.FindByName(user.UserName);
@@ -78,6 +79,30 @@ namespace Swu.Portal.Data.Repository
         public ApplicationUser getById(string id)
         {
             return this._userManager.FindById(id);
+        }
+
+        public bool Update(ApplicationUser user, string selectedRoleName)
+        {
+            var updateUserResult = false;
+            var updateRoleResult = false;
+            var u = this._userManager.FindByName(user.UserName);
+            u.FirstName_EN = user.FirstName_EN;
+            u.LastName_EN = user.LastName_EN;
+            u.FirstName_TH = user.FirstName_TH;
+            u.LastName_TH = user.LastName_TH;
+            u.Email = user.Email;
+            u.UpdatedDate = user.UpdatedDate;
+            updateUserResult = this._userManager.Update(u).Succeeded;
+            if (updateUserResult)
+            {
+                var roles = this._userManager.GetRoles(u.Id);
+                foreach (var role in roles)
+                {
+                    this._userManager.RemoveFromRole(u.Id, role);
+                }
+                updateRoleResult = this._userManager.AddToRole(u.Id, selectedRoleName).Succeeded;
+            }
+            return updateUserResult && updateRoleResult;
         }
     }
 }
