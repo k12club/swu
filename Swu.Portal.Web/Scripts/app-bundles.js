@@ -545,6 +545,33 @@ var Swu;
             });
             return def.promise;
         };
+        apiService.prototype.postWithFormData = function (models, url, contentType) {
+            var url = this.constant.api.versionName + "/" + url;
+            var def = this.$q.defer();
+            this.$http({
+                url: url,
+                method: 'POST',
+                transformRequest: function (data) {
+                    var formData = new FormData();
+                    angular.forEach(models, function (value, key) {
+                        if (models[key].name == "file") {
+                            formData.append(models[key].name, models[key].value);
+                        }
+                        else {
+                            formData.append(models[key].name, angular.toJson(models[key].value));
+                        }
+                    });
+                    return formData;
+                },
+                headers: { 'Content-Type': undefined },
+                data: models
+            }).then(function (successResponse) {
+                def.resolve(successResponse.data);
+            }, function (errorRes) {
+                def.reject(errorRes);
+            });
+            return def.promise;
+        };
         apiService.$inject = ['$q', '$http', 'AppConstant'];
         apiService = __decorate([
             Swu.Module("app"),
@@ -573,6 +600,30 @@ var Swu;
             Swu.Directive({ name: "loginModal" })
         ], loginModal);
         return loginModal;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var fileModel = (function () {
+        function fileModel($parse) {
+            this.$parse = $parse;
+            this.restric = "A";
+        }
+        fileModel.prototype.link = function (scope, element, attrs) {
+            var model = this.$parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            element.bind('change', function () {
+                scope.$apply(function () {
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        };
+        fileModel.$inject = ["$parse"];
+        fileModel = __decorate([
+            Swu.Module("app"),
+            Swu.Directive({ name: "fileModel" })
+        ], fileModel);
+        return fileModel;
     }());
 })(Swu || (Swu = {}));
 var Swu;
@@ -864,7 +915,7 @@ var Swu;
                     '': { templateUrl: '/Scripts/app/settings/main.html' },
                     'subContent@settings': {
                         templateUrl: '/Scripts/app/settings/default.html',
-                        controller: 'SettingCoursesController as vm'
+                        controller: 'ProfileController as vm'
                     }
                 }
             })
@@ -2561,22 +2612,40 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
-    var SettingCoursesController = (function () {
-        function SettingCoursesController($scope, $state) {
+    var ProfileController = (function () {
+        function ProfileController($scope, $state, profileService, auth) {
+            var _this = this;
             this.$scope = $scope;
             this.$state = $state;
+            this.profileService = profileService;
+            this.auth = auth;
+            this.$scope.getCurrentUser = function () {
+                _this.$scope.currentUser = _this.auth.getCurrentUser();
+                console.log(_this.$scope.currentUser);
+            };
+            this.$scope.save = function () {
+                var models = [];
+                models.push({ name: "file", value: _this.$scope.file });
+                models.push({ name: "dummy", value: {} });
+                console.log(models);
+                _this.profileService.updateUserProfile(models).then(function (response) {
+                    console.log(response);
+                }, function (error) { });
+            };
+            this.init();
         }
-        SettingCoursesController.prototype.init = function () {
+        ProfileController.prototype.init = function () {
+            this.$scope.getCurrentUser();
         };
         ;
-        SettingCoursesController.$inject = ["$scope", "$state"];
-        SettingCoursesController = __decorate([
+        ProfileController.$inject = ["$scope", "$state", "profileService", "AuthServices"];
+        ProfileController = __decorate([
             Swu.Module("app"),
-            Swu.Controller({ name: "SettingCoursesController" })
-        ], SettingCoursesController);
-        return SettingCoursesController;
+            Swu.Controller({ name: "ProfileController" })
+        ], ProfileController);
+        return ProfileController;
     }());
-    Swu.SettingCoursesController = SettingCoursesController;
+    Swu.ProfileController = ProfileController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -2713,7 +2782,6 @@ var Swu;
                 this.$scope.title = "Add role to user";
                 this.$scope.mode = Swu.actionMode.approve;
             }
-            console.log(this.$scope.mode);
             if (this.$scope.mode == Swu.actionMode.edit || this.$scope.mode == Swu.actionMode.approve) {
                 this.userService.getById(this.$scope.id).then(function (response) {
                     _this.$scope.user = response;
@@ -2747,6 +2815,7 @@ var Swu;
                         return item.id == $scope.selectedRole;
                     });
                     _this.$scope.user.selectedRoleName = _selectedRole[0].name;
+                    console.log(_this.$scope.user);
                     _this.userService.addNewOrUpdate(_this.$scope.user).then(function (response) {
                         if (response) {
                             _this.$modalInstance.close();
@@ -2799,6 +2868,24 @@ var Swu;
             Swu.Factory({ name: "userService" })
         ], userService);
         return userService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var profileService = (function () {
+        function profileService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        profileService.prototype.updateUserProfile = function (models) {
+            return this.apiService.postWithFormData(models, "Account/uploadAsync");
+        };
+        profileService.$inject = ['apiService', 'AppConstant'];
+        profileService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "profileService" })
+        ], profileService);
+        return profileService;
     }());
 })(Swu || (Swu = {}));
 var Swu;
@@ -2887,4 +2974,63 @@ var Swu;
         actionMode[actionMode["approve"] = 3] = "approve";
     })(Swu.actionMode || (Swu.actionMode = {}));
     var actionMode = Swu.actionMode;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    (function (HttpStatusCode) {
+        HttpStatusCode[HttpStatusCode["Continue"] = 100] = "Continue";
+        HttpStatusCode[HttpStatusCode["SwitchingProtocols"] = 101] = "SwitchingProtocols";
+        HttpStatusCode[HttpStatusCode["OK"] = 200] = "OK";
+        HttpStatusCode[HttpStatusCode["Created"] = 201] = "Created";
+        HttpStatusCode[HttpStatusCode["Accepted"] = 202] = "Accepted";
+        HttpStatusCode[HttpStatusCode["NonAuthoritativeInformation"] = 203] = "NonAuthoritativeInformation";
+        HttpStatusCode[HttpStatusCode["NoContent"] = 204] = "NoContent";
+        HttpStatusCode[HttpStatusCode["ResetContent"] = 205] = "ResetContent";
+        HttpStatusCode[HttpStatusCode["PartialContent"] = 206] = "PartialContent";
+        HttpStatusCode[HttpStatusCode["MultipleChoices"] = 300] = "MultipleChoices";
+        HttpStatusCode[HttpStatusCode["Ambiguous"] = 300] = "Ambiguous";
+        HttpStatusCode[HttpStatusCode["MovedPermanently"] = 301] = "MovedPermanently";
+        HttpStatusCode[HttpStatusCode["Moved"] = 301] = "Moved";
+        HttpStatusCode[HttpStatusCode["Found"] = 302] = "Found";
+        HttpStatusCode[HttpStatusCode["Redirect"] = 302] = "Redirect";
+        HttpStatusCode[HttpStatusCode["SeeOther"] = 303] = "SeeOther";
+        HttpStatusCode[HttpStatusCode["RedirectMethod"] = 303] = "RedirectMethod";
+        HttpStatusCode[HttpStatusCode["NotModified"] = 304] = "NotModified";
+        HttpStatusCode[HttpStatusCode["UseProxy"] = 305] = "UseProxy";
+        HttpStatusCode[HttpStatusCode["Unused"] = 306] = "Unused";
+        HttpStatusCode[HttpStatusCode["RedirectKeepVerb"] = 307] = "RedirectKeepVerb";
+        HttpStatusCode[HttpStatusCode["TemporaryRedirect"] = 307] = "TemporaryRedirect";
+        HttpStatusCode[HttpStatusCode["BadRequest"] = 400] = "BadRequest";
+        HttpStatusCode[HttpStatusCode["Unauthorized"] = 401] = "Unauthorized";
+        HttpStatusCode[HttpStatusCode["PaymentRequired"] = 402] = "PaymentRequired";
+        HttpStatusCode[HttpStatusCode["Forbidden"] = 403] = "Forbidden";
+        HttpStatusCode[HttpStatusCode["NotFound"] = 404] = "NotFound";
+        HttpStatusCode[HttpStatusCode["MethodNotAllowed"] = 405] = "MethodNotAllowed";
+        HttpStatusCode[HttpStatusCode["NotAcceptable"] = 406] = "NotAcceptable";
+        HttpStatusCode[HttpStatusCode["ProxyAuthenticationRequired"] = 407] = "ProxyAuthenticationRequired";
+        HttpStatusCode[HttpStatusCode["RequestTimeout"] = 408] = "RequestTimeout";
+        HttpStatusCode[HttpStatusCode["Conflict"] = 409] = "Conflict";
+        HttpStatusCode[HttpStatusCode["Gone"] = 410] = "Gone";
+        HttpStatusCode[HttpStatusCode["LengthRequired"] = 411] = "LengthRequired";
+        HttpStatusCode[HttpStatusCode["PreconditionFailed"] = 412] = "PreconditionFailed";
+        HttpStatusCode[HttpStatusCode["RequestEntityTooLarge"] = 413] = "RequestEntityTooLarge";
+        HttpStatusCode[HttpStatusCode["RequestUriTooLong"] = 414] = "RequestUriTooLong";
+        HttpStatusCode[HttpStatusCode["UnsupportedMediaType"] = 415] = "UnsupportedMediaType";
+        HttpStatusCode[HttpStatusCode["RequestedRangeNotSatisfiable"] = 416] = "RequestedRangeNotSatisfiable";
+        HttpStatusCode[HttpStatusCode["ExpectationFailed"] = 417] = "ExpectationFailed";
+        HttpStatusCode[HttpStatusCode["UpgradeRequired"] = 426] = "UpgradeRequired";
+        HttpStatusCode[HttpStatusCode["InternalServerError"] = 500] = "InternalServerError";
+        HttpStatusCode[HttpStatusCode["NotImplemented"] = 501] = "NotImplemented";
+        HttpStatusCode[HttpStatusCode["BadGateway"] = 502] = "BadGateway";
+        HttpStatusCode[HttpStatusCode["ServiceUnavailable"] = 503] = "ServiceUnavailable";
+        HttpStatusCode[HttpStatusCode["GatewayTimeout"] = 504] = "GatewayTimeout";
+        HttpStatusCode[HttpStatusCode["HttpVersionNotSupported"] = 505] = "HttpVersionNotSupported";
+    })(Swu.HttpStatusCode || (Swu.HttpStatusCode = {}));
+    var HttpStatusCode = Swu.HttpStatusCode;
+    (function (EmployeeType) {
+        EmployeeType[EmployeeType["NotEmployee"] = 0] = "NotEmployee";
+        EmployeeType[EmployeeType["Permanent"] = 1] = "Permanent";
+        EmployeeType[EmployeeType["Guest"] = 2] = "Guest";
+    })(Swu.EmployeeType || (Swu.EmployeeType = {}));
+    var EmployeeType = Swu.EmployeeType;
 })(Swu || (Swu = {}));

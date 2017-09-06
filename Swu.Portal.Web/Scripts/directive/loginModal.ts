@@ -1,6 +1,4 @@
-﻿/// <reference path="../_references.ts" />
-
-module Swu {
+﻿module Swu {
     @Module("app")
     @Directive({ name: "loginModal" })
     class loginModal implements ng.IDirective {

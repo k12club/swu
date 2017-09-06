@@ -4,9 +4,14 @@ using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace Swu.Portal.Web.Api
@@ -14,6 +19,8 @@ namespace Swu.Portal.Web.Api
     [RoutePrefix("V1/Account")]
     public class AccountController : ApiController
     {
+        private const string UPLOAD_DIR = "uploads";
+
         private readonly IApplicationUserServices _applicationUserServices;
         private readonly IDateTimeRepository _datetimeRepository;
         public AccountController(IApplicationUserServices applicationUserServices, IDateTimeRepository datetimeRepository)
@@ -32,17 +39,7 @@ namespace Swu.Portal.Web.Api
             {
                 var u = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return new UserProfile
-                {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    FirstName_EN = u.FirstName_EN,
-                    LastName_EN = u.LastName_EN,
-                    FirstName_TH = u.FirstName_TH,
-                    LastName_TH = u.LastName_TH,
-                    Email = u.Email,
-                    SelectedRoleName = selectedRoleName
-                };
+                return Mapping(u, selectedRoleName);
             }
             return null;
         }
@@ -61,11 +58,14 @@ namespace Swu.Portal.Web.Api
                     Email = model.Email,
                 };
                 var result = false;
-                if (string.IsNullOrWhiteSpace(model.Id)) {
+                if (string.IsNullOrWhiteSpace(model.Id))
+                {
                     user.CreatedDate = this._datetimeRepository.Now();
                     user.UpdatedDate = this._datetimeRepository.Now();
                     result = this._applicationUserServices.AddNewUser(user, model.Password, model.SelectedRoleName);
-                } else {
+                }
+                else
+                {
                     user.UpdatedDate = this._datetimeRepository.Now();
                     result = this._applicationUserServices.Update(user, model.SelectedRoleName);
                 }
@@ -81,20 +81,7 @@ namespace Swu.Portal.Web.Api
             foreach (var u in users)
             {
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                result.Add(new UserProfile
-                {
-                    Id =u.Id,
-                    UserName = u.UserName,
-                    FirstName_EN = u.FirstName_EN,
-                    LastName_EN = u.LastName_EN,
-                    FirstName_TH = u.FirstName_TH,
-                    LastName_TH = u.LastName_TH,
-                    Email = u.Email,
-                    SelectedRoleName = selectedRoleName,
-                    CreatedDate = u.CreatedDate,
-                    UpdateDate = u.UpdatedDate,
-                    RegistrationDate = u.RegistrationDate
-                });
+                result.Add(Mapping(u, selectedRoleName));
             }
             return result;
         }
@@ -103,6 +90,56 @@ namespace Swu.Portal.Web.Api
         {
             var u = this._applicationUserServices.getById(id);
             var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
+            return Mapping(u, selectedRoleName);
+        }
+        [HttpPost, Route("uploadAsync")]
+        public async Task<HttpResponseMessage> PostFormData()
+        {
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            string root = HttpContext.Current.Server.MapPath("~/FileUpload/users/");
+            var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the file names.
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string fileName = file.Headers.ContentDisposition.FileName;
+                    if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                    {
+                        fileName = fileName.Trim('"');
+                    }
+                    if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                    {
+                        fileName = Path.GetFileName(fileName);
+                    }
+                    var moveTo = Path.Combine(root, fileName);
+                    if (File.Exists(moveTo))
+                    {
+                        File.Delete(moveTo);
+                    }
+                    File.Move(file.LocalFileName, moveTo);
+                }
+                foreach (var key in provider.FormData)
+                {
+                    var val = provider.FormData[key.ToString()];
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        private UserProfile Mapping(ApplicationUser u, string selectedRoleName)
+        {
             return new UserProfile
             {
                 Id = u.Id,
@@ -112,7 +149,11 @@ namespace Swu.Portal.Web.Api
                 FirstName_TH = u.FirstName_TH,
                 LastName_TH = u.LastName_TH,
                 Email = u.Email,
-                SelectedRoleName = selectedRoleName
+                SelectedRoleName = selectedRoleName,
+                ImageUrl = u.ImageUrl,
+                Position = u.Position,
+                Tag = u.Tag,
+                Description = u.Description
             };
         }
     }

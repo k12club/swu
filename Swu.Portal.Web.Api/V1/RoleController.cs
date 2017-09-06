@@ -25,7 +25,7 @@ namespace Swu.Portal.Web.Api.V1
         [HttpGet, Route("all")]
         public List<RoleProxy> GetAll()
         {
-            var roles = this._roleRepository.Roles().Select(r=>new RoleProxy(r)).ToList();
+            var roles = this._roleRepository.Roles().Select(r=>new RoleProxy(r)).OrderBy(r=>r.Name).ToList();
             return roles;
         }
     }

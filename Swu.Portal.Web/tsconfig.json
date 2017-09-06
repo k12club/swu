@@ -12,6 +12,7 @@
     "Scripts/const/const.ts",
     "Scripts/app/core/apiServices.ts",
     "Scripts/directive/loginmodal.ts",
+    "Scripts/directive/fileUpload.ts",
     "Scripts/filter/range.ts",
 
     "Scripts/app/login/controller/LoginController.ts",
@@ -69,10 +70,11 @@
 
     "Scripts/app/contact/ContactUsController.ts",
 
-    "Scripts/app/settings/controller/SettingCoursesController.ts",
+    "Scripts/app/settings/controller/ProfileController.ts",
     "Scripts/app/settings/controller/UsersController.ts",
     "Scripts/app/settings/controller/UsersModalController.ts",
     "Scripts/app/settings/service/userService.ts",
+    "Scripts/app/settings/service/profileService.ts",
 
     "Scripts/app/forum/controller/ForumController.ts",
     "Scripts/app/forum/service/forumService.ts",
@@ -97,7 +99,9 @@
     "Scripts/model/boardType.ts",
     "Scripts/model/forumAndComments.ts",
     "Scripts/model/role.ts",
-    "Scripts/model/actionMode.ts"
+    "Scripts/model/actionMode.ts",
+    "Scripts/model/nameValue.ts",
+    "Scripts/model/HttpStatusCode.ts"
 
   ],
   "exclude": [

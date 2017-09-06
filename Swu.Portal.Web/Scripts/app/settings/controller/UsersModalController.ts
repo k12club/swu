@@ -31,7 +31,6 @@
                 this.$scope.title = "Add role to user";
                 this.$scope.mode = actionMode.approve;
             }
-            console.log(this.$scope.mode);
             if (this.$scope.mode == actionMode.edit || this.$scope.mode == actionMode.approve) {
                 this.userService.getById(this.$scope.id).then((response) => {
                     this.$scope.user = response;
@@ -65,6 +64,7 @@
                         return item.id == $scope.selectedRole;
                     });
                     this.$scope.user.selectedRoleName = _selectedRole[0].name;
+                    console.log(this.$scope.user);
                     this.userService.addNewOrUpdate(this.$scope.user).then((response) => {
                         if (response) {
                             this.$modalInstance.close();

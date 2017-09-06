@@ -14,5 +14,11 @@
         createdDate?: Date;
         updateDate?: Date;
         registrationDate?: Date;
+        imageUrl?: string;
+
+        //teacher
+        position?: string;
+        tag?: string;
+        description?: string;
     }
 }

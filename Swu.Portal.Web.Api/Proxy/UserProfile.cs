@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Swu.Portal.Web.Api
 {
@@ -30,6 +31,16 @@ namespace Swu.Portal.Web.Api
         public string SelectedRoleId { get; set; }
         [JsonProperty(PropertyName = "selectedRoleName")]
         public string SelectedRoleName { get; set; }
+        [JsonProperty(PropertyName = "imageUrl")]
+        public string ImageUrl { get; set; }
+
+        //teacher
+        [JsonProperty(PropertyName = "position")]
+        public string Position { get; set; }
+        [JsonProperty(PropertyName = "tag")]
+        public string Tag { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         [JsonProperty(PropertyName = "createdDate")]
         public DateTime? CreatedDate { get; set; }
@@ -37,6 +48,25 @@ namespace Swu.Portal.Web.Api
         public DateTime? UpdateDate { get; set; }
         [JsonProperty(PropertyName = "registrationDate")]
         public DateTime? RegistrationDate { get; set; }
+        //public UserProfile()
+        //{
+
+        //}
+        //public UserProfile(ApplicationUser u,string selectedRoleName)
+        //{
+        //    Id = u.Id;
+        //    UserName = u.UserName;
+        //    FirstName_EN = u.FirstName_EN;
+        //    LastName_EN = u.LastName_EN;
+        //    FirstName_TH = u.FirstName_TH;
+        //    LastName_TH = u.LastName_TH;
+        //    Email = u.Email;
+        //    SelectedRoleName = selectedRoleName;
+        //    ImageUrl = u.ImageUrl;
+        //    Position = u.Position;
+        //    Tag = u.Tag;
+        //    Description = u.Description;
+        //}
 
     }
 }

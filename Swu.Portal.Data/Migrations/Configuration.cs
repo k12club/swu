@@ -76,15 +76,18 @@ namespace Swu.Portal.Data.Migrations
                 LastName_TH = "¤ªàÊ¹",
                 Email = "chansakcsc@gmail.com.com",
                 CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now
-
+                UpdatedDate = DateTime.Now,
+                ImageUrl = "FileUpload/users/chansak.jpg",
+                Position = "Professor of Art",
+                Tag = "Architectural Studies / History of Art / European Studies",
+                Description = "Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor."
             };
             userManager.Create(admin, "password");
             foreach (var roleName in roleNames) {
                 roleManager.Create(new IdentityRole { Name = roleName });
             }
             var user = userManager.FindByName(admin.UserName);
-            userManager.AddToRole(user.Id, "Admin");
+            userManager.AddToRole(user.Id, "Teacher");
             #endregion
 
             #region Curriculum

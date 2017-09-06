@@ -15,7 +15,7 @@
                         '': { templateUrl: '/Scripts/app/settings/main.html' },
                         'subContent@settings': {
                             templateUrl: '/Scripts/app/settings/default.html',
-                            controller: 'SettingCoursesController as vm'
+                            controller: 'ProfileController as vm'
                         },
                     }
                 })

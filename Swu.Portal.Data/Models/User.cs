@@ -16,7 +16,13 @@ namespace Swu.Portal.Data.Models
         public string FirstName_TH { get; set; }
         public string LastName_TH { get; set; }
         public string ImageUrl { get; set; }
+
+        //Teacher
+        public string Position { get; set; }
+        public string Tag { get; set; }
         public string Description { get; set; }
+
+        //Student
         public string StudentId { get; set; }
 
         [Column(TypeName = "datetime2")]
