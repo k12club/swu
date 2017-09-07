@@ -2937,12 +2937,13 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseManagementController = (function () {
-        function CourseManagementController($scope, $state, courseManagementService, $uibModal) {
+        function CourseManagementController($scope, $state, courseManagementService, $uibModal, auth) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
             this.courseManagementService = courseManagementService;
             this.$uibModal = $uibModal;
+            this.auth = auth;
             this.$scope.getTotalPageNumber = function () {
                 return (_this.$scope.courses.length) / _this.$scope.pageSize;
             };
@@ -3015,10 +3016,11 @@ var Swu;
         CourseManagementController.prototype.init = function () {
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
+            this.$scope.currentUser = this.auth.getCurrentUser();
             this.$scope.getData();
         };
         ;
-        CourseManagementController.$inject = ["$scope", "$state", "courseManagementService", "$uibModal"];
+        CourseManagementController.$inject = ["$scope", "$state", "courseManagementService", "$uibModal", "AuthServices"];
         CourseManagementController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CourseManagementController" })
@@ -3030,7 +3032,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseManagementModalController = (function () {
-        function CourseManagementModalController($scope, $state, courseManagementService, toastr, $modalInstance, profileService, AuthServices, id, mode) {
+        function CourseManagementModalController($scope, $state, courseManagementService, toastr, $modalInstance, profileService, auth, webboardService, id, mode) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -3038,24 +3040,21 @@ var Swu;
             this.toastr = toastr;
             this.$modalInstance = $modalInstance;
             this.profileService = profileService;
-            this.AuthServices = AuthServices;
+            this.auth = auth;
+            this.webboardService = webboardService;
             this.id = id;
             this.mode = mode;
             this.$scope.id = id;
-            if (mode == 1) {
-                this.$scope.mode = Swu.actionMode.addNew;
-                this.$scope.title = "Add New Course";
-            }
-            else if (mode == 2) {
-                this.$scope.title = "Edit Course";
-                this.$scope.mode = Swu.actionMode.edit;
-            }
-            if (this.$scope.mode == Swu.actionMode.edit) {
-                this.courseManagementService.getCourseById(this.$scope.id).then(function (response) {
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                _this.courseManagementService.getCourseById(id).then(function (response) {
                     _this.$scope.course = response;
                     $("#content").summernote("code", _this.$scope.course.fullDescription);
+                    _this.$scope.selectedCateogry = _.filter(_this.$scope.categories, function (item, index) {
+                        return item.id == $scope.course.categoryId;
+                    })[0].id.toString();
                 }, function (error) { });
-            }
+            };
             this.$scope.validate = function () {
                 $('form').validator();
             };
@@ -3066,13 +3065,40 @@ var Swu;
                 _this.$modalInstance.dismiss("");
             };
             this.$scope.save = function () {
+                if (_this.$scope.isValid()) {
+                    var models = [];
+                    _this.$scope.course.categoryId = parseInt(_this.$scope.selectedCateogry);
+                    _this.$scope.course.categoryName = _.filter(_this.$scope.categories, function (item, index) {
+                        return item.id == $scope.course.categoryId;
+                    })[0].title;
+                    _this.$scope.course.createdUserId = _this.auth.getCurrentUser().id;
+                    models.push({ name: "file", value: _this.$scope.file });
+                    models.push({ name: "course", value: _this.$scope.course });
+                    _this.courseManagementService.addNewOrUpdate(models).then(function (response) {
+                        _this.$modalInstance.close();
+                    }, function (error) { });
+                }
             };
             this.init();
         }
         CourseManagementModalController.prototype.init = function () {
+            var _this = this;
+            this.webboardService.getCourseCategory().then(function (response) {
+                _this.$scope.categories = response;
+                if (_this.$scope.mode == 1) {
+                    _this.$scope.mode = Swu.actionMode.addNew;
+                    _this.$scope.title = "Add New Course";
+                    _this.$scope.selectedCateogry = _.first(_this.$scope.categories).id.toString();
+                }
+                else if (_this.$scope.mode == 2) {
+                    _this.$scope.title = "Edit Course";
+                    _this.$scope.mode = Swu.actionMode.edit;
+                    _this.$scope.edit(_this.$scope.id);
+                }
+            }, function (error) { });
         };
         ;
-        CourseManagementModalController.$inject = ["$scope", "$state", "courseManagementService", "toastr", "$modalInstance", "profileService", "AuthServices", "id", "mode"];
+        CourseManagementModalController.$inject = ["$scope", "$state", "courseManagementService", "toastr", "$modalInstance", "profileService", "AuthServices", "webboardService", "id", "mode"];
         CourseManagementModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CourseManagementModalController" })
@@ -3133,6 +3159,9 @@ var Swu;
             this.apiService = apiService;
             this.constant = constant;
         }
+        courseManagementService.prototype.addNewOrUpdate = function (models) {
+            return this.apiService.postWithFormData(models, "Course/SaveAsync");
+        };
         courseManagementService.prototype.getAll = function () {
             return this.apiService.getData("Course/allCourse");
         };

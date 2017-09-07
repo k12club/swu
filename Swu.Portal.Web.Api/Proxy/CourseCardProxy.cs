@@ -17,7 +17,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public TeacherProxy Teacher { get; set; }
         [JsonProperty(PropertyName = "cardType")]
         public CardType CardType { get; set; }
-        public CourseCardProxy(Course c)
+        public CourseCardProxy(Data.Models.Course c)
         {
             this.Course = new CourseProxy
             {

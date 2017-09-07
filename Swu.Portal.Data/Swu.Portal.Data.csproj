@@ -95,6 +95,7 @@
     <Compile Include="Repository\ResearchCategoryRepository.cs" />
     <Compile Include="Repository\ResearchRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
+    <Compile Include="Repository\TeacherCourseRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extension\" />

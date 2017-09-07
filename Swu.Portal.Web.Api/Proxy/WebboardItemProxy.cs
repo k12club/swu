@@ -30,7 +30,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public WebboardType Type { get; set; }
         [JsonProperty(PropertyName = "categoryId")]
         public int CategoryId { get; set; }
-        public WebboardItemProxy(Course c)
+        public WebboardItemProxy(Data.Models.Course c)
         {
             this.Id = c.Id;
             this.ImageUrl = c.ImageUrl;

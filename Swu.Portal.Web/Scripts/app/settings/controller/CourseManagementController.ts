@@ -4,6 +4,7 @@
         pageSize: number;
         totalPageNumber: number;
 
+        currentUser: IUserProfile;
         courses: ICourseDetail[];
         displayCourses: ICourseDetail[];
         getData(): void;
@@ -13,8 +14,8 @@
     @Module("app")
     @Controller({ name: "CourseManagementController" })
     export class CourseManagementController {
-        static $inject: Array<string> = ["$scope", "$state", "courseManagementService","$uibModal"];
-        constructor(private $scope: CourseManagementScope, private $state: ng.ui.IState, private courseManagementService: IcourseManagementService, private $uibModal: ng.ui.bootstrap.IModalService) {
+        static $inject: Array<string> = ["$scope", "$state", "courseManagementService", "$uibModal","AuthServices"];
+        constructor(private $scope: CourseManagementScope, private $state: ng.ui.IState, private courseManagementService: IcourseManagementService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices) {
             //Pagination section
             this.$scope.getTotalPageNumber = (): number => {
                 return (this.$scope.courses.length) / this.$scope.pageSize;
@@ -90,6 +91,7 @@
         init(): void {
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
+            this.$scope.currentUser = this.auth.getCurrentUser();
             this.$scope.getData();
         };
 

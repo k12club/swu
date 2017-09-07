@@ -10,6 +10,13 @@ namespace Swu.Portal.Data.Models
 {
     public class Course : IEntity
     {
+        public Course()
+        {
+            PhotoAlbums = new HashSet<PhotoAlbum>();
+            Curriculums = new HashSet<Curriculum>();
+            Students = new HashSet<ApplicationUser>();
+            Teachers = new HashSet<ApplicationUser>();
+        }
         [Key]
         public string Id { get; set; }
         public string ImageUrl { get; set; }

@@ -1,7 +1,7 @@
 ﻿module Swu {
     export interface IcourseManagementService {
         //getRoles(): ng.IPromise<IRole[]>;
-        //addNewOrUpdate(user: IUserProfile): ng.IPromise<boolean>;
+        addNewOrUpdate(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
         getAll(): ng.IPromise<ICourseDetail[]>;
         getCourseById(id: string): ng.IPromise<ICourseDetail>;
     }
@@ -15,9 +15,9 @@
         //getRoles(): ng.IPromise<IRole[]> {
         //    return this.apiService.getData<IRole[]>("role/all");
         //}
-        //addNewOrUpdate(user: IUserProfile): ng.IPromise<boolean> {
-        //    return this.apiService.postData<boolean>(user, "Account/addNewOrUpdate");
-        //}
+        addNewOrUpdate(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postWithFormData<HttpStatusCode>(models, "Course/SaveAsync");
+        }
         getAll(): ng.IPromise<ICourseDetail[]> {
             return this.apiService.getData<ICourseDetail[]>("Course/allCourse");
         }

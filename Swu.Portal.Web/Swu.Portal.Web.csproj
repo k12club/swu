@@ -736,6 +736,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FileUpload\course\" />
     <Folder Include="FileUpload\users\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\forum\model\" />

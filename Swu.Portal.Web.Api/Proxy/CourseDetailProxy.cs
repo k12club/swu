@@ -20,7 +20,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public List<StudentProxy> Students { get; set; }
         [JsonProperty(PropertyName = "photosAlbum")]
         public PhotoAlbumProxy PhotosAlbum { get; set; }
-        public CourseAllDetailProxy(Course c)
+        public CourseAllDetailProxy(Data.Models.Course c)
         {
             this.Curriculums = new List<CurriculumProxy>();
             this.Teacher = new List<TeacherProxy>();
@@ -75,7 +75,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public CourseDetailProxy CourseInfo { get; set; }
         [JsonProperty(PropertyName = "teachers")]
         public List<TeacherProxy> Teacher { get; set; }
-        public CourseBriefDetailProxy(Course c)
+        public CourseBriefDetailProxy(Data.Models.Course c)
         {
             this.CourseInfo = new CourseDetailProxy
             {

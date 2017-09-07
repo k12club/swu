@@ -42,6 +42,12 @@ namespace Swu.Portal.Web.Api.Proxy
         [JsonProperty(PropertyName = "lang")]
         public string Language { get; set; }
 
+        [JsonProperty(PropertyName = "createdUserId")]
+        public string CreatedUserId { get; set; }
+        [JsonProperty(PropertyName = "createdDate")]
+        public DateTime CreatedDate { get; set; }
+        [JsonProperty(PropertyName = "updateDate")]
+        public DateTime UpdateDate { get; set; }
     }
     public class CourseDetailProxy : CourseProxy
     {
@@ -55,7 +61,7 @@ namespace Swu.Portal.Web.Api.Proxy
         {
 
         }
-        public CourseDetailProxy(Course c)
+        public CourseDetailProxy(Data.Models.Course c)
         {
             Id = c.Id;
             ImageUrl = c.ImageUrl;

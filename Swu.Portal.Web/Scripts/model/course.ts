@@ -13,6 +13,11 @@
         numberOfStudents?: number;
         numberOfTeachers?: number;
         lang?: string;
-        price: number;
+        price?: number;
+        categoryId?: number;
+        categoryName?: string;
+        createdUserId?: string;
+        createdDate: Date;
+        updateDate: Date;
     }
 }
