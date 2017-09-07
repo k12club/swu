@@ -3072,6 +3072,7 @@ var Swu;
                         return item.id == $scope.course.categoryId;
                     })[0].title;
                     _this.$scope.course.createdUserId = _this.auth.getCurrentUser().id;
+                    $("#content").summernote("code", _this.$scope.course.fullDescription);
                     models.push({ name: "file", value: _this.$scope.file });
                     models.push({ name: "course", value: _this.$scope.course });
                     _this.courseManagementService.addNewOrUpdate(models).then(function (response) {

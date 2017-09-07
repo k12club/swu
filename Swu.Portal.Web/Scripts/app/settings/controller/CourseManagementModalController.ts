@@ -48,6 +48,7 @@
                         return item.id == $scope.course.categoryId;
                     })[0].title;
                     this.$scope.course.createdUserId = this.auth.getCurrentUser().id;
+                    $("#content").summernote("code", this.$scope.course.fullDescription);
                     models.push({ name: "file", value: this.$scope.file });
                     models.push({ name: "course", value: this.$scope.course });
                     this.courseManagementService.addNewOrUpdate(models).then((response) => {
