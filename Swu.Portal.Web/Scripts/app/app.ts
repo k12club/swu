@@ -46,16 +46,17 @@ module Swu {
                 return moment(date).format('DD/MM/YYYY');
             };
         }])
-        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant, AuthServices: IAuthServices) {
+        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant, auth: IAuthServices) {
             $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                if (AuthServices.isLoggedIn() ==false) {
+                if (auth.isLoggedIn() ==false) {
                     //Todo: force to login before do any operation
                 }
+                
             });
             $rootScope.lang = AppConstant.defaultLang;
             $rootScope.scrollToToped = () => {

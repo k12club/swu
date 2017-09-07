@@ -1,4 +1,5 @@
-﻿using Swu.Portal.Core.Dependencies;
+﻿using Newtonsoft.Json;
+using Swu.Portal.Core.Dependencies;
 using Swu.Portal.Data.Models;
 using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
@@ -19,8 +20,7 @@ namespace Swu.Portal.Web.Api
     [RoutePrefix("V1/Account")]
     public class AccountController : ApiController
     {
-        private const string UPLOAD_DIR = "uploads";
-
+        private const string UPLOAD_DIR = "FileUpload/users/";
         private readonly IApplicationUserServices _applicationUserServices;
         private readonly IDateTimeRepository _datetimeRepository;
         public AccountController(IApplicationUserServices applicationUserServices, IDateTimeRepository datetimeRepository)
@@ -31,18 +31,26 @@ namespace Swu.Portal.Web.Api
         [HttpPost, Route("login")]
         public UserProfile Login(UserLoginProxy model)
         {
-
-            //mockup data:
-            //username:chansak
-            //password:password
             if (ModelState.IsValid)
             {
                 var u = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return Mapping(u, selectedRoleName);
+                return u.ToUserProfileViewModel(selectedRoleName);
             }
             return null;
         }
+        [HttpPost, Route("login2")]
+        public UserProfile Login(UserProfile model)
+        {
+            if (ModelState.IsValid)
+            {
+                var u = this._applicationUserServices.VerifyWithCurrentUser(model.ToEntity());
+                var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
+                return u.ToUserProfileViewModel(selectedRoleName);
+            }
+            return null;
+        }
+
         [HttpPost, Route("addNewOrUpdate")]
         public bool AddNewOrUpdate(UserProfile model)
         {
@@ -81,7 +89,7 @@ namespace Swu.Portal.Web.Api
             foreach (var u in users)
             {
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                result.Add(Mapping(u, selectedRoleName));
+                result.Add(u.ToUserProfileViewModel(selectedRoleName));
             }
             return result;
         }
@@ -90,7 +98,7 @@ namespace Swu.Portal.Web.Api
         {
             var u = this._applicationUserServices.getById(id);
             var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-            return Mapping(u, selectedRoleName);
+            return u.ToUserProfileViewModel(selectedRoleName);
         }
         [HttpPost, Route("uploadAsync")]
         public async Task<HttpResponseMessage> PostFormData()
@@ -101,14 +109,22 @@ namespace Swu.Portal.Web.Api
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            string root = HttpContext.Current.Server.MapPath("~/FileUpload/users/");
+            string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_DIR);
             var provider = new MultipartFormDataStreamProvider(root);
             try
             {
-                // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
-
-                // This illustrates how to get the file names.
+                UserProfile user = new UserProfile();
+                foreach (var key in provider.FormData)
+                {
+                    if (key.Equals("user"))
+                    {
+                        var json = provider.FormData[key.ToString()];
+                        user = JsonConvert.DeserializeObject<UserProfile>(json);
+                    }
+                }
+                string _newFileName = string.Empty;
+                string _path = string.Empty;
                 foreach (MultipartFileData file in provider.FileData)
                 {
                     string fileName = file.Headers.ContentDisposition.FileName;
@@ -120,41 +136,24 @@ namespace Swu.Portal.Web.Api
                     {
                         fileName = Path.GetFileName(fileName);
                     }
-                    var moveTo = Path.Combine(root, fileName);
+                    _newFileName = string.Format("{0}{1}", user.Id, Path.GetExtension(fileName));
+                    _path = string.Format("{0}{1}", UPLOAD_DIR,_newFileName);
+                    var moveTo = Path.Combine(root, _newFileName);
                     if (File.Exists(moveTo))
                     {
                         File.Delete(moveTo);
                     }
+                    _path = string.Format("{0}{1}",UPLOAD_DIR,_newFileName);
                     File.Move(file.LocalFileName, moveTo);
+                    user.ImageUrl = string.Format("{0}?{1}", _path, this._datetimeRepository.Now());
                 }
-                foreach (var key in provider.FormData)
-                {
-                    var val = provider.FormData[key.ToString()];
-                }
+                this._applicationUserServices.Update(user.ToEntity(), user.SelectedRoleName);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
-        }
-        private UserProfile Mapping(ApplicationUser u, string selectedRoleName)
-        {
-            return new UserProfile
-            {
-                Id = u.Id,
-                UserName = u.UserName,
-                FirstName_EN = u.FirstName_EN,
-                LastName_EN = u.LastName_EN,
-                FirstName_TH = u.FirstName_TH,
-                LastName_TH = u.LastName_TH,
-                Email = u.Email,
-                SelectedRoleName = selectedRoleName,
-                ImageUrl = u.ImageUrl,
-                Position = u.Position,
-                Tag = u.Tag,
-                Description = u.Description
-            };
         }
     }
 }

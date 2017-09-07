@@ -10,6 +10,8 @@ namespace Swu.Portal.Web.Api
 {
     public static class EntityExtension
     {
+        private const string DEFAULT_IMG = "Content/images/default.jpg";
+
         public static UserLoginProxy ToUserLoginViewModel(this ApplicationUser data)
         {
             return Mapper.Map<UserLoginProxy>(data);
@@ -19,13 +21,38 @@ namespace Swu.Portal.Web.Api
             return Mapper.Map<ApplicationUser>(data);
         }
 
-        public static UserProfile ToUserProfileViewModel(this ApplicationUser data)
+        public static UserProfile ToUserProfileViewModel(this ApplicationUser u, string selectedRoleName)
         {
-            return Mapper.Map<UserProfile>(data);
+            return new UserProfile
+            {
+                Id = u.Id,
+                UserName = u.UserName,
+                FirstName_EN = u.FirstName_EN,
+                LastName_EN = u.LastName_EN,
+                FirstName_TH = u.FirstName_TH,
+                LastName_TH = u.LastName_TH,
+                Email = u.Email,
+                SelectedRoleName = selectedRoleName,
+                ImageUrl = string.IsNullOrEmpty(u.ImageUrl)? DEFAULT_IMG : u.ImageUrl,
+                Position = u.Position,
+                Tag = u.Tag,
+                Description = u.Description
+            };
         }
-        public static ApplicationUser ToEntity(this UserProfile data)
+        public static ApplicationUser ToEntity(this UserProfile u)
         {
-            return Mapper.Map<ApplicationUser>(data);
+            return new ApplicationUser {
+                UserName = u.UserName,
+                FirstName_EN = u.FirstName_EN,
+                LastName_EN = u.LastName_EN,
+                FirstName_TH = u.FirstName_TH,
+                LastName_TH = u.LastName_TH,
+                Email = u.Email,
+                ImageUrl = u.ImageUrl,
+                Position = u.Position,
+                Tag = u.Tag,
+                Description = u.Description
+            };
         }
 
     }

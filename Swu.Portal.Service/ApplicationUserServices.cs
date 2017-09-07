@@ -18,6 +18,7 @@ namespace Swu.Portal.Service
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
+        ApplicationUser VerifyWithCurrentUser(ApplicationUser user);
     }
     public class ApplicationUserServices : IApplicationUserServices
     {
@@ -61,6 +62,11 @@ namespace Swu.Portal.Service
         public ApplicationUser VerifyAndGetUser(string username, string password)
         {
             return this._applicationUserRepository.VerifyAndGetUser(username, password);
+        }
+
+        public ApplicationUser VerifyWithCurrentUser(ApplicationUser user)
+        {
+            return this._applicationUserRepository.VerifyWithCurrentUser(user);
         }
     }
 }

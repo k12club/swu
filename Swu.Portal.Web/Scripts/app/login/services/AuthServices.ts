@@ -12,6 +12,7 @@
         logout(): void;
         isLoggedIn(): boolean;
         getCurrentUser(): IUserProfile;
+        updateProfile(loginSuccessCallback: () => any, loginFailCallback: () => any): void;
     }
     @Module("app")
     @Factory({ name: "AuthServices" })
@@ -20,6 +21,13 @@
         constructor(private apiService: apiService, private constant: AppConstant, private $cookies: ICookiesService) {
 
         }
+        private setCurrentUser(currentUser: IUserProfile): void {
+            this.$cookies.putObject("currentUser", JSON.stringify(currentUser), { expires: new Date(Date.now() + (60 * 1000 * this.constant.timeoutExpired)) });
+        };
+        private loginWithCurentUser(): ng.IPromise<IUserProfile> {
+            var currentUser = this.getCurrentUser();
+            return this.apiService.postData(currentUser,"account/login2");
+        };
         login(user: IUserLogin, loginSuccessCallback: () => any, loginFailCallback: () => any): void {
             this.apiService.postData<IUserProfile>(user, "account/login").then((response) => {
                 this.setCurrentUser(response);
@@ -34,9 +42,6 @@
         isLoggedIn(): boolean {
             return this.getCurrentUser() != null;
         };
-        private setCurrentUser(currentUser: IUserProfile): void {
-            this.$cookies.putObject("currentUser", JSON.stringify(currentUser), { expires: new Date(Date.now() + (60 * 1000 * this.constant.timeoutExpired))});
-        };
         getCurrentUser(): IUserProfile {
             var user = this.$cookies.getObject("currentUser");
             if (user != null) {
@@ -44,5 +49,13 @@
             }
             return user;
         };
+        updateProfile(loginSuccessCallback: () => any, loginFailCallback: () => any): void {
+            var user = this.loginWithCurentUser().then((response) => {
+                this.setCurrentUser(response);
+                loginSuccessCallback();
+            }, (error) => {
+                loginFailCallback();
+            });
+        }
     }
 }

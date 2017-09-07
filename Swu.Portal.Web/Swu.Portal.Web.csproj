@@ -694,6 +694,7 @@
     <Content Include="Scripts\app\settings\main.html" />
     <Content Include="Scripts\app\research\research_detail.html" />
     <Content Include="Scripts\app\research\research_list.html" />
+    <Content Include="Scripts\app\settings\view\profile.tmpl.html" />
     <Content Include="Scripts\app\settings\view\user.tmpl.html" />
     <Content Include="Scripts\app\settings\view\users.html" />
     <Content Include="Scripts\app\teacher\teacher_detail.html" />
@@ -831,6 +832,7 @@
     <TypeScriptCompile Include="Scripts\app\home\service\newsService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\ProfileModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\profileService.ts" />

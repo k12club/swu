@@ -21,6 +21,7 @@ namespace Swu.Portal.Data.Repository
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
+        ApplicationUser VerifyWithCurrentUser(ApplicationUser user);
     }
     public class ApplicationUserRepository : IApplicationUserRepository
     {
@@ -70,6 +71,11 @@ namespace Swu.Portal.Data.Repository
             }
         }
 
+        public ApplicationUser VerifyWithCurrentUser(ApplicationUser user) {
+            var u =  this._userManager.FindByName(user.UserName);
+            return u;
+        }
+
         public List<string> GetRolesByUserName(string userName)
         {
             var u = this._userManager.FindByName(userName);
@@ -92,6 +98,10 @@ namespace Swu.Portal.Data.Repository
             u.LastName_TH = user.LastName_TH;
             u.Email = user.Email;
             u.UpdatedDate = user.UpdatedDate;
+            u.Position = user.Position;
+            u.ImageUrl = user.ImageUrl;
+            u.Tag = user.Tag;
+            u.Description = u.Description;
             updateUserResult = this._userManager.Update(u).Succeeded;
             if (updateUserResult)
             {

@@ -73,6 +73,7 @@
     "Scripts/app/settings/controller/ProfileController.ts",
     "Scripts/app/settings/controller/UsersController.ts",
     "Scripts/app/settings/controller/UsersModalController.ts",
+    "Scripts/app/settings/controller/ProfileModalController.ts",
     "Scripts/app/settings/service/userService.ts",
     "Scripts/app/settings/service/profileService.ts",
 

@@ -715,6 +715,15 @@ var Swu;
             this.constant = constant;
             this.$cookies = $cookies;
         }
+        LoginServices.prototype.setCurrentUser = function (currentUser) {
+            this.$cookies.putObject("currentUser", JSON.stringify(currentUser), { expires: new Date(Date.now() + (60 * 1000 * this.constant.timeoutExpired)) });
+        };
+        ;
+        LoginServices.prototype.loginWithCurentUser = function () {
+            var currentUser = this.getCurrentUser();
+            return this.apiService.postData(currentUser, "account/login2");
+        };
+        ;
         LoginServices.prototype.login = function (user, loginSuccessCallback, loginFailCallback) {
             var _this = this;
             this.apiService.postData(user, "account/login").then(function (response) {
@@ -732,10 +741,6 @@ var Swu;
             return this.getCurrentUser() != null;
         };
         ;
-        LoginServices.prototype.setCurrentUser = function (currentUser) {
-            this.$cookies.putObject("currentUser", JSON.stringify(currentUser), { expires: new Date(Date.now() + (60 * 1000 * this.constant.timeoutExpired)) });
-        };
-        ;
         LoginServices.prototype.getCurrentUser = function () {
             var user = this.$cookies.getObject("currentUser");
             if (user != null) {
@@ -744,6 +749,15 @@ var Swu;
             return user;
         };
         ;
+        LoginServices.prototype.updateProfile = function (loginSuccessCallback, loginFailCallback) {
+            var _this = this;
+            var user = this.loginWithCurentUser().then(function (response) {
+                _this.setCurrentUser(response);
+                loginSuccessCallback();
+            }, function (error) {
+                loginFailCallback();
+            });
+        };
         LoginServices.$inject = ['apiService', 'AppConstant', '$cookies'];
         LoginServices = __decorate([
             Swu.Module("app"),
@@ -2613,24 +2627,30 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ProfileController = (function () {
-        function ProfileController($scope, $state, profileService, auth) {
+        function ProfileController($scope, $state, profileService, auth, $uibModal, $timeout) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
             this.profileService = profileService;
             this.auth = auth;
+            this.$uibModal = $uibModal;
+            this.$timeout = $timeout;
             this.$scope.getCurrentUser = function () {
                 _this.$scope.currentUser = _this.auth.getCurrentUser();
                 console.log(_this.$scope.currentUser);
             };
-            this.$scope.save = function () {
-                var models = [];
-                models.push({ name: "file", value: _this.$scope.file });
-                models.push({ name: "dummy", value: {} });
-                console.log(models);
-                _this.profileService.updateUserProfile(models).then(function (response) {
-                    console.log(response);
-                }, function (error) { });
+            this.$scope.edit = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/profile.tmpl.html',
+                    controller: Swu.ProfileModalController
+                };
+                _this.$uibModal.open(options).result.then(function (user) {
+                    _this.auth.updateProfile(function () {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                        });
+                    }, function () { });
+                });
             };
             this.init();
         }
@@ -2638,7 +2658,7 @@ var Swu;
             this.$scope.getCurrentUser();
         };
         ;
-        ProfileController.$inject = ["$scope", "$state", "profileService", "AuthServices"];
+        ProfileController.$inject = ["$scope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout"];
         ProfileController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ProfileController" })
@@ -2815,7 +2835,6 @@ var Swu;
                         return item.id == $scope.selectedRole;
                     });
                     _this.$scope.user.selectedRoleName = _selectedRole[0].name;
-                    console.log(_this.$scope.user);
                     _this.userService.addNewOrUpdate(_this.$scope.user).then(function (response) {
                         if (response) {
                             _this.$modalInstance.close();
@@ -2842,6 +2861,50 @@ var Swu;
         return UsersModalController;
     }());
     Swu.UsersModalController = UsersModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var ProfileModalController = (function () {
+        function ProfileModalController($scope, $state, userService, toastr, $modalInstance, profileService, AuthServices) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.userService = userService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.profileService = profileService;
+            this.AuthServices = AuthServices;
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                var models = [];
+                models.push({ name: "file", value: _this.$scope.file });
+                models.push({ name: "user", value: _this.$scope.user });
+                _this.profileService.updateUserProfile(models).then(function (response) {
+                    _this.$modalInstance.close(response);
+                }, function (error) { });
+            };
+            this.init();
+        }
+        ProfileModalController.prototype.init = function () {
+            this.$scope.user = this.AuthServices.getCurrentUser();
+        };
+        ;
+        ProfileModalController.$inject = ["$scope", "$state", "userService", "toastr", "$modalInstance", "profileService", "AuthServices"];
+        ProfileModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ProfileModalController" })
+        ], ProfileModalController);
+        return ProfileModalController;
+    }());
+    Swu.ProfileModalController = ProfileModalController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {

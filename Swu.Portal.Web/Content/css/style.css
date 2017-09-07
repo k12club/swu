@@ -1699,6 +1699,12 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 .irs-mrgnbot-fourty {
     margin-bottom: 40px;
 }
+.irs-mrgnbot-twenty {
+    margin-bottom: 10px;
+}
+.irs-mrgnbot-eighty {
+    margin-bottom: 80px;
+}
 
 .irs-footer-gallery-thumb img {
     margin-bottom: 15px;

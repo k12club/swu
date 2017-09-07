@@ -64,7 +64,6 @@
                         return item.id == $scope.selectedRole;
                     });
                     this.$scope.user.selectedRoleName = _selectedRole[0].name;
-                    console.log(this.$scope.user);
                     this.userService.addNewOrUpdate(this.$scope.user).then((response) => {
                         if (response) {
                             this.$modalInstance.close();
