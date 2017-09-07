@@ -1,72 +1,39 @@
-﻿<!--<div class="clearfix">
+﻿<div class="clearfix">
     <div class="row">
         <div class="irs-blog-post-title">
-            <h3>COURSES SETTING</h3>
+            <h3>Course Management</h3>
         </div>
     </div>
     <div class="row">
-        <div class="irs-courses-shorting-heading clearfix">
-            <ul class="list-inline pull-left">
-                <li><a href="#"><span class="flaticon-squares text-thm2"></span></a></li>
-                <li><a href="#"><span class="flaticon-signs-3"></span></a></li>
-                <li><a href="#">Showing 1-2 of 39 results</a></li>
-            </ul>
-            <div class="input-group irs-nav-search-form">
-                <input type="text" class="form-control pull-right" placeholder="Search courses">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="flaticon-musica-searcher"></span></button>
-                </span>
+
+        <div role="tabpanel" class="tab-pane fade in active" id="list">
+            <div class="row">
+                <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr class="irs-table-deading style2">
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody class="irs-table-body style2">
+                        <tr ng-repeat="c in displayCourses">
+                            <th><a href="" ng-click="edit(c.id)">{{c.name_en}}</a></th>
+                            <th>{{c.categoryName}}</th>
+                            <td>{{c.price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="list-inline irs-ip-navigation clearfix">
+                    <li><span class="flaticon-arrows" ng-click="prev()"></span></li>
+                    <li ng-repeat="number in []|range:totalPageNumber" ng-click="changePage($index)"><a ng-class="{active:number == currentPage}">{{$index+1}}</a></li>
+                    <li><span class="flaticon-arrows-1" ng-click="next()"></span></li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="row">
-        <table class="table">
-            <thead>
-                <tr class="irs-table-deading style2">
-                    <th>Title</th>
-                    <th>Salary</th>
-                    <th>Reference</th>
-                    <th>Closes</th>
-                </tr>
-            </thead>
-            <tbody class="irs-table-body style2">
-                <tr>
-                    <th scope="row">Unestablished Lecturer (Fixed Term) <br> <em>Department of Sociology</em></th>
-                    <td>$39,324 - $49,772</td>
-                    <td>EH45325</td>
-                    <td>22/03/2017</td>
-                </tr>
-                <tr>
-                    <th scope="row">University Lecturer / Senior Lecturer in Economics <br> <em>Judge Business School</em></th>
-                    <td>$20,324 - $25,000</td>
-                    <td>EH00675</td>
-                    <td>21/03/2017</td>
-                </tr>
-                <tr>
-                    <th scope="row">University Lecturer in Concrete Structures <br> <em>Department of Engineering</em></th>
-                    <td>$38,500 - $42,800</td>
-                    <td>EH11987</td>
-                    <td>20/03/2017</td>
-                </tr>
-                <tr>
-                    <th scope="row">University Lecturer in Private Law <br><em>Faculty of Law</em></th>
-                    <td>$49,098 - $52,987</td>
-                    <td>EH04212</td>
-                    <td>19/03/2017</td>
-                </tr>
-                <tr>
-                    <th scope="row">University Lecturer in Literature and Visual Culture <br> <em>Faculty of English</em></th>
-                    <td>$39,234 - $49,090</td>
-                    <td>EH44898</td>
-                    <td>18/03/2017</td>
-                </tr>
-                <tr>
-                    <th scope="row">University Senior Lecturer in Dietary Public Health Research <br> <em>Department of Public Health and Primary Care</em></th>
-                    <td>$29,543 - $35,657</td>
-                    <td>EH08432</td>
-                    <td>17/03/2017</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>-->
+
+</div>

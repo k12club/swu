@@ -74,8 +74,12 @@
     "Scripts/app/settings/controller/UsersController.ts",
     "Scripts/app/settings/controller/UsersModalController.ts",
     "Scripts/app/settings/controller/ProfileModalController.ts",
+    "Scripts/app/settings/controller/CourseManagementController.ts",
+    "Scripts/app/settings/controller/CourseManagementModalController.ts",
     "Scripts/app/settings/service/userService.ts",
     "Scripts/app/settings/service/profileService.ts",
+    "Scripts/app/settings/service/courseManagementService.ts",
+
 
     "Scripts/app/forum/controller/ForumController.ts",
     "Scripts/app/forum/service/forumService.ts",

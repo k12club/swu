@@ -42,16 +42,31 @@ namespace Swu.Portal.Web.Api.Proxy
                 NumberOfTeachers = c.Teachers.Count(),
                 NumberOfTimes = c.Curriculums.Sum(i => i.NumberOfTime),
             };
-            foreach (var cur in c.Curriculums) {
-                this.Curriculums.Add(new CurriculumProxy(cur));
+            if (c.Curriculums.Count > 0)
+            {
+                foreach (var cur in c.Curriculums)
+                {
+                    this.Curriculums.Add(new CurriculumProxy(cur));
+                }
             }
-            foreach (var t in c.Teachers) {
-                this.Teacher.Add(new TeacherProxy(t));
+            if (c.Teachers.Count > 0)
+            {
+                foreach (var t in c.Teachers)
+                {
+                    this.Teacher.Add(new TeacherProxy(t));
+                }
             }
-            foreach (var s in c.Students) {
-                this.Students.Add(new StudentProxy(s));
+            if (c.Students.Count > 0)
+            {
+                foreach (var s in c.Students)
+                {
+                    this.Students.Add(new StudentProxy(s));
+                }
             }
-            this.PhotosAlbum = new PhotoAlbumProxy(c.PhotoAlbums.FirstOrDefault());
+            if (c.PhotoAlbums.Count > 0)
+            {
+                this.PhotosAlbum = new PhotoAlbumProxy(c.PhotoAlbums.FirstOrDefault());
+            }
         }
     }
     public class CourseBriefDetailProxy

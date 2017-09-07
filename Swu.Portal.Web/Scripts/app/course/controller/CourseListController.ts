@@ -4,6 +4,8 @@
         next(): void;
         prev(): void;
         changePage(page: number): void;
+        getTotalPageNumber(): number;
+
     }
     export interface ICourseListScope extends IPagination{
         currentPage: number;
@@ -13,7 +15,6 @@
         courses: ICourseBriefDetail[];
         displayCourses: ICourseBriefDetail[];
         getCourseByCriteria(criteria: SearchCritirea): void;
-        getTotalPageNumber(): number;
         search(): void;
     }
     @Module("app")

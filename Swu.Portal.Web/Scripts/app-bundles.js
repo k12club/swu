@@ -460,14 +460,14 @@ var Swu;
                 return moment(date).format('DD/MM/YYYY');
             };
         }])
-        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state, $http, $rootScope, AppConstant, AuthServices) {
+        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state, $http, $rootScope, AppConstant, auth) {
             $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                if (AuthServices.isLoggedIn() == false) {
+                if (auth.isLoggedIn() == false) {
                 }
             });
             $rootScope.lang = AppConstant.defaultLang;
@@ -948,7 +948,8 @@ var Swu;
                 url: "/courses",
                 views: {
                     'subContent@settings': {
-                        templateUrl: '/Scripts/app/settings/view/courses.html'
+                        templateUrl: '/Scripts/app/settings/view/courses.html',
+                        controller: 'CourseManagementController as vm'
                     }
                 }
             });
@@ -2676,6 +2677,29 @@ var Swu;
             this.$state = $state;
             this.userService = userService;
             this.$uibModal = $uibModal;
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.users.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayUsers = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.users, _this.$scope.displayUsers, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
             this.$scope.addNew = function () {
                 var options = {
                     templateUrl: '/Scripts/app/settings/view/user.tmpl.html',
@@ -2732,6 +2756,9 @@ var Swu;
                     _this.$scope.users = _.filter(response, function (item, index) {
                         return item.selectedRoleName != null;
                     });
+                    console.log(_this.$scope.users);
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.paginate(_this.$scope.users, _this.$scope.displayUsers, _this.$scope.pageSize, _this.$scope.currentPage);
                     _this.$scope.waiting = _.filter(response, function (item, index) {
                         return item.selectedRoleName == null;
                     });
@@ -2764,6 +2791,8 @@ var Swu;
             this.init();
         }
         UsersController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
             this.$scope.getUsers();
         };
         ;
@@ -2789,7 +2818,6 @@ var Swu;
             this.userId = userId;
             this.mode = mode;
             this.$scope.id = userId;
-            console.log(mode);
             if (mode == 1) {
                 this.$scope.mode = Swu.actionMode.addNew;
                 this.$scope.title = "Add New User";
@@ -2908,6 +2936,153 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var CourseManagementController = (function () {
+        function CourseManagementController($scope, $state, courseManagementService, $uibModal) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.courseManagementService = courseManagementService;
+            this.$uibModal = $uibModal;
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.courses.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayCourses = displayData;
+                console.log(_this.$scope.displayCourses);
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.courses, _this.$scope.displayCourses, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/courses.tmpl.html',
+                    controller: Swu.CourseManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return "";
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    },
+                    size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/courses.tmpl.html',
+                    controller: Swu.CourseManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    },
+                    size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.getData = function () {
+                _this.courseManagementService.getAll().then(function (response) {
+                    _this.$scope.courses = response;
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.paginate(_this.$scope.courses, _this.$scope.displayCourses, _this.$scope.pageSize, _this.$scope.currentPage);
+                }, function (error) { });
+            };
+            this.init();
+        }
+        CourseManagementController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.getData();
+        };
+        ;
+        CourseManagementController.$inject = ["$scope", "$state", "courseManagementService", "$uibModal"];
+        CourseManagementController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CourseManagementController" })
+        ], CourseManagementController);
+        return CourseManagementController;
+    }());
+    Swu.CourseManagementController = CourseManagementController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CourseManagementModalController = (function () {
+        function CourseManagementModalController($scope, $state, courseManagementService, toastr, $modalInstance, profileService, AuthServices, id, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.courseManagementService = courseManagementService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.profileService = profileService;
+            this.AuthServices = AuthServices;
+            this.id = id;
+            this.mode = mode;
+            this.$scope.id = id;
+            if (mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Course";
+            }
+            else if (mode == 2) {
+                this.$scope.title = "Edit Course";
+                this.$scope.mode = Swu.actionMode.edit;
+            }
+            if (this.$scope.mode == Swu.actionMode.edit) {
+                this.courseManagementService.getCourseById(this.$scope.id).then(function (response) {
+                    _this.$scope.course = response;
+                    $("#content").summernote("code", _this.$scope.course.fullDescription);
+                }, function (error) { });
+            }
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+            };
+            this.init();
+        }
+        CourseManagementModalController.prototype.init = function () {
+        };
+        ;
+        CourseManagementModalController.$inject = ["$scope", "$state", "courseManagementService", "toastr", "$modalInstance", "profileService", "AuthServices", "id", "mode"];
+        CourseManagementModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CourseManagementModalController" })
+        ], CourseManagementModalController);
+        return CourseManagementModalController;
+    }());
+    Swu.CourseManagementModalController = CourseManagementModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var userService = (function () {
         function userService(apiService, constant) {
             this.apiService = apiService;
@@ -2949,6 +3124,27 @@ var Swu;
             Swu.Factory({ name: "profileService" })
         ], profileService);
         return profileService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var courseManagementService = (function () {
+        function courseManagementService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        courseManagementService.prototype.getAll = function () {
+            return this.apiService.getData("Course/allCourse");
+        };
+        courseManagementService.prototype.getCourseById = function (id) {
+            return this.apiService.getData("Course/getCourseById?id=" + id);
+        };
+        courseManagementService.$inject = ['apiService', 'AppConstant'];
+        courseManagementService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "courseManagementService" })
+        ], courseManagementService);
+        return courseManagementService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

@@ -780,6 +780,7 @@
     <Content Include="Scripts\angular\angular-resource.min.js.map" />
     <Content Include="Scripts\angular\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular\angular.min.js.map" />
+    <Content Include="Scripts\app\settings\view\courses.tmpl.html" />
     <None Include="Scripts\jquery\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-2.2.1.min.map" />
     <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
@@ -832,10 +833,13 @@
     <TypeScriptCompile Include="Scripts\app\home\service\newsService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\ProfileModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\profileService.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\service\courseManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\userService.ts" />
     <TypeScriptCompile Include="Scripts\directive\fileUpload.ts" />
     <TypeScriptCompile Include="Scripts\filter\range.ts" />

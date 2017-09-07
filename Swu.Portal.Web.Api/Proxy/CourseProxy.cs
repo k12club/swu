@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swu.Portal.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,10 @@ namespace Swu.Portal.Web.Api.Proxy
         public int NumberOfComments { get; set; }
         [JsonProperty(PropertyName = "price")]
         public decimal Price { get; set; }
+        [JsonProperty(PropertyName = "categoryId")]
+        public int CategoryId { get; set; }
+        [JsonProperty(PropertyName = "categoryName")]
+        public string CategoryName { get; set; }
 
         [JsonProperty(PropertyName = "numberOfLectures")]
         public int NumberOfLecture { get; set; }
@@ -38,7 +43,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public string Language { get; set; }
 
     }
-    public class CourseDetailProxy :CourseProxy
+    public class CourseDetailProxy : CourseProxy
     {
         [JsonProperty(PropertyName = "bigImageUrl")]
         public string BigImageUrl { get; set; }
@@ -46,5 +51,22 @@ namespace Swu.Portal.Web.Api.Proxy
         public string ShortDescription { get; set; }
         [JsonProperty(PropertyName = "fullDescription")]
         public string FullDescription { get; set; }
+        public CourseDetailProxy()
+        {
+
+        }
+        public CourseDetailProxy(Course c)
+        {
+            Id = c.Id;
+            ImageUrl = c.ImageUrl;
+            Language = c.Language;
+            Name_EN = c.Name_EN;
+            Name_TH = c.Name_TH;
+            Price = c.Price;
+            FullDescription = c.FullDescription;
+            BigImageUrl = c.BigImageUrl;
+            CategoryId = c.CategoryId;
+            CategoryName = c.Category.Title;
+        }
     }
 }

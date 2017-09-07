@@ -35,6 +35,7 @@
                     views: {
                         'subContent@settings': {
                             templateUrl: '/Scripts/app/settings/view/courses.html',
+                            controller:'CourseManagementController as vm'
                         },
                     }
                 });

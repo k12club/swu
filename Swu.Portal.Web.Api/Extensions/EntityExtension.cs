@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Swu.Portal.Data.Models;
+using Swu.Portal.Web.Api.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,10 @@ namespace Swu.Portal.Web.Api
                 ImageUrl = string.IsNullOrEmpty(u.ImageUrl)? DEFAULT_IMG : u.ImageUrl,
                 Position = u.Position,
                 Tag = u.Tag,
-                Description = u.Description
+                Description = u.Description,
+                CreatedDate = u.CreatedDate,
+                UpdateDate = u.UpdatedDate,
+                RegistrationDate = u.RegistrationDate
             };
         }
         public static ApplicationUser ToEntity(this UserProfile u)
@@ -53,6 +57,11 @@ namespace Swu.Portal.Web.Api
                 Tag = u.Tag,
                 Description = u.Description
             };
+        }
+
+        public static CourseDetailProxy ToViewModel(this Course c)
+        {
+            return new CourseDetailProxy(c);
         }
 
     }

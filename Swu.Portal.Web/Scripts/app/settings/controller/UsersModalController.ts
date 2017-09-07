@@ -20,7 +20,6 @@
         static $inject: Array<string> = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId","mode"];
         constructor(private $scope: UserModalScope, private $state: ng.ui.IState, private userService: IuserService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private userId: string,private mode :number) {
             this.$scope.id = userId;
-            console.log(mode);
             if (mode == 1) {
                 this.$scope.mode = actionMode.addNew;
                 this.$scope.title = "Add New User";

@@ -27,15 +27,20 @@
                                 </tr>
                             </thead>
                             <tbody class="irs-table-body style2">
-                                <tr ng-repeat="u in users">
+                                <tr ng-repeat="u in displayUsers">
                                     <th><a href="" ng-click="edit(u.id)">{{u.userName}}</a></th>
                                     <th>{{u.firstName_en}} {{u.lastName_en}}</th>
                                     <td><a href="#"><span class="badge badge-success">{{u.displayRoleName}}</span></a><br></td>
                                     <td>Activated</td>
-                                    <td>{{u.updateDate|date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td>{{u.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</td>
                                 </tr>
                             </tbody>
                         </table>
+                        <ul class="list-inline irs-ip-navigation clearfix">
+                            <li><span class="flaticon-arrows" ng-click="prev()"></span></li>
+                            <li ng-repeat="number in []|range:totalPageNumber" ng-click="changePage($index)"><a ng-class="{active:number == currentPage}">{{$index+1}}</a></li>
+                            <li><span class="flaticon-arrows-1" ng-click="next()"></span></li>
+                        </ul>
                     </div>
                     <div class="row">
                         <form class="form form-inline" role="form">

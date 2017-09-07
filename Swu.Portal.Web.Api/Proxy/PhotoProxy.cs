@@ -37,7 +37,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public List<PhotoProxy> Photos { get; set; }
         public PhotoAlbumProxy()
         {
-
+            this.Photos = new List<PhotoProxy>();
         }
         public PhotoAlbumProxy(PhotoAlbum album)
         {
