@@ -20,11 +20,12 @@
             }
             this.$scope.Login = () => {
                 this.auth.login({ "userName": this.$scope.userName, "password": this.$scope.password }, this.loginSuccess, this.loginFail);
+                this.$state.go("app", { reload: true });
             }
             this.$scope.Logout = () => {
                 this.auth.logout();
                 this.init();
-                this.$state.go("app");
+                this.$state.go("app", {reload:true});
             }
             this.$scope.swapLanguage = (lang: string): void => {
                 if ($scope.userProfile != null || $scope.userProfile != undefined) {

@@ -22,7 +22,8 @@ module Swu {
             "underscore",
             "ui.bootstrap",
             "pascalprecht.translate",
-            "ngCookies"
+            "ngCookies",
+            "summernote"
         ])
         .filter('range', function rangeFilter() {
             return function (input: number[], total: number) {
@@ -33,7 +34,7 @@ module Swu {
             };
         })
         .filter('trustAsHtml', ['$sce', function ($sce: ng.ISCEService) {
-            return function (html:any) {
+            return function (html: any) {
                 return $sce.trustAsHtml(html);
             };
         }])
@@ -46,17 +47,19 @@ module Swu {
                 return moment(date).format('DD/MM/YYYY');
             };
         }])
-        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant, auth: IAuthServices) {
+        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", "$window", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant, auth: IAuthServices, $window: ng.IWindowService) {
             $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                if (auth.isLoggedIn() ==false) {
-                    //Todo: force to login before do any operation
+                if (_.contains(AppConstant.authorizeStateList, $state.current.name)) {
+                    if (auth.isLoggedIn() == false) {
+                        $state.go("app", { reload: true });
+                    }
                 }
-                
+
             });
             $rootScope.lang = AppConstant.defaultLang;
             $rootScope.scrollToToped = () => {

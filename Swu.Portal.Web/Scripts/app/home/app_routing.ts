@@ -13,6 +13,7 @@
                 .state("app", {
                     url: "/app",
                     templateUrl: "/Scripts/app/home/index.html",
+                    cache:false,
                     controller: "HomeController as vm"
                 });
         }

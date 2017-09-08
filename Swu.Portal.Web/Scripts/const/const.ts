@@ -23,5 +23,10 @@ module Swu {
             "settings.courses",
             "settings.users"
         ];
+        authorizeStateList = [
+            "settings",
+            "settings.courses",
+            "settings.users"
+        ];
     }
 }

@@ -321,6 +321,7 @@
     <Content Include="Content\css\prettyPhoto\light_square\sprite.png" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\summernote.css" />
     <Content Include="Content\css\swiper.min.css" />
     <Content Include="Content\css\translations.css" />
     <Content Include="Content\css\ytplayer\raster%402x.png" />
@@ -584,6 +585,7 @@
     <Content Include="Content\images\testimonial\5.png" />
     <Content Include="Content\images\testimonial\6.png" />
     <Content Include="Content\images\testimonial\7.png" />
+    <Content Include="Content\js\angular-summernote.min.js" />
     <Content Include="Content\js\bootsnav.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\css3-animate-it.js" />
@@ -610,6 +612,7 @@
     <Content Include="Content\js\index.plugin.js" />
     <Content Include="Content\js\script.js" />
     <Content Include="Content\js\scrollto.js" />
+    <Content Include="Content\js\summernote.min.js" />
     <Content Include="Content\js\swiper.min.js" />
     <Content Include="Content\js\validator.min.js" />
     <Content Include="Content\js\wow.min.js" />

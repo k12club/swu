@@ -436,7 +436,8 @@ var Swu;
         "underscore",
         "ui.bootstrap",
         "pascalprecht.translate",
-        "ngCookies"
+        "ngCookies",
+        "summernote"
     ])
         .filter('range', function rangeFilter() {
         return function (input, total) {
@@ -460,14 +461,17 @@ var Swu;
                 return moment(date).format('DD/MM/YYYY');
             };
         }])
-        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", function ($state, $http, $rootScope, AppConstant, auth) {
+        .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", "$window", function ($state, $http, $rootScope, AppConstant, auth, $window) {
             $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                if (auth.isLoggedIn() == false) {
+                if (_.contains(AppConstant.authorizeStateList, $state.current.name)) {
+                    if (auth.isLoggedIn() == false) {
+                        $state.go("app", { reload: true });
+                    }
                 }
             });
             $rootScope.lang = AppConstant.defaultLang;
@@ -492,6 +496,11 @@ var Swu;
                 "board.forum",
                 "board.course",
                 "board.research",
+                "settings",
+                "settings.courses",
+                "settings.users"
+            ];
+            this.authorizeStateList = [
                 "settings",
                 "settings.courses",
                 "settings.users"
@@ -669,11 +678,12 @@ var Swu;
             };
             this.$scope.Login = function () {
                 _this.auth.login({ "userName": _this.$scope.userName, "password": _this.$scope.password }, _this.loginSuccess, _this.loginFail);
+                _this.$state.go("app", { reload: true });
             };
             this.$scope.Logout = function () {
                 _this.auth.logout();
                 _this.init();
-                _this.$state.go("app");
+                _this.$state.go("app", { reload: true });
             };
             this.$scope.swapLanguage = function (lang) {
                 if ($scope.userProfile != null || $scope.userProfile != undefined) {
@@ -796,6 +806,7 @@ var Swu;
                 .state("app", {
                 url: "/app",
                 templateUrl: "/Scripts/app/home/index.html",
+                cache: false,
                 controller: "HomeController as vm"
             });
         }
@@ -3049,7 +3060,6 @@ var Swu;
             this.$scope.edit = function (id) {
                 _this.courseManagementService.getCourseById(id).then(function (response) {
                     _this.$scope.course = response;
-                    $("#content").summernote("code", _this.$scope.course.fullDescription);
                     _this.$scope.selectedCateogry = _.filter(_this.$scope.categories, function (item, index) {
                         return item.id == $scope.course.categoryId;
                     })[0].id.toString();
@@ -3065,19 +3075,24 @@ var Swu;
                 _this.$modalInstance.dismiss("");
             };
             this.$scope.save = function () {
-                if (_this.$scope.isValid()) {
-                    var models = [];
-                    _this.$scope.course.categoryId = parseInt(_this.$scope.selectedCateogry);
-                    _this.$scope.course.categoryName = _.filter(_this.$scope.categories, function (item, index) {
-                        return item.id == $scope.course.categoryId;
-                    })[0].title;
-                    _this.$scope.course.createdUserId = _this.auth.getCurrentUser().id;
-                    $("#content").summernote("code", _this.$scope.course.fullDescription);
-                    models.push({ name: "file", value: _this.$scope.file });
-                    models.push({ name: "course", value: _this.$scope.course });
-                    _this.courseManagementService.addNewOrUpdate(models).then(function (response) {
-                        _this.$modalInstance.close();
-                    }, function (error) { });
+                if (_this.auth.isLoggedIn()) {
+                    if (_this.$scope.isValid()) {
+                        var models = [];
+                        _this.$scope.course.categoryId = parseInt(_this.$scope.selectedCateogry);
+                        _this.$scope.course.categoryName = _.filter(_this.$scope.categories, function (item, index) {
+                            return item.id == $scope.course.categoryId;
+                        })[0].title;
+                        _this.$scope.course.createdUserId = _this.auth.getCurrentUser().id;
+                        models.push({ name: "file", value: _this.$scope.file });
+                        models.push({ name: "course", value: _this.$scope.course });
+                        _this.courseManagementService.addNewOrUpdate(models).then(function (response) {
+                            _this.$modalInstance.close();
+                        }, function (error) { });
+                    }
+                }
+                else {
+                    _this.toastr.error("Time out expired");
+                    _this.$state.go("app", { reload: true });
                 }
             };
             this.init();
