@@ -22,11 +22,11 @@ D:\Git\swu\Swu.Portal.Service\bin\Debug\Autofac.Configuration.dll
 D:\Git\swu\Swu.Portal.Service\bin\Debug\Autofac.dll
 D:\Git\swu\Swu.Portal.Service\bin\Debug\EntityFramework.dll
 D:\Git\swu\Swu.Portal.Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\Git\swu\Swu.Portal.Service\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Git\swu\Swu.Portal.Service\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\Git\swu\Swu.Portal.Service\bin\Debug\SharpRepository.Ioc.Autofac.dll
 D:\Git\swu\Swu.Portal.Service\bin\Debug\SharpRepository.Repository.dll
 D:\Git\swu\Swu.Portal.Service\bin\Debug\Swu.Portal.Data.dll
-D:\Git\swu\Swu.Portal.Service\bin\Debug\Microsoft.AspNet.Identity.Core.dll
-D:\Git\swu\Swu.Portal.Service\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\Git\swu\Swu.Portal.Service\bin\Debug\Swu.Portal.Data.pdb
 D:\Git\swu\Swu.Portal.Service\bin\Debug\Autofac.xml
 D:\Git\swu\Swu.Portal.Service\bin\Debug\EntityFramework.xml

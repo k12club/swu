@@ -27,24 +27,22 @@ namespace Swu.Portal.Web.Api
     {
         private const string UPLOAD_DIR = "FileUpload/course/";
         private readonly IDateTimeRepository _datetimeRepository;
-        private readonly IRepository2<Data.Models.Course> _courseRepository;
+        private readonly IRepository2<Course> _courseRepository;
         private readonly IRepository2<PhotoAlbum> _photoAlbumRepository;
         private readonly IRepository<CourseCategory> _courseCategoryRepository;
-        private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly ICourseService _courseService;
         public CourseController(
             IDateTimeRepository datetimeRepository,
-            IRepository2<Data.Models.Course> courseRepository,
+            IRepository2<Course> courseRepository,
             IRepository2<PhotoAlbum> photoAlbumRepository,
-            IRepository<CourseCategory> courseCategoryRepository)
+            IRepository<CourseCategory> courseCategoryRepository,
+            ICourseService courseService)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
             this._photoAlbumRepository = photoAlbumRepository;
             this._courseCategoryRepository = courseCategoryRepository;
-            this._userManager = new UserManager<ApplicationUser>(
-            new UserStore<ApplicationUser>(
-                new SwuDBContext()));
+            this._courseService = courseService;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -52,7 +50,7 @@ namespace Swu.Portal.Web.Api
             if (ModelState.IsValid)
             {
                 var cards = new List<CourseCardProxy>();
-                var courses = this._courseRepository.List.ToList();
+                var courses = this._courseRepository.List.OrderByDescending(o=>o.CreatedDate).ToList();
                 foreach (var c in courses)
                 {
                     cards.Add(new CourseCardProxy(c));
@@ -172,12 +170,11 @@ and start a new fresh tomorrow. ",
         [HttpPost, Route("SaveAsync")]
         public async Task<HttpResponseMessage> PostFormData()
         {
-            // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-            var Id = Guid.NewGuid().ToString();
+            var GuID = Guid.NewGuid().ToString();
             string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_DIR);
             var provider = new MultipartFormDataStreamProvider(root);
             try
@@ -217,30 +214,9 @@ and start a new fresh tomorrow. ",
                 }
                 if (string.IsNullOrEmpty(course.Id))
                 {
-                    using (var context = new SwuDBContext())
-                    {
-                        var user = this._userManager.FindById(course.CreatedUserId);
-                        var c = new Course
-                        {
-                            Id = Id,
-                            ImageUrl = course.ImageUrl,
-                            Language = course.Language,
-                            Name_EN = course.Name_EN,
-                            Name_TH = course.Name_TH,
-                            Price = course.Price,
-                            FullDescription = course.FullDescription,
-                            BigImageUrl = course.BigImageUrl,
-                            CategoryId = course.CategoryId,
-                            CreatedDate = course.CreatedDate,
-                            CreatedUser = course.CreatedUserId,
-                            UpdatedDate = course.UpdateDate
-                        };
-                        context.Users.Attach(user);
-                        c.Teachers.Add(user);
-                        context.Courses.Add(c);
-                        context.SaveChanges();
-                        //this._courseRepository.Add(c);
-                    }
+                    course.Id = GuID;
+                    this._courseService.Add(course.ToEntity(), course.CreatedUserId);
+
                 }
                 else
                 {
@@ -253,10 +229,9 @@ and start a new fresh tomorrow. ",
                     c.FullDescription = course.FullDescription;
                     c.BigImageUrl = course.BigImageUrl;
                     c.CategoryId = course.CategoryId;
-                    c.CreatedDate = course.CreatedDate;
                     c.UpdatedDate = this._datetimeRepository.Now();
                     c.UpdatedUser = course.CreatedUserId;
-                    this._courseRepository.Update(c);
+                    this._courseService.Update(c);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
