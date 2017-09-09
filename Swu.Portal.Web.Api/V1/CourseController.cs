@@ -31,18 +31,21 @@ namespace Swu.Portal.Web.Api
         private readonly IRepository2<PhotoAlbum> _photoAlbumRepository;
         private readonly IRepository<CourseCategory> _courseCategoryRepository;
         private readonly ICourseService _courseService;
+        private readonly IRepository<Curriculum> _curriculumRepository;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
             IRepository2<PhotoAlbum> photoAlbumRepository,
             IRepository<CourseCategory> courseCategoryRepository,
-            ICourseService courseService)
+            ICourseService courseService,
+            IRepository<Curriculum> curriculumRepository)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
             this._photoAlbumRepository = photoAlbumRepository;
             this._courseCategoryRepository = courseCategoryRepository;
             this._courseService = courseService;
+            this._curriculumRepository = curriculumRepository;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -240,12 +243,27 @@ and start a new fresh tomorrow. ",
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-        [HttpPost, Route("addCurriculum")]
-        public CurriculumProxy AddCurriculum(CurriculumProxy curriculum) {
-            var course = this._courseRepository.FindById(curriculum.CourseId);
-            course.Curriculums.Add(curriculum.ToEntity());
-            this._courseRepository.Update(course);
+        [HttpPost, Route("addOrUpdateCurriculum")]
+        public CurriculumProxy AddOrUpdateCurriculum(CurriculumProxy curriculum) {
+            if (curriculum.Id == 0) {
+                var course = this._courseRepository.FindById(curriculum.CourseId);
+                course.Curriculums.Add(curriculum.ToEntity());
+                this._courseRepository.Update(course);
+            }
+            else
+            {
+                var c = this._curriculumRepository.FindById(curriculum.Id);
+                c.Name = curriculum.Name;
+                c.Type = (CurriculumType)curriculum.Type;
+                c.NumberOfTime = curriculum.NumberOfTime;
+                this._curriculumRepository.Update(c);
+            }
             return curriculum;
+        }
+        [HttpGet, Route("getCurriculumById")]
+        public CurriculumProxy GetCurriculumById(int id) {
+            var curriculum = this._curriculumRepository.FindById(id);
+            return new CurriculumProxy(curriculum);
         }
     }
 }

@@ -7,8 +7,9 @@
         getCourse(id: number): void;
         render(photos: IPhoto[]): void;
         registerScript(): void;
-        isShowAddButton: boolean;
+        hasPermission: boolean;
         addNew(): void;
+        edit(id: number): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
@@ -19,7 +20,7 @@
             this.$scope.getCourse = (id: number) => {
                 this.courseService.getById(id).then((response) => {
                     this.$scope.courseDetail = response;
-                    this.$scope.isShowAddButton = this.AuthServices.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
+                    this.$scope.hasPermission = this.AuthServices.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
                     this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(this.$scope.courseDetail.course.fullDescription);
                     _.map(this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
@@ -99,13 +100,37 @@
                     controller: CurriculumModalController,
                     resolve: {
                         id: function () {
+                            return 0;
+                        },
+                        courseId: function () {
                             return $scope.id;
                         },
                         mode: function () {
                             return actionMode.addNew;
                         }
                     },
-                    size: "sm"
+                    size: "md"
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getCourse(this.$scope.id);
+                });
+            };
+            this.$scope.edit = (id: number) => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/course/view/curriculum.tmpl.html',
+                    controller: CurriculumModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        courseId: function () {
+                            return $scope.id;
+                        },
+                        mode: function () {
+                            return actionMode.edit;
+                        }
+                    },
+                    size: "md"
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getCourse(this.$scope.id);

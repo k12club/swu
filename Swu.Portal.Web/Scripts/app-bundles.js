@@ -1976,7 +1976,7 @@ var Swu;
             this.$scope.getCourse = function (id) {
                 _this.courseService.getById(id).then(function (response) {
                     _this.$scope.courseDetail = response;
-                    _this.$scope.isShowAddButton = _this.AuthServices.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
+                    _this.$scope.hasPermission = _this.AuthServices.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
                     _this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(_this.$scope.courseDetail.course.fullDescription);
                     _.map(_this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
@@ -2056,13 +2056,37 @@ var Swu;
                     controller: Swu.CurriculumModalController,
                     resolve: {
                         id: function () {
+                            return 0;
+                        },
+                        courseId: function () {
                             return $scope.id;
                         },
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
                     },
-                    size: "sm"
+                    size: "md"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getCourse(_this.$scope.id);
+                });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/course/view/curriculum.tmpl.html',
+                    controller: Swu.CurriculumModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        courseId: function () {
+                            return $scope.id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    },
+                    size: "md"
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getCourse(_this.$scope.id);
@@ -2151,7 +2175,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CurriculumModalController = (function () {
-        function CurriculumModalController($scope, $state, courseService, toastr, $modalInstance, profileService, auth, webboardService, id, mode) {
+        function CurriculumModalController($scope, $state, courseService, toastr, $modalInstance, profileService, auth, webboardService, id, courseId, mode) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -2162,9 +2186,17 @@ var Swu;
             this.auth = auth;
             this.webboardService = webboardService;
             this.id = id;
+            this.courseId = courseId;
             this.mode = mode;
             this.$scope.id = id;
+            this.$scope.courseId = courseId;
             this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                _this.courseService.getCurriculumById(id).then(function (response) {
+                    _this.$scope.curriculum = response;
+                    _this.$scope.selectedType = _this.$scope.curriculum.type.toString();
+                }, function (error) { });
+            };
             this.$scope.validate = function () {
                 $('form').validator();
             };
@@ -2176,13 +2208,15 @@ var Swu;
             };
             this.$scope.save = function () {
                 if (_this.$scope.isValid()) {
-                    _this.$scope.curriculum.courseId = _this.$scope.id;
+                    _this.$scope.curriculum.id = _this.$scope.id;
+                    _this.$scope.curriculum.courseId = _this.$scope.courseId;
                     _this.$scope.curriculum.type = parseInt(_this.$scope.selectedType);
-                    console.log(_this.$scope.curriculum);
                     _this.courseService.saveCurriculum(_this.$scope.curriculum).then(function (response) {
                         _this.$modalInstance.close();
                     }, function (error) { });
                 }
+            };
+            $scope.delete = function () {
             };
             this.init();
         }
@@ -2202,7 +2236,7 @@ var Swu;
             }
         };
         ;
-        CurriculumModalController.$inject = ["$scope", "$state", "courseService", "toastr", "$modalInstance", "profileService", "AuthServices", "webboardService", "id", "mode"];
+        CurriculumModalController.$inject = ["$scope", "$state", "courseService", "toastr", "$modalInstance", "profileService", "AuthServices", "webboardService", "id", "courseId", "mode"];
         CurriculumModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CurriculumModalController" })
@@ -2225,7 +2259,10 @@ var Swu;
             return this.apiService.getData("course/getCourseByCriteria?keyword=" + criteria.name);
         };
         courseService.prototype.saveCurriculum = function (curriculum) {
-            return this.apiService.postData(curriculum, "course/addCurriculum");
+            return this.apiService.postData(curriculum, "course/addOrUpdateCurriculum");
+        };
+        courseService.prototype.getCurriculumById = function (id) {
+            return this.apiService.getData("course/getCurriculumById?id=" + id);
         };
         courseService.$inject = ['apiService', 'AppConstant'];
         courseService = __decorate([

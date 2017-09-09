@@ -49,12 +49,7 @@ namespace Swu.Portal.Web.Api.Proxy
             {
                 foreach (var cur in c.Curriculums)
                 {
-                    this.Curriculums.Add(new CurriculumProxy
-                    {
-                        Name = cur.Name,
-                        Type = Convert.ToInt16(cur.Type),
-                        NumberOfTime = cur.NumberOfTime,
-                });
+                    this.Curriculums.Add(new CurriculumProxy(cur));
             }
         }
             if (c.Teachers.Count > 0)

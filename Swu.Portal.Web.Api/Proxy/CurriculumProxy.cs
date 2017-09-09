@@ -11,6 +11,8 @@ namespace Swu.Portal.Web.Api.Proxy
 {
     public class CurriculumProxy
     {
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
         [JsonProperty(PropertyName = "type")]
@@ -19,5 +21,17 @@ namespace Swu.Portal.Web.Api.Proxy
         public int NumberOfTime { get; set; }
         [JsonProperty(PropertyName = "courseId")]
         public string CourseId { get; set; }
+        public CurriculumProxy()
+        {
+
+        }
+        public CurriculumProxy(Curriculum c)
+        {
+            this.Id = c.Id;
+            this.Name = c.Name;
+            this.Type = (int)c.Type;
+            this.NumberOfTime = c.NumberOfTime;
+            this.CourseId = c.CourseId;
+        }
     }
 }

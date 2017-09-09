@@ -4,7 +4,8 @@
         title: string;
     }
     interface CurriculumModalScope extends ng.IScope {
-        id: string;
+        id: number;
+        courseId: string;
         options: SummernoteOptions;
         text: string;
         mode: actionMode;
@@ -15,7 +16,8 @@
         file: any;
         title: string;
 
-        edit(id: string): void;
+        edit(id: number): void;
+        delete(): void;
         validate(): void;
         isValid(): boolean;
         cancel(): void;
@@ -24,18 +26,17 @@
     @Module("app")
     @Controller({ name: "CurriculumModalController" })
     export class CurriculumModalController {
-        static $inject: Array<string> = ["$scope", "$state", "courseService", "toastr", "$modalInstance", "profileService", "AuthServices", "webboardService", "id", "mode"];
-        constructor(private $scope: CurriculumModalScope, private $state: ng.ui.IStateService, private courseService: IcourseService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private profileService: IprofileService, private auth: IAuthServices, private webboardService: IwebboardService, private id: string, private mode: number) {
+        static $inject: Array<string> = ["$scope", "$state", "courseService", "toastr", "$modalInstance", "profileService", "AuthServices", "webboardService", "id","courseId", "mode"];
+        constructor(private $scope: CurriculumModalScope, private $state: ng.ui.IStateService, private courseService: IcourseService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private profileService: IprofileService, private auth: IAuthServices, private webboardService: IwebboardService, private id: number, private courseId:string, private mode: number) {
             this.$scope.id = id;
+            this.$scope.courseId = courseId;
             this.$scope.mode = mode;
-            //this.$scope.edit = (id: string): void => {
-            //    this.courseManagementService.getCourseById(id).then((response) => {
-            //        this.$scope.course = response;
-            //        this.$scope.selectedCateogry = _.filter(this.$scope.categories, function (item, index) {
-            //            return item.id == $scope.course.categoryId;
-            //        })[0].id.toString();
-            //    }, (error) => { });
-            //}
+            this.$scope.edit = (id: number): void => {
+                this.courseService.getCurriculumById(id).then((response) => {
+                    this.$scope.curriculum = response;
+                    this.$scope.selectedType = this.$scope.curriculum.type.toString();
+                }, (error) => { });
+            }
             this.$scope.validate = (): void => {
                 $('form').validator();
             };
@@ -47,13 +48,16 @@
             }
             this.$scope.save = (): void => {
                 if (this.$scope.isValid()) {
-                    this.$scope.curriculum.courseId = this.$scope.id;
+                    this.$scope.curriculum.id = this.$scope.id;
+                    this.$scope.curriculum.courseId = this.$scope.courseId;
                     this.$scope.curriculum.type = parseInt(this.$scope.selectedType);
-                    console.log(this.$scope.curriculum);
                     this.courseService.saveCurriculum(this.$scope.curriculum).then((response) => {
                         this.$modalInstance.close();
                     }, (error) => { });
                 }
+
+            }
+            $scope.delete = () => {
 
             }
             this.init();

@@ -94,15 +94,21 @@
                                     <div role="tabpanel" class="tab-pane fade" id="curriculum">
                                         <div class="col-md-12">
                                             <div class="irs-cdtls-feture-bot2">
-                                                <div class="row" ng-show="isShowAddButton">
+                                                <div class="row" ng-show="hasPermission">
                                                     <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
                                                 </div>
                                                 <ul class="list-group" ng-repeat="c in courseDetail.curriculums" ng-show="courseDetail.curriculums.length>0">
                                                     <li ng-show="c.type ===1">
                                                         <a class="list-group-item" href="#">
-                                                            <ul class="list-inline">
+                                                            <ul class="list-inline" ng-show="hasPermission">
+                                                                <li ng-click="edit(c.id)">
+                                                                    <span class="flaticon-business text-thm2"></span>{{c.name}}
+                                                                </li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
+                                                            </ul>
+                                                            <ul class="list-inline" ng-show="!hasPermission">
                                                                 <li>
-                                                                    <span class="flaticon-business text-thm2"></span> {{c.name}}
+                                                                    <span class="flaticon-business text-thm2"></span>{{c.name}}
                                                                 </li>
                                                                 <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
@@ -110,7 +116,13 @@
                                                     </li>
                                                     <li ng-show="c.type ===2">
                                                         <a class="list-group-item" href="#">
-                                                            <ul class="list-inline">
+                                                            <ul class="list-inline" ng-show="hasPermission">
+                                                                <li  ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-registration-modal-lg"> Register for test (20)</span></li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-result-modal-lg"> Test result</span></li>
+                                                                <li class="pull-right">{{c.time}}</li>
+                                                            </ul>
+                                                            <ul class="list-inline" ng-show="!hasPermission">
                                                                 <li><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-registration-modal-lg"> Register for test (20)</span></li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-result-modal-lg"> Test result</span></li>
