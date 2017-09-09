@@ -94,16 +94,17 @@
                                     <div role="tabpanel" class="tab-pane fade" id="curriculum">
                                         <div class="col-md-12">
                                             <div class="irs-cdtls-feture-bot2">
-                                                <ul class="list-group" ng-repeat="c in courseDetail.curriculums">
+                                                <div class="row" ng-show="isShowAddButton">
+                                                    <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                                </div>
+                                                <ul class="list-group" ng-repeat="c in courseDetail.curriculums" ng-show="courseDetail.curriculums.length>0">
                                                     <li ng-show="c.type ===1">
                                                         <a class="list-group-item" href="#">
                                                             <ul class="list-inline">
                                                                 <li>
-                                                                    <span class="flaticon-business text-thm2"></span> {{
-c.name
-                                                                    }}
+                                                                    <span class="flaticon-business text-thm2"></span> {{c.name}}
                                                                 </li>
-                                                                <li class="pull-right">{{c.time}}</li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
                                                         </a>
                                                     </li>
@@ -606,36 +607,38 @@ c.name
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="students">
-                                        <div class="col-md-6">
-                                            <div class="irs-cdtls-feture-bot2">
-                                                <ul class="list-group" ng-repeat="s in splitStudents1">
-                                                    <li>
-                                                        <a class="list-group-item" href="#">
-                                                            <ul class="list-inline">
-                                                                <li>{{s.number}}</li>
-                                                                <li>{{s.studentId}}</li>
-                                                                <li>{{s.name}}</li>
-                                                                <li class="pull-right"><span class="btn btn-sm irs-btn-thm3"> Profile</span></li>
-                                                            </ul>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                        <div class="row" ng-show="students.length>0">
+                                            <div class="col-md-6">
+                                                <div class="irs-cdtls-feture-bot2">
+                                                    <ul class="list-group" ng-repeat="s in splitStudents1">
+                                                        <li>
+                                                            <a class="list-group-item" href="#">
+                                                                <ul class="list-inline">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
+                                                                    <li class="pull-right"><span class="btn btn-sm irs-btn-thm3"> Profile</span></li>
+                                                                </ul>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="irs-cdtls-feture-bot2">
-                                                <ul class="list-group" ng-repeat="s in splitStudents2">
-                                                    <li>
-                                                        <a class="list-group-item" href="#">
-                                                            <ul class="list-inline">
-                                                                <li>{{s.number}}</li>
-                                                                <li>{{s.studentId}}</li>
-                                                                <li>{{s.name}}</li>
-                                                                <li class="pull-right"><span class="btn btn-sm irs-btn-thm3"> Profile</span></li>
-                                                            </ul>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                            <div class="col-md-6">
+                                                <div class="irs-cdtls-feture-bot2">
+                                                    <ul class="list-group" ng-repeat="s in splitStudents2">
+                                                        <li>
+                                                            <a class="list-group-item" href="#">
+                                                                <ul class="list-inline">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
+                                                                    <li class="pull-right"><span class="btn btn-sm irs-btn-thm3"> Profile</span></li>
+                                                                </ul>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

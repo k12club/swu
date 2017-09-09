@@ -14,20 +14,10 @@ namespace Swu.Portal.Web.Api.Proxy
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
         [JsonProperty(PropertyName = "type")]
-        public Enum.CurriculumType Type { get; set; }
+        public int Type { get; set; }
         [JsonProperty(PropertyName = "numberOfTime")]
         public int NumberOfTime { get; set; }
-        [JsonProperty(PropertyName = "time")]
-        public string Time {
-            get {
-                return string.Format("{0} hrs.", NumberOfTime);
-            }
-        }
-        public CurriculumProxy(Curriculum c)
-        {
-            this.Name = c.Name;
-            this.Type = (Enum.CurriculumType)Convert.ToInt16(c.Type);
-            this.NumberOfTime = c.NumberOfTime;
-        }
+        [JsonProperty(PropertyName = "courseId")]
+        public string CourseId { get; set; }
     }
 }

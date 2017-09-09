@@ -5,18 +5,21 @@
         splitStudents1: IStudentDetail[];
         splitStudents2: IStudentDetail[];
         getCourse(id: number): void;
-        render(photos:IPhoto[]): void;
+        render(photos: IPhoto[]): void;
         registerScript(): void;
+        isShowAddButton: boolean;
+        addNew(): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
     export class CourseController {
-        static $inject: Array<string> = ["$scope", "$state", "courseService", "$stateParams", "$sce"];
-        constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService) {
+        static $inject: Array<string> = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices"];
+        constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private AuthServices: IAuthServices) {
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getCourse = (id: number) => {
                 this.courseService.getById(id).then((response) => {
                     this.$scope.courseDetail = response;
+                    this.$scope.isShowAddButton = this.AuthServices.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
                     this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(this.$scope.courseDetail.course.fullDescription);
                     _.map(this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
@@ -28,7 +31,7 @@
                         if (key < (this.$scope.courseDetail.students.length / 2)) {
                             this.$scope.splitStudents1.push({
                                 id: value.id,
-                                number: key+1,
+                                number: key + 1,
                                 studentId: value.studentId,
                                 name: value.name,
                                 description: value.description,
@@ -37,7 +40,7 @@
                         } else {
                             this.$scope.splitStudents2.push({
                                 id: value.id,
-                                number: key+1,
+                                number: key + 1,
                                 studentId: value.studentId,
                                 name: value.name,
                                 description: value.description,
@@ -56,13 +59,13 @@
                     var elements = "<div class='col-md-4'>\
                         <div class='resources-item' >\
                             <div class='resources-category-image' >\
-                                <a href='../../../../"+ value.imageUrl +"' title= '" + value.name + "' by='"+ value.uploadBy +"'>\
-                                    <img class='img-responsive' alt= '' src= '../../../../"+ value.imageUrl +"'>\
+                                <a href='../../../../"+ value.imageUrl + "' title= '" + value.name + "' by='" + value.uploadBy + "'>\
+                                    <img class='img-responsive' alt= '' src= '../../../../"+ value.imageUrl + "'>\
                                         </a>\
                                         </div>\
                                         <div class='resources-description' >\
-                                            <p>"+ value.displayPublishedDate +"</p>\
-                                                <h4>"+ value.name +"</h4>\
+                                            <p>"+ value.displayPublishedDate + "</p>\
+                                                <h4>"+ value.name + "</h4>\
                                                 </div>\
                                                 </div>\
                                                 </div>";
@@ -88,6 +91,24 @@
                             return item.el.attr('title') + '<small> Upload by: ' + item.el.attr('by') + '</small>';
                         }
                     }
+                });
+            };
+            this.$scope.addNew = () => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/course/view/curriculum.tmpl.html',
+                    controller: CurriculumModalController,
+                    resolve: {
+                        id: function () {
+                            return $scope.id;
+                        },
+                        mode: function () {
+                            return actionMode.addNew;
+                        }
+                    },
+                    size: "sm"
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getCourse(this.$scope.id);
                 });
             };
             this.init();

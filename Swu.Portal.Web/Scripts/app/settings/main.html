@@ -24,15 +24,13 @@
 </section>
 
 <!-- Side Menu -->
-<section class="irs-ip-details">
+<section class="irs-ip-details" ng-controller="MainSettingController as vm">
     <div class="container">
         <div class="row irs-all-course-bb clearfix">
             <div class="col-sm-12 col-md-4 col-lg-3">
                 <h3 class="irs-sblc-title text-center">Settings</h3>
-                <ul class="list-unstyled irs-sbc-list">
-                    <li><a href="#" ui-sref="settings"><span class="glyphicon glyphicon-user"></span> Personal Info</a></li>
-                    <li><a href="#" ui-sref="settings.users"><span class="flaticon-arrows-3"></span>User Management</a></li>
-                    <li><a href="#" ui-sref="settings.courses"><span class="flaticon-arrows-3"></span> Courses</a></li>
+                <ul class="list-unstyled irs-sbc-list" ng-repeat="menu in displayMenus">
+                    <li><a href="#" ui-sref="{{menu.stateName}}"><span class="{{menu.icon}}"></span>{{menu.name}}</a></li>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-8 col-lg-9 irs-padb-svnty clearfix">

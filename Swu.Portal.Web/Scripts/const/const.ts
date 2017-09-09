@@ -24,9 +24,18 @@ module Swu {
             "settings.users"
         ];
         authorizeStateList = [
-            "settings",
-            "settings.courses",
-            "settings.users"
+            {
+                name: "settings",
+                roles:["Admin","Teacher","Student","Parent","Officer"]
+            },
+            {
+                name: "settings.courses",
+                roles: ["Admin","Teacher"]
+            },
+            {
+                name: "settings.users",
+                roles: ["Admin","Officer"]
+            }
         ];
     }
 }

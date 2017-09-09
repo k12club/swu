@@ -468,8 +468,14 @@ var Swu;
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                if (_.contains(AppConstant.authorizeStateList, $state.current.name)) {
-                    if (auth.isLoggedIn() == false) {
+                var permission = _.filter(AppConstant.authorizeStateList, function (item, index) { return item.name == $state.current.name; })[0];
+                if (permission != null) {
+                    if (auth.isLoggedIn()) {
+                        if (!_.contains(permission.roles, auth.getCurrentUser().selectedRoleName)) {
+                            $state.go("app", { reload: true });
+                        }
+                    }
+                    else {
                         $state.go("app", { reload: true });
                     }
                 }
@@ -501,9 +507,18 @@ var Swu;
                 "settings.users"
             ];
             this.authorizeStateList = [
-                "settings",
-                "settings.courses",
-                "settings.users"
+                {
+                    name: "settings",
+                    roles: ["Admin", "Teacher", "Student", "Parent", "Officer"]
+                },
+                {
+                    name: "settings.courses",
+                    roles: ["Admin", "Teacher"]
+                },
+                {
+                    name: "settings.users",
+                    roles: ["Admin", "Officer"]
+                }
             ];
         }
         AppConstant = __decorate([
@@ -1948,17 +1963,20 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseController = (function () {
-        function CourseController($scope, $state, courseService, $stateParams, $sce) {
+        function CourseController($scope, $state, courseService, $stateParams, $sce, $uibModal, AuthServices) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
             this.courseService = courseService;
             this.$stateParams = $stateParams;
             this.$sce = $sce;
+            this.$uibModal = $uibModal;
+            this.AuthServices = AuthServices;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getCourse = function (id) {
                 _this.courseService.getById(id).then(function (response) {
                     _this.$scope.courseDetail = response;
+                    _this.$scope.isShowAddButton = _this.AuthServices.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
                     _this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(_this.$scope.courseDetail.course.fullDescription);
                     _.map(_this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
@@ -2032,6 +2050,24 @@ var Swu;
                     }
                 });
             };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/course/view/curriculum.tmpl.html',
+                    controller: Swu.CurriculumModalController,
+                    resolve: {
+                        id: function () {
+                            return $scope.id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    },
+                    size: "sm"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getCourse(_this.$scope.id);
+                });
+            };
             this.init();
         }
         CourseController.prototype.init = function () {
@@ -2040,7 +2076,7 @@ var Swu;
             this.$scope.getCourse(this.$scope.id);
         };
         ;
-        CourseController.$inject = ["$scope", "$state", "courseService", "$stateParams", "$sce"];
+        CourseController.$inject = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices"];
         CourseController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CourseController" })
@@ -2114,6 +2150,69 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var CurriculumModalController = (function () {
+        function CurriculumModalController($scope, $state, courseService, toastr, $modalInstance, profileService, auth, webboardService, id, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.courseService = courseService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.profileService = profileService;
+            this.auth = auth;
+            this.webboardService = webboardService;
+            this.id = id;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.mode = mode;
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.$scope.isValid()) {
+                    _this.$scope.curriculum.courseId = _this.$scope.id;
+                    _this.$scope.curriculum.type = parseInt(_this.$scope.selectedType);
+                    console.log(_this.$scope.curriculum);
+                    _this.courseService.saveCurriculum(_this.$scope.curriculum).then(function (response) {
+                        _this.$modalInstance.close();
+                    }, function (error) { });
+                }
+            };
+            this.init();
+        }
+        CurriculumModalController.prototype.init = function () {
+            this.$scope.types = [];
+            this.$scope.types.push({ id: Swu.CurriculumType.lecture, title: "Lecture" });
+            this.$scope.types.push({ id: Swu.CurriculumType.exam, title: "Exam" });
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Course";
+                this.$scope.selectedType = _.first(this.$scope.types).id.toString();
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Course";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        CurriculumModalController.$inject = ["$scope", "$state", "courseService", "toastr", "$modalInstance", "profileService", "AuthServices", "webboardService", "id", "mode"];
+        CurriculumModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CurriculumModalController" })
+        ], CurriculumModalController);
+        return CurriculumModalController;
+    }());
+    Swu.CurriculumModalController = CurriculumModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var courseService = (function () {
         function courseService(apiService, constant) {
             this.apiService = apiService;
@@ -2124,6 +2223,9 @@ var Swu;
         };
         courseService.prototype.getCourseByCriteria = function (criteria) {
             return this.apiService.getData("course/getCourseByCriteria?keyword=" + criteria.name);
+        };
+        courseService.prototype.saveCurriculum = function (curriculum) {
+            return this.apiService.postData(curriculum, "course/addCurriculum");
         };
         courseService.$inject = ['apiService', 'AppConstant'];
         courseService = __decorate([
@@ -2638,8 +2740,43 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var MainSettingController = (function () {
+        function MainSettingController($scope, auth, AppConstant) {
+            var _this = this;
+            this.$scope = $scope;
+            this.auth = auth;
+            this.AppConstant = AppConstant;
+            this.$scope.menus = [];
+            this.$scope.displayMenus = [];
+            this.$scope.menus.push({ stateName: "settings", name: "Personal Info", icon: "glyphicon glyphicon-user" });
+            this.$scope.menus.push({ stateName: "settings.users", name: "User Management", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.courses", name: "Courses", icon: "flaticon-arrows-3" });
+            this.$scope.displayMenus = _.filter(this.$scope.menus, function (menu, index) {
+                var currentUserRole = _this.auth.getCurrentUser().selectedRoleName;
+                var permission = _.filter(_this.AppConstant.authorizeStateList, function (item, index) {
+                    return item.name == menu.stateName;
+                })[0];
+                if (_.contains(permission.roles, currentUserRole)) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+        }
+        MainSettingController.$inject = ["$scope", "AuthServices", "AppConstant"];
+        MainSettingController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "MainSettingController" })
+        ], MainSettingController);
+        return MainSettingController;
+    }());
+    Swu.MainSettingController = MainSettingController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var ProfileController = (function () {
-        function ProfileController($scope, $state, profileService, auth, $uibModal, $timeout) {
+        function ProfileController($scope, $state, profileService, auth, $uibModal, $timeout, AppConstant) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -2647,6 +2784,7 @@ var Swu;
             this.auth = auth;
             this.$uibModal = $uibModal;
             this.$timeout = $timeout;
+            this.AppConstant = AppConstant;
             this.$scope.getCurrentUser = function () {
                 _this.$scope.currentUser = _this.auth.getCurrentUser();
                 console.log(_this.$scope.currentUser);
@@ -2670,7 +2808,7 @@ var Swu;
             this.$scope.getCurrentUser();
         };
         ;
-        ProfileController.$inject = ["$scope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout"];
+        ProfileController.$inject = ["$scope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout", "AppConstant"];
         ProfileController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ProfileController" })

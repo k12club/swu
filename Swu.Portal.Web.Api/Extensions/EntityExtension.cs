@@ -12,7 +12,6 @@ namespace Swu.Portal.Web.Api
     public static class EntityExtension
     {
         private const string DEFAULT_IMG = "Content/images/default.jpg";
-
         public static UserLoginProxy ToUserLoginViewModel(this ApplicationUser data)
         {
             return Mapper.Map<UserLoginProxy>(data);
@@ -21,7 +20,6 @@ namespace Swu.Portal.Web.Api
         {
             return Mapper.Map<ApplicationUser>(data);
         }
-
         public static UserProfile ToUserProfileViewModel(this ApplicationUser u, string selectedRoleName)
         {
             return new UserProfile
@@ -59,7 +57,6 @@ namespace Swu.Portal.Web.Api
                 Description = u.Description
             };
         }
-
         public static CourseDetailProxy ToViewModel(this Data.Models.Course c)
         {
             return new CourseDetailProxy(c);
@@ -80,6 +77,16 @@ namespace Swu.Portal.Web.Api
                 CreatedDate = course.CreatedDate,
                 CreatedUser = course.CreatedUserId,
                 UpdatedDate = course.UpdateDate
+            };
+        }
+        public static Curriculum ToEntity(this CurriculumProxy curriculum)
+        {
+            return new Data.Models.Curriculum
+            {
+                Name = curriculum.Name,
+                CourseId = curriculum.CourseId,
+                Type = (CurriculumType)curriculum.Type,
+                NumberOfTime = curriculum.NumberOfTime
             };
         }
     }

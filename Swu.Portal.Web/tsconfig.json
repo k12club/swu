@@ -50,6 +50,7 @@
 
     "Scripts/app/course/controller/CourseController.ts",
     "Scripts/app/course/controller/CourseListController.ts",
+    "Scripts/app/course/controller/CurriculumModalController.ts",
     "Scripts/app/course/service/courseService.ts",
     "Scripts/app/course/model/courseAllDetail.ts",
 
@@ -70,6 +71,7 @@
 
     "Scripts/app/contact/ContactUsController.ts",
 
+    "Scripts/app/settings/controller/MainSettingController.ts",
     "Scripts/app/settings/controller/ProfileController.ts",
     "Scripts/app/settings/controller/UsersController.ts",
     "Scripts/app/settings/controller/UsersModalController.ts",

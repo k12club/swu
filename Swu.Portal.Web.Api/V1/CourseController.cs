@@ -240,5 +240,12 @@ and start a new fresh tomorrow. ",
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+        [HttpPost, Route("addCurriculum")]
+        public CurriculumProxy AddCurriculum(CurriculumProxy curriculum) {
+            var course = this._courseRepository.FindById(curriculum.CourseId);
+            course.Curriculums.Add(curriculum.ToEntity());
+            this._courseRepository.Update(course);
+            return curriculum;
+        }
     }
 }
