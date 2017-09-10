@@ -24,5 +24,7 @@ namespace Swu.Portal.Data.Models
         public string CourseId { get; set; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
+
+        public virtual StudentCourse StudentCourse { get; set; }
     }
 }

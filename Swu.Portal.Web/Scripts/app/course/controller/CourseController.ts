@@ -10,17 +10,23 @@
         hasPermission: boolean;
         addNew(): void;
         edit(id: number): void;
+        getCurrentUser(): IUserProfile;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
     export class CourseController {
         static $inject: Array<string> = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices"];
-        constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private AuthServices: IAuthServices) {
+        constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices) {
             this.$scope.id = this.$stateParams["id"];
+            this.$scope.getCurrentUser = () => {
+                return this.auth.getCurrentUser();
+            };
             this.$scope.getCourse = (id: number) => {
                 this.courseService.getById(id).then((response) => {
                     this.$scope.courseDetail = response;
-                    this.$scope.hasPermission = this.AuthServices.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
+                    if (this.$scope.getCurrentUser() != null) {
+                        this.$scope.hasPermission = this.auth.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
+                    }
                     this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(this.$scope.courseDetail.course.fullDescription);
                     _.map(this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
@@ -141,6 +147,7 @@
         init(): void {
             this.$scope.splitStudents1 = [];
             this.$scope.splitStudents2 = [];
+            this.$scope.hasPermission = false;
             this.$scope.getCourse(this.$scope.id);
         };
 

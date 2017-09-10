@@ -24,7 +24,7 @@
     </div>
 </section>
 
-<section class="irs-ip-details irs-padb-svnty" ng-controller="CourseController as vm">
+<section class="irs-ip-details irs-padb-svnty">
     <div class="container">
         <div class="row clearfix">
             <div class="col-lg-12 clearfix">
@@ -117,7 +117,7 @@
                                                     <li ng-show="c.type ===2">
                                                         <a class="list-group-item" href="#">
                                                             <ul class="list-inline" ng-show="hasPermission">
-                                                                <li  ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
+                                                                <li ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-registration-modal-lg"> Register for test (20)</span></li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-result-modal-lg"> Test result</span></li>
                                                                 <li class="pull-right">{{c.time}}</li>
@@ -143,107 +143,17 @@
                                                         <p class="irs-sign-reg-para text-center">Exam for mid term (40point): 1 August 2017, 09:00-12:00 AM. </p>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row">
+                                                        <div class="row" ng-show="courseDetail.students.length>0">
                                                             <div class="col-md-6">
                                                                 <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group">
+                                                                    <ul class="list-group" ng-repeat="s in splitStudents1">
                                                                         <li>
                                                                             <a class="list-group-item" href="#">
                                                                                 <ul class="list-inline">
-                                                                                    <li>#1</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">32</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#2</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">23</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#3</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">30</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#4</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">20</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#5</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">18</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#6</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">22</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#7</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">9</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#8</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">26</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#9</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">19</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#10</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">36</li>
+                                                                                    <li>{{s.number}}</li>
+                                                                                    <li>{{s.studentId}}</li>
+                                                                                    <li>{{s.name}}</li>
+                                                                                    <li class="pull-right">0</li>
                                                                                 </ul>
                                                                             </a>
                                                                         </li>
@@ -252,104 +162,14 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group">
+                                                                    <ul class="list-group" ng-repeat="s in splitStudents2">
                                                                         <li>
                                                                             <a class="list-group-item" href="#">
                                                                                 <ul class="list-inline">
-                                                                                    <li>#11</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">38</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#12</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">22</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#13</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">16</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#14</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">32</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#15</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">22</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#16</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">27</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#17</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">24</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#18</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">28</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#19</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">32</li>30
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#20</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right">27</li>
+                                                                                    <li>{{s.number}}</li>
+                                                                                    <li>{{s.studentId}}</li>
+                                                                                    <li>{{s.name}}</li>
+                                                                                    <li class="pull-right">0</li>
                                                                                 </ul>
                                                                             </a>
                                                                         </li>
@@ -372,106 +192,16 @@
                                                         <p class="irs-sign-reg-para text-center">Exam for mid term (40point): 1 August 2017, 09:00-12:00 AM. </p>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row">
+                                                        <div class="row" ng-show="courseDetail.students.length>0">
                                                             <div class="col-md-6">
                                                                 <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group">
+                                                                    <ul class="list-group" ng-repeat="s in splitStudents1">
                                                                         <li>
                                                                             <a class="list-group-item" href="#">
                                                                                 <ul class="list-inline">
-                                                                                    <li>#1</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#2</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#3</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#4</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#5</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#6</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#7</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#8</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#9</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#10</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
+                                                                                    <li>{{s.number}}</li>
+                                                                                    <li>{{s.studentId}}</li>
+                                                                                    <li>{{s.name}}</li>
                                                                                     <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
                                                                                 </ul>
                                                                             </a>
@@ -481,103 +211,13 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group">
+                                                                    <ul class="list-group" ng-repeat="s in splitStudents2">
                                                                         <li>
                                                                             <a class="list-group-item" href="#">
                                                                                 <ul class="list-inline">
-                                                                                    <li>#11</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-remove text-danger"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#12</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#13</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#14</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#15</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#16</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#17</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#18</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#19</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>#20</li>
-                                                                                    <li>12345678</li>
-                                                                                    <li>Mr. Chansak Kochasen</li>
+                                                                                    <li>{{s.number}}</li>
+                                                                                    <li>{{s.studentId}}</li>
+                                                                                    <li>{{s.name}}</li>
                                                                                     <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
                                                                                 </ul>
                                                                             </a>
@@ -619,7 +259,7 @@
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="students">
-                                        <div class="row" ng-show="students.length>0">
+                                        <div class="row" ng-show="courseDetail.students.length>0">
                                             <div class="col-md-6">
                                                 <div class="irs-cdtls-feture-bot2">
                                                     <ul class="list-group" ng-repeat="s in splitStudents1">

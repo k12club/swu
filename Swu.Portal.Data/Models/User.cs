@@ -37,5 +37,6 @@ namespace Swu.Portal.Data.Models
         public virtual ICollection<Course> TeacherCourses { get; set; }
 
         public virtual ICollection<Course> StudentCourses { get; set; }
+
     }
 }

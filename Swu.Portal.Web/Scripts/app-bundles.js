@@ -1963,7 +1963,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseController = (function () {
-        function CourseController($scope, $state, courseService, $stateParams, $sce, $uibModal, AuthServices) {
+        function CourseController($scope, $state, courseService, $stateParams, $sce, $uibModal, auth) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -1971,12 +1971,17 @@ var Swu;
             this.$stateParams = $stateParams;
             this.$sce = $sce;
             this.$uibModal = $uibModal;
-            this.AuthServices = AuthServices;
+            this.auth = auth;
             this.$scope.id = this.$stateParams["id"];
+            this.$scope.getCurrentUser = function () {
+                return _this.auth.getCurrentUser();
+            };
             this.$scope.getCourse = function (id) {
                 _this.courseService.getById(id).then(function (response) {
                     _this.$scope.courseDetail = response;
-                    _this.$scope.hasPermission = _this.AuthServices.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
+                    if (_this.$scope.getCurrentUser() != null) {
+                        _this.$scope.hasPermission = _this.auth.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
+                    }
                     _this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(_this.$scope.courseDetail.course.fullDescription);
                     _.map(_this.$scope.courseDetail.teachers, function (t) {
                         t.description = $sce.trustAsHtml(t.description);
@@ -2097,6 +2102,7 @@ var Swu;
         CourseController.prototype.init = function () {
             this.$scope.splitStudents1 = [];
             this.$scope.splitStudents2 = [];
+            this.$scope.hasPermission = false;
             this.$scope.getCourse(this.$scope.id);
         };
         ;
