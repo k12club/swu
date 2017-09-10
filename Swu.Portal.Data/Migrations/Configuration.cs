@@ -354,9 +354,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
+                Students = new List<ApplicationUser> {
+                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                },
                 ApplicationUser = defaultUser
             };
             var c2 = new Course
@@ -764,70 +764,70 @@ namespace Swu.Portal.Data.Migrations
             #region Student Score
             var sc1 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 42,
                 Student = s1
             };
             var sc2 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 30,
                 Student = s2
             };
             var sc3 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 45,
                 Student = s3
             };
             var sc4 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 20,
                 Student = s4
             };
             var sc5 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 39,
                 Student = s5
             };
             var sc6 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 39,
                 Student = s6
             };
             var sc7 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 21,
                 Student = s7
             };
             var sc8 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 43,
                 Student = s8
             };
             var sc9 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 30,
                 Student = s9
             };
             var sc10 = new StudentScore
             {
-                CurriculumId = cur1.Id,
+                CurriculumId = cur4.Id,
                 Activated = true,
                 Score = 40,
                 Student = s10

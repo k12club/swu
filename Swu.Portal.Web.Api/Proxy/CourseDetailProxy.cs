@@ -50,15 +50,15 @@ namespace Swu.Portal.Web.Api.Proxy
                 foreach (var cur in c.Curriculums)
                 {
                     this.Curriculums.Add(new CurriculumProxy(cur));
+                }
             }
-        }
             if (c.Teachers.Count > 0)
             {
                 foreach (var t in c.Teachers)
                 {
                     this.Teacher.Add(new TeacherProxy(t));
                 }
-}
+            }
             if (c.Students.Count > 0)
             {
                 foreach (var s in c.Students)
@@ -73,33 +73,33 @@ namespace Swu.Portal.Web.Api.Proxy
         }
     }
     public class CourseBriefDetailProxy
-{
-    [JsonProperty(PropertyName = "course")]
-    public CourseDetailProxy CourseInfo { get; set; }
-    [JsonProperty(PropertyName = "teachers")]
-    public List<TeacherProxy> Teacher { get; set; }
-    public CourseBriefDetailProxy(Data.Models.Course c)
     {
-        this.CourseInfo = new CourseDetailProxy
+        [JsonProperty(PropertyName = "course")]
+        public CourseDetailProxy CourseInfo { get; set; }
+        [JsonProperty(PropertyName = "teachers")]
+        public List<TeacherProxy> Teacher { get; set; }
+        public CourseBriefDetailProxy(Data.Models.Course c)
         {
-            Id = c.Id,
-            ImageUrl = c.ImageUrl,
-            Language = c.Language,
-            Name_EN = c.Name_EN,
-            Name_TH = c.Name_TH,
-            Price = c.Price,
-            FullDescription = c.FullDescription,
-            BigImageUrl = c.BigImageUrl,
-            NumberOfLecture = c.Curriculums.Where(i => i.Type == CurriculumType.Lecture).Count(),
-            NumberOfQuizes = c.Curriculums.Where(i => i.Type == CurriculumType.Quize).Count(),
-            NumberOfStudents = c.Students.Count(),
-            NumberOfTeachers = c.Teachers.Count(),
-            NumberOfTimes = c.Curriculums.Sum(i => i.NumberOfTime),
-        };
-        foreach (var t in c.Teachers)
-        {
-            this.Teacher.Add(new TeacherProxy(t));
+            this.CourseInfo = new CourseDetailProxy
+            {
+                Id = c.Id,
+                ImageUrl = c.ImageUrl,
+                Language = c.Language,
+                Name_EN = c.Name_EN,
+                Name_TH = c.Name_TH,
+                Price = c.Price,
+                FullDescription = c.FullDescription,
+                BigImageUrl = c.BigImageUrl,
+                NumberOfLecture = c.Curriculums.Where(i => i.Type == CurriculumType.Lecture).Count(),
+                NumberOfQuizes = c.Curriculums.Where(i => i.Type == CurriculumType.Quize).Count(),
+                NumberOfStudents = c.Students.Count(),
+                NumberOfTeachers = c.Teachers.Count(),
+                NumberOfTimes = c.Curriculums.Sum(i => i.NumberOfTime),
+            };
+            foreach (var t in c.Teachers)
+            {
+                this.Teacher.Add(new TeacherProxy(t));
+            }
         }
     }
-}
 }

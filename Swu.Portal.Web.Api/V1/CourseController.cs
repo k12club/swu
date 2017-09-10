@@ -53,7 +53,7 @@ namespace Swu.Portal.Web.Api
             if (ModelState.IsValid)
             {
                 var cards = new List<CourseCardProxy>();
-                var courses = this._courseRepository.List.OrderByDescending(o=>o.CreatedDate).ToList();
+                var courses = this._courseRepository.List.OrderByDescending(o => o.CreatedDate).ToList();
                 foreach (var c in courses)
                 {
                     cards.Add(new CourseCardProxy(c));
@@ -80,16 +80,28 @@ namespace Swu.Portal.Web.Api
         public CourseAllDetailProxy GetById(string id)
         {
             var course = this._courseRepository.FindById(id);
-            var result = new CourseAllDetailProxy(course);
-            var photos = this._photoAlbumRepository.FindById(result.PhotosAlbum.Id);
+            var allDetail = new CourseAllDetailProxy(course);
+            List<Dictionary<int, StudentScoreProxy>> studentScores = new List<Dictionary<int, StudentScoreProxy>>();
+            foreach (var c in allDetail.Curriculums)
+            {
+                var curriculums = this._curriculumRepository.FindById(c.Id);
+                foreach (var sc in curriculums.StudentScores)
+                {
+                    //var studentScore = new Dictionary<int, StudentScoreProxy>();
+                    //studentScore.Add(c.Id, new StudentScoreProxy(sc));
+                    //studentScores.Add(studentScore);
+                    c.StudentScores.Add(new StudentScoreProxy(sc));
+                }
+            }
+            var photos = this._photoAlbumRepository.FindById(allDetail.PhotosAlbum.Id);
             if (photos != null)
             {
                 foreach (var p in photos.Photos)
                 {
-                    result.PhotosAlbum.Photos.Add(new PhotoProxy(p));
+                    allDetail.PhotosAlbum.Photos.Add(new PhotoProxy(p));
                 }
             }
-            return result;
+            return allDetail;
         }
         [HttpGet, Route("allItems")]
         public List<WebboardItemProxy> GetAllItems(string keyword)
@@ -244,8 +256,10 @@ and start a new fresh tomorrow. ",
             }
         }
         [HttpPost, Route("addOrUpdateCurriculum")]
-        public CurriculumProxy AddOrUpdateCurriculum(CurriculumProxy curriculum) {
-            if (curriculum.Id == 0) {
+        public CurriculumProxy AddOrUpdateCurriculum(CurriculumProxy curriculum)
+        {
+            if (curriculum.Id == 0)
+            {
                 var course = this._courseRepository.FindById(curriculum.CourseId);
                 course.Curriculums.Add(curriculum.ToEntity());
                 this._courseRepository.Update(course);
@@ -261,7 +275,8 @@ and start a new fresh tomorrow. ",
             return curriculum;
         }
         [HttpGet, Route("getCurriculumById")]
-        public CurriculumProxy GetCurriculumById(int id) {
+        public CurriculumProxy GetCurriculumById(int id)
+        {
             var curriculum = this._curriculumRepository.FindById(id);
             return new CurriculumProxy(curriculum);
         }

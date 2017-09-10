@@ -21,9 +21,11 @@ namespace Swu.Portal.Web.Api.Proxy
         public int NumberOfTime { get; set; }
         [JsonProperty(PropertyName = "courseId")]
         public string CourseId { get; set; }
+        [JsonProperty(PropertyName = "studentScore")]
+        public List<StudentScoreProxy> StudentScores { get; set; }
         public CurriculumProxy()
         {
-
+            StudentScores = new List<StudentScoreProxy>();
         }
         public CurriculumProxy(Curriculum c)
         {
@@ -32,6 +34,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.Type = (int)c.Type;
             this.NumberOfTime = c.NumberOfTime;
             this.CourseId = c.CourseId;
+            StudentScores = new List<StudentScoreProxy>();
         }
     }
 }
