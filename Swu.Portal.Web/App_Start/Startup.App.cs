@@ -35,7 +35,9 @@ namespace Swu.Portal.Web
             builder.RegisterType<ResearchCategoryRepository>().As<IRepository<ResearchCategory>>().InstancePerRequest();
             builder.RegisterType<CommentRepository>().As<IRepository<Comment>>().InstancePerRequest();
             builder.RegisterType<CourseService>().As<ICourseService>().InstancePerRequest();
-            builder.RegisterType<CurriculumRepository>().As<IRepository<Curriculum>>().InstancePerRequest();
+            builder.RegisterType<CurriculumRepository>().As<ICurriculumRepository>().InstancePerRequest();
+            builder.RegisterType<StudentCourseRepository>().As<IStudentCourseRepository>().InstancePerRequest();
+            builder.RegisterType<StudentScoreRepository>().As<IRepository<StudentScore>>().InstancePerRequest();
 
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);

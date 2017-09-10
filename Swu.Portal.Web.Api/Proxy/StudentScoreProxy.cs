@@ -10,8 +10,6 @@ namespace Swu.Portal.Web.Api.Proxy
 {
     public class StudentScoreProxy : StudentProxy
     {
-        [JsonProperty(PropertyName = "activated")]
-        public bool Activated { get; set; }
         [JsonProperty(PropertyName = "score")]
         public double Score { get; set; }
         public StudentScoreProxy()
@@ -24,7 +22,6 @@ namespace Swu.Portal.Web.Api.Proxy
             this.Name = sc.Student.FirstName_EN + " " + sc.Student.LastName_EN;
             this.ImageUrl = sc.Student.ImageUrl;
             this.StudentId = sc.Student.StudentId;
-            this.Activated = sc.Activated;
             this.Score = sc.Score;
         }
     }

@@ -51,6 +51,7 @@
     "Scripts/app/course/controller/CourseController.ts",
     "Scripts/app/course/controller/CourseListController.ts",
     "Scripts/app/course/controller/CurriculumModalController.ts",
+    "Scripts/app/course/controller/QuizeresultController.ts",
     "Scripts/app/course/service/courseService.ts",
     "Scripts/app/course/model/courseAllDetail.ts",
 
@@ -108,7 +109,8 @@
     "Scripts/model/role.ts",
     "Scripts/model/actionMode.ts",
     "Scripts/model/nameValue.ts",
-    "Scripts/model/HttpStatusCode.ts"
+    "Scripts/model/HttpStatusCode.ts",
+    "Scripts/model/studentScore.ts"
 
   ],
   "exclude": [

@@ -14,7 +14,7 @@ namespace Swu.Portal.Data.Models
         {
             PhotoAlbums = new HashSet<PhotoAlbum>();
             Curriculums = new HashSet<Curriculum>();
-            Students = new HashSet<ApplicationUser>();
+            Students = new HashSet<StudentCourse>();
             Teachers = new HashSet<ApplicationUser>();
         }
         [Key]
@@ -35,7 +35,7 @@ namespace Swu.Portal.Data.Models
 
         public virtual ICollection<PhotoAlbum> PhotoAlbums { get; set; }
         public virtual ICollection<Curriculum> Curriculums { get; set; }
-        public virtual ICollection<ApplicationUser> Students { get; set; }
+        public virtual ICollection<StudentCourse> Students { get; set; }
         public virtual ICollection<ApplicationUser> Teachers { get; set; }
 
     }

@@ -1,5 +1,6 @@
 ﻿module Swu {
     export interface ICourseScope extends ng.IScope {
+        currentUser: IUserProfile;
         id: number;
         courseDetail: ICourseAllDetail;
         splitStudents1: IStudentDetail[];
@@ -8,9 +9,17 @@
         render(photos: IPhoto[]): void;
         registerScript(): void;
         hasPermission: boolean;
+        canSeeQuizeResult: boolean;
+        canTakeCourse: boolean;
+
         addNew(): void;
         edit(id: number): void;
         getCurrentUser(): IUserProfile;
+        getStudentScore(id: number): StudentScore;
+        showResultModal(id: number): void;
+        takeCourse(): void;
+        removeCourse(): void;
+        approve(id:string): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
@@ -19,13 +28,27 @@
         constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices) {
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getCurrentUser = () => {
-                return this.auth.getCurrentUser();
+                if (this.$scope.currentUser == null) {
+                    this.$scope.currentUser = this.auth.getCurrentUser();
+                }
+                return this.$scope.currentUser;
             };
             this.$scope.getCourse = (id: number) => {
+                this.$scope.canSeeQuizeResult = false;
+                this.$scope.canTakeCourse = false;
+                this.$scope.courseDetail = null;
+                this.$scope.splitStudents1 = [];
+                this.$scope.splitStudents2 = [];
                 this.courseService.getById(id).then((response) => {
                     this.$scope.courseDetail = response;
                     if (this.$scope.getCurrentUser() != null) {
-                        this.$scope.hasPermission = this.auth.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
+                        this.$scope.hasPermission = this.$scope.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
+                        this.$scope.canSeeQuizeResult = _.filter(this.$scope.courseDetail.students, (item: IStudentDetail, index: number) => {
+                            return item.id.toString() == this.$scope.getCurrentUser().id;
+                        }).length > 0;
+                        this.$scope.canTakeCourse = _.filter(this.$scope.courseDetail.students, (item: IStudentDetail, index: number) => {
+                            return item.id.toString() == this.$scope.getCurrentUser().id && this.$scope.getCurrentUser().selectedRoleName == "Student";
+                        }).length == 0;
                     }
                     this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(this.$scope.courseDetail.course.fullDescription);
                     _.map(this.$scope.courseDetail.teachers, function (t) {
@@ -42,7 +65,8 @@
                                 studentId: value.studentId,
                                 name: value.name,
                                 description: value.description,
-                                imageUrl: value.imageUrl
+                                imageUrl: value.imageUrl,
+                                activated: value.activated
                             });
                         } else {
                             this.$scope.splitStudents2.push({
@@ -51,11 +75,11 @@
                                 studentId: value.studentId,
                                 name: value.name,
                                 description: value.description,
-                                imageUrl: value.imageUrl
+                                imageUrl: value.imageUrl,
+                                activated: value.activated
                             });
                         }
                     });
-
                     this.$scope.render(this.$scope.courseDetail.photosAlbum.photos);
                     this.$scope.registerScript();
                 }, (error) => { });
@@ -141,6 +165,41 @@
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getCourse(this.$scope.id);
                 });
+            };
+            this.$scope.showResultModal = (id: number) => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/course/view/quizeResult.tmpl.html',
+                    controller: QuizeResultController,
+                    resolve: {
+                        studentScores: function () {
+                            return $scope.getStudentScore(id);
+                        }
+                    },
+                    size: "lg"
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getCourse(this.$scope.id);
+                });
+            };
+            this.$scope.getStudentScore = (id: number): StudentScore => {
+                return _.filter(this.$scope.courseDetail.curriculums, (item, index) => {
+                    return item.id == id;
+                })[0].studentScores;
+            };
+            this.$scope.takeCourse = () => {
+                this.courseService.takeCourse(this.$scope.id.toString(), this.$scope.getCurrentUser().id).then((reponse) => {
+                    this.$scope.getCourse(this.$scope.id);
+                }, (error) => { });
+            };
+            this.$scope.removeCourse = () => {
+                this.courseService.removeCourse(this.$scope.id.toString(), this.$scope.getCurrentUser().id).then((reponse) => {
+                    this.$scope.getCourse(this.$scope.id);
+                }, (error) => { });
+            };
+            this.$scope.approve = (id:string) => {
+                this.courseService.approveTakeCourse(this.$scope.id.toString(), id).then((reponse) => {
+                    this.$scope.getCourse(this.$scope.id);
+                }, (error) => { });
             };
             this.init();
         }

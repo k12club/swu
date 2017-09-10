@@ -34,7 +34,7 @@ module Swu {
             },
             {
                 name: "settings.users",
-                roles: ["Admin","Officer"]
+                roles: ["Admin","Teacher","Officer"]
             }
         ];
     }

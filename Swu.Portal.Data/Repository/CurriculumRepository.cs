@@ -9,7 +9,10 @@ using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
-    public class CurriculumRepository : IRepository<Curriculum>
+    public interface ICurriculumRepository : IRepository<Curriculum> {
+        void Add(Curriculum entity,StudentScore score);
+    }
+    public class CurriculumRepository : ICurriculumRepository
     {
         private SwuDBContext context;
         public CurriculumRepository()
@@ -22,7 +25,6 @@ namespace Swu.Portal.Data.Repository
             {
                 return this.context.Curriculums
                     .Include(i=>i.StudentScores)
-                    .Include(i=>i.ApplicationUser)
                     .AsEnumerable();
             }
         }
@@ -46,9 +48,15 @@ namespace Swu.Portal.Data.Repository
         {
             var result = this.context.Curriculums
                 .Include(i => i.StudentScores)
-                .Include(i => i.ApplicationUser)
                 .Where(i => i.Id == Id).FirstOrDefault();
             return result;
+        }
+
+        public void Add(Curriculum entity, StudentScore score)
+        {
+            this.context.Curriculums.Attach(entity);
+            entity.StudentScores.Add(score);
+            this.context.SaveChanges();
         }
     }
 }

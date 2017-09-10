@@ -38,13 +38,14 @@
                                 <li> <span class="text-thm2 flaticon-social-2"></span> {{courseDetail.course.numberOfRegistered}}</li>
                                 <li> <span class="text-thm2 flaticon-interface-1"></span> {{courseDetail.course.numberOfComments}}</li>
                                 <li> <span class="text-thm2 flaticon-folder"></span> Languages / Foreign</li>
-                                <li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark"> Take This Course</a></li>
+                                <li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark" ng-show="canTakeCourse" ng-click="takeCourse()"> Take This Course</a></li>
+                                <!--<li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark" ng-show="!canTakeCourse" ng-click="removeCourse()"> Remove This Course</a></li>-->
                             </ul>
                         </div>
-                        <!--<div class="irs-courses-details-thumb">
-                            <img class="img-responsive img-fluid" ng-src="../../../{{courseDetail.course.bigImageUrl}}" alt="cd1.jpg">
+                        <div class="irs-courses-details-thumb">
+                            <img class="img-responsive img-fluid" ng-src="../../../Content/images/courses/cd1.jpg" alt="cd1.jpg">
                             <div class="irs-cdtls-price"><p>{{courseDetail.course.price|currency}}</p></div>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
                 <div class="row irs-mrngtp-svnty">
@@ -116,118 +117,14 @@
                                                     </li>
                                                     <li ng-show="c.type ===2">
                                                         <a class="list-group-item" href="#">
-                                                            <ul class="list-inline" ng-show="hasPermission">
-                                                                <li ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
-                                                                <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-registration-modal-lg"> Register for test (20)</span></li>
-                                                                <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-result-modal-lg"> Test result</span></li>
-                                                                <li class="pull-right">{{c.time}}</li>
-                                                            </ul>
-                                                            <ul class="list-inline" ng-show="!hasPermission">
+                                                            <ul class="list-inline">
                                                                 <li><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
-                                                                <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-registration-modal-lg"> Register for test (20)</span></li>
-                                                                <li><span class="btn btn-sm irs-btn-thm3" data-toggle="modal" data-target=".bs-exam-result-modal-lg"> Test result</span></li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult" ng-click="showResultModal(c.id)"> Quize result</span></li>
                                                                 <li class="pull-right">{{c.time}}</li>
                                                             </ul>
                                                         </a>
                                                     </li>
                                                 </ul>
-                                            </div>
-                                        </div>
-                                        <!-- Exam result modal -->
-                                        <div class="modal fade bs-exam-result-modal-lg" tabindex="-1" role="modal">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title text-center" id="exampleModalLabel">Exam result for INDE 201: Practice of Medicine I</h4>
-                                                        <p class="irs-sign-reg-para text-center">Exam for mid term (40point): 1 August 2017, 09:00-12:00 AM. </p>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row" ng-show="courseDetail.students.length>0">
-                                                            <div class="col-md-6">
-                                                                <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group" ng-repeat="s in splitStudents1">
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>{{s.number}}</li>
-                                                                                    <li>{{s.studentId}}</li>
-                                                                                    <li>{{s.name}}</li>
-                                                                                    <li class="pull-right">0</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group" ng-repeat="s in splitStudents2">
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>{{s.number}}</li>
-                                                                                    <li>{{s.studentId}}</li>
-                                                                                    <li>{{s.name}}</li>
-                                                                                    <li class="pull-right">0</li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Exam registration modal -->
-                                        <div class="modal fade bs-exam-registration-modal-lg" tabindex="-1" role="modal">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title text-center" id="exampleModalLabel">Exam registered for INDE 201: Practice of Medicine I</h4>
-                                                        <p class="irs-sign-reg-para text-center">Exam for mid term (40point): 1 August 2017, 09:00-12:00 AM. </p>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row" ng-show="courseDetail.students.length>0">
-                                                            <div class="col-md-6">
-                                                                <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group" ng-repeat="s in splitStudents1">
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>{{s.number}}</li>
-                                                                                    <li>{{s.studentId}}</li>
-                                                                                    <li>{{s.name}}</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="irs-cdtls-feture-bot2">
-                                                                    <ul class="list-group" ng-repeat="s in splitStudents2">
-                                                                        <li>
-                                                                            <a class="list-group-item" href="#">
-                                                                                <ul class="list-inline">
-                                                                                    <li>{{s.number}}</li>
-                                                                                    <li>{{s.studentId}}</li>
-                                                                                    <li>{{s.name}}</li>
-                                                                                    <li class="pull-right"><span class="glyphicon glyphicon-ok text-success"></span></li>
-                                                                                </ul>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -247,11 +144,6 @@
                                                             <li class="irs-name-tdsd">{{t.name}}</li>
                                                             <li class="irs-psot-tdsd">{{t.position}}</li>
                                                         </ul>
-                                                        <div class="irs-social-icon-td-sngle-dtls pull-right">
-                                                            <ul class="list-inline irs-courses-tdetls">
-                                                                <li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark"> View Profile</a></li>
-                                                            </ul>
-                                                        </div>
                                                         <p ng-bind-html="t.description"></p>
                                                     </div>
                                                 </div>
@@ -269,7 +161,8 @@
                                                                     <li>{{s.number}}</li>
                                                                     <li>{{s.studentId}}</li>
                                                                     <li>{{s.name}}</li>
-                                                                    <li class="pull-right"><span class="btn btn-sm irs-btn-thm3"> Profile</span></li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(s.id)">Approve</span></li>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
                                                                 </ul>
                                                             </a>
                                                         </li>
@@ -285,7 +178,8 @@
                                                                     <li>{{s.number}}</li>
                                                                     <li>{{s.studentId}}</li>
                                                                     <li>{{s.name}}</li>
-                                                                    <li class="pull-right"><span class="btn btn-sm irs-btn-thm3"> Profile</span></li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(s.id)">Approve</span></li>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
                                                                 </ul>
                                                             </a>
                                                         </li>

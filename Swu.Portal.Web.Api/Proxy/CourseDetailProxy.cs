@@ -61,10 +61,10 @@ namespace Swu.Portal.Web.Api.Proxy
             }
             if (c.Students.Count > 0)
             {
-                foreach (var s in c.Students)
-                {
-                    this.Students.Add(new StudentProxy(s));
-                }
+                //foreach (var s in c.Students)
+                //{
+                //    this.Students.Add(new StudentProxy(s.Student));
+                //}
             }
             if (c.PhotoAlbums.Count > 0)
             {

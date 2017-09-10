@@ -29,7 +29,9 @@ namespace Swu.Portal.Data.Context
         //public DbSet<Contact> Contact { get; set; }
         //public DbSet<StudentProfile> StudentProfile { get; set; }
         //public DbSet<ParentProfile> ParentProfile { get; set; }
-        public DbSet<StudentScore> StudentCourse { get; set; }
+        public DbSet<StudentScore> StudentScore { get; set; }
+        public DbSet<StudentCourse> StudentCourse { get; set; }
+
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
@@ -54,16 +56,16 @@ namespace Swu.Portal.Data.Context
             modelBuilder.Entity<Course>();
             modelBuilder.Entity<CourseCategory>();
             modelBuilder.Entity<Curriculum>();
-            modelBuilder
-                .Entity<ApplicationUser>()
-                .HasMany<Course>(c => c.StudentCourses)
-                .WithMany(s => s.Students)
-                .Map(cs =>
-                {
-                    cs.MapLeftKey("StudentRefId");
-                    cs.MapRightKey("CourseRefId");
-                    cs.ToTable("StudentCourse");
-                });
+            //modelBuilder
+            //    .Entity<ApplicationUser>()
+            //    .HasMany<Course>(c => c.StudentCourses)
+            //    .WithMany(s => s.Students)
+            //    .Map(cs =>
+            //    {
+            //        cs.MapLeftKey("StudentRefId");
+            //        cs.MapRightKey("CourseRefId");
+            //        cs.ToTable("StudentCourse");
+            //    });
             modelBuilder
                 .Entity<ApplicationUser>()
                 .HasMany<Course>(c => c.TeacherCourses)
@@ -82,6 +84,7 @@ namespace Swu.Portal.Data.Context
             //modelBuilder.Entity<StudentProfile>();
             //modelBuilder.Entity<ParentProfile>();
             modelBuilder.Entity<StudentScore>();
+            modelBuilder.Entity<StudentCourse>();
         }
     }
 }

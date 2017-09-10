@@ -1,0 +1,48 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Quize Results</h3>
+</div>
+<div class="modal-body">
+    <form id="form" name="form">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="irs-cdtls-feture-bot2">
+                    <ul class="list-group" ng-repeat="s in splitStudents1">
+                        <li>
+                            <a class="list-group-item" href="#">
+                                <ul class="list-inline">
+                                    <li>{{s.number}}</li>
+                                    <li>{{s.studentId}}</li>
+                                    <li>{{s.name}}</li>
+                                    <li class="pull-right">{{s.score}}</li>
+                                </ul>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="irs-cdtls-feture-bot2">
+                    <ul class="list-group" ng-repeat="s in splitStudents2">
+                        <li>
+                            <a class="list-group-item" href="#">
+                                <ul class="list-inline">
+                                    <li>{{s.number}}</li>
+                                    <li>{{s.studentId}}</li>
+                                    <li>{{s.name}}</li>
+                                    <li class="pull-right">{{s.score}}</li>
+                                </ul>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <button class="btn btn-warning" type="button" ng-click="close()">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

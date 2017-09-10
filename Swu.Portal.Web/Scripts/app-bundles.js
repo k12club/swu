@@ -517,7 +517,7 @@ var Swu;
                 },
                 {
                     name: "settings.users",
-                    roles: ["Admin", "Officer"]
+                    roles: ["Admin", "Teacher", "Officer"]
                 }
             ];
         }
@@ -1974,13 +1974,27 @@ var Swu;
             this.auth = auth;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getCurrentUser = function () {
-                return _this.auth.getCurrentUser();
+                if (_this.$scope.currentUser == null) {
+                    _this.$scope.currentUser = _this.auth.getCurrentUser();
+                }
+                return _this.$scope.currentUser;
             };
             this.$scope.getCourse = function (id) {
+                _this.$scope.canSeeQuizeResult = false;
+                _this.$scope.canTakeCourse = false;
+                _this.$scope.courseDetail = null;
+                _this.$scope.splitStudents1 = [];
+                _this.$scope.splitStudents2 = [];
                 _this.courseService.getById(id).then(function (response) {
                     _this.$scope.courseDetail = response;
                     if (_this.$scope.getCurrentUser() != null) {
-                        _this.$scope.hasPermission = _this.auth.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
+                        _this.$scope.hasPermission = _this.$scope.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
+                        _this.$scope.canSeeQuizeResult = _.filter(_this.$scope.courseDetail.students, function (item, index) {
+                            return item.id.toString() == _this.$scope.getCurrentUser().id;
+                        }).length > 0;
+                        _this.$scope.canTakeCourse = _.filter(_this.$scope.courseDetail.students, function (item, index) {
+                            return item.id.toString() == _this.$scope.getCurrentUser().id && _this.$scope.getCurrentUser().selectedRoleName == "Student";
+                        }).length == 0;
                     }
                     _this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(_this.$scope.courseDetail.course.fullDescription);
                     _.map(_this.$scope.courseDetail.teachers, function (t) {
@@ -1997,7 +2011,8 @@ var Swu;
                                 studentId: value.studentId,
                                 name: value.name,
                                 description: value.description,
-                                imageUrl: value.imageUrl
+                                imageUrl: value.imageUrl,
+                                activated: value.activated
                             });
                         }
                         else {
@@ -2007,7 +2022,8 @@ var Swu;
                                 studentId: value.studentId,
                                 name: value.name,
                                 description: value.description,
-                                imageUrl: value.imageUrl
+                                imageUrl: value.imageUrl,
+                                activated: value.activated
                             });
                         }
                     });
@@ -2096,6 +2112,41 @@ var Swu;
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getCourse(_this.$scope.id);
                 });
+            };
+            this.$scope.showResultModal = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/course/view/quizeResult.tmpl.html',
+                    controller: Swu.QuizeResultController,
+                    resolve: {
+                        studentScores: function () {
+                            return $scope.getStudentScore(id);
+                        }
+                    },
+                    size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getCourse(_this.$scope.id);
+                });
+            };
+            this.$scope.getStudentScore = function (id) {
+                return _.filter(_this.$scope.courseDetail.curriculums, function (item, index) {
+                    return item.id == id;
+                })[0].studentScores;
+            };
+            this.$scope.takeCourse = function () {
+                _this.courseService.takeCourse(_this.$scope.id.toString(), _this.$scope.getCurrentUser().id).then(function (reponse) {
+                    _this.$scope.getCourse(_this.$scope.id);
+                }, function (error) { });
+            };
+            this.$scope.removeCourse = function () {
+                _this.courseService.removeCourse(_this.$scope.id.toString(), _this.$scope.getCurrentUser().id).then(function (reponse) {
+                    _this.$scope.getCourse(_this.$scope.id);
+                }, function (error) { });
+            };
+            this.$scope.approve = function (id) {
+                _this.courseService.approveTakeCourse(_this.$scope.id.toString(), id).then(function (reponse) {
+                    _this.$scope.getCourse(_this.$scope.id);
+                }, function (error) { });
             };
             this.init();
         }
@@ -2253,6 +2304,55 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var QuizeResultController = (function () {
+        function QuizeResultController($scope, $modalInstance, studentScores) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$modalInstance = $modalInstance;
+            this.studentScores = studentScores;
+            this.$scope.students = studentScores;
+            this.$scope.close = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.init();
+        }
+        QuizeResultController.prototype.init = function () {
+            var _this = this;
+            this.$scope.splitStudents1 = [];
+            this.$scope.splitStudents2 = [];
+            _.forEach(this.$scope.students, function (value, key) {
+                if (key < (_this.$scope.students.length / 2)) {
+                    _this.$scope.splitStudents1.push({
+                        id: value.id,
+                        activated: value.activated,
+                        name: value.name,
+                        score: value.score,
+                        studentId: value.studentId
+                    });
+                }
+                else {
+                    _this.$scope.splitStudents2.push({
+                        id: value.id,
+                        activated: value.activated,
+                        name: value.name,
+                        score: value.score,
+                        studentId: value.studentId
+                    });
+                }
+            });
+        };
+        ;
+        QuizeResultController.$inject = ["$scope", "$modalInstance", "studentScores"];
+        QuizeResultController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "QuizeResultController" })
+        ], QuizeResultController);
+        return QuizeResultController;
+    }());
+    Swu.QuizeResultController = QuizeResultController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var courseService = (function () {
         function courseService(apiService, constant) {
             this.apiService = apiService;
@@ -2269,6 +2369,15 @@ var Swu;
         };
         courseService.prototype.getCurriculumById = function (id) {
             return this.apiService.getData("course/getCurriculumById?id=" + id);
+        };
+        courseService.prototype.takeCourse = function (courseId, studentId) {
+            return this.apiService.getData("course/takeCourse?courseId=" + courseId + "&studentId=" + studentId);
+        };
+        courseService.prototype.removeCourse = function (courseId, studentId) {
+            return this.apiService.getData("course/removeCourse?courseId=" + courseId + "&studentId=" + studentId);
+        };
+        courseService.prototype.approveTakeCourse = function (courseId, studentId) {
+            return this.apiService.getData("course/approveTakeCourse?courseId=" + courseId + "&studentId=" + studentId);
         };
         courseService.$inject = ['apiService', 'AppConstant'];
         courseService = __decorate([

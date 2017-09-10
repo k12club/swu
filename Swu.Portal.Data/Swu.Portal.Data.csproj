@@ -79,6 +79,7 @@
     <Compile Include="Models\Research.cs" />
     <Compile Include="Models\ResearchCategory.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentCourse.cs" />
     <Compile Include="Models\StudentProfile.cs" />
     <Compile Include="Models\StudentScore.cs" />
     <Compile Include="Models\Teacher.cs" />
@@ -97,7 +98,8 @@
     <Compile Include="Repository\ResearchCategoryRepository.cs" />
     <Compile Include="Repository\ResearchRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
-    <Compile Include="Repository\TeacherCourseRepository.cs" />
+    <Compile Include="Repository\StudentCourseRepository.cs" />
+    <Compile Include="Repository\StudentScoreRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extension\" />

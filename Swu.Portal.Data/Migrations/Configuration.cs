@@ -83,13 +83,27 @@ namespace Swu.Portal.Data.Migrations
                 Tag = "Architectural Studies / History of Art / European Studies",
                 Description = "Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor."
             };
+            var student = new ApplicationUser
+            {
+                UserName = "std1",
+                FirstName_EN = "Alex",
+                LastName_EN = "Rendal",
+                FirstName_TH = "",
+                LastName_TH = "",
+                Email = "chansakcsc@gmail.com.com",
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
+            };
             userManager.Create(admin, "password");
+            userManager.Create(student, "password");
             foreach (var roleName in roleNames)
             {
                 roleManager.Create(new IdentityRole { Name = roleName });
             }
             var user = userManager.FindByName(admin.UserName);
             userManager.AddToRole(user.Id, "Teacher");
+            var std1 = userManager.FindByName(student.UserName);
+            userManager.AddToRole(student.Id, "Student");
             #endregion
 
             #region Curriculum
@@ -194,7 +208,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "11111"
 
             };
             var s2 = new ApplicationUser
@@ -205,7 +219,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "22222"
             };
             var s3 = new ApplicationUser
             {
@@ -215,7 +229,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "33333"
             };
             var s4 = new ApplicationUser
             {
@@ -225,7 +239,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "44444"
             };
             var s5 = new ApplicationUser
             {
@@ -235,7 +249,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "55555"
             };
             var s6 = new ApplicationUser
             {
@@ -245,7 +259,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "66666"
             };
             var s7 = new ApplicationUser
             {
@@ -255,7 +269,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "77777"
             };
             var s8 = new ApplicationUser
             {
@@ -265,7 +279,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "88888"
             };
             var s9 = new ApplicationUser
             {
@@ -275,7 +289,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "99999"
             };
             var s10 = new ApplicationUser
             {
@@ -285,7 +299,7 @@ namespace Swu.Portal.Data.Migrations
                 FirstName_TH = "student",
                 LastName_TH = "student",
                 Email = "test.test@test.com",
-                StudentId = "1234567"
+                StudentId = "00000"
             };
 
             students.Add(s1);
@@ -352,11 +366,11 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat1,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t1
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c2 = new Course
@@ -377,7 +391,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat1,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t1
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -402,7 +416,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat1,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t1
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -427,7 +441,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat2,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t1
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -452,7 +466,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat2,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t1
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -477,7 +491,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat2,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t2
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -502,7 +516,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat3,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t2
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -527,7 +541,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat3,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t2
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -552,7 +566,7 @@ namespace Swu.Portal.Data.Migrations
                                                     </ul>",
                 Category = cat3,
                 Teachers = new List<ApplicationUser> {
-                    t1,t2
+                    t2
                 },
                 //Students = new List<ApplicationUser> {
                 //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
@@ -762,88 +776,88 @@ namespace Swu.Portal.Data.Migrations
             context.SaveChanges();
 
             #region Student Score
-            var sc1 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 42,
-                Student = s1
-            };
-            var sc2 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 30,
-                Student = s2
-            };
-            var sc3 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 45,
-                Student = s3
-            };
-            var sc4 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 20,
-                Student = s4
-            };
-            var sc5 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 39,
-                Student = s5
-            };
-            var sc6 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 39,
-                Student = s6
-            };
-            var sc7 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 21,
-                Student = s7
-            };
-            var sc8 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 43,
-                Student = s8
-            };
-            var sc9 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 30,
-                Student = s9
-            };
-            var sc10 = new StudentScore
-            {
-                CurriculumId = cur4.Id,
-                Activated = true,
-                Score = 40,
-                Student = s10
-            };
-            studentScores.Add(sc1);
-            studentScores.Add(sc2);
-            studentScores.Add(sc3);
-            studentScores.Add(sc4);
-            studentScores.Add(sc5);
-            studentScores.Add(sc6);
-            studentScores.Add(sc7);
-            studentScores.Add(sc8);
-            studentScores.Add(sc9);
-            studentScores.Add(sc10);
-            context.StudentCourse.AddRange(studentScores);
-            context.SaveChanges();
+            //var sc1 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 42,
+            //    Student = s1
+            //};
+            //var sc2 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 30,
+            //    Student = s2
+            //};
+            //var sc3 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 45,
+            //    Student = s3
+            //};
+            //var sc4 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 20,
+            //    Student = s4
+            //};
+            //var sc5 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 39,
+            //    Student = s5
+            //};
+            //var sc6 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 39,
+            //    Student = s6
+            //};
+            //var sc7 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 21,
+            //    Student = s7
+            //};
+            //var sc8 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 43,
+            //    Student = s8
+            //};
+            //var sc9 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 30,
+            //    Student = s9
+            //};
+            //var sc10 = new StudentScore
+            //{
+            //    CurriculumId = cur4.Id,
+            //    Activated = true,
+            //    Score = 40,
+            //    Student = s10
+            //};
+            //studentScores.Add(sc1);
+            //studentScores.Add(sc2);
+            //studentScores.Add(sc3);
+            //studentScores.Add(sc4);
+            //studentScores.Add(sc5);
+            //studentScores.Add(sc6);
+            //studentScores.Add(sc7);
+            //studentScores.Add(sc8);
+            //studentScores.Add(sc9);
+            //studentScores.Add(sc10);
+            //context.StudentCourse.AddRange(studentScores);
+            //context.SaveChanges();
             #endregion
         }
     }

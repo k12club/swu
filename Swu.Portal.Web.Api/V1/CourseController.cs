@@ -31,14 +31,18 @@ namespace Swu.Portal.Web.Api
         private readonly IRepository2<PhotoAlbum> _photoAlbumRepository;
         private readonly IRepository<CourseCategory> _courseCategoryRepository;
         private readonly ICourseService _courseService;
-        private readonly IRepository<Curriculum> _curriculumRepository;
+        private readonly ICurriculumRepository _curriculumRepository;
+        private readonly IStudentCourseRepository _studentCourseRepository;
+        private readonly IRepository<StudentScore> _studentScoreRepository;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
             IRepository2<PhotoAlbum> photoAlbumRepository,
             IRepository<CourseCategory> courseCategoryRepository,
             ICourseService courseService,
-            IRepository<Curriculum> curriculumRepository)
+            ICurriculumRepository curriculumRepository,
+            IStudentCourseRepository studentCourseRepository,
+            IRepository<StudentScore> studentScoreRepository)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
@@ -46,6 +50,8 @@ namespace Swu.Portal.Web.Api
             this._courseCategoryRepository = courseCategoryRepository;
             this._courseService = courseService;
             this._curriculumRepository = curriculumRepository;
+            this._studentCourseRepository = studentCourseRepository;
+            this._studentScoreRepository = studentScoreRepository;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -84,15 +90,14 @@ namespace Swu.Portal.Web.Api
             List<Dictionary<int, StudentScoreProxy>> studentScores = new List<Dictionary<int, StudentScoreProxy>>();
             foreach (var c in allDetail.Curriculums)
             {
-                var curriculums = this._curriculumRepository.FindById(c.Id);
-                foreach (var sc in curriculums.StudentScores)
+                var score = this._studentScoreRepository.List.Where(i => i.CurriculumId == c.Id);
+                foreach (var sc in score)
                 {
-                    //var studentScore = new Dictionary<int, StudentScoreProxy>();
-                    //studentScore.Add(c.Id, new StudentScoreProxy(sc));
-                    //studentScores.Add(studentScore);
                     c.StudentScores.Add(new StudentScoreProxy(sc));
                 }
             }
+            var studentCourse = this._studentCourseRepository.FindByCourseId(id).ToList();
+            allDetail.Students.AddRange(studentCourse.Select(i => new StudentProxy(i)));
             var photos = this._photoAlbumRepository.FindById(allDetail.PhotosAlbum.Id);
             if (photos != null)
             {
@@ -279,6 +284,49 @@ and start a new fresh tomorrow. ",
         {
             var curriculum = this._curriculumRepository.FindById(id);
             return new CurriculumProxy(curriculum);
+        }
+        [HttpGet, Route("takeCourse")]
+        public void TakeCourse(string courseId, string studentId)
+        {
+            var course = this._courseRepository.FindById(courseId);
+            this._courseService.AddStudent(course, studentId);
+        }
+        [HttpGet, Route("removeCourse")]
+        public void RemoveCourse(string courseId, string studentId)
+        {
+            var course = this._courseRepository.FindById(courseId);
+            this._courseService.RemoveStudent(course, studentId);
+        }
+        [HttpGet, Route("approveTakeCourse")]
+        public void ApproveTakeCourse(string courseId, string studentId)
+        {
+            var course = this._courseRepository.FindById(courseId);
+            this._courseService.ApproveTakeCourse(course, studentId);
+            this.AddApprovedStudentToCurriculum(course.Id, studentId);
+        }
+        private void AddApprovedStudentToCurriculum(string courseId, string studentId)
+        {
+            var courses = this._courseRepository.FindById(courseId);
+            var registered = this._studentCourseRepository.List.Where(i => i.Course.Id == courseId && i.Student.Id == studentId);
+            foreach (var c in courses.Curriculums)
+            {
+                if (c.Type == CurriculumType.Quize)
+                {
+                    foreach (var ss in registered)
+                    {
+                        if (c.StudentScores.Where(i => i.Student.Id == ss.Student.Id).Count() == 0)
+                        {
+                            var score = new StudentScore
+                            {
+                                CurriculumId = c.Id,
+                                Student = ss.Student,
+                                Score = 0
+                            };
+                            this._curriculumRepository.Add(c, score);
+                        }
+                    }
+                }
+            }
         }
     }
 }
