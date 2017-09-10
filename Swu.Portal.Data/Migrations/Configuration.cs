@@ -51,11 +51,12 @@ namespace Swu.Portal.Data.Migrations
             var comments = new List<Comment>();
             var rcategories = new List<ResearchCategory>();
             var researchs = new List<Research>();
+            var studentScores = new List<StudentScore>();
             #region User
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new SwuDBContext()));
             var roleNames = new List<string> { "Teacher", "Student", "Parent", "Admin", "Officer" };
-            var userRole = new IdentityRole { Name = "Admin",Id = Guid.NewGuid().ToString()};
+            var userRole = new IdentityRole { Name = "Admin", Id = Guid.NewGuid().ToString() };
             var defaultUser = new ApplicationUser
             {
                 UserName = "default",
@@ -83,7 +84,8 @@ namespace Swu.Portal.Data.Migrations
                 Description = "Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor."
             };
             userManager.Create(admin, "password");
-            foreach (var roleName in roleNames) {
+            foreach (var roleName in roleNames)
+            {
                 roleManager.Create(new IdentityRole { Name = roleName });
             }
             var user = userManager.FindByName(admin.UserName);
@@ -193,7 +195,7 @@ namespace Swu.Portal.Data.Migrations
                 LastName_TH = "student",
                 Email = "test.test@test.com",
                 StudentId = "1234567"
-                
+
             };
             var s2 = new ApplicationUser
             {
@@ -285,7 +287,7 @@ namespace Swu.Portal.Data.Migrations
                 Email = "test.test@test.com",
                 StudentId = "1234567"
             };
-            
+
             students.Add(s1);
             students.Add(s2);
             students.Add(s3);
@@ -352,9 +354,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c2 = new Course
@@ -377,9 +379,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c3 = new Course
@@ -402,9 +404,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c4 = new Course
@@ -427,9 +429,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c5 = new Course
@@ -452,9 +454,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c6 = new Course
@@ -477,9 +479,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c7 = new Course
@@ -502,9 +504,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c8 = new Course
@@ -527,9 +529,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             var c9 = new Course
@@ -552,9 +554,9 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1,t2
                 },
-                Students = new List<ApplicationUser> {
-                    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                },
+                //Students = new List<ApplicationUser> {
+                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
+                //},
                 ApplicationUser = defaultUser
             };
             courses.Add(c1);
@@ -632,42 +634,42 @@ namespace Swu.Portal.Data.Migrations
 <p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
                 ImageUrl = "Content/images/blog/blog-post-ip1.jpg",
                 ApplicationUser = defaultUser,
-                CreatedDate =  DateTime.Now
+                CreatedDate = DateTime.Now
             };
-//            var f2 = new Forum
-//            {
-//                Id = FID2,
-//                Category = fcat1,
-//                Name = "เปิดบ้านศิลปกรรมฯ มศว เส้นทางสู่อาชีพสร้างฝันน้องๆ ม.ปลาย ให้เป็นจริง",
-//                ShortDescription = "คณะศิลปกรรมศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) นับเป็นอีกหนึ่งคณะของสถาบันการศึกษาอุดมศึกษาที่เป็นที่เรียนที่ใฝ่ฝันของน้องๆ นักเรียน ม.ปลาย เพราะมีเหล่าศิลปินนักแสดงรุ่นใหม่ในปัจจุบันจำนวนไม่น้อยที่จบจากรั้ว มศว เช่น นิวเยียร์ กิตติวัฒน์ / ซีซีน ภัสธราภรณ์ / ซีน ปัณณ์ญาณัช / ไต้ฝุ่น KPN / แอปเปิ้ล เดอะสตาร์ เป็นต้น ล่าสุดคณะศิลปกรรมศาสตร์ มศว จึงได้จัดกิจกรรมเปิดบ้านศิลปกรรมศาสตร์ มศว แนะนำหลักสูตรพร้อมนำรุ่นพี่ศิษย์เก่ามากความสามารถมาร่วมพูดคุย สร้างแรงบันดาลใจให้กับน้องๆ เหล่านักเรียน ม.ปลาย ที่อยากจะเข้าเรียนที่แห่งนี้ด้วยงาน “FOFA SWU : Open House 2017” แนะแนวการเตรียมตัวสอบด้วยระบบ TCAS ในปี 2561 ซึ่งก็ได้รับความสนใจจากน้องๆ นักเรียนทั้งในกรุงเทพฯ และมาจากต่างจังหวัดมากกว่า 600 คน ณ อาคารนวัตกรรม ศาสตราจารย์ ดร.สาโรช บัวศรี มศว ประสานมิตร สุขุมวิท 23",
-//                FullDescription = @"<p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. During my freshman year, I was looking for ways to get involved on campus. As it is currently the midst of finals season here in Cambridge, many here on campus can’t help but think about their Winter Break plans. </p>
-//<p> Known as J - Term on campus,
-//                Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
-//<p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
-//<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
-//<p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
-//<p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
-//<p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
-//                ImageUrl = "Content/images/courses/1.jpg",
-//                //ApplicationUser = defaultUser
-//            };
-//            var f3 = new Forum
-//            {
-//                Id = FID3,
-//                Category = fcat1,
-//                Name = "นิสิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ มศว ที่ได้รับ",
-//                ShortDescription = "มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) ขอแสดงความยินดีกับ ผศ.ดร.สุรศักดิ์ ละลอกน้ำ และนิสิตหลักสูตรการศึกษาบัณฑิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ ได้แก่ นายมารุตต์ แสงสุข นางสาวพิณพิชา เพียรมานะ นายนราธิป ปราโมทย์ นายภานุกร คงไสยะ นางสาวปัทมาพร น่าดู นางสาวสิรินญา ไพเราะ และนางสาววาสนา ไผ่งาม ที่ได้รับ รางวัลรองชนะเลิศอันดับหนึ่ง จากการเข้าร่วมประกวดผลงานประเภท นวัตกรรม จากผลงาน ชุดกิจกรรมวิทยาศาสตร์ เรื่อง 9 กิจกรรมวิทยาศาสตร์ตามแนวทางพระราชดำริ ใน การประชุมวิชาการวิจัยและนวัตกรรมสร้างสรรค์ครั้งที่ 4 และการประชุมสัมมนาวิชาการระดับนานาชาติ ด้านพลังงานไฟฟ้าแรงสูง พลาสมาและไมโครนาโนบับเบิลสำหรับเกษตรกรและการประมงขั้นสูง ครั้งที่ 2 จัดโดย มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ระหว่างวันที่ 26 - 27 กรกฎาคม 2560 ณ ศูนย์ประชุมนานาชาติ โรงแรมเชียงใหม่แกรนด์วิว จังหวัดเชียงใหม่",
-//                FullDescription = @"<p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. During my freshman year, I was looking for ways to get involved on campus. As it is currently the midst of finals season here in Cambridge, many here on campus can’t help but think about their Winter Break plans. </p>
-//<p> Known as J - Term on campus,
-//                Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
-//<p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
-//<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
-//<p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
-//<p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
-//<p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
-//                ImageUrl = "Content/images/courses/1.jpg",
-//                //ApplicationUser = defaultUser
-//            };
+            //            var f2 = new Forum
+            //            {
+            //                Id = FID2,
+            //                Category = fcat1,
+            //                Name = "เปิดบ้านศิลปกรรมฯ มศว เส้นทางสู่อาชีพสร้างฝันน้องๆ ม.ปลาย ให้เป็นจริง",
+            //                ShortDescription = "คณะศิลปกรรมศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) นับเป็นอีกหนึ่งคณะของสถาบันการศึกษาอุดมศึกษาที่เป็นที่เรียนที่ใฝ่ฝันของน้องๆ นักเรียน ม.ปลาย เพราะมีเหล่าศิลปินนักแสดงรุ่นใหม่ในปัจจุบันจำนวนไม่น้อยที่จบจากรั้ว มศว เช่น นิวเยียร์ กิตติวัฒน์ / ซีซีน ภัสธราภรณ์ / ซีน ปัณณ์ญาณัช / ไต้ฝุ่น KPN / แอปเปิ้ล เดอะสตาร์ เป็นต้น ล่าสุดคณะศิลปกรรมศาสตร์ มศว จึงได้จัดกิจกรรมเปิดบ้านศิลปกรรมศาสตร์ มศว แนะนำหลักสูตรพร้อมนำรุ่นพี่ศิษย์เก่ามากความสามารถมาร่วมพูดคุย สร้างแรงบันดาลใจให้กับน้องๆ เหล่านักเรียน ม.ปลาย ที่อยากจะเข้าเรียนที่แห่งนี้ด้วยงาน “FOFA SWU : Open House 2017” แนะแนวการเตรียมตัวสอบด้วยระบบ TCAS ในปี 2561 ซึ่งก็ได้รับความสนใจจากน้องๆ นักเรียนทั้งในกรุงเทพฯ และมาจากต่างจังหวัดมากกว่า 600 คน ณ อาคารนวัตกรรม ศาสตราจารย์ ดร.สาโรช บัวศรี มศว ประสานมิตร สุขุมวิท 23",
+            //                FullDescription = @"<p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. During my freshman year, I was looking for ways to get involved on campus. As it is currently the midst of finals season here in Cambridge, many here on campus can’t help but think about their Winter Break plans. </p>
+            //<p> Known as J - Term on campus,
+            //                Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
+            //<p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
+            //<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
+            //<p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
+            //<p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
+            //<p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
+            //                ImageUrl = "Content/images/courses/1.jpg",
+            //                //ApplicationUser = defaultUser
+            //            };
+            //            var f3 = new Forum
+            //            {
+            //                Id = FID3,
+            //                Category = fcat1,
+            //                Name = "นิสิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ มศว ที่ได้รับ",
+            //                ShortDescription = "มหาวิทยาลัยศรีนครินทรวิโรฒ (มศว) ขอแสดงความยินดีกับ ผศ.ดร.สุรศักดิ์ ละลอกน้ำ และนิสิตหลักสูตรการศึกษาบัณฑิต สาขาวิชาวิทยาศาสตร์ทั่วไป คณะวิทยาศาสตร์ ได้แก่ นายมารุตต์ แสงสุข นางสาวพิณพิชา เพียรมานะ นายนราธิป ปราโมทย์ นายภานุกร คงไสยะ นางสาวปัทมาพร น่าดู นางสาวสิรินญา ไพเราะ และนางสาววาสนา ไผ่งาม ที่ได้รับ รางวัลรองชนะเลิศอันดับหนึ่ง จากการเข้าร่วมประกวดผลงานประเภท นวัตกรรม จากผลงาน ชุดกิจกรรมวิทยาศาสตร์ เรื่อง 9 กิจกรรมวิทยาศาสตร์ตามแนวทางพระราชดำริ ใน การประชุมวิชาการวิจัยและนวัตกรรมสร้างสรรค์ครั้งที่ 4 และการประชุมสัมมนาวิชาการระดับนานาชาติ ด้านพลังงานไฟฟ้าแรงสูง พลาสมาและไมโครนาโนบับเบิลสำหรับเกษตรกรและการประมงขั้นสูง ครั้งที่ 2 จัดโดย มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ระหว่างวันที่ 26 - 27 กรกฎาคม 2560 ณ ศูนย์ประชุมนานาชาติ โรงแรมเชียงใหม่แกรนด์วิว จังหวัดเชียงใหม่",
+            //                FullDescription = @"<p>However, the aspect of citizenship that Dr Schlissel wants to address is that of understanding how to accumulate and assess information. During my freshman year, I was looking for ways to get involved on campus. As it is currently the midst of finals season here in Cambridge, many here on campus can’t help but think about their Winter Break plans. </p>
+            //<p> Known as J - Term on campus,
+            //                Harvard’s Winter Break lasts for over a month.Depending on your final exam schedules in December, one’s winter break can last from early-to - mid December to late January. With over a month of break in between Fall and Spring Semesters, may Harvard students opt to take the time to do a variety of things: spend time with family, travel abroad, volunteer, work, prepare for graduate school exams, etc. </p>
+            //<p> Freshman year J - term and this upcoming J - term I plan to stay home for the majority of it to rest and spend time with my family in Los Angeles.A fellow Harvard program attendee and I co - wrote a piece for Vice News Latin America about American expats that live in Mexico and how their experiences in Mexico had informed their thoughts on the upcoming presidential election.The link to the article can be found below: </p>
+            //<p>< a class='irs-active-link text-thm2' href='#'>https://news.vice.com/article/wed-be-on-the-other-side-of-the-wall-us-ex…</a></p>
+            //<p>Not only was this experience a remarkable opportunity to immerse myself in a new country, but it gave me a supportive network of friends and programming that made that adjustment in a new country all the more enjoyable.</p>
+            //<p class='irs-mrgntop-ffty'>It kinda stinks getting deferred because no one likes waiting, but there’s still hope.Just because you got deferred doesn’t mean that you can’t get accepted later.Me and my roommate both got deferred and then got in during regular decision.So, don’t freak out. You’re still rockin’! </p>
+            //<p class='irs-mrgntop-ffty'>There’s nothing like a nice relaxing cup of tea, says my grandma, and she’s been around on this green and blue planet for 88 years so I trust her.Take some time to gather yourself and chill out. Everything’s A-okay.The sky is still above your head probably/hopefully, and you will eventually go to college next year. </p>",
+            //                ImageUrl = "Content/images/courses/1.jpg",
+            //                //ApplicationUser = defaultUser
+            //            };
             forums.Add(f1);
             //forums.Add(f2);
             //forums.Add(f3);
@@ -728,14 +730,9 @@ namespace Swu.Portal.Data.Migrations
             };
             researchs.Add(r1);
             #endregion
+
             context.CourseCategory.AddRange(categories);
             context.SaveChanges();
-
-            //context.Teachers.AddRange(teachers);
-            //context.SaveChanges();
-
-            //context.Students.AddRange(students);
-            //context.SaveChanges();
 
             context.Courses.AddRange(courses);
             context.SaveChanges();
@@ -763,6 +760,91 @@ namespace Swu.Portal.Data.Migrations
 
             context.Research.AddRange(researchs);
             context.SaveChanges();
+
+            #region Student Score
+            var sc1 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 42,
+                Student = s1
+            };
+            var sc2 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 30,
+                Student = s2
+            };
+            var sc3 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 45,
+                Student = s3
+            };
+            var sc4 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 20,
+                Student = s4
+            };
+            var sc5 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 39,
+                Student = s5
+            };
+            var sc6 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 39,
+                Student = s6
+            };
+            var sc7 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 21,
+                Student = s7
+            };
+            var sc8 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 43,
+                Student = s8
+            };
+            var sc9 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 30,
+                Student = s9
+            };
+            var sc10 = new StudentScore
+            {
+                CurriculumId = cur1.Id,
+                Activated = true,
+                Score = 40,
+                Student = s10
+            };
+            studentScores.Add(sc1);
+            studentScores.Add(sc2);
+            studentScores.Add(sc3);
+            studentScores.Add(sc4);
+            studentScores.Add(sc5);
+            studentScores.Add(sc6);
+            studentScores.Add(sc7);
+            studentScores.Add(sc8);
+            studentScores.Add(sc9);
+            studentScores.Add(sc10);
+            context.StudentCourse.AddRange(studentScores);
+            context.SaveChanges();
+            #endregion
         }
     }
 }

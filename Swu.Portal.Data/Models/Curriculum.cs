@@ -25,6 +25,6 @@ namespace Swu.Portal.Data.Models
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
 
-        public virtual StudentCourse StudentCourse { get; set; }
+        public virtual ICollection<StudentScore> StudentScores { get; set; }
     }
 }

@@ -33,10 +33,9 @@ namespace Swu.Portal.Data.Models
         public DateTime? RegistrationDate { get; set; }
 
         public virtual ICollection<Forum> Forums { get; set; }
-
         public virtual ICollection<Course> TeacherCourses { get; set; }
-
         public virtual ICollection<Course> StudentCourses { get; set; }
+        public virtual ICollection<StudentScore> StudentScore { get; set; }
 
     }
 }

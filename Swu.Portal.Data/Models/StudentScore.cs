@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Data.Models
 {
-    public class StudentCourse : IEntity
+    public class StudentScore : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,8 +16,10 @@ namespace Swu.Portal.Data.Models
         public bool Activated { get; set; }
         public int Score { get; set; }
 
-        public virtual ICollection<Curriculum> Curriculum { get; set; }
+        public int CurriculumId { get; set; }
+        [ForeignKey("CurriculumId")]
+        public virtual Curriculum Curriculum { get; set; }
 
-        public virtual ICollection<ApplicationUser> Students { get; set; }
+        public virtual ApplicationUser Student { get; set; }
     }
 }

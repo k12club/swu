@@ -29,6 +29,7 @@ namespace Swu.Portal.Data.Context
         //public DbSet<Contact> Contact { get; set; }
         //public DbSet<StudentProfile> StudentProfile { get; set; }
         //public DbSet<ParentProfile> ParentProfile { get; set; }
+        public DbSet<StudentScore> StudentCourse { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
@@ -80,6 +81,7 @@ namespace Swu.Portal.Data.Context
             //modelBuilder.Entity<Contact>();
             //modelBuilder.Entity<StudentProfile>();
             //modelBuilder.Entity<ParentProfile>();
+            modelBuilder.Entity<StudentScore>();
         }
     }
 }
