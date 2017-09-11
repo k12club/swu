@@ -9,6 +9,7 @@ namespace Swu.Portal.Core.Dependencies
     public interface IConfigurationRepository
     {
         string UploadFilePath { get; }
+        string DefaultUserImage { get; }
     }
     public class ConfigurationRepository : IConfigurationRepository
     {
@@ -19,7 +20,15 @@ namespace Swu.Portal.Core.Dependencies
 
         public string UploadFilePath
         {
-            get { return "~/App_Data/Temp/FileUploads"; }
+            get {
+                return "~/App_Data/Temp/FileUploads";
+            }
+        }
+        public string DefaultUserImage
+        {
+            get {
+                return "Content/images/default.jpg";
+            }
         }
     }
 }

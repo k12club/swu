@@ -11,7 +11,6 @@ namespace Swu.Portal.Web.Api
 {
     public static class EntityExtension
     {
-        private const string DEFAULT_IMG = "Content/images/default.jpg";
         public static UserLoginProxy ToUserLoginViewModel(this ApplicationUser data)
         {
             return Mapper.Map<UserLoginProxy>(data);
@@ -20,7 +19,7 @@ namespace Swu.Portal.Web.Api
         {
             return Mapper.Map<ApplicationUser>(data);
         }
-        public static UserProfile ToUserProfileViewModel(this ApplicationUser u, string selectedRoleName)
+        public static UserProfile ToUserProfileViewModel(this ApplicationUser u, string selectedRoleName,string defaultImageUrl)
         {
             return new UserProfile
             {
@@ -32,7 +31,7 @@ namespace Swu.Portal.Web.Api
                 LastName_TH = u.LastName_TH,
                 Email = u.Email,
                 SelectedRoleName = selectedRoleName,
-                ImageUrl = string.IsNullOrEmpty(u.ImageUrl) ? DEFAULT_IMG : u.ImageUrl,
+                ImageUrl = string.IsNullOrEmpty(u.ImageUrl) ? defaultImageUrl : u.ImageUrl,
                 Position = u.Position,
                 Tag = u.Tag,
                 Description = u.Description,

@@ -1,4 +1,5 @@
-﻿using Swu.Portal.Data.Models;
+﻿using Swu.Portal.Core.Dependencies;
+using Swu.Portal.Data.Models;
 using Swu.Portal.Data.Repository;
 using Swu.Portal.Web.Api.Proxy;
 using System;
@@ -16,11 +17,17 @@ namespace Swu.Portal.Web.Api.V1
         private readonly IRepository2<Forum> _forumRepository;
         private readonly IRepository<ForumCategory> _forumCategoryRepository;
         private readonly IRepository<Comment> _commentRepository;
-        public ForumController(IRepository2<Forum> forumRepository, IRepository<ForumCategory> forumCategoryRepository, IRepository<Comment> commentRepository)
+        private readonly IConfigurationRepository _configurationRepository;
+        public ForumController(
+            IRepository2<Forum> forumRepository, 
+            IRepository<ForumCategory> forumCategoryRepository, 
+            IRepository<Comment> commentRepository,
+            IConfigurationRepository configurationRepository)
         {
             this._forumRepository = forumRepository;
             this._forumCategoryRepository = forumCategoryRepository;
             this._commentRepository = commentRepository;
+            this._configurationRepository = configurationRepository;
         }
         [HttpGet, Route("allItems")]
         public List<WebboardItemProxy> GetAllItems(string keyword)
@@ -37,7 +44,7 @@ namespace Swu.Portal.Web.Api.V1
             }
             foreach (var f in forums)
             {
-                webboardItems.Add(new WebboardItemProxy(f));
+                webboardItems.Add(new WebboardItemProxy(f,this._configurationRepository.DefaultUserImage));
             }
             return webboardItems;
         }

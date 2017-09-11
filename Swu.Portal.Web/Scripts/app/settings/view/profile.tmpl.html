@@ -1,0 +1,68 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Edit Profile</h3>
+</div>
+<div class="modal-body">
+    <form id="form" name="form">
+        <div class="col-md-2 irs-mrgnbot-twenty">
+            <div class="irs-courses-td-sngle">
+                <div class="irs-ctds-thumb">
+                    <img class="img-responsive img-fluid" ng-src="../../../{{user.imageUrl}}" alt="tmd1.png">
+                </div>
+                <div class="row text-center">
+                    <span>Current Image</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group irs-mrgnbot-eighty">
+            <input type="file" file-model="file" />
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">User Name:</label>
+            <input type="text" class="form-control" id="username" ng-model="user.userName" placeholder="Enter user name" disabled required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">First Name:</label>
+            <input type="text" class="form-control" id="fname" ng-model="user.firstName_en" placeholder="Enter first name" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">Last Name:</label>
+            <input type="text" class="form-control" id="lname" ng-model="user.lastName_en" placeholder="Enter last name" required>
+            <div class="help-block with-errors"></div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">Email:</label>
+            <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div ng-show="user.selectedRoleName == 'Teacher'">
+            <div class="form-group">
+                <label class="col-2 col-form-label">Position:</label>
+                <input type="text" class="form-control" id="position" ng-model="user.position" placeholder="Enter last name">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label">Tag:</label>
+                <input type="text" class="form-control" id="tag" ng-model="user.tag" placeholder="Enter last name">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label">Description:</label>
+                <textarea class="form-control" id="description" ng-model="user.description" placeholder="Enter last name" ></textarea>
+                <div class="help-block with-errors"></div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-default" ng-click="save()">Save</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

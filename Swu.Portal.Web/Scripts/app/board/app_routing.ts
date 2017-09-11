@@ -14,8 +14,7 @@
                     views: {
                         '': { templateUrl: '/Scripts/app/board/view/board.html' },
                         'subContent@board': {
-                            templateUrl: '/Scripts/app/board/view/default.html',
-                            controller: 'WebBoardController as vm'
+                            templateUrl: '/Scripts/app/board/view/default.html'
                         },
                     }
                 })

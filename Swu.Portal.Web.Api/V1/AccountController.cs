@@ -23,10 +23,15 @@ namespace Swu.Portal.Web.Api
         private const string UPLOAD_DIR = "FileUpload/users/";
         private readonly IApplicationUserServices _applicationUserServices;
         private readonly IDateTimeRepository _datetimeRepository;
-        public AccountController(IApplicationUserServices applicationUserServices, IDateTimeRepository datetimeRepository)
+        private readonly IConfigurationRepository _configurationRepository;
+        public AccountController(
+            IApplicationUserServices applicationUserServices, 
+            IDateTimeRepository datetimeRepository,
+            IConfigurationRepository configurationRepository)
         {
             this._applicationUserServices = applicationUserServices;
             this._datetimeRepository = datetimeRepository;
+            this._configurationRepository = configurationRepository;
         }
         [HttpPost, Route("login")]
         public UserProfile Login(UserLoginProxy model)
@@ -35,7 +40,7 @@ namespace Swu.Portal.Web.Api
             {
                 var u = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return u.ToUserProfileViewModel(selectedRoleName);
+                return u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage);
             }
             return null;
         }
@@ -46,7 +51,7 @@ namespace Swu.Portal.Web.Api
             {
                 var u = this._applicationUserServices.VerifyWithCurrentUser(model.ToEntity());
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return u.ToUserProfileViewModel(selectedRoleName);
+                return u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage);
             }
             return null;
         }
@@ -89,7 +94,7 @@ namespace Swu.Portal.Web.Api
             foreach (var u in users)
             {
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                result.Add(u.ToUserProfileViewModel(selectedRoleName));
+                result.Add(u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage));
             }
             return result;
         }
@@ -98,7 +103,7 @@ namespace Swu.Portal.Web.Api
         {
             var u = this._applicationUserServices.getById(id);
             var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-            return u.ToUserProfileViewModel(selectedRoleName);
+            return u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage);
         }
         [HttpPost, Route("uploadAsync")]
         public async Task<HttpResponseMessage> PostFormData()

@@ -27,6 +27,8 @@ namespace Swu.Portal.Web.Api.Proxy
                 Name_EN = c.Name_EN,
                 Name_TH = c.Name_TH,
                 Price = c.Price,
+                NumberOfStudents = c.Students.Count(),
+                NumberOfTimes  = c.Curriculums.Sum(i=>i.NumberOfTime)
             };
             this.Teacher = new TeacherProxy(c.Teachers.FirstOrDefault());
             this.CardType = CardType.Recently;

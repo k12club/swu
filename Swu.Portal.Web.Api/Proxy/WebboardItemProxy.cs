@@ -30,38 +30,42 @@ namespace Swu.Portal.Web.Api.Proxy
         public WebboardType Type { get; set; }
         [JsonProperty(PropertyName = "categoryId")]
         public int CategoryId { get; set; }
-        public WebboardItemProxy(Data.Models.Course c)
+        public WebboardItemProxy(Data.Models.Course c, string defaultImageUrl)
         {
             this.Id = c.Id;
             this.ImageUrl = c.ImageUrl;
             this.Name = c.Name_EN;
             this.ShortDescription = c.ShortDescription;
-            //this.CreateBy = c.CreatedUser;
+            this.CreateBy = "demo user"; //c.ApplicationUser.FirstName_EN + " " + c.ApplicationUser.LastName_EN;
             this.Type = WebboardType.course;
             this.CategoryId = c.CategoryId;
-            this.CreatorImageUrl = "Content/images/resource/student1.png";
+            this.CreatorImageUrl = defaultImageUrl; // string.IsNullOrEmpty(c.ApplicationUser.ImageUrl) ? defaultImageUrl : c.ApplicationUser.ImageUrl;
+            this.NumberOfView = 0;
         }
-        public WebboardItemProxy(Forum f)
+        public WebboardItemProxy(Forum f, string defaultImageUrl)
         {
             this.Id = f.Id;
             this.ImageUrl = f.ImageUrl;
             this.Name = f.Name;
             this.ShortDescription = f.ShortDescription;
-            //this.CreateBy = f.CreatedUser;
+            this.CreateBy = "demo user";//f.ApplicationUser.FirstName_EN + " " + f.ApplicationUser.LastName_EN;
             this.Type = WebboardType.forum;
             this.CategoryId = f.CategoryId;
-            this.CreatorImageUrl = "Content/images/resource/student1.png";
+            this.CreatorImageUrl = defaultImageUrl; //string.IsNullOrEmpty(f.ApplicationUser.ImageUrl) ? defaultImageUrl : f.ApplicationUser.ImageUrl;
+            this.NumberOfView = 0;
         }
-        public WebboardItemProxy(Research r)
+        public WebboardItemProxy(Research r, string defaultImageUrl)
         {
             this.Id = r.Id;
             this.ImageUrl = r.ImageUrl;
             this.Name = r.Name_EN;
             this.ShortDescription = r.ShortDescription;
-            //this.CreateBy = r.CreatedUser;
+            this.CreateBy = "demo user";//r.ApplicationUser.FirstName_EN + " " + r.ApplicationUser.LastName_EN;
             this.Type = WebboardType.research;
             this.CategoryId = r.CategoryId;
-            this.CreatorImageUrl = "Content/images/resource/student1.png";
+            this.CreatorImageUrl = defaultImageUrl;//string.IsNullOrEmpty(r.ApplicationUser.ImageUrl) ? defaultImageUrl : r.ApplicationUser.ImageUrl;
+            this.NumberOfView = 0;
+
         }
     }
 }

@@ -1025,8 +1025,7 @@ var Swu;
                 views: {
                     '': { templateUrl: '/Scripts/app/board/view/board.html' },
                     'subContent@board': {
-                        templateUrl: '/Scripts/app/board/view/default.html',
-                        controller: 'WebBoardController as vm'
+                        templateUrl: '/Scripts/app/board/view/default.html'
                     }
                 }
             })
@@ -1993,9 +1992,14 @@ var Swu;
                         _this.$scope.canSeeQuizeResult = _.filter(_this.$scope.courseDetail.students, function (item, index) {
                             return item.id.toString() == _this.$scope.getCurrentUser().id && item.activated;
                         }).length > 0;
-                        _this.$scope.canTakeCourse = _.filter(_this.$scope.courseDetail.students, function (item, index) {
-                            return item.id.toString() == _this.$scope.getCurrentUser().id && _this.$scope.getCurrentUser().selectedRoleName == "Student";
-                        }).length == 0;
+                        if (_this.$scope.hasPermission) {
+                            _this.$scope.canTakeCourse = false;
+                        }
+                        else {
+                            _this.$scope.canTakeCourse = _.filter(_this.$scope.courseDetail.students, function (item, index) {
+                                return item.id.toString() == _this.$scope.getCurrentUser().id && _this.$scope.getCurrentUser().selectedRoleName == "Student";
+                            }).length == 0;
+                        }
                     }
                     _this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(_this.$scope.courseDetail.course.fullDescription);
                     _.map(_this.$scope.courseDetail.teachers, function (t) {
@@ -2473,6 +2477,7 @@ var Swu;
                 }
             };
             this.$scope.search = function () {
+                console.log('search');
                 switch (_this.$scope.type) {
                     case 1: {
                         _this.$scope.categoryName = "Forums";

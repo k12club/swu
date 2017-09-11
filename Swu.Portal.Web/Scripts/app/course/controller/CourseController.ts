@@ -42,13 +42,22 @@
                 this.courseService.getById(id).then((response) => {
                     this.$scope.courseDetail = response;
                     if (this.$scope.getCurrentUser() != null) {
+                        //is teacher
                         this.$scope.hasPermission = this.$scope.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
+
+                        //is approved member
                         this.$scope.canSeeQuizeResult = _.filter(this.$scope.courseDetail.students, (item: IStudentDetail, index: number) => {
                             return item.id.toString() == this.$scope.getCurrentUser().id && item.activated;
                         }).length > 0;
-                        this.$scope.canTakeCourse = _.filter(this.$scope.courseDetail.students, (item: IStudentDetail, index: number) => {
-                            return item.id.toString() == this.$scope.getCurrentUser().id && this.$scope.getCurrentUser().selectedRoleName == "Student";
-                        }).length == 0;
+
+                        //is member
+                        if (this.$scope.hasPermission) {
+                            this.$scope.canTakeCourse = false;
+                        } else {
+                            this.$scope.canTakeCourse = _.filter(this.$scope.courseDetail.students, (item: IStudentDetail, index: number) => {
+                                return item.id.toString() == this.$scope.getCurrentUser().id && this.$scope.getCurrentUser().selectedRoleName == "Student";
+                            }).length == 0;
+                        }
                     }
                     this.$scope.courseDetail.course.fullDescription = $sce.trustAsHtml(this.$scope.courseDetail.course.fullDescription);
                     _.map(this.$scope.courseDetail.teachers, function (t) {

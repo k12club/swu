@@ -34,6 +34,7 @@ namespace Swu.Portal.Web.Api
         private readonly ICurriculumRepository _curriculumRepository;
         private readonly IStudentCourseRepository _studentCourseRepository;
         private readonly IRepository<StudentScore> _studentScoreRepository;
+        private readonly IConfigurationRepository _configurationRepository;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
@@ -42,7 +43,8 @@ namespace Swu.Portal.Web.Api
             ICourseService courseService,
             ICurriculumRepository curriculumRepository,
             IStudentCourseRepository studentCourseRepository,
-            IRepository<StudentScore> studentScoreRepository)
+            IRepository<StudentScore> studentScoreRepository,
+            IConfigurationRepository configurationRepository)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
@@ -52,6 +54,8 @@ namespace Swu.Portal.Web.Api
             this._curriculumRepository = curriculumRepository;
             this._studentCourseRepository = studentCourseRepository;
             this._studentScoreRepository = studentScoreRepository;
+            this._configurationRepository = configurationRepository;
+
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -123,7 +127,7 @@ namespace Swu.Portal.Web.Api
             }
             foreach (var c in courses)
             {
-                webboardItems.Add(new WebboardItemProxy(c));
+                webboardItems.Add(new WebboardItemProxy(c,this._configurationRepository.DefaultUserImage));
             }
             return webboardItems;
         }

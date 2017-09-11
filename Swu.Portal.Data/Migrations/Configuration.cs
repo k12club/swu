@@ -368,9 +368,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c2 = new Course
@@ -393,9 +390,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c3 = new Course
@@ -418,9 +412,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c4 = new Course
@@ -443,9 +434,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c5 = new Course
@@ -468,9 +456,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c6 = new Course
@@ -493,9 +478,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c7 = new Course
@@ -518,9 +500,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c8 = new Course
@@ -543,9 +522,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             var c9 = new Course
@@ -568,9 +544,6 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                //Students = new List<ApplicationUser> {
-                //    s1,s2,s3,s4,s5,s6,s7,s8,s9,s10
-                //},
                 ApplicationUser = defaultUser
             };
             courses.Add(c1);

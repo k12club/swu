@@ -35,8 +35,8 @@
                             <ul class="list-inline irs-cl-teacher-info">
                                 <li class="irs-cl-thumb"><img ng-src="../../../{{courseDetail.teachers[0].imageUrl}}" class="img-circle" style="width:50px;height:50px" alt="s4.png"></li>
                                 <li class="irs-cl-info">with <span class="text-thm2">{{courseDetail.teachers[0].name}}</span></li>
-                                <li> <span class="text-thm2 flaticon-social-2"></span> {{courseDetail.course.numberOfRegistered}}</li>
-                                <li> <span class="text-thm2 flaticon-interface-1"></span> {{courseDetail.course.numberOfComments}}</li>
+                                <li> <span class="text-thm2 flaticon-people-1"></span> {{courseDetail.course.numberOfStudents}}</li>
+                                <li> <span class="text-thm2 flaticon-clock-1"></span> {{courseDetail.course.numberOfTimes}}</li>
                                 <li> <span class="text-thm2 flaticon-folder"></span> Languages / Foreign</li>
                                 <li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark" ng-show="canTakeCourse" ng-click="takeCourse()"> Take This Course</a></li>
                                 <!--<li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark" ng-show="!canTakeCourse" ng-click="removeCourse()"> Remove This Course</a></li>-->
@@ -44,7 +44,7 @@
                         </div>
                         <div class="irs-courses-details-thumb">
                             <img class="img-responsive img-fluid" ng-src="../../../Content/images/courses/cd1.jpg" alt="cd1.jpg">
-                            <div class="irs-cdtls-price"><p>{{courseDetail.course.price|currency}}</p></div>
+                            <!--<div class="irs-cdtls-price"><p>{{courseDetail.course.price|currency}}</p></div>-->
                         </div>
                     </div>
                 </div>
