@@ -17,8 +17,8 @@ namespace Swu.Portal.Service
     {
         void Add(Course course, string creatorId);
         void Update(Course course);
-        void AddStudent(Course course, string studentId);
-        void RemoveStudent(Course course, string studentId);
+        void AddStudent(string courseId, string studentId);
+        void RemoveStudent(string courseId, string studentId);
         void ApproveTakeCourse(Course course, string studentId);
     }
     public class CourseService : ICourseService
@@ -48,47 +48,25 @@ namespace Swu.Portal.Service
             this._courseRepository.Update(course);
         }
 
-        public void AddStudent(Course course, string studentId)
+        public void AddStudent(string courseId, string studentId)
         {
             using (var context = new SwuDBContext())
             {
-                var student = this._userManager.FindById(studentId);
-                context.Courses.Attach(course);
-                context.Users.Attach(student);
-                context.StudentCourse.Add(new StudentCourse { Course = course, Student = student });
+                var c = context.Courses.AsNoTracking().Where(i => i.Id == courseId).FirstOrDefault();
+                context.Courses.Attach(c);
+                var s = context.Users.AsNoTracking().Where(i => i.Id == studentId).FirstOrDefault();
+                context.Users.Attach(s);
+                context.StudentCourse.Add(new StudentCourse { Course = c, Student = s });
                 context.SaveChanges();
             }
         }
-        public void RemoveStudent(Course course, string studentId)
+        public void RemoveStudent(string courseId, string studentId)
         {
             using (var context = new SwuDBContext())
             {
-                var studentCourse = this._studentCourseRepository
-                    .List
-                    .Where(i => i.Student.Id == studentId && i.Course.Id == course.Id)
-                    .FirstOrDefault();
+                var studentCourse = context.StudentCourse.AsNoTracking().Where(i => i.Student.Id == studentId && i.Course.Id == courseId).FirstOrDefault();
                 context.Entry(studentCourse).State = System.Data.Entity.EntityState.Deleted;
                 context.SaveChanges();
-
-                //var entry = context.Entry<StudentCourse>(studentCourse);
-                //if (entry.State == EntityState.Detached)
-                //{
-                //    var set = context.Set<StudentCourse>();
-                //    string keyName = context.StudentCourse.Create().GetType().GetProperties().Single(p => p.GetCustomAttributes(typeof(KeyAttribute), false).Count() > 0).Name;
-                //    var pkey = context.StudentCourse.Create().GetType().GetProperty(keyName).GetValue(studentCourse);
-                //    StudentCourse attachedEntity = set.Find(pkey);
-                //    if (attachedEntity != null)
-                //    {
-                //        var attachedEntry = context.Entry(attachedEntity);
-                //        attachedEntry.CurrentValues.SetValues(studentCourse);
-                //        context.Entry(attachedEntry.Entity).State = System.Data.Entity.EntityState.Deleted;
-                //    }
-                //    else
-                //    {
-                //        context.Entry(studentCourse).State = System.Data.Entity.EntityState.Deleted;
-                //    }
-                //}
-                //context.SaveChanges();
             }
         }
         public void ApproveTakeCourse(Course course, string studentId)

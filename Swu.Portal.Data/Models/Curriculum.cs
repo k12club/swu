@@ -14,6 +14,10 @@ namespace Swu.Portal.Data.Models
     }
     public class Curriculum : IEntity
     {
+        public Curriculum()
+        {
+            StudentScores = new HashSet<StudentScore>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

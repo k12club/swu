@@ -119,7 +119,7 @@
                                                         <a class="list-group-item" href="#">
                                                             <ul class="list-inline">
                                                                 <li><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
-                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult" ng-click="showResultModal(c.id)"> Quize result</span></li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="showResultModal(c.id)"> Quize result</span></li>
                                                                 <li class="pull-right">{{c.time}}</li>
                                                             </ul>
                                                         </a>
@@ -157,11 +157,18 @@
                                                     <ul class="list-group" ng-repeat="s in splitStudents1">
                                                         <li>
                                                             <a class="list-group-item" href="#">
-                                                                <ul class="list-inline">
+                                                                <ul class="list-inline" ng-show="hasPermission">
                                                                     <li>{{s.number}}</li>
                                                                     <li>{{s.studentId}}</li>
                                                                     <li>{{s.name}}</li>
                                                                     <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(s.id)">Approve</span></li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm2" ng-click="removeCourse(s.id)">Decline</span>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
+                                                                </ul>
+                                                                <ul class="list-inline" ng-show="!hasPermission">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
                                                                     <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
                                                                 </ul>
                                                             </a>
@@ -174,11 +181,18 @@
                                                     <ul class="list-group" ng-repeat="s in splitStudents2">
                                                         <li>
                                                             <a class="list-group-item" href="#">
-                                                                <ul class="list-inline">
+                                                                <ul class="list-inline" ng-show="hasPermission">
                                                                     <li>{{s.number}}</li>
                                                                     <li>{{s.studentId}}</li>
                                                                     <li>{{s.name}}</li>
                                                                     <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(s.id)">Approve</span></li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm2" ng-click="removeCourse(s.id)">Decline</span>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
+                                                                </ul>
+                                                                <ul class="list-inline" ng-show="!hasPermission">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
                                                                     <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
                                                                 </ul>
                                                             </a>

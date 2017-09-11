@@ -18,14 +18,14 @@
         getStudentScore(id: number): StudentScore;
         showResultModal(id: number): void;
         takeCourse(): void;
-        removeCourse(): void;
+        removeCourse(id:string): void;
         approve(id:string): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
     export class CourseController {
-        static $inject: Array<string> = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices"];
-        constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices) {
+        static $inject: Array<string> = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices","toastr"];
+        constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices, private toastr: Toastr) {
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getCurrentUser = () => {
                 if (this.$scope.currentUser == null) {
@@ -44,7 +44,7 @@
                     if (this.$scope.getCurrentUser() != null) {
                         this.$scope.hasPermission = this.$scope.getCurrentUser().id == this.$scope.courseDetail.course.createdUserId;
                         this.$scope.canSeeQuizeResult = _.filter(this.$scope.courseDetail.students, (item: IStudentDetail, index: number) => {
-                            return item.id.toString() == this.$scope.getCurrentUser().id;
+                            return item.id.toString() == this.$scope.getCurrentUser().id && item.activated;
                         }).length > 0;
                         this.$scope.canTakeCourse = _.filter(this.$scope.courseDetail.students, (item: IStudentDetail, index: number) => {
                             return item.id.toString() == this.$scope.getCurrentUser().id && this.$scope.getCurrentUser().selectedRoleName == "Student";
@@ -189,16 +189,19 @@
             this.$scope.takeCourse = () => {
                 this.courseService.takeCourse(this.$scope.id.toString(), this.$scope.getCurrentUser().id).then((reponse) => {
                     this.$scope.getCourse(this.$scope.id);
+                    this.toastr.success("Success");
                 }, (error) => { });
             };
-            this.$scope.removeCourse = () => {
-                this.courseService.removeCourse(this.$scope.id.toString(), this.$scope.getCurrentUser().id).then((reponse) => {
+            this.$scope.removeCourse = (id:string) => {
+                this.courseService.removeCourse(this.$scope.id.toString(), id).then((reponse) => {
                     this.$scope.getCourse(this.$scope.id);
+                    this.toastr.success("Success");
                 }, (error) => { });
             };
             this.$scope.approve = (id:string) => {
                 this.courseService.approveTakeCourse(this.$scope.id.toString(), id).then((reponse) => {
                     this.$scope.getCourse(this.$scope.id);
+                    this.toastr.success("Success");
                 }, (error) => { });
             };
             this.init();

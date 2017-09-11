@@ -1963,7 +1963,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CourseController = (function () {
-        function CourseController($scope, $state, courseService, $stateParams, $sce, $uibModal, auth) {
+        function CourseController($scope, $state, courseService, $stateParams, $sce, $uibModal, auth, toastr) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -1972,6 +1972,7 @@ var Swu;
             this.$sce = $sce;
             this.$uibModal = $uibModal;
             this.auth = auth;
+            this.toastr = toastr;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getCurrentUser = function () {
                 if (_this.$scope.currentUser == null) {
@@ -1990,7 +1991,7 @@ var Swu;
                     if (_this.$scope.getCurrentUser() != null) {
                         _this.$scope.hasPermission = _this.$scope.getCurrentUser().id == _this.$scope.courseDetail.course.createdUserId;
                         _this.$scope.canSeeQuizeResult = _.filter(_this.$scope.courseDetail.students, function (item, index) {
-                            return item.id.toString() == _this.$scope.getCurrentUser().id;
+                            return item.id.toString() == _this.$scope.getCurrentUser().id && item.activated;
                         }).length > 0;
                         _this.$scope.canTakeCourse = _.filter(_this.$scope.courseDetail.students, function (item, index) {
                             return item.id.toString() == _this.$scope.getCurrentUser().id && _this.$scope.getCurrentUser().selectedRoleName == "Student";
@@ -2136,16 +2137,19 @@ var Swu;
             this.$scope.takeCourse = function () {
                 _this.courseService.takeCourse(_this.$scope.id.toString(), _this.$scope.getCurrentUser().id).then(function (reponse) {
                     _this.$scope.getCourse(_this.$scope.id);
+                    _this.toastr.success("Success");
                 }, function (error) { });
             };
-            this.$scope.removeCourse = function () {
-                _this.courseService.removeCourse(_this.$scope.id.toString(), _this.$scope.getCurrentUser().id).then(function (reponse) {
+            this.$scope.removeCourse = function (id) {
+                _this.courseService.removeCourse(_this.$scope.id.toString(), id).then(function (reponse) {
                     _this.$scope.getCourse(_this.$scope.id);
+                    _this.toastr.success("Success");
                 }, function (error) { });
             };
             this.$scope.approve = function (id) {
                 _this.courseService.approveTakeCourse(_this.$scope.id.toString(), id).then(function (reponse) {
                     _this.$scope.getCourse(_this.$scope.id);
+                    _this.toastr.success("Success");
                 }, function (error) { });
             };
             this.init();
@@ -2157,7 +2161,7 @@ var Swu;
             this.$scope.getCourse(this.$scope.id);
         };
         ;
-        CourseController.$inject = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices"];
+        CourseController.$inject = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices", "toastr"];
         CourseController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CourseController" })

@@ -288,14 +288,12 @@ and start a new fresh tomorrow. ",
         [HttpGet, Route("takeCourse")]
         public void TakeCourse(string courseId, string studentId)
         {
-            var course = this._courseRepository.FindById(courseId);
-            this._courseService.AddStudent(course, studentId);
+            this._courseService.AddStudent(courseId, studentId);
         }
         [HttpGet, Route("removeCourse")]
         public void RemoveCourse(string courseId, string studentId)
         {
-            var course = this._courseRepository.FindById(courseId);
-            this._courseService.RemoveStudent(course, studentId);
+            this._courseService.RemoveStudent(courseId, studentId);
         }
         [HttpGet, Route("approveTakeCourse")]
         public void ApproveTakeCourse(string courseId, string studentId)
@@ -314,7 +312,8 @@ and start a new fresh tomorrow. ",
                 {
                     foreach (var ss in registered)
                     {
-                        if (c.StudentScores.Where(i => i.Student.Id == ss.Student.Id).Count() == 0)
+                        var existing = this._studentScoreRepository.List.Where(i => i.Student.Id == ss.Student.Id && i.CurriculumId == c.Id).ToList();
+                        if (existing.Count() == 0)
                         {
                             var score = new StudentScore
                             {
