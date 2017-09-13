@@ -22,7 +22,7 @@ Check out
 * [toastr]
 * [underscore]
 * [es6-promise]
-* [jquery] (http://jquery.com/) v.1.12.4
+* [jquery](http://jquery.com/) v.1.12.4
 * [moment]
 
 ## Versioning
