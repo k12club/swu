@@ -36,6 +36,7 @@ namespace Swu.Portal.Web.Api
         private readonly IRepository<StudentScore> _studentScoreRepository;
         private readonly IConfigurationRepository _configurationRepository;
         private readonly IPhotoAlbumService _photoAlbumService;
+        private readonly IRepository<Photo> _photoRepository;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
@@ -46,7 +47,8 @@ namespace Swu.Portal.Web.Api
             IStudentCourseRepository studentCourseRepository,
             IRepository<StudentScore> studentScoreRepository,
             IConfigurationRepository configurationRepository,
-            IPhotoAlbumService photoAlbumService)
+            IPhotoAlbumService photoAlbumService,
+            IRepository<Photo> photoRepository)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
@@ -58,6 +60,7 @@ namespace Swu.Portal.Web.Api
             this._studentScoreRepository = studentScoreRepository;
             this._configurationRepository = configurationRepository;
             this._photoAlbumService = photoAlbumService;
+            this._photoRepository = photoRepository;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -406,6 +409,19 @@ and start a new fresh tomorrow. ",
                     PublishedDate = this._datetimeRepository.Now()
                 };
                 this._photoAlbumService.AddNewPhoto(courseId, albumId, userId, photo.ToEntity());
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("removePhoto")]
+        public HttpResponseMessage RemovePhoto(int photoId) {
+            try
+            {
+                var photo = this._photoRepository.FindById(photoId);
+                this._photoRepository.Delete(photo);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)

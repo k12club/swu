@@ -117,7 +117,12 @@
                                                     </li>
                                                     <li ng-show="c.type ===2">
                                                         <a class="list-group-item" href="#">
-                                                            <ul class="list-inline">
+                                                            <ul class="list-inline" ng-show="hasPermission">
+                                                                <li ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="showResultModal(c.id)"> Quize result</span></li>
+                                                                <li class="pull-right">{{c.time}}</li>
+                                                            </ul>
+                                                            <ul class="list-inline" ng-show="!hasPermission">
                                                                 <li><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="showResultModal(c.id)"> Quize result</span></li>
                                                                 <li class="pull-right">{{c.time}}</li>
@@ -209,7 +214,7 @@
                                                     <div class="row" ng-show="hasPermission">
                                                         <button type="button" class="btn btn-link pull-left" ng-click="addNewPhoto(courseDetail.photosAlbum.id)"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
                                                     </div>
-                                                    <div class="popup-gallery">
+                                                    <div class="popup-gallery" compile="html">
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,6 +227,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <script>
     if ($('.irs-lc-carousel').length) {

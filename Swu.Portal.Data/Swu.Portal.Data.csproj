@@ -95,6 +95,7 @@
     <Compile Include="Repository\ForumRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\PhotoAlbumRepository.cs" />
+    <Compile Include="Repository\PhotoRepository.cs" />
     <Compile Include="Repository\ResearchCategoryRepository.cs" />
     <Compile Include="Repository\ResearchRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />

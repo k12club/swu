@@ -11,6 +11,7 @@
         hasPermission: boolean;
         canSeeQuizeResult: boolean;
         canTakeCourse: boolean;
+        html: string;
 
         addNew(): void;
         edit(id: number): void;
@@ -18,15 +19,15 @@
         getStudentScore(id: number): StudentScore;
         showResultModal(id: number): void;
         takeCourse(): void;
-        removeCourse(id:string): void;
+        removeCourse(id: string): void;
         approve(id: string): void;
-
-        addNewPhoto(id:string): void;
+        addNewPhoto(id: string): void;
+        removePhoto(id: number): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
     export class CourseController {
-        static $inject: Array<string> = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices","toastr"];
+        static $inject: Array<string> = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices", "toastr"];
         constructor(private $scope: ICourseScope, private $state: ng.ui.IState, private courseService: IcourseService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices, private toastr: Toastr) {
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getCurrentUser = () => {
@@ -101,20 +102,19 @@
                     var elements = "<div class='col-md-4'>\
                         <div class='resources-item' >\
                             <div class='resources-category-image' >\
+                                <button title='Remove' type='button' class='mfp-close2' ng-show='hasPermission' ng-click='removePhoto(" + value.id + ")'>×</button>\
                                 <a href='../../../../"+ value.imageUrl + "' title= '" + value.name + "' by='" + value.uploadBy + "'>\
-                                    <img class='img-responsive' alt= '' src= '../../../../"+ value.imageUrl + "'>\
-                                        </a>\
-                                        </div>\
-                                        <div class='resources-description' >\
-                                            <p>"+ value.displayPublishedDate + "</p>\
-                                                <h4>"+ value.name + "</h4>\
-                                                </div>\
-                                                </div>\
-                                                </div>";
+                                    <img class='img-responsive' alt= '' src= '../../../../"+ value.imageUrl + "'></a>\
+                            </div>\
+                        <div class='resources-description' ><p>"+ value.displayPublishedDate + "</p>\
+                        <h4>"+ value.name + "</h4></div></div>\
+                    </div>";
                     html += elements;
                 });
                 html = "<div class='row'>" + html + "</div>";
-                $('.popup-gallery').html(html);
+                //$('.popup-gallery').html(html);
+                //this.$scope.html = $sce.trustAsHtml(html);
+                this.$scope.html = html;
             }
             this.$scope.registerScript = () => {
                 $('.popup-gallery').magnificPopup({
@@ -207,13 +207,13 @@
                     this.toastr.success("Success");
                 }, (error) => { });
             };
-            this.$scope.removeCourse = (id:string) => {
+            this.$scope.removeCourse = (id: string) => {
                 this.courseService.removeCourse(this.$scope.id.toString(), id).then((reponse) => {
                     this.$scope.getCourse(this.$scope.id);
                     this.toastr.success("Success");
                 }, (error) => { });
             };
-            this.$scope.approve = (id:string) => {
+            this.$scope.approve = (id: string) => {
                 this.courseService.approveTakeCourse(this.$scope.id.toString(), id).then((reponse) => {
                     this.$scope.getCourse(this.$scope.id);
                     this.toastr.success("Success");
@@ -241,6 +241,14 @@
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getCourse(this.$scope.id);
+                });
+            };
+            this.$scope.removePhoto = (id: number): void => {
+                this.courseService.removePhoto(id).then((response) => {
+                    this.$scope.getCourse(this.$scope.id);
+                    this.toastr.success("Success");
+                }, (error) => {
+                    this.toastr.error("Error");
                 });
             };
             this.init();

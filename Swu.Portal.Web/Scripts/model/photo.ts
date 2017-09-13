@@ -8,7 +8,7 @@
         uploadBy: string;
     }
     export interface IPhotoAlbum {
-        id: number;
+        id: string;
         photos: IPhoto[];
     }
 }

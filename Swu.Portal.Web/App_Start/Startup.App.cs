@@ -40,6 +40,8 @@ namespace Swu.Portal.Web
             builder.RegisterType<StudentScoreRepository>().As<IRepository<StudentScore>>().InstancePerRequest();
             builder.RegisterType<ConfigurationRepository>().As<IConfigurationRepository>().InstancePerRequest();
             builder.RegisterType<PhotoAlbumService>().As<IPhotoAlbumService>().InstancePerRequest();
+            builder.RegisterType<PhotoRepository>().As<IRepository<Photo>>().InstancePerRequest();
+            builder.RegisterType<CommentService>().As<ICommentService>().InstancePerRequest();
 
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);

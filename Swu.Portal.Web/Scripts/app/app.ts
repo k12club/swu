@@ -38,6 +38,19 @@ module Swu {
                 return $sce.trustAsHtml(html);
             };
         }])
+        .directive('compile', ['$compile', function ($compile: ng.ICompileService) {
+            return function (scope: ng.IScope, element: any, attrs: any) {
+                scope.$watch(
+                    function (scope) {
+                        return scope.$eval(attrs.compile);
+                    },
+                    function (value) {
+                        element.html(value);
+                        $compile(element.contents())(scope);
+                    }
+                )
+            }
+        }])
         .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider: any, AppConstant: AppConstant, $mdDateLocaleProvider: any) {
             $translateProvider.translations("en", translations_en);
             $translateProvider.translations("th", translations_th);

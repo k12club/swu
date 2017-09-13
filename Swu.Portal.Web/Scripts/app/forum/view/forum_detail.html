@@ -10,7 +10,7 @@
 </section>
 
 <!-- Breadcrumbs html -->
-<div ng-controller="ForumController as vm">
+<div>
     <section class="irs-ip-brdcrumb">
         <div class="container">
             <div class="row">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="irs-blog-post-meta style2">
                                 <ul class="list-inline">
-                                    <li><a href="#">on<span class="text-thm2"> {{forumAndComments.forum.createdDate|date:'dd/MM/yyyy'}}</span></a></li>
+                                    <li><a href="#">on<span class="text-thm2"> {{forumAndComments.forum.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span></a></li>
                                     <li><a href="#">by<span class="text-thm2"> {{forumAndComments.forum.creatorName}}</span></a></li>
                                     <li><a class="irs-colrdaek" href="#"><span class="text-thm2 flaticon-interface-1"> </span>{{forumAndComments.forum.numberOfViews}}</a></li>
                                 </ul>
@@ -56,10 +56,10 @@
                                 </ul>
                             </div>
                             <br><br>
-                            <div id="comment"></div>
+                            <summernote id="comment" ng-model="comment"></summernote>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="#" class="btn btn-default irs-button-styledark" ng-click="save()"> Post</a>
+                                    <input type="button" ng-disabled="!canPost" class="btn btn-default irs-button-styledark" ng-click="save()" value="Post" />
                                 </div>
                             </div>
                             <p class="irs-mrgntop-ffty irs-all-course-bb"></p>
@@ -69,13 +69,13 @@
                                     <div class="row">
                                         <div class="col-md-1">
                                             <div class="irs-bp-author">
-                                                <img ng-src="../../../../{{c.createImageUrl}}" alt="blog-post-author.jpg">
+                                                <img ng-src="../../../../{{c.createImageUrl}}" class="img-circle" style="width:50px;height:50px" alt="blog-post-author.jpg">
                                             </div>
                                         </div>
                                         <div class="col-md-11">
                                             <div class="irs-courses-td-sngle-dtls">
                                                 <ul class="list-unstyled">
-                                                    <li class="irs-name-tdsd style2">on <span class="text-thm2 ng-binding"> {{c.createdDate|date:'dd/MM/yyyy'}}</span> by <span class="text-thm2 ng-binding">{{c.creatorName}}</span></li>
+                                                    <li class="irs-name-tdsd style2">on <span class="text-thm2 ng-binding"> {{c.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span> by <span class="text-thm2 ng-binding">{{c.creatorName}}</span></li>
                                                 </ul>
                                                 <p>{{c.description}}</p>
                                             </div>
@@ -92,13 +92,3 @@
         </div>
     </section>
 </div>
-<script>
-    $(document).ready(function () {
-        $('#comment').summernote({
-            height: 300,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: false
-        });
-    });
-</script>

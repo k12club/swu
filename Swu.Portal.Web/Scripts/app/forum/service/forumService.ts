@@ -1,6 +1,7 @@
 ﻿module Swu {
     export interface IforumService {
         getForumDetail(id: string): ng.IPromise<ForumAndComments>;
+        postComment(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "forumService" })
@@ -11,6 +12,9 @@
         }
         getForumDetail(id: string): ng.IPromise<ForumAndComments> {
             return this.apiService.getData<ForumAndComments>("forum/getForumDetail?id=" + id);
+        }
+        postComment(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postWithFormData(models, "forum/postComment");
         }
     }
 }

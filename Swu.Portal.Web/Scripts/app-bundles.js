@@ -452,6 +452,16 @@ var Swu;
                 return $sce.trustAsHtml(html);
             };
         }])
+        .directive('compile', ['$compile', function ($compile) {
+            return function (scope, element, attrs) {
+                scope.$watch(function (scope) {
+                    return scope.$eval(attrs.compile);
+                }, function (value) {
+                    element.html(value);
+                    $compile(element.contents())(scope);
+                });
+            };
+        }])
         .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider, AppConstant, $mdDateLocaleProvider) {
             $translateProvider.translations("en", Swu.translations_en);
             $translateProvider.translations("th", Swu.translations_th);
@@ -2042,20 +2052,17 @@ var Swu;
                     var elements = "<div class='col-md-4'>\
                         <div class='resources-item' >\
                             <div class='resources-category-image' >\
+                                <button title='Remove' type='button' class='mfp-close2' ng-show='hasPermission' ng-click='removePhoto(" + value.id + ")'>×</button>\
                                 <a href='../../../../" + value.imageUrl + "' title= '" + value.name + "' by='" + value.uploadBy + "'>\
-                                    <img class='img-responsive' alt= '' src= '../../../../" + value.imageUrl + "'>\
-                                        </a>\
-                                        </div>\
-                                        <div class='resources-description' >\
-                                            <p>" + value.displayPublishedDate + "</p>\
-                                                <h4>" + value.name + "</h4>\
-                                                </div>\
-                                                </div>\
-                                                </div>";
+                                    <img class='img-responsive' alt= '' src= '../../../../" + value.imageUrl + "'></a>\
+                            </div>\
+                        <div class='resources-description' ><p>" + value.displayPublishedDate + "</p>\
+                        <h4>" + value.name + "</h4></div></div>\
+                    </div>";
                     html += elements;
                 });
                 html = "<div class='row'>" + html + "</div>";
-                $('.popup-gallery').html(html);
+                _this.$scope.html = html;
             };
             this.$scope.registerScript = function () {
                 $('.popup-gallery').magnificPopup({
@@ -2182,6 +2189,14 @@ var Swu;
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getCourse(_this.$scope.id);
+                });
+            };
+            this.$scope.removePhoto = function (id) {
+                _this.courseService.removePhoto(id).then(function (response) {
+                    _this.$scope.getCourse(_this.$scope.id);
+                    _this.toastr.success("Success");
+                }, function (error) {
+                    _this.toastr.error("Error");
                 });
             };
             this.init();
@@ -2486,6 +2501,9 @@ var Swu;
         };
         courseService.prototype.savePhoto = function (models) {
             return this.apiService.postWithFormData(models, "Course/uploadPhotoAsnc");
+        };
+        courseService.prototype.removePhoto = function (photoId) {
+            return this.apiService.getData("course/removePhoto?photoId=" + photoId);
         };
         courseService.$inject = ['apiService', 'AppConstant'];
         courseService = __decorate([
@@ -3594,7 +3612,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ForumController = (function () {
-        function ForumController($scope, $rootScope, $state, $stateParams, $sce, forumService) {
+        function ForumController($scope, $rootScope, $state, $stateParams, $sce, forumService, auth, toastr) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
@@ -3602,6 +3620,8 @@ var Swu;
             this.$stateParams = $stateParams;
             this.$sce = $sce;
             this.forumService = forumService;
+            this.auth = auth;
+            this.toastr = toastr;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getForumAndComments = function (id) {
                 _this.forumService.getForumDetail(id).then(function (response) {
@@ -3609,14 +3629,26 @@ var Swu;
                 }, function (error) { });
             };
             this.$scope.save = function () {
+                var models = [];
+                var userId = _this.auth.getCurrentUser().id;
+                models.push({ name: "forumId", value: _this.$scope.id });
+                models.push({ name: "userId", value: userId });
+                models.push({ name: "comment", value: _this.$scope.comment });
+                _this.forumService.postComment(models).then(function (response) {
+                    _this.init();
+                    _this.toastr.success("Success");
+                }, function (error) {
+                    _this.toastr.error("Error");
+                });
             };
             this.init();
         }
         ForumController.prototype.init = function () {
+            this.$scope.canPost = this.auth.isLoggedIn();
             this.$scope.getForumAndComments(this.$scope.id);
         };
         ;
-        ForumController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "$sce", "forumService"];
+        ForumController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "$sce", "forumService", "AuthServices", "toastr"];
         ForumController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ForumController" })
@@ -3634,6 +3666,9 @@ var Swu;
         }
         forumService.prototype.getForumDetail = function (id) {
             return this.apiService.getData("forum/getForumDetail?id=" + id);
+        };
+        forumService.prototype.postComment = function (models) {
+            return this.apiService.postWithFormData(models, "forum/postComment");
         };
         forumService.$inject = ['apiService', 'AppConstant'];
         forumService = __decorate([
