@@ -70,6 +70,10 @@ namespace Swu.Portal.Web.Api.Proxy
             {
                 this.PhotosAlbum = new PhotoAlbumProxy(c.PhotoAlbums.FirstOrDefault());
             }
+            else {
+                this.PhotosAlbum.Id = "";
+                this.PhotosAlbum.Photos = new List<PhotoProxy>();
+            }
         }
     }
     public class CourseBriefDetailProxy

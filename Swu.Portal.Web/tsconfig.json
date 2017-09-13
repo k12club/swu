@@ -51,6 +51,7 @@
     "Scripts/app/course/controller/CourseController.ts",
     "Scripts/app/course/controller/CourseListController.ts",
     "Scripts/app/course/controller/CurriculumModalController.ts",
+    "Scripts/app/course/controller/PhotoModalController.ts",
     "Scripts/app/course/controller/QuizeresultController.ts",
     "Scripts/app/course/service/courseService.ts",
     "Scripts/app/course/model/courseAllDetail.ts",

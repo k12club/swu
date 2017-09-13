@@ -678,6 +678,7 @@
     <Content Include="Scripts\app\course\view\course_list.html" />
     <Content Include="Scripts\app\course\view\course_detail.html" />
     <Content Include="Scripts\app\course\view\curriculum.tmpl.html" />
+    <Content Include="Scripts\app\course\view\photo.tmpl.html" />
     <Content Include="Scripts\app\course\view\quizeResult.tmpl.html" />
     <Content Include="Scripts\app\forum\view\forum_detail.html" />
     <Content Include="Scripts\app\home\view\campus-video.html" />
@@ -816,6 +817,7 @@
     <TypeScriptCompile Include="Scripts\app\course\controller\CourseListController.ts" />
     <TypeScriptCompile Include="Scripts\app\course\controller\CourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\course\controller\CurriculumModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\course\controller\PhotoModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\course\controller\QuizeResultController.ts" />
     <TypeScriptCompile Include="Scripts\app\course\model\courseAllDetail.ts" />
     <TypeScriptCompile Include="Scripts\app\course\service\courseService.ts" />

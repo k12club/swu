@@ -25,7 +25,7 @@ namespace Swu.Portal.Web.Api
     [RoutePrefix("V1/Course")]
     public class CourseController : ApiController
     {
-        private const string UPLOAD_DIR = "FileUpload/course/";
+        private const string UPLOAD_DIR = "FileUpload/photo/";
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IRepository2<Course> _courseRepository;
         private readonly IRepository2<PhotoAlbum> _photoAlbumRepository;
@@ -35,6 +35,7 @@ namespace Swu.Portal.Web.Api
         private readonly IStudentCourseRepository _studentCourseRepository;
         private readonly IRepository<StudentScore> _studentScoreRepository;
         private readonly IConfigurationRepository _configurationRepository;
+        private readonly IPhotoAlbumService _photoAlbumService;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
@@ -44,7 +45,8 @@ namespace Swu.Portal.Web.Api
             ICurriculumRepository curriculumRepository,
             IStudentCourseRepository studentCourseRepository,
             IRepository<StudentScore> studentScoreRepository,
-            IConfigurationRepository configurationRepository)
+            IConfigurationRepository configurationRepository,
+            IPhotoAlbumService photoAlbumService)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
@@ -55,7 +57,7 @@ namespace Swu.Portal.Web.Api
             this._studentCourseRepository = studentCourseRepository;
             this._studentScoreRepository = studentScoreRepository;
             this._configurationRepository = configurationRepository;
-
+            this._photoAlbumService = photoAlbumService;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -107,7 +109,7 @@ namespace Swu.Portal.Web.Api
             {
                 foreach (var p in photos.Photos)
                 {
-                    allDetail.PhotosAlbum.Photos.Add(new PhotoProxy(p));
+                    allDetail.PhotosAlbum.Photos.Add(new PhotoProxy(p, photos.ApplicationUser));
                 }
             }
             return allDetail;
@@ -127,7 +129,7 @@ namespace Swu.Portal.Web.Api
             }
             foreach (var c in courses)
             {
-                webboardItems.Add(new WebboardItemProxy(c,this._configurationRepository.DefaultUserImage));
+                webboardItems.Add(new WebboardItemProxy(c, this._configurationRepository.DefaultUserImage));
             }
             return webboardItems;
         }
@@ -329,6 +331,86 @@ and start a new fresh tomorrow. ",
                         }
                     }
                 }
+            }
+        }
+        [HttpPost, Route("uploadPhotoAsnc")]
+        public async Task<HttpResponseMessage> UploadPhoto()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_DIR);
+            string uploadPath = string.Empty;
+            string courseId = string.Empty;
+            string albumId = string.Empty;
+            string userId = string.Empty;
+            string title = string.Empty;
+            var dummyAlbumId = Guid.NewGuid().ToString();
+            var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                CourseDetailProxy course = new CourseDetailProxy();
+                foreach (var key in provider.FormData)
+                {
+                    if (key.Equals("course"))
+                    {
+                        courseId = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
+                    }
+                    if (key.Equals("album"))
+                    {
+                        albumId = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
+                    }
+                    if (key.Equals("user"))
+                    {
+                        userId = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
+                    }
+                    if (key.Equals("name"))
+                    {
+                        title = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
+                    }
+                }
+                albumId = String.IsNullOrEmpty(albumId) ? dummyAlbumId : albumId;
+                uploadPath = root + albumId + @"\";
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+                string _newFileName = string.Empty;
+                string _path = string.Empty;
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string fileName = file.Headers.ContentDisposition.FileName;
+                    if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                    {
+                        fileName = fileName.Trim('"');
+                    }
+                    if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                    {
+                        fileName = Path.GetFileName(fileName);
+                    }
+                    _newFileName = string.Format("{0}{1}", Guid.NewGuid(), Path.GetExtension(fileName));
+                    var moveTo = Path.Combine(uploadPath, _newFileName);
+                    if (File.Exists(moveTo))
+                    {
+                        File.Delete(moveTo);
+                    }
+                    _path = string.Format("{0}{1}", UPLOAD_DIR + albumId + "/", _newFileName);
+                    File.Move(file.LocalFileName, moveTo);
+                }
+                var photo = new PhotoProxy
+                {
+                    Name = title,
+                    ImageUrl = _path,
+                    PublishedDate = this._datetimeRepository.Now()
+                };
+                this._photoAlbumService.AddNewPhoto(courseId, albumId, userId, photo.ToEntity());
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
     }

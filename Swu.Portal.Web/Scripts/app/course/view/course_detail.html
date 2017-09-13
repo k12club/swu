@@ -205,7 +205,10 @@
                                     <div role="tabpanel" class="tab-pane fade" id="photos">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="container">
+                                                <div class="irs-cdtls-feture-bot2">
+                                                    <div class="row" ng-show="hasPermission">
+                                                        <button type="button" class="btn btn-link pull-left" ng-click="addNewPhoto(courseDetail.photosAlbum.id)"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                                    </div>
                                                     <div class="popup-gallery">
                                                     </div>
                                                 </div>

@@ -15,7 +15,8 @@ namespace Swu.Portal.Data.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime PublishedDate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime? PublishedDate { get; set; }
         public string UploadBy { get; set; }
 
         public string PhotoAlbumId { get; set; }

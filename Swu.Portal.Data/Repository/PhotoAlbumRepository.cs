@@ -22,6 +22,7 @@ namespace Swu.Portal.Data.Repository
             {
                 return this.context.PhotoAlbums
                     .Include(i => i.Photos)
+                    .Include(i => i.ApplicationUser)
                     .AsEnumerable();
             }
         }
@@ -45,6 +46,7 @@ namespace Swu.Portal.Data.Repository
         {
             var result = this.context.PhotoAlbums
                 .Include(i => i.Photos)
+                .Include(i=>i.ApplicationUser)
                 .Where(i => i.Id == Id).FirstOrDefault();
             return result;
         }

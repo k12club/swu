@@ -88,5 +88,14 @@ namespace Swu.Portal.Web.Api
                 NumberOfTime = curriculum.NumberOfTime
             };
         }
+        public static Photo ToEntity(this PhotoProxy photo)
+        {
+            return new Data.Models.Photo
+            {
+                Name = photo.Name,
+                ImageUrl = photo.ImageUrl,
+                PublishedDate = photo.PublishedDate
+            };
+        }
     }
 }

@@ -19,7 +19,9 @@
         showResultModal(id: number): void;
         takeCourse(): void;
         removeCourse(id:string): void;
-        approve(id:string): void;
+        approve(id: string): void;
+
+        addNewPhoto(id:string): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
@@ -134,6 +136,7 @@
                 });
             };
             this.$scope.addNew = () => {
+                console.log($scope.id);
                 var options: ng.ui.bootstrap.IModalSettings = {
                     templateUrl: '/Scripts/app/course/view/curriculum.tmpl.html',
                     controller: CurriculumModalController,
@@ -143,6 +146,9 @@
                         },
                         courseId: function () {
                             return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.currentUser.id;
                         },
                         mode: function () {
                             return actionMode.addNew;
@@ -212,6 +218,30 @@
                     this.$scope.getCourse(this.$scope.id);
                     this.toastr.success("Success");
                 }, (error) => { });
+            };
+            this.$scope.addNewPhoto = (id: string): void => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/course/view/photo.tmpl.html',
+                    controller: PhotoModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        courseId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.currentUser.id;
+                        },
+                        mode: function () {
+                            return actionMode.addNew;
+                        }
+                    },
+                    size: "md"
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getCourse(this.$scope.id);
+                });
             };
             this.init();
         }

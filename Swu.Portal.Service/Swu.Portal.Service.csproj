@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="ApplicationUserServices.cs" />
     <Compile Include="CourseService.cs" />
+    <Compile Include="PhotoAlbumService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
