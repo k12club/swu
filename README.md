@@ -5,7 +5,7 @@
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Installing
+## Installing
 
 Check out 
 [the installation in the documentation.](https://github.com/chansak/swu/tree/master/document/installation.md)
@@ -19,16 +19,16 @@ Check out
 
 * [angular](http://angularjs.org) - AngularJS v1.4.7
 * [ui-bootstrap](http://angular-ui.github.io/bootstrap/) - Version: 1.0.3
-* [ng-annotation]
-* [ng-file-upload-shim]
-* [ngprogress-lite.min]
-* [ngStorage]
 * [toastr]
 * [underscore]
+* [es6-promise]
+* [jquery](http://jquery.com/) v.1.12.4
+* [moment]
 
 ## Versioning
-* version: v 1.1.0.0 , 20 August 2017 : multi language support
-* version: 1.0.0 , 1 August 2017
+* version: v 1.2.0.0 , 13/09/2017 : authentication, authorization, user management and course management
+* version: v 1.1.0.0 , 20/08/2017 : multi language support
+* version: v 1.0.0 , 1/08/2017
 ⋅⋅⋅ This version is just a initial version for setting up the project. Compose with folder structor and layer design.
 
 ## Authors
