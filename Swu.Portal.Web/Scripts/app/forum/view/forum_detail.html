@@ -34,27 +34,27 @@
                     <div class="clearfix">
                         <div class="irs-blog-post-ip">
                             <div class="irs-blog-post-title">
-                                <h3>Applied Science and Best Technology (AST)</h3>
+                                <h3>{{forumAndComments.forum.name}}</h3>
                             </div>
                             <div class="irs-blog-post-meta style2">
                                 <ul class="list-inline">
                                     <li><a href="#">on<span class="text-thm2"> {{forumAndComments.forum.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span></a></li>
                                     <li><a href="#">by<span class="text-thm2"> {{forumAndComments.forum.creatorName}}</span></a></li>
-                                    <li><a class="irs-colrdaek" href="#"><span class="text-thm2 flaticon-interface-1"> </span>{{forumAndComments.forum.numberOfViews}}</a></li>
+                                    <li><a class="irs-colrdaek" href="#"><span class="flaticon-interface"> </span>{{forumAndComments.forum.numberOfViews}}</a></li>
                                 </ul>
                             </div>
-                            <div class="irs-blog-post-thumb">
+                            <!--<div class="irs-blog-post-thumb">
                                 <img class="img-responsive img-fluid" ng-src="../../../../{{forumAndComments.forum.imageUrl}}" alt="blog-post-ip1.jpg">
-                            </div>
+                            </div>-->
                             <div class="irs-blog-post-detailss irs-all-course-bb">
                                 <div ng-bind-html="forumAndComments.forum.fullDescription | trustAsHtml"></div>
                             </div>
-                            <div class="irs-bp-atag">
+                            <!--<div class="irs-bp-atag">
                                 <ul class="list-inline irs-atag-list">
                                     <li><a href="#">Tags: </a></li>
                                     <li>alumni / courses / university</li>
                                 </ul>
-                            </div>
+                            </div>-->
                             <br><br>
                             <summernote id="comment" ng-model="comment"></summernote>
                             <div class="row">

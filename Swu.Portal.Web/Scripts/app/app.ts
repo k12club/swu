@@ -67,11 +67,6 @@ module Swu {
                 if (!result) {
                     document.body.scrollTop = document.documentElement.scrollTop = 0;
                 }
-                //if (_.contains(AppConstant.authorizeStateList, $state.current.name)) {
-                //    if (auth.isLoggedIn() == false) {
-                //        $state.go("app", { reload: true });
-                //    }
-                //}
                 var permission = _.filter(AppConstant.authorizeStateList, (item: any, index: number) => { return item.name == $state.current.name })[0];
                 if (permission != null) {
                     if (auth.isLoggedIn()) {

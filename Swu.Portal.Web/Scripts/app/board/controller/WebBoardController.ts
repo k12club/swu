@@ -12,10 +12,12 @@
         numberOfView?: number;
         numberOfComments?: number;
         shortDescription?: string;
+        fullDescription?: string;
         createBy?: string;
         creatorImageUrl?: string;
         type: BoardType
         categoryId?: number;
+        userId?: string;
     }
     export interface IWebBoardScope extends IPagination {
         categoryName: string;
@@ -64,29 +66,30 @@
             //End Pagination section
 
             this.$scope.search = () => {
-                console.log('search');
                 switch (this.$scope.type) {
                     case 1: {
                         this.$scope.categoryName = "Forums";
                         this.webboardService.getForumsCategory().then((response) => {
                             this.$scope.categorys = response;
+                            console.log(_.first(this.$scope.categorys).id);
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
-                            this.webboardService.getForumsItems(this.$scope.criteria).then((response) => {
-                                this.$scope.items = response;
-                                this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
-                                this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
-                                    return item.type == BoardType.forums;
-                                });
-                                _.map(this.$scope.categorys, function (c) {
-                                    var number = _.filter($scope.items, (item: Webboarditems) => {
-                                        return item.type == BoardType.forums && item.categoryId == c.id;
-                                    }).length;
-                                    c.numberofItems = number;
-                                });
-                                this.$scope.changePage(this.$scope.currentPage);
-                            }, (error) => { });
+                            //this.webboardService.getForumsItems(this.$scope.criteria).then((response) => {
+                            //    this.$scope.items = response;
+                            //    this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
+                            //    this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
+                            //        return item.type == BoardType.forums;
+                            //    });
+                            //    _.map(this.$scope.categorys, function (c) {
+                            //        var number = _.filter($scope.items, (item: Webboarditems) => {
+                            //            return item.type == BoardType.forums && item.categoryId == c.id;
+                            //        }).length;
+                            //        c.numberofItems = number;
+                            //    });
+                            //    this.$scope.changePage(this.$scope.currentPage);
+                            //}, (error) => { });
+                            $state.go('board.forum', { 'id': _.first($scope.categorys).id });
                         }, (error) => { });
                         break;
                     }
@@ -97,20 +100,21 @@
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.course({id:" + c.id + "})";
                             });
-                            this.webboardService.getCourseItems(this.$scope.criteria).then((response) => {
-                                this.$scope.items = response;
-                                this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
-                                this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
-                                    return item.type == BoardType.course;
-                                });
-                                _.map(this.$scope.categorys, function (c) {
-                                    var number = _.filter($scope.items, (item: Webboarditems) => {
-                                        return item.type == BoardType.course && item.categoryId == c.id;
-                                    }).length;
-                                    c.numberofItems = number;
-                                });
-                                this.$scope.changePage(this.$scope.currentPage);
-                            }, (error) => { });
+                            //this.webboardService.getCourseItems(this.$scope.criteria).then((response) => {
+                            //    this.$scope.items = response;
+                            //    this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
+                            //    this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
+                            //        return item.type == BoardType.course;
+                            //    });
+                            //    _.map(this.$scope.categorys, function (c) {
+                            //        var number = _.filter($scope.items, (item: Webboarditems) => {
+                            //            return item.type == BoardType.course && item.categoryId == c.id;
+                            //        }).length;
+                            //        c.numberofItems = number;
+                            //    });
+                            //    this.$scope.changePage(this.$scope.currentPage);
+                            //}, (error) => { });
+                            $state.go('board.course', { 'id': _.first($scope.categorys).id });
                         }, (error) => { });
                         break;
                     }
@@ -121,20 +125,21 @@
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.research({id:" + c.id + "})";
                             });
-                            this.webboardService.getResearchItems(this.$scope.criteria).then((response) => {
-                                this.$scope.items = response;
-                                this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
-                                this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
-                                    return item.type == BoardType.research;
-                                });
-                                _.map(this.$scope.categorys, function (c) {
-                                    var number = _.filter($scope.items, (item: Webboarditems) => {
-                                        return item.type == BoardType.research && item.categoryId == c.id;
-                                    }).length;
-                                    c.numberofItems = number;
-                                });
-                                this.$scope.changePage(this.$scope.currentPage);
-                            }, (error) => { });
+                            //this.webboardService.getResearchItems(this.$scope.criteria).then((response) => {
+                            //    this.$scope.items = response;
+                            //    this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
+                            //    this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
+                            //        return item.type == BoardType.research;
+                            //    });
+                            //    _.map(this.$scope.categorys, function (c) {
+                            //        var number = _.filter($scope.items, (item: Webboarditems) => {
+                            //            return item.type == BoardType.research && item.categoryId == c.id;
+                            //        }).length;
+                            //        c.numberofItems = number;
+                            //    });
+                            //    this.$scope.changePage(this.$scope.currentPage);
+                            //}, (error) => { });
+                            $state.go('board.research', { 'id': _.first($scope.categorys).id });
                         }, (error) => { });
                         break;
                     }
@@ -143,6 +148,7 @@
             this.init();
         };
         init(): void {
+            console.log('WebBoardController init');
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
             this.$scope.criteria = {

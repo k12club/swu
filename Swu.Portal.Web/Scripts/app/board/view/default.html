@@ -14,25 +14,43 @@
 <div class="irs-blog-post-ip">
     <div class="row clearfix">
         <div class="irs-cl-list" ng-repeat="item in displayItems">
-            <div class="col-xs-12 col-lg-4">
-                <div class="irs-cl-list-thumb">
-                    <img class="img-responsive img-fluid" ng-src="../../../../{{item.imageUrl}}">
-                    <div class="irs-cl-overlay"></div>
-                    <div class="irs-cl-price">Free</div>
+            <div ng-show="type==1">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="irs-cl-details">
+                        <ul class="list-inline irs-cl-teacher-info">
+                            <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{item.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
+                            <li><a href="#">on<span class="text-thm2"> {{item.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span></a></li>
+                            <li class="irs-cl-info">by <span class="text-thm2"> {{item.createBy}}</span></li>
+                            <li> <span class="flaticon-interface"></span> {{item.numberOfComments}}</li>
+                        </ul>
+                        <h3 ng-show="type==1"><a href="#" ui-sref="forum({ id: item.id })">{{item.name}}</a></h3>
+                        <h3 ng-show="type==2"><a href="#" ui-sref="course({ id: item.id })">{{item.name}}</a></h3>
+                        <h3 ng-show="type==3"> {{item.name}}</h3>
+                        <p>{{item.shortDescription}}</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-lg-8">
-                <div class="irs-cl-details">
-                    <ul class="list-inline irs-cl-teacher-info">
-                        <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{item.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
-                        <li class="irs-cl-info">with <span class="text-thm2"> {{item.createBy}}</span></li>
-                        <li> <span class="text-thm2 flaticon-social-2"></span> {{item.numberOfView}}</li>
-                        <!--<li> <span class="text-thm2 flaticon-interface-1"></span> {{item.numberOfComments}}</li>-->
-                    </ul>
-                    <h3 ng-show="type==1"><a href="#" ui-sref="forum({ id: item.id })">{{item.name}}</a></h3>
-                    <h3 ng-show="type==2"><a href="#" ui-sref="course({ id: item.id })">{{item.name}}</a></h3>
-                    <h3 ng-show="type==3"> {{item.name}}</h3>
-                    <p>{{item.shortDescription}}</p>
+            <div ng-show="type!=1">
+                <div class="col-xs-12 col-lg-4">
+                    <div class="irs-cl-list-thumb">
+                        <img class="img-responsive img-fluid" ng-src="../../../../{{item.imageUrl}}">
+                        <div class="irs-cl-overlay"></div>
+                        <div class="irs-cl-price">Free</div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-8">
+                    <div class="irs-cl-details">
+                        <ul class="list-inline irs-cl-teacher-info">
+                            <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{item.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
+                            <li class="irs-cl-info">with <span class="text-thm2"> {{item.createBy}}</span></li>
+                            <li> <span class="text-thm2 flaticon-social-2"></span> {{item.numberOfView}}</li>
+                            <!--<li> <span class="text-thm2 flaticon-interface-1"></span> {{item.numberOfComments}}</li>-->
+                        </ul>
+                        <h3 ng-show="type==1"><a href="#" ui-sref="forum({ id: item.id })">{{item.name}}</a></h3>
+                        <h3 ng-show="type==2"><a href="#" ui-sref="course({ id: item.id })">{{item.name}}</a></h3>
+                        <h3 ng-show="type==3"> {{item.name}}</h3>
+                        <p>{{item.shortDescription}}</p>
+                    </div>
                 </div>
             </div>
         </div>

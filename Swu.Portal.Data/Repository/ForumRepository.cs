@@ -22,6 +22,7 @@ namespace Swu.Portal.Data.Repository
             {
                 return this.context.Forums
                     .Include(i=>i.ApplicationUser)
+                    .Include(i=>i.Comments)
                     .AsEnumerable();
             }
         }
@@ -45,6 +46,7 @@ namespace Swu.Portal.Data.Repository
         {
             var result = this.context.Forums
                 .Include(i => i.ApplicationUser)
+                .Include(i => i.Comments)
                 .Where(i => i.Id == Id).FirstOrDefault();
             return result;
         }

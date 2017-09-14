@@ -136,7 +136,6 @@
                 });
             };
             this.$scope.addNew = () => {
-                console.log($scope.id);
                 var options: ng.ui.bootstrap.IModalSettings = {
                     templateUrl: '/Scripts/app/course/view/curriculum.tmpl.html',
                     controller: CurriculumModalController,

@@ -12,7 +12,10 @@
                 .state("board", {
                     url: "/board/:type",
                     views: {
-                        '': { templateUrl: '/Scripts/app/board/view/board.html' },
+                        '': {
+                            templateUrl: '/Scripts/app/board/view/board.html',
+                            controller: 'WebBoardController as vm'
+                        },
                         'subContent@board': {
                             templateUrl: '/Scripts/app/board/view/default.html'
                         },
@@ -34,7 +37,7 @@
                     views: {
                         'subContent@board': {
                             templateUrl: '/Scripts/app/board/view/board-course.html',
-                            controller:'CourseBoardController as vm'
+                            controller: 'CourseBoardController as vm'
                         },
                     }
                 })

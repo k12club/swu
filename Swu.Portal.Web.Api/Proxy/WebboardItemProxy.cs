@@ -22,14 +22,24 @@ namespace Swu.Portal.Web.Api.Proxy
         public int NumberOfComments { get; set; }
         [JsonProperty(PropertyName = "shortDescription")]
         public string ShortDescription { get; set; }
+        [JsonProperty(PropertyName = "fullDescription")]
+        public string FullDescription { get; set; }
         [JsonProperty(PropertyName = "createBy")]
         public string CreateBy { get; set; }
+        [JsonProperty(PropertyName = "createdDate")]
+        public DateTime? CreatedDate { get; set; }
         [JsonProperty(PropertyName = "creatorImageUrl")]
         public string CreatorImageUrl { get; set; }
         [JsonProperty(PropertyName = "type")]
         public WebboardType Type { get; set; }
         [JsonProperty(PropertyName = "categoryId")]
         public int CategoryId { get; set; }
+        [JsonProperty(PropertyName = "userId")]
+        public string UserId { get; set; }  
+        public WebboardItemProxy()
+        {
+
+        }
         public WebboardItemProxy(Data.Models.Course c, string defaultImageUrl)
         {
             this.Id = c.Id;
@@ -48,11 +58,14 @@ namespace Swu.Portal.Web.Api.Proxy
             this.ImageUrl = f.ImageUrl;
             this.Name = f.Name;
             this.ShortDescription = f.ShortDescription;
-            this.CreateBy = "demo user";//f.ApplicationUser.FirstName_EN + " " + f.ApplicationUser.LastName_EN;
+            this.FullDescription = f.FullDescription;
+            this.CreateBy = f.ApplicationUser.FirstName_EN + " " + f.ApplicationUser.LastName_EN;
             this.Type = WebboardType.forum;
             this.CategoryId = f.CategoryId;
-            this.CreatorImageUrl = defaultImageUrl; //string.IsNullOrEmpty(f.ApplicationUser.ImageUrl) ? defaultImageUrl : f.ApplicationUser.ImageUrl;
-            this.NumberOfView = 0;
+            this.CreatorImageUrl = string.IsNullOrEmpty(f.ApplicationUser.ImageUrl) ? defaultImageUrl : f.ApplicationUser.ImageUrl;
+            this.NumberOfComments = f.Comments.Count();
+            this.UserId = f.ApplicationUser.Id;
+            this.CreatedDate = f.CreatedDate;
         }
         public WebboardItemProxy(Research r, string defaultImageUrl)
         {

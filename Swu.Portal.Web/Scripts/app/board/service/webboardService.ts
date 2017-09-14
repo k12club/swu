@@ -8,6 +8,9 @@
 
         getResearchCategory(): ng.IPromise<WebboardCategory[]>;
         getResearchItems(criteria: SearchCritirea): ng.IPromise<Webboarditems[]>;
+
+        //createNewPost(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
+        createNewPost(forum: Webboarditems): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "webboardService" })
@@ -36,6 +39,12 @@
         getResearchItems(criteria: SearchCritirea): ng.IPromise<Webboarditems[]> {
             var keyword = (criteria.name == "") ? "*" : criteria.name;
             return this.apiService.getData<Webboarditems[]>("research/allItems?keyword=" + keyword);
+        }
+        //createNewPost(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
+        //    return this.apiService.postWithFormData(models, "forum/createNewPost");
+        //}
+        createNewPost(forum: Webboarditems): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData(forum, "forum/createNewPost");
         }
     }
 }

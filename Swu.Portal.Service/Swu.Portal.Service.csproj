@@ -79,6 +79,7 @@
     <Compile Include="ApplicationUserServices.cs" />
     <Compile Include="CommentService.cs" />
     <Compile Include="CourseService.cs" />
+    <Compile Include="ForumService.cs" />
     <Compile Include="PhotoAlbumService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

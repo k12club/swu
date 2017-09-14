@@ -3,19 +3,23 @@
         id: number;
         items: Webboarditems[];
         displayItems: Webboarditems[];
+        currentUser: IUserProfile;
+        canPost: boolean;
 
+        getCurrentUser(): IUserProfile;
         search(): void;
         currentPage: number;
         pageSize: number;
         totalPageNumber: number;
         criteria: SearchCritirea;
         getTotalPageNumber(): number;
+        addNewPost(): void;
     }
     @Module("app")
     @Controller({ name: "GeneralBoardController" })
     export class GeneralBoardController {
-        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
-        constructor(private $scope: IGeneralBoardScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private webboardService: IwebboardService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce", "$uibModal", "AuthServices"];
+        constructor(private $scope: IGeneralBoardScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private webboardService: IwebboardService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices) {
             this.$scope.id = this.$stateParams["id"];
             //Pagination section
             this.$scope.getTotalPageNumber = (): number => {
@@ -42,7 +46,33 @@
                 }
             };
             //End Pagination section
-
+            this.$scope.getCurrentUser = () => {
+                if (this.$scope.currentUser == null) {
+                    this.$scope.currentUser = this.auth.getCurrentUser();
+                }
+                return this.$scope.currentUser;
+            };
+            this.$scope.addNewPost = () => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/board/view/forum.tmpl.html',
+                    controller: ForumModalController,
+                    resolve: {
+                        categoryId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.getCurrentUser().id;
+                        },
+                        mode: function () {
+                            return actionMode.addNew;
+                        }
+                    },
+                    size: "lg"
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.search();
+                });
+            };
             this.$scope.search = () => {
                 this.webboardService.getForumsItems(this.$scope.criteria).then((response) => {
                     this.$scope.items = response;
@@ -57,6 +87,10 @@
         init(): void {
             this.$scope.items = [];
             this.$scope.displayItems = [];
+            this.$scope.currentUser = this.$scope.getCurrentUser();
+            if (this.$scope.currentUser != null) {
+                this.$scope.canPost = true;
+            }
             this.$scope.search();
         };
 

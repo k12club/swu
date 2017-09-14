@@ -42,6 +42,7 @@ namespace Swu.Portal.Web
             builder.RegisterType<PhotoAlbumService>().As<IPhotoAlbumService>().InstancePerRequest();
             builder.RegisterType<PhotoRepository>().As<IRepository<Photo>>().InstancePerRequest();
             builder.RegisterType<CommentService>().As<ICommentService>().InstancePerRequest();
+            builder.RegisterType<ForumService>().As<IForumService>().InstancePerRequest();
 
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);

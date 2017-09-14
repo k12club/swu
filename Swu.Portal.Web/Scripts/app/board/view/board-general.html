@@ -14,24 +14,24 @@
     </div>
     <div class="irs-blog-post-ip">
         <div class="row clearfix">
-            <div class="row">
-                <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+            <div class="row" ng-show="canPost">
+                <button type="button" class="btn btn-link pull-left" ng-click="addNewPost()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
             </div>
             <div class="irs-cl-list" ng-repeat="item in displayItems">
-                <div class="col-xs-12 col-lg-4">
+                <!--<div class="col-xs-12 col-lg-4">
                     <div class="irs-cl-list-thumb">
                         <img class="img-responsive img-fluid" ng-src="../../../../{{item.imageUrl}}">
                         <div class="irs-cl-overlay"></div>
                         <div class="irs-cl-price">Free</div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-lg-8">
+                </div>-->
+                <div class="col-xs-12 col-lg-12">
                     <div class="irs-cl-details">
                         <ul class="list-inline irs-cl-teacher-info">
                             <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{item.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
-                            <li class="irs-cl-info">with <span class="text-thm2"> {{item.createBy}}</span></li>
-                            <li> <span class="text-thm2 flaticon-social-2"></span> {{item.numberOfView}}</li>
-                            <li> <span class="text-thm2 flaticon-interface-1"></span> {{item.numberOfComments}}</li>
+                            <li><a href="#">on<span class="text-thm2"> {{item.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span></a></li>
+                            <li class="irs-cl-info">by <span class="text-thm2"> {{item.createBy}}</span></li>
+                            <li> <span class="flaticon-interface"></span> {{item.numberOfComments}}</li>
                         </ul>
                         <h3><a href="#" ui-sref="forum({ id: item.id })">{{item.name}}</a></h3>
                         <p>{{item.shortDescription}}</p>

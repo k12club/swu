@@ -1033,7 +1033,10 @@ var Swu;
                 .state("board", {
                 url: "/board/:type",
                 views: {
-                    '': { templateUrl: '/Scripts/app/board/view/board.html' },
+                    '': {
+                        templateUrl: '/Scripts/app/board/view/board.html',
+                        controller: 'WebBoardController as vm'
+                    },
                     'subContent@board': {
                         templateUrl: '/Scripts/app/board/view/default.html'
                     }
@@ -2084,7 +2087,6 @@ var Swu;
                 });
             };
             this.$scope.addNew = function () {
-                console.log($scope.id);
                 var options = {
                     templateUrl: '/Scripts/app/course/view/curriculum.tmpl.html',
                     controller: Swu.CurriculumModalController,
@@ -2595,29 +2597,16 @@ var Swu;
                 }
             };
             this.$scope.search = function () {
-                console.log('search');
                 switch (_this.$scope.type) {
                     case 1: {
                         _this.$scope.categoryName = "Forums";
                         _this.webboardService.getForumsCategory().then(function (response) {
                             _this.$scope.categorys = response;
+                            console.log(_.first(_this.$scope.categorys).id);
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
-                            _this.webboardService.getForumsItems(_this.$scope.criteria).then(function (response) {
-                                _this.$scope.items = response;
-                                _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
-                                _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
-                                    return item.type == Swu.BoardType.forums;
-                                });
-                                _.map(_this.$scope.categorys, function (c) {
-                                    var number = _.filter($scope.items, function (item) {
-                                        return item.type == Swu.BoardType.forums && item.categoryId == c.id;
-                                    }).length;
-                                    c.numberofItems = number;
-                                });
-                                _this.$scope.changePage(_this.$scope.currentPage);
-                            }, function (error) { });
+                            $state.go('board.forum', { 'id': _.first($scope.categorys).id });
                         }, function (error) { });
                         break;
                     }
@@ -2628,20 +2617,7 @@ var Swu;
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.course({id:" + c.id + "})";
                             });
-                            _this.webboardService.getCourseItems(_this.$scope.criteria).then(function (response) {
-                                _this.$scope.items = response;
-                                _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
-                                _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
-                                    return item.type == Swu.BoardType.course;
-                                });
-                                _.map(_this.$scope.categorys, function (c) {
-                                    var number = _.filter($scope.items, function (item) {
-                                        return item.type == Swu.BoardType.course && item.categoryId == c.id;
-                                    }).length;
-                                    c.numberofItems = number;
-                                });
-                                _this.$scope.changePage(_this.$scope.currentPage);
-                            }, function (error) { });
+                            $state.go('board.course', { 'id': _.first($scope.categorys).id });
                         }, function (error) { });
                         break;
                     }
@@ -2652,20 +2628,7 @@ var Swu;
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.research({id:" + c.id + "})";
                             });
-                            _this.webboardService.getResearchItems(_this.$scope.criteria).then(function (response) {
-                                _this.$scope.items = response;
-                                _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
-                                _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
-                                    return item.type == Swu.BoardType.research;
-                                });
-                                _.map(_this.$scope.categorys, function (c) {
-                                    var number = _.filter($scope.items, function (item) {
-                                        return item.type == Swu.BoardType.research && item.categoryId == c.id;
-                                    }).length;
-                                    c.numberofItems = number;
-                                });
-                                _this.$scope.changePage(_this.$scope.currentPage);
-                            }, function (error) { });
+                            $state.go('board.research', { 'id': _.first($scope.categorys).id });
                         }, function (error) { });
                         break;
                     }
@@ -2698,7 +2661,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var GeneralBoardController = (function () {
-        function GeneralBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce) {
+        function GeneralBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce, $uibModal, auth) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
@@ -2706,6 +2669,8 @@ var Swu;
             this.webboardService = webboardService;
             this.$stateParams = $stateParams;
             this.$sce = $sce;
+            this.$uibModal = $uibModal;
+            this.auth = auth;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getTotalPageNumber = function () {
                 return Math.ceil((_this.$scope.displayItems.length) / _this.$scope.pageSize);
@@ -2730,6 +2695,33 @@ var Swu;
                     _this.$scope.changePage(prevPage);
                 }
             };
+            this.$scope.getCurrentUser = function () {
+                if (_this.$scope.currentUser == null) {
+                    _this.$scope.currentUser = _this.auth.getCurrentUser();
+                }
+                return _this.$scope.currentUser;
+            };
+            this.$scope.addNewPost = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/board/view/forum.tmpl.html',
+                    controller: Swu.ForumModalController,
+                    resolve: {
+                        categoryId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.getCurrentUser().id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    },
+                    size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.search();
+                });
+            };
             this.$scope.search = function () {
                 _this.webboardService.getForumsItems(_this.$scope.criteria).then(function (response) {
                     _this.$scope.items = response;
@@ -2742,13 +2734,16 @@ var Swu;
             this.init();
         }
         GeneralBoardController.prototype.init = function () {
-            console.log('GeneralBoardController init');
             this.$scope.items = [];
             this.$scope.displayItems = [];
+            this.$scope.currentUser = this.$scope.getCurrentUser();
+            if (this.$scope.currentUser != null) {
+                this.$scope.canPost = true;
+            }
             this.$scope.search();
         };
         ;
-        GeneralBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
+        GeneralBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce", "$uibModal", "AuthServices"];
         GeneralBoardController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "GeneralBoardController" })
@@ -2881,6 +2876,68 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var ForumModalController = (function () {
+        function ForumModalController($scope, $state, webboardService, toastr, $modalInstance, profileService, auth, categoryId, userId, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.webboardService = webboardService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.profileService = profileService;
+            this.auth = auth;
+            this.categoryId = categoryId;
+            this.userId = userId;
+            this.mode = mode;
+            this.$scope.mode = mode;
+            this.$scope.categoryId = categoryId;
+            this.$scope.userId = userId;
+            this.$scope.edit = function (id) {
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.$scope.isValid()) {
+                    _this.$scope.forum.categoryId = _this.$scope.categoryId;
+                    _this.$scope.forum.userId = _this.$scope.userId;
+                    _this.webboardService.createNewPost(_this.$scope.forum).then(function (response) {
+                        _this.$modalInstance.close(response);
+                    }, function (error) { });
+                }
+            };
+            $scope.delete = function () {
+            };
+            this.init();
+        }
+        ForumModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Post";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Post";
+                this.$scope.mode = Swu.actionMode.edit;
+            }
+        };
+        ;
+        ForumModalController.$inject = ["$scope", "$state", "webboardService", "toastr", "$modalInstance", "profileService", "AuthServices", "categoryId", "userId", "mode"];
+        ForumModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ForumModalController" })
+        ], ForumModalController);
+        return ForumModalController;
+    }());
+    Swu.ForumModalController = ForumModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var webboardService = (function () {
         function webboardService(apiService, constant) {
             this.apiService = apiService;
@@ -2906,6 +2963,9 @@ var Swu;
         webboardService.prototype.getResearchItems = function (criteria) {
             var keyword = (criteria.name == "") ? "*" : criteria.name;
             return this.apiService.getData("research/allItems?keyword=" + keyword);
+        };
+        webboardService.prototype.createNewPost = function (forum) {
+            return this.apiService.postData(forum, "forum/createNewPost");
         };
         webboardService.$inject = ['apiService', 'AppConstant'];
         webboardService = __decorate([
