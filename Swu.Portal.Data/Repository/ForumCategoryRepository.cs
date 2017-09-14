@@ -19,8 +19,11 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.ForumCategory
-                    .AsEnumerable();
+                List<ForumCategory> data = new List<ForumCategory>();
+                using (var context = new SwuDBContext()) {
+                    data = context.ForumCategory.ToList();
+                }
+                return data;
             }
         }
         public void Add(ForumCategory entity)

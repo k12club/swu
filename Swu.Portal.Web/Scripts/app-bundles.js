@@ -2675,6 +2675,7 @@ var Swu;
         }
         ;
         WebBoardController.prototype.init = function () {
+            console.log('WebBoardController init');
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
             this.$scope.criteria = {
@@ -2741,6 +2742,7 @@ var Swu;
             this.init();
         }
         GeneralBoardController.prototype.init = function () {
+            console.log('GeneralBoardController init');
             this.$scope.items = [];
             this.$scope.displayItems = [];
             this.$scope.search();
@@ -3644,6 +3646,7 @@ var Swu;
             this.init();
         }
         ForumController.prototype.init = function () {
+            this.$scope.comment = "";
             this.$scope.canPost = this.auth.isLoggedIn();
             this.$scope.getForumAndComments(this.$scope.id);
         };

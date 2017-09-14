@@ -44,21 +44,29 @@ namespace Swu.Portal.Web.Api.V1
         [HttpGet, Route("allItems")]
         public List<WebboardItemProxy> GetAllItems(string keyword)
         {
-            var webboardItems = new List<WebboardItemProxy>();
-            var forums = new List<Forum>();
-            if (keyword.Equals("*"))
+            try
             {
-                forums = this._forumRepository.List.ToList();
+                var webboardItems = new List<WebboardItemProxy>();
+                var forums = new List<Forum>();
+                if (keyword.Equals("*"))
+                {
+                    forums = this._forumRepository.List.ToList();
+                }
+                else
+                {
+                    forums = this._forumRepository.List.Where(i => i.Name.ToLower().Contains(keyword.ToLower())).ToList();
+                }
+                foreach (var f in forums)
+                {
+                    webboardItems.Add(new WebboardItemProxy(f, this._configurationRepository.DefaultUserImage));
+                }
+                return webboardItems;
             }
-            else
+            catch (Exception ex)
             {
-                forums = this._forumRepository.List.Where(i => i.Name.ToLower().Contains(keyword.ToLower())).ToList();
+
             }
-            foreach (var f in forums)
-            {
-                webboardItems.Add(new WebboardItemProxy(f, this._configurationRepository.DefaultUserImage));
-            }
-            return webboardItems;
+            return null;
         }
         [HttpGet, Route("category")]
         public List<WebboardCategoryProxy> GetCategory()

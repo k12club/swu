@@ -35,6 +35,7 @@
             this.init();
         }
         init(): void {
+            this.$scope.comment = "";
             this.$scope.canPost = this.auth.isLoggedIn();
             this.$scope.getForumAndComments(this.$scope.id);
         };
