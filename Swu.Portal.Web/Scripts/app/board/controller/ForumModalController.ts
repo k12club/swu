@@ -1,5 +1,6 @@
 ﻿module Swu {
     interface ForumModalScope extends ng.IScope {
+        id: string;
         categoryId: number;
         userId: string;
 
@@ -20,13 +21,16 @@
     @Module("app")
     @Controller({ name: "ForumModalController" })
     export class ForumModalController {
-        static $inject: Array<string> = ["$scope", "$state", "webboardService", "toastr", "$modalInstance", "profileService", "AuthServices","categoryId","userId", "mode"];
-        constructor(private $scope: ForumModalScope, private $state: ng.ui.IStateService, private webboardService: IwebboardService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private profileService: IprofileService, private auth: IAuthServices, private categoryId:number,private userId:string, private mode: number) {
+        static $inject: Array<string> = ["$scope", "$state", "webboardService", "toastr", "$modalInstance", "profileService", "AuthServices", "id", "categoryId", "userId", "mode"];
+        constructor(private $scope: ForumModalScope, private $state: ng.ui.IStateService, private webboardService: IwebboardService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private profileService: IprofileService, private auth: IAuthServices, private id: string, private categoryId: number, private userId: string, private mode: number) {
+            this.$scope.id = id;
             this.$scope.mode = mode;
             this.$scope.categoryId = categoryId;
             this.$scope.userId = userId;
             this.$scope.edit = (id: string): void => {
-
+                this.webboardService.getPostById(id).then((response) => {
+                    this.$scope.forum = response;
+                }, (error) => { });
             }
             this.$scope.validate = (): void => {
                 $('form').validator();
@@ -41,14 +45,7 @@
                 if (this.$scope.isValid()) {
                     this.$scope.forum.categoryId = this.$scope.categoryId;
                     this.$scope.forum.userId = this.$scope.userId;
-                    //var models: NamePairValue[] = [];
-                    //models.push({ name: "name", value: this.$scope.name });
-                    //models.push({ name: "shortDescription", value: this.$scope.shortDescription });
-                    //models.push({ name: "fullDescription", value: this.$scope.fullDescription });
-                    //models.push({ name: "categoryId", value: this.$scope.categoryId });
-                    //models.push({ name: "userId", value: this.$scope.userId });
-                    //console.log(models);
-                    this.webboardService.createNewPost(this.$scope.forum).then((response) => {
+                    this.webboardService.addOrUpdatePost(this.$scope.forum).then((response) => {
                         this.$modalInstance.close(response);
                     }, (error) => { });
                 }
@@ -66,7 +63,7 @@
             } else if (this.$scope.mode == 2) {
                 this.$scope.title = "Edit Post";
                 this.$scope.mode = actionMode.edit;
-                //this.$scope.edit(this.$scope.id);
+                this.$scope.edit(this.$scope.id);
             }
 
         };

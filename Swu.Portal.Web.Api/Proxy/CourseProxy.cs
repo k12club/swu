@@ -48,6 +48,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public DateTime? CreatedDate { get; set; }
         [JsonProperty(PropertyName = "updateDate")]
         public DateTime UpdateDate { get; set; }
+
     }
     public class CourseDetailProxy : CourseProxy
     {

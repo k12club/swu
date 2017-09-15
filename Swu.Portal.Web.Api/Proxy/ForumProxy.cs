@@ -25,7 +25,12 @@ namespace Swu.Portal.Web.Api.Proxy
         public int NumberOfViews { get; set; }
         [JsonProperty(PropertyName = "createdDate")]
         public DateTime? CreatedDate { get; set; }
+        [JsonProperty(PropertyName = "createdUserId")]
+        public String CreatedUserId { get; set; }
         [JsonProperty(PropertyName = "creatorName")]
         public String CreatorName { get; set; }
+        [JsonProperty(PropertyName = "creatorImageUrl")]
+        public string CreatorImageUrl { get; set; }
+
     }
 }

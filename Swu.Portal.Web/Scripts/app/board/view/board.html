@@ -1,4 +1,4 @@
-﻿    <!-- Breadcrumbs Styles -->
+﻿<!-- Breadcrumbs Styles -->
 <section class="irs-ip-breadcrumbs">
     <div class="container">
         <div class="row">
@@ -38,7 +38,10 @@
                     <ul class="list-unstyled irs-sbc-list">
                         <!--<li><a href="" ui-sref="board({type:type})">All</a></li>-->
                         <li ng-repeat="c in categorys"><a href="" ui-sref="{{c.link}}"><span class="flaticon-arrows-3"></span>{{c.title}}</a></li>
+                        <li class="divider"></li>
+                        <li><a><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> New Category</a></li>
                     </ul>
+
                 </div>
             </div>
         </div>

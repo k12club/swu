@@ -99,8 +99,10 @@ namespace Swu.Portal.Web.Api.V1
                     ImageUrl = forum.ImageUrl,
                     NumberOfViews = comments.Count(),
                     Price = forum.Price,
+                    CreatedUserId = forum.ApplicationUser.Id,
                     CreatorName = forum.ApplicationUser.FirstName_EN + " " + forum.ApplicationUser.LastName_EN,
-                    CreatedDate = forum.CreatedDate
+                    CreatedDate = forum.CreatedDate,
+                    CreatorImageUrl = forum.ApplicationUser.ImageUrl
                 },
                 Comments = comments
             };
@@ -151,59 +153,62 @@ namespace Swu.Portal.Web.Api.V1
             }
 
         }
-        [HttpPost, Route("createNewPost")]
-        public void CreateNewPost(WebboardItemProxy forum)
+        [HttpPost, Route("updateComment")]
+        public HttpResponseMessage UpdateComment(CommentProxy comment)
         {
-            this._forumService.CreateNewPost(new Forum
+            try
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = forum.Name,
-                ShortDescription = forum.ShortDescription,
-                FullDescription = forum.FullDescription,
-                CategoryId = forum.CategoryId,
-                CreatedDate = this._datetimeRepository.Now()
-            }, forum.UserId);
+                var c = this._commentRepository.FindById(comment.Id);
+                c.Description = comment.Description;
+                c.UpdatedDate = this._datetimeRepository.Now();
+                this._commentRepository.Update(c);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
-        //public async Task<HttpResponseMessage> CreateNewPost()
-        //{
-        //    try
-        //    {
-        //        if (!Request.Content.IsMimeMultipartContent())
-        //        {
-        //            throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-        //        }
-        //        string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_DIR);
-        //        var provider = new MultipartFormDataStreamProvider(root);
-        //        var postMessage = string.Empty;
-        //        var categoryId = string.Empty;
-        //        var userId = string.Empty;
-        //        await Request.Content.ReadAsMultipartAsync(provider);
-        //        CourseDetailProxy course = new CourseDetailProxy();
-        //        foreach (var key in provider.FormData)
-        //        {
-        //            if (key.Equals("postMessage"))
-        //            {
-        //                postMessage = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
-        //            }
-        //            if (key.Equals("categoryId"))
-        //            {
-        //                categoryId = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
-        //            }
-        //            if (key.Equals("userId"))
-        //            {
-        //                userId = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
-        //            }
-        //        }
-        //        this._forumService.CreateNewPost(new Forum {
+        [HttpPost, Route("addOrUpdatePost")]
+        public void AddOrUpdatePost(WebboardItemProxy forum)
+        {
+            if (string.IsNullOrWhiteSpace(forum.Id))
+            {
+                this._forumService.CreateNewPost(new Forum
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = forum.Name,
+                    ShortDescription = forum.ShortDescription,
+                    FullDescription = forum.FullDescription,
+                    CategoryId = forum.CategoryId,
+                    CreatedDate = this._datetimeRepository.Now()
+                }, forum.UserId);
+            }
+            else
+            {
+                this._forumService.UpdatePost(new Forum
+                {
+                    Id = forum.Id,
+                    Name = forum.Name,
+                    ShortDescription = forum.ShortDescription,
+                    FullDescription = forum.FullDescription,
+                    CategoryId = forum.CategoryId,
+                    UpdatedDate = this._datetimeRepository.Now()
+                }, forum.UserId);
+            }
 
-        //        }, userId);
-        //        return Request.CreateResponse(HttpStatusCode.OK);
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
-        //    }
-
-        //}
+        }
+        [HttpGet, Route("getPostById")]
+        public WebboardItemProxy GetPostById(string id)
+        {
+            var forum = this._forumRepository.FindById(id);
+            return new WebboardItemProxy(forum, this._configurationRepository.DefaultUserImage);
+        }
+        [HttpGet, Route("getCommentById")]
+        public CommentProxy GetCommentById(int id)
+        {
+            var comment = this._commentRepository.FindById(id);
+            return new CommentProxy(comment);
+        }
     }
 }

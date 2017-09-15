@@ -33,15 +33,16 @@
                 <div class="col-sm-12 col-md-8 col-lg-12 clearfix">
                     <div class="clearfix">
                         <div class="irs-blog-post-ip">
-                            <div class="irs-blog-post-title">
-                                <h3>{{forumAndComments.forum.name}}</h3>
-                            </div>
                             <div class="irs-blog-post-meta style2">
                                 <ul class="list-inline">
+                                    <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{forumAndComments.forum.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
                                     <li><a href="#">on<span class="text-thm2"> {{forumAndComments.forum.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span></a></li>
                                     <li><a href="#">by<span class="text-thm2"> {{forumAndComments.forum.creatorName}}</span></a></li>
                                     <li><a class="irs-colrdaek" href="#"><span class="flaticon-interface"> </span>{{forumAndComments.forum.numberOfViews}}</a></li>
                                 </ul>
+                            </div>
+                            <div class="irs-blog-post-title">
+                                <h3>{{forumAndComments.forum.name}}</h3>
                             </div>
                             <!--<div class="irs-blog-post-thumb">
                                 <img class="img-responsive img-fluid" ng-src="../../../../{{forumAndComments.forum.imageUrl}}" alt="blog-post-ip1.jpg">
@@ -65,25 +66,21 @@
                             <p class="irs-mrgntop-ffty irs-all-course-bb"></p>
                             <br />
                             <div ng-repeat="c in forumAndComments.comments">
-                                <div class="irs-blog-post-author">
+                                <div class="col-lg-12" style="border-bottom:solid 1px #eee;margin-bottom:40px;padding-bottom:40px">
                                     <div class="row">
-                                        <div class="col-md-1">
-                                            <div class="irs-bp-author">
-                                                <img ng-src="../../../../{{c.createImageUrl}}" class="img-circle" style="width:50px;height:50px" alt="blog-post-author.jpg">
-                                            </div>
+                                        <div class="col-lg-11">
+                                            <ul class="list-inline irs-cl-teacher-info">
+                                                <li class="irs-cl-thumb"><img ng-src="../../../../{{c.createImageUrl}}" class="img-circle" style="width:50px;height:50px" alt="blog-post-author.jpg"></li>
+                                                <li class="irs-name-tdsd style2">on <span class="text-thm2 ng-binding"> {{c.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span> by <span class="text-thm2 ng-binding">{{c.creatorName}}</span></li>
+                                            </ul>
                                         </div>
-                                        <div class="col-md-11">
-                                            <div class="irs-courses-td-sngle-dtls">
-                                                <ul class="list-unstyled">
-                                                    <li class="irs-name-tdsd style2">on <span class="text-thm2 ng-binding"> {{c.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span> by <span class="text-thm2 ng-binding">{{c.creatorName}}</span></li>
-                                                </ul>
-                                                <p>{{c.description}}</p>
-                                            </div>
-                                        </div>
+                                        <div class="col-lg-1" ng-show="canEdit(c.createdUserId)" ng-click="editComment(c.id)"><span class="flaticon-pen"></span></div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <h3><a href="#" ui-sref="forum({ id: item.id })">{{item.name}}</a></h3>
+                                        <p ng-bind-html="c.description"></p>
                                     </div>
                                 </div>
-                                <p class="irs-mrgntop-ffty irs-all-course-bb"></p>
-                                <br />
                             </div>
                         </div>
                     </div>

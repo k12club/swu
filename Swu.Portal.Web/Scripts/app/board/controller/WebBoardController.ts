@@ -71,7 +71,6 @@
                         this.$scope.categoryName = "Forums";
                         this.webboardService.getForumsCategory().then((response) => {
                             this.$scope.categorys = response;
-                            console.log(_.first(this.$scope.categorys).id);
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
@@ -148,7 +147,6 @@
             this.init();
         };
         init(): void {
-            console.log('WebBoardController init');
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
             this.$scope.criteria = {

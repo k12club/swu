@@ -10,7 +10,8 @@
         getResearchItems(criteria: SearchCritirea): ng.IPromise<Webboarditems[]>;
 
         //createNewPost(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
-        createNewPost(forum: Webboarditems): ng.IPromise<HttpStatusCode>;
+        addOrUpdatePost(forum: Webboarditems): ng.IPromise<HttpStatusCode>;
+        getPostById(id: string): ng.IPromise<Webboarditems>;
     }
     @Module("app")
     @Factory({ name: "webboardService" })
@@ -43,8 +44,11 @@
         //createNewPost(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
         //    return this.apiService.postWithFormData(models, "forum/createNewPost");
         //}
-        createNewPost(forum: Webboarditems): ng.IPromise<HttpStatusCode> {
-            return this.apiService.postData(forum, "forum/createNewPost");
+        addOrUpdatePost(forum: Webboarditems): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData(forum, "forum/addOrUpdatePost");
+        }
+        getPostById(id: string): ng.IPromise<Webboarditems> {
+            return this.apiService.getData("forum/getPostById?id=" + id);
         }
     }
 }

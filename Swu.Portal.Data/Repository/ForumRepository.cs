@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
-    public class ForumRepository :IRepository2<Forum>
+    public class ForumRepository : IRepository2<Forum>
     {
         private SwuDBContext context;
         public ForumRepository()
@@ -20,10 +20,15 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.Forums
-                    .Include(i=>i.ApplicationUser)
-                    .Include(i=>i.Comments)
-                    .AsEnumerable();
+                List<Forum> data = new List<Forum>();
+                using (var context = new SwuDBContext())
+                {
+                    data = context.Forums
+                        .Include(i => i.ApplicationUser)
+                        .Include(i => i.Comments)
+                        .ToList();
+                }
+                return data;
             }
         }
         public void Add(Forum entity)
@@ -44,11 +49,15 @@ namespace Swu.Portal.Data.Repository
         }
         public Forum FindById(string Id)
         {
-            var result = this.context.Forums
-                .Include(i => i.ApplicationUser)
-                .Include(i => i.Comments)
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            Forum forum = new Forum();
+            using (var context = new SwuDBContext())
+            {
+                forum = context.Forums.Where(i => i.Id == Id)
+                    .Include(i => i.ApplicationUser)
+                    .Include(i => i.Comments)
+                    .FirstOrDefault();
+            }
+            return forum;
         }
     }
 }

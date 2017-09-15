@@ -87,6 +87,7 @@
 
 
     "Scripts/app/forum/controller/ForumController.ts",
+    "Scripts/app/forum/controller/CommentModalController.ts",
     "Scripts/app/forum/service/forumService.ts",
 
     "Scripts/model/userprofile.ts",

@@ -2,6 +2,8 @@
     export interface IforumService {
         getForumDetail(id: string): ng.IPromise<ForumAndComments>;
         postComment(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
+        getCommentById(id: number): ng.IPromise<Comment>;
+        updateComment(comment: Comment): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "forumService" })
@@ -15,6 +17,12 @@
         }
         postComment(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
             return this.apiService.postWithFormData(models, "forum/postComment");
+        }
+        getCommentById(id: number): ng.IPromise<Comment> {
+            return this.apiService.getData("forum/getCommentById?id=" + id);
+        }
+        updateComment(comment: Comment): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData(comment, "forum/updateComment");
         }
     }
 }

@@ -19,5 +19,6 @@
         createdUserId?: string;
         createdDate: Date;
         updateDate: Date;
+        createdBy: string;
     }
 }

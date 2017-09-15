@@ -5,6 +5,7 @@
         displayItems: Webboarditems[];
         currentUser: IUserProfile;
         canPost: boolean;
+        canEdit(creatorId: string): boolean;
 
         getCurrentUser(): IUserProfile;
         search(): void;
@@ -14,6 +15,7 @@
         criteria: SearchCritirea;
         getTotalPageNumber(): number;
         addNewPost(): void;
+        editPost(id: string): void;
     }
     @Module("app")
     @Controller({ name: "GeneralBoardController" })
@@ -57,6 +59,9 @@
                     templateUrl: '/Scripts/app/board/view/forum.tmpl.html',
                     controller: ForumModalController,
                     resolve: {
+                        id: function () {
+                            return "";
+                        },
                         categoryId: function () {
                             return $scope.id;
                         },
@@ -73,6 +78,30 @@
                     this.$scope.search();
                 });
             };
+            this.$scope.editPost = (id: string): void => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/board/view/forum.tmpl.html',
+                    controller: ForumModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        categoryId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.getCurrentUser().id;
+                        },
+                        mode: function () {
+                            return actionMode.edit;
+                        }
+                    },
+                    size: "lg"
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.search();
+                });
+            };
             this.$scope.search = () => {
                 this.webboardService.getForumsItems(this.$scope.criteria).then((response) => {
                     this.$scope.items = response;
@@ -81,6 +110,13 @@
                     });
                     this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
                 }, (error) => { });
+            };
+            this.$scope.canEdit = (creatorId: string): boolean => {
+                var _canEdit = false;
+                if (this.$scope.currentUser != null) {
+                    _canEdit = this.$scope.currentUser.id == creatorId;
+                }
+                return _canEdit;
             };
             this.init();
         }

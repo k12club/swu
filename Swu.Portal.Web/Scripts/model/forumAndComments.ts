@@ -8,11 +8,13 @@
         numberOfViews: number;
         price: number;
         createdDate: Date;
+        createdUserId: string;
         creatorName: string;
     }
     export interface Comment {
         id: number;
         description: string;
+        createdUserId: string;
         creatorName: string;
         createImageUrl: string;
     }

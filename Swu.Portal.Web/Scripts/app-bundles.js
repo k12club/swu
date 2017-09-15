@@ -2706,6 +2706,9 @@ var Swu;
                     templateUrl: '/Scripts/app/board/view/forum.tmpl.html',
                     controller: Swu.ForumModalController,
                     resolve: {
+                        id: function () {
+                            return "";
+                        },
                         categoryId: function () {
                             return $scope.id;
                         },
@@ -2722,6 +2725,30 @@ var Swu;
                     _this.$scope.search();
                 });
             };
+            this.$scope.editPost = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/board/view/forum.tmpl.html',
+                    controller: Swu.ForumModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        categoryId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.getCurrentUser().id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    },
+                    size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.search();
+                });
+            };
             this.$scope.search = function () {
                 _this.webboardService.getForumsItems(_this.$scope.criteria).then(function (response) {
                     _this.$scope.items = response;
@@ -2730,6 +2757,13 @@ var Swu;
                     });
                     _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
                 }, function (error) { });
+            };
+            this.$scope.canEdit = function (creatorId) {
+                var _canEdit = false;
+                if (_this.$scope.currentUser != null) {
+                    _canEdit = _this.$scope.currentUser.id == creatorId;
+                }
+                return _canEdit;
             };
             this.init();
         }
@@ -2877,7 +2911,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ForumModalController = (function () {
-        function ForumModalController($scope, $state, webboardService, toastr, $modalInstance, profileService, auth, categoryId, userId, mode) {
+        function ForumModalController($scope, $state, webboardService, toastr, $modalInstance, profileService, auth, id, categoryId, userId, mode) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -2886,13 +2920,18 @@ var Swu;
             this.$modalInstance = $modalInstance;
             this.profileService = profileService;
             this.auth = auth;
+            this.id = id;
             this.categoryId = categoryId;
             this.userId = userId;
             this.mode = mode;
+            this.$scope.id = id;
             this.$scope.mode = mode;
             this.$scope.categoryId = categoryId;
             this.$scope.userId = userId;
             this.$scope.edit = function (id) {
+                _this.webboardService.getPostById(id).then(function (response) {
+                    _this.$scope.forum = response;
+                }, function (error) { });
             };
             this.$scope.validate = function () {
                 $('form').validator();
@@ -2907,7 +2946,7 @@ var Swu;
                 if (_this.$scope.isValid()) {
                     _this.$scope.forum.categoryId = _this.$scope.categoryId;
                     _this.$scope.forum.userId = _this.$scope.userId;
-                    _this.webboardService.createNewPost(_this.$scope.forum).then(function (response) {
+                    _this.webboardService.addOrUpdatePost(_this.$scope.forum).then(function (response) {
                         _this.$modalInstance.close(response);
                     }, function (error) { });
                 }
@@ -2924,10 +2963,11 @@ var Swu;
             else if (this.$scope.mode == 2) {
                 this.$scope.title = "Edit Post";
                 this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
             }
         };
         ;
-        ForumModalController.$inject = ["$scope", "$state", "webboardService", "toastr", "$modalInstance", "profileService", "AuthServices", "categoryId", "userId", "mode"];
+        ForumModalController.$inject = ["$scope", "$state", "webboardService", "toastr", "$modalInstance", "profileService", "AuthServices", "id", "categoryId", "userId", "mode"];
         ForumModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ForumModalController" })
@@ -2964,8 +3004,11 @@ var Swu;
             var keyword = (criteria.name == "") ? "*" : criteria.name;
             return this.apiService.getData("research/allItems?keyword=" + keyword);
         };
-        webboardService.prototype.createNewPost = function (forum) {
-            return this.apiService.postData(forum, "forum/createNewPost");
+        webboardService.prototype.addOrUpdatePost = function (forum) {
+            return this.apiService.postData(forum, "forum/addOrUpdatePost");
+        };
+        webboardService.prototype.getPostById = function (id) {
+            return this.apiService.getData("forum/getPostById?id=" + id);
         };
         webboardService.$inject = ['apiService', 'AppConstant'];
         webboardService = __decorate([
@@ -3674,7 +3717,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ForumController = (function () {
-        function ForumController($scope, $rootScope, $state, $stateParams, $sce, forumService, auth, toastr) {
+        function ForumController($scope, $rootScope, $state, $stateParams, $sce, forumService, auth, toastr, $uibModal) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
@@ -3684,10 +3727,14 @@ var Swu;
             this.forumService = forumService;
             this.auth = auth;
             this.toastr = toastr;
+            this.$uibModal = $uibModal;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getForumAndComments = function (id) {
                 _this.forumService.getForumDetail(id).then(function (response) {
                     _this.$scope.forumAndComments = response;
+                    _.map(_this.$scope.forumAndComments.comments, function (c) {
+                        c.description = _this.$sce.trustAsHtml(c.description);
+                    });
                 }, function (error) { });
             };
             this.$scope.save = function () {
@@ -3703,15 +3750,47 @@ var Swu;
                     _this.toastr.error("Error");
                 });
             };
+            this.$scope.getCurrentUser = function () {
+                if (_this.$scope.currentUser == null) {
+                    _this.$scope.currentUser = _this.auth.getCurrentUser();
+                }
+                return _this.$scope.currentUser;
+            };
+            this.$scope.canEdit = function (creatorId) {
+                var _canEdit = false;
+                if (_this.$scope.currentUser != null) {
+                    _canEdit = _this.$scope.currentUser.id == creatorId;
+                }
+                return _canEdit;
+            };
+            this.$scope.editComment = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/forum/view/comment.tmpl.html',
+                    controller: Swu.CommentModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    },
+                    size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getForumAndComments(_this.$scope.id);
+                });
+            };
             this.init();
         }
         ForumController.prototype.init = function () {
             this.$scope.comment = "";
+            this.$scope.currentUser = this.$scope.getCurrentUser();
             this.$scope.canPost = this.auth.isLoggedIn();
             this.$scope.getForumAndComments(this.$scope.id);
         };
         ;
-        ForumController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "$sce", "forumService", "AuthServices", "toastr"];
+        ForumController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "$sce", "forumService", "AuthServices", "toastr", "$uibModal"];
         ForumController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ForumController" })
@@ -3719,6 +3798,68 @@ var Swu;
         return ForumController;
     }());
     Swu.ForumController = ForumController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CommentModalController = (function () {
+        function CommentModalController($scope, $state, forumService, toastr, $modalInstance, profileService, auth, id, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.forumService = forumService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.profileService = profileService;
+            this.auth = auth;
+            this.id = id;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                _this.forumService.getCommentById(id).then(function (response) {
+                    _this.$scope.comment = response;
+                }, function (error) { });
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.$scope.isValid()) {
+                    _this.forumService.updateComment(_this.$scope.comment).then(function (response) {
+                        _this.$modalInstance.close(response);
+                    }, function (error) { });
+                }
+            };
+            $scope.delete = function () {
+            };
+            this.init();
+        }
+        CommentModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Comment";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Comment";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        CommentModalController.$inject = ["$scope", "$state", "forumService", "toastr", "$modalInstance", "profileService", "AuthServices", "id", "mode"];
+        CommentModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CommentModalController" })
+        ], CommentModalController);
+        return CommentModalController;
+    }());
+    Swu.CommentModalController = CommentModalController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -3732,6 +3873,12 @@ var Swu;
         };
         forumService.prototype.postComment = function (models) {
             return this.apiService.postWithFormData(models, "forum/postComment");
+        };
+        forumService.prototype.getCommentById = function (id) {
+            return this.apiService.getData("forum/getCommentById?id=" + id);
+        };
+        forumService.prototype.updateComment = function (comment) {
+            return this.apiService.postData(comment, "forum/updateComment");
         };
         forumService.$inject = ['apiService', 'AppConstant'];
         forumService = __decorate([
