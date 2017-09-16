@@ -847,6 +847,7 @@
     <TypeScriptCompile Include="Scripts\app\home\service\newsService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
+    <TypeScriptCompile Include="Scripts\app\menu\controller\NavController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\MainSettingController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\ProfileModalController.ts" />

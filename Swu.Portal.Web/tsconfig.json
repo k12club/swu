@@ -29,6 +29,7 @@
     "Scripts/app/board/app_routing.ts",
     "Scripts/app/forum/app_routing.ts",
 
+    "Scripts/app/menu/controller/NavController.ts",
     "Scripts/app/home/controller/HomeController.ts",
     "Scripts/app/home/controller/HomeCourseController.ts",
     "Scripts/app/home/controller/MainSliderController.ts",

@@ -1106,6 +1106,36 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var NavController = (function () {
+        function NavController($scope, $state, auth) {
+            this.$scope = $scope;
+            this.$state = $state;
+            this.auth = auth;
+            this.$scope.goToPage = function (stateName, type) {
+                console.log(type);
+                if (stateName == "board") {
+                    $state.go("board", { "type": type }, { reload: true });
+                }
+                else {
+                    $state.go(stateName, { reload: true });
+                }
+            };
+            this.init();
+        }
+        NavController.prototype.init = function () {
+        };
+        ;
+        NavController.$inject = ["$scope", "$state", "AuthServices"];
+        NavController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "NavController" })
+        ], NavController);
+        return NavController;
+    }());
+    Swu.NavController = NavController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var HomeController = (function () {
         function HomeController($scope, $state, auth) {
             this.$scope = $scope;
@@ -2602,7 +2632,6 @@ var Swu;
                         _this.$scope.categoryName = "Forums";
                         _this.webboardService.getForumsCategory().then(function (response) {
                             _this.$scope.categorys = response;
-                            console.log(_.first(_this.$scope.categorys).id);
                             _.map(_this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
@@ -2638,7 +2667,6 @@ var Swu;
         }
         ;
         WebBoardController.prototype.init = function () {
-            console.log('WebBoardController init');
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
             this.$scope.criteria = {
