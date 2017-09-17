@@ -65,6 +65,7 @@
     "Scripts/app/board/controller/CourseBoardController.ts",
     "Scripts/app/board/controller/ResearchBoardController.ts",
     "Scripts/app/board/controller/ForumModalController.ts",
+    "Scripts/app/board/controller/ResearchModalController.ts",
     "Scripts/app/board/service/webboardService.ts",
 
     "Scripts/app/teacher/TeacherController.ts",

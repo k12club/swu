@@ -10,6 +10,10 @@ namespace Swu.Portal.Data.Models
 {
     public class Research :IEntity
     {
+        public Research()
+        {
+            AttachFiles = new HashSet<AttachFile>();
+        }
         [Key]
         public string Id { get; set; }
         public string ImageUrl { get; set; }
@@ -20,8 +24,17 @@ namespace Swu.Portal.Data.Models
         public decimal Price { get; set; }
         public int NumberOfViews { get; set; }
 
+
+        public string CreatorName { get; set; }
+        public string Publisher { get; set; }
+        public string Contributor { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime PublishDate { get; set; }
+
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual ResearchCategory Category { get; set; }
+
+        public virtual ICollection<AttachFile> AttachFiles { get; set; }
     }
 }

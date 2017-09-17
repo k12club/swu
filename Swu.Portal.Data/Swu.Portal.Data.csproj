@@ -65,6 +65,7 @@
     <Compile Include="Context\SwuDBContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MigrationsContextFactory.cs" />
+    <Compile Include="Models\AttachFile.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Course.cs" />

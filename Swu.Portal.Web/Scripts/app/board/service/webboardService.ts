@@ -12,6 +12,8 @@
         //createNewPost(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
         addOrUpdatePost(forum: Webboarditems): ng.IPromise<HttpStatusCode>;
         getPostById(id: string): ng.IPromise<Webboarditems>;
+        getResearchById(id: string): ng.IPromise<Webboarditems>;
+        addOrUpdateResearch(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "webboardService" })
@@ -49,6 +51,13 @@
         }
         getPostById(id: string): ng.IPromise<Webboarditems> {
             return this.apiService.getData("forum/getPostById?id=" + id);
+        }
+        getResearchById(id: string): ng.IPromise<Webboarditems> {
+            return this.apiService.getData("research/getResearchById?id=" + id);
+        }
+        addOrUpdateResearch(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postWithFormData<HttpStatusCode>(models, "research/SaveAsync");
+
         }
     }
 }

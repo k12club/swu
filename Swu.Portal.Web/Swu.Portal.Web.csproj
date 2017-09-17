@@ -245,6 +245,7 @@
     <Content Include="Content\css\animations.css" />
     <Content Include="Content\css\blank.gif" />
     <Content Include="Content\css\bootsnav.css" />
+    <Content Include="Content\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\fancyBox.css" />
@@ -587,6 +588,7 @@
     <Content Include="Content\images\testimonial\7.png" />
     <Content Include="Content\js\angular-summernote.min.js" />
     <Content Include="Content\js\bootsnav.js" />
+    <Content Include="Content\js\bootstrap-datepicker.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\css3-animate-it.js" />
     <Content Include="Content\js\fancybox.js" />
@@ -621,6 +623,22 @@
     <Content Include="Content\MaterialIcons-Regular.ijmap.txt" />
     <Content Include="Content\MaterialIcons-Regular.svg" />
     <Content Include="favicon.ico" />
+    <Content Include="FileUpload\photo\b5f20fc6-f9ed-4fe9-bed4-2d4e86631426\74755c32-4328-4d20-911b-ab9f463e043f.jpg" />
+    <Content Include="FileUpload\photo\b5f20fc6-f9ed-4fe9-bed4-2d4e86631426\d7a6e2a2-a235-4d58-8878-20ca2f3c528b.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\1b8519c3-06d6-4a97-abd1-3c799849cadb.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\39f6a0a2-3982-4400-8df4-cb0d9f4c863b.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\409a498c-f1e3-4260-8ebc-9d1257778a34.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\41b27962-e007-4444-be56-9f1147983cdc.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\6e0f9cab-81d8-42bf-b27b-688531922d10.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\9bc0a90d-3dc7-4681-80cb-0d76fbcd5820.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\aaac74b9-b996-4d87-bb22-88726afb1bd0.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\ace52191-3271-43e4-b3c9-d6b7cb801d71.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\b15b4a9a-13f7-4f61-a473-e55beef1c9a5.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\bf063297-b694-491b-9f7e-a120a6ddbecb.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\bf3d6710-9268-41b0-a80a-150dbf639d8b.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\c9a0a2ee-3a28-450f-825d-fbaa7d9e5a65.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\d9547f37-215a-472f-8fcd-db22195b26d0.jpg" />
+    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\f924750b-9824-4269-b01f-f917db22ff2e.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -674,6 +692,7 @@
     <Content Include="Scripts\app\board\view\board-research.html" />
     <Content Include="Scripts\app\board\view\board.html" />
     <Content Include="Scripts\app\board\view\default.html" />
+    <Content Include="Scripts\app\board\view\research.tmpl.html" />
     <Content Include="Scripts\app\contact\contact.html" />
     <Content Include="Scripts\app\course\view\course_list.html" />
     <Content Include="Scripts\app\course\view\course_detail.html" />
@@ -745,6 +764,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="FileUpload\course\" />
+    <Folder Include="FileUpload\research\" />
     <Folder Include="FileUpload\users\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\forum\model\" />
@@ -801,6 +821,7 @@
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\board\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\board\controller\CourseBoardController.ts" />
+    <TypeScriptCompile Include="Scripts\app\board\controller\ResearchModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\board\controller\GeneralBoardController.ts" />
     <TypeScriptCompile Include="Scripts\app\board\controller\ResearchBoardController.ts">
       <SubType>Code</SubType>

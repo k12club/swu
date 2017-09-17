@@ -31,7 +31,7 @@ namespace Swu.Portal.Data.Context
         //public DbSet<ParentProfile> ParentProfile { get; set; }
         public DbSet<StudentScore> StudentScore { get; set; }
         public DbSet<StudentCourse> StudentCourse { get; set; }
-
+        public DbSet<AttachFile> AttachFiles { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;

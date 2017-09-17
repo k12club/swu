@@ -713,6 +713,10 @@ namespace Swu.Portal.Data.Migrations
                 Name_EN = "Yellow Head Virus - YHV",
                 ShortDescription = "การคัดเลือกพืชสมุนไพรที่แสดงฤทธิ์ต้านไวรัส (Yellow Head Virus - YHV) ในกุ้งกุลาดำ",
                 ImageUrl = "Content/images/courses/1.jpg",
+                CreatorName = "Nuchanart Srichan",
+                Publisher = "Kasetsart University. Office of the University Library Address: Bangkok",
+                Contributor = "Patnaree Srisuphaolarn",
+                PublishDate = new DateTime(2009, 8, 23),
                 ApplicationUser = defaultUser
             };
             researchs.Add(r1);

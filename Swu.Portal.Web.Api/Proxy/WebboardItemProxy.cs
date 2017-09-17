@@ -35,10 +35,17 @@ namespace Swu.Portal.Web.Api.Proxy
         [JsonProperty(PropertyName = "categoryId")]
         public int CategoryId { get; set; }
         [JsonProperty(PropertyName = "userId")]
-        public string UserId { get; set; }  
+        public string UserId { get; set; }
+
+        [JsonProperty(PropertyName = "moreDetail")]
+        public MoreDetailProxy MoreDetail { get; set; }
+
+        [JsonProperty(PropertyName = "attachFiles")]
+        public List<AttachFilesProxy> AttachFiles { get; set; }
         public WebboardItemProxy()
         {
-
+            AttachFiles = new List<AttachFilesProxy>();
+            MoreDetail = new MoreDetailProxy();
         }
         public WebboardItemProxy(Data.Models.Course c, string defaultImageUrl)
         {
@@ -46,11 +53,14 @@ namespace Swu.Portal.Web.Api.Proxy
             this.ImageUrl = c.ImageUrl;
             this.Name = c.Name_EN;
             this.ShortDescription = c.ShortDescription;
-            this.CreateBy = "demo user"; //c.ApplicationUser.FirstName_EN + " " + c.ApplicationUser.LastName_EN;
+            this.CreateBy = c.ApplicationUser.FirstName_EN + " " + c.ApplicationUser.LastName_EN;
             this.Type = WebboardType.course;
             this.CategoryId = c.CategoryId;
-            this.CreatorImageUrl = defaultImageUrl; // string.IsNullOrEmpty(c.ApplicationUser.ImageUrl) ? defaultImageUrl : c.ApplicationUser.ImageUrl;
+            this.CreatorImageUrl = string.IsNullOrEmpty(c.ApplicationUser.ImageUrl) ? defaultImageUrl : c.ApplicationUser.ImageUrl;
             this.NumberOfView = 0;
+            this.CreatedDate = c.CreatedDate;
+            AttachFiles = new List<AttachFilesProxy>();
+            MoreDetail = new MoreDetailProxy();
         }
         public WebboardItemProxy(Forum f, string defaultImageUrl)
         {
@@ -66,6 +76,8 @@ namespace Swu.Portal.Web.Api.Proxy
             this.NumberOfComments = f.Comments.Count();
             this.UserId = f.ApplicationUser.Id;
             this.CreatedDate = f.CreatedDate;
+            AttachFiles = new List<AttachFilesProxy>();
+            MoreDetail = new MoreDetailProxy();
         }
         public WebboardItemProxy(Research r, string defaultImageUrl)
         {
@@ -73,12 +85,20 @@ namespace Swu.Portal.Web.Api.Proxy
             this.ImageUrl = r.ImageUrl;
             this.Name = r.Name_EN;
             this.ShortDescription = r.ShortDescription;
-            this.CreateBy = "demo user";//r.ApplicationUser.FirstName_EN + " " + r.ApplicationUser.LastName_EN;
+            this.CreateBy = r.ApplicationUser.FirstName_EN + " " + r.ApplicationUser.LastName_EN;
             this.Type = WebboardType.research;
             this.CategoryId = r.CategoryId;
-            this.CreatorImageUrl = defaultImageUrl;//string.IsNullOrEmpty(r.ApplicationUser.ImageUrl) ? defaultImageUrl : r.ApplicationUser.ImageUrl;
+            this.CreatorImageUrl = string.IsNullOrEmpty(r.ApplicationUser.ImageUrl) ? defaultImageUrl : r.ApplicationUser.ImageUrl;
             this.NumberOfView = 0;
-
+            this.UserId = r.ApplicationUser.Id;
+            this.CreatedDate = r.CreatedDate;
+            AttachFiles = new List<AttachFilesProxy>();
+            if (r.AttachFiles.Count() > 0) {
+                foreach (var f in r.AttachFiles) {
+                    this.AttachFiles.Add(new AttachFilesProxy(f));
+                }
+            }
+            MoreDetail = new MoreDetailProxy(r);
         }
     }
 }

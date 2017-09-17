@@ -1112,7 +1112,6 @@ var Swu;
             this.$state = $state;
             this.auth = auth;
             this.$scope.goToPage = function (stateName, type) {
-                console.log(type);
                 if (stateName == "board") {
                     $state.go("board", { "type": type }, { reload: true });
                 }
@@ -2878,7 +2877,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ResearchBoardController = (function () {
-        function ResearchBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce) {
+        function ResearchBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce, auth, $uibModal) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
@@ -2886,6 +2885,8 @@ var Swu;
             this.webboardService = webboardService;
             this.$stateParams = $stateParams;
             this.$sce = $sce;
+            this.auth = auth;
+            this.$uibModal = $uibModal;
             this.$scope.id = this.$stateParams["id"];
             this.$scope.getTotalPageNumber = function () {
                 return Math.ceil((_this.$scope.displayItems.length) / _this.$scope.pageSize);
@@ -2910,24 +2911,94 @@ var Swu;
                     _this.$scope.changePage(prevPage);
                 }
             };
+            this.$scope.getCurrentUser = function () {
+                if (_this.$scope.currentUser == null) {
+                    _this.$scope.currentUser = _this.auth.getCurrentUser();
+                }
+                return _this.$scope.currentUser;
+            };
             this.$scope.search = function () {
                 _this.webboardService.getResearchItems(_this.$scope.criteria).then(function (response) {
                     _this.$scope.items = response;
+                    console.log(response);
                     _this.$scope.displayItems = _.filter(_this.$scope.items, function (item) {
                         return item.type == Swu.BoardType.research && item.categoryId == _this.$scope.id;
                     });
                     _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
                 }, function (error) { });
             };
+            this.$scope.canEdit = function (creatorId) {
+                var _canEdit = false;
+                if (_this.$scope.currentUser != null) {
+                    _canEdit = _this.$scope.currentUser.id == creatorId;
+                }
+                return _canEdit;
+            };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/board/view/research.tmpl.html',
+                    controller: Swu.ResearchModalController,
+                    resolve: {
+                        id: function () {
+                            return "";
+                        },
+                        categoryId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.getCurrentUser().id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    },
+                    size: "md"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.search();
+                });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/board/view/research.tmpl.html',
+                    controller: Swu.ResearchModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        categoryId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.getCurrentUser().id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    },
+                    size: "md"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.search();
+                });
+            };
+            this.$scope.getFileName = function (path) {
+                var fileName = path.split('\\').pop().split('/').pop();
+                return fileName;
+            };
             this.init();
         }
         ResearchBoardController.prototype.init = function () {
+            this.$scope.currentUser = this.$scope.getCurrentUser();
+            if (this.$scope.currentUser != null) {
+                this.$scope.canAddNew = true;
+            }
             this.$scope.items = [];
             this.$scope.displayItems = [];
             this.$scope.search();
         };
         ;
-        ResearchBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
+        ResearchBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce", "AuthServices", "$uibModal"];
         ResearchBoardController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ResearchBoardController" })
@@ -3006,6 +3077,79 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var ResearchModalController = (function () {
+        function ResearchModalController($scope, $state, webboardService, toastr, $modalInstance, profileService, auth, id, categoryId, userId, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.webboardService = webboardService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.profileService = profileService;
+            this.auth = auth;
+            this.id = id;
+            this.categoryId = categoryId;
+            this.userId = userId;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.mode = mode;
+            this.$scope.categoryId = categoryId;
+            this.$scope.userId = userId;
+            this.$scope.edit = function (id) {
+                _this.webboardService.getResearchById(id).then(function (response) {
+                    _this.$scope.research = response;
+                    _this.$scope.displayPublishDate = moment(_this.$scope.research.moreDetail.publishDate).format("DD/MM/YYYY");
+                }, function (error) { });
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.$scope.isValid()) {
+                    var models = [];
+                    _this.$scope.research.userId = _this.$scope.userId;
+                    _this.$scope.research.categoryId = _this.$scope.categoryId;
+                    _this.$scope.research.moreDetail.publishDate = new Date(_this.$scope.displayPublishDate);
+                    models.push({ name: "file", value: _this.$scope.file });
+                    models.push({ name: "research", value: _this.$scope.research });
+                    _this.webboardService.addOrUpdateResearch(models).then(function (response) {
+                        _this.$modalInstance.close(response);
+                    }, function (error) { });
+                }
+            };
+            this.$scope.delete = function () {
+            };
+            this.init();
+        }
+        ResearchModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Research";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Research";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        ResearchModalController.$inject = ["$scope", "$state", "webboardService", "toastr", "$modalInstance", "profileService", "AuthServices", "id", "categoryId", "userId", "mode"];
+        ResearchModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "ResearchModalController" })
+        ], ResearchModalController);
+        return ResearchModalController;
+    }());
+    Swu.ResearchModalController = ResearchModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var webboardService = (function () {
         function webboardService(apiService, constant) {
             this.apiService = apiService;
@@ -3037,6 +3181,12 @@ var Swu;
         };
         webboardService.prototype.getPostById = function (id) {
             return this.apiService.getData("forum/getPostById?id=" + id);
+        };
+        webboardService.prototype.getResearchById = function (id) {
+            return this.apiService.getData("research/getResearchById?id=" + id);
+        };
+        webboardService.prototype.addOrUpdateResearch = function (models) {
+            return this.apiService.postWithFormData(models, "research/SaveAsync");
         };
         webboardService.$inject = ['apiService', 'AppConstant'];
         webboardService = __decorate([

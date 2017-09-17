@@ -1,4 +1,14 @@
 ﻿module Swu {
+    export interface AttachFile {
+        id: number;
+        filePath: string;
+    }
+    export interface WebboardMoreDetail {
+        creatorName?: string;
+        publisher?: string;
+        contributor?: string;
+        publishDate?: Date;
+    }
     export interface WebboardCategory {
         id: number;
         title: string;
@@ -18,6 +28,8 @@
         type: BoardType
         categoryId?: number;
         userId?: string;
+        moreDetail?: WebboardMoreDetail,
+        attachFiles: AttachFile[];
     }
     export interface IWebBoardScope extends IPagination {
         categoryName: string;

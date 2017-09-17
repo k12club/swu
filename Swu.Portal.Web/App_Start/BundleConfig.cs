@@ -89,17 +89,19 @@ namespace Swu.Portal.Web
                 "~/Content/js/css3-animate-it.js",
                 "~/Content/js/swiper.min.js",
                 "~/Content/js/flipclock.min.js",
+                "~/Content/js/bootstrap-datepicker.min",
                 "~/Content/js/script.js"));
 
             bundles.Add(new ScriptBundle("~/ie9/js")
                .Include("~/Content/js/html5shiv.min.js",
                "~/Content/js/respond.min.js"));
 
-           bundles.Add(new StyleBundle("~/theme/css")
-                .Include("~/Content/css/bootstrap.min.css",
-                "~/Content/css/style.css",
-                "~/Content/css/responsive.css",
-                "~/Content/css/translations.css"));
+            bundles.Add(new StyleBundle("~/theme/css")
+                 .Include("~/Content/css/bootstrap.min.css",
+                 "~/Content/css/style.css",
+                 "~/Content/css/responsive.css",
+                 "~/Content/css/translations.css",
+                 "~/Content/css/bootstrap-datepicker.min.css"));
         }
     }
 }
