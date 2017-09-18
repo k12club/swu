@@ -429,5 +429,21 @@ and start a new fresh tomorrow. ",
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+        [HttpPost, Route("addNewCategory")]
+        public HttpResponseMessage AddNewCategory(WebboardCategoryProxy category)
+        {
+            try
+            {
+                this._courseCategoryRepository.Add(new CourseCategory
+                {
+                    Title = category.Title
+                });
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
     }
 }

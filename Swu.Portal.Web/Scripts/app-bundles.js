@@ -2625,6 +2625,44 @@ var Swu;
                     _this.$scope.changePage(prevPage);
                 }
             };
+            this.$scope.addNew = function () {
+                _this.$scope.showAddNewCategory = true;
+            };
+            this.$scope.save = function () {
+                if (_this.$scope.newCategoty != "") {
+                    switch (_this.$scope.type) {
+                        case 1: {
+                            _this.webboardService.addNewForumCategory({ id: 0, title: _this.$scope.newCategoty }).then(function (response) {
+                                _this.$scope.showAddNewCategory = false;
+                                _this.$scope.newCategoty = "";
+                                _this.$scope.search();
+                            }, function (error) { });
+                            break;
+                        }
+                        case 2: {
+                            _this.webboardService.addNewCourseCategory({ id: 0, title: _this.$scope.newCategoty }).then(function (response) {
+                                _this.$scope.showAddNewCategory = false;
+                                _this.$scope.newCategoty = "";
+                                _this.$scope.search();
+                            }, function (error) { });
+                            break;
+                        }
+                        case 3: {
+                            _this.webboardService.addNewResearchCategory({ id: 0, title: _this.$scope.newCategoty }).then(function (response) {
+                                _this.$scope.showAddNewCategory = false;
+                                _this.$scope.newCategoty = "";
+                                _this.$scope.search();
+                            }, function (error) { });
+                            break;
+                        }
+                    }
+                }
+            };
+            this.$scope.cancel = function () {
+                _this.$scope.showAddNewCategory = false;
+                _this.$scope.newCategoty = "";
+                _this.$scope.search();
+            };
             this.$scope.search = function () {
                 switch (_this.$scope.type) {
                     case 1: {
@@ -2639,7 +2677,7 @@ var Swu;
                         break;
                     }
                     case 2: {
-                        _this.$scope.categoryName = "Courses";
+                        _this.$scope.categoryName = "Group Courses";
                         _this.webboardService.getCourseCategory().then(function (response) {
                             _this.$scope.categorys = response;
                             _.map(_this.$scope.categorys, function (c) {
@@ -2650,7 +2688,7 @@ var Swu;
                         break;
                     }
                     case 3: {
-                        _this.$scope.categoryName = "Research";
+                        _this.$scope.categoryName = "Research Type";
                         _this.webboardService.getResearchCategory().then(function (response) {
                             _this.$scope.categorys = response;
                             _.map(_this.$scope.categorys, function (c) {
@@ -2666,12 +2704,14 @@ var Swu;
         }
         ;
         WebBoardController.prototype.init = function () {
+            this.$scope.showAddNewCategory = false;
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
             this.$scope.criteria = {
                 name: ""
             };
             this.$scope.categorys = [];
+            this.$scope.displayCategories = [];
             this.$scope.items = [];
             this.$scope.search();
         };
@@ -3187,6 +3227,15 @@ var Swu;
         };
         webboardService.prototype.addOrUpdateResearch = function (models) {
             return this.apiService.postWithFormData(models, "research/SaveAsync");
+        };
+        webboardService.prototype.addNewForumCategory = function (category) {
+            return this.apiService.postData(category, "forum/addNewCategory");
+        };
+        webboardService.prototype.addNewResearchCategory = function (category) {
+            return this.apiService.postData(category, "research/addNewCategory");
+        };
+        webboardService.prototype.addNewCourseCategory = function (category) {
+            return this.apiService.postData(category, "course/addNewCategory");
         };
         webboardService.$inject = ['apiService', 'AppConstant'];
         webboardService = __decorate([

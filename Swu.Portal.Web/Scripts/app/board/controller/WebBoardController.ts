@@ -12,8 +12,8 @@
     export interface WebboardCategory {
         id: number;
         title: string;
-        link: string;
-        numberofItems: number;
+        link?: string;
+        numberofItems?: number;
     }
     export interface Webboarditems {
         id?: number;
@@ -35,8 +35,11 @@
         categoryName: string;
         type: number;
         categorys: WebboardCategory[];
+        displayCategories: WebboardCategory[];
         items: Webboarditems[];
         displayItems: Webboarditems[];
+        showAddNewCategory: boolean;
+        newCategoty: string;
 
         search(): void;
         currentPage: number;
@@ -44,6 +47,9 @@
         totalPageNumber: number;
         criteria: SearchCritirea;
         getTotalPageNumber(): number;
+        addNew(): void;
+        save(): void;
+        cancel(): void;
     }
     @Module("app")
     @Controller({ name: "WebBoardController" })
@@ -76,7 +82,44 @@
                 }
             };
             //End Pagination section
-
+            this.$scope.addNew = () => {
+                this.$scope.showAddNewCategory = true;
+            };
+            this.$scope.save = () => {
+                if (this.$scope.newCategoty != "") {
+                    switch (this.$scope.type) {
+                        case 1: {
+                            this.webboardService.addNewForumCategory({ id: 0, title: this.$scope.newCategoty }).then((response) => {
+                                this.$scope.showAddNewCategory = false;
+                                this.$scope.newCategoty = "";
+                                this.$scope.search();
+                            }, (error) => { });
+                            break;
+                        }
+                        case 2: {
+                            this.webboardService.addNewCourseCategory({ id: 0, title: this.$scope.newCategoty }).then((response) => {
+                                this.$scope.showAddNewCategory = false;
+                                this.$scope.newCategoty = "";
+                                this.$scope.search();
+                            }, (error) => { });
+                            break;
+                        }
+                        case 3: {
+                            this.webboardService.addNewResearchCategory({ id: 0, title: this.$scope.newCategoty }).then((response) => {
+                                this.$scope.showAddNewCategory = false;
+                                this.$scope.newCategoty = "";
+                                this.$scope.search();
+                            }, (error) => { });
+                            break;
+                        }
+                    }
+                }
+            };
+            this.$scope.cancel = () => {
+                this.$scope.showAddNewCategory = false;
+                this.$scope.newCategoty = "";
+                this.$scope.search();
+            };
             this.$scope.search = () => {
                 switch (this.$scope.type) {
                     case 1: {
@@ -86,70 +129,28 @@
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
-                            //this.webboardService.getForumsItems(this.$scope.criteria).then((response) => {
-                            //    this.$scope.items = response;
-                            //    this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
-                            //    this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
-                            //        return item.type == BoardType.forums;
-                            //    });
-                            //    _.map(this.$scope.categorys, function (c) {
-                            //        var number = _.filter($scope.items, (item: Webboarditems) => {
-                            //            return item.type == BoardType.forums && item.categoryId == c.id;
-                            //        }).length;
-                            //        c.numberofItems = number;
-                            //    });
-                            //    this.$scope.changePage(this.$scope.currentPage);
-                            //}, (error) => { });
                             $state.go('board.forum', { 'id': _.first($scope.categorys).id });
                         }, (error) => { });
                         break;
                     }
                     case 2: {
-                        this.$scope.categoryName = "Courses";
+                        this.$scope.categoryName = "Group Courses";
                         this.webboardService.getCourseCategory().then((response) => {
                             this.$scope.categorys = response;
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.course({id:" + c.id + "})";
                             });
-                            //this.webboardService.getCourseItems(this.$scope.criteria).then((response) => {
-                            //    this.$scope.items = response;
-                            //    this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
-                            //    this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
-                            //        return item.type == BoardType.course;
-                            //    });
-                            //    _.map(this.$scope.categorys, function (c) {
-                            //        var number = _.filter($scope.items, (item: Webboarditems) => {
-                            //            return item.type == BoardType.course && item.categoryId == c.id;
-                            //        }).length;
-                            //        c.numberofItems = number;
-                            //    });
-                            //    this.$scope.changePage(this.$scope.currentPage);
-                            //}, (error) => { });
                             $state.go('board.course', { 'id': _.first($scope.categorys).id });
                         }, (error) => { });
                         break;
                     }
                     case 3: {
-                        this.$scope.categoryName = "Research";
+                        this.$scope.categoryName = "Research Type";
                         this.webboardService.getResearchCategory().then((response) => {
                             this.$scope.categorys = response;
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.research({id:" + c.id + "})";
                             });
-                            //this.webboardService.getResearchItems(this.$scope.criteria).then((response) => {
-                            //    this.$scope.items = response;
-                            //    this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
-                            //    this.$scope.displayItems = _.filter(this.$scope.items, (item: Webboarditems) => {
-                            //        return item.type == BoardType.research;
-                            //    });
-                            //    _.map(this.$scope.categorys, function (c) {
-                            //        var number = _.filter($scope.items, (item: Webboarditems) => {
-                            //            return item.type == BoardType.research && item.categoryId == c.id;
-                            //        }).length;
-                            //        c.numberofItems = number;
-                            //    });
-                            //    this.$scope.changePage(this.$scope.currentPage);
-                            //}, (error) => { });
                             $state.go('board.research', { 'id': _.first($scope.categorys).id });
                         }, (error) => { });
                         break;
@@ -159,12 +160,14 @@
             this.init();
         };
         init(): void {
+            this.$scope.showAddNewCategory = false;
             this.$scope.currentPage = 0;
             this.$scope.pageSize = 5;
             this.$scope.criteria = {
                 name: ""
             };
             this.$scope.categorys = [];
+            this.$scope.displayCategories = [];
             this.$scope.items = [];
             this.$scope.search();
         };

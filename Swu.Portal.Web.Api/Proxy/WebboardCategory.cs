@@ -14,6 +14,10 @@ namespace Swu.Portal.Web.Api.Proxy
         public int Id { get; set; }
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
+        public WebboardCategoryProxy()
+        {
+
+        }
         public WebboardCategoryProxy(CourseCategory c)
         {
             this.Id = c.Id;

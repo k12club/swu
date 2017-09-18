@@ -163,5 +163,21 @@ namespace Swu.Portal.Web.Api.V1
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+        [HttpPost, Route("addNewCategory")]
+        public HttpResponseMessage AddNewCategory(WebboardCategoryProxy category)
+        {
+            try
+            {
+                this._researchCategoryRepository.Add(new ResearchCategory
+                {
+                    Title = category.Title
+                });
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
     }
 }

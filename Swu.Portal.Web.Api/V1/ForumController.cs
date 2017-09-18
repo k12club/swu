@@ -210,5 +210,20 @@ namespace Swu.Portal.Web.Api.V1
             var comment = this._commentRepository.FindById(id);
             return new CommentProxy(comment);
         }
+        [HttpPost, Route("addNewCategory")]
+        public HttpResponseMessage AddNewCategory(WebboardCategoryProxy category)
+        {
+            try
+            {
+                this._forumCategoryRepository.Add(new ForumCategory {
+                    Title=category.Title
+                });
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
     }
 }

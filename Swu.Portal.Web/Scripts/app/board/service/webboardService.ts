@@ -14,6 +14,10 @@
         getPostById(id: string): ng.IPromise<Webboarditems>;
         getResearchById(id: string): ng.IPromise<Webboarditems>;
         addOrUpdateResearch(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
+
+        addNewForumCategory(category: WebboardCategory): ng.IPromise<HttpStatusCode>;
+        addNewResearchCategory(category: WebboardCategory): ng.IPromise<HttpStatusCode>;
+        addNewCourseCategory(category: WebboardCategory): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "webboardService" })
@@ -57,7 +61,15 @@
         }
         addOrUpdateResearch(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
             return this.apiService.postWithFormData<HttpStatusCode>(models, "research/SaveAsync");
-
+        }
+        addNewForumCategory(category: WebboardCategory): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData(category, "forum/addNewCategory");
+        }
+        addNewResearchCategory(category: WebboardCategory): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData(category, "research/addNewCategory");
+        }
+        addNewCourseCategory(category: WebboardCategory): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData(category, "course/addNewCategory");
         }
     }
 }

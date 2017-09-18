@@ -38,8 +38,15 @@
                     <ul class="list-unstyled irs-sbc-list">
                         <!--<li><a href="" ui-sref="board({type:type})">All</a></li>-->
                         <li ng-repeat="c in categorys"><a href="" ui-sref="{{c.link}}"><span class="flaticon-arrows-3"></span>{{c.title}}</a></li>
+                        <li ng-show="showAddNewCategory">
+                            <a><span class="flaticon-arrows-3"></span></a><input type="text" ng-model="newCategoty" />&nbsp;
+                            <span class="glyphicon glyphicon-plus-sign text-success" aria-hidden="true" ng-click="save()"></span>
+                            <span class="glyphicon glyphicon-minus-sign text-danger" aria-hidden="true" ng-click="cancel()"></span>
+                        </li>
                         <li class="divider"></li>
-                        <li><a><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> New Category</a></li>
+                        <li ng-show="!showAddNewCategory" ng-click="addNew()">
+                            <a><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> New Category</a>
+                        </li>
                     </ul>
 
                 </div>
