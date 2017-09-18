@@ -40,7 +40,10 @@
         displayItems: Webboarditems[];
         showAddNewCategory: boolean;
         newCategoty: string;
+        canAddNewCategory: boolean;
+        currentUser: IUserProfile;
 
+        getCurrentUser(): IUserProfile;
         search(): void;
         currentPage: number;
         pageSize: number;
@@ -54,8 +57,8 @@
     @Module("app")
     @Controller({ name: "WebBoardController" })
     export class WebBoardController {
-        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
-        constructor(private $scope: IWebBoardScope, private $rootScope: IRootScope, private $state: ng.ui.IStateService, private webboardService: IwebboardService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce","AuthServices"];
+        constructor(private $scope: IWebBoardScope, private $rootScope: IRootScope, private $state: ng.ui.IStateService, private webboardService: IwebboardService, private $stateParams: ng.ui.IStateParamsService, private $sce: ng.ISCEService, private auth: IAuthServices) {
             this.$scope.type = Number(this.$stateParams["type"]);
             //Pagination section
             this.$scope.getTotalPageNumber = (): number => {
@@ -82,6 +85,12 @@
                 }
             };
             //End Pagination section
+            this.$scope.getCurrentUser = () => {
+                if (this.$scope.currentUser == null) {
+                    this.$scope.currentUser = this.auth.getCurrentUser();
+                }
+                return this.$scope.currentUser;
+            };
             this.$scope.addNew = () => {
                 this.$scope.showAddNewCategory = true;
             };
@@ -169,6 +178,12 @@
             this.$scope.categorys = [];
             this.$scope.displayCategories = [];
             this.$scope.items = [];
+            this.$scope.currentUser = this.$scope.getCurrentUser();
+            if (this.$scope.currentUser != null) {
+                if (this.$scope.currentUser.selectedRoleName == "Admin") {
+                    this.$scope.canAddNewCategory = true;
+                }
+            }
             this.$scope.search();
         };
 

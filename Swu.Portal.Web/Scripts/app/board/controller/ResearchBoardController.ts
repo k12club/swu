@@ -131,7 +131,9 @@
         init(): void {
             this.$scope.currentUser = this.$scope.getCurrentUser();
             if (this.$scope.currentUser != null) {
-                this.$scope.canAddNew = true;
+                if (this.$scope.currentUser.selectedRoleName == "Admin") {
+                    this.$scope.canAddNew = true;
+                }
             }
             this.$scope.items = [];
             this.$scope.displayItems = [];

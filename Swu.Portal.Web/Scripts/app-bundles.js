@@ -2593,7 +2593,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var WebBoardController = (function () {
-        function WebBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce) {
+        function WebBoardController($scope, $rootScope, $state, webboardService, $stateParams, $sce, auth) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
@@ -2601,6 +2601,7 @@ var Swu;
             this.webboardService = webboardService;
             this.$stateParams = $stateParams;
             this.$sce = $sce;
+            this.auth = auth;
             this.$scope.type = Number(this.$stateParams["type"]);
             this.$scope.getTotalPageNumber = function () {
                 return Math.ceil((_this.$scope.items.length) / _this.$scope.pageSize);
@@ -2624,6 +2625,12 @@ var Swu;
                 if (prevPage >= 0) {
                     _this.$scope.changePage(prevPage);
                 }
+            };
+            this.$scope.getCurrentUser = function () {
+                if (_this.$scope.currentUser == null) {
+                    _this.$scope.currentUser = _this.auth.getCurrentUser();
+                }
+                return _this.$scope.currentUser;
             };
             this.$scope.addNew = function () {
                 _this.$scope.showAddNewCategory = true;
@@ -2713,10 +2720,16 @@ var Swu;
             this.$scope.categorys = [];
             this.$scope.displayCategories = [];
             this.$scope.items = [];
+            this.$scope.currentUser = this.$scope.getCurrentUser();
+            if (this.$scope.currentUser != null) {
+                if (this.$scope.currentUser.selectedRoleName == "Admin") {
+                    this.$scope.canAddNewCategory = true;
+                }
+            }
             this.$scope.search();
         };
         ;
-        WebBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce"];
+        WebBoardController.$inject = ["$scope", "$rootScope", "$state", "webboardService", "$stateParams", "$sce", "AuthServices"];
         WebBoardController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "WebBoardController" })
@@ -3031,7 +3044,9 @@ var Swu;
         ResearchBoardController.prototype.init = function () {
             this.$scope.currentUser = this.$scope.getCurrentUser();
             if (this.$scope.currentUser != null) {
-                this.$scope.canAddNew = true;
+                if (this.$scope.currentUser.selectedRoleName == "Admin") {
+                    this.$scope.canAddNew = true;
+                }
             }
             this.$scope.items = [];
             this.$scope.displayItems = [];

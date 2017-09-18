@@ -44,7 +44,7 @@
                             <span class="glyphicon glyphicon-minus-sign text-danger" aria-hidden="true" ng-click="cancel()"></span>
                         </li>
                         <li class="divider"></li>
-                        <li ng-show="!showAddNewCategory" ng-click="addNew()">
+                        <li ng-show="canAddNewCategory && !showAddNewCategory" ng-click="addNew()">
                             <a><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> New Category</a>
                         </li>
                     </ul>
