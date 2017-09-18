@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swu.Portal.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +28,21 @@ namespace Swu.Portal.Web.Api.Proxy
         public DateTime StartDate { get; set; }
         [JsonProperty(PropertyName = "endDate")]
         public DateTime EndDate { get; set; }
+        public EventProxy()
+        {
+
+        }
+        public EventProxy(Event e)
+        {
+            this.Title_EN = e.Title_EN;
+            this.Title_TH = e.Title_TH;
+            this.Description_EN = e.Description_EN;
+            this.Description_TH = e.Description_TH;
+            this.Place_EN = e.Place_EN;
+            this.Place_TH = e.Place_TH;
+            this.ImageUrl = e.ImageUrl;
+            this.StartDate = e.StartDate;
+            this.EndDate = e.EndDate;
+        }
     }
 }

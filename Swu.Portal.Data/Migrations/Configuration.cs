@@ -52,6 +52,7 @@ namespace Swu.Portal.Data.Migrations
             var rcategories = new List<ResearchCategory>();
             var researchs = new List<Research>();
             var studentScores = new List<StudentScore>();
+            var events = new List<Event>();
             #region User
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new SwuDBContext()));
@@ -752,6 +753,69 @@ namespace Swu.Portal.Data.Migrations
             context.Research.AddRange(researchs);
             context.SaveChanges();
 
+            #region Event
+            var e1 = new Event
+            {
+                Title_EN = "War and Medicine- Lunchtime Talks Series",
+                Description_EN = "On the last Friday of every month at lunchtime (13.00) there will be a series of talks examining the effect of the First World War on medicine.",
+                Place_EN = "Venue: Hall B",
+                Title_TH = "รับสมัครสอบตรง",
+                Description_TH = "",
+                Place_TH = "http://admission.swu.acth",
+                ImageUrl = "images/event/1.jpg",
+                StartDate = new DateTime(2017, 8, 14, 9, 0, 0).ToUniversalTime()
+            };
+            var e2 = new Event
+            {
+                Title_EN = "War and Medicine- Lunchtime Talks Series",
+                Description_EN = "On the last Friday of every month at lunchtime (13.00) there will be a series of talks examining the effect of the First World War on medicine.",
+                Place_EN = "Venue: Hall B",
+                Title_TH = "ประกาศรายชื่อผู้มีสิทธิ์สอบ",
+                Description_TH = "",
+                Place_TH = "http://admission.swu.acth",
+                ImageUrl = "images/event/1.jpg",
+                StartDate = new DateTime(2017, 8, 24, 9, 30, 0).ToUniversalTime()
+            };
+            var e3 = new Event
+            {
+                Title_EN = "War and Medicine- Lunchtime Talks Series",
+                Description_EN = "On the last Friday of every month at lunchtime (13.00) there will be a series of talks examining the effect of the First World War on medicine.",
+                Place_EN = "Venue: Hall B",
+                Title_TH = "สอบคัดเลือก 1",
+                Description_TH = @"09.00-12.00 วิทยาศาสตร์พื้นฐาน
+                13.00-15.00 ความถนัดทางการเรียน
+                คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
+                Place_TH = "คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
+                ImageUrl = "images/event/1.jpg",
+                StartDate = new DateTime(2018, 1, 10, 9, 0, 0).ToUniversalTime()
+            };
+            var e4 = new Event
+            {
+                Title_EN = "War and Medicine- Lunchtime Talks Series",
+                Description_EN = "On the last Friday of every month at lunchtime (13.00) there will be a series of talks examining the effect of the First World War on medicine.",
+                Place_EN = "Venue: Hall B",
+                Title_TH = "ประกาศการสอบขั้นที่ 1",
+                Description_TH = "",
+                Place_TH = "คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
+                ImageUrl = "images/event/1.jpg",
+                StartDate = new DateTime(2018, 1, 21, 9, 0, 0).ToUniversalTime()
+            };
+            var e5 = new Event
+            {
+                Title_EN = "War and Medicine- Lunchtime Talks Series",
+                Description_EN = "On the last Friday of every month at lunchtime (13.00) there will be a series of talks examining the effect of the First World War on medicine.",
+                Place_EN = "Venue: Hall B",
+                Title_TH = "ประกาศการสอบขั้นที่ 1",
+                Description_TH = "",
+                Place_TH = "คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
+                ImageUrl = "images/event/1.jpg",
+                StartDate = new DateTime(2018, 1, 21, 9, 0, 0).ToUniversalTime()
+            };
+            events.AddRange(new List<Event> { e1, e2, e3, e4, e5 });
+            context.Events.AddRange(events);
+            context.SaveChanges();
+            #endregion
+
             #region Student Score
             //var sc1 = new StudentScore
             //{
@@ -835,6 +899,72 @@ namespace Swu.Portal.Data.Migrations
             //studentScores.Add(sc10);
             //context.StudentCourse.AddRange(studentScores);
             //context.SaveChanges();
+            #endregion
+
+            #region Video
+            var videos = new List<Video> {
+                    new Video {
+                        ImageUrl="Content/images/campus/1.jpg",
+                        VideoUrl="https://www.youtube.com/watch?v=hYEnh4LuruQ",
+                        Title_EN="Campus Life",
+                        Title_TH="การใช้ชีวิต"
+                    },
+                    new Video {
+                        ImageUrl="Content/images/campus/2.jpg",
+                        VideoUrl="https://www.youtube.com/watch?v=PvXZKSumtk8",
+                        Title_EN="Interview",
+                        Title_TH="สัมภาษณ์"
+                    },
+                    new Video {
+                        ImageUrl="Content/images/campus/3.jpg",
+                        VideoUrl="https://www.youtube.com/watch?v=JxvrkpMRk4o",
+                        Title_EN="Job fair",
+                        Title_TH="หางาน"
+                    },
+                    new Video {
+                        ImageUrl="Content/images/campus/4.jpg",
+                        VideoUrl="https://www.youtube.com/watch?v=1GaMGdOQLvg",
+                        Title_EN="Sport day",
+                        Title_TH="กีฬาสี"
+                    },
+                };
+            context.Videos.AddRange(videos);
+            #endregion
+
+            #region News
+            var news = new List<News>
+                {
+                    new News {
+                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
+                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
+                        ImageUrl="Content/images/blog/1.jpg",
+                        StartDate = new DateTime(2017, 8, 14, 9, 0, 0).ToUniversalTime(),
+                        ApplicationUser = defaultUser
+                    },
+                    new News {
+                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
+                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
+                        ImageUrl="Content/images/blog/1.jpg",
+                        StartDate = new DateTime(2017, 8, 14, 9, 0, 0).ToUniversalTime(),
+                        ApplicationUser = defaultUser
+                    },
+                    new News {
+                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
+                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
+                        ImageUrl="Content/images/blog/1.jpg",
+                        StartDate = new DateTime(2017, 8, 14, 9, 0, 0).ToUniversalTime(),
+                        ApplicationUser = defaultUser
+                    },
+                    new News {
+                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
+                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
+                        ImageUrl="Content/images/blog/1.jpg",
+                        StartDate = new DateTime(2017, 8, 14, 9, 0, 0).ToUniversalTime(),
+                        ApplicationUser = defaultUser
+                    },
+                };
+            context.News.AddRange(news);
+            context.SaveChanges();
             #endregion
         }
     }

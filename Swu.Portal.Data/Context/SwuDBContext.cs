@@ -16,8 +16,6 @@ namespace Swu.Portal.Data.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseCategory> CourseCategory { get; set; }
         public DbSet<Curriculum> Curriculums { get; set; }
-        //public DbSet<Student> Students { get; set; }
-        //public DbSet<Teacher> Teachers { get; set; }
         public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Forum> Forums { get; set; }
@@ -25,13 +23,12 @@ namespace Swu.Portal.Data.Context
         public DbSet<Research> Research { get; set; }
         public DbSet<ResearchCategory> ResearchCategory { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        //public DbSet<TeacherProfile> TeacherProfile { get; set; }
-        //public DbSet<Contact> Contact { get; set; }
-        //public DbSet<StudentProfile> StudentProfile { get; set; }
-        //public DbSet<ParentProfile> ParentProfile { get; set; }
         public DbSet<StudentScore> StudentScore { get; set; }
         public DbSet<StudentCourse> StudentCourse { get; set; }
         public DbSet<AttachFile> AttachFiles { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Video> Videos { get; set; }
+        public DbSet<News> News { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;

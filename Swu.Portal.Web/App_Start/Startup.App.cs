@@ -44,6 +44,9 @@ namespace Swu.Portal.Web
             builder.RegisterType<CommentService>().As<ICommentService>().InstancePerRequest();
             builder.RegisterType<ForumService>().As<IForumService>().InstancePerRequest();
             builder.RegisterType<ResearchService>().As<IResearchService>().InstancePerRequest();
+            builder.RegisterType<EventRepository>().As<IRepository<Event>>().InstancePerRequest();
+            builder.RegisterType<VideoRepository>().As<IRepository<Video>>().InstancePerRequest();
+            builder.RegisterType<NewsRepository>().As<IRepository<News>>().InstancePerRequest();
 
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);

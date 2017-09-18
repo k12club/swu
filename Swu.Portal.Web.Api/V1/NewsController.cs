@@ -1,4 +1,6 @@
 ﻿using Swu.Portal.Core.Dependencies;
+using Swu.Portal.Data.Models;
+using Swu.Portal.Data.Repository;
 using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
 using Swu.Portal.Web.Api.Proxy;
@@ -15,48 +17,17 @@ namespace Swu.Portal.Web.Api
     public class NewsController : ApiController
     {
         private readonly IDateTimeRepository _datetimeRepository;
-        public NewsController(IDateTimeRepository datetimeRepository)
+        private readonly IRepository<News> _newsRepository;
+
+        public NewsController(IDateTimeRepository datetimeRepository, IRepository<News> newsRepository)
         {
             this._datetimeRepository = datetimeRepository;
+            this._newsRepository = newsRepository;
         }
         [HttpGet, Route("all")]
         public List<NewsProxy> GetAll()
         {
-            if (ModelState.IsValid)
-            {
-                return new List<NewsProxy>
-                {
-                    new NewsProxy {
-                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
-                        ImageUrl="Content/images/blog/1.jpg",
-                        CreatedBy="chansak kochasen",
-                        StartDate=this._datetimeRepository.Now().AddDays(1)
-                    },
-                    new NewsProxy {
-                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
-                        ImageUrl="Content/images/blog/1.jpg",
-                        CreatedBy="chansak kochasen",
-                        StartDate=this._datetimeRepository.Now().AddDays(1)
-                    },
-                    new NewsProxy {
-                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
-                        ImageUrl="Content/images/blog/1.jpg",
-                        CreatedBy="chansak kochasen",
-                        StartDate=this._datetimeRepository.Now().AddDays(1)
-                    },
-                    new NewsProxy {
-                        Title_EN="Students recreate 5,000-year-old Chinese beer recipe",
-                        Title_TH="ทดสอบทดสอบทดสอบทดสอบ",
-                        ImageUrl="Content/images/blog/1.jpg",
-                        CreatedBy="chansak kochasen",
-                        StartDate=this._datetimeRepository.Now().AddDays(1)
-                    },
-                };
-            }
-            return null;
+            return this._newsRepository.List.Select(i => new NewsProxy(i)).ToList();
         }
     }
 }
