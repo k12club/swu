@@ -20,9 +20,14 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.News
-                    .Include(i => i.ApplicationUser)
-                    .AsEnumerable();
+                List<News> data = new List<News>();
+                using (var context = new SwuDBContext())
+                {
+                    data = context.News
+                        .Include(i => i.ApplicationUser)
+                        .ToList();
+                }
+                return data;
             }
         }
         public void Add(News entity)
@@ -43,10 +48,15 @@ namespace Swu.Portal.Data.Repository
         }
         public News FindById(int Id)
         {
-            var result = this.context.News
-                .Include(i => i.ApplicationUser)
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            News data = new News();
+            using (var context = new SwuDBContext())
+            {
+                data = context.News
+                    .Include(i => i.ApplicationUser)
+                    .Where(i => i.Id == Id)
+                    .FirstOrDefault();
+            }
+            return data;
         }
     }
 }

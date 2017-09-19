@@ -20,9 +20,14 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.Videos
-                    .Include(i => i.ApplicationUser)
-                    .AsEnumerable();
+                List<Video> data = new List<Video>();
+                using (var context = new SwuDBContext())
+                {
+                    data = context.Videos
+                        .Include(i => i.ApplicationUser)
+                        .ToList();
+                }
+                return data;
             }
         }
         public void Add(Video entity)
@@ -43,10 +48,15 @@ namespace Swu.Portal.Data.Repository
         }
         public Video FindById(int Id)
         {
-            var result = this.context.Videos
-                .Include(i => i.ApplicationUser)
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            Video data = new Video();
+            using (var context = new SwuDBContext())
+            {
+                data = context.Videos
+                    .Include(i => i.ApplicationUser)
+                    .Where(i => i.Id == Id)
+                    .FirstOrDefault();
+            }
+            return data;
         }
     }
 }

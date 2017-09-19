@@ -54,8 +54,8 @@
                     url: "/videos",
                     views: {
                         'subContent@settings': {
-                            templateUrl: '/Scripts/app/settings/view/events.html',
-                            controller: 'EventManagementController as vm'
+                            templateUrl: '/Scripts/app/settings/view/videos.html',
+                            controller: 'VideoManagementController as vm'
                         },
                     }
                 })

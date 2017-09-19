@@ -44,9 +44,13 @@ namespace Swu.Portal.Data.Repository
         }
         public ForumCategory FindById(int Id)
         {
-            var result = this.context.ForumCategory
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            ForumCategory data = new ForumCategory();
+            using (var context = new SwuDBContext())
+            {
+                data = context.ForumCategory.Where(i => i.Id == Id)
+                    .FirstOrDefault();
+            }
+            return data;
         }
     }
 }

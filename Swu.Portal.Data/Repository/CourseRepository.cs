@@ -20,14 +20,19 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.Courses
-                    .Include(i => i.Category)
-                    .Include(i => i.Curriculums)
-                    .Include(i => i.Students)
-                    .Include(i => i.Teachers)
-                    .Include(i =>i.PhotoAlbums)
-                    .Include(i=>i.ApplicationUser)
-                    .AsEnumerable();
+                List<Course> data = new List<Course>();
+                using (var context = new SwuDBContext())
+                {
+                    data = context.Courses
+                        .Include(i => i.Category)
+                            .Include(i => i.Curriculums)
+                            .Include(i => i.Students)
+                            .Include(i => i.Teachers)
+                            .Include(i => i.PhotoAlbums)
+                            .Include(i => i.ApplicationUser)
+                        .ToList();
+                }
+                return data;
             }
         }
         public void Add(Course entity)
@@ -42,22 +47,28 @@ namespace Swu.Portal.Data.Repository
         }
         public void Update(Course entity)
         {
-            this.context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            this.context.SaveChanges();
-
+            using (var context = new SwuDBContext())
+            {
+                this.context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                this.context.SaveChanges();
+            }
         }
         public Course FindById(string Id)
         {
-            var result = this.context
-                .Courses
-                .Include(i => i.Category)
-                .Include(i => i.Curriculums)
-                .Include(i => i.Students)
-                .Include(i => i.Teachers)
-                .Include(i=>i.PhotoAlbums)
-                .Include(i => i.ApplicationUser)
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            Course data = new Course();
+            using (var context = new SwuDBContext())
+            {
+                data = context.Courses
+                    .Include(i => i.Category)
+                        .Include(i => i.Curriculums)
+                        .Include(i => i.Students)
+                        .Include(i => i.Teachers)
+                        .Include(i => i.PhotoAlbums)
+                        .Include(i => i.ApplicationUser)
+                    .Where(i => i.Id == Id)
+                    .FirstOrDefault();
+            }
+            return data;
         }
     }
 }

@@ -19,8 +19,13 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.ResearchCategory
-                    .AsEnumerable();
+                List<ResearchCategory> data = new List<ResearchCategory>();
+                using (var context = new SwuDBContext())
+                {
+                    data = context.ResearchCategory
+                        .ToList();
+                }
+                return data;
             }
         }
         public void Add(ResearchCategory entity)
@@ -41,9 +46,13 @@ namespace Swu.Portal.Data.Repository
         }
         public ResearchCategory FindById(int Id)
         {
-            var result = this.context.ResearchCategory
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            ResearchCategory data = new ResearchCategory();
+            using (var context = new SwuDBContext())
+            {
+                data = context.ResearchCategory.Where(i => i.Id == Id)
+                    .FirstOrDefault();
+            }
+            return data;
         }
     }
 }

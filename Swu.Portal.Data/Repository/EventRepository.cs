@@ -20,9 +20,14 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.Events
-                    .Include(i => i.ApplicationUser)
-                    .AsEnumerable();
+                List<Event> data = new List<Event>();
+                using (var context = new SwuDBContext())
+                {
+                    data = context.Events
+                        .Include(i => i.ApplicationUser)
+                        .ToList();
+                }
+                return data;
             }
         }
         public void Add(Event entity)
@@ -43,10 +48,15 @@ namespace Swu.Portal.Data.Repository
         }
         public Event FindById(int Id)
         {
-            var result = this.context.Events
-                .Include(i => i.ApplicationUser)
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            Event data = new Event();
+            using (var context = new SwuDBContext())
+            {
+                data = context.Events
+                    .Include(i => i.ApplicationUser)
+                    .Where(i => i.Id == Id)
+                    .FirstOrDefault();
+            }
+            return data;
         }
     }
 }

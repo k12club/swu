@@ -1,5 +1,6 @@
 ﻿module Swu {
     export interface IVideo{
+        id: number;
         imageUrl: string;
         videoUrl: string;
         title?: string;

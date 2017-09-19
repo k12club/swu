@@ -19,8 +19,12 @@ namespace Swu.Portal.Data.Repository
         {
             get
             {
-                return this.context.CourseCategory
-                    .AsEnumerable();
+                List<CourseCategory> data = new List<CourseCategory>();
+                using (var context = new SwuDBContext())
+                {
+                    data = context.CourseCategory.ToList();
+                }
+                return data;
             }
         }
         public void Add(CourseCategory entity)
@@ -41,9 +45,13 @@ namespace Swu.Portal.Data.Repository
         }
         public CourseCategory FindById(int Id)
         {
-            var result = this.context.CourseCategory
-                .Where(i => i.Id == Id).FirstOrDefault();
-            return result;
+            CourseCategory data = new CourseCategory();
+            using (var context = new SwuDBContext())
+            {
+                data = context.CourseCategory.Where(i => i.Id == Id)
+                    .FirstOrDefault();
+            }
+            return data;
         }
     }
 }
