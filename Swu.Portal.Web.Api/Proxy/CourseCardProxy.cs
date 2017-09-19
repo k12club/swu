@@ -17,6 +17,10 @@ namespace Swu.Portal.Web.Api.Proxy
         public TeacherProxy Teacher { get; set; }
         [JsonProperty(PropertyName = "cardType")]
         public CardType CardType { get; set; }
+        public CourseCardProxy()
+        {
+
+        }
         public CourseCardProxy(Data.Models.Course c)
         {
             this.Course = new CourseProxy
@@ -28,10 +32,11 @@ namespace Swu.Portal.Web.Api.Proxy
                 Name_TH = c.Name_TH,
                 Price = c.Price,
                 NumberOfStudents = c.Students.Count(),
-                NumberOfTimes  = c.Curriculums.Sum(i=>i.NumberOfTime)
+                NumberOfTimes  = c.Curriculums.Sum(i=>i.NumberOfTime),
+                NumberOfViews = c.NumberOfViews,
+                CreatedDate = c.CreatedDate
             };
             this.Teacher = new TeacherProxy(c.Teachers.FirstOrDefault());
-            this.CardType = CardType.Recently;
         }
     }
 }

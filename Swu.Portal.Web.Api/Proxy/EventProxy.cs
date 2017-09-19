@@ -10,6 +10,8 @@ namespace Swu.Portal.Web.Api.Proxy
 {
     public class EventProxy
     {
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
         [JsonProperty(PropertyName = "title_en")]
         public string Title_EN { get; set; }
         [JsonProperty(PropertyName = "description_en")]
@@ -34,6 +36,7 @@ namespace Swu.Portal.Web.Api.Proxy
         }
         public EventProxy(Event e)
         {
+            this.Id = e.Id;
             this.Title_EN = e.Title_EN;
             this.Title_TH = e.Title_TH;
             this.Description_EN = e.Description_EN;

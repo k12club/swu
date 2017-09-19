@@ -74,9 +74,31 @@ namespace Swu.Portal.Web.Api
                     cards.Add(new CourseCardProxy(c));
                 }
                 var result = new List<CourseCardProxy>();
-                result.AddRange(cards.Where(i => i.CardType == Enum.CardType.Recently).Take(4));
-                result.AddRange(cards.Where(i => i.CardType == Enum.CardType.Popular).Take(4));
-                result.AddRange(cards.Where(i => i.CardType == Enum.CardType.TopRate).Take(4));
+
+                //this.CardType = CardType.Recently;
+                var recently = cards.OrderByDescending(c => c.Course.CreatedDate).Take(4).ToList();
+                foreach (var r in recently)
+                {
+                    result.Add(new CourseCardProxy {
+                        Course = r.Course,
+                        Teacher = r.Teacher,
+                        CardType = Enum.CardType.Recently
+                    });
+                }
+                result.AddRange(recently);
+
+                var poppular = cards.OrderByDescending(c => c.Course.NumberOfViews).Take(4).ToList();
+                foreach (var p in poppular)
+                {
+                    result.Add(new CourseCardProxy
+                    {
+                        Course = p.Course,
+                        Teacher = p.Teacher,
+                        CardType = Enum.CardType.Popular
+                    });
+                }
+                result.AddRange(poppular);
+                //result.AddRange(cards.Where(i => i.CardType == Enum.CardType.TopRate).Take(4));
                 return result;
             }
             return null;
@@ -95,6 +117,11 @@ namespace Swu.Portal.Web.Api
         public CourseAllDetailProxy GetById(string id)
         {
             var course = this._courseRepository.FindById(id);
+
+            //update number of views
+            course.NumberOfViews += 1;
+            this._courseRepository.Update(course);
+
             var allDetail = new CourseAllDetailProxy(course);
             List<Dictionary<int, StudentScoreProxy>> studentScores = new List<Dictionary<int, StudentScoreProxy>>();
             foreach (var c in allDetail.Curriculums)
@@ -417,7 +444,8 @@ and start a new fresh tomorrow. ",
             }
         }
         [HttpGet, Route("removePhoto")]
-        public HttpResponseMessage RemovePhoto(int photoId) {
+        public HttpResponseMessage RemovePhoto(int photoId)
+        {
             try
             {
                 var photo = this._photoRepository.FindById(photoId);
@@ -438,6 +466,20 @@ and start a new fresh tomorrow. ",
                 {
                     Title = category.Title
                 });
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("deleteById")]
+        public HttpResponseMessage DeleteById(string id)
+        {
+            try
+            {
+                var c = this._courseRepository.FindById(id);
+                this._courseRepository.Delete(c);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)

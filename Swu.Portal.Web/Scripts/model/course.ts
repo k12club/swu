@@ -12,6 +12,7 @@
         numberOfTimes?: number;
         numberOfStudents?: number;
         numberOfTeachers?: number;
+        numberOfViews?: number;
         lang?: string;
         price?: number;
         categoryId?: number;

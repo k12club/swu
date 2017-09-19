@@ -528,6 +528,18 @@ var Swu;
                 {
                     name: "settings.users",
                     roles: ["Admin", "Teacher", "Officer"]
+                },
+                {
+                    name: "settings.events",
+                    roles: ["Admin", "Teacher", "Officer"]
+                },
+                {
+                    name: "settings.videos",
+                    roles: ["Admin", "Teacher", "Officer"]
+                },
+                {
+                    name: "settings.news",
+                    roles: ["Admin", "Teacher", "Officer"]
                 }
             ];
         }
@@ -986,6 +998,36 @@ var Swu;
                     'subContent@settings': {
                         templateUrl: '/Scripts/app/settings/view/courses.html',
                         controller: 'CourseManagementController as vm'
+                    }
+                }
+            })
+                .state("settings.events", {
+                parent: "settings",
+                url: "/events",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/events.html',
+                        controller: 'EventManagementController as vm'
+                    }
+                }
+            })
+                .state("settings.videos", {
+                parent: "settings",
+                url: "/videos",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/events.html',
+                        controller: 'EventManagementController as vm'
+                    }
+                }
+            })
+                .state("settings.news", {
+                parent: "settings",
+                url: "/news",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/events.html',
+                        controller: 'EventManagementController as vm'
                     }
                 }
             });
@@ -3153,7 +3195,7 @@ var Swu;
             this.$scope.edit = function (id) {
                 _this.webboardService.getResearchById(id).then(function (response) {
                     _this.$scope.research = response;
-                    _this.$scope.displayPublishDate = moment(_this.$scope.research.moreDetail.publishDate).format("DD/MM/YYYY");
+                    _this.$scope.displayPublishDate = moment(_this.$scope.research.moreDetail.publishDate).format("MM/DD/YYYY");
                 }, function (error) { });
             };
             this.$scope.validate = function () {
@@ -3175,6 +3217,7 @@ var Swu;
                     models.push({ name: "research", value: _this.$scope.research });
                     _this.webboardService.addOrUpdateResearch(models).then(function (response) {
                         _this.$modalInstance.close(response);
+                        _this.toastr.success("Success");
                     }, function (error) { });
                 }
             };
@@ -3377,6 +3420,9 @@ var Swu;
             this.$scope.menus.push({ stateName: "settings", name: "Personal Info", icon: "glyphicon glyphicon-user" });
             this.$scope.menus.push({ stateName: "settings.users", name: "User Management", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.courses", name: "Courses", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.events", name: "Events", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.videos", name: "Videos", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.news", name: "News", icon: "flaticon-arrows-3" });
             this.$scope.displayMenus = _.filter(this.$scope.menus, function (menu, index) {
                 var currentUserRole = _this.auth.getCurrentUser().selectedRoleName;
                 var permission = _.filter(_this.AppConstant.authorizeStateList, function (item, index) {
@@ -3859,6 +3905,12 @@ var Swu;
                     _this.$state.go("app", { reload: true });
                 }
             };
+            this.$scope.delete = function (id) {
+                _this.courseManagementService.deleteById(id).then(function (response) {
+                    _this.$modalInstance.close();
+                    _this.toastr.success("Success");
+                }, function (error) { });
+            };
             this.init();
         }
         CourseManagementModalController.prototype.init = function () {
@@ -3886,6 +3938,171 @@ var Swu;
         return CourseManagementModalController;
     }());
     Swu.CourseManagementModalController = CourseManagementModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var EventManagementController = (function () {
+        function EventManagementController($scope, $state, eventService, $uibModal) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.eventService = eventService;
+            this.$uibModal = $uibModal;
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.data.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.display = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/event.tmpl.html',
+                    controller: Swu.EventManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }, size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/event.tmpl.html',
+                    controller: Swu.EventManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }, size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.getData = function () {
+                _this.eventService.getAll().then(function (response) {
+                    _this.$scope.data = response;
+                    console.log(response);
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+                }, function (error) { });
+            };
+            this.init();
+        }
+        EventManagementController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.getData();
+        };
+        ;
+        EventManagementController.$inject = ["$scope", "$state", "eventManagementService", "$uibModal"];
+        EventManagementController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "EventManagementController" })
+        ], EventManagementController);
+        return EventManagementController;
+    }());
+    Swu.EventManagementController = EventManagementController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var EventManagementModalController = (function () {
+        function EventManagementModalController($scope, $state, eventManagementService, toastr, $modalInstance, auth, id, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.eventManagementService = eventManagementService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.auth = auth;
+            this.id = id;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                _this.eventManagementService.getEventById(id).then(function (response) {
+                    _this.$scope.event = response;
+                    _this.$scope.displayStartDate = moment(_this.$scope.event.startDate).format("MM/DD/YYYY");
+                }, function (error) { });
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.auth.isLoggedIn()) {
+                    if (_this.$scope.isValid()) {
+                        _this.$scope.event.startDate = new Date(_this.$scope.displayStartDate);
+                        _this.eventManagementService.addNewOrUpdate(_this.$scope.event).then(function (response) {
+                            _this.$modalInstance.close();
+                            _this.toastr.success("Success");
+                        }, function (error) { });
+                    }
+                }
+                else {
+                    _this.toastr.error("Time out expired");
+                    _this.$state.go("app", { reload: true });
+                }
+            };
+            this.$scope.delete = function (id) {
+                _this.eventManagementService.deleteById(id).then(function (response) {
+                    _this.$modalInstance.close();
+                    _this.toastr.success("Success");
+                }, function (error) { });
+            };
+            this.init();
+        }
+        EventManagementModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Event";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Event";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        EventManagementModalController.$inject = ["$scope", "$state", "eventManagementService", "toastr", "$modalInstance", "AuthServices", "id", "mode"];
+        EventManagementModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "EventManagementModalController" })
+        ], EventManagementModalController);
+        return EventManagementModalController;
+    }());
+    Swu.EventManagementModalController = EventManagementModalController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -3948,12 +4165,42 @@ var Swu;
         courseManagementService.prototype.getCourseById = function (id) {
             return this.apiService.getData("Course/getCourseById?id=" + id);
         };
+        courseManagementService.prototype.deleteById = function (id) {
+            return this.apiService.getData("course/deleteById?id=" + id);
+        };
         courseManagementService.$inject = ['apiService', 'AppConstant'];
         courseManagementService = __decorate([
             Swu.Module("app"),
             Swu.Factory({ name: "courseManagementService" })
         ], courseManagementService);
         return courseManagementService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var eventManagementService = (function () {
+        function eventManagementService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        eventManagementService.prototype.addNewOrUpdate = function (event) {
+            return this.apiService.postData(event, "event/addNewOrUpdate");
+        };
+        eventManagementService.prototype.getAll = function () {
+            return this.apiService.getData("event/allEvents");
+        };
+        eventManagementService.prototype.getEventById = function (id) {
+            return this.apiService.getData("event/getEventById?id=" + id);
+        };
+        eventManagementService.prototype.deleteById = function (id) {
+            return this.apiService.getData("event/deleteById?id=" + id);
+        };
+        eventManagementService.$inject = ['apiService', 'AppConstant'];
+        eventManagementService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "eventManagementService" })
+        ], eventManagementService);
+        return eventManagementService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

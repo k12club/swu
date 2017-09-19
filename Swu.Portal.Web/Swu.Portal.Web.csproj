@@ -721,6 +721,8 @@
     <Content Include="Scripts\app\settings\main.html" />
     <Content Include="Scripts\app\research\research_detail.html" />
     <Content Include="Scripts\app\research\research_list.html" />
+    <Content Include="Scripts\app\settings\view\event.tmpl.html" />
+    <Content Include="Scripts\app\settings\view\events.html" />
     <Content Include="Scripts\app\settings\view\profile.tmpl.html" />
     <Content Include="Scripts\app\settings\view\user.tmpl.html" />
     <Content Include="Scripts\app\settings\view\users.html" />
@@ -870,11 +872,14 @@
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
     <TypeScriptCompile Include="Scripts\app\menu\controller\NavController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\EventManagementController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\EventManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\MainSettingController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\ProfileModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\service\eventManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\profileService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\courseManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\userService.ts" />

@@ -4,15 +4,13 @@ using Swu.Portal.Data.Models;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Swu.Portal.Data.Context
 {
     public class SwuDBContext : DbContext, IDisposable
     {
         public DbSet<ApplicationUser> Users { get; set; }
-        //public DbSet<IdentityUserLogin> UserLogin { get; set; }
-        //public DbSet<IdentityRole> Roles { get; set; }
-        //public DbSet<IdentityUserRole> UserRole { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseCategory> CourseCategory { get; set; }
         public DbSet<Curriculum> Curriculums { get; set; }
@@ -32,14 +30,12 @@ namespace Swu.Portal.Data.Context
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;
-            //Database.SetInitializer(new DatabaseInitializer());
             this.Configuration.LazyLoadingEnabled = false;
         }
         public SwuDBContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             Configuration.ProxyCreationEnabled = false;
-            //Database.SetInitializer(new DatabaseInitializer());
             this.Configuration.LazyLoadingEnabled = false;
         }
 
@@ -49,20 +45,6 @@ namespace Swu.Portal.Data.Context
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(i => i.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(i => i.Id);
             modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.RoleId, i.UserId });
-
-            modelBuilder.Entity<Course>();
-            modelBuilder.Entity<CourseCategory>();
-            modelBuilder.Entity<Curriculum>();
-            //modelBuilder
-            //    .Entity<ApplicationUser>()
-            //    .HasMany<Course>(c => c.StudentCourses)
-            //    .WithMany(s => s.Students)
-            //    .Map(cs =>
-            //    {
-            //        cs.MapLeftKey("StudentRefId");
-            //        cs.MapRightKey("CourseRefId");
-            //        cs.ToTable("StudentCourse");
-            //    });
             modelBuilder
                 .Entity<ApplicationUser>()
                 .HasMany<Course>(c => c.TeacherCourses)
@@ -73,15 +55,7 @@ namespace Swu.Portal.Data.Context
                     ct.MapRightKey("CourseRefId");
                     ct.ToTable("TeacherCourse");
                 });
-            modelBuilder.Entity<Forum>();
-            modelBuilder.Entity<ForumCategory>();
-            modelBuilder.Entity<Comment>();
-            //modelBuilder.Entity<TeacherProfile>();
-            //modelBuilder.Entity<Contact>();
-            //modelBuilder.Entity<StudentProfile>();
-            //modelBuilder.Entity<ParentProfile>();
-            modelBuilder.Entity<StudentScore>();
-            modelBuilder.Entity<StudentCourse>();
+            modelBuilder.Entity<Course>();
         }
     }
 }

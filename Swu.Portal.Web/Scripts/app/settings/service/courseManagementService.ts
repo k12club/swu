@@ -4,6 +4,7 @@
         addNewOrUpdate(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
         getAll(): ng.IPromise<ICourseDetail[]>;
         getCourseById(id: string): ng.IPromise<ICourseDetail>;
+        deleteById(id: string): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "courseManagementService" })
@@ -24,5 +25,9 @@
         getCourseById(id: string): ng.IPromise<ICourseDetail> {
             return this.apiService.getData<ICourseDetail>("Course/getCourseById?id=" + id);
         }
+        deleteById(id: string): ng.IPromise<HttpStatusCode> {
+            return this.apiService.getData("course/deleteById?id=" + id);
+        }
+
     }
 }

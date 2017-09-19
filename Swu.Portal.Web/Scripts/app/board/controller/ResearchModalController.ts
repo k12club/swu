@@ -32,8 +32,7 @@
             this.$scope.edit = (id: string): void => {
                 this.webboardService.getResearchById(id).then((response) => {
                     this.$scope.research = response;
-                    //this.$scope.research.moreDetail.publishDate = moment(this.$scope.research.moreDetail.publishDate).format("MM/DD/YYYY");
-                    this.$scope.displayPublishDate = moment(this.$scope.research.moreDetail.publishDate).format("DD/MM/YYYY");
+                    this.$scope.displayPublishDate = moment(this.$scope.research.moreDetail.publishDate).format("MM/DD/YYYY");
                 }, (error) => { });
             }
             this.$scope.validate = (): void => {
@@ -55,6 +54,7 @@
                     models.push({ name: "research", value: this.$scope.research });
                     this.webboardService.addOrUpdateResearch(models).then((response) => {
                         this.$modalInstance.close(response);
+                        this.toastr.success("Success");
                     }, (error) => { });
                 }
 

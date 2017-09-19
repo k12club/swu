@@ -16,6 +16,7 @@
         isValid(): boolean;
         cancel(): void;
         save(): void;
+        delete(id: string): void;
     }
     @Module("app")
     @Controller({ name: "CourseManagementModalController" })
@@ -61,6 +62,12 @@
                     this.$state.go("app", {reload:true});
                 }
             }
+            this.$scope.delete = (id: string): void => {
+                this.courseManagementService.deleteById(id).then((response) => {
+                    this.$modalInstance.close();
+                    this.toastr.success("Success");
+                }, (error) => { });
+            };
             this.init();
         }
         init(): void {

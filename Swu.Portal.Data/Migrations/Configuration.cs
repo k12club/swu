@@ -369,7 +369,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c2 = new Course
             {
@@ -391,7 +392,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c3 = new Course
             {
@@ -413,7 +415,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c4 = new Course
             {
@@ -435,7 +438,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c5 = new Course
             {
@@ -457,7 +461,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t1
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c6 = new Course
             {
@@ -479,7 +484,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c7 = new Course
             {
@@ -501,7 +507,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c8 = new Course
             {
@@ -523,7 +530,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             var c9 = new Course
             {
@@ -545,7 +553,8 @@ namespace Swu.Portal.Data.Migrations
                 Teachers = new List<ApplicationUser> {
                     t2
                 },
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                CreatedDate = DateTime.Now
             };
             courses.Add(c1);
             courses.Add(c2);

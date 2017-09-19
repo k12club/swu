@@ -42,6 +42,7 @@ namespace Swu.Portal.Web.Api.Proxy
                 NumberOfStudents = c.Students.Count(),
                 NumberOfTeachers = c.Teachers.Count(),
                 NumberOfTimes = c.Curriculums.Sum(i => i.NumberOfTime),
+                NumberOfViews = c.NumberOfViews,
                 CreatedUserId = c.Teachers.First().Id,
                 CreatedDate = c.CreatedDate,
             };
@@ -70,7 +71,8 @@ namespace Swu.Portal.Web.Api.Proxy
             {
                 this.PhotosAlbum = new PhotoAlbumProxy(c.PhotoAlbums.FirstOrDefault());
             }
-            else {
+            else
+            {
                 this.PhotosAlbum.Id = "";
                 this.PhotosAlbum.Photos = new List<PhotoProxy>();
             }

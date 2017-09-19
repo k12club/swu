@@ -38,6 +38,36 @@
                             controller:'CourseManagementController as vm'
                         },
                     }
+                })
+                .state("settings.events", {
+                    parent: "settings",
+                    url: "/events",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/events.html',
+                            controller: 'EventManagementController as vm'
+                        },
+                    }
+                })
+                .state("settings.videos", {
+                    parent: "settings",
+                    url: "/videos",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/events.html',
+                            controller: 'EventManagementController as vm'
+                        },
+                    }
+                })
+                .state("settings.news", {
+                    parent: "settings",
+                    url: "/news",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/events.html',
+                            controller: 'EventManagementController as vm'
+                        },
+                    }
                 });
         }
     }

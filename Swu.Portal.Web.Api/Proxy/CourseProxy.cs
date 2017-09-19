@@ -39,6 +39,9 @@ namespace Swu.Portal.Web.Api.Proxy
         public int NumberOfStudents { get; set; }
         [JsonProperty(PropertyName = "numberOfTeachers")]
         public int NumberOfTeachers { get; set; }
+        [JsonProperty(PropertyName = "numberOfViews")]
+        public int NumberOfViews { get; set; }
+
         [JsonProperty(PropertyName = "lang")]
         public string Language { get; set; }
 

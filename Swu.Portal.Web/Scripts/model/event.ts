@@ -1,5 +1,6 @@
 ﻿module Swu {
     export interface IEvent {
+        id?:number;
         title?: string;
         place?: string;
         description?: string;

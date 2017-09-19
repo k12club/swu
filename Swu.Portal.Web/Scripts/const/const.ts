@@ -35,6 +35,18 @@ module Swu {
             {
                 name: "settings.users",
                 roles: ["Admin","Teacher","Officer"]
+            },
+            {
+                name: "settings.events",
+                roles: ["Admin", "Teacher", "Officer"]
+            },
+            {
+                name: "settings.videos",
+                roles: ["Admin", "Teacher", "Officer"]
+            },
+            {
+                name: "settings.news",
+                roles: ["Admin", "Teacher", "Officer"]
             }
         ];
     }
