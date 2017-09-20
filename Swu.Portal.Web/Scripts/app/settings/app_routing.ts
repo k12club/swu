@@ -64,8 +64,8 @@
                     url: "/news",
                     views: {
                         'subContent@settings': {
-                            templateUrl: '/Scripts/app/settings/view/events.html',
-                            controller: 'EventManagementController as vm'
+                            templateUrl: '/Scripts/app/settings/view/news.html',
+                            controller: 'NewsManagementController as vm'
                         },
                     }
                 });

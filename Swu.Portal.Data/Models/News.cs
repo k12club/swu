@@ -17,6 +17,8 @@ namespace Swu.Portal.Data.Models
         public string Title_EN { get; set; }
         public string ImageUrl { get; set; }
         public string CreatedBy { get; set; }
+        public string FullDescription_TH { get; set; }
+        public string FullDescription_EN { get; set; }
         public DateTime StartDate { get; set; }
     }
 }

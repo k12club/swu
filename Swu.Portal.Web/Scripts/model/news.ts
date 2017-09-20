@@ -6,5 +6,7 @@
         title_th: string;
         createdBy: string;
         startDate: Date;
+        fullDescription_en: string;
+        fullDescription_th: string;
     }
 }

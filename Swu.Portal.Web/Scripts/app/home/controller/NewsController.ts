@@ -4,6 +4,7 @@
         render(news: INews[]): void;
         registerScript(): void;
         count: number;
+        html: string;
     }
     @Module("app")
     @Controller({ name: "NewsController" })
@@ -33,19 +34,19 @@
                         <div class='irs-blog-post' >\
                             <div class='irs-bp-thumb' > <img class='img-responsive img-fluid' src= '../../../"+ value.imageUrl + "' alt= 'blog/1.jpg' > </div>\
                                 <div class='irs-bp-details' >\
-                                                    <h3 class='irs-bp-title' >"+ value.title + "</h3>\
-                                                        <div class='irs-bp-meta' >\
-                                                            <ul class='list-inline irs-bp-meta-dttime' >\
-                                                                <li>by <span class='text-thm1' >"+ value.createdBy + "</span> </li >\
-                                                                    <li><span class='flaticon-clock-1' > </span>"+ value.startDate + "</li>\
-                                                                        </ul>\
-                                                                        </div>\
-                                                                        </div>\
-                                                                        </div>\
-                                                                        </div>";
+                                    <h4 class='irs-bp-title' >"+ value.title + "</h3>\
+                                        <div class='irs-bp-meta' >\
+                                            <ul class='list-inline irs-bp-meta-dttime' >\
+                                                <li><span class='flaticon-clock-1' > </span>"+ moment(value.startDate).format('DD/MM/YYYY h:mm:ss a') + "</li>\
+                                            </ul>\
+                                        </div>\
+                                </div>\
+                            </div>\
+                        </div>";
                     html += elements;
                 });
                 $('#main-news').html(html);
+                //this.$scope.html = html;
             };
             this.$scope.registerScript = (): void => {
                 if ($('.irs-blog-slider').length) {
@@ -106,7 +107,9 @@
                                 title_th: value.title_th,
                                 imageUrl: value.imageUrl,
                                 createdBy: value.createdBy,
-                                startDate: value.startDate
+                                startDate: value.startDate,
+                                fullDescription_en :value.fullDescription_en,
+                                fullDescription_th : value.fullDescription_th
                             }
                         );
                     });

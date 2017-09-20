@@ -118,10 +118,8 @@ namespace Swu.Portal.Web.Api
         {
             var course = this._courseRepository.FindById(id);
 
-            //TODO: need to fix this bug when update number of view
-            //update number of views
-            //course.NumberOfViews += 1;
-            //this._courseRepository.Update(course);
+            course.NumberOfViews += 1;
+            this._courseRepository.Update(course);
 
             var allDetail = new CourseAllDetailProxy(course);
             List<Dictionary<int, StudentScoreProxy>> studentScores = new List<Dictionary<int, StudentScoreProxy>>();
@@ -272,6 +270,7 @@ and start a new fresh tomorrow. ",
                 if (string.IsNullOrEmpty(course.Id))
                 {
                     course.Id = GuID;
+                    course.CreatedDate = this._datetimeRepository.Now();
                     this._courseService.Add(course.ToEntity(), course.CreatedUserId);
 
                 }

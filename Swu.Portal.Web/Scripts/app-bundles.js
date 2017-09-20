@@ -1026,8 +1026,8 @@ var Swu;
                 url: "/news",
                 views: {
                     'subContent@settings': {
-                        templateUrl: '/Scripts/app/settings/view/events.html',
-                        controller: 'EventManagementController as vm'
+                        templateUrl: '/Scripts/app/settings/view/news.html',
+                        controller: 'NewsManagementController as vm'
                     }
                 }
             });
@@ -1807,16 +1807,15 @@ var Swu;
                         <div class='irs-blog-post' >\
                             <div class='irs-bp-thumb' > <img class='img-responsive img-fluid' src= '../../../" + value.imageUrl + "' alt= 'blog/1.jpg' > </div>\
                                 <div class='irs-bp-details' >\
-                                                    <h3 class='irs-bp-title' >" + value.title + "</h3>\
-                                                        <div class='irs-bp-meta' >\
-                                                            <ul class='list-inline irs-bp-meta-dttime' >\
-                                                                <li>by <span class='text-thm1' >" + value.createdBy + "</span> </li >\
-                                                                    <li><span class='flaticon-clock-1' > </span>" + value.startDate + "</li>\
-                                                                        </ul>\
-                                                                        </div>\
-                                                                        </div>\
-                                                                        </div>\
-                                                                        </div>";
+                                    <h4 class='irs-bp-title' >" + value.title + "</h3>\
+                                        <div class='irs-bp-meta' >\
+                                            <ul class='list-inline irs-bp-meta-dttime' >\
+                                                <li><span class='flaticon-clock-1' > </span>" + moment(value.startDate).format('DD/MM/YYYY h:mm:ss a') + "</li>\
+                                            </ul>\
+                                        </div>\
+                                </div>\
+                            </div>\
+                        </div>";
                     html += elements;
                 });
                 $('#main-news').html(html);
@@ -1879,7 +1878,9 @@ var Swu;
                             title_th: value.title_th,
                             imageUrl: value.imageUrl,
                             createdBy: value.createdBy,
-                            startDate: value.startDate
+                            startDate: value.startDate,
+                            fullDescription_en: value.fullDescription_en,
+                            fullDescription_th: value.fullDescription_th
                         });
                     });
                     $scope.swapLanguage(newValue);
@@ -4273,6 +4274,174 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var NewsManagementController = (function () {
+        function NewsManagementController($scope, $state, newsManagementService, $uibModal) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.newsManagementService = newsManagementService;
+            this.$uibModal = $uibModal;
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.data.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.display = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/news.tmpl.html',
+                    controller: Swu.NewsManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }, size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/news.tmpl.html',
+                    controller: Swu.NewsManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }, size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.getData = function () {
+                _this.newsManagementService.getAll().then(function (response) {
+                    _this.$scope.data = response;
+                    console.log(response);
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+                }, function (error) { });
+            };
+            this.init();
+        }
+        NewsManagementController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.getData();
+        };
+        ;
+        NewsManagementController.$inject = ["$scope", "$state", "newsManagementService", "$uibModal"];
+        NewsManagementController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "NewsManagementController" })
+        ], NewsManagementController);
+        return NewsManagementController;
+    }());
+    Swu.NewsManagementController = NewsManagementController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var NewsManagementModalController = (function () {
+        function NewsManagementModalController($scope, $state, newsManagementService, toastr, $modalInstance, auth, id, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.newsManagementService = newsManagementService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.auth = auth;
+            this.id = id;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                _this.newsManagementService.getById(id).then(function (response) {
+                    _this.$scope.news = response;
+                    _this.$scope.displayStartDate = moment(_this.$scope.news.startDate).format("MM/DD/YYYY");
+                }, function (error) { });
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.auth.isLoggedIn()) {
+                    if (_this.$scope.isValid()) {
+                        _this.$scope.news.startDate = new Date(_this.$scope.displayStartDate);
+                        var models = [];
+                        models.push({ name: "file", value: _this.$scope.file });
+                        models.push({ name: "news", value: _this.$scope.news });
+                        _this.newsManagementService.addNewOrUpdate(models).then(function (response) {
+                            _this.$modalInstance.close();
+                            _this.toastr.success("Success");
+                        }, function (error) { });
+                    }
+                }
+                else {
+                    _this.toastr.error("Time out expired");
+                    _this.$state.go("app", { reload: true });
+                }
+            };
+            this.$scope.delete = function (id) {
+                _this.newsManagementService.deleteById(id).then(function (response) {
+                    _this.$modalInstance.close();
+                    _this.toastr.success("Success");
+                }, function (error) { });
+            };
+            this.init();
+        }
+        NewsManagementModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New News";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit News";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        NewsManagementModalController.$inject = ["$scope", "$state", "newsManagementService", "toastr", "$modalInstance", "AuthServices", "id", "mode"];
+        NewsManagementModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "NewsManagementModalController" })
+        ], NewsManagementModalController);
+        return NewsManagementModalController;
+    }());
+    Swu.NewsManagementModalController = NewsManagementModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var userService = (function () {
         function userService(apiService, constant) {
             this.apiService = apiService;
@@ -4395,6 +4564,33 @@ var Swu;
             Swu.Factory({ name: "videoManagementService" })
         ], videoManagementService);
         return videoManagementService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var newsManagementService = (function () {
+        function newsManagementService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        newsManagementService.prototype.addNewOrUpdate = function (models) {
+            return this.apiService.postWithFormData(models, "news/addNewOrUpdate");
+        };
+        newsManagementService.prototype.getAll = function () {
+            return this.apiService.getData("news/all");
+        };
+        newsManagementService.prototype.getById = function (id) {
+            return this.apiService.getData("news/getById?id=" + id);
+        };
+        newsManagementService.prototype.deleteById = function (id) {
+            return this.apiService.getData("news/deleteById?id=" + id);
+        };
+        newsManagementService.$inject = ['apiService', 'AppConstant'];
+        newsManagementService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "newsManagementService" })
+        ], newsManagementService);
+        return newsManagementService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

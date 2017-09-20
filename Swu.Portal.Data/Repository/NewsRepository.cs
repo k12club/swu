@@ -14,7 +14,7 @@ namespace Swu.Portal.Data.Repository
         private SwuDBContext context;
         public NewsRepository()
         {
-            this.context = DbContextFactory.Instance.GetOrCreateContext();
+            this.context = new SwuDBContext(); //DbContextFactory.Instance.GetOrCreateContext();
         }
         public IEnumerable<News> List
         {

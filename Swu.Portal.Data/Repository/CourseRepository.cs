@@ -14,7 +14,7 @@ namespace Swu.Portal.Data.Repository
         private SwuDBContext context;
         public CourseRepository()
         {
-            this.context = DbContextFactory.Instance.GetOrCreateContext();
+            this.context = new SwuDBContext(); //DbContextFactory.Instance.GetOrCreateContext();
         }
         public IEnumerable<Course> List
         {
@@ -47,11 +47,8 @@ namespace Swu.Portal.Data.Repository
         }
         public void Update(Course entity)
         {
-            using (var context = new SwuDBContext())
-            {
-                this.context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-                this.context.SaveChanges();
-            }
+            this.context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            this.context.SaveChanges();
         }
         public Course FindById(string Id)
         {

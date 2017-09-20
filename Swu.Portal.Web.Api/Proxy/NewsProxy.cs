@@ -10,6 +10,8 @@ namespace Swu.Portal.Web.Api.Proxy
 {
     public class NewsProxy
     {
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
         [JsonProperty(PropertyName = "title_th")]
         public string Title_TH { get; set; }
         [JsonProperty(PropertyName = "title_en")]
@@ -20,17 +22,25 @@ namespace Swu.Portal.Web.Api.Proxy
         public string CreatedBy { get; set; }
         [JsonProperty(PropertyName = "startDate")]
         public DateTime StartDate { get; set; }
+
+        [JsonProperty(PropertyName = "description_th")]
+        public string Description_TH { get; set; }
+        [JsonProperty(PropertyName = "description_en")]
+        public string Description_EN { get; set; }
         public NewsProxy()
         {
 
         }
         public NewsProxy(News news)
         {
+            this.Id = news.Id;
             this.Title_EN = news.Title_EN;
             this.Title_TH = news.Title_TH;
             this.ImageUrl = news.ImageUrl;
             this.StartDate = news.StartDate;
-            this.CreatedBy = news.ApplicationUser.FirstName_EN + " " + news.ApplicationUser.LastName_EN;
+            this.Description_EN = news.FullDescription_EN;
+            this.Description_TH = news.FullDescription_TH;
+            //this.CreatedBy = news.ApplicationUser.FirstName_EN + " " + news.ApplicationUser.LastName_EN;
         }
     }
 }
