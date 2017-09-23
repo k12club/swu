@@ -21,7 +21,11 @@ module Swu {
             "board.research",
             "settings",
             "settings.courses",
-            "settings.users"
+            "settings.users",
+            "settings.events",
+            "settings.videos",
+            "settings.news",
+            "settings.categories"
         ];
         authorizeStateList = [
             {
@@ -47,7 +51,12 @@ module Swu {
             {
                 name: "settings.news",
                 roles: ["Admin", "Teacher", "Officer"]
+            },
+            {
+                name: "settings.categories",
+                roles: ["Admin", "Teacher", "Officer"]
             }
+            
         ];
     }
 }

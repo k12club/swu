@@ -89,6 +89,8 @@
     "Scripts/app/settings/controller/VideoManagementModalController.ts",
     "Scripts/app/settings/controller/NewsManagementController.ts",
     "Scripts/app/settings/controller/NewsManagementModalController.ts",
+    "Scripts/app/settings/controller/CategoryManagementController.ts",
+    "Scripts/app/settings/controller/CategoryMangementModalController.ts",
 
     "Scripts/app/settings/service/userService.ts",
     "Scripts/app/settings/service/profileService.ts",
@@ -96,6 +98,7 @@
     "Scripts/app/settings/service/eventManagementService.ts",
     "Scripts/app/settings/service/videoManagementService.ts",
     "Scripts/app/settings/service/newsManagementService.ts",
+    "Scripts/app/settings/service/categoryManagementService.ts",
 
     "Scripts/app/forum/controller/ForumController.ts",
     "Scripts/app/forum/controller/CommentModalController.ts",

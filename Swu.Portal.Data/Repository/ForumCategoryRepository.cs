@@ -13,7 +13,7 @@ namespace Swu.Portal.Data.Repository
         private SwuDBContext context;
         public ForumCategoryRepository()
         {
-            this.context = DbContextFactory.Instance.GetOrCreateContext();
+            this.context = new SwuDBContext();//DbContextFactory.Instance.GetOrCreateContext();
         }
         public IEnumerable<ForumCategory> List
         {
@@ -33,6 +33,7 @@ namespace Swu.Portal.Data.Repository
         }
         public void Delete(ForumCategory entity)
         {
+            this.context.ForumCategory.Attach(entity);
             this.context.ForumCategory.Remove(entity);
             this.context.SaveChanges();
         }

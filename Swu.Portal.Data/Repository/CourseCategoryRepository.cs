@@ -13,7 +13,7 @@ namespace Swu.Portal.Data.Repository
         private SwuDBContext context;
         public CourseCategoryRepository()
         {
-            this.context = DbContextFactory.Instance.GetOrCreateContext();
+            this.context = new SwuDBContext(); //DbContextFactory.Instance.GetOrCreateContext();
         }
         public IEnumerable<CourseCategory> List
         {
@@ -34,6 +34,7 @@ namespace Swu.Portal.Data.Repository
         }
         public void Delete(CourseCategory entity)
         {
+            this.context.CourseCategory.Attach(entity);
             this.context.CourseCategory.Remove(entity);
             this.context.SaveChanges();
         }

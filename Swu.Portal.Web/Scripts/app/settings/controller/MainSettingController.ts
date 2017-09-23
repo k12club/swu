@@ -22,7 +22,8 @@
             this.$scope.menus = [];
             this.$scope.displayMenus = [];
             this.$scope.menus.push({ stateName: "settings", name: "Personal Info", icon:"glyphicon glyphicon-user" });
-            this.$scope.menus.push({ stateName: "settings.users", name: "User Management", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.users", name: "User", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.categories", name: "Category", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.courses", name: "Courses", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.events", name: "Events", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.videos", name: "Videos", icon: "flaticon-arrows-3" });

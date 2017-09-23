@@ -163,6 +163,8 @@ namespace Swu.Portal.Web.Api.V1
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+
+
         [HttpPost, Route("addNewCategory")]
         public HttpResponseMessage AddNewCategory(WebboardCategoryProxy category)
         {
@@ -172,6 +174,51 @@ namespace Swu.Portal.Web.Api.V1
                 {
                     Title = category.Title
                 });
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpPost, Route("addNewOrUpdateCategory")]
+        public HttpResponseMessage AddNewOrUpdateCategory(WebboardCategoryProxy category)
+        {
+            try
+            {
+                if (category.Id == 0)
+                {
+                    this._researchCategoryRepository.Add(new ResearchCategory
+                    {
+                        Title = category.Title
+                    });
+                }
+                else
+                {
+                    var c = this._researchCategoryRepository.FindById(category.Id);
+                    c.Title = category.Title;
+                    this._researchCategoryRepository.Update(c);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("getCategoryById")]
+        public WebboardCategoryProxy GetCategoryById(int id)
+        {
+            var c = this._researchCategoryRepository.FindById(id);
+            return new WebboardCategoryProxy(c);
+        }
+        [HttpGet, Route("deleteCategoryById")]
+        public HttpResponseMessage DeleteCategoryById(int id)
+        {
+            try
+            {
+                var c = this._researchCategoryRepository.FindById(id);
+                this._researchCategoryRepository.Delete(c);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)

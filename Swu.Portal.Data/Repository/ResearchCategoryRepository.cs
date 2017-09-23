@@ -13,7 +13,7 @@ namespace Swu.Portal.Data.Repository
         private SwuDBContext context;
         public ResearchCategoryRepository()
         {
-            this.context = DbContextFactory.Instance.GetOrCreateContext();
+            this.context = new SwuDBContext(); //DbContextFactory.Instance.GetOrCreateContext();
         }
         public IEnumerable<ResearchCategory> List
         {
@@ -35,6 +35,7 @@ namespace Swu.Portal.Data.Repository
         }
         public void Delete(ResearchCategory entity)
         {
+            this.context.ResearchCategory.Attach(entity);
             this.context.ResearchCategory.Remove(entity);
             this.context.SaveChanges();
         }

@@ -514,7 +514,11 @@ var Swu;
                 "board.research",
                 "settings",
                 "settings.courses",
-                "settings.users"
+                "settings.users",
+                "settings.events",
+                "settings.videos",
+                "settings.news",
+                "settings.categories"
             ];
             this.authorizeStateList = [
                 {
@@ -539,6 +543,10 @@ var Swu;
                 },
                 {
                     name: "settings.news",
+                    roles: ["Admin", "Teacher", "Officer"]
+                },
+                {
+                    name: "settings.categories",
                     roles: ["Admin", "Teacher", "Officer"]
                 }
             ];
@@ -1028,6 +1036,16 @@ var Swu;
                     'subContent@settings': {
                         templateUrl: '/Scripts/app/settings/view/news.html',
                         controller: 'NewsManagementController as vm'
+                    }
+                }
+            })
+                .state("settings.categories", {
+                parent: "settings",
+                url: "/categories",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/category.html',
+                        controller: 'CategoryManagementController as vm'
                     }
                 }
             });
@@ -3419,7 +3437,8 @@ var Swu;
             this.$scope.menus = [];
             this.$scope.displayMenus = [];
             this.$scope.menus.push({ stateName: "settings", name: "Personal Info", icon: "glyphicon glyphicon-user" });
-            this.$scope.menus.push({ stateName: "settings.users", name: "User Management", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.users", name: "User", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.categories", name: "Category", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.courses", name: "Courses", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.events", name: "Events", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.videos", name: "Videos", icon: "flaticon-arrows-3" });
@@ -4442,6 +4461,357 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var CategoryManagementController = (function () {
+        function CategoryManagementController($scope, $state, categoryManagementService, $uibModal) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.categoryManagementService = categoryManagementService;
+            this.$uibModal = $uibModal;
+            this.$scope.getTotalPageNumber1 = function () {
+                return (_this.$scope.course.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate1 = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayCourse = displayData;
+            };
+            this.$scope.changePage1 = function (page) {
+                _this.$scope.currentPage1 = page;
+                _this.$scope.paginate1(_this.$scope.course, _this.$scope.displayCourse, _this.$scope.pageSize, _this.$scope.currentPage1);
+            };
+            this.$scope.next1 = function () {
+                var nextPage = _this.$scope.currentPage1 + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber1()) {
+                    _this.$scope.changePage1(nextPage);
+                }
+            };
+            this.$scope.prev1 = function () {
+                var prevPage = _this.$scope.currentPage1 - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage1(prevPage);
+                }
+            };
+            this.$scope.getTotalPageNumber2 = function () {
+                return (_this.$scope.research.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate2 = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayResearch = displayData;
+            };
+            this.$scope.changePage2 = function (page) {
+                _this.$scope.currentPage2 = page;
+                _this.$scope.paginate2(_this.$scope.course, _this.$scope.displayCourse, _this.$scope.pageSize, _this.$scope.currentPage2);
+            };
+            this.$scope.next2 = function () {
+                var nextPage = _this.$scope.currentPage2 + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber2()) {
+                    _this.$scope.changePage2(nextPage);
+                }
+            };
+            this.$scope.prev2 = function () {
+                var prevPage = _this.$scope.currentPage2 - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage2(prevPage);
+                }
+            };
+            this.$scope.getTotalPageNumber3 = function () {
+                return (_this.$scope.forum.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate3 = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayForum = displayData;
+            };
+            this.$scope.changePage3 = function (page) {
+                _this.$scope.currentPage3 = page;
+                _this.$scope.paginate3(_this.$scope.course, _this.$scope.displayCourse, _this.$scope.pageSize, _this.$scope.currentPage3);
+            };
+            this.$scope.next3 = function () {
+                var nextPage = _this.$scope.currentPage3 + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber3()) {
+                    _this.$scope.changePage3(nextPage);
+                }
+            };
+            this.$scope.prev3 = function () {
+                var prevPage = _this.$scope.currentPage3 - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage3(prevPage);
+                }
+            };
+            this.$scope.addNew1 = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/category.tmpl.html',
+                    controller: Swu.CategoryMangementModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        type: function () {
+                            return 1;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData1();
+                });
+            };
+            this.$scope.edit1 = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/category.tmpl.html',
+                    controller: Swu.CategoryMangementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        type: function () {
+                            return 1;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData1();
+                });
+            };
+            this.$scope.getData1 = function () {
+                _this.categoryManagementService.getAll1().then(function (response) {
+                    _this.$scope.course = response;
+                    _this.$scope.totalPageNumber1 = _this.$scope.getTotalPageNumber1();
+                    _this.$scope.paginate1(_this.$scope.course, _this.$scope.displayCourse, _this.$scope.pageSize, _this.$scope.currentPage1);
+                }, function (error) { });
+            };
+            this.$scope.addNew2 = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/category.tmpl.html',
+                    controller: Swu.CategoryMangementModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        type: function () {
+                            return 2;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData2();
+                });
+            };
+            this.$scope.edit2 = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/category.tmpl.html',
+                    controller: Swu.CategoryMangementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        type: function () {
+                            return 2;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData2();
+                });
+            };
+            this.$scope.getData2 = function () {
+                _this.categoryManagementService.getAll2().then(function (response) {
+                    _this.$scope.research = response;
+                    _this.$scope.totalPageNumber2 = _this.$scope.getTotalPageNumber2();
+                    _this.$scope.paginate2(_this.$scope.research, _this.$scope.displayResearch, _this.$scope.pageSize, _this.$scope.currentPage2);
+                }, function (error) { });
+            };
+            this.$scope.addNew3 = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/category.tmpl.html',
+                    controller: Swu.CategoryMangementModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        type: function () {
+                            return 3;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData3();
+                });
+            };
+            this.$scope.edit3 = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/category.tmpl.html',
+                    controller: Swu.CategoryMangementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        type: function () {
+                            return 3;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData3();
+                });
+            };
+            this.$scope.getData3 = function () {
+                _this.categoryManagementService.getAll3().then(function (response) {
+                    _this.$scope.forum = response;
+                    _this.$scope.totalPageNumber3 = _this.$scope.getTotalPageNumber3();
+                    _this.$scope.paginate3(_this.$scope.forum, _this.$scope.displayResearch, _this.$scope.pageSize, _this.$scope.currentPage3);
+                }, function (error) { });
+            };
+            this.init();
+        }
+        CategoryManagementController.prototype.init = function () {
+            this.$scope.currentPage1 = 0;
+            this.$scope.currentPage2 = 0;
+            this.$scope.currentPage3 = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.getData1();
+            this.$scope.getData2();
+            this.$scope.getData3();
+        };
+        ;
+        CategoryManagementController.$inject = ["$scope", "$state", "categoryManagementService", "$uibModal"];
+        CategoryManagementController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CategoryManagementController" })
+        ], CategoryManagementController);
+        return CategoryManagementController;
+    }());
+    Swu.CategoryManagementController = CategoryManagementController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var CategoryMangementModalController = (function () {
+        function CategoryMangementModalController($scope, $state, categoryManagementService, toastr, $modalInstance, auth, id, type, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.categoryManagementService = categoryManagementService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.auth = auth;
+            this.id = id;
+            this.type = type;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.type = type;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                if (_this.$scope.type == 1) {
+                    _this.categoryManagementService.getById1(id).then(function (response) {
+                        _this.$scope.category = response;
+                    }, function (error) { });
+                }
+                else if (_this.$scope.type == 2) {
+                    _this.categoryManagementService.getById2(id).then(function (response) {
+                        _this.$scope.category = response;
+                    }, function (error) { });
+                }
+                else if (_this.$scope.type == 3) {
+                    _this.categoryManagementService.getById3(id).then(function (response) {
+                        _this.$scope.category = response;
+                    }, function (error) { });
+                }
+                else { }
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.$scope.isValid()) {
+                    if (_this.$scope.type == 1) {
+                        _this.categoryManagementService.addNewOrUpdate1(_this.$scope.category).then(function (response) {
+                            _this.$modalInstance.close();
+                            _this.toastr.success("Success");
+                        }, function (error) { });
+                    }
+                    else if (_this.$scope.type == 2) {
+                        _this.categoryManagementService.addNewOrUpdate2(_this.$scope.category).then(function (response) {
+                            _this.$modalInstance.close();
+                            _this.toastr.success("Success");
+                        }, function (error) { });
+                    }
+                    else if (_this.$scope.type == 3) {
+                        _this.categoryManagementService.addNewOrUpdate3(_this.$scope.category).then(function (response) {
+                            _this.$modalInstance.close();
+                            _this.toastr.success("Success");
+                        }, function (error) { });
+                    }
+                    else { }
+                }
+            };
+            this.$scope.delete = function (id) {
+                if (_this.$scope.type == 1) {
+                    _this.categoryManagementService.deleteById1(id).then(function (response) {
+                        _this.$modalInstance.close();
+                        _this.toastr.success("Success");
+                    }, function (error) { });
+                }
+                else if (_this.$scope.type == 2) {
+                    _this.categoryManagementService.deleteById2(id).then(function (response) {
+                        _this.$modalInstance.close();
+                        _this.toastr.success("Success");
+                    }, function (error) { });
+                }
+                else if (_this.$scope.type == 3) {
+                    _this.categoryManagementService.deleteById3(id).then(function (response) {
+                        _this.$modalInstance.close();
+                        _this.toastr.success("Success");
+                    }, function (error) { });
+                }
+                else { }
+            };
+            this.init();
+        }
+        CategoryMangementModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Category";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Category";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        CategoryMangementModalController.$inject = ["$scope", "$state", "categoryManagementService", "toastr", "$modalInstance", "AuthServices", "id", "type", "mode"];
+        CategoryMangementModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CategoryMangementModalController" })
+        ], CategoryMangementModalController);
+        return CategoryMangementModalController;
+    }());
+    Swu.CategoryMangementModalController = CategoryMangementModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var userService = (function () {
         function userService(apiService, constant) {
             this.apiService = apiService;
@@ -4591,6 +4961,57 @@ var Swu;
             Swu.Factory({ name: "newsManagementService" })
         ], newsManagementService);
         return newsManagementService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var categoryManagementService = (function () {
+        function categoryManagementService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        categoryManagementService.prototype.addNewOrUpdate1 = function (category) {
+            return this.apiService.postData(category, "course/addNewOrUpdateCategory");
+        };
+        categoryManagementService.prototype.getAll1 = function () {
+            return this.apiService.getData("course/category");
+        };
+        categoryManagementService.prototype.getById1 = function (id) {
+            return this.apiService.getData("course/getCategoryById?id=" + id);
+        };
+        categoryManagementService.prototype.deleteById1 = function (id) {
+            return this.apiService.getData("course/deleteCategoryById?id=" + id);
+        };
+        categoryManagementService.prototype.addNewOrUpdate2 = function (category) {
+            return this.apiService.postData(category, "research/addNewOrUpdateCategory");
+        };
+        categoryManagementService.prototype.getAll2 = function () {
+            return this.apiService.getData("research/category");
+        };
+        categoryManagementService.prototype.getById2 = function (id) {
+            return this.apiService.getData("research/getCategoryById?id=" + id);
+        };
+        categoryManagementService.prototype.deleteById2 = function (id) {
+            return this.apiService.getData("research/deleteCategoryById?id=" + id);
+        };
+        categoryManagementService.prototype.addNewOrUpdate3 = function (category) {
+            return this.apiService.postData(category, "forum/addNewOrUpdateCategory");
+        };
+        categoryManagementService.prototype.getAll3 = function () {
+            return this.apiService.getData("forum/category");
+        };
+        categoryManagementService.prototype.getById3 = function (id) {
+            return this.apiService.getData("forum/getCategoryById?id=" + id);
+        };
+        categoryManagementService.prototype.deleteById3 = function (id) {
+            return this.apiService.getData("forum/deleteCategoryById?id=" + id);
+        };
+        categoryManagementService.$inject = ['apiService', 'AppConstant'];
+        categoryManagementService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "categoryManagementService" })
+        ], categoryManagementService);
+        return categoryManagementService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

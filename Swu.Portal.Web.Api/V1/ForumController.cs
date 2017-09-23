@@ -87,7 +87,7 @@ namespace Swu.Portal.Web.Api.V1
         {
             var forum = this._forumRepository.FindById(id);
             var comments = this._commentRepository.List.Where(i => i.ForumId == id)
-                .Select(c => new CommentProxy(c)).ToList();
+                .Select(c => new CommentProxy(c)).OrderByDescending(o=>o.CreatedDate).ToList();
             return new ForumDetailProxy
             {
                 Forum = new ForumProxy
@@ -211,6 +211,8 @@ namespace Swu.Portal.Web.Api.V1
             return new CommentProxy(comment);
         }
         [HttpPost, Route("addNewCategory")]
+
+
         public HttpResponseMessage AddNewCategory(WebboardCategoryProxy category)
         {
             try
@@ -218,6 +220,51 @@ namespace Swu.Portal.Web.Api.V1
                 this._forumCategoryRepository.Add(new ForumCategory {
                     Title=category.Title
                 });
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpPost, Route("addNewOrUpdateCategory")]
+        public HttpResponseMessage AddNewOrUpdateCategory(WebboardCategoryProxy category)
+        {
+            try
+            {
+                if (category.Id == 0)
+                {
+                    this._forumCategoryRepository.Add(new ForumCategory
+                    {
+                        Title = category.Title
+                    });
+                }
+                else
+                {
+                    var c = this._forumCategoryRepository.FindById(category.Id);
+                    c.Title = category.Title;
+                    this._forumCategoryRepository.Update(c);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("getCategoryById")]
+        public WebboardCategoryProxy GetCategoryById(int id)
+        {
+            var c = this._forumCategoryRepository.FindById(id);
+            return new WebboardCategoryProxy(c);
+        }
+        [HttpGet, Route("deleteCategoryById")]
+        public HttpResponseMessage DeleteCategoryById(int id)
+        {
+            try
+            {
+                var c = this._forumCategoryRepository.FindById(id);
+                this._forumCategoryRepository.Delete(c);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)

@@ -79,7 +79,8 @@ namespace Swu.Portal.Web.Api
                 var recently = cards.OrderByDescending(c => c.Course.CreatedDate).Take(4).ToList();
                 foreach (var r in recently)
                 {
-                    result.Add(new CourseCardProxy {
+                    result.Add(new CourseCardProxy
+                    {
                         Course = r.Course,
                         Teacher = r.Teacher,
                         CardType = Enum.CardType.Recently
@@ -161,17 +162,6 @@ namespace Swu.Portal.Web.Api
                 webboardItems.Add(new WebboardItemProxy(c, this._configurationRepository.DefaultUserImage));
             }
             return webboardItems;
-        }
-        [HttpGet, Route("category")]
-        public List<WebboardCategoryProxy> GetCategory()
-        {
-            var webboardCategories = new List<WebboardCategoryProxy>();
-            var catgories = this._courseCategoryRepository.List.ToList();
-            foreach (var c in catgories)
-            {
-                webboardCategories.Add(new WebboardCategoryProxy(c));
-            }
-            return webboardCategories;
         }
         [HttpGet, Route("getCourseByCriteria")]
         public List<CourseBriefDetailProxy> getCourseByCriteria(string keyword)
@@ -457,6 +447,33 @@ and start a new fresh tomorrow. ",
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+        [HttpGet, Route("deleteById")]
+        public HttpResponseMessage DeleteById(string id)
+        {
+            try
+            {
+                var c = this._courseRepository.FindById(id);
+                this._courseRepository.Delete(c);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+
+        [HttpGet, Route("category")]
+        public List<WebboardCategoryProxy> GetCategory()
+        {
+            var webboardCategories = new List<WebboardCategoryProxy>();
+            var catgories = this._courseCategoryRepository.List.ToList();
+            foreach (var c in catgories)
+            {
+                webboardCategories.Add(new WebboardCategoryProxy(c));
+            }
+            return webboardCategories;
+        }
         [HttpPost, Route("addNewCategory")]
         public HttpResponseMessage AddNewCategory(WebboardCategoryProxy category)
         {
@@ -473,13 +490,43 @@ and start a new fresh tomorrow. ",
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-        [HttpGet, Route("deleteById")]
-        public HttpResponseMessage DeleteById(string id)
+        [HttpPost, Route("addNewOrUpdateCategory")]
+        public HttpResponseMessage AddNewOrUpdateCategory(WebboardCategoryProxy category)
         {
             try
             {
-                var c = this._courseRepository.FindById(id);
-                this._courseRepository.Delete(c);
+                if (category.Id == 0)
+                {
+                    this._courseCategoryRepository.Add(new CourseCategory
+                    {
+                        Title = category.Title
+                    });
+                }
+                else {
+                    var c = this._courseCategoryRepository.FindById(category.Id);
+                    c.Title = category.Title;
+                    this._courseCategoryRepository.Update(c);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("getCategoryById")]
+        public WebboardCategoryProxy GetCategoryById(int id)
+        {
+            var c = this._courseCategoryRepository.FindById(id);
+            return new WebboardCategoryProxy(c);
+        }
+        [HttpGet, Route("deleteCategoryById")]
+        public HttpResponseMessage DeleteCategoryById(int id)
+        {
+            try
+            {
+                var c = this._courseCategoryRepository.FindById(id);
+                this._courseCategoryRepository.Delete(c);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)

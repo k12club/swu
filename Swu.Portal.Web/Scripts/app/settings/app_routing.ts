@@ -68,6 +68,16 @@
                             controller: 'NewsManagementController as vm'
                         },
                     }
+                })
+                .state("settings.categories", {
+                    parent: "settings",
+                    url: "/categories",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/category.html',
+                            controller: 'CategoryManagementController as vm'
+                        },
+                    }
                 });
         }
     }
