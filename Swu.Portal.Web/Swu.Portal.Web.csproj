@@ -569,6 +569,16 @@
     <Content Include="Content\images\resource\testi3.jpg" />
     <Content Include="Content\images\resource\testimonials-bg.jpg" />
     <Content Include="Content\images\resource\video-bg.jpg" />
+    <Content Include="Content\images\team\1.jpg" />
+    <Content Include="Content\images\team\10.jpg" />
+    <Content Include="Content\images\team\2.jpg" />
+    <Content Include="Content\images\team\3.jpg" />
+    <Content Include="Content\images\team\4.jpg" />
+    <Content Include="Content\images\team\5.jpg" />
+    <Content Include="Content\images\team\6.jpg" />
+    <Content Include="Content\images\team\7.jpg" />
+    <Content Include="Content\images\team\8.jpg" />
+    <Content Include="Content\images\team\9.jpg" />
     <Content Include="Content\images\team\event-participater1.jpg" />
     <Content Include="Content\images\team\event-participater2.jpg" />
     <Content Include="Content\images\team\event-participater3.jpg" />
@@ -732,8 +742,8 @@
     <Content Include="Scripts\app\settings\view\users.html" />
     <Content Include="Scripts\app\settings\view\videos.html" />
     <Content Include="Scripts\app\settings\view\videos.tmpl.html" />
-    <Content Include="Scripts\app\teacher\teacher_detail.html" />
-    <Content Include="Scripts\app\teacher\teacher_list.html" />
+    <Content Include="Scripts\app\teacher\view\teacher_detail.html" />
+    <Content Include="Scripts\app\teacher\view\teacher_list.html" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\jquery\jquery-1.10.2.js" />
@@ -900,6 +910,7 @@
     <TypeScriptCompile Include="Scripts\app\settings\service\courseManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\userService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\videoManagementService.ts" />
+    <TypeScriptCompile Include="Scripts\app\teacher\service\teacherService.ts" />
     <TypeScriptCompile Include="Scripts\directive\fileUpload.ts" />
     <TypeScriptCompile Include="Scripts\filter\range.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
@@ -933,8 +944,8 @@
     <TypeScriptCompile Include="Scripts\app\research\ResearchController.ts" />
     <TypeScriptCompile Include="Scripts\app\research\ResearchListController.ts" />
     <TypeScriptCompile Include="Scripts\app\teacher\app_routing.ts" />
-    <TypeScriptCompile Include="Scripts\app\teacher\TeacherController.ts" />
-    <TypeScriptCompile Include="Scripts\app\teacher\TeacherListController.ts" />
+    <TypeScriptCompile Include="Scripts\app\teacher\controller\TeacherController.ts" />
+    <TypeScriptCompile Include="Scripts\app\teacher\controller\TeacherListController.ts" />
     <TypeScriptCompile Include="Scripts\const\const.ts" />
     <TypeScriptCompile Include="Scripts\directive\loginModal.ts" />
     <TypeScriptCompile Include="Scripts\model\video.ts" />

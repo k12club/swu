@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Security;
+using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
@@ -54,7 +55,8 @@ namespace Swu.Portal.Data.Repository
 
         public List<ApplicationUser> GetAllUsers()
         {
-            return this._userManager.Users.ToList();
+            return this._userManager.Users
+                .Include(i=>i.Roles).ToList();
         }
 
         public ApplicationUser VerifyAndGetUser(string username, string password)

@@ -68,8 +68,9 @@
     "Scripts/app/board/controller/ResearchModalController.ts",
     "Scripts/app/board/service/webboardService.ts",
 
-    "Scripts/app/teacher/TeacherController.ts",
-    "Scripts/app/teacher/TeacherListController.ts",
+    "Scripts/app/teacher/controller/TeacherController.ts",
+    "Scripts/app/teacher/controller/TeacherListController.ts",
+    "Scripts/app/teacher/service/teacherService.ts",
 
     "Scripts/app/research/ResearchController.ts",
     "Scripts/app/research/ResearchListController.ts",

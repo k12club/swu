@@ -902,12 +902,12 @@ var Swu;
             $stateProvider
                 .state("teacher", {
                 url: "/teacher/:id",
-                templateUrl: "/Scripts/app/teacher/teacher_detail.html",
+                templateUrl: "/Scripts/app/teacher/view/teacher_detail.html",
                 controller: "TeacherController as vm"
             })
                 .state("teacher-list", {
                 url: "/teacher-list",
-                templateUrl: "/Scripts/app/teacher/teacher_list.html",
+                templateUrl: "/Scripts/app/teacher/view/teacher_list.html",
                 controller: "TeacherListController as vm"
             });
         }
@@ -2608,23 +2608,47 @@ var Swu;
 var Swu;
 (function (Swu) {
     var CommitteeController = (function () {
-        function CommitteeController($scope, $state, committeeService) {
-            var _this = this;
+        function CommitteeController($scope, $rootScope, $state, committeeService) {
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$state = $state;
             this.committeeService = committeeService;
-            this.$scope.getCommittee = function () {
-                _this.committeeService.getCommittees().then(function (response) {
-                    _this.$scope.committee = response;
-                }, function (error) { });
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map($scope.committee, function (c) {
+                            c.name = c.name_en;
+                            c.position = c.position_en;
+                            c.description = c.description_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map($scope.committee, function (c) {
+                            c.name = c.name_th;
+                            c.position = c.position_th;
+                            c.description = c.description_th;
+                        });
+                        break;
+                    }
+                }
             };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.committee != undefined || $scope.committee != null) {
+                    $scope.swapLanguage(newValue);
+                }
+            });
             this.init();
         }
         CommitteeController.prototype.init = function () {
-            this.$scope.getCommittee();
+            var _this = this;
+            this.committeeService.getCommittees().then(function (response) {
+                _this.$scope.committee = response;
+                _this.$scope.swapLanguage(_this.$rootScope.lang);
+            }, function (error) { });
         };
         ;
-        CommitteeController.$inject = ["$scope", "$state", "committeeService"];
+        CommitteeController.$inject = ["$scope", "$rootScope", "$state", "committeeService"];
         CommitteeController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "CommitteeController" })
@@ -3347,14 +3371,49 @@ var Swu;
 var Swu;
 (function (Swu) {
     var TeacherListController = (function () {
-        function TeacherListController($scope, $state) {
+        function TeacherListController($scope, $rootScope, $state, teacherService) {
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$state = $state;
+            this.teacherService = teacherService;
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map($scope.teachers, function (c) {
+                            c.firstName = c.firstName_en;
+                            c.lastName = c.lastName_en;
+                            c.description = c.description_en;
+                            c.position = c.position_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map($scope.teachers, function (c) {
+                            c.firstName = c.firstName_th;
+                            c.lastName = c.lastName_th;
+                            c.description = c.description_th;
+                            c.position = c.position_th;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.teachers != undefined || $scope.teachers != null) {
+                    $scope.swapLanguage(newValue);
+                }
+            });
+            this.init();
         }
         TeacherListController.prototype.init = function () {
+            var _this = this;
+            this.teacherService.getAllTeachers().then(function (response) {
+                _this.$scope.teachers = response;
+                _this.$scope.swapLanguage(_this.$rootScope.lang);
+            }, function (error) { });
         };
         ;
-        TeacherListController.$inject = ["$scope", "$state"];
+        TeacherListController.$inject = ["$scope", "$rootScope", "$state", "teacherService"];
         TeacherListController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "TeacherListController" })
@@ -3362,6 +3421,24 @@ var Swu;
         return TeacherListController;
     }());
     Swu.TeacherListController = TeacherListController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var teacherService = (function () {
+        function teacherService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        teacherService.prototype.getAllTeachers = function () {
+            return this.apiService.getData("account/teachers");
+        };
+        teacherService.$inject = ['apiService', 'AppConstant'];
+        teacherService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "teacherService" })
+        ], teacherService);
+        return teacherService;
+    }());
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -3710,7 +3787,7 @@ var Swu;
                             _this.toastr.success("Success");
                         }
                         else {
-                            _this.toastr.error("Error");
+                            _this.toastr.error("The account is already existed in database.");
                         }
                         _this.$scope.user = {};
                     }, function (error) { });

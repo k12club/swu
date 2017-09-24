@@ -11,12 +11,12 @@
             $stateProvider
                 .state("teacher", {
                     url: "/teacher/:id",
-                    templateUrl: "/Scripts/app/teacher/teacher_detail.html",
+                    templateUrl: "/Scripts/app/teacher/view/teacher_detail.html",
                     controller: "TeacherController as vm"
                 })
                 .state("teacher-list", {
                     url: "/teacher-list",
-                    templateUrl: "/Scripts/app/teacher/teacher_list.html",
+                    templateUrl: "/Scripts/app/teacher/view/teacher_list.html",
                     controller: "TeacherListController as vm"
                 });
         }

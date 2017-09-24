@@ -25,7 +25,7 @@ namespace Swu.Portal.Web.Api
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IConfigurationRepository _configurationRepository;
         public AccountController(
-            IApplicationUserServices applicationUserServices, 
+            IApplicationUserServices applicationUserServices,
             IDateTimeRepository datetimeRepository,
             IConfigurationRepository configurationRepository)
         {
@@ -40,7 +40,7 @@ namespace Swu.Portal.Web.Api
             {
                 var u = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage);
+                return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
             }
             return null;
         }
@@ -51,7 +51,7 @@ namespace Swu.Portal.Web.Api
             {
                 var u = this._applicationUserServices.VerifyWithCurrentUser(model.ToEntity());
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage);
+                return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
             }
             return null;
         }
@@ -94,7 +94,7 @@ namespace Swu.Portal.Web.Api
             foreach (var u in users)
             {
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                result.Add(u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage));
+                result.Add(u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage));
             }
             return result;
         }
@@ -103,7 +103,7 @@ namespace Swu.Portal.Web.Api
         {
             var u = this._applicationUserServices.getById(id);
             var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-            return u.ToUserProfileViewModel(selectedRoleName,this._configurationRepository.DefaultUserImage);
+            return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
         }
         [HttpPost, Route("uploadAsync")]
         public async Task<HttpResponseMessage> PostFormData()
@@ -142,13 +142,13 @@ namespace Swu.Portal.Web.Api
                         fileName = Path.GetFileName(fileName);
                     }
                     _newFileName = string.Format("{0}{1}", user.Id, Path.GetExtension(fileName));
-                    _path = string.Format("{0}{1}", UPLOAD_DIR,_newFileName);
+                    _path = string.Format("{0}{1}", UPLOAD_DIR, _newFileName);
                     var moveTo = Path.Combine(root, _newFileName);
                     if (File.Exists(moveTo))
                     {
                         File.Delete(moveTo);
                     }
-                    _path = string.Format("{0}{1}",UPLOAD_DIR,_newFileName);
+                    _path = string.Format("{0}{1}", UPLOAD_DIR, _newFileName);
                     File.Move(file.LocalFileName, moveTo);
                     user.ImageUrl = string.Format("{0}?{1}", _path, this._datetimeRepository.Now());
                 }
@@ -159,6 +159,37 @@ namespace Swu.Portal.Web.Api
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+        }
+        [HttpGet, Route("teachers")]
+        public List<UserProfile> GetAllTeachers()
+        {
+            var teachers = new List<UserProfile>();
+            var users = this._applicationUserServices.GetAllUsers();
+            foreach (var user in users)
+            {
+                var roles = this._applicationUserServices.GetRolesByUserName(user.UserName);
+                if (roles.Count() > 0)
+                {
+                    if (roles.FirstOrDefault().Equals("Teacher"))
+                    {
+                        teachers.Add(new UserProfile()
+                        {
+                            Id = user.Id,
+                            ImageUrl = user.ImageUrl,
+                            FirstName_EN = user.FirstName_EN,
+                            LastName_EN = user.LastName_EN,
+                            FirstName_TH = user.FirstName_TH,
+                            LastName_TH = user.LastName_TH,
+                            Description = user.Description,
+                            Email = user.Email,
+                            Position = user.Position,
+                            Tag = user.Tag,
+                            CreatedDate = user.CreatedDate
+                        });
+                    }
+                }
+            }
+            return teachers;
         }
     }
 }

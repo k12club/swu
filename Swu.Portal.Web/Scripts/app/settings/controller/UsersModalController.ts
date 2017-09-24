@@ -68,7 +68,7 @@
                             this.$modalInstance.close();
                             this.toastr.success("Success");
                         } else {
-                            this.toastr.error("Error");
+                            this.toastr.error("The account is already existed in database.");
                         }
                         this.$scope.user = {};
                     }, (error) => { });

@@ -41,10 +41,10 @@
                     </div><!-- /input-group -->
                 </div>
                 <div class="row clearfix">
-                    <div class="irs-cl-list">
+                    <div class="irs-cl-list" ng-repeat="t in teachers">
                         <div class="col-xs-12 col-lg-2">
                             <div class="irs-ctds-thumb">
-                                <img class="img-responsive img-fluid" src="../../../Content/images/team/tsm2.png" alt="cl1.png">
+                                <img class="img-responsive img-fluid" ng-src="../../../{{t.imageUrl}}" alt="cl1.png">
                                 <div class="irs-cl-overlay"></div>
                             </div>
                         </div>
@@ -52,29 +52,22 @@
                             <div class="irs-cl-details">
                                 <div class="irs-courses-td-sngle-dtls">
                                     <ul class="list-inline">
-                                        <li class="irs-name-tdsd">Professor of Art</li>
-                                        <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span> Architectural Studies / History of Art / European Studies</li>
+                                        <li class="irs-name-tdsd">{{t.position}}</li>
+                                        <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span> {{t.tag}}</li>
                                     </ul>
-                                    <h2>Edward J. Wallen</h2>
-                                    <p>Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor. </p>
+                                    <h2>{{t.firstName}} {{t.lastName}}</h2>
+                                    <p>{{t.description}}</p>
                                 </div>
-                                <ul class="list-inline irs-tctt">
+                                <!--<ul class="list-inline irs-tctt">
                                     <li><span class="text-thm2 flaticon-phone-receiver"></span> (012) 345 - 6789</li>
                                     <li><span class="text-thm2 flaticon-key-1"></span>  Room 129</li>
                                     <li><span class="text-thm2 flaticon-multimedia"></span> edward.wallen@edu-hub.com</li>
                                     <li><a href="#" ui-sref="teacher({id:1})" class="btn btn-default irs-btn-thm3"> View Profile</a></li>
-                                </ul>
+                                </ul>-->
                             </div>
                         </div>
                     </div>
                 </div>
-                <ul class="list-inline irs-ip-navigation clearfix">
-                    <li><span class="flaticon-arrows"></span></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><span class="flaticon-arrows-1"></span></li>
-                </ul>
             </div>
         </div>
     </div>
