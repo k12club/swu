@@ -69,6 +69,15 @@ namespace Swu.Portal.Web.Api
                     FirstName_TH = model.FirstName_TH,
                     LastName_TH = model.LastName_TH,
                     Email = model.Email,
+                    Position_EN = model.Position_EN,
+                    Tag_EN = model.Tag_EN,
+                    Description_EN = model.Description_EN,
+                    Position_TH = model.Position_TH,
+                    Tag_TH = model.Tag_TH,
+                    Description_TH = model.Description_TH,
+                    LineId = model.LineId,
+                    Mobile = model.Mobile,
+                    OfficeTel = model.OfficeTel,
                 };
                 var result = false;
                 if (string.IsNullOrWhiteSpace(model.Id))
@@ -180,10 +189,16 @@ namespace Swu.Portal.Web.Api
                             LastName_EN = user.LastName_EN,
                             FirstName_TH = user.FirstName_TH,
                             LastName_TH = user.LastName_TH,
-                            Description = user.Description,
+                            Description_EN = user.Description_EN,
+                            Description_TH = user.Description_TH,
                             Email = user.Email,
-                            Position = user.Position,
-                            Tag = user.Tag,
+                            Position_EN = user.Position_EN,
+                            Position_TH = user.Position_TH,
+                            Tag_EN = user.Tag_EN,
+                            Tag_TH = user.Tag_TH,
+                            LineId = user.LineId,
+                            Mobile = user.Mobile,
+                            OfficeTel = user.OfficeTel,
                             CreatedDate = user.CreatedDate
                         });
                     }

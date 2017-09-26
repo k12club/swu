@@ -23,7 +23,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.Id = u.Id;
             this.Name = u.FirstName_EN + " " + u.LastName_EN;
             this.ImageUrl = u.ImageUrl;
-            this.Description = u.Description;
+            this.Description = u.Description_EN;
         } 
     }
 }

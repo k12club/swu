@@ -35,12 +35,26 @@ namespace Swu.Portal.Web.Api
         public string ImageUrl { get; set; }
 
         //teacher
-        [JsonProperty(PropertyName = "position")]
-        public string Position { get; set; }
-        [JsonProperty(PropertyName = "tag")]
-        public string Tag { get; set; }
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "position_en")]
+        public string Position_EN { get; set; }
+        [JsonProperty(PropertyName = "tag_en")]
+        public string Tag_EN { get; set; }
+        [JsonProperty(PropertyName = "description_en")]
+        public string Description_EN { get; set; }
+        [JsonProperty(PropertyName = "position_th")]
+        public string Position_TH { get; set; }
+        [JsonProperty(PropertyName = "tag_th")]
+        public string Tag_TH { get; set; }
+        [JsonProperty(PropertyName = "description_th")]
+        public string Description_TH { get; set; }
+
+
+        [JsonProperty(PropertyName = "lineId")]
+        public string LineId { get; set; }
+        [JsonProperty(PropertyName = "mobile")]
+        public string Mobile { get; set; }
+        [JsonProperty(PropertyName = "officeTel")]
+        public string OfficeTel { get; set; }
 
         [JsonProperty(PropertyName = "createdDate")]
         public DateTime? CreatedDate { get; set; }

@@ -53,6 +53,26 @@ namespace Swu.Portal.Data.Migrations
             var researchs = new List<Research>();
             var studentScores = new List<StudentScore>();
             var events = new List<Event>();
+            var university = new List<University>();
+            var department = new List<Department>();
+
+            #region University
+            var u1 = new University
+            {
+                Name = "Srinakharinwirot"
+            };
+            //context.University.Add(u1);
+            //context.SaveChanges();
+            #endregion
+
+            #region Department
+            var d1 = new Department
+            {
+                Name = "IT"
+            };
+            //context.Department.Add(d1);
+            //context.SaveChanges();
+            #endregion
             #region User
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new SwuDBContext()));
@@ -80,9 +100,17 @@ namespace Swu.Portal.Data.Migrations
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now,
                 ImageUrl = "FileUpload/users/chansak.jpg",
-                Position = "Professor of Art",
-                Tag = "Architectural Studies / History of Art / European Studies",
-                Description = "Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor."
+                Position_EN = "Professor of Art",
+                Tag_EN = "Architectural Studies / History of Art / European Studies",
+                Description_EN = "Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor.",
+                Position_TH = "Professor of Art",
+                Tag_TH = "Architectural Studies / History of Art / European Studies",
+                Description_TH = "Edward joined Edu Hub in the Crean College of Health and Behavioral Sciences as an Assistant Professor.",
+                LineId = "chansakcsc",
+                Mobile = "082-7898386",
+                OfficeTel = "(02)-234567",
+                Department = d1,
+                University = u1
             };
             var student = new ApplicationUser
             {
@@ -183,7 +211,7 @@ namespace Swu.Portal.Data.Migrations
                 LastName_TH = "teacher1",
                 Email = "test.test@test.com",
                 ImageUrl = "Content/images/courses/s4.png",
-                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                Description_EN = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
             };
             var t2 = new ApplicationUser
             {
@@ -194,7 +222,7 @@ namespace Swu.Portal.Data.Migrations
                 LastName_TH = "teacher2",
                 Email = "test.test@test.com",
                 ImageUrl = "Content/images/courses/s4.png",
-                Description = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
+                Description_EN = "Your week’s work will include a tutorial on linguistics and one on literature, in or arranged by your college, a linguistics class and language classes on different skills relating to the language or languages you study, and five or six lectures.",
             };
             teachers.Add(t1);
             teachers.Add(t2);

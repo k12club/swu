@@ -94,16 +94,23 @@ namespace Swu.Portal.Data.Repository
             var updateUserResult = false;
             var updateRoleResult = false;
             var u = this._userManager.FindByName(user.UserName);
-            u.FirstName_EN = user.FirstName_EN;
-            u.LastName_EN = user.LastName_EN;
-            u.FirstName_TH = user.FirstName_TH;
-            u.LastName_TH = user.LastName_TH;
             u.Email = user.Email;
             u.UpdatedDate = user.UpdatedDate;
-            u.Position = user.Position;
             u.ImageUrl = user.ImageUrl;
-            u.Tag = user.Tag;
-            u.Description = u.Description;
+
+            u.FirstName_EN = user.FirstName_EN;
+            u.LastName_EN = user.LastName_EN;
+            u.Position_EN = user.Position_EN;
+            u.Tag_EN = user.Tag_EN;
+            u.Description_EN = u.Description_EN;
+
+            u.FirstName_TH = user.FirstName_TH;
+            u.LastName_TH = user.LastName_TH;
+            u.Position_TH = user.Position_TH;
+            u.Tag_TH = user.Tag_TH;
+            u.Description_TH = user.Description_TH;
+
+
             updateUserResult = this._userManager.Update(u).Succeeded;
             if (updateUserResult)
             {

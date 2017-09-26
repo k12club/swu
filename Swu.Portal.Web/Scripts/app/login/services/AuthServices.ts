@@ -30,6 +30,7 @@
         };
         login(user: IUserLogin, loginSuccessCallback: () => any, loginFailCallback: () => any): void {
             this.apiService.postData<IUserProfile>(user, "account/login").then((response) => {
+                console.log(response);
                 this.setCurrentUser(response);
                 loginSuccessCallback();
             }, (error) => {

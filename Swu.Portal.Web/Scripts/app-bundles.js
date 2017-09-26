@@ -782,6 +782,7 @@ var Swu;
         LoginServices.prototype.login = function (user, loginSuccessCallback, loginFailCallback) {
             var _this = this;
             this.apiService.postData(user, "account/login").then(function (response) {
+                console.log(response);
                 _this.setCurrentUser(response);
                 loginSuccessCallback();
             }, function (error) {
@@ -3545,9 +3546,10 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ProfileController = (function () {
-        function ProfileController($scope, $state, profileService, auth, $uibModal, $timeout, AppConstant) {
+        function ProfileController($scope, $rootScope, $state, profileService, auth, $uibModal, $timeout, AppConstant) {
             var _this = this;
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$state = $state;
             this.profileService = profileService;
             this.auth = auth;
@@ -3556,28 +3558,62 @@ var Swu;
             this.AppConstant = AppConstant;
             this.$scope.getCurrentUser = function () {
                 _this.$scope.currentUser = _this.auth.getCurrentUser();
-                console.log(_this.$scope.currentUser);
+                _this.$scope.swapLanguage(_this.$rootScope.lang);
             };
             this.$scope.edit = function () {
                 var options = {
                     templateUrl: '/Scripts/app/settings/view/profile.tmpl.html',
-                    controller: Swu.ProfileModalController
+                    controller: Swu.ProfileModalController,
+                    size: 'lg'
                 };
                 _this.$uibModal.open(options).result.then(function (user) {
                     _this.auth.updateProfile(function () {
                         $timeout(function () {
                             $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
                         });
                     }, function () { });
                 });
             };
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _this.$scope.currentUser.firstName = _this.$scope.currentUser.firstName_en;
+                        _this.$scope.currentUser.lastName = _this.$scope.currentUser.lastName_en;
+                        _this.$scope.currentUser.position = _this.$scope.currentUser.position_en;
+                        _this.$scope.currentUser.description = _this.$scope.currentUser.description_en;
+                        _this.$scope.currentUser.tag = _this.$scope.currentUser.tag_en;
+                        _this.$scope.currentUser.lineId = _this.$scope.currentUser.lineId;
+                        _this.$scope.currentUser.officeTel = _this.$scope.currentUser.officeTel;
+                        _this.$scope.currentUser.mobile = _this.$scope.currentUser.mobile;
+                        break;
+                    }
+                    case "th": {
+                        _this.$scope.currentUser.firstName = _this.$scope.currentUser.firstName_th;
+                        _this.$scope.currentUser.lastName = _this.$scope.currentUser.lastName_th;
+                        _this.$scope.currentUser.position = _this.$scope.currentUser.position_th;
+                        _this.$scope.currentUser.description = _this.$scope.currentUser.description_th;
+                        _this.$scope.currentUser.tag = _this.$scope.currentUser.tag_th;
+                        _this.$scope.currentUser.lineId = _this.$scope.currentUser.lineId;
+                        _this.$scope.currentUser.officeTel = _this.$scope.currentUser.officeTel;
+                        _this.$scope.currentUser.mobile = _this.$scope.currentUser.mobile;
+                        break;
+                    }
+                }
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.currentUser != undefined || $scope.currentUser != null) {
+                    $scope.swapLanguage(newValue);
+                }
+            });
             this.init();
         }
         ProfileController.prototype.init = function () {
             this.$scope.getCurrentUser();
+            this.$scope.swapLanguage(this.$rootScope.lang);
         };
         ;
-        ProfileController.$inject = ["$scope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout", "AppConstant"];
+        ProfileController.$inject = ["$scope", "$rootScope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout", "AppConstant"];
         ProfileController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ProfileController" })
@@ -3791,6 +3827,18 @@ var Swu;
                         }
                         _this.$scope.user = {};
                     }, function (error) { });
+                }
+            };
+            this.$scope.isShowThisSection = function (name) {
+                if (_this.$scope.roles != null) {
+                    var _selectedRoleId = _.first(_.filter(_this.$scope.roles, function (item, index) {
+                        return item.name == name;
+                    })).id;
+                    console.log($scope.selectedRole == _selectedRoleId);
+                    return $scope.selectedRole == _selectedRoleId;
+                }
+                else {
+                    return false;
                 }
             };
             this.init();

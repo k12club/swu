@@ -27,6 +27,8 @@ namespace Swu.Portal.Data.Context
         public DbSet<Event> Events { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<University> University { get; set; }
+        public DbSet<Department> Department { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;

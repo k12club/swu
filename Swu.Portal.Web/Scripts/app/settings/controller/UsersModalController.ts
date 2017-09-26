@@ -13,12 +13,14 @@
         isValid(): boolean;
         cancel(): void;
         submit(): void;
+
+        isShowThisSection(name: string): boolean;
     }
     @Module("app")
     @Controller({ name: "UsersModalController" })
     export class UsersModalController {
-        static $inject: Array<string> = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId","mode"];
-        constructor(private $scope: UserModalScope, private $state: ng.ui.IState, private userService: IuserService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private userId: string,private mode :number) {
+        static $inject: Array<string> = ["$scope", "$state", "userService", "toastr", "$modalInstance", "userId", "mode"];
+        constructor(private $scope: UserModalScope, private $state: ng.ui.IState, private userService: IuserService, private toastr: Toastr, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private userId: string, private mode: number) {
             this.$scope.id = userId;
             if (mode == 1) {
                 this.$scope.mode = actionMode.addNew;
@@ -73,6 +75,15 @@
                         this.$scope.user = {};
                     }, (error) => { });
                 }
+            };
+            this.$scope.isShowThisSection = (name: string): boolean => {
+                if (this.$scope.roles != null) {
+                    var _selectedRoleId = _.first(_.filter(this.$scope.roles, function (item, index) {
+                        return item.name == name;
+                    })).id;
+                    console.log($scope.selectedRole == _selectedRoleId);
+                    return $scope.selectedRole == _selectedRoleId;
+                } else { return false; }
             };
             this.init();
         }

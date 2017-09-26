@@ -71,6 +71,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseCategory.cs" />
     <Compile Include="Models\Curriculum.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ForumCategory.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Models\StudentScore.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\TeacherProfile.cs" />
+    <Compile Include="Models\University.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

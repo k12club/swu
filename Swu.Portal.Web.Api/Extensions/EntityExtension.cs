@@ -19,7 +19,7 @@ namespace Swu.Portal.Web.Api
         {
             return Mapper.Map<ApplicationUser>(data);
         }
-        public static UserProfile ToUserProfileViewModel(this ApplicationUser u, string selectedRoleName,string defaultImageUrl)
+        public static UserProfile ToUserProfileViewModel(this ApplicationUser u, string selectedRoleName, string defaultImageUrl)
         {
             return new UserProfile
             {
@@ -32,9 +32,15 @@ namespace Swu.Portal.Web.Api
                 Email = u.Email,
                 SelectedRoleName = selectedRoleName,
                 ImageUrl = string.IsNullOrEmpty(u.ImageUrl) ? defaultImageUrl : u.ImageUrl,
-                Position = u.Position,
-                Tag = u.Tag,
-                Description = u.Description,
+                Position_EN = u.Position_EN,
+                Tag_EN = u.Tag_EN,
+                Description_EN = u.Description_EN,
+                Position_TH = u.Position_TH,
+                Tag_TH = u.Tag_TH,
+                Description_TH = u.Description_TH,
+                LineId = u.LineId,
+                Mobile = u.Mobile,
+                OfficeTel = u.OfficeTel,
                 CreatedDate = u.CreatedDate,
                 UpdateDate = u.UpdatedDate,
                 RegistrationDate = u.RegistrationDate
@@ -51,9 +57,15 @@ namespace Swu.Portal.Web.Api
                 LastName_TH = u.LastName_TH,
                 Email = u.Email,
                 ImageUrl = u.ImageUrl,
-                Position = u.Position,
-                Tag = u.Tag,
-                Description = u.Description
+                Position_EN = u.Position_EN,
+                Position_TH = u.Position_TH,
+                Description_EN = u.Description_EN,
+                Description_TH = u.Description_TH,
+                Tag_EN = u.Tag_EN,
+                Tag_TH = u.Tag_TH,
+                LineId = u.LineId,
+                Mobile = u.Mobile,
+                OfficeTel = u.OfficeTel
             };
         }
         public static CourseDetailProxy ToViewModel(this Data.Models.Course c)

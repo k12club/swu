@@ -3,6 +3,7 @@
         id?: string;
         firstName?: string;
         lastName?: string;
+
         firstName_en?: string;
         lastName_en?: string;
         firstName_th?: string;
@@ -17,8 +18,22 @@
         imageUrl?: string;
 
         //teacher
+        position_en?: string;
+        tag_en?: string;
+        description_en?: string;
+
+
+        position_th?: string;
+        tag_th?: string;
+        description_th?: string;
+
+
         position?: string;
         tag?: string;
         description?: string;
+
+        lineId?: string;
+        mobile?: string;
+        officeTel?: string;
     }
 }
