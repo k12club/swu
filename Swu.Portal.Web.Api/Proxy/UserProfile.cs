@@ -48,7 +48,6 @@ namespace Swu.Portal.Web.Api
         [JsonProperty(PropertyName = "description_th")]
         public string Description_TH { get; set; }
 
-
         [JsonProperty(PropertyName = "lineId")]
         public string LineId { get; set; }
         [JsonProperty(PropertyName = "mobile")]
@@ -56,31 +55,67 @@ namespace Swu.Portal.Web.Api
         [JsonProperty(PropertyName = "officeTel")]
         public string OfficeTel { get; set; }
 
+        //Student
+        [JsonProperty(PropertyName = "studentId")]
+        public string StudentId { get; set; }
+        [JsonProperty(PropertyName = "passportId")]
+        public string PassportId { get; set; }
+
+        //Parent
+        [JsonProperty(PropertyName = "referenceUser")]
+        public UserProfile ReferenceUser { get; set; }
+        [JsonProperty(PropertyName = "referenceUserId")]
+        public string ReferenceUserId { get; set; }
+
         [JsonProperty(PropertyName = "createdDate")]
         public DateTime? CreatedDate { get; set; }
         [JsonProperty(PropertyName = "updateDate")]
         public DateTime? UpdateDate { get; set; }
         [JsonProperty(PropertyName = "registrationDate")]
         public DateTime? RegistrationDate { get; set; }
-        //public UserProfile()
-        //{
 
-        //}
-        //public UserProfile(ApplicationUser u,string selectedRoleName)
-        //{
-        //    Id = u.Id;
-        //    UserName = u.UserName;
-        //    FirstName_EN = u.FirstName_EN;
-        //    LastName_EN = u.LastName_EN;
-        //    FirstName_TH = u.FirstName_TH;
-        //    LastName_TH = u.LastName_TH;
-        //    Email = u.Email;
-        //    SelectedRoleName = selectedRoleName;
-        //    ImageUrl = u.ImageUrl;
-        //    Position = u.Position;
-        //    Tag = u.Tag;
-        //    Description = u.Description;
-        //}
+        [JsonProperty(PropertyName = "departmentId")]
+        public int DepartmentId { get; set; }
+        [JsonProperty(PropertyName = "department")]
+        public DepartmentProxy Department { get; set; }
+        [JsonProperty(PropertyName = "universityId")]
+        public int UniversityId { get; set; }
+        [JsonProperty(PropertyName = "university")]
+        public UniversityProxy University { get; set; }
+
+        public UserProfile()
+        {
+
+        }
+        public UserProfile(ApplicationUser u)
+        {
+            Id = u.Id;
+            UserName = u.UserName;
+
+            FirstName_EN = u.FirstName_EN;
+            LastName_EN = u.LastName_EN;
+            Position_EN = u.Position_EN;
+            Tag_EN = u.Tag_EN;
+            Description_EN = u.Description_EN;
+
+            FirstName_TH = u.FirstName_TH;
+            LastName_TH = u.LastName_TH;
+            Position_TH = u.Position_TH;
+            Tag_TH = u.Tag_TH;
+            Description_TH = u.Description_TH;
+
+            Email = u.Email;
+            //SelectedRoleName = selectedRoleName;
+            ImageUrl = u.ImageUrl;
+            LineId = u.LineId;
+            Mobile = u.Mobile;
+            OfficeTel = u.OfficeTel;
+            CreatedDate = u.CreatedDate;
+            UpdateDate = u.UpdatedDate;
+
+            StudentId = u.StudentId;
+            PassportId = u.PassportId;
+        }
 
     }
 }

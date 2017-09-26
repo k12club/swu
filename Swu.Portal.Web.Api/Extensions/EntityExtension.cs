@@ -21,30 +21,44 @@ namespace Swu.Portal.Web.Api
         }
         public static UserProfile ToUserProfileViewModel(this ApplicationUser u, string selectedRoleName, string defaultImageUrl)
         {
-            return new UserProfile
+            var user = new UserProfile
             {
                 Id = u.Id,
                 UserName = u.UserName,
+
                 FirstName_EN = u.FirstName_EN,
                 LastName_EN = u.LastName_EN,
-                FirstName_TH = u.FirstName_TH,
-                LastName_TH = u.LastName_TH,
-                Email = u.Email,
-                SelectedRoleName = selectedRoleName,
-                ImageUrl = string.IsNullOrEmpty(u.ImageUrl) ? defaultImageUrl : u.ImageUrl,
                 Position_EN = u.Position_EN,
                 Tag_EN = u.Tag_EN,
                 Description_EN = u.Description_EN,
+
+                FirstName_TH = u.FirstName_TH,
+                LastName_TH = u.LastName_TH,
                 Position_TH = u.Position_TH,
                 Tag_TH = u.Tag_TH,
                 Description_TH = u.Description_TH,
+
+                Email = u.Email,
+                SelectedRoleName = selectedRoleName,
+                ImageUrl = string.IsNullOrEmpty(u.ImageUrl) ? defaultImageUrl : u.ImageUrl,
                 LineId = u.LineId,
                 Mobile = u.Mobile,
                 OfficeTel = u.OfficeTel,
                 CreatedDate = u.CreatedDate,
                 UpdateDate = u.UpdatedDate,
-                RegistrationDate = u.RegistrationDate
+
+                StudentId = u.StudentId,
+                PassportId = u.PassportId,
             };
+            user.Department = (u.Department != null) ? new DepartmentProxy(u.Department) : new DepartmentProxy();
+            user.DepartmentId = (u.Department != null) ? u.Department.Id : 0;
+
+            user.University = (u.University != null) ? new UniversityProxy(u.University) : new UniversityProxy();
+            user.UniversityId = (u.University != null) ? u.University.Id : 0;
+
+            user.ReferenceUser = (u.ReferenceUser != null) ? new UserProfile(u.ReferenceUser) : new UserProfile();
+            user.ReferenceUserId = (u.ReferenceUser != null) ? u.ReferenceUser.Id : "";
+            return user;
         }
         public static ApplicationUser ToEntity(this UserProfile u)
         {
@@ -53,16 +67,19 @@ namespace Swu.Portal.Web.Api
                 UserName = u.UserName,
                 FirstName_EN = u.FirstName_EN,
                 LastName_EN = u.LastName_EN,
+                Position_EN = u.Position_EN,
+                Description_EN = u.Description_EN,
+                Tag_EN = u.Tag_EN,
+
                 FirstName_TH = u.FirstName_TH,
                 LastName_TH = u.LastName_TH,
+                Position_TH = u.Position_TH,
+                Description_TH = u.Description_TH,
+                Tag_TH = u.Tag_TH,
+
                 Email = u.Email,
                 ImageUrl = u.ImageUrl,
-                Position_EN = u.Position_EN,
-                Position_TH = u.Position_TH,
-                Description_EN = u.Description_EN,
-                Description_TH = u.Description_TH,
-                Tag_EN = u.Tag_EN,
-                Tag_TH = u.Tag_TH,
+
                 LineId = u.LineId,
                 Mobile = u.Mobile,
                 OfficeTel = u.OfficeTel

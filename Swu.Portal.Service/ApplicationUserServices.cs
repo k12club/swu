@@ -12,13 +12,13 @@ namespace Swu.Portal.Service
     public interface IApplicationUserServices
     {
         ApplicationUser GetUser(string username);
-        ApplicationUser VerifyAndGetUser(string username,string password);
+        Task<ApplicationUser> VerifyAndGetUser(string username,string password);
         bool AddNewUser(ApplicationUser user ,string password,string selectedRoleName);
         bool Update(ApplicationUser user, string selectedRoleName);
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
-        ApplicationUser VerifyWithCurrentUser(ApplicationUser user);
+        Task<ApplicationUser> VerifyWithCurrentUser(ApplicationUser user);
     }
     public class ApplicationUserServices : IApplicationUserServices
     {
@@ -59,12 +59,12 @@ namespace Swu.Portal.Service
             return this._applicationUserRepository.Update(user, selectedRoleName);
         }
 
-        public ApplicationUser VerifyAndGetUser(string username, string password)
+        public Task<ApplicationUser> VerifyAndGetUser(string username, string password)
         {
             return this._applicationUserRepository.VerifyAndGetUser(username, password);
         }
 
-        public ApplicationUser VerifyWithCurrentUser(ApplicationUser user)
+        public Task<ApplicationUser> VerifyWithCurrentUser(ApplicationUser user)
         {
             return this._applicationUserRepository.VerifyWithCurrentUser(user);
         }

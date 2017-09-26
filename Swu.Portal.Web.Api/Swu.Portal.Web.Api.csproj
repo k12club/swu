@@ -164,6 +164,7 @@
     <Compile Include="Proxy\CourseDetailProxy.cs" />
     <Compile Include="Proxy\CourseProxy.cs" />
     <Compile Include="Proxy\CurriculumProxy.cs" />
+    <Compile Include="Proxy\DepartmentProxy.cs" />
     <Compile Include="Proxy\EventProxy.cs" />
     <Compile Include="Proxy\Exam.cs" />
     <Compile Include="Proxy\ExamRegistrationProxy.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Proxy\StudentProxy.cs" />
     <Compile Include="Proxy\StudentScoreProxy.cs" />
     <Compile Include="Proxy\TeacherProxy.cs" />
+    <Compile Include="Proxy\UniversityProxy.cs" />
     <Compile Include="Proxy\UserLoginProxy.cs" />
     <Compile Include="Proxy\UserProfile.cs" />
     <Compile Include="Proxy\VideoProxy.cs" />

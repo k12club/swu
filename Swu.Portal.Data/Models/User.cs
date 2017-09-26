@@ -34,7 +34,7 @@ namespace Swu.Portal.Data.Models
 
         //Student
         public string StudentId { get; set; }
-        public string PasswordId { get; set; }
+        public string PassportId { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime? CreatedDate { get; set; }
@@ -48,12 +48,10 @@ namespace Swu.Portal.Data.Models
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
         public virtual ICollection<StudentScore> StudentScore { get; set; }
 
-        public string RefUserId { get; set; }
-        [ForeignKey("RefUserId")]
+        //Parent
         public virtual ApplicationUser ReferenceUser { get; set; }
 
         public virtual Department Department { get; set; }
-
         public virtual University University { get; set; }
     }
 }

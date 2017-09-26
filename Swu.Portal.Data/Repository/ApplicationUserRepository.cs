@@ -13,25 +13,42 @@ using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
+    public class ApplicationUserStore<T> : UserStore<ApplicationUser>
+    {
+        public ApplicationUserStore(SwuDBContext context) : base(context)
+        {
+
+        }
+        public override Task<ApplicationUser> FindByNameAsync(string userName)
+        {
+            return Users
+                .Include(i => i.Department)
+                .Include(i => i.University)
+                .Include(i => i.ReferenceUser)
+                .FirstOrDefaultAsync(i => i.UserName == userName);
+        }
+    }
     public interface IApplicationUserRepository
     {
-        ApplicationUser VerifyAndGetUser(string username, string password);
+        Task<ApplicationUser> VerifyAndGetUser(string username, string password);
         ApplicationUser GetUser(string username);
         bool AddNew(ApplicationUser user, string password, string selectedRoleName);
         bool Update(ApplicationUser user, string selectedRoleName);
         List<ApplicationUser> GetAllUsers();
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
-        ApplicationUser VerifyWithCurrentUser(ApplicationUser user);
+        Task<ApplicationUser> VerifyWithCurrentUser(ApplicationUser user);
     }
     public class ApplicationUserRepository : IApplicationUserRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         public ApplicationUserRepository()
         {
+            //this._userManager = new UserManager<ApplicationUser>(
+            //new UserStore<ApplicationUser>(
+            //    new SwuDBContext()));
             this._userManager = new UserManager<ApplicationUser>(
-            new UserStore<ApplicationUser>(
-                new SwuDBContext()));
+                new ApplicationUserStore<ApplicationUser>(new SwuDBContext()));
         }
 
         public bool AddNew(ApplicationUser user, string password, string selectedRoleName)
@@ -56,12 +73,13 @@ namespace Swu.Portal.Data.Repository
         public List<ApplicationUser> GetAllUsers()
         {
             return this._userManager.Users
-                .Include(i=>i.Roles).ToList();
+                .Include(i => i.Roles).ToList();
         }
 
-        public ApplicationUser VerifyAndGetUser(string username, string password)
+        public async Task<ApplicationUser> VerifyAndGetUser(string username, string password)
         {
-            var user = this._userManager.FindByName(username);
+            //var user = this._userManager.FindByName(username);
+            var user = await this._userManager.FindByNameAsync(username);
             var passwordHasher = new PasswordHasher();
             if (passwordHasher.VerifyHashedPassword(user.PasswordHash, password) != PasswordVerificationResult.Failed)
             {
@@ -73,8 +91,9 @@ namespace Swu.Portal.Data.Repository
             }
         }
 
-        public ApplicationUser VerifyWithCurrentUser(ApplicationUser user) {
-            var u =  this._userManager.FindByName(user.UserName);
+        public async Task<ApplicationUser> VerifyWithCurrentUser(ApplicationUser user)
+        {
+            var u = await this._userManager.FindByNameAsync(user.UserName);
             return u;
         }
 
@@ -102,7 +121,7 @@ namespace Swu.Portal.Data.Repository
             u.LastName_EN = user.LastName_EN;
             u.Position_EN = user.Position_EN;
             u.Tag_EN = user.Tag_EN;
-            u.Description_EN = u.Description_EN;
+            u.Description_EN = user.Description_EN;
 
             u.FirstName_TH = user.FirstName_TH;
             u.LastName_TH = user.LastName_TH;

@@ -34,22 +34,22 @@ namespace Swu.Portal.Web.Api
             this._configurationRepository = configurationRepository;
         }
         [HttpPost, Route("login")]
-        public UserProfile Login(UserLoginProxy model)
+        public async Task<UserProfile> Login(UserLoginProxy model)
         {
             if (ModelState.IsValid)
             {
-                var u = this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
+                var u = await this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
                 return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
             }
             return null;
         }
         [HttpPost, Route("login2")]
-        public UserProfile Login(UserProfile model)
+        public async Task<UserProfile> Login(UserProfile model)
         {
             if (ModelState.IsValid)
             {
-                var u = this._applicationUserServices.VerifyWithCurrentUser(model.ToEntity());
+                var u = await this._applicationUserServices.VerifyWithCurrentUser(model.ToEntity());
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
                 return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
             }
