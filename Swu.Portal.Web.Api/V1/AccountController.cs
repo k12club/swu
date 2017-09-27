@@ -24,14 +24,17 @@ namespace Swu.Portal.Web.Api
         private readonly IApplicationUserServices _applicationUserServices;
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IConfigurationRepository _configurationRepository;
+        private readonly IReferenceUserService _referenceUserService;
         public AccountController(
             IApplicationUserServices applicationUserServices,
             IDateTimeRepository datetimeRepository,
-            IConfigurationRepository configurationRepository)
+            IConfigurationRepository configurationRepository,
+            IReferenceUserService referenceUserService)
         {
             this._applicationUserServices = applicationUserServices;
             this._datetimeRepository = datetimeRepository;
             this._configurationRepository = configurationRepository;
+            this._referenceUserService = referenceUserService;
         }
         [HttpPost, Route("login")]
         public async Task<UserProfile> Login(UserLoginProxy model)
@@ -40,7 +43,44 @@ namespace Swu.Portal.Web.Api
             {
                 var u = await this._applicationUserServices.VerifyAndGetUser(model.UserName, model.Password);
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
+                var data = u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
+                if (data.SelectedRoleName == "Parent")
+                {
+                    var c = this._referenceUserService.GetReferenceUserByParentId(data.Id);
+                    if (c != null)
+                    {
+                        var child = this._applicationUserServices.FindById(c.ChildId);
+                        data.Child = child.ToUserProfileViewModel("Student", null);
+                        data.Child.Approve = c.Approved;
+                        if (model.Language.Equals("en"))
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", child.FirstName_EN, child.LastName_EN);
+                        }
+                        else
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", child.FirstName_TH, child.LastName_TH);
+                        }
+                    }
+                }
+                else if (data.SelectedRoleName == "Student")
+                {
+                    var p = this._referenceUserService.GetReferenceUserByChildId(data.Id);
+                    if (p != null)
+                    {
+                        var parent = this._applicationUserServices.FindById(p.ParentId);
+                        data.Parent = parent.ToUserProfileViewModel("Parent", null);
+                        data.Parent.Approve = p.Approved;
+                        if (model.Language.Equals("en"))
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", parent.FirstName_EN, parent.LastName_EN);
+                        }
+                        else
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", parent.FirstName_TH, parent.LastName_TH);
+                        }
+                    }
+                }
+                return data;
             }
             return null;
         }
@@ -51,7 +91,44 @@ namespace Swu.Portal.Web.Api
             {
                 var u = await this._applicationUserServices.VerifyWithCurrentUser(model.ToEntity());
                 var selectedRoleName = this._applicationUserServices.GetRolesByUserName(u.UserName).FirstOrDefault();
-                return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
+                var data = u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
+                if (data.SelectedRoleName == "Parent")
+                {
+                    var c = this._referenceUserService.GetReferenceUserByParentId(data.Id);
+                    if (c != null)
+                    {
+                        var child = this._applicationUserServices.FindById(c.ChildId);
+                        data.Child = child.ToUserProfileViewModel("Student", null);
+                        data.Child.Approve = c.Approved;
+                        if (model.Language.Equals("en"))
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", child.FirstName_EN, child.LastName_EN);
+                        }
+                        else
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", child.FirstName_TH, child.LastName_TH);
+                        }
+                    }
+                }
+                else if (data.SelectedRoleName == "Student")
+                {
+                    var p = this._referenceUserService.GetReferenceUserByChildId(data.Id);
+                    if (p != null)
+                    {
+                        var parent = this._applicationUserServices.FindById(p.ParentId);
+                        data.Parent = parent.ToUserProfileViewModel("Parent", null);
+                        data.Parent.Approve = p.Approved;
+                        if (model.Language.Equals("en"))
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", parent.FirstName_EN, parent.LastName_EN);
+                        }
+                        else
+                        {
+                            data.ReferenceUserName = string.Format("{0} {1}", parent.FirstName_TH, parent.LastName_TH);
+                        }
+                    }
+                }
+                return data;
             }
             return null;
         }
@@ -129,12 +206,18 @@ namespace Swu.Portal.Web.Api
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
                 UserProfile user = new UserProfile();
+                string lang = "";
                 foreach (var key in provider.FormData)
                 {
                     if (key.Equals("user"))
                     {
                         var json = provider.FormData[key.ToString()];
                         user = JsonConvert.DeserializeObject<UserProfile>(json);
+                    }
+                    else if (key.Equals("lang"))
+                    {
+                        var json = provider.FormData[key.ToString()];
+                        lang = JsonConvert.DeserializeObject<string>(json);
                     }
                 }
                 string _newFileName = string.Empty;
@@ -162,11 +245,33 @@ namespace Swu.Portal.Web.Api
                     user.ImageUrl = string.Format("{0}?{1}", _path, this._datetimeRepository.Now());
                 }
                 this._applicationUserServices.Update(user.ToEntity(), user.SelectedRoleName);
+
+                if (user.SelectedRoleName == "Parent")
+                {
+                    var fullname = user.ReferenceUserName.Split(' ');
+                    ApplicationUser referenceUser = null;
+                    if (lang.Equals("en"))
+                    {
+                        referenceUser = await this._applicationUserServices.FindByFirstNameAndLastNameEN(fullname[0], fullname[1]);
+                    }
+                    else
+                    {
+                        referenceUser = await this._applicationUserServices.FindByFirstNameAndLastNameTH(fullname[0], fullname[1]);
+                    }
+                    this.AddReferenceUser(user.Id, referenceUser);
+                }
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        private void AddReferenceUser(string parentId, ApplicationUser child)
+        {
+            if (child != null)
+            {
+                this._referenceUserService.AddOrUpdateUserReference(child, parentId);
             }
         }
         [HttpGet, Route("teachers")]
@@ -205,6 +310,81 @@ namespace Swu.Portal.Web.Api
                 }
             }
             return teachers;
+        }
+        [HttpGet, Route("getUsersByName")]
+        public List<string> GetUsersByName(string name, string lang)
+        {
+            var returnResult = new List<string>();
+            if (name != null)
+            {
+                if (lang.Equals("en"))
+                {
+                    var users = this._applicationUserServices.GetAllUsers()
+                                        .Where(
+                                            i =>
+                                                (i.FirstName_EN.ToLower().Contains(name.ToLower()) || i.LastName_EN.ToLower().Contains(name.ToLower()))
+                                            )
+                                        .ToList();
+                    foreach (var user in users)
+                    {
+                        var role = this._applicationUserServices.GetRolesByUserName(user.UserName).FirstOrDefault();
+                        if (role != null)
+                        {
+                            if (role.Equals("Student"))
+                            {
+                                returnResult.Add(user.FirstName_EN + " " + user.LastName_EN);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    var users = this._applicationUserServices.GetAllUsers()
+                    .Where(
+                        i =>
+                            (i.FirstName_TH.ToLower().Contains(name.ToLower()) || i.LastName_TH.ToLower().Contains(name.ToLower()))
+                        )
+                    .ToList();
+                    foreach (var user in users)
+                    {
+                        var role = this._applicationUserServices.GetRolesByUserName(user.UserName).FirstOrDefault();
+                        if (role != null)
+                        {
+                            if (role.Equals("Student"))
+                            {
+                                returnResult.Add(user.FirstName_TH + " " + user.LastName_TH);
+                            }
+                        }
+                    }
+                }
+            }
+            return returnResult;
+        }
+        [HttpGet, Route("approveRequest")]
+        public HttpResponseMessage ApproveRequest(string childId, string parentId)
+        {
+            try
+            {
+                this._referenceUserService.ApproveRequest(childId, parentId);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("rejectRequest")]
+        public HttpResponseMessage RejectRequest(string childId, string parentId)
+        {
+            try
+            {
+                this._referenceUserService.RejectRequest(childId, parentId);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Swu.Portal.Data.Context
         public DbSet<News> News { get; set; }
         public DbSet<University> University { get; set; }
         public DbSet<Department> Department { get; set; }
+        public DbSet<ReferenceUser> ReferenceUser { get; set;}
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;

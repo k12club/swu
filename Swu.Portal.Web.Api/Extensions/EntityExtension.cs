@@ -56,8 +56,8 @@ namespace Swu.Portal.Web.Api
             user.University = (u.University != null) ? new UniversityProxy(u.University) : new UniversityProxy();
             user.UniversityId = (u.University != null) ? u.University.Id : 0;
 
-            user.ReferenceUser = (u.ReferenceUser != null) ? new UserProfile(u.ReferenceUser) : new UserProfile();
-            user.ReferenceUserId = (u.ReferenceUser != null) ? u.ReferenceUser.Id : "";
+            //user.ReferenceUser = (u.ReferenceUser != null) ? new UserProfile(u.ReferenceUser) : new UserProfile();
+            //user.ReferenceUserId = (u.ReferenceUser != null) ? u.ReferenceUser.Id : "";
             return user;
         }
         public static ApplicationUser ToEntity(this UserProfile u)

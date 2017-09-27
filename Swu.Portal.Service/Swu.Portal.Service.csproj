@@ -82,6 +82,7 @@
     <Compile Include="ForumService.cs" />
     <Compile Include="PhotoAlbumService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceUserService.cs" />
     <Compile Include="ResearchService.cs" />
   </ItemGroup>
   <ItemGroup>

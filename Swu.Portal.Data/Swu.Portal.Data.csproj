@@ -80,6 +80,7 @@
     <Compile Include="Models\ParentProfile.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PhotoAlbum.cs" />
+    <Compile Include="Models\ReferenceUser.cs" />
     <Compile Include="Models\Research.cs" />
     <Compile Include="Models\ResearchCategory.cs" />
     <Compile Include="Models\Student.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\PhotoAlbumRepository.cs" />
     <Compile Include="Repository\PhotoRepository.cs" />
+    <Compile Include="Repository\ReferenceUserRepository.cs" />
     <Compile Include="Repository\ResearchCategoryRepository.cs" />
     <Compile Include="Repository\ResearchRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />

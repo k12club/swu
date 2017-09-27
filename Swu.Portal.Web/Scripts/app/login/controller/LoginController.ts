@@ -19,7 +19,7 @@
                 this.$scope.showModal = flag;
             }
             this.$scope.Login = () => {
-                this.auth.login({ "userName": this.$scope.userName, "password": this.$scope.password }, this.loginSuccess, this.loginFail);
+                this.auth.login({ "userName": this.$scope.userName, "password": this.$scope.password,"lang":this.$rootScope.lang }, this.loginSuccess, this.loginFail);
                 this.$state.go("app", { reload: true });
             }
             this.$scope.Logout = () => {

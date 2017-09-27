@@ -35,5 +35,14 @@
         lineId?: string;
         mobile?: string;
         officeTel?: string;
+
+        referenceUserName?: string;
+
+        lang?: string;
+
+        parent?: IUserProfile;
+        child?: IUserProfile;
+        approve?: boolean;
+
     }
 }

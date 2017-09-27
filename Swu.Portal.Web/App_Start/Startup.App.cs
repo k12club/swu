@@ -48,6 +48,9 @@ namespace Swu.Portal.Web
             builder.RegisterType<VideoRepository>().As<IRepository<Video>>().InstancePerRequest();
             builder.RegisterType<NewsRepository>().As<IRepository<News>>().InstancePerRequest();
 
+            builder.RegisterType<ReferenceUserService>().As<IReferenceUserService>().InstancePerRequest();
+            //builder.RegisterType<ReferenceUserRepository>().As<IRepository<ReferenceUser>>().InstancePerRequest();
+
             builder.RegisterApiControllers(typeof(ApiStartUp).Assembly);
             builder.RegisterControllers(typeof(Startup).Assembly);
 

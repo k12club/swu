@@ -3,16 +3,22 @@
         currentUser: IUserProfile;
         file: any;
 
+        parent: IUserProfile;
+        waiting: IUserProfile;
+
+        child: IUserProfile;
+
         edit(): void;
         getCurrentUser(): void;
-        save(): void;
+        approve(parentId: string): void;
+        reject(parentId: string): void;
     }
 
     @Module("app")
     @Controller({ name: "ProfileController" })
     export class ProfileController {
-        static $inject: Array<string> = ["$scope","$rootScope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout","AppConstant"];
-        constructor(private $scope: ProfileScope, private $rootScope:IRootScope, private $state: ng.ui.IStateService, private profileService: IprofileService, private auth: IAuthServices, private $uibModal: ng.ui.bootstrap.IModalService, private $timeout: ng.ITimeoutService, private AppConstant: AppConstant) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout", "AppConstant"];
+        constructor(private $scope: ProfileScope, private $rootScope: IRootScope, private $state: ng.ui.IStateService, private profileService: IprofileService, private auth: IAuthServices, private $uibModal: ng.ui.bootstrap.IModalService, private $timeout: ng.ITimeoutService, private AppConstant: AppConstant) {
             this.$scope.getCurrentUser = (): void => {
                 this.$scope.currentUser = this.auth.getCurrentUser();
                 this.$scope.swapLanguage(this.$rootScope.lang);
@@ -21,7 +27,7 @@
                 var options: ng.ui.bootstrap.IModalSettings = {
                     templateUrl: '/Scripts/app/settings/view/profile.tmpl.html',
                     controller: ProfileModalController,
-                    size:'lg'
+                    size: 'lg'
                 };
                 this.$uibModal.open(options).result.then((user: IUserProfile) => {
                     this.auth.updateProfile(() => {
@@ -43,6 +49,36 @@
                         this.$scope.currentUser.lineId = this.$scope.currentUser.lineId;
                         this.$scope.currentUser.officeTel = this.$scope.currentUser.officeTel;
                         this.$scope.currentUser.mobile = this.$scope.currentUser.mobile;
+                        if (this.$scope.currentUser.selectedRoleName == "Student") {
+                            if (this.$scope.currentUser.parent != null) {
+                                this.$scope.currentUser.parent.firstName = this.$scope.currentUser.parent.firstName_en;
+                                this.$scope.currentUser.parent.lastName = this.$scope.currentUser.parent.lastName_en;
+                                var _approve = this.$scope.currentUser.parent.approve;
+                                if (_approve) {
+                                    this.$scope.parent = this.$scope.currentUser.parent;
+                                    this.$scope.waiting = null;
+                                } else {
+                                    this.$scope.waiting = this.$scope.currentUser.parent;
+                                    this.$scope.parent = null;
+                                }
+                            } else {
+                                this.$scope.waiting = null;
+                                this.$scope.parent = null;
+                            }
+                        } else if (this.$scope.currentUser.selectedRoleName == "Parent") {
+                            if (this.$scope.currentUser.child != null) {
+                                this.$scope.currentUser.child.firstName = this.$scope.currentUser.child.firstName_en;
+                                this.$scope.currentUser.child.lastName = this.$scope.currentUser.child.lastName_en;
+                                var _approve = this.$scope.currentUser.child.approve;
+                                if (_approve) {
+                                    this.$scope.child = this.$scope.currentUser.child;
+                                } else {
+                                    this.$scope.child = null;
+                                }
+                            } else {
+                                this.$scope.child = null;
+                            }
+                        } else { }
                         break;
                     }
                     case "th": {
@@ -54,6 +90,36 @@
                         this.$scope.currentUser.lineId = this.$scope.currentUser.lineId;
                         this.$scope.currentUser.officeTel = this.$scope.currentUser.officeTel;
                         this.$scope.currentUser.mobile = this.$scope.currentUser.mobile;
+                        if (this.$scope.currentUser.selectedRoleName == "Student") {
+                            if (this.$scope.currentUser.parent != null) {
+                                this.$scope.currentUser.parent.firstName = this.$scope.currentUser.parent.firstName_th;
+                                this.$scope.currentUser.parent.lastName = this.$scope.currentUser.parent.lastName_th;
+                                var _approve = this.$scope.currentUser.parent.approve;
+                                if (_approve) {
+                                    this.$scope.parent = this.$scope.currentUser.parent;
+                                    this.$scope.waiting = null;
+                                } else {
+                                    this.$scope.waiting = this.$scope.currentUser.parent;
+                                    this.$scope.parent = null;
+                                }
+                            } else {
+                                this.$scope.waiting = null;
+                                this.$scope.parent = null;
+                            }
+                        } else if (this.$scope.currentUser.selectedRoleName == "Parent") {
+                            if (this.$scope.currentUser.child != null) {
+                                this.$scope.currentUser.child.firstName = this.$scope.currentUser.child.firstName_en;
+                                this.$scope.currentUser.child.lastName = this.$scope.currentUser.child.lastName_en;
+                                var _approve = this.$scope.currentUser.child.approve;
+                                if (_approve) {
+                                    this.$scope.child = this.$scope.currentUser.child;
+                                } else {
+                                    this.$scope.child = null;
+                                }
+                            } else {
+                                this.$scope.child = null;
+                            }
+                        } else { }
                         break;
                     }
                 }
@@ -63,6 +129,26 @@
                     $scope.swapLanguage(newValue);
                 }
             });
+            this.$scope.approve = (parentId: string): void => {
+                this.profileService.approve(this.$scope.currentUser.id, parentId).then((response) => {
+                    this.auth.updateProfile(() => {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                        });
+                    }, () => { });
+                }, (error) => { });
+            }
+            this.$scope.reject = (parentId: string): void => {
+                this.profileService.reject(this.$scope.currentUser.id, parentId).then((response) => {
+                    this.auth.updateProfile(() => {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                        });
+                    }, () => { });
+                }, (error) => { });
+            }
             this.init();
         }
         init(): void {

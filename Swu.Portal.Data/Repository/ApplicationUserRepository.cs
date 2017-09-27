@@ -13,7 +13,13 @@ using System.Data.Entity;
 
 namespace Swu.Portal.Data.Repository
 {
-    public class ApplicationUserStore<T> : UserStore<ApplicationUser>
+    public interface IMyUserStore : IUserStore<ApplicationUser>
+    {
+        Task<ApplicationUser> FindByFirstNameAndLastNameEN(string firstName, string lastName);
+        Task<ApplicationUser> FindByFirstNameAndLastNameTH(string firstName, string lastName);
+
+    }
+    public class ApplicationUserStore<T> : UserStore<ApplicationUser>, IMyUserStore
     {
         public ApplicationUserStore(SwuDBContext context) : base(context)
         {
@@ -25,7 +31,16 @@ namespace Swu.Portal.Data.Repository
                 .Include(i => i.Department)
                 .Include(i => i.University)
                 .Include(i => i.ReferenceUser)
+                .Include(i => i.Roles)
                 .FirstOrDefaultAsync(i => i.UserName == userName);
+        }
+        public virtual Task<ApplicationUser> FindByFirstNameAndLastNameEN(string firstName, string lastName)
+        {
+            return Users.FirstOrDefaultAsync(i => i.FirstName_EN.ToLower().Contains(firstName) && i.LastName_EN.ToLower().Contains(lastName));
+        }
+        public virtual Task<ApplicationUser> FindByFirstNameAndLastNameTH(string firstName, string lastName)
+        {
+            return Users.FirstOrDefaultAsync(i => i.FirstName_TH.ToLower().Contains(firstName) && i.LastName_TH.ToLower().Contains(lastName));
         }
     }
     public interface IApplicationUserRepository
@@ -38,19 +53,23 @@ namespace Swu.Portal.Data.Repository
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
         Task<ApplicationUser> VerifyWithCurrentUser(ApplicationUser user);
+        Task<ApplicationUser> FindByNameAsync(string name);
+        Task<ApplicationUser> FindByFirstNameAndLastNameEN(string firstName, string lastName);
+        Task<ApplicationUser> FindByFirstNameAndLastNameTH(string firstName, string lastName);
+        ApplicationUser FindById(string id);
     }
     public class ApplicationUserRepository : IApplicationUserRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMyUserStore _store;
         public ApplicationUserRepository()
         {
             //this._userManager = new UserManager<ApplicationUser>(
             //new UserStore<ApplicationUser>(
             //    new SwuDBContext()));
-            this._userManager = new UserManager<ApplicationUser>(
-                new ApplicationUserStore<ApplicationUser>(new SwuDBContext()));
+            this._store = new ApplicationUserStore<ApplicationUser>(new SwuDBContext());
+            this._userManager = new UserManager<ApplicationUser>(this._store);
         }
-
         public bool AddNew(ApplicationUser user, string password, string selectedRoleName)
         {
             var addUserResult = false;
@@ -63,19 +82,16 @@ namespace Swu.Portal.Data.Repository
             }
             return addUserResult && addToRoleResult;
         }
-
         public ApplicationUser GetUser(string username)
         {
             var user = this._userManager.FindByName(username);
             return user;
         }
-
         public List<ApplicationUser> GetAllUsers()
         {
             return this._userManager.Users
                 .Include(i => i.Roles).ToList();
         }
-
         public async Task<ApplicationUser> VerifyAndGetUser(string username, string password)
         {
             //var user = this._userManager.FindByName(username);
@@ -90,24 +106,20 @@ namespace Swu.Portal.Data.Repository
                 return null;
             }
         }
-
         public async Task<ApplicationUser> VerifyWithCurrentUser(ApplicationUser user)
         {
             var u = await this._userManager.FindByNameAsync(user.UserName);
             return u;
         }
-
         public List<string> GetRolesByUserName(string userName)
         {
             var u = this._userManager.FindByName(userName);
             return this._userManager.GetRoles(u.Id).ToList();
         }
-
         public ApplicationUser getById(string id)
         {
             return this._userManager.FindById(id);
         }
-
         public bool Update(ApplicationUser user, string selectedRoleName)
         {
             var updateUserResult = false;
@@ -141,6 +153,23 @@ namespace Swu.Portal.Data.Repository
                 updateRoleResult = this._userManager.AddToRole(u.Id, selectedRoleName).Succeeded;
             }
             return updateUserResult && updateRoleResult;
+        }
+        public Task<ApplicationUser> FindByNameAsync(string name)
+        {
+            return this._userManager.FindByNameAsync(name);
+        }
+        public Task<ApplicationUser> FindByFirstNameAndLastNameEN(string firstName, string lastName)
+        {
+            return this._store.FindByFirstNameAndLastNameEN(firstName, lastName);
+        }
+        public Task<ApplicationUser> FindByFirstNameAndLastNameTH(string firstName, string lastName)
+        {
+            return this._store.FindByFirstNameAndLastNameTH(firstName, lastName);
+        }
+
+        public ApplicationUser FindById(string id)
+        {
+            return this._userManager.FindById(id);
         }
     }
 }

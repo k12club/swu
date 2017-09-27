@@ -17,8 +17,8 @@
     @Module("app")
     @Factory({ name: "AuthServices" })
     class LoginServices implements IAuthServices {
-        static $inject = ['apiService', 'AppConstant', '$cookies'];
-        constructor(private apiService: apiService, private constant: AppConstant, private $cookies: ICookiesService) {
+        static $inject = ['$rootScope','apiService', 'AppConstant', '$cookies'];
+        constructor(private $rootScope: IRootScope, private apiService: apiService, private constant: AppConstant, private $cookies: ICookiesService) {
 
         }
         private setCurrentUser(currentUser: IUserProfile): void {
@@ -26,11 +26,11 @@
         };
         private loginWithCurentUser(): ng.IPromise<IUserProfile> {
             var currentUser = this.getCurrentUser();
+            currentUser.lang = this.$rootScope.lang;
             return this.apiService.postData(currentUser,"account/login2");
         };
         login(user: IUserLogin, loginSuccessCallback: () => any, loginFailCallback: () => any): void {
             this.apiService.postData<IUserProfile>(user, "account/login").then((response) => {
-                console.log(response);
                 this.setCurrentUser(response);
                 loginSuccessCallback();
             }, (error) => {

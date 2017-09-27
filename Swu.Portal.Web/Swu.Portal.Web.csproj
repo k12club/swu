@@ -243,6 +243,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\animations.css" />
+    <Content Include="Content\css\autocomplete.css" />
     <Content Include="Content\css\blank.gif" />
     <Content Include="Content\css\bootsnav.css" />
     <Content Include="Content\css\bootstrap-datepicker.min.css" />

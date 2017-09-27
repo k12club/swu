@@ -15,9 +15,14 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-8 irs-mrgnbtm-sxty">
             <div class="row" ng-show="currentUser.selectedRoleName == 'Admin'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+            </div>
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Parent'">
                 <ul class="list-inline">
                     <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
                 </ul>
@@ -30,45 +35,75 @@
                 </ul>
                 <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
                 <p>{{currentUser.description}}</p>
-            </div>
-            <!--<ul class="list-inline irs-tctt">
-                <li><span class="text-thm2 flaticon-phone-receiver"></span> (012) 345 - 6789</li>
-                <li><span class="text-thm2 flaticon-key-1"></span>  Room 129</li>
-                <li><span class="text-thm2 flaticon-multimedia"></span> edward.wallen@edu-hub.com</li>
-            </ul>
-            <div class="irs-social-icon-td-sngle-dtls">
-                <ul class="list-inline irs-courses-tdetls style2">
-                    <li class="fbok"><a href="#"><span class="flaticon-social-3"></span> </a></li>
-                    <li class="twtr"><a href="#"><span class="flaticon-social-4"></span> </a></li>
-                    <li class="gplus"><a href="#"><span class="flaticon-social-media-1"></span> </a></li>
-                    <li class="linkdin"><a href="#"><span class="flaticon-linkedin-logo"></span> </a></li>
+                <ul class="list-inline irs-tctt">
+                    <li><span class="text-thm2 flaticon-phone-receiver"></span> {{currentUser.mobile}}</li>
+                    <li><span class="text-thm2 flaticon-key-1"></span> {{currentUser.officeTel}}</li>
+                    <li><span class="text-thm2 flaticon-multimedia"></span> {{currentUser.email}}</li>
                 </ul>
-            </div>-->
+                <div class="irs-social-icon-td-sngle-dtls">
+                    <ul class="list-inline irs-courses-tdetls style2">
+                        <li class="fbok"><a href="#"><span class="flaticon-social-3"></span> </a></li>
+                        <li class="twtr"><a href="#"><span class="flaticon-social-4"></span> </a></li>
+                        <li class="gplus"><a href="#"><span class="flaticon-social-media-1"></span> </a></li>
+                        <li class="linkdin"><a href="#"><span class="flaticon-linkedin-logo"></span> </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Student'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+            </div>
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Officer'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+            </div>
+
         </div>
-        <!--<div class="row">
+        <div class="row" ng-show="currentUser.selectedRoleName == 'Student'">
             <div class="col-md-12">
                 <div class="irs-courses-details">
                     <div class="irs-cdetails-tab">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a data-target="#info1" aria-controls="info1" role="tab" data-toggle="tab">EXPERIANCE</a></li>
-                            <li role="presentation"><a data-target="#info2" aria-controls="info2" role="tab" data-toggle="tab">EDUCATION</a></li>
-                            <li role="presentation"><a data-target="#info3" aria-controls="info3" role="tab" data-toggle="tab">SKILLS</a></li>
+                            <li role="presentation" class="active"><a data-target="#p1" aria-controls="p1" role="tab" data-toggle="tab">Parents</a></li>
+                            <li role="presentation"><a data-target="#p2" aria-controls="p2" role="tab" data-toggle="tab">Waiting for approve to be your parent</a></li>
+                            <!--<li role="presentation"><a data-target="#info3" aria-controls="info3" role="tab" data-toggle="tab">SKILLS</a></li>
                             <li role="presentation"><a data-target="#info4" aria-controls="info4" role="tab" data-toggle="tab">LANGUAGE</a></li>
-                            <li role="presentation"><a data-target="#info5" aria-controls="info5" role="tab" data-toggle="tab">HOBBIES & INTEREST</a></li>
+                            <li role="presentation"><a data-target="#info5" aria-controls="info5" role="tab" data-toggle="tab">HOBBIES & INTEREST</a></li>-->
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade in active" id="info1">
+                            <div role="tabpanel" class="tab-pane fade in active" id="p1">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                                    <div class="col-md-6">
+                                        <ul class="list-inline irs-cl-teacher-info" ng-show="parent != null">
+                                            <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{parent.imageUrl}}" style="width:50px;height:50px" alt="s3.png" src="../../../../Content/images/courses/s4.png"></li>
+                                            <li class="irs-cl-info"><h3>{{parent.firstName}} {{parent.lastName}}</h3></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade in active" id="info2">
+                            <div role="tabpanel" class="tab-pane fade" id="p2">
                                 <div class="row">
+                                    <div class="col-md-10">
+                                        <ul class="list-group" ng-show="waiting != null">
+                                            <li>
+                                                <a href="#">
+                                                    <ul class="list-inline">
+                                                        <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{waiting.imageUrl}}" style="width:50px;height:50px" alt="s3.png" src="../../../../Content/images/courses/s4.png"></li>
+                                                        <li class="irs-cl-info"><h3>{{waiting.firstName}} {{waiting.lastName}}</h3></li>
+                                                        <li class="pull-right"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(waiting.id)">Approve</span></li>
+                                                        <li class="pull-right"><span class="btn btn-sm irs-btn-thm2" ng-click="reject(waiting.id)">Decline</span>
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade in active" id="info3">
+                            <!--<div role="tabpanel" class="tab-pane fade in active" id="info3">
                                 <div class="row">
                                 </div>
                             </div>
@@ -79,11 +114,34 @@
                             <div role="tabpanel" class="tab-pane fade in active" id="info5">
                                 <div class="row">
                                 </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="currentUser.selectedRoleName == 'Parent'">
+            <div class="col-md-12">
+                <div class="irs-courses-details">
+                    <div class="irs-cdetails-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a data-target="#c1" aria-controls="info" role="tab" data-toggle="tab">Students</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="c1">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-inline irs-cl-teacher-info" ng-show="child != null">
+                                            <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{child.imageUrl}}" style="width:50px;height:50px" alt="s3.png" src="../../../../Content/images/courses/s4.png"></li>
+                                            <li class="irs-cl-info"><h3>{{child.firstName}} {{child.lastName}}</h3></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
     </div>
 </div>

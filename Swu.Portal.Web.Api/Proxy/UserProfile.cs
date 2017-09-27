@@ -62,10 +62,10 @@ namespace Swu.Portal.Web.Api
         public string PassportId { get; set; }
 
         //Parent
-        [JsonProperty(PropertyName = "referenceUser")]
-        public UserProfile ReferenceUser { get; set; }
-        [JsonProperty(PropertyName = "referenceUserId")]
-        public string ReferenceUserId { get; set; }
+        [JsonProperty(PropertyName = "parent")]
+        public UserProfile Parent { get; set; }
+        [JsonProperty(PropertyName = "child")]
+        public UserProfile Child { get; set; }
 
         [JsonProperty(PropertyName = "createdDate")]
         public DateTime? CreatedDate { get; set; }
@@ -82,6 +82,15 @@ namespace Swu.Portal.Web.Api
         public int UniversityId { get; set; }
         [JsonProperty(PropertyName = "university")]
         public UniversityProxy University { get; set; }
+
+        [JsonProperty(PropertyName = "referenceUserName")]
+        public string ReferenceUserName { get; set; }
+
+        [JsonProperty(PropertyName = "lang")]
+        public string Language { get; set; }
+
+        [JsonProperty(PropertyName = "approve")]
+        public bool Approve { get; set; }
 
         public UserProfile()
         {

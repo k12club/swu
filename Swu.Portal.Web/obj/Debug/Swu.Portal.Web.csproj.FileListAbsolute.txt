@@ -92,6 +92,7 @@ D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.pdb
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\bin\AutoMapper.dll
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web\bin\AutoMapper.xml
+D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\csc.exe
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Git\swu\Swu.Portal.Web\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -185,6 +186,5 @@ D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.xml
-D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.pdb

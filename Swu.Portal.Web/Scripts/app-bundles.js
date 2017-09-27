@@ -462,6 +462,218 @@ var Swu;
                 });
             };
         }])
+        .directive('autocomplete', function () {
+        var index = -1;
+        return {
+            restrict: 'E',
+            scope: {
+                searchParam: '=ngModel',
+                suggestions: '=data',
+                onType: '=onType',
+                onSelect: '=onSelect',
+                autocompleteRequired: '=',
+                noAutoSort: '=noAutoSort'
+            },
+            controller: ['$scope', function ($scope) {
+                    $scope.selectedIndex = -1;
+                    $scope.initLock = true;
+                    $scope.setIndex = function (i) {
+                        $scope.selectedIndex = parseInt(i);
+                    };
+                    this.setIndex = function (i) {
+                        $scope.setIndex(i);
+                        $scope.$apply();
+                    };
+                    $scope.getIndex = function (i) {
+                        return $scope.selectedIndex;
+                    };
+                    var watching = true;
+                    $scope.completing = false;
+                    $scope.$watch('searchParam', function (newValue, oldValue) {
+                        if (oldValue === newValue || (!oldValue && $scope.initLock)) {
+                            return;
+                        }
+                        if (watching && typeof $scope.searchParam !== 'undefined' && $scope.searchParam !== null) {
+                            $scope.completing = true;
+                            $scope.searchFilter = $scope.searchParam;
+                            $scope.selectedIndex = -1;
+                        }
+                        if ($scope.onType)
+                            $scope.onType($scope.searchParam);
+                    });
+                    this.preSelect = function (suggestion) {
+                        watching = false;
+                        $scope.$apply();
+                        watching = true;
+                    };
+                    $scope.preSelect = this.preSelect;
+                    this.preSelectOff = function () {
+                        watching = true;
+                    };
+                    $scope.preSelectOff = this.preSelectOff;
+                    $scope.select = function (suggestion) {
+                        if (suggestion) {
+                            $scope.searchParam = suggestion;
+                            $scope.searchFilter = suggestion;
+                            if ($scope.onSelect)
+                                $scope.onSelect(suggestion);
+                        }
+                        watching = false;
+                        $scope.completing = false;
+                        setTimeout(function () { watching = true; }, 1000);
+                        $scope.setIndex(-1);
+                    };
+                }],
+            link: function (scope, element, attrs) {
+                setTimeout(function () {
+                    scope.initLock = false;
+                    scope.$apply();
+                }, 250);
+                var attr = '';
+                scope.attrs = {
+                    "placeholder": "Reference user's name",
+                    "class": "",
+                    "id": "",
+                    "inputclass": "",
+                    "inputid": ""
+                };
+                for (var a in attrs) {
+                    attr = a.replace('attr', '').toLowerCase();
+                    if (a.indexOf('attr') === 0) {
+                        scope.attrs[attr] = attrs[a];
+                    }
+                }
+                if (attrs.clickActivation) {
+                    element[0].onclick = function (e) {
+                        if (!scope.searchParam) {
+                            setTimeout(function () {
+                                scope.completing = true;
+                                scope.$apply();
+                            }, 200);
+                        }
+                    };
+                }
+                var key = { left: 37, up: 38, right: 39, down: 40, enter: 13, esc: 27, tab: 9 };
+                document.addEventListener("keydown", function (e) {
+                    var keycode = e.keyCode || e.which;
+                    switch (keycode) {
+                        case key.esc:
+                            scope.select();
+                            scope.setIndex(-1);
+                            scope.$apply();
+                            e.preventDefault();
+                    }
+                }, true);
+                document.addEventListener("blur", function (e) {
+                    setTimeout(function () {
+                        scope.select();
+                        scope.setIndex(-1);
+                        scope.$apply();
+                    }, 150);
+                }, true);
+                element[0].addEventListener("keydown", function (e) {
+                    var keycode = e.keyCode || e.which;
+                    var l = angular.element(this).find('li').length;
+                    if (!scope.completing || l == 0)
+                        return;
+                    switch (keycode) {
+                        case key.up:
+                            index = scope.getIndex() - 1;
+                            if (index < -1) {
+                                index = l - 1;
+                            }
+                            else if (index >= l) {
+                                index = -1;
+                                scope.setIndex(index);
+                                scope.preSelectOff();
+                                break;
+                            }
+                            scope.setIndex(index);
+                            if (index !== -1)
+                                scope.preSelect(angular.element(angular.element(this).find('li')[index]).text());
+                            scope.$apply();
+                            break;
+                        case key.down:
+                            index = scope.getIndex() + 1;
+                            if (index < -1) {
+                                index = l - 1;
+                            }
+                            else if (index >= l) {
+                                index = -1;
+                                scope.setIndex(index);
+                                scope.preSelectOff();
+                                scope.$apply();
+                                break;
+                            }
+                            scope.setIndex(index);
+                            if (index !== -1)
+                                scope.preSelect(angular.element(angular.element(this).find('li')[index]).text());
+                            break;
+                        case key.left:
+                            break;
+                        case key.right:
+                        case key.enter:
+                        case key.tab:
+                            index = scope.getIndex();
+                            if (index !== -1) {
+                                scope.select(angular.element(angular.element(this).find('li')[index]).text());
+                                if (keycode == key.enter) {
+                                    e.preventDefault();
+                                }
+                            }
+                            else {
+                                if (keycode == key.enter) {
+                                    scope.select();
+                                }
+                            }
+                            scope.setIndex(-1);
+                            scope.$apply();
+                            break;
+                        case key.esc:
+                            scope.select();
+                            scope.setIndex(-1);
+                            scope.$apply();
+                            e.preventDefault();
+                            break;
+                        default:
+                            return;
+                    }
+                });
+            },
+            template: '\
+        <div class="autocomplete {{ attrs.class }}" id="{{ attrs.id }}">\
+          <input\
+            type="text"\
+            ng-model="searchParam"\
+            placeholder="{{ attrs.placeholder }}"\
+            class="{{ attrs.inputclass }}"\
+            tabindex="{{ attrs.tabindex }}"\
+            id="{{ attrs.inputid }}"\
+            name="{{ attrs.name }}"\
+            ng-required="{{ autocompleteRequired }}" />\
+          <ul ng-if="!noAutoSort" ng-show="completing && (suggestions | filter:searchFilter).length > 0">\
+            <li\
+              suggestion\
+              ng-repeat="suggestion in suggestions | filter:searchFilter | orderBy:\'toString()\' track by $index"\
+              index="{{ $index }}"\
+              val="{{ suggestion }}"\
+              ng-class="{ active: ($index === selectedIndex) }"\
+              ng-click="select(suggestion)"\
+              ng-bind-html="suggestion | highlight:searchParam"></li>\
+          </ul>\
+          <ul ng-if="noAutoSort" ng-show="completing && (suggestions | filter:searchFilter).length > 0">\
+            <li\
+              suggestion\
+              ng-repeat="suggestion in suggestions | filter:searchFilter track by $index"\
+              index="{{ $index }}"\
+              val="{{ suggestion }}"\
+              ng-class="{ active: ($index === selectedIndex) }"\
+              ng-click="select(suggestion)"\
+              ng-bind-html="suggestion | highlight:searchParam"></li>\
+          </ul>\
+        </div>'
+        };
+    })
         .config(["$translateProvider", "AppConstant", "$mdDateLocaleProvider", function ($translateProvider, AppConstant, $mdDateLocaleProvider) {
             $translateProvider.translations("en", Swu.translations_en);
             $translateProvider.translations("th", Swu.translations_th);
@@ -471,6 +683,37 @@ var Swu;
                 return moment(date).format('DD/MM/YYYY');
             };
         }])
+        .filter('highlight', ['$sce', function ($sce) {
+            return function (input, searchParam) {
+                if (typeof input === 'function')
+                    return '';
+                if (searchParam) {
+                    var words = '(' +
+                        searchParam.split(/\ /).join(' |') + '|' +
+                        searchParam.split(/\ /).join('|') +
+                        ')', exp = new RegExp(words, 'gi');
+                    if (words.length) {
+                        input = input.replace(exp, "<span class=\"highlight\">$1</span>");
+                    }
+                }
+                return $sce.trustAsHtml(input);
+            };
+        }])
+        .directive('suggestion', function () {
+        return {
+            restrict: 'A',
+            require: '^autocomplete',
+            link: function (scope, element, attrs, autoCtrl) {
+                element.bind('mouseenter', function () {
+                    autoCtrl.preSelect(attrs.val);
+                    autoCtrl.setIndex(attrs.index);
+                });
+                element.bind('mouseleave', function () {
+                    autoCtrl.preSelectOff();
+                });
+            }
+        };
+    })
         .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", "$window", function ($state, $http, $rootScope, AppConstant, auth, $window) {
             $rootScope.$on("$stateChangeSuccess", function () {
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
@@ -722,7 +965,7 @@ var Swu;
                 _this.$scope.showModal = flag;
             };
             this.$scope.Login = function () {
-                _this.auth.login({ "userName": _this.$scope.userName, "password": _this.$scope.password }, _this.loginSuccess, _this.loginFail);
+                _this.auth.login({ "userName": _this.$scope.userName, "password": _this.$scope.password, "lang": _this.$rootScope.lang }, _this.loginSuccess, _this.loginFail);
                 _this.$state.go("app", { reload: true });
             };
             this.$scope.Logout = function () {
@@ -765,7 +1008,8 @@ var Swu;
 var Swu;
 (function (Swu) {
     var LoginServices = (function () {
-        function LoginServices(apiService, constant, $cookies) {
+        function LoginServices($rootScope, apiService, constant, $cookies) {
+            this.$rootScope = $rootScope;
             this.apiService = apiService;
             this.constant = constant;
             this.$cookies = $cookies;
@@ -776,13 +1020,13 @@ var Swu;
         ;
         LoginServices.prototype.loginWithCurentUser = function () {
             var currentUser = this.getCurrentUser();
+            currentUser.lang = this.$rootScope.lang;
             return this.apiService.postData(currentUser, "account/login2");
         };
         ;
         LoginServices.prototype.login = function (user, loginSuccessCallback, loginFailCallback) {
             var _this = this;
             this.apiService.postData(user, "account/login").then(function (response) {
-                console.log(response);
                 _this.setCurrentUser(response);
                 loginSuccessCallback();
             }, function (error) {
@@ -814,7 +1058,7 @@ var Swu;
                 loginFailCallback();
             });
         };
-        LoginServices.$inject = ['apiService', 'AppConstant', '$cookies'];
+        LoginServices.$inject = ['$rootScope', 'apiService', 'AppConstant', '$cookies'];
         LoginServices = __decorate([
             Swu.Module("app"),
             Swu.Factory({ name: "AuthServices" })
@@ -3586,6 +3830,42 @@ var Swu;
                         _this.$scope.currentUser.lineId = _this.$scope.currentUser.lineId;
                         _this.$scope.currentUser.officeTel = _this.$scope.currentUser.officeTel;
                         _this.$scope.currentUser.mobile = _this.$scope.currentUser.mobile;
+                        if (_this.$scope.currentUser.selectedRoleName == "Student") {
+                            if (_this.$scope.currentUser.parent != null) {
+                                _this.$scope.currentUser.parent.firstName = _this.$scope.currentUser.parent.firstName_en;
+                                _this.$scope.currentUser.parent.lastName = _this.$scope.currentUser.parent.lastName_en;
+                                var _approve = _this.$scope.currentUser.parent.approve;
+                                if (_approve) {
+                                    _this.$scope.parent = _this.$scope.currentUser.parent;
+                                    _this.$scope.waiting = null;
+                                }
+                                else {
+                                    _this.$scope.waiting = _this.$scope.currentUser.parent;
+                                    _this.$scope.parent = null;
+                                }
+                            }
+                            else {
+                                _this.$scope.waiting = null;
+                                _this.$scope.parent = null;
+                            }
+                        }
+                        else if (_this.$scope.currentUser.selectedRoleName == "Parent") {
+                            if (_this.$scope.currentUser.child != null) {
+                                _this.$scope.currentUser.child.firstName = _this.$scope.currentUser.child.firstName_en;
+                                _this.$scope.currentUser.child.lastName = _this.$scope.currentUser.child.lastName_en;
+                                var _approve = _this.$scope.currentUser.child.approve;
+                                if (_approve) {
+                                    _this.$scope.child = _this.$scope.currentUser.child;
+                                }
+                                else {
+                                    _this.$scope.child = null;
+                                }
+                            }
+                            else {
+                                _this.$scope.child = null;
+                            }
+                        }
+                        else { }
                         break;
                     }
                     case "th": {
@@ -3597,6 +3877,42 @@ var Swu;
                         _this.$scope.currentUser.lineId = _this.$scope.currentUser.lineId;
                         _this.$scope.currentUser.officeTel = _this.$scope.currentUser.officeTel;
                         _this.$scope.currentUser.mobile = _this.$scope.currentUser.mobile;
+                        if (_this.$scope.currentUser.selectedRoleName == "Student") {
+                            if (_this.$scope.currentUser.parent != null) {
+                                _this.$scope.currentUser.parent.firstName = _this.$scope.currentUser.parent.firstName_th;
+                                _this.$scope.currentUser.parent.lastName = _this.$scope.currentUser.parent.lastName_th;
+                                var _approve = _this.$scope.currentUser.parent.approve;
+                                if (_approve) {
+                                    _this.$scope.parent = _this.$scope.currentUser.parent;
+                                    _this.$scope.waiting = null;
+                                }
+                                else {
+                                    _this.$scope.waiting = _this.$scope.currentUser.parent;
+                                    _this.$scope.parent = null;
+                                }
+                            }
+                            else {
+                                _this.$scope.waiting = null;
+                                _this.$scope.parent = null;
+                            }
+                        }
+                        else if (_this.$scope.currentUser.selectedRoleName == "Parent") {
+                            if (_this.$scope.currentUser.child != null) {
+                                _this.$scope.currentUser.child.firstName = _this.$scope.currentUser.child.firstName_en;
+                                _this.$scope.currentUser.child.lastName = _this.$scope.currentUser.child.lastName_en;
+                                var _approve = _this.$scope.currentUser.child.approve;
+                                if (_approve) {
+                                    _this.$scope.child = _this.$scope.currentUser.child;
+                                }
+                                else {
+                                    _this.$scope.child = null;
+                                }
+                            }
+                            else {
+                                _this.$scope.child = null;
+                            }
+                        }
+                        else { }
                         break;
                     }
                 }
@@ -3606,6 +3922,26 @@ var Swu;
                     $scope.swapLanguage(newValue);
                 }
             });
+            this.$scope.approve = function (parentId) {
+                _this.profileService.approve(_this.$scope.currentUser.id, parentId).then(function (response) {
+                    _this.auth.updateProfile(function () {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                        });
+                    }, function () { });
+                }, function (error) { });
+            };
+            this.$scope.reject = function (parentId) {
+                _this.profileService.reject(_this.$scope.currentUser.id, parentId).then(function (response) {
+                    _this.auth.updateProfile(function () {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                        });
+                    }, function () { });
+                }, function (error) { });
+            };
             this.init();
         }
         ProfileController.prototype.init = function () {
@@ -3859,7 +4195,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ProfileModalController = (function () {
-        function ProfileModalController($scope, $state, userService, toastr, $modalInstance, profileService, AuthServices) {
+        function ProfileModalController($scope, $rootScope, $state, userService, toastr, $modalInstance, profileService, AuthServices) {
             var _this = this;
             this.$scope = $scope;
             this.$state = $state;
@@ -3881,17 +4217,24 @@ var Swu;
                 var models = [];
                 models.push({ name: "file", value: _this.$scope.file });
                 models.push({ name: "user", value: _this.$scope.user });
+                models.push({ name: "lang", value: $rootScope.lang });
                 _this.profileService.updateUserProfile(models).then(function (response) {
                     _this.$modalInstance.close(response);
+                }, function (error) { });
+            };
+            $scope.updateRefUsers = function (name) {
+                userService.getUsersByName(name, $rootScope.lang).then(function (response) {
+                    _this.$scope.refUsers = response;
                 }, function (error) { });
             };
             this.init();
         }
         ProfileModalController.prototype.init = function () {
             this.$scope.user = this.AuthServices.getCurrentUser();
+            this.$scope.refUsers = [""];
         };
         ;
-        ProfileModalController.$inject = ["$scope", "$state", "userService", "toastr", "$modalInstance", "profileService", "AuthServices"];
+        ProfileModalController.$inject = ["$scope", "$rootScope", "$state", "userService", "toastr", "$modalInstance", "profileService", "AuthServices"];
         ProfileModalController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ProfileModalController" })
@@ -4954,6 +5297,9 @@ var Swu;
         userService.prototype.getById = function (id) {
             return this.apiService.getData("Account/getById?id=" + id);
         };
+        userService.prototype.getUsersByName = function (name, lang) {
+            return this.apiService.getData("Account/getUsersByName?name=" + name + "&lang=" + lang);
+        };
         userService.$inject = ['apiService', 'AppConstant'];
         userService = __decorate([
             Swu.Module("app"),
@@ -4971,6 +5317,12 @@ var Swu;
         }
         profileService.prototype.updateUserProfile = function (models) {
             return this.apiService.postWithFormData(models, "Account/uploadAsync");
+        };
+        profileService.prototype.approve = function (childId, parentId) {
+            return this.apiService.getData("Account/approveRequest?childId=" + childId + "&parentId=" + parentId);
+        };
+        profileService.prototype.reject = function (childId, parentId) {
+            return this.apiService.getData("Account/rejectRequest?childId=" + childId + "&parentId=" + parentId);
         };
         profileService.$inject = ['apiService', 'AppConstant'];
         profileService = __decorate([

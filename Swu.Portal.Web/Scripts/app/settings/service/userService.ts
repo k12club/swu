@@ -4,6 +4,7 @@
         addNewOrUpdate(user: IUserProfile): ng.IPromise<boolean>;
         getAllUsers(): ng.IPromise<IUserProfile[]>;
         getById(id: string): ng.IPromise<IUserProfile>;
+        getUsersByName(name: string, lang: string): ng.IPromise<string[]>;
     }
     @Module("app")
     @Factory({ name: "userService" })
@@ -23,6 +24,9 @@
         }
         getById(id: string): ng.IPromise<IUserProfile> {
             return this.apiService.getData<IUserProfile>("Account/getById?id=" + id);
+        }
+        getUsersByName(name: string, lang: string): ng.IPromise<string[]> {
+            return this.apiService.getData<string[]>("Account/getUsersByName?name=" + name + "&lang=" + lang);
         }
     }
 }

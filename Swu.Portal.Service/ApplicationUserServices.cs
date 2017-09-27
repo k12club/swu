@@ -19,6 +19,11 @@ namespace Swu.Portal.Service
         List<string> GetRolesByUserName(string userName);
         ApplicationUser getById(string id);
         Task<ApplicationUser> VerifyWithCurrentUser(ApplicationUser user);
+        Task<ApplicationUser> FindByNameAsync(string name);
+        Task<ApplicationUser> FindByFirstNameAndLastNameEN(string firstName, string lastName);
+        Task<ApplicationUser> FindByFirstNameAndLastNameTH(string firstName, string lastName);
+        ApplicationUser FindById(string id);
+
     }
     public class ApplicationUserServices : IApplicationUserServices
     {
@@ -31,6 +36,26 @@ namespace Swu.Portal.Service
         public bool AddNewUser(ApplicationUser user, string password, string selectedRoleName)
         {
             return this._applicationUserRepository.AddNew(user, password,selectedRoleName);
+        }
+
+        public Task<ApplicationUser> FindByFirstNameAndLastNameEN(string firstName, string lastName)
+        {
+            return this._applicationUserRepository.FindByFirstNameAndLastNameEN(firstName, lastName);
+        }
+
+        public Task<ApplicationUser> FindByFirstNameAndLastNameTH(string firstName, string lastName)
+        {
+            return this._applicationUserRepository.FindByFirstNameAndLastNameTH(firstName, lastName);
+        }
+
+        public ApplicationUser FindById(string id)
+        {
+            return this._applicationUserRepository.FindById(id);
+        }
+
+        public Task<ApplicationUser> FindByNameAsync(string name)
+        {
+            return this._applicationUserRepository.FindByNameAsync(name);
         }
 
         public List<ApplicationUser> GetAllUsers()

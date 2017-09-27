@@ -49,7 +49,8 @@ namespace Swu.Portal.Data.Models
         public virtual ICollection<StudentScore> StudentScore { get; set; }
 
         //Parent
-        public virtual ApplicationUser ReferenceUser { get; set; }
+        //public virtual ApplicationUser ReferenceUser { get; set; }
+        public virtual ICollection<ReferenceUser> ReferenceUser { get; set; }
 
         public virtual Department Department { get; set; }
         public virtual University University { get; set; }

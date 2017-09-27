@@ -13,5 +13,7 @@ namespace Swu.Portal.Web.Api
         public string UserName { get; set; }
         [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
+        [JsonProperty(PropertyName = "lang")]
+        public string Language { get; set; }
     }
 }

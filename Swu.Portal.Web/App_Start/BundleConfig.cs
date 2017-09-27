@@ -101,7 +101,8 @@ namespace Swu.Portal.Web
                  "~/Content/css/style.css",
                  "~/Content/css/responsive.css",
                  "~/Content/css/translations.css",
-                 "~/Content/css/bootstrap-datepicker.min.css"));
+                 "~/Content/css/bootstrap-datepicker.min.css",
+                 "~/Content/css/autocomplete.css"));
         }
     }
 }
