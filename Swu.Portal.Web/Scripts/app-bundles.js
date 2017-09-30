@@ -995,10 +995,10 @@ var Swu;
                 $scope.swapLanguage(lang);
             };
             this.$scope.validate = function () {
-                $('form').validator();
+                $('#reg-form').validator();
             };
             this.$scope.isValid = function () {
-                return ($('#form').validator('validate').has('.has-error').length === 0);
+                return ($('#reg-form').validator('validate').has('.has-error').length === 0);
             };
             this.$scope.register = function () {
                 if (_this.$scope.isValid()) {
@@ -4194,10 +4194,10 @@ var Swu;
                 }, function (error) { });
             }
             this.$scope.validate = function () {
-                $('form').validator();
+                $('#user-form').validator();
             };
             this.$scope.isValid = function () {
-                return ($('#form').validator('validate').has('.has-error').length === 0);
+                return ($('#user-form').validator('validate').has('.has-error').length === 0);
             };
             this.$scope.getRoles = function () {
                 _this.userService.getRoles().then(function (response) {

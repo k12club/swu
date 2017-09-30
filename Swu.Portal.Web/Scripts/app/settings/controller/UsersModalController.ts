@@ -46,10 +46,10 @@
                 }, (error) => { });
             }
             this.$scope.validate = (): void => {
-                $('form').validator();
+                $('#user-form').validator();
             };
             this.$scope.isValid = (): boolean => {
-                return ($('#form').validator('validate').has('.has-error').length === 0);
+                return ($('#user-form').validator('validate').has('.has-error').length === 0);
             };
             this.$scope.getRoles = (): void => {
                 this.userService.getRoles().then((response) => {

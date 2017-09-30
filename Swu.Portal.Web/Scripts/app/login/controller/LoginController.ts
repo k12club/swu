@@ -55,10 +55,10 @@
                 $scope.swapLanguage(lang);
             };
             this.$scope.validate = (): void => {
-                $('form').validator();
+                $('#reg-form').validator();
             };
             this.$scope.isValid = (): boolean => {
-                return ($('#form').validator('validate').has('.has-error').length === 0);
+                return ($('#reg-form').validator('validate').has('.has-error').length === 0);
             };
             this.$scope.register = () => {
                 if (this.$scope.isValid()) {
