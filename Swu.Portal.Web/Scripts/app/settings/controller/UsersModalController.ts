@@ -42,6 +42,7 @@
                             return item.name == $scope.user.selectedRoleName;
                         })[0].id;
                     }
+                    console.log(response);
                 }, (error) => { });
             }
             this.$scope.validate = (): void => {

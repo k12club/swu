@@ -13,6 +13,7 @@
         isLoggedIn(): boolean;
         getCurrentUser(): IUserProfile;
         updateProfile(loginSuccessCallback: () => any, loginFailCallback: () => any): void;
+        register(register: IUserProfile): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "AuthServices" })
@@ -57,6 +58,9 @@
             }, (error) => {
                 loginFailCallback();
             });
+        }
+        register(register: IUserProfile): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData(register, "account/addNewOrUpdate");
         }
     }
 }

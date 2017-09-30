@@ -77,8 +77,14 @@ namespace Swu.Portal.Data.Repository
             addUserResult = this._userManager.Create(user, password).Succeeded;
             if (addUserResult)
             {
-                var u = this._userManager.FindByName(user.UserName);
-                addToRoleResult = this._userManager.AddToRole(u.Id, selectedRoleName).Succeeded;
+                if (!string.IsNullOrWhiteSpace(selectedRoleName))
+                {
+                    var u = this._userManager.FindByName(user.UserName);
+                    addToRoleResult = this._userManager.AddToRole(u.Id, selectedRoleName).Succeeded;
+                }
+                else {
+                    addToRoleResult = true;
+                }
             }
             return addUserResult && addToRoleResult;
         }

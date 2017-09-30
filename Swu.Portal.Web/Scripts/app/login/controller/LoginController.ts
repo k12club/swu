@@ -9,6 +9,12 @@
         Login(): void;
         Logout(): void;
         changeLanguage(lang: string): void;
+
+        validate(): void;
+        isValid(): boolean;
+
+        registerUser: IUserProfile;
+        register(): void;
     }
     @Module("app")
     @Controller({ name: "LoginController" })
@@ -19,13 +25,13 @@
                 this.$scope.showModal = flag;
             }
             this.$scope.Login = () => {
-                this.auth.login({ "userName": this.$scope.userName, "password": this.$scope.password,"lang":this.$rootScope.lang }, this.loginSuccess, this.loginFail);
+                this.auth.login({ "userName": this.$scope.userName, "password": this.$scope.password, "lang": this.$rootScope.lang }, this.loginSuccess, this.loginFail);
                 this.$state.go("app", { reload: true });
             }
             this.$scope.Logout = () => {
                 this.auth.logout();
                 this.init();
-                this.$state.go("app", {reload:true});
+                this.$state.go("app", { reload: true });
             }
             this.$scope.swapLanguage = (lang: string): void => {
                 if ($scope.userProfile != null || $scope.userProfile != undefined) {
@@ -47,6 +53,22 @@
                 $translate.use(lang);
                 $rootScope.lang = lang;
                 $scope.swapLanguage(lang);
+            };
+            this.$scope.validate = (): void => {
+                $('form').validator();
+            };
+            this.$scope.isValid = (): boolean => {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.register = () => {
+                if (this.$scope.isValid()) {
+                    this.auth.register(this.$scope.registerUser).then((response) => {
+                        toastr.success("Success");
+                        this.$scope.showModal = false;
+                    }, (error) => {
+                        toastr.error("Failed");
+                    });
+                }
             };
             this.init();
         }

@@ -994,6 +994,22 @@ var Swu;
                 $rootScope.lang = lang;
                 $scope.swapLanguage(lang);
             };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.register = function () {
+                if (_this.$scope.isValid()) {
+                    _this.auth.register(_this.$scope.registerUser).then(function (response) {
+                        toastr.success("Success");
+                        _this.$scope.showModal = false;
+                    }, function (error) {
+                        toastr.error("Failed");
+                    });
+                }
+            };
             this.init();
         }
         LoginController.$inject = ["$scope", "$rootScope", "$state", "AuthServices", "$translate", "toastr"];
@@ -1057,6 +1073,9 @@ var Swu;
             }, function (error) {
                 loginFailCallback();
             });
+        };
+        LoginServices.prototype.register = function (register) {
+            return this.apiService.postData(register, "account/addNewOrUpdate");
         };
         LoginServices.$inject = ['$rootScope', 'apiService', 'AppConstant', '$cookies'];
         LoginServices = __decorate([
@@ -4171,6 +4190,7 @@ var Swu;
                             return item.name == $scope.user.selectedRoleName;
                         })[0].id;
                     }
+                    console.log(response);
                 }, function (error) { });
             }
             this.$scope.validate = function () {

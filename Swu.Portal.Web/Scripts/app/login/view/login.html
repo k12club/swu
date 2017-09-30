@@ -44,10 +44,10 @@
                                                     </form>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <form class="irs-reg-form">
+                                                    <form class="irs-reg-form" id="form">
                                                         <h3 translate="login.register"><span class="flaticon-key"></span></h3>
                                                         <p translate="login.registerTitle"></p>
-                                                        <div class="form-group">
+                                                        <!--<div class="form-group">
                                                             <input type="text" class="form-control" id="exampleInputNamex" placeholder="{{'login.firstName'|translate}}">
                                                         </div>
                                                         <div class="form-group">
@@ -64,6 +64,31 @@
                                                         </div>
                                                         <div class="form-group text-center">
                                                             <input type="button" class="btn btn-default irs-button-styledark" value="{{'login.btnRegister'|translate}}" />
+                                                        </div>-->
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="username" ng-model="registerUser.userName" placeholder="{{'login.userName'|translate}}" required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control" id="email" ng-model="registerUser.email" placeholder="{{'login.email'|translate}}" required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control" id="pwd" ng-model="registerUser.password" placeholder="{{'login.password'|translate}}"
+                                                                   data-minlength="6"
+                                                                   required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control" id="pwd2" ng-model="registerUser.rePassword" placeholder="{{'login.rePassword'|translate}}"
+                                                                   data-minlength="6"
+                                                                   data-match="#pwd"
+                                                                   data-match-error="Password is not match"
+                                                                   required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group text-center">
+                                                            <input type="button" class="btn btn-default irs-button-styledark" ng-click="register()" value="{{'login.btnRegister'|translate}}" />
                                                         </div>
                                                     </form>
                                                 </div>
