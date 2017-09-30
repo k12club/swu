@@ -165,6 +165,7 @@
     <Compile Include="Proxy\CourseProxy.cs" />
     <Compile Include="Proxy\CurriculumProxy.cs" />
     <Compile Include="Proxy\DepartmentProxy.cs" />
+    <Compile Include="Proxy\EmailProxy.cs" />
     <Compile Include="Proxy\EventProxy.cs" />
     <Compile Include="Proxy\Exam.cs" />
     <Compile Include="Proxy\ExamRegistrationProxy.cs" />

@@ -37,17 +37,17 @@
                         <li><span translate="shared.address"></span></li>
                     </ul>
                     <h3 class="irs-cf-title">Contact Form</h3>
-                    <form class="irs-contact-formed">
+                    <form id="form" class="irs-contact-formed">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInputtext" placeholder="Name">
+                            <input type="text" class="form-control" style="background-color:#fff" id="exampleInputtext" ng-model="email.name" placeholder="Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <input type="email" class="form-control" style="background-color:#fff" id="exampleInputEmail1" ng-model="email.emailFrom" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="2" placeholder="Message"></textarea>
+                            <textarea class="form-control" style="background-color:#fff" rows="2" ng-model="email.message" placeholder="Message" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-default">Contact Us</button>
+                        <button type="button" ng-click="sendMail()" class="btn btn-default">Contact Us</button>
                     </form>
                     <div class="irs-courses-td-sngle-dtls irs-cfp">
                         <div class="irs-social-icon-td-sngle-dtls">

@@ -11,7 +11,7 @@
             $stateProvider
                 .state("contact", {
                     url: "/contact",
-                    templateUrl: "/Scripts/app/contact/contact.html",
+                    templateUrl: "/Scripts/app/contact/view/contact.html",
                     controller: "ContactUsController as vm"
                 });
         }

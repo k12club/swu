@@ -704,7 +704,7 @@
     <Content Include="Scripts\app\board\view\board.html" />
     <Content Include="Scripts\app\board\view\default.html" />
     <Content Include="Scripts\app\board\view\research.tmpl.html" />
-    <Content Include="Scripts\app\contact\contact.html" />
+    <Content Include="Scripts\app\contact\view\contact.html" />
     <Content Include="Scripts\app\course\view\course_list.html" />
     <Content Include="Scripts\app\course\view\course_detail.html" />
     <Content Include="Scripts\app\course\view\curriculum.tmpl.html" />
@@ -853,7 +853,8 @@
     <TypeScriptCompile Include="Scripts\app\committee\controller\CommitteeController.ts" />
     <TypeScriptCompile Include="Scripts\app\committee\service\committeeService.ts" />
     <TypeScriptCompile Include="Scripts\app\contact\app_routing.ts" />
-    <TypeScriptCompile Include="Scripts\app\contact\ContactUsController.ts" />
+    <TypeScriptCompile Include="Scripts\app\contact\controller\ContactUsController.ts" />
+    <TypeScriptCompile Include="Scripts\app\contact\service\contractService.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-experimental.ts" />
     <TypeScriptCompile Include="Scripts\app\core\angular-ngAnnotations.ts" />
     <TypeScriptCompile Include="Scripts\app\core\apiServices.ts" />
@@ -923,6 +924,7 @@
     <TypeScriptCompile Include="Scripts\model\course.ts" />
     <TypeScriptCompile Include="Scripts\model\curriculumType.ts" />
     <TypeScriptCompile Include="Scripts\model\courseType.ts" />
+    <TypeScriptCompile Include="Scripts\model\email.ts" />
     <TypeScriptCompile Include="Scripts\model\event.ts" />
     <TypeScriptCompile Include="Scripts\model\exam.ts" />
     <TypeScriptCompile Include="Scripts\model\forumAndComments.ts" />

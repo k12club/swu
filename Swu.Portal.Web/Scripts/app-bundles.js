@@ -1203,7 +1203,7 @@ var Swu;
             $stateProvider
                 .state("contact", {
                 url: "/contact",
-                templateUrl: "/Scripts/app/contact/contact.html",
+                templateUrl: "/Scripts/app/contact/view/contact.html",
                 controller: "ContactUsController as vm"
             });
         }
@@ -3732,14 +3732,37 @@ var Swu;
 var Swu;
 (function (Swu) {
     var ContactUsController = (function () {
-        function ContactUsController($scope, $state) {
+        function ContactUsController($scope, contractService, $state, toastr) {
+            var _this = this;
             this.$scope = $scope;
+            this.contractService = contractService;
             this.$state = $state;
+            this.toastr = toastr;
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.sendMail = function () {
+                if (_this.$scope.isValid()) {
+                    _this.contractService.sendMail(_this.$scope.email).then(function (response) {
+                        _this.toastr.success("Success");
+                        $scope.email = null;
+                    }, function (error) {
+                        _this.toastr.error("Send failed");
+                        $scope.email = null;
+                    });
+                }
+            };
+            this.init();
         }
         ContactUsController.prototype.init = function () {
+            this.$scope.email = null;
+            this.$scope.validate();
         };
         ;
-        ContactUsController.$inject = ["$scope", "$state"];
+        ContactUsController.$inject = ["$scope", "contractService", "$state", "toastr"];
         ContactUsController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "ContactUsController" })
@@ -3747,6 +3770,24 @@ var Swu;
         return ContactUsController;
     }());
     Swu.ContactUsController = ContactUsController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var contractService = (function () {
+        function contractService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        contractService.prototype.sendMail = function (email) {
+            return this.apiService.postData(email, "shared/sendMail");
+        };
+        contractService.$inject = ['apiService', 'AppConstant'];
+        contractService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "contractService" })
+        ], contractService);
+        return contractService;
+    }());
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {

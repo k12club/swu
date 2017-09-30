@@ -75,7 +75,8 @@
     "Scripts/app/research/ResearchController.ts",
     "Scripts/app/research/ResearchListController.ts",
 
-    "Scripts/app/contact/ContactUsController.ts",
+    "Scripts/app/contact/controller/ContactUsController.ts",
+    "Scripts/app/contact/service/contractService.ts",
 
     "Scripts/app/settings/controller/MainSettingController.ts",
     "Scripts/app/settings/controller/ProfileController.ts",
@@ -128,7 +129,8 @@
     "Scripts/model/actionMode.ts",
     "Scripts/model/nameValue.ts",
     "Scripts/model/HttpStatusCode.ts",
-    "Scripts/model/studentScore.ts"
+    "Scripts/model/studentScore.ts",
+    "Scripts/model/email.ts"
 
   ],
   "exclude": [

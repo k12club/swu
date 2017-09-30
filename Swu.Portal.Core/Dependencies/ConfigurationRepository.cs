@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Swu.Portal.Core.Dependencies
 {
@@ -10,6 +11,10 @@ namespace Swu.Portal.Core.Dependencies
     {
         string UploadFilePath { get; }
         string DefaultUserImage { get; }
+
+        string AdminEmail { get; }
+        string AdminPassword { get; }
+
     }
     public class ConfigurationRepository : IConfigurationRepository
     {
@@ -21,13 +26,29 @@ namespace Swu.Portal.Core.Dependencies
         public string UploadFilePath
         {
             get {
-                return "~/App_Data/Temp/FileUploads";
+                return ConfigurationManager.AppSettings["UploadFilePath"];
             }
         }
         public string DefaultUserImage
         {
             get {
-                return "Content/images/default.jpg";
+                return ConfigurationManager.AppSettings["DefaultUserImage"];
+            }
+        }
+
+        public string AdminEmail
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["AdminEmail"];
+            }
+        }
+
+        public string AdminPassword
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["AdminPassword"];
             }
         }
     }

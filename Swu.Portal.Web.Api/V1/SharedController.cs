@@ -5,6 +5,8 @@ using Swu.Portal.Web.Api.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -14,8 +16,10 @@ namespace Swu.Portal.Web.Api
     [RoutePrefix("V1/shared")]
     public class SharedController : ApiController
     {
-        public SharedController()
+        private readonly IEmailSender _emailSender;
+        public SharedController(IEmailSender emailSender)
         {
+            this._emailSender = emailSender;
         }
         [HttpGet, Route("commitments")]
         public List<CommitmentProxy> GetCommitment()
@@ -54,6 +58,24 @@ namespace Swu.Portal.Web.Api
                 };
             }
             return null;
+        }
+        [HttpPost, Route("sendMail")]
+        public HttpResponseMessage SendMail(EmailProxy email)
+        {
+            try
+            {
+                this._emailSender.Send(new Service.Model.Email
+                {
+                    SenderName = email.Sender,
+                    SenderEmail = email.Email,
+                    Message = email.Message
+                });
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
     }
 }
