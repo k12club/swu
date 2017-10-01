@@ -116,7 +116,10 @@ namespace Swu.Portal.Web.Api
                 Name = curriculum.Name,
                 CourseId = curriculum.CourseId,
                 Type = (CurriculumType)curriculum.Type,
-                NumberOfTime = curriculum.NumberOfTime
+                NumberOfTime = curriculum.NumberOfTime,
+                RoomDescription = curriculum.RoomDescription,
+                StartDate = curriculum.StartDate,
+                SurveyLink = curriculum.SurveyLink
             };
         }
         public static Photo ToEntity(this PhotoProxy photo)

@@ -49,6 +49,9 @@ namespace Swu.Portal.Web
             builder.RegisterType<NewsRepository>().As<IRepository<News>>().InstancePerRequest();
             builder.RegisterType<EmailSender>().As<IEmailSender>().InstancePerRequest();
             builder.RegisterType<PersonalFileService>().As<IPersonalFileService>().InstancePerRequest();
+            builder.RegisterType<CurriculumService>().As<ICurriculumService>().InstancePerRequest();
+            builder.RegisterType<StudentCourseService>().As<IStudentCourseService>().InstancePerRequest();
+            builder.RegisterType<StudentScoreService>().As<IStudentScoreService>().InstancePerRequest();
 
 
             builder.RegisterType<ReferenceUserService>().As<IReferenceUserService>().InstancePerRequest();

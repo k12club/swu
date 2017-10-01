@@ -9,6 +9,7 @@
         options: SummernoteOptions;
         text: string;
         mode: actionMode;
+        displayPublishDate: string;
 
         curriculum: ICurriculum;
         types: DropDownOption[];
@@ -34,6 +35,8 @@
             this.$scope.edit = (id: number): void => {
                 this.courseService.getCurriculumById(id).then((response) => {
                     this.$scope.curriculum = response;
+                    console.log(response);
+                    this.$scope.displayPublishDate = moment(this.$scope.curriculum.startDate).format("MM/DD/YYYY");
                     this.$scope.selectedType = this.$scope.curriculum.type.toString();
                 }, (error) => { });
             }
@@ -51,6 +54,7 @@
                     this.$scope.curriculum.id = this.$scope.id;
                     this.$scope.curriculum.courseId = this.$scope.courseId;
                     this.$scope.curriculum.type = parseInt(this.$scope.selectedType);
+                    this.$scope.curriculum.startDate = new Date(this.$scope.displayPublishDate);
                     this.courseService.saveCurriculum(this.$scope.curriculum).then((response) => {
                         this.$modalInstance.close();
                     }, (error) => { });

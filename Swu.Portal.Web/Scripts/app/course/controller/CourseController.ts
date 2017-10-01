@@ -23,6 +23,7 @@
         approve(id: string): void;
         addNewPhoto(id: string): void;
         removePhoto(id: number): void;
+        survey(link: string): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
@@ -249,6 +250,13 @@
                 }, (error) => {
                     this.toastr.error("Error");
                 });
+            };
+            $scope.survey = (link: string) => {
+                var prefix = 'http://';
+                if (link.substr(0, prefix.length) !== prefix) {
+                    link = prefix + link;
+                }
+                window.location.href = link;
             };
             this.init();
         }

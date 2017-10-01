@@ -123,6 +123,9 @@
         init(): void {
             this.$scope.items = [];
             this.$scope.displayItems = [];
+            this.$scope.criteria = {
+                name:""
+            };
             this.$scope.currentUser = this.$scope.getCurrentUser();
             if (this.$scope.currentUser != null) {
                 this.$scope.canPost = true;

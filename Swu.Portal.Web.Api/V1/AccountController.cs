@@ -283,10 +283,34 @@ namespace Swu.Portal.Web.Api
             }
         }
         [HttpGet, Route("teachers")]
-        public List<UserProfile> GetAllTeachers()
+        public List<UserProfile> GetAllTeachers(string keyword, string lang)
         {
             var teachers = new List<UserProfile>();
-            var users = this._applicationUserServices.GetAllUsers();
+            List<ApplicationUser> users = new List<ApplicationUser>();
+            if (lang.Equals("en"))
+            {
+                if (keyword != null)
+                {
+                    users = this._applicationUserServices.GetAllUsers()
+                        .Where(i => i.FirstName_EN.ToLower().Contains(keyword.ToLower()) || i.LastName_EN.ToLower().Contains(keyword.ToLower())).ToList();
+                }
+                else
+                {
+                    users = this._applicationUserServices.GetAllUsers().ToList();
+
+                }
+            }
+            else
+            {
+                if (keyword != null) {
+                    users = this._applicationUserServices.GetAllUsers()
+                        .Where(i => i.FirstName_TH.ToLower().Contains(keyword.ToLower()) || i.LastName_TH.ToLower().Contains(keyword.ToLower())).ToList();
+
+                }
+                else {
+                    users = this._applicationUserServices.GetAllUsers().ToList();
+                }
+            }
             foreach (var user in users)
             {
                 var roles = this._applicationUserServices.GetRolesByUserName(user.UserName);

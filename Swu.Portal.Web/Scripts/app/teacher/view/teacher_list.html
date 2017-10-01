@@ -31,17 +31,17 @@
                     <ul class="list-inline pull-left">
                         <li><a href="#"><span class="flaticon-squares text-thm2"></span></a></li>
                         <li><a href="#"><span class="flaticon-signs-3"></span></a></li>
-                        <li><a href="#">Showing 1-2 of 39 results</a></li>
+                        <li><a href="#">Showing {{currentPage+1}}-{{totalPageNumber}} of {{displayItems.length}} results</a></li>
                     </ul>
                     <div class="input-group irs-nav-search-form">
-                        <input type="text" class="form-control pull-right" placeholder="Search teacher">
+                        <input type="text" class="form-control pull-right" ng-model="criteria.name" placeholder="Search teacher">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><span class="flaticon-musica-searcher"></span></button>
+                            <button class="btn btn-default" type="button"><span class="flaticon-musica-searcher" ng-click="search()"></span></button>
                         </span>
                     </div><!-- /input-group -->
                 </div>
                 <div class="row clearfix">
-                    <div class="irs-cl-list" ng-repeat="t in teachers">
+                    <div class="irs-cl-list" ng-repeat="t in displayItems">
                         <div class="col-xs-12 col-lg-2">
                             <div class="irs-ctds-thumb">
                                 <img class="img-responsive img-fluid" ng-src="../../../{{t.imageUrl}}" alt="cl1.png">
@@ -75,6 +75,11 @@
                         </div>
                     </div>
                 </div>
+                <ul class="list-inline irs-ip-navigation clearfix">
+                    <li><span class="flaticon-arrows" ng-click="prev()"></span></li>
+                    <li ng-repeat="number in []|range:totalPageNumber" ng-click="changePage($index)"><a ng-class="{active:number == currentPage}">{{$index+1}}</a></li>
+                    <li><span class="flaticon-arrows-1" ng-click="next()"></span></li>
+                </ul>
             </div>
         </div>
     </div>

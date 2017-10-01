@@ -813,14 +813,17 @@ var Swu;
         apiService.prototype.getData = function (url) {
             var def = this.$q.defer();
             var url = this.constant.api.versionName + "/" + url;
-            this.$http.get(url)
-                .then(function (successResponse) {
-                if (successResponse)
-                    def.resolve(successResponse.data);
-                else
-                    def.reject('server error');
+            this.$http({
+                url: url,
+                method: 'GET',
+                withCredentials: true,
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            }).then(function (successResponse) {
+                def.resolve(successResponse.data);
             }, function (errorRes) {
-                def.reject(errorRes.statusText);
+                def.reject(errorRes);
             });
             return def.promise;
         };
@@ -2555,6 +2558,13 @@ var Swu;
                     _this.toastr.error("Error");
                 });
             };
+            $scope.survey = function (link) {
+                var prefix = 'http://';
+                if (link.substr(0, prefix.length) !== prefix) {
+                    link = prefix + link;
+                }
+                window.location.href = link;
+            };
             this.init();
         }
         CourseController.prototype.init = function () {
@@ -2658,6 +2668,8 @@ var Swu;
             this.$scope.edit = function (id) {
                 _this.courseService.getCurriculumById(id).then(function (response) {
                     _this.$scope.curriculum = response;
+                    console.log(response);
+                    _this.$scope.displayPublishDate = moment(_this.$scope.curriculum.startDate).format("MM/DD/YYYY");
                     _this.$scope.selectedType = _this.$scope.curriculum.type.toString();
                 }, function (error) { });
             };
@@ -2675,6 +2687,7 @@ var Swu;
                     _this.$scope.curriculum.id = _this.$scope.id;
                     _this.$scope.curriculum.courseId = _this.$scope.courseId;
                     _this.$scope.curriculum.type = parseInt(_this.$scope.selectedType);
+                    _this.$scope.curriculum.startDate = new Date(_this.$scope.displayPublishDate);
                     _this.courseService.saveCurriculum(_this.$scope.curriculum).then(function (response) {
                         _this.$modalInstance.close();
                     }, function (error) { });
@@ -3199,6 +3212,9 @@ var Swu;
         GeneralBoardController.prototype.init = function () {
             this.$scope.items = [];
             this.$scope.displayItems = [];
+            this.$scope.criteria = {
+                name: ""
+            };
             this.$scope.currentUser = this.$scope.getCurrentUser();
             if (this.$scope.currentUser != null) {
                 this.$scope.canPost = true;
@@ -3636,6 +3652,7 @@ var Swu;
 (function (Swu) {
     var TeacherListController = (function () {
         function TeacherListController($scope, $rootScope, $state, teacherService) {
+            var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$state = $state;
@@ -3643,7 +3660,7 @@ var Swu;
             this.$scope.swapLanguage = function (lang) {
                 switch (lang) {
                     case "en": {
-                        _.map($scope.teachers, function (c) {
+                        _.map($scope.items, function (c) {
                             c.firstName = c.firstName_en;
                             c.lastName = c.lastName_en;
                             c.description = c.description_en;
@@ -3652,7 +3669,7 @@ var Swu;
                         break;
                     }
                     case "th": {
-                        _.map($scope.teachers, function (c) {
+                        _.map($scope.items, function (c) {
                             c.firstName = c.firstName_th;
                             c.lastName = c.lastName_th;
                             c.description = c.description_th;
@@ -3663,18 +3680,50 @@ var Swu;
                 }
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
-                if ($scope.teachers != undefined || $scope.teachers != null) {
+                if ($scope.items != undefined || $scope.items != null) {
                     $scope.swapLanguage(newValue);
                 }
             });
+            this.$scope.getTotalPageNumber = function () {
+                return Math.ceil((_this.$scope.displayItems.length) / _this.$scope.pageSize);
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.displayItems = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.items, _this.$scope.displayItems, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.search = function () {
+                _this.teacherService.getAllTeachers(_this.$scope.criteria, $rootScope.lang).then(function (response) {
+                    _this.$scope.items = response;
+                    _this.$scope.paginate(_this.$scope.items, _this.$scope.displayItems, _this.$scope.pageSize, _this.$scope.currentPage);
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.swapLanguage(_this.$rootScope.lang);
+                }, function (error) { });
+            };
             this.init();
         }
         TeacherListController.prototype.init = function () {
-            var _this = this;
-            this.teacherService.getAllTeachers().then(function (response) {
-                _this.$scope.teachers = response;
-                _this.$scope.swapLanguage(_this.$rootScope.lang);
-            }, function (error) { });
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.criteria = {
+                name: ""
+            };
+            this.$scope.search();
         };
         ;
         TeacherListController.$inject = ["$scope", "$rootScope", "$state", "teacherService"];
@@ -3693,8 +3742,9 @@ var Swu;
             this.apiService = apiService;
             this.constant = constant;
         }
-        teacherService.prototype.getAllTeachers = function () {
-            return this.apiService.getData("account/teachers");
+        teacherService.prototype.getAllTeachers = function (criteria, lang) {
+            var keyword = (criteria.name == "" || criteria.name == null) ? "*" : criteria.name;
+            return this.apiService.getData("account/teachers?keyword=" + criteria.name + "&lang=" + lang);
         };
         teacherService.$inject = ['apiService', 'AppConstant'];
         teacherService = __decorate([

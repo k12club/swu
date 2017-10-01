@@ -147,7 +147,10 @@ namespace Swu.Portal.Data.Repository
             u.Position_TH = user.Position_TH;
             u.Tag_TH = user.Tag_TH;
             u.Description_TH = user.Description_TH;
-            
+
+            u.LineId = user.LineId;
+            u.Mobile = user.Mobile;
+            u.OfficeTel = user.OfficeTel;
 
             updateUserResult = this._userManager.Update(u).Succeeded;
             if (updateUserResult)

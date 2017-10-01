@@ -103,15 +103,19 @@
                                                     <li ng-show="c.type ===1">
                                                         <a class="list-group-item" href="#">
                                                             <ul class="list-inline" ng-show="hasPermission">
-                                                                <li ng-click="edit(c.id)">
-                                                                    <span class="flaticon-business text-thm2"></span>{{c.name}}
-                                                                </li>
+                                                                <li ng-click="edit(c.id)"><span class="flaticon-business text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
+                                                                <li>&nbsp;,&nbsp;Start Date: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;,&nbsp;Room Name: {{c.room}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3"  ng-show="canSeeQuizeResult || hasPermission"  ng-click="survey(c.surveyLink)">Survey</span></li>
                                                                 <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
                                                             <ul class="list-inline" ng-show="!hasPermission">
                                                                 <li>
-                                                                    <span class="flaticon-business text-thm2"></span>{{c.name}}
+                                                                    <span class="flaticon-business text-thm2"></span>&nbsp;<b>{{c.name}}</b>
                                                                 </li>
+                                                                <li>&nbsp;,&nbsp;Start Date: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;,&nbsp;Room Name: {{c.room}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="survey(c.surveyLink)">Survey</span></li>
                                                                 <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
                                                         </a>

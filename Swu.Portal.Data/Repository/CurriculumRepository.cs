@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Swu.Portal.Data.Repository
 {
@@ -15,9 +17,11 @@ namespace Swu.Portal.Data.Repository
     public class CurriculumRepository : ICurriculumRepository
     {
         private SwuDBContext context;
+        private readonly UserManager<ApplicationUser> _userManager;
         public CurriculumRepository()
         {
             this.context = DbContextFactory.Instance.GetOrCreateContext();
+            this._userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
         }
         public IEnumerable<Curriculum> List
         {
@@ -54,9 +58,14 @@ namespace Swu.Portal.Data.Repository
 
         public void Add(Curriculum entity, StudentScore score)
         {
-            this.context.Curriculums.Attach(entity);
-            entity.StudentScores.Add(score);
-            this.context.SaveChanges();
+            using (var context = new SwuDBContext()) {
+                var existing = context.Curriculums.Where(i => i.Id == entity.Id).FirstOrDefault();
+                var student = this._userManager.FindById(score.Student.Id);
+                context.Users.Attach(student);
+                context.Curriculums.Attach(existing);
+                existing.StudentScores.Add(score);
+                context.SaveChanges();
+            }
         }
     }
 }

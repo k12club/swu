@@ -17,6 +17,7 @@ namespace Swu.Portal.Data.Models
         public Curriculum()
         {
             StudentScores = new HashSet<StudentScore>();
+            CurriculumDocuments = new HashSet<CurriculumDocument>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -25,10 +26,16 @@ namespace Swu.Portal.Data.Models
         public CurriculumType Type { get; set; }
         public int NumberOfTime { get; set; }
 
+        [Column(TypeName = "datetime2")]
+        public DateTime StartDate { get; set; }
+        public string RoomDescription { get; set; }
+        public string SurveyLink { get; set; }
         public string CourseId { get; set; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
 
         public virtual ICollection<StudentScore> StudentScores { get; set; }
+        public virtual ICollection<CurriculumDocument> CurriculumDocuments { get; set; }
+
     }
 }

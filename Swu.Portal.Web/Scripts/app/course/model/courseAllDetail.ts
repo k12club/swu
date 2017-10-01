@@ -12,6 +12,11 @@
         //time?: string;
         courseId?: string;
         studentScores: StudentScores;
+
+        startDate?: Date;
+        room?: string;
+        surveyLink?: string;
+        curriculumDocuments?: AttachFile[];
     }
     export interface ITeacherDetail extends ITeacher { }
     export interface IStudentDetail extends IStudent {

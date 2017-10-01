@@ -142,7 +142,9 @@ namespace Swu.Portal.Data.Migrations
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
                 NumberOfTime = 2,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                StartDate= new DateTime().AddDays(1),
+                RoomDescription= "402",
             };
             var cur2 = new Curriculum
             {
@@ -150,7 +152,10 @@ namespace Swu.Portal.Data.Migrations
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
                 NumberOfTime = 2,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                StartDate = new DateTime().AddDays(2),
+                RoomDescription = "402",
+
             };
             var cur3 = new Curriculum
             {
@@ -158,7 +163,10 @@ namespace Swu.Portal.Data.Migrations
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
                 NumberOfTime = 2,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                StartDate = new DateTime().AddDays(3),
+                RoomDescription = "402",
+
             };
             var cur4 = new Curriculum
             {
@@ -166,7 +174,10 @@ namespace Swu.Portal.Data.Migrations
                 Type = CurriculumType.Quize,
                 CourseId = CID1,
                 NumberOfTime = 2,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                StartDate = new DateTime().AddDays(4),
+                RoomDescription = "402",
+
             };
             var cur5 = new Curriculum
             {
@@ -174,7 +185,10 @@ namespace Swu.Portal.Data.Migrations
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
                 NumberOfTime = 2,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                StartDate = new DateTime().AddDays(5),
+                RoomDescription = "402",
+
             };
             var cur6 = new Curriculum
             {
@@ -182,7 +196,10 @@ namespace Swu.Portal.Data.Migrations
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
                 NumberOfTime = 2,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                StartDate = new DateTime().AddDays(6),
+                RoomDescription = "402",
+
             };
             var cur7 = new Curriculum
             {
@@ -190,7 +207,10 @@ namespace Swu.Portal.Data.Migrations
                 Type = CurriculumType.Lecture,
                 CourseId = CID1,
                 NumberOfTime = 2,
-                ApplicationUser = defaultUser
+                ApplicationUser = defaultUser,
+                StartDate = new DateTime().AddDays(7),
+                RoomDescription = "402",
+
             };
             curriculums.Add(cur1);
             curriculums.Add(cur2);

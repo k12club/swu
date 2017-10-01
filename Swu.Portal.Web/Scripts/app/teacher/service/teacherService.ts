@@ -1,6 +1,6 @@
 ﻿module Swu {
     export interface IteacherService {
-        getAllTeachers(): ng.IPromise<ITeacherDetail[]>;
+        getAllTeachers(criteria: SearchCritirea, lang: string): ng.IPromise<ITeacherDetail[]>;
     }
     @Module("app")
     @Factory({ name: "teacherService" })
@@ -9,8 +9,9 @@
         constructor(private apiService: apiService, private constant: AppConstant) {
 
         }
-        getAllTeachers(): ng.IPromise<ITeacherDetail[]> {
-            return this.apiService.getData("account/teachers");
+        getAllTeachers(criteria: SearchCritirea, lang: string): ng.IPromise<ITeacherDetail[]> {
+            var keyword = (criteria.name == "" || criteria.name == null) ? "*" : criteria.name;
+            return this.apiService.getData("account/teachers?keyword=" + criteria.name + "&lang=" + lang);
         }
     }
 }

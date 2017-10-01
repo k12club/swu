@@ -28,5 +28,10 @@ namespace Swu.Portal.Web.Api.Proxy
             this.Id = f.Id;
             this.FilePath = f.FilePath;
         }
+        public AttachFilesProxy(CurriculumDocument f)
+        {
+            this.Id = f.Id;
+            this.FilePath = f.FilePath;
+        }
     }
 }

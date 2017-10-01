@@ -11,7 +11,7 @@ namespace Swu.Portal.Data.Repository
 {
     public interface IStudentCourseRepository : IRepository<StudentCourse>
     {
-        IEnumerable<StudentCourse> FindByCourseId(string Id);
+        List<StudentCourse> FindByCourseId(string Id);
     }
     public class StudentCourseRepository : IStudentCourseRepository
     {
@@ -53,12 +53,19 @@ namespace Swu.Portal.Data.Repository
             return result;
         }
 
-        public IEnumerable<StudentCourse> FindByCourseId(string Id)
+        public List<StudentCourse> FindByCourseId(string Id)
         {
-            var result = this.context.StudentCourse
-                .Include(i => i.Student)
-                .Where(i => i.Course.Id == Id).AsEnumerable();
-            return result;
+            List<StudentCourse> data = new List<StudentCourse>();
+            using (var context = new SwuDBContext()) {
+                data = context.StudentCourse
+                    .Include(i => i.Student)
+                    .Where(i => i.Course.Id == Id).ToList();
+            }
+            return data;
+            //var result = this.context.StudentCourse
+            //    .Include(i => i.Student)
+            //    .Where(i => i.Course.Id == Id).AsEnumerable();
+            //return result;
         }
     }
 }

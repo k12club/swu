@@ -37,6 +37,9 @@ namespace Swu.Portal.Web.Api
         private readonly IConfigurationRepository _configurationRepository;
         private readonly IPhotoAlbumService _photoAlbumService;
         private readonly IRepository<Photo> _photoRepository;
+        private readonly ICurriculumService _curriculumService;
+        private readonly IStudentCourseService _studentCourseService;
+        private readonly IStudentScoreService _studentScoreService;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
@@ -48,7 +51,10 @@ namespace Swu.Portal.Web.Api
             IRepository<StudentScore> studentScoreRepository,
             IConfigurationRepository configurationRepository,
             IPhotoAlbumService photoAlbumService,
-            IRepository<Photo> photoRepository)
+            IRepository<Photo> photoRepository,
+            ICurriculumService curriculumService,
+            IStudentCourseService studentCourseService,
+            IStudentScoreService studentScoreService)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
@@ -61,6 +67,9 @@ namespace Swu.Portal.Web.Api
             this._configurationRepository = configurationRepository;
             this._photoAlbumService = photoAlbumService;
             this._photoRepository = photoRepository;
+            this._curriculumService = curriculumService;
+            this._studentCourseService = studentCourseService;
+            this._studentScoreService = studentScoreService;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -68,7 +77,7 @@ namespace Swu.Portal.Web.Api
             if (ModelState.IsValid)
             {
                 var cards = new List<CourseCardProxy>();
-                var courses = this._courseRepository.List.OrderByDescending(o => o.CreatedDate).ToList();
+                var courses = this._courseRepository.List.OrderBy(o => o.CreatedDate).ToList();
                 foreach (var c in courses)
                 {
                     cards.Add(new CourseCardProxy(c));
@@ -76,7 +85,7 @@ namespace Swu.Portal.Web.Api
                 var result = new List<CourseCardProxy>();
 
                 //this.CardType = CardType.Recently;
-                var recently = cards.OrderByDescending(c => c.Course.CreatedDate).Take(4).ToList();
+                var recently = cards.OrderBy(c => c.Course.CreatedDate).Take(4).ToList();
                 foreach (var r in recently)
                 {
                     result.Add(new CourseCardProxy
@@ -291,9 +300,16 @@ and start a new fresh tomorrow. ",
         {
             if (curriculum.Id == 0)
             {
-                var course = this._courseRepository.FindById(curriculum.CourseId);
-                course.Curriculums.Add(curriculum.ToEntity());
-                this._courseRepository.Update(course);
+                this._curriculumService.AddNew(new Curriculum
+                {
+                    CourseId = curriculum.CourseId,
+                    Name = curriculum.Name,
+                    Type = (CurriculumType)curriculum.Type,
+                    NumberOfTime = curriculum.NumberOfTime,
+                    StartDate = curriculum.StartDate,
+                    RoomDescription = curriculum.RoomDescription,
+                    SurveyLink = curriculum.SurveyLink,
+                });
             }
             else
             {
@@ -301,7 +317,11 @@ and start a new fresh tomorrow. ",
                 c.Name = curriculum.Name;
                 c.Type = (CurriculumType)curriculum.Type;
                 c.NumberOfTime = curriculum.NumberOfTime;
+                c.StartDate = curriculum.StartDate;
+                c.RoomDescription = curriculum.RoomDescription;
+                c.SurveyLink = curriculum.SurveyLink;
                 this._curriculumRepository.Update(c);
+
             }
             return curriculum;
         }
@@ -331,23 +351,21 @@ and start a new fresh tomorrow. ",
         private void AddApprovedStudentToCurriculum(string courseId, string studentId)
         {
             var courses = this._courseRepository.FindById(courseId);
-            var registered = this._studentCourseRepository.List.Where(i => i.Course.Id == courseId && i.Student.Id == studentId);
+            var registered = this._studentCourseService.FindByBothKey(courseId, studentId);
             foreach (var c in courses.Curriculums)
             {
                 if (c.Type == CurriculumType.Quize)
                 {
-                    foreach (var ss in registered)
+                    foreach (var sr in registered)
                     {
-                        var existing = this._studentScoreRepository.List.Where(i => i.Student.Id == ss.Student.Id && i.CurriculumId == c.Id).ToList();
+                        var existing = this._studentScoreService.FindByBothKey(c.Id, sr.Student.Id).ToList();
                         if (existing.Count() == 0)
                         {
                             var score = new StudentScore
                             {
-                                CurriculumId = c.Id,
-                                Student = ss.Student,
                                 Score = 0
                             };
-                            this._curriculumRepository.Add(c, score);
+                            this._studentScoreService.AddScore(score, c.Id,sr.Student.Id);
                         }
                     }
                 }
@@ -502,7 +520,8 @@ and start a new fresh tomorrow. ",
                         Title = category.Title
                     });
                 }
-                else {
+                else
+                {
                     var c = this._courseCategoryRepository.FindById(category.Id);
                     c.Title = category.Title;
                     this._courseCategoryRepository.Update(c);

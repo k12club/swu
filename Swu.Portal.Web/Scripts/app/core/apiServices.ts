@@ -14,17 +14,29 @@ module Swu {
 
             var def = this.$q.defer();
             var url = this.constant.api.versionName + "/" + url;
-            this.$http.get(url)
-                .then((successResponse) => {
-                    if (successResponse)
-                        def.resolve(successResponse.data);
-                    else
-                        def.reject('server error');
+            //this.$http.get(url)
+            //    .then((successResponse) => {
+            //        if (successResponse)
+            //            def.resolve(successResponse.data);
+            //        else
+            //            def.reject('server error');
 
-                }, (errorRes) => {
+            //    }, (errorRes) => {
 
-                    def.reject(errorRes.statusText);
-                });
+            //        def.reject(errorRes.statusText);
+            //    });
+            this.$http({
+                url: url,
+                method: 'GET',
+                withCredentials: true,
+                headers: {
+                    'Cache-Control':'no-cache'
+                }
+            }).then((successResponse) => {
+                def.resolve(successResponse.data);
+            }, (errorRes) => {
+                def.reject(errorRes);
+            });
             return def.promise;
         }
         public postData<T>(data: any, url?: string, contentType?: string): ng.IPromise<T> {

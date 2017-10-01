@@ -73,10 +73,7 @@ namespace Swu.Portal.Service
         {
             using (var context = new SwuDBContext())
             {
-                var studentCourse = this._studentCourseRepository
-                    .List
-                    .Where(i => i.Student.Id == studentId && i.Course.Id == course.Id)
-                    .FirstOrDefault();
+                var studentCourse = context.StudentCourse.Where(i => i.Student.Id == studentId && i.Course.Id == course.Id).FirstOrDefault();
                 studentCourse.Activated = true;
                 context.StudentCourse.Attach(studentCourse);
                 context.Entry(studentCourse).State = EntityState.Modified;
