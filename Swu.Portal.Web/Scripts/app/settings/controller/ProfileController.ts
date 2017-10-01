@@ -12,6 +12,12 @@
         getCurrentUser(): void;
         approve(parentId: string): void;
         reject(parentId: string): void;
+
+        personalFile: any;
+        uploadFile(): void;
+        getFileName(path: string): string;
+        addNew(): void;
+        removeFile(id: number): void;
     }
 
     @Module("app")
@@ -138,7 +144,7 @@
                         });
                     }, () => { });
                 }, (error) => { });
-            }
+            };
             this.$scope.reject = (parentId: string): void => {
                 this.profileService.reject(this.$scope.currentUser.id, parentId).then((response) => {
                     this.auth.updateProfile(() => {
@@ -148,7 +154,50 @@
                         });
                     }, () => { });
                 }, (error) => { });
-            }
+            };
+            this.$scope.addNew = () => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/settings/view/personalFile.tmpl.html',
+                    controller: PersonalFileModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        userId: function () {
+                            return $scope.currentUser.id;
+                        },
+                        mode: function () {
+                            return actionMode.addNew;
+                        }
+                    }
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.auth.updateProfile(() => {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                            toastr.success("success");
+                        });
+                    }, () => { });
+                });
+            };
+            this.$scope.getFileName = (path: string): string => {
+                var fileName = path.split('\\').pop().split('/').pop();
+                return fileName;
+            };
+            this.$scope.removeFile = (id: number) => {
+                this.profileService.removeFile(id).then((response) => {
+                    this.auth.updateProfile(() => {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                            toastr.success("success");
+                        });
+                    }, () => { });
+                }, (error) => {
+                    toastr.error("Failed");
+                });
+            };
             this.init();
         }
         init(): void {

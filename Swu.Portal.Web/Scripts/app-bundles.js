@@ -4002,6 +4002,49 @@ var Swu;
                     }, function () { });
                 }, function (error) { });
             };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/personalFile.tmpl.html',
+                    controller: Swu.PersonalFileModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        userId: function () {
+                            return $scope.currentUser.id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.auth.updateProfile(function () {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                            toastr.success("success");
+                        });
+                    }, function () { });
+                });
+            };
+            this.$scope.getFileName = function (path) {
+                var fileName = path.split('\\').pop().split('/').pop();
+                return fileName;
+            };
+            this.$scope.removeFile = function (id) {
+                _this.profileService.removeFile(id).then(function (response) {
+                    _this.auth.updateProfile(function () {
+                        $timeout(function () {
+                            $scope.currentUser = auth.getCurrentUser();
+                            $scope.swapLanguage($rootScope.lang);
+                            toastr.success("success");
+                        });
+                    }, function () { });
+                }, function (error) {
+                    toastr.error("Failed");
+                });
+            };
             this.init();
         }
         ProfileController.prototype.init = function () {
@@ -5341,6 +5384,62 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var PersonalFileModalController = (function () {
+        function PersonalFileModalController($scope, $state, profileService, toastr, $modalInstance, auth, id, userId, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.profileService = profileService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.auth = auth;
+            this.id = id;
+            this.userId = userId;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.userId = userId;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.submit = function () {
+                var models = [];
+                models.push({ name: "file", value: _this.$scope.file });
+                models.push({ name: "userId", value: _this.$scope.userId });
+                _this.profileService.uploadPersonalFile(models).then(function (response) {
+                    _this.$modalInstance.close();
+                }, function (error) { });
+            };
+            this.$scope.delete = function (id) {
+            };
+            this.init();
+        }
+        PersonalFileModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New File";
+            }
+        };
+        ;
+        PersonalFileModalController.$inject = ["$scope", "$state", "profileService", "toastr", "$modalInstance", "AuthServices", "id", "userId", "mode"];
+        PersonalFileModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "PersonalFileModalController" })
+        ], PersonalFileModalController);
+        return PersonalFileModalController;
+    }());
+    Swu.PersonalFileModalController = PersonalFileModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var userService = (function () {
         function userService(apiService, constant) {
             this.apiService = apiService;
@@ -5384,6 +5483,12 @@ var Swu;
         };
         profileService.prototype.reject = function (childId, parentId) {
             return this.apiService.getData("Account/rejectRequest?childId=" + childId + "&parentId=" + parentId);
+        };
+        profileService.prototype.uploadPersonalFile = function (models) {
+            return this.apiService.postWithFormData(models, "Account/uploadPersonalFileAsync");
+        };
+        profileService.prototype.removeFile = function (id) {
+            return this.apiService.getData("Account/removeFile?id=" + id);
         };
         profileService.$inject = ['apiService', 'AppConstant'];
         profileService = __decorate([

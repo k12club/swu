@@ -58,6 +58,8 @@ namespace Swu.Portal.Web.Api
 
             //user.ReferenceUser = (u.ReferenceUser != null) ? new UserProfile(u.ReferenceUser) : new UserProfile();
             //user.ReferenceUserId = (u.ReferenceUser != null) ? u.ReferenceUser.Id : "";
+
+            user.PersonalFiles = (u.PersonalFile != null)? u.PersonalFile.Select(f=>new AttachFilesProxy(f)).ToList() : new List<AttachFilesProxy>();
             return user;
         }
         public static ApplicationUser ToEntity(this UserProfile u)

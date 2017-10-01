@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Swu.Portal.Core.Dependencies;
+using Swu.Portal.Data.Context;
 using Swu.Portal.Data.Models;
 using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
@@ -21,20 +22,24 @@ namespace Swu.Portal.Web.Api
     public class AccountController : ApiController
     {
         private const string UPLOAD_DIR = "FileUpload/users/";
+        private const string UPLOAD_FILE_DIR = "FileUpload/personalFile/";
         private readonly IApplicationUserServices _applicationUserServices;
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IConfigurationRepository _configurationRepository;
         private readonly IReferenceUserService _referenceUserService;
+        private readonly IPersonalFileService _personalFileService;
         public AccountController(
             IApplicationUserServices applicationUserServices,
             IDateTimeRepository datetimeRepository,
             IConfigurationRepository configurationRepository,
-            IReferenceUserService referenceUserService)
+            IReferenceUserService referenceUserService,
+            IPersonalFileService personalFileService)
         {
             this._applicationUserServices = applicationUserServices;
             this._datetimeRepository = datetimeRepository;
             this._configurationRepository = configurationRepository;
             this._referenceUserService = referenceUserService;
+            this._personalFileService = personalFileService;
         }
         [HttpPost, Route("login")]
         public async Task<UserProfile> Login(UserLoginProxy model)
@@ -192,7 +197,7 @@ namespace Swu.Portal.Web.Api
             return u.ToUserProfileViewModel(selectedRoleName, this._configurationRepository.DefaultUserImage);
         }
         [HttpPost, Route("uploadAsync")]
-        public async Task<HttpResponseMessage> PostFormData()
+        public async Task<HttpResponseMessage> UploadAsync()
         {
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
@@ -248,17 +253,20 @@ namespace Swu.Portal.Web.Api
 
                 if (user.SelectedRoleName == "Parent")
                 {
-                    var fullname = user.ReferenceUserName.Split(' ');
-                    ApplicationUser referenceUser = null;
-                    if (lang.Equals("en"))
+                    if (user.ReferenceUserName != null)
                     {
-                        referenceUser = await this._applicationUserServices.FindByFirstNameAndLastNameEN(fullname[0], fullname[1]);
+                        var fullname = user.ReferenceUserName.Split(' ');
+                        ApplicationUser referenceUser = null;
+                        if (lang.Equals("en"))
+                        {
+                            referenceUser = await this._applicationUserServices.FindByFirstNameAndLastNameEN(fullname[0], fullname[1]);
+                        }
+                        else
+                        {
+                            referenceUser = await this._applicationUserServices.FindByFirstNameAndLastNameTH(fullname[0], fullname[1]);
+                        }
+                        this.AddReferenceUser(user.Id, referenceUser);
                     }
-                    else
-                    {
-                        referenceUser = await this._applicationUserServices.FindByFirstNameAndLastNameTH(fullname[0], fullname[1]);
-                    }
-                    this.AddReferenceUser(user.Id, referenceUser);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
@@ -385,6 +393,73 @@ namespace Swu.Portal.Web.Api
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+        }
+        [HttpPost, Route("uploadPersonalFileAsync")]
+        public async Task<HttpResponseMessage> UploadPersonalFileAsync()
+        {
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_FILE_DIR);
+            var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                string userId = "";
+                string lang = "";
+                foreach (var key in provider.FormData)
+                {
+                    if (key.Equals("userId"))
+                    {
+                        var json = provider.FormData[key.ToString()];
+                        userId = JsonConvert.DeserializeObject<string>(json);
+                    }
+                }
+                string _newFileName = string.Empty;
+                string _path = string.Empty;
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string fileName = file.Headers.ContentDisposition.FileName;
+                    if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                    {
+                        fileName = fileName.Trim('"');
+                    }
+                    if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                    {
+                        fileName = Path.GetFileName(fileName);
+                    }
+                    _path = string.Format("{0}{1}/{2}", UPLOAD_FILE_DIR, userId, fileName);
+                    var moveToFileName = Path.Combine(root, userId, fileName);
+                    var moveToFolder = Path.Combine(root, userId);
+                    if (!Directory.Exists(moveToFolder))
+                    {
+                        Directory.CreateDirectory(moveToFolder);
+                    }
+                    if (File.Exists(moveToFileName))
+                    {
+                        File.Delete(moveToFileName);
+                    }
+                    File.Move(file.LocalFileName, moveToFileName);
+                    this._personalFileService.AddNewFile(new PersonalFile
+                    {
+                        FilePath = _path,
+                        UserId = userId
+                    }, userId);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("removeFile")]
+        public void RemoveFile(int id)
+        {
+            this._personalFileService.DeleteFile(id);
         }
     }
 }

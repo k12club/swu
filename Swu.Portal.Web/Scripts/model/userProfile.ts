@@ -44,5 +44,7 @@
         child?: IUserProfile;
         approve?: boolean;
 
+        personalFiles?: AttachFile[];
+
     }
 }

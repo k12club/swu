@@ -48,8 +48,8 @@ namespace Swu.Portal.Web
             builder.RegisterType<VideoRepository>().As<IRepository<Video>>().InstancePerRequest();
             builder.RegisterType<NewsRepository>().As<IRepository<News>>().InstancePerRequest();
             builder.RegisterType<EmailSender>().As<IEmailSender>().InstancePerRequest();
+            builder.RegisterType<PersonalFileService>().As<IPersonalFileService>().InstancePerRequest();
 
-            
 
             builder.RegisterType<ReferenceUserService>().As<IReferenceUserService>().InstancePerRequest();
             //builder.RegisterType<ReferenceUserRepository>().As<IRepository<ReferenceUser>>().InstancePerRequest();

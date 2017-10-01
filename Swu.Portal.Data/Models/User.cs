@@ -54,5 +54,7 @@ namespace Swu.Portal.Data.Models
 
         public virtual Department Department { get; set; }
         public virtual University University { get; set; }
+
+        public virtual ICollection<PersonalFile> PersonalFile { get; set; }
     }
 }

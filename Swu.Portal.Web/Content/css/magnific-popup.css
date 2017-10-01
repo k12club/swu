@@ -34,3 +34,25 @@ body:after {content: url(lightbox/close.png) url(lightbox/loading.gif) url(light
   .mfp-close2:active {
     top: 1px; }
 
+.mfp-close3 {
+    width: 25px;
+    height: 25px;
+    right: 0;
+    top: 0;
+    text-decoration: none;
+    text-align: left;
+    opacity: 0.5;
+    padding: 0 0 0px 0px;
+    color: #000;
+    background-color: #fff;
+    border: 0px;
+    font-style: normal;
+    font-size: 20px;
+    font-family: Arial, Baskerville, monospace;
+}
+  .mfp-close3:hover,
+  .mfp-close3:focus {
+    opacity: 1; }
+  .mfp-close2:active {
+    top: 1px; }
+

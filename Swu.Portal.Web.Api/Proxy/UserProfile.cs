@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Swu.Portal.Data.Models;
+using Swu.Portal.Web.Api.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,6 +93,8 @@ namespace Swu.Portal.Web.Api
         [JsonProperty(PropertyName = "approve")]
         public bool Approve { get; set; }
 
+        [JsonProperty(PropertyName = "personalFiles")]
+        public List<AttachFilesProxy> PersonalFiles { get; set; }
         public UserProfile()
         {
 

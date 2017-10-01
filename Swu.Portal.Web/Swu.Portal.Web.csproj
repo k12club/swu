@@ -784,6 +784,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="FileUpload\course\" />
     <Folder Include="FileUpload\news\" />
+    <Folder Include="FileUpload\personalFile\" />
     <Folder Include="FileUpload\research\" />
     <Folder Include="FileUpload\users\" />
     <Folder Include="FileUpload\video\" />
@@ -831,6 +832,7 @@
     <Content Include="Scripts\angular\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular\angular.min.js.map" />
     <Content Include="Scripts\app\settings\view\courses.tmpl.html" />
+    <Content Include="Scripts\app\settings\view\personalFile.tmpl.html" />
     <None Include="Scripts\jquery\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-2.2.1.min.map" />
     <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
@@ -899,6 +901,7 @@
     <TypeScriptCompile Include="Scripts\app\settings\controller\MainSettingController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\NewsManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\NewsManagementModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\PersonalFileModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\ProfileModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersModalController.ts" />

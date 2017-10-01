@@ -78,6 +78,7 @@
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\ParentProfile.cs" />
+    <Compile Include="Models\PersonalFile.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PhotoAlbum.cs" />
     <Compile Include="Models\ReferenceUser.cs" />

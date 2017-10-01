@@ -32,6 +32,7 @@ namespace Swu.Portal.Data.Repository
                 .Include(i => i.University)
                 .Include(i => i.ReferenceUser)
                 .Include(i => i.Roles)
+                .Include(i=>i.PersonalFile)
                 .FirstOrDefaultAsync(i => i.UserName == userName);
         }
         public virtual Task<ApplicationUser> FindByFirstNameAndLastNameEN(string firstName, string lastName)
@@ -146,7 +147,7 @@ namespace Swu.Portal.Data.Repository
             u.Position_TH = user.Position_TH;
             u.Tag_TH = user.Tag_TH;
             u.Description_TH = user.Description_TH;
-
+            
 
             updateUserResult = this._userManager.Update(u).Succeeded;
             if (updateUserResult)
