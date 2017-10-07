@@ -154,6 +154,17 @@ namespace Swu.Portal.Web.Api
             }
             return allDetail;
         }
+        [HttpGet, Route("getRegisteredCourses")]
+        public List<CourseCardProxy> GetRegisteredCourses(string id)
+        {
+            var cards = new List<CourseCardProxy>();
+            var studentCourses = this._studentCourseService.FindByStudentId(id);
+            foreach (var sc in studentCourses) {
+                var courses = this._courseRepository.FindById(sc.Course.Id);
+                cards.Add(new CourseCardProxy(courses));
+            }
+            return cards;
+        }
         [HttpGet, Route("allItems")]
         public List<WebboardItemProxy> GetAllItems(string keyword)
         {

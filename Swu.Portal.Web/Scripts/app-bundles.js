@@ -3959,6 +3959,9 @@ var Swu;
                         _this.$scope.currentUser.lineId = _this.$scope.currentUser.lineId;
                         _this.$scope.currentUser.officeTel = _this.$scope.currentUser.officeTel;
                         _this.$scope.currentUser.mobile = _this.$scope.currentUser.mobile;
+                        _.map(_this.$scope.registeredCourses, function (c) {
+                            c.course.name = c.course.name_en;
+                        });
                         if (_this.$scope.currentUser.selectedRoleName == "Student") {
                             if (_this.$scope.currentUser.parent != null) {
                                 _this.$scope.currentUser.parent.firstName = _this.$scope.currentUser.parent.firstName_en;
@@ -4006,6 +4009,9 @@ var Swu;
                         _this.$scope.currentUser.lineId = _this.$scope.currentUser.lineId;
                         _this.$scope.currentUser.officeTel = _this.$scope.currentUser.officeTel;
                         _this.$scope.currentUser.mobile = _this.$scope.currentUser.mobile;
+                        _.map(_this.$scope.registeredCourses, function (c) {
+                            c.course.name = c.course.name_th;
+                        });
                         if (_this.$scope.currentUser.selectedRoleName == "Student") {
                             if (_this.$scope.currentUser.parent != null) {
                                 _this.$scope.currentUser.parent.firstName = _this.$scope.currentUser.parent.firstName_th;
@@ -4047,7 +4053,7 @@ var Swu;
                 }
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
-                if ($scope.currentUser != undefined || $scope.currentUser != null) {
+                if (($scope.currentUser != undefined || $scope.currentUser != null) && ($scope.registeredCourses != undefined || $scope.registeredCourses != null)) {
                     $scope.swapLanguage(newValue);
                 }
             });
@@ -4114,11 +4120,89 @@ var Swu;
                     toastr.error("Failed");
                 });
             };
+            this.$scope.getRegisteredCourse = function () {
+                _this.profileService.getCourses(_this.$scope.currentUser.id).then(function (response) {
+                    _this.$scope.numberOfRegistered = response.length;
+                    _this.$scope.registeredCourses = response;
+                    _this.$scope.swapLanguage(_this.$rootScope.lang);
+                    _this.$scope.render(_this.$scope.registeredCourses);
+                    _this.$scope.registerScript();
+                }, function (error) { });
+            };
+            this.$scope.render = function (course) {
+                var html = '';
+                _.forEach(course, function (value, key) {
+                    var elements = '\
+                        <div class="item" style="border:solid 1px #eee">\
+                            <div class="irs-lc-grid text-center" >\
+                                <div class="irs-lc-grid-thumb" >\
+                                    <img class="img-responsive img-fluid" src= "../../../' + value.course.imageUrl + '" alt= "11.jpg" >\
+                                </div>\
+                            </div>\
+                            <div class="irs-lc-details">\
+                                <div class="irs-lc-teacher-info" >\
+                                    <div class="irs-lct-thumb" > <img src="' + value.teacher.imageUrl + '" class="img-circle" style="width:50px;height:50px" > </div>\
+                                    <div class="irs-lct-info" style="padding-left:30px" >with <span class="text-thm2" >' + value.teacher.name + '</span></div>\
+                                </div>\
+                                <h4> <a href="#" >' + value.course.name + '</a></h4 >\
+                            </div>\
+                            <div class="irs-lc-footer">\
+                                <div class="irs-lc-normal-part" >\
+                                    <ul class="list-inline" >\
+                                        <li>&nbsp;</li>\
+                                        <li >&nbsp;</li>\
+                                    </ul>\
+                                </div>\
+                                <div class="irs-lc-hover-part" > See Course</div>\
+                            </div>\
+                        </div>';
+                    html += elements;
+                });
+                $('#registered-course').html(html);
+            };
+            this.$scope.registerScript = function () {
+                $('#registered-course').owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    dots: false,
+                    nav: true,
+                    autoplayHoverPause: false,
+                    autoplay: false,
+                    smartSpeed: 700,
+                    navText: [
+                        '<i class="flaticon-left-arrow"></i>',
+                        '<i class="flaticon-arrows-3"></i>'
+                    ],
+                    responsive: {
+                        0: {
+                            items: 1,
+                            center: false
+                        },
+                        480: {
+                            items: 1,
+                            center: false
+                        },
+                        600: {
+                            items: 1,
+                            center: false
+                        },
+                        768: {
+                            items: 2
+                        },
+                        992: {
+                            items: 2
+                        },
+                        1200: {
+                            items: 3
+                        }
+                    }
+                });
+            };
             this.init();
         }
         ProfileController.prototype.init = function () {
             this.$scope.getCurrentUser();
-            this.$scope.swapLanguage(this.$rootScope.lang);
+            this.$scope.getRegisteredCourse();
         };
         ;
         ProfileController.$inject = ["$scope", "$rootScope", "$state", "profileService", "AuthServices", "$uibModal", "$timeout", "AppConstant"];
@@ -5558,6 +5642,9 @@ var Swu;
         };
         profileService.prototype.removeFile = function (id) {
             return this.apiService.getData("Account/removeFile?id=" + id);
+        };
+        profileService.prototype.getCourses = function (id) {
+            return this.apiService.getData("course/getRegisteredCourses?id=" + id);
         };
         profileService.$inject = ['apiService', 'AppConstant'];
         profileService = __decorate([

@@ -6,6 +6,8 @@
 
         uploadPersonalFile(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
         removeFile(id: number): ng.IPromise<HttpStatusCode>;
+
+        getCourses(id: string): ng.IPromise<ICourseCard[]>;
     }
     @Module("app")
     @Factory({ name: "profileService" })
@@ -28,6 +30,9 @@
         }
         removeFile(id: number): ng.IPromise<HttpStatusCode> {
             return this.apiService.getData("Account/removeFile?id=" + id);
+        }
+        getCourses(id:string): ng.IPromise<ICourseCard[]> {
+            return this.apiService.getData<ICourseCard[]>("course/getRegisteredCourses?id=" + id);
         }
     }
 }

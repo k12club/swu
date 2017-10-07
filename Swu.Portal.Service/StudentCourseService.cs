@@ -12,6 +12,7 @@ namespace Swu.Portal.Service
     public interface IStudentCourseService
     {
         List<StudentCourse> FindByBothKey(string courseId, string studentId);
+        List<StudentCourse> FindByStudentId(string studentId);
     }
     public class StudentCourseService : IStudentCourseService
     {
@@ -24,6 +25,20 @@ namespace Swu.Portal.Service
                     .Include(i=>i.Student)
                     .Include(i=>i.Course)
                     .Where(i => i.Student.Id == studentId && i.Course.Id == courseId)
+                    .ToList();
+            }
+            return data;
+        }
+
+        public List<StudentCourse> FindByStudentId(string studentId)
+        {
+            List<StudentCourse> data = new List<StudentCourse>();
+            using (var context = new SwuDBContext())
+            {
+                data = context.StudentCourse
+                    .Include(i => i.Student)
+                    .Include(i => i.Course)
+                    .Where(i => i.Student.Id == studentId)
                     .ToList();
             }
             return data;

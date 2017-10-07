@@ -96,12 +96,20 @@
                 <div class="irs-courses-details">
                     <div class="irs-cdetails-tab">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a data-target="#s3" aria-controls="s3" role="tab" data-toggle="tab">Personal File</a></li>
-                            <li role="presentation"><a data-target="#s1" aria-controls="s1" role="tab" data-toggle="tab">Parents</a></li>
-                            <li role="presentation"><a data-target="#s2" aria-controls="s1" role="tab" data-toggle="tab">Waiting for approve to be your parent</a></li>
+                            <li role="presentation" class="active"><a data-target="#s1" aria-controls="s1" role="tab" data-toggle="tab">Registered Courses</a></li>
+                            <li role="presentation"><a data-target="#s2" aria-controls="s2" role="tab" data-toggle="tab">Personal File</a></li>
+                            <li role="presentation"><a data-target="#s3" aria-controls="s3" role="tab" data-toggle="tab">Parents</a></li>
+                            <li role="presentation"><a data-target="#s4" aria-controls="s4" role="tab" data-toggle="tab">Waiting for approve to be your parent</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade in active" id="s3">
+                            <div role="tabpanel" class="tab-pane fade in active" id="s1">
+                                <div class="irs-cdtls-ttbg2">
+                                    <h3>Showing {{numberOfRegistered}} results</h3>
+                                    <div class="irs-td-carousel" id="registered-course">
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="s2">
                                 <div class="row">
                                     <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
                                 </div>
@@ -116,7 +124,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="s1">
+                            <div role="tabpanel" class="tab-pane fade" id="s3">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul class="list-inline irs-cl-teacher-info" ng-show="parent != null">
@@ -126,7 +134,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="s2">
+                            <div role="tabpanel" class="tab-pane fade" id="s4">
                                 <div class="row">
                                     <div class="col-md-10">
                                         <ul class="list-group" ng-show="waiting != null">

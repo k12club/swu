@@ -24,7 +24,6 @@
                             <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{item.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
                             <li><a href="#">on<span class="text-thm2"> {{item.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span></a></li>
                             <li class="irs-cl-info">by <span class="text-thm2"> {{item.createBy}}</span></li>
-                            <li> <span class="flaticon-interface"></span> {{item.numberOfComments}}</li>
                         </ul>
                     </div>
                     <div class="col-lg-1" ng-show="canEdit(item.userId)" ng-click="edit(item.id)"><span class="flaticon-pen"></span></div>

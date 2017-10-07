@@ -18,6 +18,12 @@
         getFileName(path: string): string;
         addNew(): void;
         removeFile(id: number): void;
+
+        numberOfRegistered: number;
+        getRegisteredCourse(): void;
+        registeredCourses: ICourseCard[];
+        render(course: ICourseCard[]): void;
+        registerScript(): void;
     }
 
     @Module("app")
@@ -55,6 +61,9 @@
                         this.$scope.currentUser.lineId = this.$scope.currentUser.lineId;
                         this.$scope.currentUser.officeTel = this.$scope.currentUser.officeTel;
                         this.$scope.currentUser.mobile = this.$scope.currentUser.mobile;
+                        _.map(this.$scope.registeredCourses, function (c) {
+                            c.course.name = c.course.name_en;
+                        });
                         if (this.$scope.currentUser.selectedRoleName == "Student") {
                             if (this.$scope.currentUser.parent != null) {
                                 this.$scope.currentUser.parent.firstName = this.$scope.currentUser.parent.firstName_en;
@@ -96,6 +105,11 @@
                         this.$scope.currentUser.lineId = this.$scope.currentUser.lineId;
                         this.$scope.currentUser.officeTel = this.$scope.currentUser.officeTel;
                         this.$scope.currentUser.mobile = this.$scope.currentUser.mobile;
+
+                        _.map(this.$scope.registeredCourses, function (c) {
+                            c.course.name = c.course.name_th;
+                        });
+
                         if (this.$scope.currentUser.selectedRoleName == "Student") {
                             if (this.$scope.currentUser.parent != null) {
                                 this.$scope.currentUser.parent.firstName = this.$scope.currentUser.parent.firstName_th;
@@ -131,7 +145,7 @@
                 }
             }
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
-                if ($scope.currentUser != undefined || $scope.currentUser != null) {
+                if (($scope.currentUser != undefined || $scope.currentUser != null) && ($scope.registeredCourses != undefined || $scope.registeredCourses != null)) {
                     $scope.swapLanguage(newValue);
                 }
             });
@@ -198,11 +212,89 @@
                     toastr.error("Failed");
                 });
             };
+            this.$scope.getRegisteredCourse = () => {
+                this.profileService.getCourses(this.$scope.currentUser.id).then((response) => {
+                    this.$scope.numberOfRegistered = response.length;
+                    this.$scope.registeredCourses = response;
+                    this.$scope.swapLanguage(this.$rootScope.lang);
+                    this.$scope.render(this.$scope.registeredCourses);
+                    this.$scope.registerScript();
+                }, (error) => { });
+            };
+            this.$scope.render = (course: ICourseCard[]) => {
+                var html = '';
+                _.forEach(course, (value, key) => {
+                    var elements = '\
+                        <div class="item" style="border:solid 1px #eee">\
+                            <div class="irs-lc-grid text-center" >\
+                                <div class="irs-lc-grid-thumb" >\
+                                    <img class="img-responsive img-fluid" src= "../../../'+ value.course.imageUrl + '" alt= "11.jpg" >\
+                                </div>\
+                            </div>\
+                            <div class="irs-lc-details">\
+                                <div class="irs-lc-teacher-info" >\
+                                    <div class="irs-lct-thumb" > <img src="'+ value.teacher.imageUrl +'" class="img-circle" style="width:50px;height:50px" > </div>\
+                                    <div class="irs-lct-info" style="padding-left:30px" >with <span class="text-thm2" >'+ value.teacher.name +'</span></div>\
+                                </div>\
+                                <h4> <a href="#" >'+ value.course.name +'</a></h4 >\
+                            </div>\
+                            <div class="irs-lc-footer">\
+                                <div class="irs-lc-normal-part" >\
+                                    <ul class="list-inline" >\
+                                        <li>&nbsp;</li>\
+                                        <li >&nbsp;</li>\
+                                    </ul>\
+                                </div>\
+                                <div class="irs-lc-hover-part" > See Course</div>\
+                            </div>\
+                        </div>';
+                    html += elements;
+                });
+                $('#registered-course').html(html);
+            }
+            this.$scope.registerScript = () => {
+                $('#registered-course').owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    dots: false,
+                    nav: true,
+                    autoplayHoverPause: false,
+                    autoplay: false,
+                    smartSpeed: 700,
+                    navText: [
+                        '<i class="flaticon-left-arrow"></i>',
+                        '<i class="flaticon-arrows-3"></i>'
+                    ],
+                    responsive: {
+                        0: {
+                            items: 1,
+                            center: false
+                        },
+                        480: {
+                            items: 1,
+                            center: false
+                        },
+                        600: {
+                            items: 1,
+                            center: false
+                        },
+                        768: {
+                            items: 2
+                        },
+                        992: {
+                            items: 2
+                        },
+                        1200: {
+                            items: 3
+                        }
+                    }
+                });
+            }
             this.init();
         }
         init(): void {
             this.$scope.getCurrentUser();
-            this.$scope.swapLanguage(this.$rootScope.lang);
+            this.$scope.getRegisteredCourse();
         };
 
     }

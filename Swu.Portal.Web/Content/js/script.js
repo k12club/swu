@@ -527,7 +527,7 @@
     }
 
 /*  ==================== Owl-News-carousel ==================== */
-    if($('.irs-td-carousel').length){
+    if ($('.irs-td-carousel').length) {
         $('.irs-td-carousel').owlCarousel({
             loop:true,
             margin:30,
