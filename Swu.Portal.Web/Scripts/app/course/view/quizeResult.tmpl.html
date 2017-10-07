@@ -8,14 +8,14 @@
                 <div class="irs-cdtls-feture-bot2">
                     <ul class="list-group" ng-repeat="s in splitStudents1">
                         <li>
-                            <a class="list-group-item" href="#">
-                                <ul class="list-inline">
-                                    <li>{{s.number}}</li>
-                                    <li>{{s.studentId}}</li>
-                                    <li>{{s.name}}</li>
-                                    <li class="pull-right">{{s.score}}</li>
-                                </ul>
-                            </a>
+                            <ul class="list-inline">
+                                <li>{{s.number}}</li>
+                                <!--<li>{{s.studentId}}</li>-->
+                                <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{s.imageUrl}}" style="width:50px;height:50px"></li>
+                                <li>{{s.name}}</li>
+                                <li class="pull-right" ng-show="!hasPermission">{{s.score}}</li>
+                                <li class="pull-right" ng-show="hasPermission"><input type="number" class="form-control" style="width:100px" ng-model="s.score"  required/></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -24,14 +24,14 @@
                 <div class="irs-cdtls-feture-bot2">
                     <ul class="list-group" ng-repeat="s in splitStudents2">
                         <li>
-                            <a class="list-group-item" href="#">
-                                <ul class="list-inline">
-                                    <li>{{s.number}}</li>
-                                    <li>{{s.studentId}}</li>
-                                    <li>{{s.name}}</li>
-                                    <li class="pull-right">{{s.score}}</li>
-                                </ul>
-                            </a>
+                            <ul class="list-inline">
+                                <li>{{s.number}}</li>
+                                <!--<li>{{s.studentId}}</li>-->
+                                <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{s.imageUrl}}" style="width:50px;height:50px"></li>
+                                <li>{{s.name}}</li>
+                                <li class="pull-right" ng-show="!hasPermission">{{s.score}}</li>
+                                <li class="pull-right" ng-show="hasPermission"><input type="number" class="form-control" style="width:100px" ng-model="s.score" required /></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -40,6 +40,7 @@
         <div class="modal-footer">
             <div class="form-group">
                 <div class="col-sm-12">
+                    <button type="button" class="btn btn-default" ng-click="save()" ng-show="hasPermission">Save</button>
                     <button class="btn btn-warning" type="button" ng-click="close()">Close</button>
                 </div>
             </div>

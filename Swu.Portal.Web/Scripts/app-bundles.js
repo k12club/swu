@@ -2495,6 +2495,9 @@ var Swu;
                     resolve: {
                         studentScores: function () {
                             return $scope.getStudentScore(id);
+                        },
+                        hasPermission: function () {
+                            return $scope.hasPermission;
                         }
                     },
                     size: "lg"
@@ -2794,14 +2797,23 @@ var Swu;
 var Swu;
 (function (Swu) {
     var QuizeResultController = (function () {
-        function QuizeResultController($scope, $modalInstance, studentScores) {
+        function QuizeResultController($scope, $modalInstance, courseService, studentScores, hasPermission) {
             var _this = this;
             this.$scope = $scope;
             this.$modalInstance = $modalInstance;
+            this.courseService = courseService;
             this.studentScores = studentScores;
+            this.hasPermission = hasPermission;
             this.$scope.students = studentScores;
+            this.$scope.hasPermission = hasPermission;
             this.$scope.close = function () {
                 _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                var students = _this.$scope.splitStudents1.concat(_this.$scope.splitStudents2);
+                _this.courseService.saveStudentScores(students).then(function (response) {
+                    _this.$modalInstance.close();
+                }, function (error) { });
             };
             this.init();
         }
@@ -2812,26 +2824,30 @@ var Swu;
             _.forEach(this.$scope.students, function (value, key) {
                 if (key < (_this.$scope.students.length / 2)) {
                     _this.$scope.splitStudents1.push({
-                        id: value.id,
+                        scoreId: value.scoreId,
                         activated: value.activated,
                         name: value.name,
                         score: value.score,
-                        studentId: value.studentId
+                        studentId: value.studentId,
+                        curriculumId: value.curriculumId,
+                        imageUrl: value.imageUrl
                     });
                 }
                 else {
                     _this.$scope.splitStudents2.push({
-                        id: value.id,
+                        scoreId: value.scoreId,
                         activated: value.activated,
                         name: value.name,
                         score: value.score,
-                        studentId: value.studentId
+                        studentId: value.studentId,
+                        curriculumId: value.curriculumId,
+                        imageUrl: value.imageUrl
                     });
                 }
             });
         };
         ;
-        QuizeResultController.$inject = ["$scope", "$modalInstance", "studentScores"];
+        QuizeResultController.$inject = ["$scope", "$modalInstance", "courseService", "studentScores", "hasPermission"];
         QuizeResultController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "QuizeResultController" })
@@ -2873,6 +2889,9 @@ var Swu;
         };
         courseService.prototype.removePhoto = function (photoId) {
             return this.apiService.getData("course/removePhoto?photoId=" + photoId);
+        };
+        courseService.prototype.saveStudentScores = function (scores) {
+            return this.apiService.postData(scores, "course/updateScores");
         };
         courseService.$inject = ['apiService', 'AppConstant'];
         courseService = __decorate([

@@ -13,7 +13,7 @@ namespace Swu.Portal.Data.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int Score { get; set; }
+        public double Score { get; set; }
 
         public int CurriculumId { get; set; }
         [ForeignKey("CurriculumId")]

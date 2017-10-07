@@ -101,11 +101,11 @@
                                                 </div>
                                                 <ul class="list-group" ng-repeat="c in courseDetail.curriculums" ng-show="courseDetail.curriculums.length>0">
                                                     <li ng-show="c.type ===1">
-                                                        <a class="list-group-item" href="#">
+                                                        <a class="list-group-item">
                                                             <ul class="list-inline" ng-show="hasPermission">
                                                                 <li ng-click="edit(c.id)"><span class="flaticon-business text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
-                                                                <li>&nbsp;,&nbsp;Start Date: {{c.startDate|date:'dd/MM/yyyy'}}</li>
-                                                                <li>&nbsp;,&nbsp;Room Name: {{c.room}}</li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3"  ng-show="canSeeQuizeResult || hasPermission"  ng-click="survey(c.surveyLink)">Survey</span></li>
                                                                 <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
@@ -113,24 +113,28 @@
                                                                 <li>
                                                                     <span class="flaticon-business text-thm2"></span>&nbsp;<b>{{c.name}}</b>
                                                                 </li>
-                                                                <li>&nbsp;,&nbsp;Start Date: {{c.startDate|date:'dd/MM/yyyy'}}</li>
-                                                                <li>&nbsp;,&nbsp;Room Name: {{c.room}}</li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="survey(c.surveyLink)">Survey</span></li>
                                                                 <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
                                                         </a>
                                                     </li>
                                                     <li ng-show="c.type ===2">
-                                                        <a class="list-group-item" href="#">
+                                                        <a class="list-group-item">
                                                             <ul class="list-inline" ng-show="hasPermission">
-                                                                <li ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
+                                                                <li ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="showResultModal(c.id)"> Quize result</span></li>
-                                                                <li class="pull-right">{{c.time}}</li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
                                                             <ul class="list-inline" ng-show="!hasPermission">
-                                                                <li><span class="flaticon-pen text-thm2"></span> {{c.name}}</li>
+                                                                <li><span class="flaticon-pen text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
                                                                 <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="showResultModal(c.id)"> Quize result</span></li>
-                                                                <li class="pull-right">{{c.time}}</li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
                                                         </a>
                                                     </li>

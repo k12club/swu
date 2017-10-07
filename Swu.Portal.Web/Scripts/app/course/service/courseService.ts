@@ -12,6 +12,7 @@
         approveTakeCourse(courseId: string, studentId: string): ng.IPromise<HttpStatusCode>;
         savePhoto(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
         removePhoto(photoId: number): ng.IPromise<HttpStatusCode>;
+        saveStudentScores(scores: StudentScore[]): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "courseService" })
@@ -46,6 +47,9 @@
         }
         removePhoto(photoId: number): ng.IPromise<HttpStatusCode>{
             return this.apiService.getData<HttpStatusCode>("course/removePhoto?photoId=" + photoId);
+        }
+        saveStudentScores(scores: StudentScore[]): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postData<HttpStatusCode>(scores, "course/updateScores");
         }
     }
 }

@@ -188,6 +188,9 @@
                     resolve: {
                         studentScores: function () {
                             return $scope.getStudentScore(id);
+                        },
+                        hasPermission: function () {
+                            return $scope.hasPermission;
                         }
                     },
                     size: "lg"

@@ -3,10 +3,12 @@
         studentScores:StudentScore[]
     }
     export interface StudentScore {
-        id?: string;
+        scoreId?: number;
         studentId?: string;
         name?: string;
         score?: number;
         activated?: boolean;
+        curriculumId?: number;
+        imageUrl?: string;
     }
 }

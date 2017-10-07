@@ -135,7 +135,8 @@ namespace Swu.Portal.Web.Api
             List<Dictionary<int, StudentScoreProxy>> studentScores = new List<Dictionary<int, StudentScoreProxy>>();
             foreach (var c in allDetail.Curriculums)
             {
-                var score = this._studentScoreRepository.List.Where(i => i.CurriculumId == c.Id);
+                //var score = this._studentScoreRepository.List.Where(i => i.CurriculumId == c.Id);
+                var score = this._studentScoreService.FindByCurriculumId(c.Id);
                 foreach (var sc in score)
                 {
                     c.StudentScores.Add(new StudentScoreProxy(sc));
@@ -365,7 +366,7 @@ and start a new fresh tomorrow. ",
                             {
                                 Score = 0
                             };
-                            this._studentScoreService.AddScore(score, c.Id,sr.Student.Id);
+                            this._studentScoreService.AddScore(score, c.Id, sr.Student.Id);
                         }
                     }
                 }
@@ -479,8 +480,6 @@ and start a new fresh tomorrow. ",
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-
-
         [HttpGet, Route("category")]
         public List<WebboardCategoryProxy> GetCategory()
         {
@@ -546,6 +545,28 @@ and start a new fresh tomorrow. ",
             {
                 var c = this._courseCategoryRepository.FindById(id);
                 this._courseCategoryRepository.Delete(c);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpPost, Route("updateScores")]
+        public HttpResponseMessage UpdateScores(List<StudentScoreProxy> scores)
+        {
+            try
+            {
+                var updateList = new List<StudentScore>();
+                foreach (var value in scores)
+                {
+                    updateList.Add(new StudentScore
+                    {
+                        Id = value.ScoreId,
+                        Score = value.Score
+                    });
+                }
+                this._studentScoreService.UpdateScores(updateList);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)
