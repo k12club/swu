@@ -351,7 +351,8 @@ section {
     }
 
 .irs-header-topped {
-    background: #f8be50 none repeat scroll 0 0;
+    /*background: #f8be50 none repeat scroll 0 0;*/
+    border-bottom:solid 1px #eee;
 }
 
     .irs-header-topped.style2 {
@@ -3709,7 +3710,8 @@ h3.irs-sbln-title {
 
 .account-button-label {
     margin-top: 8px;
-    background-color: #f8be50 !important;
+    /*background-color: #f8be50 !important;*/
+    background-color: transparent !important;
     border: 0px !important;
     outline: none !important;
 }

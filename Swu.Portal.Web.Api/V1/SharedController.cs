@@ -28,32 +28,25 @@ namespace Swu.Portal.Web.Api
             {
                 return new List<CommitmentProxy> {
                     new CommitmentProxy {
-                        Title_EN="Four Year Graduation Guarantee",
-                        Description_EN="By enrolling in the Four Bear Program, we guarantee you will graduate in four years with a bachelor’s degree.",
-                        Title_TH="Four Year Graduation Guarantee",
-                        Description_TH="By enrolling in the Four Bear Program, we guarantee you will graduate in four years with a bachelor’s degree.",
+                        Title_EN="Objective 1",
+                        Description_EN="To enhance the learning opportunity of medical programme from both national and international schools in Thailand",
+                        Title_TH="Objective 1",
+                        Description_TH="To enhance the learning opportunity of medical programme from both national and international schools in Thailand",
                         IconCss="flaticon-clothes"
                     },
                     new CommitmentProxy {
-                        Title_EN="Best Value",
-                        Description_EN="A top 100 university based on research, service and social mobility, according to Washington Monthly.",
-                        Title_TH="Best Value",
-                        Description_TH="A top 100 university based on research, service and social mobility, according to Washington Monthly.",
+                        Title_EN="Objective 2",
+                        Description_EN="To produce the knowledgeable medical graduates who can use the medical sciences knowledge from the UK and apply it to clinical practice in Thailand",
+                        Title_TH="Objective 2",
+                        Description_TH="To produce the knowledgeable medical graduates who can use the medical sciences knowledge from the UK and apply it to clinical practice in Thailand",
                         IconCss="flaticon-signs"
                     },
                     new CommitmentProxy {
-                        Title_EN="Small Class Sizes",
-                        Description_EN="76% of all undergraduate classes have fewer than 30 students so there´s plenty of room for everyone.",
-                        Title_TH="Small Class Sizes",
-                        Description_TH="76% of all undergraduate classes have fewer than 30 students so there´s plenty of room for everyone.",
+                        Title_EN="Objective 3",
+                        Description_EN="To produce medical graduates who can provide the efficient health care services to the society both in government and private sectors",
+                        Title_TH="Objective 3",
+                        Description_TH="To produce medical graduates who can provide the efficient health care services to the society both in government and private sectors",
                         IconCss="flaticon-school"
-                    },
-                    new CommitmentProxy {
-                        Title_EN="Extraordinary Faculty",
-                        Description_EN="World-renowned researchers provide personal attention, with a 19:1 student-to-faculty ratio.",
-                        Title_TH="Extraordinary Faculty",
-                        Description_TH="World-renowned researchers provide personal attention, with a 19:1 student-to-faculty ratio.",
-                        IconCss="flaticon-art"
                     }
                 };
             }

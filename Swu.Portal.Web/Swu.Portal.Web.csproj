@@ -713,6 +713,7 @@
     <Content Include="Scripts\app\board\view\forum.tmpl.html" />
     <Content Include="Scripts\app\forum\view\comment.tmpl.html" />
     <Content Include="Scripts\app\forum\view\forum_detail.html" />
+    <Content Include="Scripts\app\home\view\banner.html" />
     <Content Include="Scripts\app\home\view\campus-video.html" />
     <Content Include="Scripts\app\home\view\clients.html" />
     <Content Include="Scripts\app\home\view\commitment.html" />
@@ -876,6 +877,7 @@
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\CommitmentController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\ExamRegistrationController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\FooterController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\HomeCourseController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\EventController.ts" />

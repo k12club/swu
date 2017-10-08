@@ -85,7 +85,7 @@ namespace Swu.Portal.Web.Api
                 var result = new List<CourseCardProxy>();
 
                 //this.CardType = CardType.Recently;
-                var recently = cards.OrderBy(c => c.Course.CreatedDate).Take(4).ToList();
+                var recently = cards.OrderByDescending(c => c.Course.CreatedDate).Take(4).ToList();
                 foreach (var r in recently)
                 {
                     result.Add(new CourseCardProxy
@@ -110,6 +110,25 @@ namespace Swu.Portal.Web.Api
                 result.AddRange(poppular);
                 //result.AddRange(cards.Where(i => i.CardType == Enum.CardType.TopRate).Take(4));
                 return result;
+            }
+            return null;
+        }
+        [HttpGet, Route("getLatest")]
+        public List<CourseCardProxy> GetLatest()
+        {
+            if (ModelState.IsValid)
+            {
+                var cards = new List<CourseCardProxy>();
+                var courses = this._courseRepository.List.OrderBy(o => o.CreatedDate).ToList();
+                foreach (var c in courses)
+                {
+                    cards.Add(new CourseCardProxy(c));
+                }
+                var result = new List<CourseCardProxy>();
+
+                //this.CardType = CardType.Recently;
+                var recently = cards.OrderByDescending(c => c.Course.CreatedDate).Take(4).ToList();
+                return recently;
             }
             return null;
         }

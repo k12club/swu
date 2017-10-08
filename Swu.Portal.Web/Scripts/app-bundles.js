@@ -231,8 +231,8 @@ var Swu;
         shared: {
             applicationName: "SWU-Joint Medical",
             name: "Srinakharinwirot University",
-            address: "114 Sukhumvit 23Wattana, Bangkok 10110 Thailand",
-            phone: "+66 2649 5000"
+            address: "4th Floor, Faculty of Medicine Srinakharinwirot UniversitSukhumvit 23, Bangkok 10110 THAILAND",
+            phone: "+66 2 649 5934 or +66 2 260 2233-4 ext. 4919, 4409"
         },
         login: {
             anyQuestions: "Any Questions?",
@@ -328,8 +328,8 @@ var Swu;
         shared: {
             applicationName: "โครงการพัฒนาระบบประชาสัมพันธ์หลักสูตรแพทยศาสตรบัณฑิตโครงการร่วมนอตติงแฮม",
             name: "มหาวิทยาลัยศรีนครินทร์วิโรฒ",
-            address: "อาคาร 15 คณะแพทยศาสตร์ 114 สุขุมวิท 23 กรุงเทพฯ 10110",
-            phone: "+66 2649 5000"
+            address: "ชั้น 4 อาคาร 15 คณะแพทยศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ สุขุมวิท 23 เขตวัฒนา กรุงเทพฯ 10110",
+            phone: "02 649 5934 02 260 2122-4 ต่อ 4919, 4409"
         },
         login: {
             anyQuestions: "มีคำถามใช่ไหม?",
@@ -2205,6 +2205,59 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var FooterController = (function () {
+        function FooterController($scope, $state, auth, homeCourseService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.auth = auth;
+            this.homeCourseService = homeCourseService;
+            this.$scope.goToPage = function (stateName, type) {
+                if (stateName == "board") {
+                    _this.$state.go("board", { "type": type }, { reload: true });
+                }
+                else {
+                    _this.$state.go(stateName, { reload: true });
+                }
+            };
+            this.init();
+        }
+        FooterController.prototype.init = function () {
+            var _this = this;
+            this.$scope.splite1 = [];
+            this.$scope.splite2 = [];
+            this.homeCourseService.getLatest().then(function (response) {
+                _this.$scope.courses = response;
+                _.forEach(_this.$scope.courses, function (value, key) {
+                    if (key < (_this.$scope.courses.length / 2)) {
+                        _this.$scope.splite1.push({
+                            course: value.course,
+                            cardType: value.cardType,
+                            teacher: value.teacher
+                        });
+                    }
+                    else {
+                        _this.$scope.splite2.push({
+                            course: value.course,
+                            cardType: value.cardType,
+                            teacher: value.teacher
+                        });
+                    }
+                });
+            }, function (error) { });
+        };
+        ;
+        FooterController.$inject = ["$scope", "$state", "AuthServices", "homeCourseService"];
+        FooterController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "FooterController" })
+        ], FooterController);
+        return FooterController;
+    }());
+    Swu.FooterController = FooterController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var homeCourseService = (function () {
         function homeCourseService(apiService, constant) {
             this.apiService = apiService;
@@ -2212,6 +2265,9 @@ var Swu;
         }
         homeCourseService.prototype.getCourses = function () {
             return this.apiService.getData("course/all");
+        };
+        homeCourseService.prototype.getLatest = function () {
+            return this.apiService.getData("course/getLatest");
         };
         homeCourseService.$inject = ['apiService', 'AppConstant'];
         homeCourseService = __decorate([

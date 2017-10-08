@@ -3,8 +3,8 @@
         shared: {
             applicationName: "SWU-Joint Medical",
             name:"Srinakharinwirot University",
-            address: "114 Sukhumvit 23Wattana, Bangkok 10110 Thailand",
-            phone: "+66 2649 5000"
+            address: "4th Floor, Faculty of Medicine Srinakharinwirot UniversitSukhumvit 23, Bangkok 10110 THAILAND",
+            phone: "+66 2 649 5934 or +66 2 260 2233-4 ext. 4919, 4409"
         },
         login: {
             anyQuestions: "Any Questions?",

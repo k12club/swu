@@ -1,5 +1,6 @@
 ﻿module Swu {
     export interface IhomeCourseService {
+        getLatest(): ng.IPromise<ICourseCard[]>;
         getCourses(): ng.IPromise<ICourseCard[]>;
     }
     @Module("app")
@@ -11,6 +12,9 @@
         }
         getCourses(): ng.IPromise<ICourseCard[]> {
             return this.apiService.getData<ICourseCard[]>("course/all");
+        }
+        getLatest(): ng.IPromise<ICourseCard[]> {
+            return this.apiService.getData<ICourseCard[]>("course/getLatest");
         }
     }
 }
