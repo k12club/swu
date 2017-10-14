@@ -5,23 +5,26 @@
         registerScript(): void;
         count: number;
         html: string;
+        popup(id:number): void;
     }
     @Module("app")
     @Controller({ name: "NewsController" })
     export class NewsController {
-        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "newsService", "$sce", "$timeout"];
-        constructor(private $scope: INewsScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private newsService: InewsService, private $sce: ng.ISCEService, private $timeout: ng.ITimeoutService) {
+        static $inject: Array<string> = ["$scope", "$rootScope", "$state", "newsService", "$sce", "$timeout" , "$uibModal"];
+        constructor(private $scope: INewsScope, private $rootScope: IRootScope, private $state: ng.ui.IState, private newsService: InewsService, private $sce: ng.ISCEService, private $timeout: ng.ITimeoutService, private $uibModal: ng.ui.bootstrap.IModalService) {
             this.$scope.swapLanguage = (lang: string): void => {
                 switch (lang) {
                     case "en": {
                         _.map($scope.news, function (s) {
                             s.title = s.title_en;
+                            s.description = s.description_en;
                         });
                         break;
                     }
                     case "th": {
                         _.map($scope.news, function (s) {
                             s.title = s.title_th;
+                            s.description = s.description_th;
                         });
                         break;
                     }
@@ -34,7 +37,7 @@
                         <div class='irs-blog-post' >\
                             <div class='irs-bp-thumb' > <img class='img-responsive img-fluid' src= '../../../"+ value.imageUrl + "' alt= 'blog/1.jpg' > </div>\
                                 <div class='irs-bp-details' >\
-                                    <h4 class='irs-bp-title' >"+ value.title + "</h3>\
+                                    <h4 class='irs-bp-title' onclick='popup("+ value.id +")'>"+ value.title + "</h3>\
                                         <div class='irs-bp-meta' >\
                                             <ul class='list-inline irs-bp-meta-dttime' >\
                                                 <li><span class='flaticon-clock-1' > </span>"+ moment(value.startDate).format('DD/MM/YYYY h:mm:ss a') + "</li>\
@@ -46,7 +49,24 @@
                     html += elements;
                 });
                 $('#main-news').html(html);
-                //this.$scope.html = html;
+                this.$scope.html = html;
+            };
+            this.$scope.popup = (id: number): void => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/home/view/news-detail.html',
+                    controller: NewsDetailModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        lang: function () {
+                            return $rootScope.lang;
+                        }
+                    }, size: "lg"
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    
+                });
             };
             this.$scope.registerScript = (): void => {
                 if ($('.irs-blog-slider').length) {
@@ -103,13 +123,14 @@
                     _.forEach(response, (value, key) => {
                         $scope.news.push(
                             {
+                                id:value.id,
                                 title_en: value.title_en,
                                 title_th: value.title_th,
                                 imageUrl: value.imageUrl,
                                 createdBy: value.createdBy,
                                 startDate: value.startDate,
-                                fullDescription_en :value.fullDescription_en,
-                                fullDescription_th : value.fullDescription_th
+                                description_en: value.description_en,
+                                description_th: value.description_th
                             }
                         );
                     });

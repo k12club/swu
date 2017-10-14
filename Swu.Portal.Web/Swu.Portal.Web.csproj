@@ -721,6 +721,7 @@
     <Content Include="Scripts\app\home\view\events.html" />
     <Content Include="Scripts\app\home\index.html" />
     <Content Include="Scripts\app\home\view\main-slider.html" />
+    <Content Include="Scripts\app\home\view\news-detail.html" />
     <Content Include="Scripts\app\home\view\news-letter.html" />
     <Content Include="Scripts\app\home\view\news.html" />
     <Content Include="Scripts\app\home\view\register.html" />
@@ -883,6 +884,7 @@
     <TypeScriptCompile Include="Scripts\app\home\controller\EventController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\NewsController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\MainSliderController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\NewsDetailController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\VideoController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\course-card.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\exam-clock.ts" />

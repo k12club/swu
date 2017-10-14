@@ -1,4 +1,4 @@
-﻿<section class="irs-blog" ng-controller="NewsController as vm">
+﻿<section class="irs-blog" id="NewsController" ng-controller="NewsController as vm">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
@@ -14,3 +14,8 @@
         </div>
     </div>
 </section>
+<script>
+    function popup(id) {
+        angular.element(document.getElementById('NewsController')).scope().popup(id);
+    }
+</script>

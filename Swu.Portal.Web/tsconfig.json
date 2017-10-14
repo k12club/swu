@@ -39,6 +39,7 @@
     "Scripts/app/home/controller/VideoController.ts",
     "Scripts/app/home/controller/NewsController.ts",
     "Scripts/app/home/controller/FooterController.ts",
+    "Scripts/app/home/controller/NewsDetailController.ts",
 
     "Scripts/app/home/service/homeCourseService.ts",
     "Scripts/app/home/service/mainSliderService.ts",

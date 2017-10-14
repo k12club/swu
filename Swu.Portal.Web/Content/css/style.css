@@ -351,8 +351,8 @@ section {
     }
 
 .irs-header-topped {
-    /*background: #f8be50 none repeat scroll 0 0;*/
-    border-bottom:solid 1px #eee;
+    background: #f8be50 none repeat scroll 0 0;
+    border-bottom:1px solid #eaeaea;
 }
 
     .irs-header-topped.style2 {

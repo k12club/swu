@@ -34,27 +34,27 @@ module Swu {
             },
             {
                 name: "settings.courses",
-                roles: ["Admin","Teacher"]
+                roles: ["Admin", "Teacher","Officer"]
             },
             {
                 name: "settings.users",
-                roles: ["Admin","Teacher","Officer"]
+                roles: ["Admin","Officer"]
             },
             {
                 name: "settings.events",
-                roles: ["Admin", "Teacher", "Officer"]
+                roles: ["Admin", "Officer"]
             },
             {
                 name: "settings.videos",
-                roles: ["Admin", "Teacher", "Officer"]
+                roles: ["Admin", "Officer"]
             },
             {
                 name: "settings.news",
-                roles: ["Admin", "Teacher", "Officer"]
+                roles: ["Admin", "Officer"]
             },
             {
                 name: "settings.categories",
-                roles: ["Admin", "Teacher", "Officer"]
+                roles: ["Admin", "Officer"]
             }
             
         ];

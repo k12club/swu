@@ -47,15 +47,14 @@
                                         <div class='irs-edate-time'>\
                                             <ul class='list-unstyled'>\
                                                 <li><a href='#'> <span class='flaticon-clock text-thm2'></span> Date: "+ value.displayStartDate + " </a></li>\
-                                                    <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: "+ value.displayStartTime + "</a></li>\
-                                                        <li><a href='#'> <span class='flaticon-buildings text-thm2' > </span> "+ value.place + "</a></li>\
-                                                            </ul>\
-                                                            <p> "+ value.description + "</p>\
-                                                                <div class='irs-evnticon'> <span class='flaticon-cross'> </span></div>\
-                                                                    </div>\
-                                                                    </div>\
-                                                                    </div>\
-                                                                    </div>";
+                                                <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: "+ value.displayStartTime + "</a></li>\
+                                                <li><a href='#'> <span class='flaticon-buildings text-thm2' > </span> "+ value.place + "</a></li>\
+                                            </ul>\
+                                            <p> "+ value.description + "</p>\
+                                        </div>\
+                                </div>\
+                            </div>\
+                        </div>";
                     html += elements;
                 });
                 $('.irs-event-carousel').html(html);

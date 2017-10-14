@@ -1,4 +1,4 @@
-﻿<div class="clearfix">
+﻿<div class="clearfix" id="ProfileController" ng-controller="ProfileController as vm">
     <div class="row">
         <div class="irs-blog-post-title">
             <h3>PERSONAL INFORMATION</h3>
@@ -254,3 +254,8 @@
         </div>
     </div>
 </div>
+<script>
+    function gotoCourse(id) {
+        angular.element(document.getElementById('ProfileController')).scope().gotoCourse(id);
+    }
+</script>

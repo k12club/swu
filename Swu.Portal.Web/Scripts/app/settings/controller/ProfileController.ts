@@ -24,6 +24,8 @@
         registeredCourses: ICourseCard[];
         render(course: ICourseCard[]): void;
         registerScript(): void;
+
+        gotoCourse(id: string): void;
     }
 
     @Module("app")
@@ -233,10 +235,10 @@
                             </div>\
                             <div class="irs-lc-details">\
                                 <div class="irs-lc-teacher-info" >\
-                                    <div class="irs-lct-thumb" > <img src="'+ value.teacher.imageUrl +'" class="img-circle" style="width:50px;height:50px" > </div>\
-                                    <div class="irs-lct-info" style="padding-left:30px" >with <span class="text-thm2" >'+ value.teacher.name +'</span></div>\
+                                    <div class="irs-lct-thumb" > <img src="'+ value.teacher.imageUrl + '" class="img-circle" style="width:50px;height:50px" > </div>\
+                                    <div class="irs-lct-info" style="padding-left:30px" >with <span class="text-thm2" >'+ value.teacher.name + '</span></div>\
                                 </div>\
-                                <h4> <a href="#" >'+ value.course.name +'</a></h4 >\
+                                <h4> <a href="#" onclick="gotoCourse(\''+ value.course.id + '\')">' + value.course.name + '</a></h4 >\
                             </div>\
                             <div class="irs-lc-footer">\
                                 <div class="irs-lc-normal-part" >\
@@ -290,6 +292,9 @@
                     }
                 });
             }
+            this.$scope.gotoCourse = (id: string) => {
+                $state.go('course', { id: id });
+            };
             this.init();
         }
         init(): void {

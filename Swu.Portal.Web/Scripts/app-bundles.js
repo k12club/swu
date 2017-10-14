@@ -391,23 +391,23 @@ var Swu;
             title: "ข่าวสาร"
         },
         testimonials: {
-            title: "สัมภาษณ์นักศึกษา",
-            description: "ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ",
-            checkfaq: "คำถามที่พบบ่อย",
+            title: "Our Happy Students",
+            description: "Our alumni are very content with our classes and 99% of them managed to find a job in their field. Check out our full testimonials from our best students worldwide.",
+            checkfaq: "Check our FAQ’s",
             thumb1: {
-                quote: "“ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ”",
-                by: "จาคิวลีน สมิท",
-                position: "การจัดการธุรกิจ"
+                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
+                by: "Jaqueline Smith",
+                position: "BA Hons Business Management"
             },
             thumb2: {
-                quote: "“ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ”",
-                by: "จาคิวลีน สมิท",
-                position: "การจัดการธุรกิจ"
+                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
+                by: "Jaqueline Smith",
+                position: "BA Hons Business Management"
             },
             thumb3: {
-                quote: "“ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ”",
-                by: "จาคิวลีน สมิท",
-                position: "การจัดการธุรกิจ"
+                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
+                by: "Jaqueline Smith",
+                position: "BA Hons Business Management"
             }
         },
         committee: {
@@ -770,27 +770,27 @@ var Swu;
                 },
                 {
                     name: "settings.courses",
-                    roles: ["Admin", "Teacher"]
+                    roles: ["Admin", "Teacher", "Officer"]
                 },
                 {
                     name: "settings.users",
-                    roles: ["Admin", "Teacher", "Officer"]
+                    roles: ["Admin", "Officer"]
                 },
                 {
                     name: "settings.events",
-                    roles: ["Admin", "Teacher", "Officer"]
+                    roles: ["Admin", "Officer"]
                 },
                 {
                     name: "settings.videos",
-                    roles: ["Admin", "Teacher", "Officer"]
+                    roles: ["Admin", "Officer"]
                 },
                 {
                     name: "settings.news",
-                    roles: ["Admin", "Teacher", "Officer"]
+                    roles: ["Admin", "Officer"]
                 },
                 {
                     name: "settings.categories",
-                    roles: ["Admin", "Teacher", "Officer"]
+                    roles: ["Admin", "Officer"]
                 }
             ];
         }
@@ -1251,8 +1251,7 @@ var Swu;
                 views: {
                     '': { templateUrl: '/Scripts/app/settings/main.html' },
                     'subContent@settings': {
-                        templateUrl: '/Scripts/app/settings/default.html',
-                        controller: 'ProfileController as vm'
+                        templateUrl: '/Scripts/app/settings/default.html'
                     }
                 }
             })
@@ -1870,15 +1869,14 @@ var Swu;
                                         <div class='irs-edate-time'>\
                                             <ul class='list-unstyled'>\
                                                 <li><a href='#'> <span class='flaticon-clock text-thm2'></span> Date: " + value.displayStartDate + " </a></li>\
-                                                    <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: " + value.displayStartTime + "</a></li>\
-                                                        <li><a href='#'> <span class='flaticon-buildings text-thm2' > </span> " + value.place + "</a></li>\
-                                                            </ul>\
-                                                            <p> " + value.description + "</p>\
-                                                                <div class='irs-evnticon'> <span class='flaticon-cross'> </span></div>\
-                                                                    </div>\
-                                                                    </div>\
-                                                                    </div>\
-                                                                    </div>";
+                                                <li><a href='#'> <span class='flaticon-clock-1 text-thm2' > </span> Time: " + value.displayStartTime + "</a></li>\
+                                                <li><a href='#'> <span class='flaticon-buildings text-thm2' > </span> " + value.place + "</a></li>\
+                                            </ul>\
+                                            <p> " + value.description + "</p>\
+                                        </div>\
+                                </div>\
+                            </div>\
+                        </div>";
                     html += elements;
                 });
                 $('.irs-event-carousel').html(html);
@@ -2062,24 +2060,28 @@ var Swu;
 var Swu;
 (function (Swu) {
     var NewsController = (function () {
-        function NewsController($scope, $rootScope, $state, newsService, $sce, $timeout) {
+        function NewsController($scope, $rootScope, $state, newsService, $sce, $timeout, $uibModal) {
+            var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$state = $state;
             this.newsService = newsService;
             this.$sce = $sce;
             this.$timeout = $timeout;
+            this.$uibModal = $uibModal;
             this.$scope.swapLanguage = function (lang) {
                 switch (lang) {
                     case "en": {
                         _.map($scope.news, function (s) {
                             s.title = s.title_en;
+                            s.description = s.description_en;
                         });
                         break;
                     }
                     case "th": {
                         _.map($scope.news, function (s) {
                             s.title = s.title_th;
+                            s.description = s.description_th;
                         });
                         break;
                     }
@@ -2092,7 +2094,7 @@ var Swu;
                         <div class='irs-blog-post' >\
                             <div class='irs-bp-thumb' > <img class='img-responsive img-fluid' src= '../../../" + value.imageUrl + "' alt= 'blog/1.jpg' > </div>\
                                 <div class='irs-bp-details' >\
-                                    <h4 class='irs-bp-title' >" + value.title + "</h3>\
+                                    <h4 class='irs-bp-title' onclick='popup(" + value.id + ")'>" + value.title + "</h3>\
                                         <div class='irs-bp-meta' >\
                                             <ul class='list-inline irs-bp-meta-dttime' >\
                                                 <li><span class='flaticon-clock-1' > </span>" + moment(value.startDate).format('DD/MM/YYYY h:mm:ss a') + "</li>\
@@ -2104,6 +2106,23 @@ var Swu;
                     html += elements;
                 });
                 $('#main-news').html(html);
+                _this.$scope.html = html;
+            };
+            this.$scope.popup = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/home/view/news-detail.html',
+                    controller: Swu.NewsDetailModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        lang: function () {
+                            return $rootScope.lang;
+                        }
+                    }, size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                });
             };
             this.$scope.registerScript = function () {
                 if ($('.irs-blog-slider').length) {
@@ -2159,13 +2178,14 @@ var Swu;
                 newsService.getNews().then(function (response) {
                     _.forEach(response, function (value, key) {
                         $scope.news.push({
+                            id: value.id,
                             title_en: value.title_en,
                             title_th: value.title_th,
                             imageUrl: value.imageUrl,
                             createdBy: value.createdBy,
                             startDate: value.startDate,
-                            fullDescription_en: value.fullDescription_en,
-                            fullDescription_th: value.fullDescription_th
+                            description_en: value.description_en,
+                            description_th: value.description_th
                         });
                     });
                     $scope.swapLanguage(newValue);
@@ -2194,7 +2214,7 @@ var Swu;
             this.$scope.count = 0;
         };
         ;
-        NewsController.$inject = ["$scope", "$rootScope", "$state", "newsService", "$sce", "$timeout"];
+        NewsController.$inject = ["$scope", "$rootScope", "$state", "newsService", "$sce", "$timeout", "$uibModal"];
         NewsController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "NewsController" })
@@ -2255,6 +2275,59 @@ var Swu;
         return FooterController;
     }());
     Swu.FooterController = FooterController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var NewsDetailModalController = (function () {
+        function NewsDetailModalController($scope, $rootScope, $state, newsManagementService, toastr, $modalInstance, auth, id, lang) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.newsManagementService = newsManagementService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.auth = auth;
+            this.id = id;
+            this.lang = lang;
+            this.$scope.id = id;
+            this.$scope.lang = lang;
+            this.$scope.get = function (id) {
+                _this.newsManagementService.getById(id).then(function (response) {
+                    _this.$scope.news = response;
+                    _this.$scope.displayStartDate = moment(_this.$scope.news.startDate).format("MM/DD/YYYY");
+                    switch (_this.$scope.lang) {
+                        case "en": {
+                            _this.$scope.news.title = _this.$scope.news.title_en;
+                            _this.$scope.news.description = _this.$scope.news.description_en;
+                            break;
+                        }
+                        case "th": {
+                            _this.$scope.news.title = _this.$scope.news.title_th;
+                            _this.$scope.news.description = _this.$scope.news.description_th;
+                            break;
+                        }
+                    }
+                }, function (error) { });
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.init();
+        }
+        NewsDetailModalController.prototype.init = function () {
+            this.$scope.mode = Swu.actionMode.edit;
+            this.$scope.get(this.$scope.id);
+        };
+        ;
+        NewsDetailModalController.$inject = ["$scope", "$rootScope", "$state", "newsManagementService", "toastr", "$modalInstance", "AuthServices", "id", "lang"];
+        NewsDetailModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "NewsDetailModalController" })
+        ], NewsDetailModalController);
+        return NewsDetailModalController;
+    }());
+    Swu.NewsDetailModalController = NewsDetailModalController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -4200,7 +4273,7 @@ var Swu;
                                     <div class="irs-lct-thumb" > <img src="' + value.teacher.imageUrl + '" class="img-circle" style="width:50px;height:50px" > </div>\
                                     <div class="irs-lct-info" style="padding-left:30px" >with <span class="text-thm2" >' + value.teacher.name + '</span></div>\
                                 </div>\
-                                <h4> <a href="#" >' + value.course.name + '</a></h4 >\
+                                <h4> <a href="#" onclick="gotoCourse(\'' + value.course.id + '\')">' + value.course.name + '</a></h4 >\
                             </div>\
                             <div class="irs-lc-footer">\
                                 <div class="irs-lc-normal-part" >\
@@ -4253,6 +4326,9 @@ var Swu;
                         }
                     }
                 });
+            };
+            this.$scope.gotoCourse = function (id) {
+                $state.go('course', { id: id });
             };
             this.init();
         }

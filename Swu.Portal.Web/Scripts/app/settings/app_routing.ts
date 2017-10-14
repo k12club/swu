@@ -14,8 +14,7 @@
                     views: {
                         '': { templateUrl: '/Scripts/app/settings/main.html' },
                         'subContent@settings': {
-                            templateUrl: '/Scripts/app/settings/default.html',
-                            controller: 'ProfileController as vm'
+                            templateUrl: '/Scripts/app/settings/default.html'
                         },
                     }
                 })
@@ -35,7 +34,7 @@
                     views: {
                         'subContent@settings': {
                             templateUrl: '/Scripts/app/settings/view/courses.html',
-                            controller:'CourseManagementController as vm'
+                            controller: 'CourseManagementController as vm'
                         },
                     }
                 })

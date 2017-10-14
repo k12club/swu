@@ -40,7 +40,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.StartDate = news.StartDate;
             this.Description_EN = news.FullDescription_EN;
             this.Description_TH = news.FullDescription_TH;
-            //this.CreatedBy = news.ApplicationUser.FirstName_EN + " " + news.ApplicationUser.LastName_EN;
+            this.CreatedBy = news.ApplicationUser.FirstName_EN + " " + news.ApplicationUser.LastName_EN;
         }
     }
 }

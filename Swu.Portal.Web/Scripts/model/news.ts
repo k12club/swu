@@ -1,12 +1,16 @@
 ﻿module Swu {
     export interface INews {
+        id: number;
         imageUrl?: string;
         title?: string;
-        title_en: string;
-        title_th: string;
+        description?: string;
         createdBy: string;
         startDate: Date;
-        fullDescription_en: string;
-        fullDescription_th: string;
+
+        title_en?: string;
+        description_en?: string;
+
+        title_th?: string;
+        description_th?: string;
     }
 }
