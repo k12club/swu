@@ -16,7 +16,7 @@
     @Module("app")
     @Controller({ name: "UsersController" })
     export class UsersController {
-        static $inject: Array<string> = ["$scope", "$state", "userService","$uibModal"];
+        static $inject: Array<string> = ["$scope", "$state", "userService", "$uibModal"];
         constructor(private $scope: UserScope, private $state: ng.ui.IState, private userService: IuserService, private $uibModal: ng.ui.bootstrap.IModalService) {
             //Pagination section
             this.$scope.getTotalPageNumber = (): number => {
@@ -55,7 +55,8 @@
                         mode: function () {
                             return actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getUsers();

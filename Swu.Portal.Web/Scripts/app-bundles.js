@@ -2590,7 +2590,8 @@ var Swu;
                             return Swu.actionMode.addNew;
                         }
                     },
-                    size: "md"
+                    size: "md",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getCourse(_this.$scope.id);
@@ -2676,7 +2677,8 @@ var Swu;
                             return Swu.actionMode.addNew;
                         }
                     },
-                    size: "md"
+                    size: "md",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getCourse(_this.$scope.id);
@@ -3309,7 +3311,8 @@ var Swu;
                             return Swu.actionMode.addNew;
                         }
                     },
-                    size: "lg"
+                    size: "lg",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.search();
@@ -3518,7 +3521,8 @@ var Swu;
                             return Swu.actionMode.addNew;
                         }
                     },
-                    size: "md"
+                    size: "md",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.search();
@@ -4220,7 +4224,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.auth.updateProfile(function () {
@@ -4389,7 +4394,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getUsers();
@@ -4678,7 +4684,8 @@ var Swu;
                             return Swu.actionMode.addNew;
                         }
                     },
-                    size: "lg"
+                    size: "lg",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getData();
@@ -4859,7 +4866,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }, size: "lg"
+                    }, size: "lg",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getData();
@@ -5024,7 +5032,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }, size: "lg"
+                    }, size: "lg",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getData();
@@ -5191,7 +5200,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }, size: "lg"
+                    }, size: "lg",
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getData();
@@ -5408,7 +5418,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getData1();
@@ -5455,7 +5466,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getData2();
@@ -5502,7 +5514,8 @@ var Swu;
                         mode: function () {
                             return Swu.actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 _this.$uibModal.open(options).result.then(function () {
                     _this.$scope.getData3();

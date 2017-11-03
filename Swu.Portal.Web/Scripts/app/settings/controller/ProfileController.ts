@@ -185,7 +185,8 @@
                         mode: function () {
                             return actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.auth.updateProfile(() => {

@@ -140,7 +140,8 @@
                         mode: function () {
                             return actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getData1();
@@ -188,7 +189,8 @@
                         mode: function () {
                             return actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getData2();
@@ -236,7 +238,8 @@
                         mode: function () {
                             return actionMode.addNew;
                         }
-                    }
+                    },
+                    backdrop: false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getData3();

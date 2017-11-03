@@ -72,7 +72,8 @@
                             return actionMode.addNew;
                         }
                     },
-                    size: "lg"
+                    size: "lg",
+                    backdrop:false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.search();

@@ -92,7 +92,8 @@
                             return actionMode.addNew;
                         }
                     },
-                    size: "md"
+                    size: "md",
+                    backdrop:false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.search();

@@ -14,7 +14,7 @@
     @Module("app")
     @Controller({ name: "CourseManagementController" })
     export class CourseManagementController {
-        static $inject: Array<string> = ["$scope", "$state", "courseManagementService", "$uibModal","AuthServices"];
+        static $inject: Array<string> = ["$scope", "$state", "courseManagementService", "$uibModal", "AuthServices"];
         constructor(private $scope: CourseManagementScope, private $state: ng.ui.IState, private courseManagementService: IcourseManagementService, private $uibModal: ng.ui.bootstrap.IModalService, private auth: IAuthServices) {
             //Pagination section
             this.$scope.getTotalPageNumber = (): number => {
@@ -55,7 +55,8 @@
                             return actionMode.addNew;
                         }
                     },
-                    size:"lg"
+                    size: "lg",
+                    backdrop: false
                 };
                 this.$uibModal.open(options).result.then(() => {
                     this.$scope.getData();

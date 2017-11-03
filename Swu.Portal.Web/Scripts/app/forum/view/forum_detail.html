@@ -44,22 +44,13 @@
                             <div class="irs-blog-post-title">
                                 <h3>{{forumAndComments.forum.name}}</h3>
                             </div>
-                            <!--<div class="irs-blog-post-thumb">
-                                <img class="img-responsive img-fluid" ng-src="../../../../{{forumAndComments.forum.imageUrl}}" alt="blog-post-ip1.jpg">
-                            </div>-->
                             <div class="irs-blog-post-detailss irs-all-course-bb">
                                 <div ng-bind-html="forumAndComments.forum.fullDescription | trustAsHtml"></div>
                             </div>
-                            <!--<div class="irs-bp-atag">
-                                <ul class="list-inline irs-atag-list">
-                                    <li><a href="#">Tags: </a></li>
-                                    <li>alumni / courses / university</li>
-                                </ul>
-                            </div>-->
                             <br><br>
                             <summernote id="comment" ng-model="comment"></summernote>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="padding:20px">
                                     <input type="button" ng-disabled="!canPost" class="btn btn-default irs-button-styledark" ng-click="save()" value="Post" />
                                     <span ng-show="!canPost" class="text-info">Please login before post some comments</span>
                                 </div>
@@ -90,3 +81,10 @@
         </div>
     </section>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#comment').summernote({
+            height: 300
+        });
+    });
+</script>
