@@ -1,0 +1,297 @@
+﻿<!-- Breadcrumbs Styles -->
+<section class="irs-ip-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <h1 class="irs-bc-title">Courses</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Breadcrumbs html -->
+<section class="irs-ip-brdcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-right irs-bb-right">
+                <ul class="list-inline irs-brdcrmb">
+                    <li><a ui-sref="app">Home</a></li>
+                    <li><a href="#"> > </a></li>
+                    <li><a class="active">Courses</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="irs-ip-details irs-padb-svnty">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12 clearfix">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="irs-courses-details-title">
+                            <h2>{{courseDetail.course.name_en}}</h2>
+                            <ul class="list-inline irs-cl-teacher-info">
+                                <li class="irs-cl-thumb"><img ng-src="../../../{{courseDetail.teachers[0].imageUrl}}" class="img-circle" style="width:50px;height:50px" alt="s4.png"></li>
+                                <li class="irs-cl-info">with <span class="text-thm2">{{courseDetail.teachers[0].name}}</span></li>
+                                <li> <span class="text-thm2 flaticon-people-1"></span> {{courseDetail.course.numberOfStudents}}</li>
+                                <li> <span class="text-thm2 flaticon-clock-1"></span> {{courseDetail.course.numberOfTimes}}</li>
+                                <li class="irs-ccomment"><a href="#"><span class="text-thm2 glyphicon glyphicon-eye-open"></span> {{courseDetail.course.numberOfViews}}</a></li>
+                                <li> <span class="text-thm2 flaticon-folder"></span> Languages / Foreign</li>
+                                <li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark" ng-show="canTakeCourse" ng-click="takeCourse()"> Take This Course</a></li>
+                                <!--<li class="pull-right"> <a href="#" class="btn btn-default irs-button-styledark" ng-show="!canTakeCourse" ng-click="removeCourse()"> Remove This Course</a></li>-->
+                            </ul>
+                        </div>
+                        <div class="irs-courses-details-thumb">
+                            <img class="img-responsive img-fluid" ng-src="../../../Content/images/courses/cd1.jpg" alt="cd1.jpg">
+                            <!--<div class="irs-cdtls-price"><p>{{courseDetail.course.price|currency}}</p></div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="row irs-mrngtp-svnty">
+                    <div class="col-lg-12">
+                        <div class="irs-courses-details">
+                            <div class="irs-cdetails-tab">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a data-target="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                                    <li role="presentation"><a data-target="#curriculum" aria-controls="curriculum" role="tab" data-toggle="tab">Curriculum</a></li>
+                                    <li role="presentation"><a data-target="#teachers" aria-controls="teachers" role="tab" data-toggle="tab">Teachers</a></li>
+                                    <li role="presentation"><a data-target="#students" aria-controls="students" role="tab" data-toggle="tab">Students</a></li>
+                                    <li role="presentation"><a data-target="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photo Album</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="description">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="irs-cdtls-feture-bot">
+                                                    <ul class="list-group">
+                                                        <li>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-business text-thm2"></span> Lecture <span class="pull-right"> {{courseDetail.course.numberOfLectures}} </span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-clock-1 text-thm2"></span> Duration <span class="pull-right"> {{courseDetail.course.numberOfTimes}} hrs. </span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-pen text-thm2"></span> Quizzes <span class="pull-right"> {{courseDetail.course.numberOfQuizes}} </span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-people-1 text-thm2"></span> Students <span class="pull-right"> {{courseDetail.course.numberOfStudents}} </span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-school text-thm2"></span> Teachers <span class="pull-right"> {{courseDetail.course.numberOfTeachers}} </span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="list-group-item" href="#"><span class="flaticon-globe text-thm2"></span> Language <span class="pull-right"> {{courseDetail.course.lang}} </span></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="irs-courses-dtls-second-para" ng-bind-html="courseDetail.course.fullDescription">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="curriculum">
+                                        <div class="col-md-12">
+                                            <div class="irs-cdtls-feture-bot2">
+                                                <div class="row" ng-show="hasPermission">
+                                                    <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                                </div>
+                                                <ul class="list-group" ng-repeat="c in courseDetail.curriculums" ng-show="courseDetail.curriculums.length>0">
+                                                    <li ng-show="c.type ===1">
+                                                        <a class="list-group-item">
+                                                            <ul class="list-inline" ng-show="hasPermission">
+                                                                <li ng-click="edit(c.id)"><span class="flaticon-business text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3"  ng-show="canSeeQuizeResult || hasPermission"  ng-click="survey(c.surveyLink)">Survey</span></li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
+                                                            </ul>
+                                                            <ul class="list-inline" ng-show="!hasPermission">
+                                                                <li>
+                                                                    <span class="flaticon-business text-thm2"></span>&nbsp;<b>{{c.name}}</b>
+                                                                </li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="survey(c.surveyLink)">Survey</span></li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
+                                                            </ul>
+                                                        </a>
+                                                    </li>
+                                                    <li ng-show="c.type ===2">
+                                                        <a class="list-group-item">
+                                                            <ul class="list-inline" ng-show="hasPermission">
+                                                                <li ng-click="edit(c.id)"><span class="flaticon-pen text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="showResultModal(c.id)"> Quize result</span></li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
+                                                            </ul>
+                                                            <ul class="list-inline" ng-show="!hasPermission">
+                                                                <li><span class="flaticon-pen text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
+                                                                <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
+                                                                <li>&nbsp;&nbsp;at: {{c.room}}</li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="showResultModal(c.id)"> Quize result</span></li>
+                                                                <li class="pull-right">{{c.numberOfTime}} hrs</li>
+                                                            </ul>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="teachers">
+                                        <div class="irs-course-sd-teacher">
+                                            <div class="row" ng-repeat="t in courseDetail.teachers">
+                                                <div class="col-md-1 irs-mrgnbtm-sxty">
+                                                    <div class="irs-courses-td-sngle">
+                                                        <div class="irs-ctds-thumb">
+                                                            <img class="img-responsive img-fluid img-circle" ng-src="../../../{{t.imageUrl}}" alt="tsm1.png">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 irs-mrgnbtm-sxty irs-all-course-bb">
+                                                    <div class="irs-courses-td-sngle-dtls">
+                                                        <ul class="list-unstyled">
+                                                            <li class="irs-name-tdsd">{{t.name}}</li>
+                                                            <li class="irs-psot-tdsd">{{t.position}}</li>
+                                                        </ul>
+                                                        <p ng-bind-html="t.description"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="students">
+                                        <div class="row" ng-show="courseDetail.students.length>0">
+                                            <div class="col-md-6">
+                                                <div class="irs-cdtls-feture-bot2">
+                                                    <ul class="list-group" ng-repeat="s in splitStudents1">
+                                                        <li>
+                                                            <a class="list-group-item" href="#">
+                                                                <ul class="list-inline" ng-show="hasPermission">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(s.id)">Approve</span></li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm2" ng-click="removeCourse(s.id)">Decline</span>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
+                                                                </ul>
+                                                                <ul class="list-inline" ng-show="!hasPermission">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
+                                                                </ul>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="irs-cdtls-feture-bot2">
+                                                    <ul class="list-group" ng-repeat="s in splitStudents2">
+                                                        <li>
+                                                            <a class="list-group-item" href="#">
+                                                                <ul class="list-inline" ng-show="hasPermission">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(s.id)">Approve</span></li>
+                                                                    <li class="pull-right" ng-show="!s.activated"><span class="btn btn-sm irs-btn-thm2" ng-click="removeCourse(s.id)">Decline</span>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
+                                                                </ul>
+                                                                <ul class="list-inline" ng-show="!hasPermission">
+                                                                    <li>{{s.number}}</li>
+                                                                    <li>{{s.studentId}}</li>
+                                                                    <li>{{s.name}}</li>
+                                                                    <li class="pull-right" ng-show="s.activated"><span class="glyphicon glyphicon-ok text-success"></span></li>
+                                                                </ul>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="photos">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cdtls-feture-bot2">
+                                                    <div class="row" ng-show="hasPermission">
+                                                        <button type="button" class="btn btn-link pull-left" ng-click="addNewPhoto(courseDetail.photosAlbum.id)"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                                    </div>
+                                                    <div class="popup-gallery" compile="html">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    if ($('.irs-lc-carousel').length) {
+        $('.irs-lc-carousel').owlCarousel({
+            loop: true,
+            margin: 30,
+            dots: false,
+            nav: true,
+            autoplayHoverPause: false,
+            autoplay: false,
+            smartSpeed: 700,
+            navText: [
+              '<i class="flaticon-left-arrow"></i>',
+              '<i class="flaticon-arrows-3"></i>'
+            ],
+            responsive: {
+                0: {
+                    items: 1,
+                    center: false
+                },
+                480: {
+                    items: 1,
+                    center: false
+                },
+                600: {
+                    items: 2,
+                    center: false
+                },
+                768: {
+                    items: 2
+                },
+                992: {
+                    items: 3
+                },
+                1200: {
+                    items: 4
+                }
+            }
+        })
+    }
+    //$('.popup-gallery').magnificPopup({
+    //    delegate: 'a',
+    //    type: 'image',
+    //    tLoading: 'Loading image #%curr%...',
+    //    mainClass: 'mfp-img-mobile',
+    //    gallery: {
+    //        enabled: true,
+    //        navigateByImgClick: true,
+    //        preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+    //    },
+    //    image: {
+    //        tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+    //        titleSrc: function (item) {
+    //            return item.el.attr('title') + '<small>by Solodev</small>';
+    //        }
+    //    }
+    //});
+</script>

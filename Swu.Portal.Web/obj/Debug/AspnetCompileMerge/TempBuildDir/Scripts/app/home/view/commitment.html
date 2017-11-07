@@ -1,0 +1,25 @@
+﻿<section class="irs-commitment-one" ng-controller="CommitmentController as vm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div class="irs-commitment-title text-center">
+                    <h2><span translate="commitments.title"></span></h2>
+                    <img class="img-responsive" src="../../../Content/images/resource/commitment-title-img.png" alt="commitment-title-img.png">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6" ng-repeat="c in commitments">
+                <div class="animatedParent">
+                    <div class="{{c.columnCss}} {{c.style}} {{c.alignment}} animated growIn delay-250">
+                        <div class="irs-cmmt-icon"><span class="{{c.iconCss}}"></span></div>
+                        <div class="{{c.commentCss}}">
+                            <h3>{{c.title}}</h3>
+                            <p>{{c.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

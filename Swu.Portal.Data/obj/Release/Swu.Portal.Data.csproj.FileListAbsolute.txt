@@ -1,0 +1,16 @@
+D:\Git\swu\Swu.Portal.Data\bin\Release\Swu.Portal.Data.dll.config
+D:\Git\swu\Swu.Portal.Data\bin\Release\Swu.Portal.Data.dll
+D:\Git\swu\Swu.Portal.Data\bin\Release\Swu.Portal.Data.pdb
+D:\Git\swu\Swu.Portal.Data\bin\Release\EntityFramework.dll
+D:\Git\swu\Swu.Portal.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Git\swu\Swu.Portal.Data\bin\Release\Microsoft.AspNet.Identity.Core.dll
+D:\Git\swu\Swu.Portal.Data\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Git\swu\Swu.Portal.Data\bin\Release\Swu.Portal.Core.dll
+D:\Git\swu\Swu.Portal.Data\bin\Release\Swu.Portal.Core.pdb
+D:\Git\swu\Swu.Portal.Data\bin\Release\EntityFramework.xml
+D:\Git\swu\Swu.Portal.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Git\swu\Swu.Portal.Data\bin\Release\Microsoft.AspNet.Identity.Core.xml
+D:\Git\swu\Swu.Portal.Data\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Git\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.csprojResolveAssemblyReference.cache
+D:\Git\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.dll
+D:\Git\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.pdb

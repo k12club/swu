@@ -1,0 +1,43 @@
+﻿<div class="irs-courses-shorting-heading clearfix">
+    <ul class="list-inline pull-left">
+        <li><a href="#"><span class="flaticon-squares text-thm2"></span></a></li>
+        <li><a href="#"><span class="flaticon-signs-3"></span></a></li>
+        <li><a href="#">Showing {{currentPage+1}}-{{totalPageNumber}} of {{displayItems.length}} results</a></li>
+    </ul>
+    <div class="input-group irs-nav-search-form">
+        <input type="text" ng-model="criteria.name" class="form-control pull-right" placeholder="Search courses">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="search()"><span class="flaticon-musica-searcher"></span></button>
+        </span>
+    </div><!-- /input-group -->
+</div>
+<div class="irs-blog-post-ip">
+    <div class="row clearfix">
+        <div class="irs-cl-list" ng-repeat="item in displayItems">
+            <div class="col-xs-12 col-lg-4">
+                <div class="irs-cl-list-thumb">
+                    <img class="img-responsive img-fluid" ng-src="../../../../{{item.imageUrl}}">
+                    <div class="irs-cl-overlay"></div>
+                    <div class="irs-cl-price">Free</div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-lg-8">
+                <div class="irs-cl-details">
+                    <ul class="list-inline irs-cl-teacher-info">
+                        <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{item.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
+                        <li class="irs-cl-info">with <span class="text-thm2"> {{item.createBy}}</span></li>
+                        <li> <span class="text-thm2 flaticon-social-2"></span> {{item.numberOfView}}</li>
+                        <li> <span class="text-thm2 flaticon-interface-1"></span> {{item.numberOfComments}}</li>
+                    </ul>
+                    <h3><a href="#" ui-sref="course({ id: item.id })">{{item.name}}</a></h3>
+                    <p>{{item.shortDescription}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="list-inline irs-ip-navigation clearfix">
+    <li><span class="flaticon-arrows" ng-click="prev()"></span></li>
+    <li ng-repeat="number in []|range:totalPageNumber" ng-click="changePage($index)"><a ng-class="{active:number == currentPage}">{{$index+1}}</a></li>
+    <li><span class="flaticon-arrows-1" ng-click="next()"></span></li>
+</ul>

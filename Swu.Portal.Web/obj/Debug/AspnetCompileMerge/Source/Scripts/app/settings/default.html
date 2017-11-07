@@ -1,0 +1,261 @@
+﻿<div class="clearfix" id="ProfileController" ng-controller="ProfileController as vm">
+    <div class="row">
+        <div class="irs-blog-post-title">
+            <h3>PERSONAL INFORMATION</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 irs-mrgnbtm-sxty">
+            <div class="irs-courses-td-sngle">
+                <div class="irs-ctds-thumb">
+                    <img class="img-responsive img-fluid" ng-src="../../../{{currentUser.imageUrl}}" alt="tmd1.png">
+                </div>
+                <div class="row text-center">
+                    <a href="#" class="btn-link" ng-click="edit()">Update profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 irs-mrgnbtm-sxty">
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Admin'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+            </div>
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Parent'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+            </div>
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Teacher'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.position}}</li>
+                    <li class="irs-psot-tdsd"><span class="flaticon-folder text-thm2"></span>{{currentUser.tag}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+                <p>{{currentUser.description}}</p>
+                <ul class="list-inline irs-tctt">
+                    <li><span class="text-thm2 flaticon-phone-receiver"></span> {{currentUser.mobile}}</li>
+                    <li><span class="text-thm2 flaticon-key-1"></span> {{currentUser.officeTel}}</li>
+                    <li><span class="text-thm2 flaticon-multimedia"></span> {{currentUser.email}}</li>
+                </ul>
+                <div class="irs-social-icon-td-sngle-dtls">
+                    <ul class="list-inline irs-courses-tdetls style2">
+                        <li class="fbok"><a href="#"><span class="flaticon-social-3"></span> </a></li>
+                        <li class="twtr"><a href="#"><span class="flaticon-social-4"></span> </a></li>
+                        <li class="gplus"><a href="#"><span class="flaticon-social-media-1"></span> </a></li>
+                        <li class="linkdin"><a href="#"><span class="flaticon-linkedin-logo"></span> </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Student'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+            </div>
+            <div class="row" ng-show="currentUser.selectedRoleName == 'Officer'">
+                <ul class="list-inline">
+                    <li class="irs-name-tdsd">{{currentUser.selectedRoleName}}</li>
+                </ul>
+                <h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+            </div>
+
+        </div>
+        <div class="row" ng-show="currentUser.selectedRoleName == 'Admin'">
+            <div class="col-md-12">
+                <div class="irs-courses-details">
+                    <div class="irs-cdetails-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a data-target="#a1" aria-controls="a1" role="tab" data-toggle="tab">Personal File</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="a1">
+                                <div class="row">
+                                    <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <form class="form form-inline">
+                                            <div class="form-group" ng-show="currentUser.personalFiles.length>0" ng-repeat="f in currentUser.personalFiles">
+                                                <a href="{{f.filePath}}"><u>{{getFileName(f.filePath)}}</u></a>
+                                                <button title='Remove' type='button' class='mfp-close3' ng-click="removeFile(f.id)">×</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="currentUser.selectedRoleName == 'Student'">
+            <div class="col-md-12">
+                <div class="irs-courses-details">
+                    <div class="irs-cdetails-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a data-target="#s1" aria-controls="s1" role="tab" data-toggle="tab">Registered Courses</a></li>
+                            <li role="presentation"><a data-target="#s2" aria-controls="s2" role="tab" data-toggle="tab">Personal File</a></li>
+                            <li role="presentation"><a data-target="#s3" aria-controls="s3" role="tab" data-toggle="tab">Parents</a></li>
+                            <li role="presentation"><a data-target="#s4" aria-controls="s4" role="tab" data-toggle="tab">Waiting for approve to be your parent</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="s1">
+                                <div class="irs-cdtls-ttbg2">
+                                    <h3>Showing {{numberOfRegistered}} results</h3>
+                                    <div class="irs-td-carousel" id="registered-course">
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="s2">
+                                <div class="row">
+                                    <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <form class="form form-inline">
+                                            <div class="form-group" ng-show="currentUser.personalFiles.length>0" ng-repeat="f in currentUser.personalFiles">
+                                                <a href="{{f.filePath}}"><u>{{getFileName(f.filePath)}}</u></a>
+                                                <button title='Remove' type='button' class='mfp-close3' ng-click="removeFile(f.id)">×</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="s3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-inline irs-cl-teacher-info" ng-show="parent != null">
+                                            <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{parent.imageUrl}}" style="width:50px;height:50px" alt="s3.png" src="../../../../Content/images/courses/s4.png"></li>
+                                            <li class="irs-cl-info"><h3>{{parent.firstName}} {{parent.lastName}}</h3></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="s4">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <ul class="list-group" ng-show="waiting != null">
+                                            <li>
+                                                <a href="#">
+                                                    <ul class="list-inline">
+                                                        <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{waiting.imageUrl}}" style="width:50px;height:50px" alt="s3.png" src="../../../../Content/images/courses/s4.png"></li>
+                                                        <li class="irs-cl-info"><h3>{{waiting.firstName}} {{waiting.lastName}}</h3></li>
+                                                        <li class="pull-right"><span class="btn btn-sm irs-btn-thm3" ng-click="approve(waiting.id)">Approve</span></li>
+                                                        <li class="pull-right"><span class="btn btn-sm irs-btn-thm2" ng-click="reject(waiting.id)">Decline</span>
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="currentUser.selectedRoleName == 'Teacher'">
+            <div class="col-md-12">
+                <div class="irs-courses-details">
+                    <div class="irs-cdetails-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a data-target="#t1" aria-controls="t1" role="tab" data-toggle="tab">Personal File</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="t1">
+                                <div class="row">
+                                    <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <form class="form form-inline">
+                                            <div class="form-group" ng-show="currentUser.personalFiles.length>0" ng-repeat="f in currentUser.personalFiles">
+                                                <a href="{{f.filePath}}"><u>{{getFileName(f.filePath)}}</u></a>
+                                                <button title='Remove' type='button' class='mfp-close3' ng-click="removeFile(f.id)">×</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="currentUser.selectedRoleName == 'Officer'">
+            <div class="col-md-12">
+                <div class="irs-courses-details">
+                    <div class="irs-cdetails-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a data-target="#o1" aria-controls="o1" role="tab" data-toggle="tab">Personal File</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="o1">
+                                <div class="row">
+                                    <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <form class="form form-inline">
+                                            <div class="form-group" ng-show="currentUser.personalFiles.length>0" ng-repeat="f in currentUser.personalFiles">
+                                                <a href="{{f.filePath}}"><u>{{getFileName(f.filePath)}}</u></a>
+                                                <button title='Remove' type='button' class='mfp-close3' ng-click="removeFile(f.id)">×</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="currentUser.selectedRoleName == 'Parent'">
+            <div class="col-md-12">
+                <div class="irs-courses-details">
+                    <div class="irs-cdetails-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a data-target="#p2" aria-controls="p2" role="tab" data-toggle="tab">Personal File</a></li>
+                            <li role="presentation"><a data-target="#p1" aria-controls="p1" role="tab" data-toggle="tab">Students</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade  in active" id="p2">
+                                <div class="row">
+                                    <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <form class="form form-inline">
+                                            <div class="form-group" ng-show="currentUser.personalFiles.length>0" ng-repeat="f in currentUser.personalFiles">
+                                                <a href="{{f.filePath}}"><u>{{getFileName(f.filePath)}}</u></a>
+                                                <button title='Remove' type='button' class='mfp-close3' ng-click="removeFile(f.id)">×</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="p1">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-inline irs-cl-teacher-info" ng-show="child != null">
+                                            <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{child.imageUrl}}" style="width:50px;height:50px" alt="s3.png" src="../../../../Content/images/courses/s4.png"></li>
+                                            <li class="irs-cl-info"><h3>{{child.firstName}} {{child.lastName}}</h3></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function gotoCourse(id) {
+        angular.element(document.getElementById('ProfileController')).scope().gotoCourse(id);
+    }
+</script>

@@ -1,0 +1,189 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Edit Profile</h3>
+</div>
+<div class="modal-body">
+    <form id="form" name="form">
+        <div class="col-md-2 irs-mrgnbot-twenty">
+            <div class="irs-courses-td-sngle">
+                <div class="irs-ctds-thumb">
+                    <img class="img-responsive img-fluid" ng-src="../../../{{user.imageUrl}}" alt="tmd1.png">
+                </div>
+                <div class="row text-center">
+                    <span>Current Image</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group irs-mrgnbot-eighty">
+            <input type="file" file-model="file" />
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="col-2 col-form-label">User Name:</label>
+                    <input type="text" class="form-control" id="username" ng-model="user.userName" placeholder="Enter user name" disabled required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-2 col-form-label">First Name EN:</label>
+                    <input type="text" class="form-control" id="fname" ng-model="user.firstName_en" placeholder="Enter first name" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-2 col-form-label">Last Name EN:</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.lastName_en" placeholder="Enter last name" required>
+                    <div class="help-block with-errors"></div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-2 col-form-label">First Name TH:</label>
+                    <input type="text" class="form-control" id="fname" ng-model="user.firstName_th" placeholder="Enter first name" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-2 col-form-label">Last Name TH:</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.lastName_th" placeholder="Enter last name" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="col-2 col-form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" ng-show="user.selectedRoleName == 'Parent'">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Child name</label>
+                    <autocomplete ng-model="user.referenceUserName" data="refUsers" on-type="updateRefUsers"></autocomplete>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div ng-show="user.selectedRoleName == 'Teacher'">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Position EN:</label>
+                        <input type="text" class="form-control" id="position" ng-model="user.position_en" placeholder="Enter last name">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Field of expertise EN:</label>
+                        <input type="text" class="form-control" id="tag" ng-model="user.tag_en" placeholder="Enter last name">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Description EN:</label>
+                        <textarea class="form-control" id="description" ng-model="user.description_en" placeholder="Enter last name"></textarea>
+                        <div class="help-block with-errors"></div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Position TH:</label>
+                        <input type="text" class="form-control" id="position" ng-model="user.position_th" placeholder="Enter last name">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Field of expertise TH:</label>
+                        <input type="text" class="form-control" id="tag" ng-model="user.tag_th" placeholder="Enter last name">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Description TH:</label>
+                        <textarea class="form-control" id="description" ng-model="user.description_th" placeholder="Enter last name"></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Mobile:</label>
+                        <input type="text" class="form-control" id="position" ng-model="user.mobile" placeholder="Enter mobile number">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Office Tel.:</label>
+                        <input type="text" class="form-control" id="tag" ng-model="user.officeTel" placeholder="Enter office telephone number">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Line ID:</label>
+                        <input type="text" class="form-control" id="tag" ng-model="user.lineId" placeholder="Enter line id">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-md-12" ng-show="isShowThisSection('Admin')">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Position EN</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.position_en" placeholder="Enter position" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label>Field of expertise EN</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.expertise_en" placeholder="Enter field of expertise" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label>Description EN</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.description_en" placeholder="Enter description" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Position TH</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.position_th" placeholder="Enter position" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label>Field of expertise TH</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.expertise_th" placeholder="Enter field of expertise" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label>Description TH</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.description_th" placeholder="Enter description" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" ng-show="isShowThisSection('Admin')">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Mobile</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.mobile" placeholder="Enter mobile" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label>Office Telephone</label>
+                    <input type="text" class="form-control" id="lname" ng-model="user.officeTel" placeholder="Enter office telephone" ng-disabled="mode == 3" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-default" ng-click="save()">Save</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

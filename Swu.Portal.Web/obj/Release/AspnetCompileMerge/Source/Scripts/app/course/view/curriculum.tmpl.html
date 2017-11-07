@@ -1,0 +1,57 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+    <form id="form" name="form">
+        <div class="form-group">
+            <label class="col-2 col-form-label">Name:</label>
+            <input type="text" class="form-control" id="name" ng-model="curriculum.name" placeholder="Enter name" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">Type:</label>
+            <div class="form-group">
+                <select name="role" id="role" ng-model="selectedType" class="form-control" required>
+                    <option ng-repeat="r in types" value="{{r.id}}">{{r.title}}</option>
+                </select>
+            </div>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">Start Date:</label>
+            <input type="text" ng-model="displayPublishDate" id="publishDate" class="form-control" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">Room:</label>
+            <input type="text" class="form-control" id="name" ng-model="curriculum.room" placeholder="Enter room">
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">Suyvey Link:</label>
+            <input type="text" class="form-control" id="name" ng-model="curriculum.surveyLink" placeholder="Enter link">
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-2 col-form-label">Time:</label>
+            <input type="number" class="form-control" ng-model="curriculum.numberOfTime" />
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <!--<div class="col-sm-2">
+                    <button type="button" class="btn btn-danger pull-left" ng-click="delete()">Delete</button>
+                </div>-->
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-default" ng-click="save()">Save</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('#publishDate').datepicker({
+        format: "dd/mm/yyyy"
+    });
+</script>

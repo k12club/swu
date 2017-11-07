@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="wrapper">
+    <div class="preloader"></div>
+    <!-- Login -->
+    <ng-include src="'Scripts/app/login/view/login.html'"></ng-include>
+    
+    <!-- Banner -->
+    <ng-include src="'Scripts/app/home/view/banner.html'"></ng-include>
+
+    <!-- Navigate -->
+    <ng-include src="'Scripts/app/menu/view/nav.html'"></ng-include>
+
+    <!-- Services Section -->
+    <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+
+    <!-- Content Section -->
+    <div ui-view></div>
+
+    <!-- Footer Section -->
+    <section class="irs-footer" ng-controller="FooterController">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 irs-padl-zero irs-pl-fftn">
+                    <div class="irs-footer-social-icon">
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="irs-footer-location-info">
+                        <h2><span class="irs-fci-icon flaticon-phone-receiver" translate="shared.phone"></span></h2>
+                        <h5 translate="login.anyQuestions"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row irs-mrgnt-two">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 irs-padl-zero irs-pl-fftn">
+                    <div class="irs-footer-useful-link">
+                        <h4 class="irs-mrgnbot-fourty">Useful Links</h4>
+                        <ul class="irs-list-square">
+                            <li><a href="#" ng-click="goToPage('app')">Home</a></li>
+                            <li><a href="#" ng-click="goToPage('board',2)">Course</a></li>
+                            <li><a href="#" ng-click="goToPage('teacher-list')">Teacher</a></li>
+                            <li><a href="#" ng-click="goToPage('board',3)">Research</a></li>
+                            <li><a href="#" ng-click="goToPage('board',1)">Webboard</a></li>
+                            <li><a href="#"  ui-sref="contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 irs-padl-zero irs-pl-fftn">
+                    <div class="irs-footer-latest-course">
+                        <h4 class="irs-mrgnbot-fourty irs-pl-fftn">Latest Courses Added</h4>
+                        <div class="media irs-fln-media-one irs-mrgnbot-fourty" ng-repeat="c in splite1">
+                            <div class="media-left pull-left col-md-5"> <a href="#"> <img class="media-object" ng-src="../../../{{c.course.imageUrl}}" alt="s1.png"> </a> </div>
+                            <div class="media-body">
+                                <h4 class="media-heading irs-flc-ttl"><a href="#">{{c.course.name_en}}</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 irs-padl-zero irs-pl-fftn">
+                    <div class="irs-footer-latest-course">
+                        <h4 class="irs-mrgnbot-fourty irs-pl-fftn">&nbsp;</h4>
+                        <div class="media irs-fln-media-one irs-mrgnbot-fourty" ng-repeat="c in splite2">
+                            <div class="media-left pull-left col-md-5"> <a href="#"> <img class="media-object" ng-src="../../../{{c.course.imageUrl}}" alt="s1.png"> </a> </div>
+                            <div class="media-body">
+                                <h4 class="media-heading irs-flc-ttl"><a href="#">{{c.course.name_en}}</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our CopyRight Section -->
+    <section class="irs-copy-right">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Copyright © Srinakharinwirot University.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- Wrapper End -->
+@Scripts.Render("~/theme/js")
+<!-- include summernote css/js-->
+
+@*<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.js"></script>*@

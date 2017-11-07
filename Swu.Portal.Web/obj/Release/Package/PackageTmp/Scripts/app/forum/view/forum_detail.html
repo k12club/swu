@@ -1,0 +1,90 @@
+﻿<!-- Breadcrumbs Styles -->
+<section class="irs-ip-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <h1 class="irs-bc-title">Webboard</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Breadcrumbs html -->
+<div>
+    <section class="irs-ip-brdcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-right irs-bb-right">
+                    <ul class="list-inline irs-brdcrmb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#"> > </a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#"> > </a></li>
+                        <li><a class="active" href="#">Detailed</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="irs-ip-details">
+        <div class="container">
+            <div class="row irs-all-course-bb clearfix">
+                <div class="col-sm-12 col-md-8 col-lg-12 clearfix">
+                    <div class="clearfix">
+                        <div class="irs-blog-post-ip">
+                            <div class="irs-blog-post-meta style2">
+                                <ul class="list-inline">
+                                    <li class="irs-cl-thumb"><img class="img-circle" ng-src="../../../../{{forumAndComments.forum.creatorImageUrl}}" style="width:50px;height:50px" alt="s3.png"></li>
+                                    <li><a href="#">on<span class="text-thm2"> {{forumAndComments.forum.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span></a></li>
+                                    <li><a href="#">by<span class="text-thm2"> {{forumAndComments.forum.creatorName}}</span></a></li>
+                                    <li><a class="irs-colrdaek" href="#"><span class="flaticon-interface"> </span>{{forumAndComments.forum.numberOfViews}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="irs-blog-post-title">
+                                <h3>{{forumAndComments.forum.name}}</h3>
+                            </div>
+                            <div class="irs-blog-post-detailss irs-all-course-bb">
+                                <div ng-bind-html="forumAndComments.forum.fullDescription | trustAsHtml"></div>
+                            </div>
+                            <br><br>
+                            <summernote id="comment" ng-model="comment"></summernote>
+                            <div class="row">
+                                <div class="col-md-12" style="padding:20px">
+                                    <input type="button" ng-disabled="!canPost" class="btn btn-default irs-button-styledark" ng-click="save()" value="Post" />
+                                    <span ng-show="!canPost" class="text-info">Please login before post some comments</span>
+                                </div>
+                            </div>
+                            <p class="irs-mrgntop-ffty irs-all-course-bb"></p>
+                            <br />
+                            <div ng-repeat="c in forumAndComments.comments">
+                                <div class="col-lg-12" style="border-bottom:solid 1px #eee;margin-bottom:40px;padding-bottom:40px">
+                                    <div class="row">
+                                        <div class="col-lg-11">
+                                            <ul class="list-inline irs-cl-teacher-info">
+                                                <li class="irs-cl-thumb"><img ng-src="../../../../{{c.createImageUrl}}" class="img-circle" style="width:50px;height:50px" alt="blog-post-author.jpg"></li>
+                                                <li class="irs-name-tdsd style2">on <span class="text-thm2 ng-binding"> {{c.createdDate|date:'dd/MM/yyyy hh:mm:ss'}}</span> by <span class="text-thm2 ng-binding">{{c.creatorName}}</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-1" ng-show="canEdit(c.createdUserId)" ng-click="editComment(c.id)"><span class="flaticon-pen"></span></div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <h3><a href="#" ui-sref="forum({ id: item.id })">{{item.name}}</a></h3>
+                                        <p ng-bind-html="c.description"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#comment').summernote({
+            height: 300
+        });
+    });
+</script>

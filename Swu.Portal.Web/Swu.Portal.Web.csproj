@@ -702,6 +702,7 @@
     <Content Include="Scripts\angular\ui-bootstrap.js" />
     <Content Include="Scripts\angular\ui-date.js" />
     <Content Include="Scripts\angular\underscore.js" />
+    <Content Include="Scripts\app-bundles.js" />
     <Content Include="Scripts\app\board\view\board-course.html" />
     <Content Include="Scripts\app\board\view\board-general.html" />
     <Content Include="Scripts\app\board\view\board-research.html" />

@@ -1,0 +1,40 @@
+﻿<div class="clearfix">
+    <div class="row">
+        <div class="irs-blog-post-title">
+            <h3>Event Management</h3>
+        </div>
+    </div>
+    <div class="row">
+
+        <div role="tabpanel" class="tab-pane fade in active" id="list">
+            <div class="row md-margin">
+                <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr class="irs-table-deading style2">
+                            <th>Title</th>
+                            <th>Place</th>
+                            <th>Start Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="irs-table-body style2">
+                        <tr ng-repeat="e in display">
+                            {{e.id}}
+                            <th><a href="" ng-click="edit(e.id)">{{e.title_th}}</a></th>
+                            <th>{{e.place_en}}</th>
+                            <td>{{e.startDate|date:'dd/MM/yyyy'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="list-inline irs-ip-navigation clearfix">
+                    <li><span class="flaticon-arrows" ng-click="prev()"></span></li>
+                    <li ng-repeat="number in []|range:totalPageNumber" ng-click="changePage($index)"><a ng-class="{active:number == currentPage}">{{$index+1}}</a></li>
+                    <li><span class="flaticon-arrows-1" ng-click="next()"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
