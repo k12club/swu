@@ -54,7 +54,6 @@ D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.I
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web.Api\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web.Api\bin\Debug\AutoMapper.dll
 D:\Git\swu-portal\Swu.Portal.Web\Swu.Portal.Web.Api\bin\Debug\AutoMapper.xml
-D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Web.Api.dll.config
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Web.Api.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Swu.Portal.Web.Api.pdb
@@ -114,5 +113,6 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.Razor.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.dll
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.pdb

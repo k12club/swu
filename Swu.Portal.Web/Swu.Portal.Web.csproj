@@ -29,6 +29,7 @@
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -259,6 +260,7 @@
     <Content Include="Content\css\fonticon-linearicons.css" />
     <Content Include="Content\css\gallery.css" />
     <Content Include="Content\css\hover.css" />
+    <Content Include="Content\css\images\languages.png" />
     <Content Include="Content\css\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\css\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\css\images\ui-icons_777620_256x240.png" />
@@ -407,6 +409,7 @@
     <Content Include="Content\images\courses\s7.png" />
     <Content Include="Content\images\courses\s8.png" />
     <Content Include="Content\images\courses\s9.png" />
+    <Content Include="Content\images\default.jpg" />
     <Content Include="Content\images\event\1.jpg" />
     <Content Include="Content\images\event\2.jpg" />
     <Content Include="Content\images\event\3.jpg" />
@@ -444,6 +447,7 @@
     <Content Include="Content\images\gallery\s7.png" />
     <Content Include="Content\images\gallery\s8.png" />
     <Content Include="Content\images\gallery\s9.png" />
+    <Content Include="Content\images\header-logo-backup.png" />
     <Content Include="Content\images\header-logo-l2.png" />
     <Content Include="Content\images\header-logo.png" />
     <Content Include="Content\images\home\1.jpg" />
@@ -570,6 +574,7 @@
     <Content Include="Content\images\resource\testi3.jpg" />
     <Content Include="Content\images\resource\testimonials-bg.jpg" />
     <Content Include="Content\images\resource\video-bg.jpg" />
+    <Content Include="Content\images\swu.jpg" />
     <Content Include="Content\images\team\1.jpg" />
     <Content Include="Content\images\team\10.jpg" />
     <Content Include="Content\images\team\2.jpg" />
@@ -629,7 +634,6 @@
     <Content Include="Content\js\swiper.min.js" />
     <Content Include="Content\js\validator.min.js" />
     <Content Include="Content\js\wow.min.js" />
-    <Content Include="Content\images\languages.png" />
     <Content Include="Content\material-icons.css" />
     <Content Include="Content\MaterialIcons-Regular.ijmap.txt" />
     <Content Include="Content\MaterialIcons-Regular.svg" />
@@ -780,7 +784,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -993,7 +996,6 @@
     <TypeScriptCompile Include="Scripts\typings\swiper\swiper.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />
-    <TypeScriptCompile Include="Scripts\_references.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
