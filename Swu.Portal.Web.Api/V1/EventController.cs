@@ -21,11 +21,17 @@ namespace Swu.Portal.Web.Api
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IRepository<Event> _eventRepository;
         private readonly IConfigurationRepository _configurationRepository;
-        public EventController(IDateTimeRepository datetimeRepository, IRepository<Event> eventRepository, IConfigurationRepository configurationRepository)
+        private readonly IEventService _eventService;
+        public EventController(
+            IDateTimeRepository datetimeRepository,
+            IRepository<Event> eventRepository,
+            IConfigurationRepository configurationRepository,
+            IEventService eventService)
         {
             this._datetimeRepository = datetimeRepository;
             this._eventRepository = eventRepository;
             this._configurationRepository = configurationRepository;
+            this._eventService = eventService;
         }
         [HttpGet, Route("all")]
         public List<EventProxy> GetAll()
@@ -49,7 +55,7 @@ namespace Swu.Portal.Web.Api
             {
                 if (model.Id == 0)
                 {
-                    this._eventRepository.Add(new Event
+                    this._eventService.CreateNewEvent(new Event
                     {
                         Title_EN = model.Title_EN,
                         Title_TH = model.Title_TH,
@@ -63,14 +69,17 @@ namespace Swu.Portal.Web.Api
                 else
                 {
                     var e = this._eventRepository.FindById(model.Id);
-                    e.Title_EN = model.Title_EN;
-                    e.Title_TH = model.Title_TH;
-                    e.Description_EN = model.Description_EN;
-                    e.Description_TH = model.Description_TH;
-                    e.Place_EN = model.Place_EN;
-                    e.Place_TH = model.Place_TH;
-                    e.StartDate = model.StartDate;
-                    this._eventRepository.Update(e);
+                    this._eventService.UpdateEvent(new Event
+                    {
+                        Id = e.Id,
+                        Title_EN = model.Title_EN,
+                        Title_TH = model.Title_TH,
+                        Description_EN = model.Description_EN,
+                        Description_TH = model.Description_TH,
+                        Place_EN = model.Place_EN,
+                        Place_TH = model.Place_TH,
+                        StartDate = model.StartDate
+                    });
                 }
                 return Request.CreateResponse(HttpStatusCode.OK);
             }

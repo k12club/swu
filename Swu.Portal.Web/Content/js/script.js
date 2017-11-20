@@ -145,7 +145,6 @@
     // Owl-News-carousel
     if($('.irs-main-slider').length){
         $('.irs-main-slider').owlCarousel({
-            autoplay: 5000,
             loop:true,
             margin:0,
             dots: false,
@@ -228,7 +227,6 @@
     // Owl-News-carousel
     if($('.irs-event-carousel').length){
         $('.irs-event-carousel').owlCarousel({
-            autoplay: 5000,
             loop:true,
             margin:0,
             dots: false,
@@ -279,7 +277,6 @@
     // Owl-News-carousel
     if($('.irs-blog-slider').length){
         $('.irs-blog-slider').owlCarousel({
-            autoplay: 5000,
             loop:true,
             margin:0,
             dots: true,

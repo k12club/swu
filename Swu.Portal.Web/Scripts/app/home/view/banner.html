@@ -1,9 +1,97 @@
-﻿<!--<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"> <i class="fa fa-bars"></i> </button>
-    <a class="navbar-brand" ng-click="goToPage('app')"><img src="~/../Content/images/header-logo.png" class="logo" alt="header-logo.png"></a>
-</div>-->
-<div style="padding:40px">
+﻿<div class="row" ng-controller="LoginController as vm">
     <div class="container">
-        <img src="~/../Content/images/header-logo.png" class="logo" alt="header-logo.png">
+        <div class="row">
+            <div class="col-md-8" style="padding:10px">
+                <img src="~/../Content/images/header-logo.png" class="logo" alt="header-logo.png">
+            </div>
+            <div class="col-md-4">
+                <div class="irs-log-reg pull-right">
+                    <ul class="list-inline" ng-show="userProfile == null">
+                        <li>
+                            <a href="#"><div ng-click="ShowModalLogin(true)" translate="login.login"></div></a>
+                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" login-modal="showModal" data-backdrop="static">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" ng-click="ShowModalLogin(false)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title text-center" id="exampleModalLabel" translate="login.loginOrRegister"></h4>
+                                            <p class="irs-sign-reg-para text-center" translate="login.description"></p>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <form class="irs-login-form">
+                                                        <h3 translate="login.login"> <span class="flaticon-padlock"></span></h3>
+                                                        <p translate="login.loginTitle"></p>
+                                                        <div class="form-group">
+                                                            <input type="text" ng-model="userName" class="form-control" id="email" placeholder="{{'login.userName'|translate}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" ng-model="password" class="form-control" placeholder="{{'login.password'|translate}}">
+                                                        </div>
+                                                        <input type="button" class="btn btn-default irs-button-styledark" value="{{'login.btnLogin'|translate}}" ng-click="Login()" />
+                                                    </form>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <form class="irs-reg-form" id="reg-form">
+                                                        <h3 translate="login.register"><span class="flaticon-key"></span></h3>
+                                                        <p translate="login.registerTitle"></p>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="username" ng-model="registerUser.userName" placeholder="{{'login.userName'|translate}}" required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control" id="email" ng-model="registerUser.email" placeholder="{{'login.email'|translate}}" required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control" id="reg-pwd" ng-model="registerUser.password" placeholder="{{'login.password'|translate}}"
+                                                                   data-minlength="6"
+                                                                   required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control" id="reg-pwd2" ng-model="registerUser.rePassword" placeholder="{{'login.rePassword'|translate}}"
+                                                                   data-minlength="6"
+                                                                   data-match="#reg-pwd"
+                                                                   data-match-error="Password is not match"
+                                                                   required>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <div class="form-group text-center">
+                                                            <input type="button" class="btn btn-default irs-button-styledark" ng-click="register()" value="{{'login.btnRegister'|translate}}" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#"></a></li>
+                        <li><span class="lang-sm lang-lbl-en" lang="en" ng-click="changeLanguage('en')"></span></li>
+                        <li><span class="lang-sm lang-lbl" lang="th" ng-click="changeLanguage('th')"></span></li>
+                    </ul>
+                    <ul class="list-inline" ng-show="userProfile != null">
+                        <li>
+                            <div class="dropdown">
+                                <button class="account-button-label" type="button" data-toggle="dropdown">
+                                    <span translate="login.loginAs"></span> &nbsp;&nbsp;{{userProfile.firstName_en}} {{userProfile.lastName_en}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#" ui-sref="settings">Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#" ng-click="Logout()">Sign out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><span class="lang-sm lang-lbl-en" lang="en" ng-click="changeLanguage('en')"></span></li>
+                        <li><span class="lang-sm lang-lbl" lang="th" ng-click="changeLanguage('th')"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

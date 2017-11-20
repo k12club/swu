@@ -351,7 +351,8 @@ section {
     }
 
 .irs-header-topped {
-    background: #f8be50 none repeat scroll 0 0;
+    background: #457d5a none repeat scroll 0 0;
+    color:#fff;
     border-bottom:1px solid #eaeaea;
 }
 
@@ -1000,7 +1001,7 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 }
 /* OWL CAROUSEL IRS EVENT SECTION */
 .irs-edetails.irs-ext-pad {
-    padding: 55px 20px 85px;
+    /*padding: 55px 20px 85px;*/
 }
 
 .irs-event-carousel .item {

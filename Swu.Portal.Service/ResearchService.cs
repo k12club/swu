@@ -44,31 +44,6 @@ namespace Swu.Portal.Service
                 var existing = context.Research
                     .Where(i => i.Id == research.Id).Include(i => i.AttachFiles)
                     .FirstOrDefault();
-                if (hasFile)
-                {
-                    var file = existing.AttachFiles.FirstOrDefault();
-                    if (file != null)
-                    {
-                        context.AttachFiles.Remove(file);
-                        context.SaveChanges();
-                    }
-                }
-                var category = context.ResearchCategory.Find(research.CategoryId);
-                existing.ShortDescription = research.ShortDescription;
-                existing.FullDescription = research.FullDescription;
-                existing.CategoryId = research.CategoryId;
-                existing.Contributor = research.Contributor;
-                existing.Name_EN = research.Name_EN;
-                existing.Name_TH = research.Name_TH;
-                existing.PublishDate = research.PublishDate;
-                existing.Publisher = research.Publisher;
-                existing.UpdatedDate = research.UpdatedDate;
-                if (hasFile)
-                {
-                    existing.AttachFiles = research.AttachFiles;
-                }
-                context.ResearchCategory.Attach(category);
-                existing.Category = category;
                 context.Entry(existing).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }

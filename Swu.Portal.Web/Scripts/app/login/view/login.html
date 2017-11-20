@@ -1,21 +1,21 @@
-﻿<div class="irs-header-topped" ng-controller="LoginController as vm">
+﻿<div class="irs-header-topped">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 clearfix">
+            <div class="col-lg-12 clearfix">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-5 irs-padl-zero irs-pl-fftn">
-                        <div class="irs-welcm-ht">
+                    <div class="col-md-5 irs-padl-zero irs-pl-fftn">
+                        <div class="irs-welcm-ht pull-left">
                             <p class="irs-welcntxt"><i class="fa fa-phone"></i><span translate="login.anyQuestions"></span>&nbsp;<span translate="login.callUs"></span> <strong><span translate="shared.phone"></span></strong> </p>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-7">
-                        <div class="irs-welcm-ht">
+                    <div class="col-md-7">
+                        <div class="irs-welcm-ht pull-right">
                             <p class="irs-welcntxt"><i class="fa fa-map-marker">&nbsp;</i><span translate="shared.address"></span></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 clearfix">
+            <!--<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 clearfix">
                 <div class="irs-log-reg">
                     <ul class="list-inline" ng-show="userProfile == null">
                         <li>
@@ -47,24 +47,6 @@
                                                     <form class="irs-reg-form" id="reg-form">
                                                         <h3 translate="login.register"><span class="flaticon-key"></span></h3>
                                                         <p translate="login.registerTitle"></p>
-                                                        <!--<div class="form-group">
-                                                            <input type="text" class="form-control" id="exampleInputNamex" placeholder="{{'login.firstName'|translate}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="exampleInputNamexx" placeholder="{{'login.lastName'|translate}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="email" class="form-control" id="exampleInputEmailx" placeholder="{{'login.email'|translate}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="password" class="form-control" placeholder="{{'login.password'|translate}}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="password" class="form-control" placeholder="{{'login.rePassword'|translate}}">
-                                                        </div>
-                                                        <div class="form-group text-center">
-                                                            <input type="button" class="btn btn-default irs-button-styledark" value="{{'login.btnRegister'|translate}}" />
-                                                        </div>-->
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="username" ng-model="registerUser.userName" placeholder="{{'login.userName'|translate}}" required>
                                                             <div class="help-block with-errors"></div>
@@ -107,7 +89,6 @@
                             <div class="dropdown">
                                 <button class="account-button-label" type="button" data-toggle="dropdown">
                                     <span translate="login.loginAs"></span> &nbsp;&nbsp;{{userProfile.firstName_en}} {{userProfile.lastName_en}}
-                                    <!--<img ng-src="{{userProfile.imageUrl}}" class="img-circle" style="width:25px;height:25px" />-->
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -121,7 +102,7 @@
                         <li><span class="lang-sm lang-lbl" lang="th" ng-click="changeLanguage('th')"></span></li>
                     </ul>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

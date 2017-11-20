@@ -1739,8 +1739,19 @@ var Swu;
                             iconCss: value.iconCss,
                             columnCss: columnCss,
                             style: style,
-                            commentCss: commentCss
+                            commentCss: commentCss,
+                            isImgContent: false
                         });
+                    });
+                    $scope.commitments.push({
+                        title_en: "Test",
+                        description_en: "Test",
+                        title_th: "Test",
+                        description_th: "Test",
+                        alignment: "text-right",
+                        columnCss: "irs-commtmnt-column2",
+                        commentCss: "irs-cmmt-details2",
+                        isImgContent: true
                     });
                     $scope.swapLanguage(newValue);
                 }, function (error) { });

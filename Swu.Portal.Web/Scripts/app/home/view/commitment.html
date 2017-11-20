@@ -12,14 +12,20 @@
             <div class="col-xs-12 col-sm-12 col-md-6" ng-repeat="c in commitments">
                 <div class="animatedParent">
                     <div class="{{c.columnCss}} {{c.style}} {{c.alignment}} animated growIn delay-250">
-                        <div class="irs-cmmt-icon"><span class="{{c.iconCss}}"></span></div>
-                        <div class="{{c.commentCss}}">
-                            <h3>{{c.title}}</h3>
-                            <p>{{c.description}}</p>
+                        <div ng-hide="c.isImgContent">
+                            <div class="irs-cmmt-icon"><span class="{{c.iconCss}}"></span></div>
+                            <div class="{{c.commentCss}}">
+                                <h2>{{c.title}}</h2>
+                                <h4>{{c.description}}</h4>
+                            </div>
+                        </div>
+                        <div ng-show="c.isImgContent">
+                            <div class="irs-cmmt-details2">
+                                <img src="../../../Content/images/home/objective.png" style="height:160px; width:auto;" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>

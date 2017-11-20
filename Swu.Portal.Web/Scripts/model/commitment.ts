@@ -6,10 +6,13 @@
         description_en: string;
         title_th: string;
         description_th: string;
-        iconCss: string;
+        iconCss?: string;
         alignment?: string;
         columnCss?: string;
         style?: string;
-        commentCss?:string;
+        commentCss?: string;
+
+        isImgContent?: boolean;
+        ImageContent?: string;
     }
 }

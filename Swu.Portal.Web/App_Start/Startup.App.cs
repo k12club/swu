@@ -52,6 +52,7 @@ namespace Swu.Portal.Web
             builder.RegisterType<CurriculumService>().As<ICurriculumService>().InstancePerRequest();
             builder.RegisterType<StudentCourseService>().As<IStudentCourseService>().InstancePerRequest();
             builder.RegisterType<StudentScoreService>().As<IStudentScoreService>().InstancePerRequest();
+            builder.RegisterType<EventService>().As<IEventService>().InstancePerRequest();
 
 
             builder.RegisterType<ReferenceUserService>().As<IReferenceUserService>().InstancePerRequest();
