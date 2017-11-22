@@ -10,13 +10,10 @@
             private $httpProvider: ng.IHttpProvider) {
             $urlRouterProvider.otherwise("/app");
             $stateProvider
-                .state("committee-list-th", {
-                    url: "/committee-list",
-                    templateUrl: "/Scripts/app/committee/view/committee-list.html"
-                })
-                .state("committee-list-en", {
-                    url: "/committee-list-en",
-                    templateUrl: "/Scripts/app/committee/view/committee-list-en.html"
+                .state("photo", {
+                    url: "/photo/:id/:title",
+                    templateUrl: "/Scripts/app/photo/view/photo.html",
+                    controller: "PhotoController as vm"
                 });
         }
     }

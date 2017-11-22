@@ -265,8 +265,15 @@ var Swu;
             ourPeoples: "OurPeoples",
             teacher: "Teacher",
             contact: "Contact",
-            committee: "Programme Commitee",
-            board: "Webboard"
+            committee_th: "Programme Commitee (TH)",
+            committee_en: "Programme Commitee (ENG)",
+            board: "Webboard",
+            faq: "FAQ",
+            alumni: "Alumin",
+            qualification: "Qualification",
+            studyplan: "Study plan",
+            assessment: "Assessment",
+            quicklink: "Quick link"
         },
         home: {},
         course: {
@@ -316,6 +323,12 @@ var Swu;
         committee: {
             title: "Program Committee"
         },
+        album: {
+            title: "Photo albums"
+        },
+        alumni: {
+            title: ""
+        },
         research: {},
         teacher: {},
         student: {},
@@ -362,8 +375,15 @@ var Swu;
             ourPeoples: "พวกเรา",
             teacher: "รายชื่ออาจารย์",
             contact: "ติดต่อเรา",
-            committee: "กรรมการ",
-            board: "เว็บบอร์ด"
+            committee_th: "ทำเนียบผู้บริหาร(ไทย)",
+            committee_en: "ทำเนียบผู้บริหาร(ต่างชาติ)",
+            board: "เว็บบอร์ด",
+            faq: "คำถามที่พบบ่อย",
+            alumni: "ทำเนียบรุ่นนักศึกษา",
+            qualification: "เกณฑ์การรับสมัคร",
+            studyplan: "แผนการเรียน",
+            assessment: "การประเมินผล",
+            quicklink: "ลิงค์"
         },
         home: {},
         course: {
@@ -412,6 +432,12 @@ var Swu;
         },
         committee: {
             title: "คณะกรรมการ"
+        },
+        album: {
+            title: "อัลบัมรูปภาพ"
+        },
+        alumni: {
+            title: ""
         },
         research: {},
         teacher: {},
@@ -745,10 +771,15 @@ var Swu;
         function AppConstant() {
             this.timeoutExpired = 30;
             this.defaultLang = "en";
+            this.web = {
+                protocal: "http",
+                ip: "localhost",
+                port: "2255"
+            };
             this.api = {
                 protocal: "http",
                 ip: "localhost",
-                port: "8081",
+                port: "2255",
                 versionName: "V1"
             };
             this.exceptGotoTopStateList = [
@@ -1334,9 +1365,13 @@ var Swu;
             this.$httpProvider = $httpProvider;
             $urlRouterProvider.otherwise("/app");
             $stateProvider
-                .state("committee-list", {
+                .state("committee-list-th", {
                 url: "/committee-list",
                 templateUrl: "/Scripts/app/committee/view/committee-list.html"
+            })
+                .state("committee-list-en", {
+                url: "/committee-list-en",
+                templateUrl: "/Scripts/app/committee/view/committee-list-en.html"
             });
         }
         StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
@@ -1420,6 +1455,75 @@ var Swu;
                 url: "/forum/:id",
                 templateUrl: "/Scripts/app/forum/view/forum_detail.html",
                 controller: "ForumController as vm"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $stateProvider
+                .state("faq", {
+                url: "/faq",
+                templateUrl: "/Scripts/app/faq/view/faq.html"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $urlRouterProvider.otherwise("/app");
+            $stateProvider
+                .state("alumni", {
+                url: "/alumni",
+                templateUrl: "/Scripts/app/alumni/view/alumni.html"
+            });
+        }
+        StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
+        StateConfig = __decorate([
+            Swu.Module("app"),
+            Swu.Config
+        ], StateConfig);
+        return StateConfig;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var StateConfig = (function () {
+        function StateConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$urlRouterProvider = $urlRouterProvider;
+            this.$locationProvider = $locationProvider;
+            this.$httpProvider = $httpProvider;
+            $urlRouterProvider.otherwise("/app");
+            $stateProvider
+                .state("photo", {
+                url: "/photo/:id/:title",
+                templateUrl: "/Scripts/app/photo/view/photo.html",
+                controller: "PhotoController as vm"
             });
         }
         StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
@@ -2342,6 +2446,115 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var AlbumController = (function () {
+        function AlbumController($scope, $rootScope, config, $state, auth, IalbumService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.config = config;
+            this.$state = $state;
+            this.auth = auth;
+            this.IalbumService = IalbumService;
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map(_this.$scope.albums, function (v) {
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map(_this.$scope.albums, function (v) {
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$scope.goToPhotoAlbum = function (id, title) {
+                var url = $state.href('photo', { "id": id, "title": title });
+                window.open(url, '_blank');
+            };
+            this.$scope.copyUrlToClipboard = function (id, title) {
+                try {
+                    $("#" + id).select();
+                    document.execCommand("copy");
+                }
+                catch (exception) {
+                    console.log(exception);
+                }
+            };
+            this.$scope.render = function (albums) {
+                var html = "";
+                _.forEach(albums, function (value, key) {
+                    var elements = '\
+                        <div class="col-md-3">\
+                            <div class="resources-item" ng-click="goToPhotoAlbum(\'' + value.id + '\'\,\'' + value.title + '\')">\
+                                <div class="resources-category-image" >\
+                                    <img class="img-responsive" alt= "" src= "../../../../FileUpload/photo/' + value.displayImage + '" >\
+                                </div>\
+                                <div class="resources-description" >\
+                                    <p>' + moment(value.publishedDate).format('LLLL') + '</p>\
+                                    <h5>' + value.title + '</h5>\
+                                </div>\
+                            </div>\
+                            <div class="input-group">\
+                                    <input type= "text" id="' + value.id + '" class="form-control" value= "' + config.web.protocal + "://" + config.web.ip + ":" + config.web.port + $state.href('photo', { "id": value.id, "title": value.title }) + '" placeholder= "Photo gallery url" id= "copy-input" >\
+                                    <span class="input-group-btn" >\
+                                        <button class="btn btn-default" type= "button" id= "copy-button" data- toggle="tooltip" data- placement="bottom" title= "" data- original - title="Copy to Clipboard" ng-click="copyUrlToClipboard(\'' + value.id + '\'\,\'' + value.title + '\')">Copy</button>\
+                                    </span>\
+                            </div>\
+                        </div>';
+                    html += elements;
+                });
+                html += '\
+                <div class="col-md-3">\
+                    <div class="resources-item" style= "margin-top:30px !important" >\
+                        <div class="resources-description" >\
+                            <p>&nbsp; </p>\
+                            <h2> CREATE NEW ALBUM </h2>\
+                            <div class="irs-evnticon" > <span class="flaticon-cross" > </span></div></div>\
+                        </div>\
+                </div>';
+                _this.$scope.html = html;
+            };
+            this.$scope.registerScript = function () {
+            };
+            this.$scope.getAlbums = function () {
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.albums != undefined || $scope.albums != null) {
+                    IalbumService.getAlbums().then(function (response) {
+                        _.forEach(response, function (value, key) {
+                            $scope.albums.push({
+                                id: value.id,
+                                title: value.title,
+                                displayImage: value.displayImage,
+                                uploadBy: value.uploadBy,
+                                publishedDate: value.publishedDate,
+                                photos: []
+                            });
+                        });
+                        $scope.swapLanguage(newValue);
+                        $scope.render($scope.albums);
+                        $scope.registerScript();
+                    });
+                }
+            });
+            this.init();
+        }
+        AlbumController.prototype.init = function () {
+            this.$scope.albums = [];
+        };
+        AlbumController.$inject = ["$scope", "$rootScope", "AppConstant", "$state", "AuthServices", "albumService"];
+        AlbumController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "AlbumController" })
+        ], AlbumController);
+        return AlbumController;
+    }());
+    Swu.AlbumController = AlbumController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var homeCourseService = (function () {
         function homeCourseService(apiService, constant) {
             this.apiService = apiService;
@@ -2467,6 +2680,27 @@ var Swu;
             Swu.Factory({ name: "newsService" })
         ], newsService);
         return newsService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var albumService = (function () {
+        function albumService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        albumService.prototype.getAlbums = function () {
+            return this.apiService.getData("shared/albums");
+        };
+        albumService.prototype.getPhotos = function (id) {
+            return this.apiService.getData("shared/photo?id=" + id);
+        };
+        albumService.$inject = ['apiService', 'AppConstant'];
+        albumService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "albumService" })
+        ], albumService);
+        return albumService;
     }());
 })(Swu || (Swu = {}));
 var Swu;
@@ -3094,6 +3328,55 @@ var Swu;
         return CommitteeController;
     }());
     Swu.CommitteeController = CommitteeController;
+    var CommitteeEnController = (function () {
+        function CommitteeEnController($scope, $rootScope, $state, committeeService) {
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.committeeService = committeeService;
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map($scope.committee, function (c) {
+                            c.name = c.name_en;
+                            c.position = c.position_en;
+                            c.description = c.description_en;
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map($scope.committee, function (c) {
+                            c.name = c.name_th;
+                            c.position = c.position_th;
+                            c.description = c.description_th;
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.committee != undefined || $scope.committee != null) {
+                    $scope.swapLanguage(newValue);
+                }
+            });
+            this.init();
+        }
+        CommitteeEnController.prototype.init = function () {
+            var _this = this;
+            this.committeeService.getCommitteesEn().then(function (response) {
+                _this.$scope.committee = response;
+                _this.$scope.swapLanguage(_this.$rootScope.lang);
+            }, function (error) { });
+        };
+        ;
+        CommitteeEnController.$inject = ["$scope", "$rootScope", "$state", "committeeService"];
+        CommitteeEnController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "CommitteeEnController" })
+        ], CommitteeEnController);
+        return CommitteeEnController;
+    }());
+    Swu.CommitteeEnController = CommitteeEnController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -3104,6 +3387,9 @@ var Swu;
         }
         committeeService.prototype.getCommittees = function () {
             return this.apiService.getData("committee/all");
+        };
+        committeeService.prototype.getCommitteesEn = function () {
+            return this.apiService.getData("committee/allEn");
         };
         committeeService.$inject = ['apiService', 'AppConstant'];
         committeeService = __decorate([
@@ -4020,6 +4306,86 @@ var Swu;
         ], contractService);
         return contractService;
     }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var PhotoController = (function () {
+        function PhotoController($scope, $rootScope, $state, $stateParams, auth, IalbumService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$rootScope = $rootScope;
+            this.$state = $state;
+            this.$stateParams = $stateParams;
+            this.auth = auth;
+            this.IalbumService = IalbumService;
+            this.$scope.id = this.$stateParams["id"];
+            this.$scope.title = this.$stateParams["title"];
+            this.$scope.swapLanguage = function (lang) {
+                switch (lang) {
+                    case "en": {
+                        _.map(_this.$scope.photos, function (p) {
+                            p.displayPublishedDate = moment(p.publishedDate).format("LL");
+                        });
+                        break;
+                    }
+                    case "th": {
+                        _.map(_this.$scope.photos, function (p) {
+                            p.displayPublishedDate = moment(p.publishedDate).format("LL");
+                        });
+                        break;
+                    }
+                }
+            };
+            this.$scope.render = function (photos) {
+                var html = "";
+                _.forEach(photos, function (value, key) {
+                    var elements = "<div class='col-md-4'>\
+                        <div class='resources-item' >\
+                            <div class='resources-category-image' >\
+                                <a href='../../../../" + value.imageUrl + "' title= '" + value.name + "' by='" + value.uploadBy + "'>\
+                                    <img class='img-responsive' alt= '' src= '../../../../" + value.imageUrl + "'></a>\
+                            </div>\
+                        <div class='resources-description' ><p>" + value.displayPublishedDate + "</p>\
+                        <h4>" + value.name + "</h4></div></div>\
+                    </div>";
+                    html += elements;
+                });
+                _this.$scope.html = html;
+            };
+            this.$scope.registerScript = function () {
+            };
+            this.$rootScope.$watch("lang", function (newValue, oldValue) {
+                if ($scope.photos != undefined || $scope.photos != null) {
+                    IalbumService.getPhotos($scope.id).then(function (response) {
+                        _.forEach(response, function (value, key) {
+                            $scope.photos.push({
+                                id: value.id,
+                                name: value.name,
+                                imageUrl: value.imageUrl,
+                                displayPublishedDate: value.displayPublishedDate,
+                                publishedDate: value.publishedDate,
+                                uploadBy: value.uploadBy
+                            });
+                        });
+                        $scope.swapLanguage(newValue);
+                        $scope.render($scope.photos);
+                        $scope.registerScript();
+                    });
+                }
+            });
+            this.init();
+        }
+        PhotoController.prototype.init = function () {
+            this.$scope.photos = [];
+        };
+        PhotoController.$inject = ["$scope", "$rootScope", "$state", "$stateParams", "AuthServices", "albumService"];
+        PhotoController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "PhotoController" })
+        ], PhotoController);
+        return PhotoController;
+    }());
+    Swu.PhotoController = PhotoController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {

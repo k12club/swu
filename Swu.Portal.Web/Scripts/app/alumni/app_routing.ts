@@ -10,13 +10,9 @@
             private $httpProvider: ng.IHttpProvider) {
             $urlRouterProvider.otherwise("/app");
             $stateProvider
-                .state("committee-list-th", {
-                    url: "/committee-list",
-                    templateUrl: "/Scripts/app/committee/view/committee-list.html"
-                })
-                .state("committee-list-en", {
-                    url: "/committee-list-en",
-                    templateUrl: "/Scripts/app/committee/view/committee-list-en.html"
+                .state("alumni", {
+                    url: "/alumni",
+                    templateUrl: "/Scripts/app/alumni/view/alumni.html"
                 });
         }
     }

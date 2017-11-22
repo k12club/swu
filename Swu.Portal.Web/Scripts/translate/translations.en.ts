@@ -37,8 +37,15 @@
             ourPeoples: "OurPeoples",
             teacher: "Teacher",
             contact: "Contact",
-            committee: "Programme Commitee",
-            board:"Webboard"
+            committee_th: "Programme Commitee (TH)",
+            committee_en: "Programme Commitee (ENG)",
+            board: "Webboard",
+            faq: "FAQ",
+            alumni: "Alumin",
+            qualification: "Qualification",
+            studyplan: "Study plan",
+            assessment: "Assessment",
+            quicklink: "Quick link"
         },
         home: {},
         course: {
@@ -88,6 +95,12 @@
         },
         committee: {
             title:"Program Committee",
+        },
+        album: {
+            title: "Photo albums"
+        },
+        alumni: {
+            title: ""
         },
         research: {},
         teacher: {},

@@ -9,6 +9,10 @@
     }
     export interface IPhotoAlbum {
         id: string;
+        title: string;
+        displayImage?: string;
         photos: IPhoto[];
+        uploadBy?: string;
+        publishedDate?: Date;
     }
 }

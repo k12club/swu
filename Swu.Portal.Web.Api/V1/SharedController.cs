@@ -1,4 +1,6 @@
 ﻿
+using Swu.Portal.Data.Models;
+using Swu.Portal.Data.Repository;
 using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
 using Swu.Portal.Web.Api.Proxy;
@@ -17,9 +19,14 @@ namespace Swu.Portal.Web.Api
     public class SharedController : ApiController
     {
         private readonly IEmailSender _emailSender;
-        public SharedController(IEmailSender emailSender)
+        private readonly IRepository<Photo> _photoRepository;
+        private readonly IRepository2<PhotoAlbum> _photoAlbumRepository;
+
+        public SharedController(IEmailSender emailSender, IRepository<Photo> photoRepository, IRepository2<PhotoAlbum> photoAlbumRepository)
         {
             this._emailSender = emailSender;
+            this._photoRepository = photoRepository;
+            this._photoAlbumRepository = photoAlbumRepository;
         }
         [HttpGet, Route("commitments")]
         public List<CommitmentProxy> GetCommitment()
@@ -69,6 +76,49 @@ namespace Swu.Portal.Web.Api
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+        }
+        [HttpGet, Route("albums")]
+        public List<PhotoAlbumProxy> GetAlbums()
+        {
+            if (ModelState.IsValid)
+            {
+                return new List<PhotoAlbumProxy> {
+                    new PhotoAlbumProxy {
+                        Id = "7f9d2da3-d894-460d-a337-7f8b3c069f29",
+                        Title = "ประมวณภาพการสอบคัดเลือก1",
+                        DisplayImage="7f9d2da3-d894-460d-a337-7f8b3c069f29/26a0536a-4ac2-477f-8dd5-65bd7cdfc144.jpg",
+                        UploadBy="Chansak kochasen",
+                        PublishedDate= DateTime.UtcNow
+                    },
+                    new PhotoAlbumProxy {
+                        Id = "66d77ba7-a6c6-43c7-b023-fe502ce3ddaa",
+                        Title = "Good Bye senior Party",
+                        DisplayImage="7f9d2da3-d894-460d-a337-7f8b3c069f29/2b4289fb-a94c-4aa4-a607-f949126aa46e.jpg",
+                        UploadBy="Chansak kochasen",
+                        PublishedDate= DateTime.UtcNow
+                    }
+                };
+            }
+            return null;
+        }
+
+        [HttpGet, Route("photo")]
+        public List<PhotoProxy> GetPhotosById(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var album = this._photoAlbumRepository.FindById(id);
+                List<PhotoProxy> photos = new List<PhotoProxy>();
+                if (album != null)
+                {
+                    foreach (var p in album.Photos)
+                    {
+                        photos.Add(new PhotoProxy(p, album.ApplicationUser));
+                    }
+                }
+                return photos;
+            }
+            return null;
         }
     }
 }

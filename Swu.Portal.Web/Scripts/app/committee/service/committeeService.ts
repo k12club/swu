@@ -1,6 +1,7 @@
 ﻿module Swu {
     export interface IcommitteeService {
         getCommittees(): ng.IPromise<ICommittee[]>;
+        getCommitteesEn(): ng.IPromise<ICommittee[]>;
     }
     @Module("app")
     @Factory({ name: "committeeService" })
@@ -11,6 +12,9 @@
         }
         getCommittees(): ng.IPromise<ICommittee[]> {
             return this.apiService.getData("committee/all");
+        }
+        getCommitteesEn(): ng.IPromise<ICommittee[]> {
+            return this.apiService.getData("committee/allEn");
         }
     }
 }

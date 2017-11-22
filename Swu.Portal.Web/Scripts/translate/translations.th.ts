@@ -37,8 +37,15 @@
             ourPeoples:"พวกเรา",
             teacher: "รายชื่ออาจารย์",
             contact: "ติดต่อเรา",
-            committee: "กรรมการ",
-            board: "เว็บบอร์ด"
+            committee_th: "ทำเนียบผู้บริหาร(ไทย)",
+            committee_en:"ทำเนียบผู้บริหาร(ต่างชาติ)",
+            board: "เว็บบอร์ด",
+            faq: "คำถามที่พบบ่อย",
+            alumni: "ทำเนียบรุ่นนักศึกษา",
+            qualification: "เกณฑ์การรับสมัคร",
+            studyplan: "แผนการเรียน",
+            assessment: "การประเมินผล",
+            quicklink:"ลิงค์"
         },
         home: {},
         course: {
@@ -88,6 +95,12 @@
         },
         committee: {
             title: "คณะกรรมการ",
+        },
+        album: {
+            title:"อัลบัมรูปภาพ"
+        },
+        alumni: {
+            title:""
         },
         research: {},
         teacher: {},

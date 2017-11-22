@@ -783,12 +783,14 @@
     <Content Include="Scripts\angular\ui-date.js" />
     <Content Include="Scripts\angular\underscore.js" />
     <Content Include="Scripts\app-bundles.js" />
+    <Content Include="Scripts\app\alumni\view\alumni.html" />
     <Content Include="Scripts\app\board\view\board-course.html" />
     <Content Include="Scripts\app\board\view\board-general.html" />
     <Content Include="Scripts\app\board\view\board-research.html" />
     <Content Include="Scripts\app\board\view\board.html" />
     <Content Include="Scripts\app\board\view\default.html" />
     <Content Include="Scripts\app\board\view\research.tmpl.html" />
+    <Content Include="Scripts\app\committee\view\committee-list-en.html" />
     <Content Include="Scripts\app\contact\view\contact.html" />
     <Content Include="Scripts\app\course\view\course_list.html" />
     <Content Include="Scripts\app\course\view\course_detail.html" />
@@ -796,8 +798,10 @@
     <Content Include="Scripts\app\course\view\photo.tmpl.html" />
     <Content Include="Scripts\app\course\view\quizeResult.tmpl.html" />
     <Content Include="Scripts\app\board\view\forum.tmpl.html" />
+    <Content Include="Scripts\app\faq\view\faq.html" />
     <Content Include="Scripts\app\forum\view\comment.tmpl.html" />
     <Content Include="Scripts\app\forum\view\forum_detail.html" />
+    <Content Include="Scripts\app\home\view\album.html" />
     <Content Include="Scripts\app\home\view\banner.html" />
     <Content Include="Scripts\app\home\view\campus-video.html" />
     <Content Include="Scripts\app\home\view\clients.html" />
@@ -814,6 +818,7 @@
     <Content Include="Scripts\app\home\view\testimonials.html" />
     <Content Include="Scripts\app\login\view\login.html" />
     <Content Include="Scripts\app\menu\view\nav.html" />
+    <Content Include="Scripts\app\photo\view\photo.html" />
     <Content Include="Scripts\app\settings\view\category.html" />
     <Content Include="Scripts\app\settings\view\category.tmpl.html" />
     <Content Include="Scripts\app\settings\view\courses.html" />
@@ -870,6 +875,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\forum\model\" />
+    <Folder Include="Scripts\app\photo\service\" />
     <Folder Include="Scripts\app\student\" />
     <Folder Include="Scripts\config\" />
     <Folder Include="Scripts\run\" />
@@ -932,6 +938,7 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\app\alumni\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\board\app_routing.ts" />
@@ -960,12 +967,14 @@
     <TypeScriptCompile Include="Scripts\app\course\controller\QuizeResultController.ts" />
     <TypeScriptCompile Include="Scripts\app\course\model\courseAllDetail.ts" />
     <TypeScriptCompile Include="Scripts\app\course\service\courseService.ts" />
+    <TypeScriptCompile Include="Scripts\app\faq\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\forum\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\forum\controller\CommentModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\forum\controller\ForumController.ts" />
     <TypeScriptCompile Include="Scripts\app\board\controller\ForumModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\forum\service\forumService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\AlbumController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\CommitmentController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\ExamRegistrationController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\FooterController.ts" />
@@ -979,6 +988,7 @@
     <TypeScriptCompile Include="Scripts\app\home\model\course-card.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\exam-clock.ts" />
     <TypeScriptCompile Include="Scripts\app\home\model\slider.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\service\albumService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\commitmentService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\eventService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\examRegistrationService.ts" />
@@ -987,6 +997,8 @@
     <TypeScriptCompile Include="Scripts\app\home\service\mainSliderService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\service\videoService.ts" />
     <TypeScriptCompile Include="Scripts\app\menu\controller\NavController.ts" />
+    <TypeScriptCompile Include="Scripts\app\photo\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\photo\controller\PhotoController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CategoryManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CategoryMangementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementModalController.ts" />

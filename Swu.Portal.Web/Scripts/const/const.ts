@@ -9,10 +9,15 @@ module Swu {
         }
         timeoutExpired = 30;
         defaultLang = "en";
+        web = {
+            protocal: "http",
+            ip: "localhost",
+            port: "2255",
+        };
         api = {
             protocal: "http",
             ip: "localhost",
-            port: "8081",
+            port: "2255",
             versionName: "V1",
         };
         exceptGotoTopStateList = [

@@ -28,6 +28,9 @@
     "Scripts/app/committee/app_routing.ts",
     "Scripts/app/board/app_routing.ts",
     "Scripts/app/forum/app_routing.ts",
+    "Scripts/app/faq/app_routing.ts",
+    "Scripts/app/alumni/app_routing.ts",
+    "Scripts/app/photo/app_routing.ts",
 
     "Scripts/app/menu/controller/NavController.ts",
     "Scripts/app/home/controller/HomeController.ts",
@@ -40,6 +43,7 @@
     "Scripts/app/home/controller/NewsController.ts",
     "Scripts/app/home/controller/FooterController.ts",
     "Scripts/app/home/controller/NewsDetailController.ts",
+    "Scripts/app/home/controller/AlbumController.ts",
 
     "Scripts/app/home/service/homeCourseService.ts",
     "Scripts/app/home/service/mainSliderService.ts",
@@ -51,6 +55,7 @@
     "Scripts/app/home/model/course-card.ts",
     "Scripts/app/home/model/slider.ts",
     "Scripts/app/home/model/exam-clock.ts",
+    "Scripts/app/home/service/albumService.ts",
 
     "Scripts/app/course/controller/CourseController.ts",
     "Scripts/app/course/controller/CourseListController.ts",
@@ -80,6 +85,8 @@
 
     "Scripts/app/contact/controller/ContactUsController.ts",
     "Scripts/app/contact/service/contractService.ts",
+
+    "Scripts/app/photo/controller/PhotoController.ts",
 
     "Scripts/app/settings/controller/MainSettingController.ts",
     "Scripts/app/settings/controller/ProfileController.ts",

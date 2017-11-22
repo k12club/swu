@@ -590,8 +590,8 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 
 /*=========== FIRST COURSE SECTION ==========*/
 .irs-courses-one {
-    padding-bottom: 120px;
-    padding-top: 110px;
+    padding-bottom: 80px;
+    padding-top: 80px;
 }
 
     .irs-courses-one::after {
@@ -714,8 +714,8 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 /*=========== EDUCATION COMMITMENT SECTION ==========*/
 .irs-commitment-one {
     background-color: #f3f3f3;
-    padding-bottom: 100px;
-    padding-top: 100px;
+    padding-bottom: 80px;
+    padding-top: 80px;
 }
 
 .irs-commitment-title {
@@ -917,8 +917,8 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 /* OUR EVENT SECTION STYLE */
 .irs-event {
     background-color: #f3f3f3;
-    padding-bottom: 130px;
-    padding-top: 150px;
+    padding-bottom: 80px;
+    padding-top: 80px;
 }
 
 .irs-event-grid {
@@ -965,7 +965,7 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 }
 
 .irs-evnticon {
-    background: #f8be50 none repeat scroll 0 0;
+    background: #457d5a none repeat scroll 0 0;
     border-radius: 50%;
     bottom: -3%;
     color: #fff;
@@ -1033,8 +1033,8 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
         }
 /* CAMPUS SECTION */
 .irs-campus {
-    padding-bottom: 120px;
-    padding-top: 120px;
+    padding-bottom: 80px;
+    padding-top: 80px;
 }
 
 .irs-mrgnt {
@@ -1134,8 +1134,8 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 /* PRICING TABLE */
 .irs-pricing {
     background-color: #313131;
-    padding-bottom: 120px;
-    padding-top: 120px;
+    padding-bottom: 100px;
+    padding-top: 100px;
 }
 
 .irs-color-white {
@@ -1257,8 +1257,8 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
     }
 /* BLOG SECTION STYLES */
 .irs-blog {
-    padding-bottom: 120px;
-    padding-top: 120px;
+    padding-bottom: 50px;
+    padding-top: 50px;
 }
 
 .irs-bp-thumb {
@@ -2626,10 +2626,11 @@ p.irs-fln-date {
 h3.irs-sbc-title,
 h3.irs-sblc-title,
 h3.irs-sbln-title {
-    background: #f8be50;
+    background: #457d5a;
     line-height: 60px;
     margin-top: 7px;
     margin-bottom: 30px;
+    color:#fff;
 }
 
 .irs-sbc-list li.active {
@@ -3105,8 +3106,8 @@ h3.irs-sbln-title {
         }
 
 .irs-table-deading {
-    background-color: #f8be50;
-    color: #313131;
+    background-color: #457d5a;
+    color: #fff;
     font-size: 18px;
 }
 
