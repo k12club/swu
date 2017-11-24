@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -25,5 +26,8 @@ namespace Swu.Portal.Data.Models
         public DateTime StartDate { get; set; }
         [Column(TypeName = "datetime2")]
         public DateTime EndDate { get; set; }
+        [DefaultValue(false)]
+        public bool IsActive { get; set; }
+
     }
 }

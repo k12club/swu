@@ -35,14 +35,15 @@
             this.$scope.render = (photos: IPhoto[]) => {
                 var html = "";
                 _.forEach(photos, (value, key) => {
-                    var elements = "<div class='col-md-4'>\
+                    var elements = "<div class='col-md-3'>\
                         <div class='resources-item' >\
                             <div class='resources-category-image' >\
                                 <a href='../../../../"+ value.imageUrl + "' title= '" + value.name + "' by='" + value.uploadBy + "'>\
                                     <img class='img-responsive' alt= '' src= '../../../../"+ value.imageUrl + "'></a>\
                             </div>\
                         <div class='resources-description' ><p>"+ value.displayPublishedDate + "</p>\
-                        <h4>"+ value.name + "</h4></div></div>\
+                        <b>"+ value.name + "</b>\
+                        </div></div>\
                     </div>";
                     html += elements;
                 });

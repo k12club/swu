@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,5 +18,7 @@ namespace Swu.Portal.Data.Models
         public string VideoUrl { get; set; }
         public string Title_EN { get; set; }
         public string Title_TH { get; set; }
+        [DefaultValue(false)]
+        public bool IsActive { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace Swu.Portal.Service
     public interface IPhotoAlbumService
     {
         void AddNewPhoto(string courseId, string albumId, string userId, Photo photo);
+        void AddNewAlbumAndPhoto(string courseId, string albumId, string title, string userId, Photo photo);
     }
     public class PhotoAlbumService : IPhotoAlbumService
     {
@@ -31,7 +32,7 @@ namespace Swu.Portal.Service
             var creator = this._userManager.FindById(userId);
             using (var context = new SwuDBContext())
             {
-                var existing = context.PhotoAlbums.Where(i => i.Id == albumId).Include(i=>i.Photos).FirstOrDefault();
+                var existing = context.PhotoAlbums.Where(i => i.Id == albumId).Include(i => i.Photos).FirstOrDefault();
                 if (existing == null)
                 {
                     context.Users.Attach(creator);
@@ -43,14 +44,59 @@ namespace Swu.Portal.Service
                             new Photo {
                                 Name = photo.Name,
                                 ImageUrl = photo.ImageUrl,
-                                PublishedDate = photo.PublishedDate}
+                                PublishedDate = photo.PublishedDate
+                            }
                         },
+                        CreatedDate = photo.PublishedDate,
                         ApplicationUser = creator
                     };
                     context.PhotoAlbums.Add(album);
                     context.SaveChanges();
                 }
-                else {
+                else
+                {
+                    context.Users.Attach(creator);
+                    existing.Photos.Add(
+                        new Photo
+                        {
+                            Name = photo.Name,
+                            ImageUrl = photo.ImageUrl,
+                            PublishedDate = photo.PublishedDate
+                        });
+                    context.SaveChanges();
+                }
+            }
+        }
+        public void AddNewAlbumAndPhoto(string courseId, string albumId, string title, string userId, Photo photo)
+        {
+
+            var creator = this._userManager.FindById(userId);
+            using (var context = new SwuDBContext())
+            {
+                var existing = context.PhotoAlbums.Where(i => i.Id == albumId).Include(i => i.Photos).FirstOrDefault();
+                if (existing == null)
+                {
+                    context.Users.Attach(creator);
+                    var album = new PhotoAlbum
+                    {
+                        Id = albumId,
+                        Name = title,
+                        CourseId = courseId,
+                        Photos = new List<Photo> {
+                            new Photo {
+                                Name = photo.Name,
+                                ImageUrl = photo.ImageUrl,
+                                PublishedDate = photo.PublishedDate
+                            }
+                        },
+                        CreatedDate = photo.PublishedDate,
+                        ApplicationUser = creator
+                    };
+                    context.PhotoAlbums.Add(album);
+                    context.SaveChanges();
+                }
+                else
+                {
                     context.Users.Attach(creator);
                     existing.Photos.Add(
                         new Photo

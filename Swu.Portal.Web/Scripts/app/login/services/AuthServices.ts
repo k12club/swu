@@ -40,6 +40,7 @@
         }
         logout() {
             this.$cookies.remove("currentUser");
+            location.reload();
         };
         isLoggedIn(): boolean {
             return this.getCurrentUser() != null;

@@ -20,6 +20,8 @@ namespace Swu.Portal.Web.Api.Proxy
         public string Title_EN { get; set; }
         [JsonProperty(PropertyName = "title_th")]
         public string Title_TH { get; set; }
+        [JsonProperty(PropertyName = "isActive")]
+        public bool IsActive { get; set; }
         public VideoProxy()
         {
 
@@ -31,6 +33,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.VideoUrl = video.VideoUrl;
             this.Title_EN = video.Title_EN;
             this.Title_TH = video.Title_TH;
+            this.IsActive = video.IsActive;
         }
     }
 }

@@ -17,5 +17,7 @@
 
         imageUrl: string;
         startDate: Date;
+
+        isActive?: boolean;
     }
 }

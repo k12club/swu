@@ -30,6 +30,8 @@ namespace Swu.Portal.Web.Api.Proxy
         public DateTime StartDate { get; set; }
         [JsonProperty(PropertyName = "endDate")]
         public DateTime EndDate { get; set; }
+        [JsonProperty(PropertyName = "isActive")]
+        public bool IsActive { get; set; }
         public EventProxy()
         {
 
@@ -46,6 +48,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.ImageUrl = e.ImageUrl;
             this.StartDate = e.StartDate;
             this.EndDate = e.EndDate;
+            this.IsActive = e.IsActive;
         }
     }
 }

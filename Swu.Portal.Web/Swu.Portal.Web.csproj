@@ -802,6 +802,7 @@
     <Content Include="Scripts\app\forum\view\comment.tmpl.html" />
     <Content Include="Scripts\app\forum\view\forum_detail.html" />
     <Content Include="Scripts\app\home\view\album.html" />
+    <Content Include="Scripts\app\home\view\album.tmpl.html" />
     <Content Include="Scripts\app\home\view\banner.html" />
     <Content Include="Scripts\app\home\view\campus-video.html" />
     <Content Include="Scripts\app\home\view\clients.html" />
@@ -975,6 +976,7 @@
     <TypeScriptCompile Include="Scripts\app\forum\service\forumService.ts" />
     <TypeScriptCompile Include="Scripts\app\home\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\AlbumController.ts" />
+    <TypeScriptCompile Include="Scripts\app\home\controller\AlbumModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\CommitmentController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\ExamRegistrationController.ts" />
     <TypeScriptCompile Include="Scripts\app\home\controller\FooterController.ts" />

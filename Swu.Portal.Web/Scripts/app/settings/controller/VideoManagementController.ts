@@ -80,7 +80,6 @@
             this.$scope.getData = (): void => {
                 this.videoManagementService.getAll().then((response) => {
                     this.$scope.data = response;
-                    console.log(response);
                     this.$scope.totalPageNumber = this.$scope.getTotalPageNumber();
                     this.$scope.paginate<IVideo>(this.$scope.data, this.$scope.display, this.$scope.pageSize, this.$scope.currentPage);
                 }, (error) => { });

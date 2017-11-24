@@ -44,6 +44,7 @@ namespace Swu.Portal.Service
                 existing.Place_EN = e.Place_EN;
                 existing.Place_TH = e.Place_TH;
                 existing.StartDate = e.StartDate;
+                existing.IsActive = e.IsActive;
                 context.Entry(existing).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }

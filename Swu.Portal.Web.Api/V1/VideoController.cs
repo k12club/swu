@@ -34,6 +34,14 @@ namespace Swu.Portal.Web.Api
         {
             return this._videoRepository.List.Select(i => new VideoProxy(i)).ToList();
         }
+        [HttpGet, Route("allActive")]
+        public List<VideoProxy> GetAllActive()
+        {
+            return this._videoRepository
+                .List
+                .Where(i=>i.IsActive)
+                .Select(i => new VideoProxy(i)).ToList();
+        }
         [HttpGet, Route("getById")]
         public VideoProxy GetById(int id)
         {
@@ -88,7 +96,8 @@ namespace Swu.Portal.Web.Api
                     Title_EN = video.Title_EN,
                     Title_TH = video.Title_TH,
                     ImageUrl = path,
-                    VideoUrl = video.VideoUrl
+                    VideoUrl = video.VideoUrl,
+                    IsActive = video.IsActive
                 };
                 if (video.Id == 0)
                 {
@@ -99,6 +108,7 @@ namespace Swu.Portal.Web.Api
                     var existing = this._videoRepository.FindById(video.Id);
                     existing.Title_EN = video.Title_EN;
                     existing.Title_TH = video.Title_TH;
+                    existing.IsActive = video.IsActive;
                     if (hasFile)
                     {
                         existing.ImageUrl = path;

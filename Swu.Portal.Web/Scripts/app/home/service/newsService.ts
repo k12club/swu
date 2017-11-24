@@ -1,6 +1,7 @@
 ﻿module Swu {
     export interface InewsService {
         getNews(): ng.IPromise<INews[]>;
+        getActiveNews(): ng.IPromise<INews[]>;
     }
     @Module("app")
     @Factory({ name: "newsService" })
@@ -11,6 +12,9 @@
         }
         getNews(): ng.IPromise<INews[]> {
             return this.apiService.getData<INews[]>("news/all");
+        }
+        getActiveNews(): ng.IPromise<INews[]> {
+            return this.apiService.getData<INews[]>("news/allActive");
         }
     }
 }

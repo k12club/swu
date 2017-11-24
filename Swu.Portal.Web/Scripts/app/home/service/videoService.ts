@@ -1,6 +1,7 @@
 ﻿module Swu {
     export interface IvideoService {
         getVideos(): ng.IPromise<IVideo[]>;
+        getActiveVideos(): ng.IPromise<IVideo[]>;
     }
     @Module("app")
     @Factory({ name: "videoService" })
@@ -11,6 +12,9 @@
         }
         getVideos(): ng.IPromise<IVideo[]> {
             return this.apiService.getData<IVideo[]>("video/all");
+        }
+        getActiveVideos(): ng.IPromise<IVideo[]> {
+            return this.apiService.getData<IVideo[]>("video/allActive");
         }
     }
 }

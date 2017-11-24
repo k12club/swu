@@ -14,17 +14,6 @@ module Swu {
 
             var def = this.$q.defer();
             var url = this.constant.api.versionName + "/" + url;
-            //this.$http.get(url)
-            //    .then((successResponse) => {
-            //        if (successResponse)
-            //            def.resolve(successResponse.data);
-            //        else
-            //            def.reject('server error');
-
-            //    }, (errorRes) => {
-
-            //        def.reject(errorRes.statusText);
-            //    });
             this.$http({
                 url: url,
                 method: 'GET',

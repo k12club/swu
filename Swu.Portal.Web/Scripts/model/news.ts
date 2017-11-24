@@ -12,5 +12,7 @@
 
         title_th?: string;
         description_th?: string;
+
+        isActive?: boolean;
     }
 }

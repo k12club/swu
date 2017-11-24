@@ -15,6 +15,8 @@ namespace Swu.Portal.Core.Dependencies
         string AdminEmail { get; }
         string AdminPassword { get; }
 
+        string dummyCourse { get; }
+
     }
     public class ConfigurationRepository : IConfigurationRepository
     {
@@ -49,6 +51,14 @@ namespace Swu.Portal.Core.Dependencies
             get
             {
                 return ConfigurationManager.AppSettings["AdminPassword"];
+            }
+        }
+
+        public string dummyCourse
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["dummyCourse"];
             }
         }
     }

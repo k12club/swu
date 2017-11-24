@@ -2,6 +2,7 @@
     export interface IalbumService {
         getAlbums(): ng.IPromise<IPhotoAlbum[]>;
         getPhotos(id: string): ng.IPromise<IPhoto[]>;
+        createNewAlbum(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "albumService" })
@@ -15,6 +16,9 @@
         }
         getPhotos(id: string): ng.IPromise<IPhoto[]> {
             return this.apiService.getData<IPhoto[]>("shared/photo?id=" + id);
+        }
+        createNewAlbum(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postWithFormData<HttpStatusCode>(models, "shared/createNewAlbum");
         }
     }
 }

@@ -945,6 +945,7 @@ var Swu;
             var modelSetter = model.assign;
             element.bind('change', function () {
                 scope.$apply(function () {
+                    console.log(element[0].files);
                     modelSetter(scope, element[0].files[0]);
                 });
             });
@@ -955,6 +956,27 @@ var Swu;
             Swu.Directive({ name: "fileModel" })
         ], fileModel);
         return fileModel;
+    }());
+    var filesModel = (function () {
+        function filesModel($parse) {
+            this.$parse = $parse;
+            this.restric = "A";
+        }
+        filesModel.prototype.link = function (scope, element, attrs) {
+            var model = this.$parse(attrs.filesModel);
+            var modelSetter = model.assign;
+            element.bind('change', function () {
+                scope.$apply(function () {
+                    modelSetter(scope, element[0].files);
+                });
+            });
+        };
+        filesModel.$inject = ["$parse"];
+        filesModel = __decorate([
+            Swu.Module("app"),
+            Swu.Directive({ name: "filesModel" })
+        ], filesModel);
+        return filesModel;
     }());
 })(Swu || (Swu = {}));
 var Swu;
@@ -984,6 +1006,7 @@ var Swu;
                 _this.$scope.userProfile = _this.auth.getCurrentUser();
                 _this.$scope.showModal = false;
                 _this.$scope.swapLanguage(_this.$rootScope.lang);
+                location.reload();
             };
             this.loginFail = function () {
                 _this.init();
@@ -1085,6 +1108,7 @@ var Swu;
         };
         LoginServices.prototype.logout = function () {
             this.$cookies.remove("currentUser");
+            location.reload();
         };
         ;
         LoginServices.prototype.isLoggedIn = function () {
@@ -2047,7 +2071,7 @@ var Swu;
                 }
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
-                eventService.getEvents().then(function (response) {
+                eventService.getActiveEvents().then(function (response) {
                     _.forEach(response, function (value, key) {
                         $scope.events.push({
                             title_en: value.title_en,
@@ -2149,7 +2173,7 @@ var Swu;
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
                 if ($scope.videos != undefined || $scope.videos != null) {
-                    videoService.getVideos().then(function (response) {
+                    videoService.getActiveVideos().then(function (response) {
                         $scope.videos = response;
                         $scope.swapLanguage($rootScope.lang);
                         $scope.render($scope.videos);
@@ -2290,7 +2314,7 @@ var Swu;
                 }
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
-                newsService.getNews().then(function (response) {
+                newsService.getActiveNews().then(function (response) {
                     _.forEach(response, function (value, key) {
                         $scope.news.push({
                             id: value.id,
@@ -2447,7 +2471,7 @@ var Swu;
 var Swu;
 (function (Swu) {
     var AlbumController = (function () {
-        function AlbumController($scope, $rootScope, config, $state, auth, IalbumService) {
+        function AlbumController($scope, $rootScope, config, $state, auth, IalbumService, $uibModal) {
             var _this = this;
             this.$scope = $scope;
             this.$rootScope = $rootScope;
@@ -2455,6 +2479,7 @@ var Swu;
             this.$state = $state;
             this.auth = auth;
             this.IalbumService = IalbumService;
+            this.$uibModal = $uibModal;
             this.$scope.swapLanguage = function (lang) {
                 switch (lang) {
                     case "en": {
@@ -2489,7 +2514,7 @@ var Swu;
                         <div class="col-md-3">\
                             <div class="resources-item" ng-click="goToPhotoAlbum(\'' + value.id + '\'\,\'' + value.title + '\')">\
                                 <div class="resources-category-image" >\
-                                    <img class="img-responsive" alt= "" src= "../../../../FileUpload/photo/' + value.displayImage + '" >\
+                                    <img class="img-responsive" alt= "" src= "../../../../' + value.displayImage + '" >\
                                 </div>\
                                 <div class="resources-description" >\
                                     <p>' + moment(value.publishedDate).format('LLLL') + '</p>\
@@ -2505,20 +2530,49 @@ var Swu;
                         </div>';
                     html += elements;
                 });
-                html += '\
+                if (_this.auth.isLoggedIn()) {
+                    html += '\
                 <div class="col-md-3">\
-                    <div class="resources-item" style= "margin-top:30px !important" >\
+                    <div class="resources-item" style= "margin-top:30px !important" ng-click="createNewAlbum()">\
                         <div class="resources-description" >\
                             <p>&nbsp; </p>\
                             <h2> CREATE NEW ALBUM </h2>\
                             <div class="irs-evnticon" > <span class="flaticon-cross" > </span></div></div>\
                         </div>\
                 </div>';
+                }
                 _this.$scope.html = html;
             };
             this.$scope.registerScript = function () {
             };
             this.$scope.getAlbums = function () {
+                _this.$scope.albums = [];
+                IalbumService.getAlbums().then(function (response) {
+                    _.forEach(response, function (value, key) {
+                        $scope.albums.push({
+                            id: value.id,
+                            title: value.title,
+                            displayImage: value.displayImage,
+                            uploadBy: value.uploadBy,
+                            publishedDate: value.publishedDate,
+                            photos: []
+                        });
+                    });
+                    $scope.swapLanguage($rootScope.lang);
+                    $scope.render($scope.albums);
+                    $scope.registerScript();
+                });
+            };
+            this.$scope.createNewAlbum = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/home/view/album.tmpl.html',
+                    controller: Swu.AlbumModalController,
+                    resolve: {},
+                    backdrop: false
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getAlbums();
+                });
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
                 if ($scope.albums != undefined || $scope.albums != null) {
@@ -2544,7 +2598,7 @@ var Swu;
         AlbumController.prototype.init = function () {
             this.$scope.albums = [];
         };
-        AlbumController.$inject = ["$scope", "$rootScope", "AppConstant", "$state", "AuthServices", "albumService"];
+        AlbumController.$inject = ["$scope", "$rootScope", "AppConstant", "$state", "AuthServices", "albumService", "$uibModal"];
         AlbumController = __decorate([
             Swu.Module("app"),
             Swu.Controller({ name: "AlbumController" })
@@ -2552,6 +2606,60 @@ var Swu;
         return AlbumController;
     }());
     Swu.AlbumController = AlbumController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var AlbumModalController = (function () {
+        function AlbumModalController($scope, $state, toastr, $modalInstance, albumService, auth) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.albumService = albumService;
+            this.auth = auth;
+            this.$scope.validate = function () {
+                $('#form-album').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form-album').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.submit = function () {
+                if (_this.$scope.isValid()) {
+                    var models = [];
+                    models.push({ name: "title", value: _this.$scope.album.title });
+                    models.push({ name: "userId", value: _this.$scope.currentUser.id });
+                    _.forEach($scope.files, function (value, key) {
+                        models.push({ name: "file", value: value });
+                    });
+                    _this.albumService.createNewAlbum(models).then(function (response) {
+                        _this.$modalInstance.close(response);
+                    }, function (error) { });
+                }
+            };
+            this.$scope.getCurrentUser = function () {
+                if (_this.$scope.currentUser == null) {
+                    _this.$scope.currentUser = _this.auth.getCurrentUser();
+                }
+                return _this.$scope.currentUser;
+            };
+            this.init();
+        }
+        AlbumModalController.prototype.init = function () {
+            this.$scope.getCurrentUser();
+        };
+        ;
+        AlbumModalController.$inject = ["$scope", "$state", "toastr", "$modalInstance", "albumService", "AuthServices"];
+        AlbumModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "AlbumModalController" })
+        ], AlbumModalController);
+        return AlbumModalController;
+    }());
+    Swu.AlbumModalController = AlbumModalController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -2638,6 +2746,9 @@ var Swu;
         eventService.prototype.getEvents = function () {
             return this.apiService.getData("event/all");
         };
+        eventService.prototype.getActiveEvents = function () {
+            return this.apiService.getData("event/allActive");
+        };
         eventService.$inject = ['apiService', 'AppConstant'];
         eventService = __decorate([
             Swu.Module("app"),
@@ -2656,6 +2767,9 @@ var Swu;
         videoService.prototype.getVideos = function () {
             return this.apiService.getData("video/all");
         };
+        videoService.prototype.getActiveVideos = function () {
+            return this.apiService.getData("video/allActive");
+        };
         videoService.$inject = ['apiService', 'AppConstant'];
         videoService = __decorate([
             Swu.Module("app"),
@@ -2673,6 +2787,9 @@ var Swu;
         }
         newsService.prototype.getNews = function () {
             return this.apiService.getData("news/all");
+        };
+        newsService.prototype.getActiveNews = function () {
+            return this.apiService.getData("news/allActive");
         };
         newsService.$inject = ['apiService', 'AppConstant'];
         newsService = __decorate([
@@ -2694,6 +2811,9 @@ var Swu;
         };
         albumService.prototype.getPhotos = function (id) {
             return this.apiService.getData("shared/photo?id=" + id);
+        };
+        albumService.prototype.createNewAlbum = function (models) {
+            return this.apiService.postWithFormData(models, "shared/createNewAlbum");
         };
         albumService.$inject = ['apiService', 'AppConstant'];
         albumService = __decorate([
@@ -4339,14 +4459,15 @@ var Swu;
             this.$scope.render = function (photos) {
                 var html = "";
                 _.forEach(photos, function (value, key) {
-                    var elements = "<div class='col-md-4'>\
+                    var elements = "<div class='col-md-3'>\
                         <div class='resources-item' >\
                             <div class='resources-category-image' >\
                                 <a href='../../../../" + value.imageUrl + "' title= '" + value.name + "' by='" + value.uploadBy + "'>\
                                     <img class='img-responsive' alt= '' src= '../../../../" + value.imageUrl + "'></a>\
                             </div>\
                         <div class='resources-description' ><p>" + value.displayPublishedDate + "</p>\
-                        <h4>" + value.name + "</h4></div></div>\
+                        <b>" + value.name + "</b>\
+                        </div></div>\
                     </div>";
                     html += elements;
                 });
@@ -5436,7 +5557,6 @@ var Swu;
             this.$scope.getData = function () {
                 _this.videoManagementService.getAll().then(function (response) {
                     _this.$scope.data = response;
-                    console.log(response);
                     _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
                     _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
                 }, function (error) { });
@@ -5604,7 +5724,6 @@ var Swu;
             this.$scope.getData = function () {
                 _this.newsManagementService.getAll().then(function (response) {
                     _this.$scope.data = response;
-                    console.log(response);
                     _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
                     _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
                 }, function (error) { });

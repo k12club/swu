@@ -34,6 +34,14 @@ namespace Swu.Portal.Web.Api
         {
             return this._newsRepository.List.Select(i => new NewsProxy(i)).ToList();
         }
+        [HttpGet, Route("allActive")]
+        public List<NewsProxy> GetAllActive()
+        {
+            return this._newsRepository
+                .List
+                .Where(i => i.IsActive)
+                .Select(i => new NewsProxy(i)).ToList();
+        }
         [HttpGet, Route("getById")]
         public NewsProxy GetById(int id)
         {
@@ -90,7 +98,8 @@ namespace Swu.Portal.Web.Api
                     ImageUrl = path,
                     StartDate = news.StartDate,
                     FullDescription_EN = news.Description_EN,
-                    FullDescription_TH = news.Description_TH
+                    FullDescription_TH = news.Description_TH,
+                    IsActive = news.IsActive
                 };
                 if (news.Id == 0)
                 {
@@ -103,6 +112,7 @@ namespace Swu.Portal.Web.Api
                     existing.Title_TH = news.Title_TH;
                     existing.FullDescription_EN = news.Description_EN;
                     existing.FullDescription_TH = news.Description_TH;
+                    existing.IsActive = news.IsActive;
                     if (hasFile)
                     {
                         existing.ImageUrl = path;

@@ -36,3 +36,5 @@ D:\Git\swu\Swu.Portal.Service\bin\Debug\Microsoft.AspNet.Identity.EntityFramewor
 D:\Git\swu\Swu.Portal.Service\obj\Debug\Swu.Portal.Service.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Service\obj\Debug\Swu.Portal.Service.dll
 D:\Git\swu\Swu.Portal.Service\obj\Debug\Swu.Portal.Service.pdb
+D:\Git\swu\Swu.Portal.Service\bin\Debug\Swu.Portal.Core.dll
+D:\Git\swu\Swu.Portal.Service\bin\Debug\Swu.Portal.Core.pdb

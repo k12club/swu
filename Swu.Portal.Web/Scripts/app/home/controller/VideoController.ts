@@ -54,7 +54,7 @@
             }
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
                 if ($scope.videos != undefined || $scope.videos != null) {
-                    videoService.getVideos().then((response) => {
+                    videoService.getActiveVideos().then((response) => {
                         $scope.videos = response;
                         $scope.swapLanguage($rootScope.lang);
                         $scope.render($scope.videos);

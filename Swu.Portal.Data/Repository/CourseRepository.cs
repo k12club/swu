@@ -6,14 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Swu.Portal.Core.Dependencies;
 
 namespace Swu.Portal.Data.Repository
 {
     public class CourseRepository : IRepository2<Course>
     {
         private SwuDBContext context;
-        public CourseRepository()
+        private readonly IConfigurationRepository _configRepository;
+        public CourseRepository(IConfigurationRepository configRepository)
         {
+            this._configRepository = configRepository;
             this.context = new SwuDBContext(); //DbContextFactory.Instance.GetOrCreateContext();
         }
         public IEnumerable<Course> List
@@ -30,6 +33,7 @@ namespace Swu.Portal.Data.Repository
                             .Include(i => i.Teachers)
                             .Include(i => i.PhotoAlbums)
                             .Include(i => i.ApplicationUser)
+                        .Where(i=>i.Id != _configRepository.dummyCourse)
                         .ToList();
                 }
                 return data;

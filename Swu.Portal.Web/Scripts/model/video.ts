@@ -6,6 +6,7 @@
         title?: string;
         title_en?: string;
         title_th?: string;
+        isActive?: boolean;
     }
     export interface IVideoAlbum {
         id: number;

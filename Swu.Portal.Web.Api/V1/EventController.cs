@@ -38,6 +38,14 @@ namespace Swu.Portal.Web.Api
         {
             return this._eventRepository.List.Select(i => new EventProxy(i)).ToList();
         }
+        [HttpGet, Route("allActive")]
+        public List<EventProxy> GetAllActive()
+        {
+            return 
+                this._eventRepository.List
+                .Where(i => i.IsActive)
+                .Select(i => new EventProxy(i)).ToList();
+        }
         [HttpGet, Route("allEvents")]
         public List<EventProxy> GetAllEvents()
         {
@@ -63,7 +71,8 @@ namespace Swu.Portal.Web.Api
                         Description_TH = model.Description_TH,
                         Place_EN = model.Place_EN,
                         Place_TH = model.Place_TH,
-                        StartDate = model.StartDate
+                        StartDate = model.StartDate,
+                        IsActive = model.IsActive
                     });
                 }
                 else
@@ -78,7 +87,8 @@ namespace Swu.Portal.Web.Api
                         Description_TH = model.Description_TH,
                         Place_EN = model.Place_EN,
                         Place_TH = model.Place_TH,
-                        StartDate = model.StartDate
+                        StartDate = model.StartDate,
+                        IsActive = model.IsActive
                     });
                 }
                 return Request.CreateResponse(HttpStatusCode.OK);

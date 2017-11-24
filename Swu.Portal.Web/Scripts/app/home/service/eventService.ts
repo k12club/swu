@@ -1,6 +1,7 @@
 ﻿module Swu {
     export interface IeventService {
         getEvents(): ng.IPromise<IEvent[]>;
+        getActiveEvents(): ng.IPromise<IEvent[]>;
     }
     @Module("app")
     @Factory({ name: "eventService" })
@@ -11,6 +12,9 @@
         }
         getEvents(): ng.IPromise<IEvent[]> {
             return this.apiService.getData<IEvent[]>("event/all");
+        }
+        getActiveEvents(): ng.IPromise<IEvent[]> {
+            return this.apiService.getData<IEvent[]>("event/allActive");
         }
     }
 }

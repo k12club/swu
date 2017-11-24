@@ -11,12 +11,13 @@
                 <button type="button" class="btn btn-link pull-left" ng-click="addNew()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
             </div>
             <div class="row">
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
-                        <tr class="irs-table-deading style2">
+                        <tr class="style2">
                             <th>Title</th>
                             <th>Place</th>
                             <th>Start Date</th>
+                            <th>Active</th>
                         </tr>
                     </thead>
                     <tbody class="irs-table-body style2">
@@ -25,6 +26,7 @@
                             <th><a href="" ng-click="edit(e.id)">{{e.title_th}}</a></th>
                             <th>{{e.place_en}}</th>
                             <td>{{e.startDate|date:'dd/MM/yyyy'}}</td>
+                            <td><input type="checkbox" ng-checked="e.isActive" disabled /> </td>
                         </tr>
                     </tbody>
                 </table>

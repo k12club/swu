@@ -76,6 +76,7 @@
             this.$scope.userProfile = this.auth.getCurrentUser();
             this.$scope.showModal = false;
             this.$scope.swapLanguage(this.$rootScope.lang);
+            location.reload();
         };
         loginFail = () => {
             this.init();
