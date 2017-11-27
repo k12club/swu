@@ -23,6 +23,7 @@ namespace Swu.Portal.Web.Api
     public class SharedController : ApiController
     {
         private const string UPLOAD_DIR = "FileUpload/photo/";
+        private const string UPLOAD_BANNER_DIR = "FileUpload/banner/";
 
         private readonly IEmailSender _emailSender;
         private readonly IRepository<Photo> _photoRepository;
@@ -30,14 +31,17 @@ namespace Swu.Portal.Web.Api
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IConfigurationRepository _configRepository;
         private readonly IPhotoAlbumService _photoAlbumService;
-
+        private readonly IRepository<Banner> _bannerRepository;
+        private readonly IBannerService _bannerService;
         public SharedController(
             IEmailSender emailSender,
             IRepository<Photo> photoRepository,
             IRepository2<PhotoAlbum> photoAlbumRepository,
             IDateTimeRepository datetimeRepository,
             IConfigurationRepository configRepository,
-            IPhotoAlbumService photoAlbumService)
+            IPhotoAlbumService photoAlbumService,
+            IRepository<Banner> bannerRepository,
+            IBannerService bannerService)
         {
             this._emailSender = emailSender;
             this._photoRepository = photoRepository;
@@ -45,6 +49,8 @@ namespace Swu.Portal.Web.Api
             this._datetimeRepository = datetimeRepository;
             this._configRepository = configRepository;
             this._photoAlbumService = photoAlbumService;
+            this._bannerRepository = bannerRepository;
+            this._bannerService = bannerService;
         }
         [HttpGet, Route("commitments")]
         public List<CommitmentProxy> GetCommitment()
@@ -111,7 +117,7 @@ namespace Swu.Portal.Web.Api
                         PublishedDate = i.CreatedDate
                     })
                     .OrderByDescending(o => o.PublishedDate)
-                    .Take(3)
+                    .Take(4)
                     .ToList();
                 return albums;
             }
@@ -201,6 +207,139 @@ namespace Swu.Portal.Web.Api
                 {
                     this._photoAlbumService.AddNewAlbumAndPhoto(this._configRepository.dummyCourse, albumId, title, userId, p.ToEntity());
                 }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpGet, Route("getActiveSlider")]
+        public List<SliderProxy> GetActiveSlider()
+        {
+            var sliders = this._bannerRepository.List
+                .Where(i => i.IsActive)
+                .Select(i => new SliderProxy
+                {
+                    Id = i.Id,
+                    Title_EN = i.Title_EN,
+                    Title_TH = i.Title_TH,
+                    Description_EN = i.Description_EN,
+                    Description_TH = i.Description_TH,
+                    ImageUrl = i.ImageUrl,
+                    IsActive = i.IsActive
+                })
+                .ToList();
+            return sliders;
+        }
+        [HttpGet, Route("getSlider")]
+        public List<SliderProxy> GetSlider()
+        {
+            var sliders = this._bannerRepository.List
+                .Select(i => new SliderProxy
+                {
+                    Id = i.Id,
+                    Title_EN = i.Title_EN,
+                    Title_TH = i.Title_TH,
+                    Description_EN = i.Description_EN,
+                    Description_TH = i.Description_TH,
+                    ImageUrl = i.ImageUrl,
+                    IsActive = i.IsActive
+                })
+                .ToList();
+            return sliders;
+        }
+        [HttpGet, Route("getById")]
+        public SliderProxy GetById(int id)
+        {
+            return new SliderProxy(this._bannerRepository.FindById(id));
+        }
+        [HttpPost, Route("addNewOrUpdate")]
+        public async Task<HttpResponseMessage> PostFormData()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            var hasFile = false;
+            var GuID = Guid.NewGuid().ToString();
+            string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_BANNER_DIR);
+            var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                SliderProxy slider = new SliderProxy();
+                foreach (var key in provider.FormData)
+                {
+                    if (key.Equals("slider"))
+                    {
+                        var json = provider.FormData[key.ToString()];
+                        slider = JsonConvert.DeserializeObject<SliderProxy>(json);
+                    }
+                }
+                string path = string.Empty;
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    hasFile = true;
+                    string fileName = file.Headers.ContentDisposition.FileName;
+                    if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                    {
+                        fileName = fileName.Trim('"');
+                    }
+                    if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                    {
+                        fileName = Path.GetFileName(fileName);
+                    }
+                    path = string.Format("{0}{1}", UPLOAD_BANNER_DIR, fileName);
+                    var moveTo = Path.Combine(root, fileName);
+                    if (File.Exists(moveTo))
+                    {
+                        File.Delete(moveTo);
+                    }
+                    File.Move(file.LocalFileName, moveTo);
+                }
+                var v = new Banner
+                {
+                    Title_EN = slider.Title_EN,
+                    Title_TH = slider.Title_TH,
+                    ImageUrl = path,
+                    Description_EN = slider.Description_EN,
+                    Description_TH = slider.Description_TH,
+                    IsActive = slider.IsActive
+                };
+                if (slider.Id == 0)
+                {
+                    this._bannerRepository.Add(v);
+                }
+                else
+                {
+                    var existing = this._bannerRepository.FindById(slider.Id);
+                    existing.Title_EN = slider.Title_EN;
+                    existing.Title_TH = slider.Title_TH;
+                    existing.Description_EN = slider.Description_EN;
+                    existing.Description_TH = slider.Description_TH;
+                    existing.IsActive = slider.IsActive;
+                    if (hasFile)
+                    {
+                        existing.ImageUrl = path;
+                    }
+                    this._bannerRepository.Update(existing);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("deleteById")]
+        public HttpResponseMessage DeleteById(int id)
+        {
+            try
+            {
+                var b = this._bannerRepository.FindById(id);
+                this._bannerService.Delete(b);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)

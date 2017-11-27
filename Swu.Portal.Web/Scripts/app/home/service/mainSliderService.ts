@@ -10,7 +10,7 @@
 
         }
         getSliders(): ng.IPromise<ISlider[]> {
-            return this.apiService.getData<ISlider[]>("course/getSlider");
+            return this.apiService.getData<ISlider[]>("shared/getActiveSlider");
         }
     }
 }

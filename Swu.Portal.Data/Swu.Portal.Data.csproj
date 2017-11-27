@@ -66,6 +66,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MigrationsContextFactory.cs" />
     <Compile Include="Models\AttachFile.cs" />
+    <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Course.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationUserRepository.cs" />
+    <Compile Include="Repository\BannerRepository.cs" />
     <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\CurriculumRepository.cs" />
     <Compile Include="Repository\EventRepository.cs" />

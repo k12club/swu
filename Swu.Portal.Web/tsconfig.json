@@ -105,6 +105,8 @@
     "Scripts/app/settings/controller/CategoryManagementController.ts",
     "Scripts/app/settings/controller/CategoryMangementModalController.ts",
     "Scripts/app/settings/controller/PersonalFileModalController.ts",
+    "Scripts/app/settings/controller/BannerManagementController.ts",
+    "Scripts/app/settings/controller/BannerManagementModalController.ts",
 
     "Scripts/app/settings/service/userService.ts",
     "Scripts/app/settings/service/profileService.ts",
@@ -113,6 +115,7 @@
     "Scripts/app/settings/service/videoManagementService.ts",
     "Scripts/app/settings/service/newsManagementService.ts",
     "Scripts/app/settings/service/categoryManagementService.ts",
+    "Scripts/app/settings/service/bannerManagementService.ts",
 
     "Scripts/app/forum/controller/ForumController.ts",
     "Scripts/app/forum/controller/CommentModalController.ts",

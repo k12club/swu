@@ -829,7 +829,9 @@
     <Content Include="Scripts\app\research\research_list.html" />
     <Content Include="Scripts\app\settings\view\event.tmpl.html" />
     <Content Include="Scripts\app\settings\view\events.html" />
+    <Content Include="Scripts\app\settings\view\banner.html" />
     <Content Include="Scripts\app\settings\view\news.html" />
+    <Content Include="Scripts\app\settings\view\banner.tmpl.html" />
     <Content Include="Scripts\app\settings\view\news.tmpl.html" />
     <Content Include="Scripts\app\settings\view\profile.tmpl.html" />
     <Content Include="Scripts\app\settings\view\user.tmpl.html" />
@@ -874,6 +876,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FileUpload\banner\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\forum\model\" />
     <Folder Include="Scripts\app\photo\service\" />
@@ -1007,7 +1010,9 @@
     <TypeScriptCompile Include="Scripts\app\settings\controller\EventManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\EventManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\MainSettingController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\BannerManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\NewsManagementController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\BannerManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\NewsManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\PersonalFileModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\ProfileModalController.ts" />
@@ -1018,6 +1023,7 @@
     <TypeScriptCompile Include="Scripts\app\settings\controller\VideoManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\categoryManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\eventManagementService.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\service\bannerManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\newsManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\profileService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\courseManagementService.ts" />

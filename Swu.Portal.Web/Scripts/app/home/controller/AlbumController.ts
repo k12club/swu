@@ -9,6 +9,7 @@
         goToPhotoAlbum(id: string, title: string): void;
         copyUrlToClipboard(id: string, title: string): void;
         createNewAlbum(): void;
+        isLoggedIn(): boolean;
     }
 
     @Module("app")
@@ -46,6 +47,9 @@
             };
             this.$scope.render = (albums: IPhotoAlbum[]) => {
                 var html = "";
+                if (this.auth.isLoggedIn()) {
+                    albums.splice(3, 1);
+                }
                 _.forEach(albums, (value, key) => {
                     var elements = '\
                         <div class="col-md-3">\
@@ -58,7 +62,7 @@
                                     <h5>'+ value.title + '</h5>\
                                 </div>\
                             </div>\
-                            <div class="input-group">\
+                            <div class="input-group" ng-show="isLoggedIn()">\
                                     <input type= "text" id="'+ value.id + '" class="form-control" value= "' + config.web.protocal + "://" + config.web.ip + ":" + config.web.port + $state.href('photo', { "id": value.id, "title": value.title }) + '" placeholder= "Photo gallery url" id= "copy-input" >\
                                     <span class="input-group-btn" >\
                                         <button class="btn btn-default" type= "button" id= "copy-button" data- toggle="tooltip" data- placement="bottom" title= "" data- original - title="Copy to Clipboard" ng-click="copyUrlToClipboard(\''+ value.id + '\'\,\'' + value.title + '\')">Copy</button>\
@@ -79,6 +83,9 @@
                 </div>';
                 }
                 this.$scope.html = html;
+            }
+            this.$scope.isLoggedIn = () => {
+                return this.auth.isLoggedIn();
             }
             this.$scope.registerScript = () => {
 

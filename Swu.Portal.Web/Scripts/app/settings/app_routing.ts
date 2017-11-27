@@ -77,6 +77,16 @@
                             controller: 'CategoryManagementController as vm'
                         },
                     }
+                })
+                .state("settings.banners", {
+                    parent: "settings",
+                    url: "/banners",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/banner.html',
+                            controller: 'BannerManagementController as vm'
+                        },
+                    }
                 });
         }
     }

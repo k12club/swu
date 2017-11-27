@@ -40,6 +40,8 @@ namespace Swu.Portal.Web.Api
         private readonly ICurriculumService _curriculumService;
         private readonly IStudentCourseService _studentCourseService;
         private readonly IStudentScoreService _studentScoreService;
+        private readonly IRepository<Banner> _bannerRepository;
+        private readonly IBannerService _bannerService;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
@@ -54,7 +56,9 @@ namespace Swu.Portal.Web.Api
             IRepository<Photo> photoRepository,
             ICurriculumService curriculumService,
             IStudentCourseService studentCourseService,
-            IStudentScoreService studentScoreService)
+            IStudentScoreService studentScoreService,
+            IBannerService bannerService,
+            IRepository<Banner> bannerRepository)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
@@ -70,6 +74,8 @@ namespace Swu.Portal.Web.Api
             this._curriculumService = curriculumService;
             this._studentCourseService = studentCourseService;
             this._studentScoreService = studentScoreService;
+            this._bannerService = bannerService;
+            this._bannerRepository = bannerRepository;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -178,7 +184,8 @@ namespace Swu.Portal.Web.Api
         {
             var cards = new List<CourseCardProxy>();
             var studentCourses = this._studentCourseService.FindByStudentId(id);
-            foreach (var sc in studentCourses) {
+            foreach (var sc in studentCourses)
+            {
                 var courses = this._courseRepository.FindById(sc.Course.Id);
                 cards.Add(new CourseCardProxy(courses));
             }
@@ -213,44 +220,6 @@ namespace Swu.Portal.Web.Api
             //    courseBriefDetail.Add(new CourseBriefDetailProxy(c));
             //}
             return courses.Select(c => new CourseBriefDetailProxy(c)).ToList();
-        }
-        [HttpGet, Route("getSlider")]
-        public List<SliderProxy> GetSlider()
-        {
-            return new List<SliderProxy> {
-                new SliderProxy {
-                    Id=1,
-                    Title_EN=@"Receive a world-class <br>
-education in the heart of <br>
-the west.",
-                    Title_TH=@"Receive a world-class <br>
-education in the heart of <br>
-the west.",
-                    Description_EN="Top rated for combining academic quality and outdoor reacreation.",
-                    Description_TH="Top rated for combining academic quality and outdoor reacreation.",
-                    ImageUrl="Content/images/home/h1.jpg"
-                },
-                new SliderProxy {
-                    Id=1,
-                    Title_EN=@"Want to experience how life is <br>
-on our campus?",
-                    Title_TH=@"Want to experience how life is <br>
-on our campus?",
-                    Description_EN="Learning Resources Centre, a student social space.",
-                    Description_TH="Learning Resources Centre, a student social space.",
-                    ImageUrl="Content/images/home/h2.jpg"
-                },
-                new SliderProxy {
-                    Id=1,
-                    Title_EN=@" Make a bold decision today <br>
-and start a new fresh tomorrow. ",
-                    Title_TH=@" Make a bold decision today <br>
-and start a new fresh tomorrow. ",
-                    Description_EN="Top rated for combining academic quality and outdoor reacreation.",
-                    Description_TH="Top rated for combining academic quality and outdoor reacreation.",
-                    ImageUrl="Content/images/home/h3.jpg"
-                }
-            };
         }
         [HttpPost, Route("SaveAsync")]
         public async Task<HttpResponseMessage> PostFormData()

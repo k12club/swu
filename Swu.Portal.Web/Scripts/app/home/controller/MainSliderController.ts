@@ -50,7 +50,6 @@
                 if ($('.irs-main-slider').length) {
                     var $owl = $('.irs-main-slider');
                     $owl.owlCarousel({
-                        loop: true,
                         margin: 0,
                         dots: false,
                         nav: false,

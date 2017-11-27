@@ -792,7 +792,8 @@ var Swu;
                 "settings.events",
                 "settings.videos",
                 "settings.news",
-                "settings.categories"
+                "settings.categories",
+                "settings.banners"
             ];
             this.authorizeStateList = [
                 {
@@ -821,6 +822,10 @@ var Swu;
                 },
                 {
                     name: "settings.categories",
+                    roles: ["Admin", "Officer"]
+                },
+                {
+                    name: "settings.banners",
                     roles: ["Admin", "Officer"]
                 }
             ];
@@ -1369,6 +1374,16 @@ var Swu;
                         controller: 'CategoryManagementController as vm'
                     }
                 }
+            })
+                .state("settings.banners", {
+                parent: "settings",
+                url: "/banners",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/banner.html',
+                        controller: 'BannerManagementController as vm'
+                    }
+                }
             });
         }
         StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
@@ -1720,7 +1735,6 @@ var Swu;
                 if ($('.irs-main-slider').length) {
                     var $owl = $('.irs-main-slider');
                     $owl.owlCarousel({
-                        loop: true,
                         margin: 0,
                         dots: false,
                         nav: false,
@@ -2509,6 +2523,9 @@ var Swu;
             };
             this.$scope.render = function (albums) {
                 var html = "";
+                if (_this.auth.isLoggedIn()) {
+                    albums.splice(3, 1);
+                }
                 _.forEach(albums, function (value, key) {
                     var elements = '\
                         <div class="col-md-3">\
@@ -2521,7 +2538,7 @@ var Swu;
                                     <h5>' + value.title + '</h5>\
                                 </div>\
                             </div>\
-                            <div class="input-group">\
+                            <div class="input-group" ng-show="isLoggedIn()">\
                                     <input type= "text" id="' + value.id + '" class="form-control" value= "' + config.web.protocal + "://" + config.web.ip + ":" + config.web.port + $state.href('photo', { "id": value.id, "title": value.title }) + '" placeholder= "Photo gallery url" id= "copy-input" >\
                                     <span class="input-group-btn" >\
                                         <button class="btn btn-default" type= "button" id= "copy-button" data- toggle="tooltip" data- placement="bottom" title= "" data- original - title="Copy to Clipboard" ng-click="copyUrlToClipboard(\'' + value.id + '\'\,\'' + value.title + '\')">Copy</button>\
@@ -2542,6 +2559,9 @@ var Swu;
                 </div>';
                 }
                 _this.$scope.html = html;
+            };
+            this.$scope.isLoggedIn = function () {
+                return _this.auth.isLoggedIn();
             };
             this.$scope.registerScript = function () {
             };
@@ -2690,7 +2710,7 @@ var Swu;
             this.constant = constant;
         }
         homeCourseService.prototype.getSliders = function () {
-            return this.apiService.getData("course/getSlider");
+            return this.apiService.getData("shared/getActiveSlider");
         };
         homeCourseService.$inject = ['apiService', 'AppConstant'];
         homeCourseService = __decorate([
@@ -4525,6 +4545,7 @@ var Swu;
             this.$scope.menus.push({ stateName: "settings.events", name: "Events", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.videos", name: "Videos", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.news", name: "News", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.banners", name: "Banners", icon: "flaticon-arrows-3" });
             this.$scope.displayMenus = _.filter(this.$scope.menus, function (menu, index) {
                 var currentUserRole = _this.auth.getCurrentUser().selectedRoleName;
                 var permission = _.filter(_this.AppConstant.authorizeStateList, function (item, index) {
@@ -6234,6 +6255,172 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var BannerManagementController = (function () {
+        function BannerManagementController($scope, $state, bannerManagementService, $uibModal) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.bannerManagementService = bannerManagementService;
+            this.$uibModal = $uibModal;
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.data.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.display = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/banner.tmpl.html',
+                    controller: Swu.BannerManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }, size: "lg",
+                    backdrop: false
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/banner.tmpl.html',
+                    controller: Swu.BannerManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }, size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.getData = function () {
+                _this.bannerManagementService.getAll().then(function (response) {
+                    _this.$scope.data = response;
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+                }, function (error) { });
+            };
+            this.init();
+        }
+        BannerManagementController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.getData();
+        };
+        ;
+        BannerManagementController.$inject = ["$scope", "$state", "bannerManagementService", "$uibModal"];
+        BannerManagementController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "BannerManagementController" })
+        ], BannerManagementController);
+        return BannerManagementController;
+    }());
+    Swu.BannerManagementController = BannerManagementController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var BannerManagementModalController = (function () {
+        function BannerManagementModalController($scope, $state, bannerManagementService, toastr, $modalInstance, auth, id, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.bannerManagementService = bannerManagementService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.auth = auth;
+            this.id = id;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                _this.bannerManagementService.getById(id).then(function (response) {
+                    _this.$scope.data = response;
+                }, function (error) { });
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.auth.isLoggedIn()) {
+                    if (_this.$scope.isValid()) {
+                        var models = [];
+                        models.push({ name: "file", value: _this.$scope.file });
+                        models.push({ name: "slider", value: _this.$scope.data });
+                        _this.bannerManagementService.addNewOrUpdate(models).then(function (response) {
+                            _this.$modalInstance.close();
+                            _this.toastr.success("Success");
+                        }, function (error) { });
+                    }
+                }
+                else {
+                    _this.toastr.error("Time out expired");
+                    _this.$state.go("app", { reload: true });
+                }
+            };
+            this.$scope.delete = function (id) {
+                _this.bannerManagementService.deleteById(id).then(function (response) {
+                    _this.$modalInstance.close();
+                    _this.toastr.success("Success");
+                }, function (error) { });
+            };
+            this.init();
+        }
+        BannerManagementModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Banner";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Banner";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        BannerManagementModalController.$inject = ["$scope", "$state", "bannerManagementService", "toastr", "$modalInstance", "AuthServices", "id", "mode"];
+        BannerManagementModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "BannerManagementModalController" })
+        ], BannerManagementModalController);
+        return BannerManagementModalController;
+    }());
+    Swu.BannerManagementModalController = BannerManagementModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var userService = (function () {
         function userService(apiService, constant) {
             this.apiService = apiService;
@@ -6452,6 +6639,33 @@ var Swu;
             Swu.Factory({ name: "categoryManagementService" })
         ], categoryManagementService);
         return categoryManagementService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var bannerManagementService = (function () {
+        function bannerManagementService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        bannerManagementService.prototype.addNewOrUpdate = function (models) {
+            return this.apiService.postWithFormData(models, "shared/addNewOrUpdate");
+        };
+        bannerManagementService.prototype.getAll = function () {
+            return this.apiService.getData("shared/getSlider");
+        };
+        bannerManagementService.prototype.getById = function (id) {
+            return this.apiService.getData("shared/getById?id=" + id);
+        };
+        bannerManagementService.prototype.deleteById = function (id) {
+            return this.apiService.getData("shared/deleteById?id=" + id);
+        };
+        bannerManagementService.$inject = ['apiService', 'AppConstant'];
+        bannerManagementService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "bannerManagementService" })
+        ], bannerManagementService);
+        return bannerManagementService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

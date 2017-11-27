@@ -30,7 +30,8 @@ module Swu {
             "settings.events",
             "settings.videos",
             "settings.news",
-            "settings.categories"
+            "settings.categories",
+            "settings.banners"
         ];
         authorizeStateList = [
             {
@@ -60,8 +61,11 @@ module Swu {
             {
                 name: "settings.categories",
                 roles: ["Admin", "Officer"]
+            },
+            {
+                name: "settings.banners",
+                roles: ["Admin", "Officer"]
             }
-            
         ];
     }
 }
