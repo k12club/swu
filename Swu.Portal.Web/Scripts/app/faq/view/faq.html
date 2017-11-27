@@ -1,4 +1,83 @@
-﻿<!-- Breadcrumbs Styles -->
+﻿<style>
+    /*Accordion*/
+    .accordion-option {
+        width: 100%;
+        float: left;
+        clear: both;
+        margin: 15px 0;
+    }
+
+        .accordion-option .title {
+            font-size: 20px;
+            font-weight: bold;
+            float: left;
+            padding: 0;
+            margin: 0;
+        }
+
+        .accordion-option .toggle-accordion {
+            float: right;
+            font-size: 16px;
+            color: #6a6c6f;
+        }
+
+            .accordion-option .toggle-accordion:before {
+                content: "Expand All";
+            }
+
+            .accordion-option .toggle-accordion.active:before {
+                content: "Collapse All";
+            }
+
+    .panel-default.expend > .panel-heading {
+        color: #333;
+        background-color: #fff;
+        border-color: #e4e5e7;
+        padding: 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        .panel-default.expend > .panel-heading span {
+            display: block;
+            padding: 10px 15px;
+        }
+
+            .panel-default.expend > .panel-heading span:after {
+                content: "";
+                position: relative;
+                top: 1px;
+                display: inline-block;
+                font-family: 'Glyphicons Halflings';
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                float: right;
+                transition: transform .25s linear;
+                -webkit-transition: -webkit-transform .25s linear;
+            }
+
+            .panel-default.expend > .panel-heading span[aria-expanded="true"] {
+                background-color: #eee;
+            }
+
+                .panel-default.expend > .panel-heading span[aria-expanded="true"]:after {
+                    content: "\2212";
+                    -webkit-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                }
+
+            .panel-default.expend > .panel-heading span[aria-expanded="false"]:after {
+                content: "\002b";
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+</style>
+<!-- Breadcrumbs Styles -->
 <section class="irs-ip-breadcrumbs irs-bc-teacher">
     <div class="container">
         <div class="row">
@@ -27,204 +106,631 @@
 <section class="irs-ip-details irs-padb-svnty">
     <div class="container">
         <div class="row clearfix">
-            <div class="col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 text-center clearfix">
-                <div class="irs-ip-faq-ttl">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Most important frequently asked questions from students.</p>
-                </div>
-            </div>
             <div class="row irs-all-course-bb">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="irs-faq-title-one">
-                        <h3>Undergraduate</h3>
+                        <h3>Frequently Asked Questions</h3>
                     </div>
-                    <div class="irs-ip-faq-content-one">
-                        <div class="irs-faq-content">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                How do I contact the University?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
-                                        </div>
-                                    </div>
+                    <div class="accordion-option">
+                        <a href="javascript:void(0)" class="toggle-accordion active" accordion-id="#accordion"></a>
+                        <div class="clearfix"></div>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h1">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c1" aria-expanded="true" aria-controls="c1">
+                                            ต้องสมัครสอบ IELTS แบบไหน ?
+                                        </span>
+                                    </h4>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingTwo">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                What does the University's motto "Dominus Illuminatio Mea" mean?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingThree">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                What is a DPhil?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headignFour">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                What are the term dates for this/next academic year?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headignFour">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headignFive">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                When was the University of Edu Hub founded?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headignFive">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
+                                <div id="c1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h1">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ตั้งแต่วันที่ 6 เมษายน 2558 ประเทศอังกฤษกำหนดให้ผู้ที่จะไปศึกษาต่อตั้งแต่ระดับปริญญาตรีขึ้นไปสอบ IELTS แบบ Academic แบบใหม่ หรือ IELTS UKVI เท่านั้น ค่าสมัครสอบ 9860 บาท</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="irs-faq-title-two">
-                        <h3>Postgraduate</h3>
-                    </div>
-                    <div class="irs-ip-faq-content-two">
-                        <div class="irs-faq-content">
-                            <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingSix">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                How can I apply for a postgraduate course?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h2">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c2" aria-expanded="true" aria-controls="c2">
+                                            เอกสารประกอบการสมัคร เช่น ผลคะแนน IELTS, IGCSE และ Transcript ต้องใช้ฉบับจริงหรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h2">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">เอกสาร ผลคะแนน IELTS UKVI  ต้องใช้ฉบับจริงในการยื่นสมัคร เนื่องจากต้องส่งเอกสารดังกล่าวให้มหาวิทยาลัยนอตติงแฮมหากผ่านการคัดเลือก  แต่หากไม่ผ่านการคัดเลือก สามารถขอรับคืนได้ตามช่วงกำหนดเวลาที่แจ้งไว้ในใบประกาศรับสมัคร </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingSeven">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                When do I apply for a postgraduate course?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h3">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c3" aria-expanded="true" aria-controls="c3">
+                                            หากมีใบเทียบวุฒิการศึกษาเทียบเท่าการศึกษาระดับพื้นฐานตามหลักสูตรขั้นพื้นฐานที่ออกโดยกระทรวงศึกษาธิการฉบับจริงมายื่นสมัครแล้ว จะต้องใช้ IGCSE ฉบับจริงหรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h3">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">หากมีใบเทียบวุฒิฯ ฉบับจริงแล้ว สามารถใช้สำเนา IGCSE ยื่นประกอบได้</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingEight">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                Are postgraduates generally more employable? What is the average starting salary of a postgraduate?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseEight" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEight">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h4">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c4" aria-expanded="true" aria-controls="c4">
+                                            ค่าเทอมเท่าไหร่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h4">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">สำหรับปีการศึกษา 2560 ชั้นเตรียมความพร้อม และชั้นคลินิกปี 4 - 6 ที่ มศว ปีการศึกษาละ 300,000 บาท ชั้นพรีคลินิก ปี 1 - 3 ที่มหาวิทยาลัยนอตติงแฮม ประมาณปีการศึกษาละ 21,120 ปอนด์ ในปีที่ 1 และ 2 และ 9,500 ปอนด์ ในปีที่ 3 และค่าใช้จ่ายส่วนตัวและที่พักที่มหาวิทยาลัยนอตติงแฮม อีกประมาณ 10,000 ปอนด์/ปี  (อัตรานี้อาจมีการเปลี่ยนแปลง)</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingNine">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                Where do I send my supporting documents?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h5">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c5" aria-expanded="true" aria-controls="c5">
+                                            รับนักเรียนต่างชาติไหม ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c5" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h5">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">รับผู้มีสัญชาติไทยเท่านั้น ไม่รับชาวต่างชาติ</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headignTen">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                What accommodation is offered to postgraduate students?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headignTen">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h6">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c6" aria-expanded="true" aria-controls="c6">
+                                            จำกัดอายุผู้เรียนไหม ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c6" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h6">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">รับต้องมีอายุอย่างน้อยครบ 17 ปีบริบูรณ์ ภายในวันที่ 31 สิงหาคม ของปีการศึกษาที่จะเดินทางไปเรียนที่ประเทศอังกฤษ</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headignEleven">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                                                <i class="flaticon-signs-1 icon-1"></i>
-                                                <i class="flaticon-signs-1 icon-2"></i>
-                                                What accommodation is offered to postgraduate students?
-                                            </a>
-                                        </h4>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h7">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c7" aria-expanded="true" aria-controls="c7">
+                                            ทำไมต้องกำหนดอายุขั้นต่ำ 17 ปี ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c7" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h7">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">เป็นข้อบังคับของการเรียนแพทย์ที่ประเทศอังกฤษ</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div id="collapseEleven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headignEleven">
-                                        <div class="panel-body">
-                                            <p>Examiners must be satisfied that the thesis represents a significant substantial piece of research, is conveyed in a lucid and scholarly manner and that candidate has a good general knowledge of the field of their thesis. </p>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h8">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c8" aria-expanded="true" aria-controls="c8">
+                                            เรียน ที่ไหนบ้าง กี่ปี ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c8" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h8">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ปีแรกจะเรียน Preparatory Course ที่ มศว ประสานมิตรตั้งแต่เดือนเมษายนถึงกันยายน และจะไปเรียนที่ University of Nottingham ประเทศอังกฤษเป็นเวลาสองปีครึ่ง ตั้งแต่เดือนกันยายนของปีการศึกษาแรกจนถึงเดือนกุมภาพันธ์ของปีการศึกษาที่สาม รับปริญญาวิทยาศาสตรการแพทย์ (B.MedSci. ) ของมหาวิทยาลัยนอตติงแฮม จากนั้นจะกลับมาประเทศไทยเพื่อเรียนที่ มศว องครักษ์จนจบการศึกษาปีที่หก รับปริญญาแพทยศาสตรบัณฑิต ( พบ.) ของมหาวิทยาลัยศรีนครินทรวิโรฒ</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h9">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c9" aria-expanded="true" aria-controls="c9">
+                                            ต้องใช้ทุนหรือไม่ ใช้ทุนกี่ปี ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c9" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h9">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ต้องใช้ทุนเหมือนนิสิตแพทย์ภาคปกติ ใช้ทุน 3 ปี </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h10">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c10" aria-expanded="true" aria-controls="c10">
+                                            ทำไมต้องใช้ทุน ทั้งที่เรียนปี 4 - 6 ร่วมกับนิสิตแพทย์ ภาคปกติ ที่ มศว แต่จ่ายค่าเทอมแพงกว่า ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c10" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h10">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">นิสิตที่คณะแพทยศาสตร์ มศว รับเพิ่มเข้ามาในหลักสูตร นี้ คณะฯ จะไม่ได้รับเงินช่วยเหลือในการผลิตแพทย์เพิ่มจากรัฐบาล ต่างจากนิสิตในหลักสูตรปกติที่รัฐบาลให้เงินอุดหนุนสำหรับผลิตแพทย์เพิ่ม และงบลงทุนอีกจำนวนหนึ่ง ดังนั้น มศว จึงจำเป็นต้องคิดค่าเล่าเรียนในอัตราที่สูงกว่าปกติ แต่ทั้งนี้ทั้งนั้นก็ยังน้อยกว่าที่คณะฯ ได้รับจากรัฐบาลมาก  ดังนั้นนิสิตจึงยังต้องใช้ทุนให้รัฐบาลเพราะตลอดการเรียนใช้ทรัพยากรการเรียนจากเงินอุดหนุนของรัฐบาลที่ให้มาสำหรับนิสิตภาคปกติ</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h11">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c11" aria-expanded="true" aria-controls="c11">
+                                            สอบคัดเลือกอย่างไร ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c11" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h11">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">หลักสูตรนี้รับนิสิตโดยวิธีการสอบตรงของ มศว เฉพาะสำหรับหลักสูตรนี้เท่านั้น  แยกจากการสอบคัดเลือก โดย กสพท.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h12">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c12" aria-expanded="true" aria-controls="c12">
+                                            ใช้เอกสารอะไรในการเข้าสมัครเรียน ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c12" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h12">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ดูรายละเอียดที่ http://admission.swu.ac.th</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h13">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c13" aria-expanded="true" aria-controls="c13">
+                                            ต้องใช้ภาษาไทยมากน้อยแค่ไหน ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c13" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h13">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">เนื่องจากจำเป็นต้องกลับมาเรียนกับภาคปกติจึงต้องมีความสามารถในการพูด อ่าน เขียนภาษาไทยได้แตกฉาน</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h14">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c14" aria-expanded="true" aria-controls="c14">
+                                            รับเข้าเรียนจำนวนทั้งหมดกี่คน ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c14" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h14">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">20 คน ต่อปี ในปีการศึกษา 2561</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h15">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c15" aria-expanded="true" aria-controls="c15">
+                                            รับตำแหน่งสำรองกี่ตำแหน่ง  ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c15" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h15">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ไม่แน่นอน </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h16">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c16" aria-expanded="true" aria-controls="c16">
+                                            เด็กที่มาจากโรงเรียนไทยหรือโรงเรียนอินเตอร์มากกว่ากัน ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c16" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h16">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">แล้วแต่ผู้สมัครที่มีคุณสมบัติครบถ้วนตามเกณฑ์ในแต่ละปีการศึกษา ไม่มีการแบ่งโควต้าสำหรับนักเรียนจากโรงเรียนไทยหรือโรงเรียนอินเตอร์</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h17">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c17" aria-expanded="true" aria-controls="c17">
+                                            รับจบปริญญาตรีหรือไม่ ต้องยื่นคะแนนมหาวิทยาลัยหรือมัธยม ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c17" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h17">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">รับ แต่จะต้องยื่นคะแนนตอนมัธยมปลายด้วย </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h18">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c18" aria-expanded="true" aria-controls="c18">
+                                            หากผู้สมัครจบปริญญาตรีทางด้านวิทยาศาสตร์แล้ว สมัครเข้าเรียนในหลักสูตร หากสอบเข้าได้จะเริ่มเรียนในชั้นปีใด ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c18" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h18">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">เข้าเรียนชั้นปี 1 ใหม่หมดทุกกรณี ไม่มีการรับ transfer ใดๆ</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h19">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c19" aria-expanded="true" aria-controls="c19">
+                                            ใช้คะแนนทดสอบภาษาอังกฤษด้วย SAT I หรือ TOEFL หรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c19" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h19">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">เป็นเงื่อนไขข้อบังคับจากมหาวิทยาลัยนอตติงแฮมที่ทำข้อตกลงไว้กับหลักสูตรว่า คะแนนภาษาอังกฤษจะใช้คะแนน IELTS UKVI เท่านั้น โดยคะแนนรวมไม่น้อยกว่า 7 และคะแนนในแต่ละทักษะ (ฟัง-พูด-อ่าน-เขียน) ต้องไม่น้อยกว่า 6.5</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h20">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c20" aria-expanded="true" aria-controls="c20">
+                                            มศว องครักษ์อยู่ที่ไหน ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c20" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h20">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">อำเภอองครักษ์ จังหวัดนครนายก</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h21">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c21" aria-expanded="true" aria-controls="c21">
+                                            เรียนชั้นคลินิกที่ไหน ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c21" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h21">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">โรงพยาบาลศูนย์การแพทย์สมเด็จพระเทพรัตนราชสุดาฯ สยามบรมราชกุมารีฯ อำเภอองครักษ์ จังหวัดนครนายก</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h22">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c22" aria-expanded="true" aria-controls="c22">
+                                            Nottingham อยู่ที่ไหน ที่เดียวกับ Notting Hill หรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c22" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h22">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">Nottingham เป็นเมืองที่อยู่ทางตะวันออกเฉียงเหนือของ London อยู่ในเขต East Midland ใช้เวลาเดินทางจาก London โดยรถบัสระยะเวลาเดินทางประมาณสามชั่วโมง แต่ Notting Hill ซึ่งเป็นเขตหนึ่งด้านตะวันตกของกรุง London</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h23">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c23" aria-expanded="true" aria-controls="c23">
+                                            มีทุนสนับสนุนค่าเล่าเรียนหรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c23" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h23">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">เคยมีสำหรับนิสิตรุ่นที่ 1 และ 2 แต่ตอนนี้ไม่มีแล้ว</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h24">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c24" aria-expanded="true" aria-controls="c24">
+                                            รับนักเรียนไทยที่จบจากโรงเรียนในต่างประเทศไหม ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c24" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h24">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">รับ แต่ต้องแสดงใบเทียบวุฒิการศึกษาที่รับรองว่าเทียบวุฒิการศึกษาเท่าการศึกษาขั้นพื้นฐานตามหลักสูตรของกระทรวงศึกษาธิการ ที่ออกโดยสำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ) ดูรายละเอียดใน http://www.obec.go.th </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h25">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c25" aria-expanded="true" aria-controls="c25">
+                                            หลักสูตรนี้เป็นหลักสูตร Inter หรือเปล่า ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c25" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h25">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">เป็นหลักสูตรโครงการร่วมฯ กับมหาวิทยาลัยนอตติงแฮม ประเทศอังกฤษ เปิดรับนิสิตมาตั้งแต่ปีการศึกษา 2546ไม่ใช่หลักสูตรแพทย์ Inter </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h26">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c26" aria-expanded="true" aria-controls="c26">
+                                            หลักสูตรนี้ได้รับการรับรองจากแพทยสภา และ สกอ. หรือยัง ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c26" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h26">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ได้รับการรับรองจากทั้งแพทยสภา และสกอ. แล้ว</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h27">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c27" aria-expanded="true" aria-controls="c27">
+                                            เป็นหลักสูตร Pre-med ใช่หรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c27" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h27">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ไม่ใช่ หลักสูตรนี้เป็นหลักสูตรแพทยศาสตรบัณฑิต (โครงการร่วมฯ) นิสิตที่จบหลักสูตร จะได้รับปริญญาแพทยศาสตรบัณฑิต (พบ.) ของ มศว  และนิสิตในหลักสูตรก็จะได้รับปริญญา B.Med.Sci จากมหาวิทยาลัยนอตติงแฮมด้วย</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h28">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c28" aria-expanded="true" aria-controls="c28">
+                                            ผู้สมัครต้องมีหลักฐานการทำกิจกรรมสาธารณกุศลหรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c28" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h28">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ไม่ใช่เงื่อนไขบังคับ แต่หากมีก็สามารถยื่นมาเป็นเอกสารประกอบการพิจารณาได้ แต่ไม่ใช่เงื่อนไขสำคัญในการพิจารณา</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h29">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c29" aria-expanded="true" aria-controls="c29">
+                                            เรียนที่นอตติงแฮมแล้วจะขอต่อแพทย์ที่นอตติงแฮม ไม่ต้องกลับมาเรียนที่ มศว ได้ไหม ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c29" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h29">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ไม่ได้ เงื่อนไขหลักคือนิสิตจะต้องกลับมาศึกษาต่อแพทย์ที่ มศว ไม่สามารถต่อแพทย์ที่นอตติงแฮมได้ หลักสูตรนี้ไม่ใช่ทางลัดที่จะเข้าเรียนต่อแพทย์ที่นอตติงแฮม</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h30">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c30" aria-expanded="true" aria-controls="c30">
+                                            เอกสารส่งล่าช้าหลังกำหนดหมดเขตรับสมัครได้หรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c30" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h30">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">กำหนดการรับสมัคร ปีการศึกษา 2561 ระหว่างวันที่ 2 ตุลาคม – 28 พฤษจิกายน 2560 จะนับวันที่ไปรษณีย์ประทับตราถึงวันที่ 28 พฤษจิกายน 2560 เท่านั้น </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default expend">
+                                <div class="panel-heading" role="tab" id="h31">
+                                    <h4 class="panel-title">
+                                        <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c31" aria-expanded="true" aria-controls="c31">
+                                            ควรส่งเอกสารการสมัครตั้งแต่เนิ่นๆ หรือไม่ ?
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="c31" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h31">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-14">
+                                                <div class="irs-cl-details">
+                                                    <p class="ng-binding">ควรยื่นใบสมัครพร้อมเอกสารการสมัครแต่เนิ่นๆ เพื่อเจ้าหน้าที่จะได้ทำการตรวจสอบในเบื้องต้น หากขาดเอกสารใดอาจโทรศัพท์ติดตามให้มายื่นเพิ่มเติม ทั้งนี้เพื่อประโยชน์ของตัวท่านเอง และควรระบุเบอร์โทรศัพท์ที่สามารถติดต่อได้โดยตรงและรวดเร็วในใบสมัครด้วย </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -233,28 +739,31 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="row">
-                <div class="col-lg-4 col-lg-offset-4">
-                    <div class="irs-contact-form-ip text-center">
-                        <h2>Didn’t find an answer yet?</h2>
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputText1" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputText2" placeholder="Subject">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="2" placeholder="Your Question"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-default irs-button-styledark">Get Your Answer</button>
-                        </form>
-                    </div>
-                </div>
-            </div>-->
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function () {
+        $(".toggle-accordion").on("click", function () {
+            var accordionId = $(this).attr("accordion-id"),
+              numPanelOpen = $(accordionId + ' .collapse.in').length;
+
+            $(this).toggleClass("active");
+
+            if (numPanelOpen == 0) {
+                openAllPanels(accordionId);
+            } else {
+                closeAllPanels(accordionId);
+            }
+        });
+        openAllPanels = function (aId) {
+            console.log("setAllPanelOpen");
+            $(aId + ' .panel-collapse:not(".in")').collapse('show');
+        }
+        closeAllPanels = function (aId) {
+            console.log("setAllPanelclose");
+            $(aId + ' .panel-collapse.in').collapse('hide');
+        }
+        $(".toggle-accordion").click();
+    });
+</script>
