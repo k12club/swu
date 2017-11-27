@@ -63,21 +63,21 @@ namespace Swu.Portal.Web.Api
                         Description_EN="To enhance the learning opportunity of medical programme from both national and international schools in Thailand",
                         Title_TH="Objective 1",
                         Description_TH="To enhance the learning opportunity of medical programme from both national and international schools in Thailand",
-                        IconCss="flaticon-clothes"
+                        IconCss="fa fa-university"
                     },
                     new CommitmentProxy {
                         Title_EN="Objective 2",
                         Description_EN="To produce the knowledgeable medical graduates who can use the medical sciences knowledge from the UK and apply it to clinical practice in Thailand",
                         Title_TH="Objective 2",
                         Description_TH="To produce the knowledgeable medical graduates who can use the medical sciences knowledge from the UK and apply it to clinical practice in Thailand",
-                        IconCss="flaticon-signs"
+                        IconCss="fa fa-user-md"
                     },
                     new CommitmentProxy {
                         Title_EN="Objective 3",
                         Description_EN="To produce medical graduates who can provide the efficient health care services to the society both in government and private sectors",
                         Title_TH="Objective 3",
                         Description_TH="To produce medical graduates who can provide the efficient health care services to the society both in government and private sectors",
-                        IconCss="flaticon-school"
+                        IconCss="fa fa-hospital-o"
                     }
                 };
             }
