@@ -87,6 +87,16 @@
                             controller: 'BannerManagementController as vm'
                         },
                     }
+                })
+                .state("settings.album", {
+                    parent: "settings",
+                    url: "/album",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/album.html',
+                            controller: 'AlbumManagementController as vm'
+                        },
+                    }
                 });
         }
     }

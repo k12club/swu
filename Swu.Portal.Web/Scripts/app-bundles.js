@@ -793,7 +793,8 @@ var Swu;
                 "settings.videos",
                 "settings.news",
                 "settings.categories",
-                "settings.banners"
+                "settings.banners",
+                "settings.album"
             ];
             this.authorizeStateList = [
                 {
@@ -826,6 +827,10 @@ var Swu;
                 },
                 {
                     name: "settings.banners",
+                    roles: ["Admin", "Officer"]
+                },
+                {
+                    name: "settings.album",
                     roles: ["Admin", "Officer"]
                 }
             ];
@@ -1382,6 +1387,16 @@ var Swu;
                     'subContent@settings': {
                         templateUrl: '/Scripts/app/settings/view/banner.html',
                         controller: 'BannerManagementController as vm'
+                    }
+                }
+            })
+                .state("settings.album", {
+                parent: "settings",
+                url: "/album",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/album.html',
+                        controller: 'AlbumManagementController as vm'
                     }
                 }
             });
@@ -4546,6 +4561,7 @@ var Swu;
             this.$scope.menus.push({ stateName: "settings.videos", name: "Videos", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.news", name: "News", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.banners", name: "Banners", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.album", name: "Albums", icon: "flaticon-arrows-3" });
             this.$scope.displayMenus = _.filter(this.$scope.menus, function (menu, index) {
                 var currentUserRole = _this.auth.getCurrentUser().selectedRoleName;
                 var permission = _.filter(_this.AppConstant.authorizeStateList, function (item, index) {
@@ -6421,6 +6437,164 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var AlbumManagementController = (function () {
+        function AlbumManagementController($scope, $state, config, albumManagementService, $uibModal) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.config = config;
+            this.albumManagementService = albumManagementService;
+            this.$uibModal = $uibModal;
+            this.$scope.getTotalPageNumber = function () {
+                return (_this.$scope.data.length) / _this.$scope.pageSize;
+            };
+            this.$scope.paginate = function (data, displayData, pageSize, currentPage) {
+                displayData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+                _this.$scope.display = displayData;
+            };
+            this.$scope.changePage = function (page) {
+                _this.$scope.currentPage = page;
+                _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+            };
+            this.$scope.next = function () {
+                var nextPage = _this.$scope.currentPage + 1;
+                if (nextPage < _this.$scope.getTotalPageNumber()) {
+                    _this.$scope.changePage(nextPage);
+                }
+            };
+            this.$scope.prev = function () {
+                var prevPage = _this.$scope.currentPage - 1;
+                if (prevPage >= 0) {
+                    _this.$scope.changePage(prevPage);
+                }
+            };
+            this.$scope.addNew = function () {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/album.tmpl.html',
+                    controller: Swu.AlbumManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return 0;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    }, size: "lg",
+                    backdrop: false
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.edit = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/settings/view/album.tmpl.html',
+                    controller: Swu.AlbumManagementModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.edit;
+                        }
+                    }, size: "lg"
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getData();
+                });
+            };
+            this.$scope.getData = function () {
+                _this.albumManagementService.getAll().then(function (response) {
+                    _this.$scope.data = response;
+                    _this.$scope.totalPageNumber = _this.$scope.getTotalPageNumber();
+                    _this.$scope.paginate(_this.$scope.data, _this.$scope.display, _this.$scope.pageSize, _this.$scope.currentPage);
+                }, function (error) { });
+            };
+            this.init();
+        }
+        AlbumManagementController.prototype.init = function () {
+            this.$scope.currentPage = 0;
+            this.$scope.pageSize = 5;
+            this.$scope.getData();
+        };
+        ;
+        AlbumManagementController.$inject = ["$scope", "$state", "AppConstant", "albumManagementService", "$uibModal"];
+        AlbumManagementController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "AlbumManagementController" })
+        ], AlbumManagementController);
+        return AlbumManagementController;
+    }());
+    Swu.AlbumManagementController = AlbumManagementController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var AlbumManagementModalController = (function () {
+        function AlbumManagementModalController($scope, $state, config, albumManagementService, toastr, $modalInstance, auth, id, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.config = config;
+            this.albumManagementService = albumManagementService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.auth = auth;
+            this.id = id;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+                _this.albumManagementService.getById(id).then(function (response) {
+                    _this.$scope.data = response;
+                    _this.$scope.data.link = config.web.protocal + "://" + config.web.ip + ":" + config.web.port + "/" + $state.href('photo', { "id": _this.$scope.data.id, "title": _this.$scope.data.title });
+                }, function (error) { });
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                _this.albumManagementService.updatePhotoAlbum(_this.$scope.data).then(function (response) {
+                    _this.$modalInstance.close();
+                    _this.toastr.success("Success");
+                }, function (error) { });
+            };
+            this.$scope.delete = function (id) {
+                _this.albumManagementService.deleteById(id).then(function (response) {
+                    _this.$modalInstance.close();
+                    _this.toastr.success("Success");
+                }, function (error) { });
+            };
+            this.init();
+        }
+        AlbumManagementModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New Album";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit Album";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        AlbumManagementModalController.$inject = ["$scope", "$state", "AppConstant", "albumManagementService", "toastr", "$modalInstance", "AuthServices", "id", "mode"];
+        AlbumManagementModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "AlbumManagementModalController" })
+        ], AlbumManagementModalController);
+        return AlbumManagementModalController;
+    }());
+    Swu.AlbumManagementModalController = AlbumManagementModalController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var userService = (function () {
         function userService(apiService, constant) {
             this.apiService = apiService;
@@ -6666,6 +6840,33 @@ var Swu;
             Swu.Factory({ name: "bannerManagementService" })
         ], bannerManagementService);
         return bannerManagementService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var albumManagementService = (function () {
+        function albumManagementService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        albumManagementService.prototype.getAll = function () {
+            return this.apiService.getData("shared/allAlbums");
+        };
+        albumManagementService.prototype.getById = function (id) {
+            return this.apiService.getData("shared/getAlbumById?id=" + id);
+        };
+        albumManagementService.prototype.deleteById = function (id) {
+            return this.apiService.getData("shared/deleteAlbumById?id=" + id);
+        };
+        albumManagementService.prototype.updatePhotoAlbum = function (model) {
+            return this.apiService.postData(model, "shared/updatePhotoAlbum");
+        };
+        albumManagementService.$inject = ['apiService', 'AppConstant'];
+        albumManagementService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "albumManagementService" })
+        ], albumManagementService);
+        return albumManagementService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

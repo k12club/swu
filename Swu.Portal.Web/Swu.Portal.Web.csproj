@@ -820,6 +820,8 @@
     <Content Include="Scripts\app\login\view\login.html" />
     <Content Include="Scripts\app\menu\view\nav.html" />
     <Content Include="Scripts\app\photo\view\photo.html" />
+    <Content Include="Scripts\app\settings\view\album.html" />
+    <Content Include="Scripts\app\settings\view\album.tmpl.html" />
     <Content Include="Scripts\app\settings\view\category.html" />
     <Content Include="Scripts\app\settings\view\category.tmpl.html" />
     <Content Include="Scripts\app\settings\view\courses.html" />
@@ -1004,6 +1006,8 @@
     <TypeScriptCompile Include="Scripts\app\menu\controller\NavController.ts" />
     <TypeScriptCompile Include="Scripts\app\photo\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\photo\controller\PhotoController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\AlbumManagementController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\AlbumManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CategoryManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CategoryMangementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementModalController.ts" />
@@ -1021,6 +1025,7 @@
     <TypeScriptCompile Include="Scripts\app\settings\controller\UsersController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\VideoManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\VideoManagementModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\service\albumManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\categoryManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\eventManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\bannerManagementService.ts" />

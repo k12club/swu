@@ -1,0 +1,33 @@
+﻿<div class="clearfix">
+    <div class="row">
+        <div class="irs-blog-post-title">
+            <h3>Banners Management</h3>
+        </div>
+    </div>
+    <div class="row">
+
+        <div role="tabpanel" class="tab-pane fade in active" id="list">
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="style2">
+                            <th>Title</th>
+                        </tr>
+                    </thead>
+                    <tbody class="irs-table-body style2">
+                        <tr ng-repeat="a in display">
+                            {{e.id}}
+                            <td><a href="" ng-click="edit(a.id)">{{a.title}}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="list-inline irs-ip-navigation clearfix">
+                    <li><span class="flaticon-arrows" ng-click="prev()"></span></li>
+                    <li ng-repeat="number in []|range:totalPageNumber" ng-click="changePage($index)"><a ng-class="{active:number == currentPage}">{{$index+1}}</a></li>
+                    <li><span class="flaticon-arrows-1" ng-click="next()"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

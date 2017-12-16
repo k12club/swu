@@ -14,5 +14,6 @@
         photos: IPhoto[];
         uploadBy?: string;
         publishedDate?: Date;
+        link?: string;
     }
 }

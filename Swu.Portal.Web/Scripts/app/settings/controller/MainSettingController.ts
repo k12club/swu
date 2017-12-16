@@ -29,6 +29,7 @@
             this.$scope.menus.push({ stateName: "settings.videos", name: "Videos", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.news", name: "News", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.banners", name: "Banners", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.album", name: "Albums", icon: "flaticon-arrows-3" });
             this.$scope.displayMenus = _.filter(this.$scope.menus, (menu: SettingMenu, index: number) => {
                 var currentUserRole = this.auth.getCurrentUser().selectedRoleName;
                 var permission = _.filter(this.AppConstant.authorizeStateList, (item: any, index: number) => {
