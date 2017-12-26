@@ -123,6 +123,7 @@
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
                 if ($scope.albums != undefined || $scope.albums != null) {
                     IalbumService.getAlbums().then((response) => {
+                        $scope.albums = [];
                         _.forEach(response, (value, key) => {
                             $scope.albums.push({
                                 id: value.id,

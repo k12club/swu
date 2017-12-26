@@ -37,6 +37,7 @@
                 var models: NamePairValue[] = [];
                 models.push({ name: "file", value: this.$scope.file });
                 models.push({ name: "userId", value: this.$scope.userId });
+                console.log(this.$scope.userId);
                 this.profileService.uploadPersonalFile(models).then((response) => {
                     this.$modalInstance.close();
                 }, (error) => { });

@@ -2612,6 +2612,7 @@ var Swu;
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
                 if ($scope.albums != undefined || $scope.albums != null) {
                     IalbumService.getAlbums().then(function (response) {
+                        $scope.albums = [];
                         _.forEach(response, function (value, key) {
                             $scope.albums.push({
                                 id: value.id,
@@ -6245,6 +6246,7 @@ var Swu;
                 var models = [];
                 models.push({ name: "file", value: _this.$scope.file });
                 models.push({ name: "userId", value: _this.$scope.userId });
+                console.log(_this.$scope.userId);
                 _this.profileService.uploadPersonalFile(models).then(function (response) {
                     _this.$modalInstance.close();
                 }, function (error) { });
