@@ -10,47 +10,47 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Service
 {
-    public interface IEventService
+    public interface INewsService
     {
-        void CreateNewEvent(Event e, string creatorId);
-        void UpdateEvent(Event e, string creatorId);
+        void CreateNewNews(News e, string creatorId);
+        void UpdateNews(News e, string creatorId);
     }
-    public class EventService : IEventService
+    public class NewsService : INewsService
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public EventService()
+        public NewsService()
         {
             this._userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SwuDBContext()));
         }
-        public void CreateNewEvent(Event e,string creatorId)
+        public void CreateNewNews(News n, string creatorId)
         {
             using (var context = new SwuDBContext())
             {
                 var creator = this._userManager.FindById(creatorId);
                 context.Users.Attach(creator);
-                e.ApplicationUser = creator;
-                context.Events.Add(e);
+                n.ApplicationUser = creator;
+                context.News.Add(n);
                 context.SaveChanges();
             }
         }
-        public void UpdateEvent(Event e,string creatorId)
+        public void UpdateNews(News n, string creatorId)
         {
             using (var context = new SwuDBContext())
             {
                 var creator = this._userManager.FindById(creatorId);
-                var existing = context.Events
-                    .Where(i => i.Id == e.Id)
+                var existing = context.News
+                    .Where(i => i.Id == n.Id)
                     .FirstOrDefault();
                 context.Users.Attach(creator);
                 existing.ApplicationUser = creator;
-                existing.Title_EN = e.Title_EN;
-                existing.Title_TH = e.Title_TH;
-                existing.Description_EN = e.Description_EN;
-                existing.Description_TH = e.Description_TH;
-                existing.Place_EN = e.Place_EN;
-                existing.Place_TH = e.Place_TH;
-                existing.StartDate = e.StartDate;
-                existing.IsActive = e.IsActive;
+                existing.Title_EN = n.Title_EN;
+                existing.Title_TH = n.Title_TH;
+                existing.ImageUrl = n.ImageUrl;
+                existing.StartDate = n.StartDate;
+                existing.FullDescription_EN = n.FullDescription_EN;
+                existing.FullDescription_TH = n.FullDescription_TH;
+                existing.StartDate = n.StartDate;
+                existing.IsActive = n.IsActive;
                 context.Entry(existing).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }

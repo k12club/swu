@@ -43,6 +43,7 @@
                 if (this.auth.isLoggedIn()) {
                     if (this.$scope.isValid()) {
                         this.$scope.event.startDate = new Date(this.$scope.displayStartDate);
+                        this.$scope.event.createdUserId = this.auth.getCurrentUser().id; //"296374fc-1533-46b4-99de-853cf9f474eb";
                         this.eventManagementService.addNewOrUpdate(this.$scope.event).then((response) => {
                             this.$modalInstance.close();
                             this.toastr.success("Success");

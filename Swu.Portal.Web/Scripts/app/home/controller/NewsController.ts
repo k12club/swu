@@ -34,10 +34,10 @@
                 var html = "";
                 _.forEach(news, (value, key) => {
                     var elements = "<div class='item'>\
-                        <div class='irs-blog-post' >\
+                        <div class='irs-blog-post' onclick='popup("+ value.id +")'>\
                             <div class='irs-bp-thumb' > <img class='img-responsive img-fluid' src= '../../../"+ value.imageUrl + "' alt= 'blog/1.jpg' > </div>\
                                 <div class='irs-bp-details' >\
-                                    <h4 class='irs-bp-title' onclick='popup("+ value.id +")'>"+ value.title + "</h3>\
+                                    <h4 class='irs-bp-title'>"+ value.title + "</h3>\
                                         <div class='irs-bp-meta' >\
                                             <ul class='list-inline irs-bp-meta-dttime' >\
                                                 <li><span class='flaticon-clock-1' > </span>"+ moment(value.startDate).format('DD/MM/YYYY h:mm:ss a') + "</li>\

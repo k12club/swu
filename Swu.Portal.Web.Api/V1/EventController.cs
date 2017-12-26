@@ -73,7 +73,7 @@ namespace Swu.Portal.Web.Api
                         Place_TH = model.Place_TH,
                         StartDate = model.StartDate,
                         IsActive = model.IsActive
-                    });
+                    },model.CreatedUserId);
                 }
                 else
                 {
@@ -89,7 +89,7 @@ namespace Swu.Portal.Web.Api
                         Place_TH = model.Place_TH,
                         StartDate = model.StartDate,
                         IsActive = model.IsActive
-                    });
+                    }, model.CreatedUserId);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK);
             }

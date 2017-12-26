@@ -43,6 +43,7 @@
                 if (this.auth.isLoggedIn()) {
                     if (this.$scope.isValid()) {
                         this.$scope.news.startDate = new Date(this.$scope.displayStartDate);
+                        this.$scope.news.createdUserId = this.auth.getCurrentUser().id;
                         var models: NamePairValue[] = [];
                         models.push({ name: "file", value: this.$scope.file });
                         models.push({ name: "news", value: this.$scope.news });

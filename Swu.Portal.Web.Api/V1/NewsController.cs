@@ -24,10 +24,12 @@ namespace Swu.Portal.Web.Api
         private const string UPLOAD_DIR = "FileUpload/news/";
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IRepository<News> _newsRepository;
-        public NewsController(IDateTimeRepository datetimeRepository, IRepository<News> newsRepository)
+        private readonly INewsService _newsService;
+        public NewsController(IDateTimeRepository datetimeRepository, IRepository<News> newsRepository, INewsService newsService)
         {
             this._datetimeRepository = datetimeRepository;
             this._newsRepository = newsRepository;
+            this._newsService = newsService;
         }
         [HttpGet, Route("all")]
         public List<NewsProxy> GetAll()
@@ -91,34 +93,37 @@ namespace Swu.Portal.Web.Api
                     }
                     File.Move(file.LocalFileName, moveTo);
                 }
-                var v = new News
-                {
-                    Title_EN = news.Title_EN,
-                    Title_TH = news.Title_TH,
-                    ImageUrl = path,
-                    StartDate = news.StartDate,
-                    FullDescription_EN = news.Description_EN,
-                    FullDescription_TH = news.Description_TH,
-                    IsActive = news.IsActive
-                };
                 if (news.Id == 0)
                 {
-                    this._newsRepository.Add(v);
+                    //this._newsRepository.Add(n);
+                    this._newsService.CreateNewNews(new News
+                    {
+                        Title_EN = news.Title_EN,
+                        Title_TH = news.Title_TH,
+                        ImageUrl = path,
+                        StartDate = news.StartDate,
+                        FullDescription_EN = news.Description_EN,
+                        FullDescription_TH = news.Description_TH,
+                        IsActive = news.IsActive
+                    }, news.CreatedUserId);
                 }
                 else
                 {
-                    var existing = this._newsRepository.FindById(news.Id);
-                    existing.Title_EN = news.Title_EN;
-                    existing.Title_TH = news.Title_TH;
-                    existing.FullDescription_EN = news.Description_EN;
-                    existing.FullDescription_TH = news.Description_TH;
-                    existing.IsActive = news.IsActive;
+                    var n = new News();
+                    n.Id = news.Id;
+                    n.Title_EN = news.Title_EN;
+                    n.Title_TH = news.Title_TH;
+                    n.FullDescription_EN = news.Description_EN;
+                    n.FullDescription_TH = news.Description_TH;
+                    n.IsActive = news.IsActive;
                     if (hasFile)
                     {
-                        existing.ImageUrl = path;
+                        n.ImageUrl = path;
                     }
-                    existing.StartDate = news.StartDate;
-                    this._newsRepository.Update(existing);
+                    n.StartDate = news.StartDate;
+                    //this._newsRepository.Update(existing);
+                    this._newsService.UpdateNews(n, news.CreatedUserId);
+
                 }
                 return Request.CreateResponse(HttpStatusCode.OK);
             }

@@ -19,5 +19,6 @@
         startDate: Date;
 
         isActive?: boolean;
+        createdUserId?: string;
     }
 }

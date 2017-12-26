@@ -55,6 +55,7 @@ namespace Swu.Portal.Web
             builder.RegisterType<EventService>().As<IEventService>().InstancePerRequest();
             builder.RegisterType<BannerService>().As<IBannerService>().InstancePerRequest();
             builder.RegisterType<BannerRepository>().As<IRepository<Banner>>().InstancePerRequest();
+            builder.RegisterType<NewsService>().As<INewsService>().InstancePerRequest();
 
             builder.RegisterType<ReferenceUserService>().As<IReferenceUserService>().InstancePerRequest();
             //builder.RegisterType<ReferenceUserRepository>().As<IRepository<ReferenceUser>>().InstancePerRequest();

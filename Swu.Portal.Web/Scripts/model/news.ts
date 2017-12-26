@@ -14,5 +14,6 @@
         description_th?: string;
 
         isActive?: boolean;
+        createdUserId?: string;
     }
 }

@@ -2259,10 +2259,10 @@ var Swu;
                 var html = "";
                 _.forEach(news, function (value, key) {
                     var elements = "<div class='item'>\
-                        <div class='irs-blog-post' >\
+                        <div class='irs-blog-post' onclick='popup(" + value.id + ")'>\
                             <div class='irs-bp-thumb' > <img class='img-responsive img-fluid' src= '../../../" + value.imageUrl + "' alt= 'blog/1.jpg' > </div>\
                                 <div class='irs-bp-details' >\
-                                    <h4 class='irs-bp-title' onclick='popup(" + value.id + ")'>" + value.title + "</h3>\
+                                    <h4 class='irs-bp-title'>" + value.title + "</h3>\
                                         <div class='irs-bp-meta' >\
                                             <ul class='list-inline irs-bp-meta-dttime' >\
                                                 <li><span class='flaticon-clock-1' > </span>" + moment(value.startDate).format('DD/MM/YYYY h:mm:ss a') + "</li>\
@@ -5485,6 +5485,7 @@ var Swu;
                 if (_this.auth.isLoggedIn()) {
                     if (_this.$scope.isValid()) {
                         _this.$scope.event.startDate = new Date(_this.$scope.displayStartDate);
+                        _this.$scope.event.createdUserId = _this.auth.getCurrentUser().id;
                         _this.eventManagementService.addNewOrUpdate(_this.$scope.event).then(function (response) {
                             _this.$modalInstance.close();
                             _this.toastr.success("Success");
@@ -5817,6 +5818,7 @@ var Swu;
                 if (_this.auth.isLoggedIn()) {
                     if (_this.$scope.isValid()) {
                         _this.$scope.news.startDate = new Date(_this.$scope.displayStartDate);
+                        _this.$scope.news.createdUserId = _this.auth.getCurrentUser().id;
                         var models = [];
                         models.push({ name: "file", value: _this.$scope.file });
                         models.push({ name: "news", value: _this.$scope.news });

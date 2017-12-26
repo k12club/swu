@@ -29,6 +29,8 @@ namespace Swu.Portal.Web.Api.Proxy
         public string Description_EN { get; set; }
         [JsonProperty(PropertyName = "isActive")]
         public bool IsActive { get; set; }
+        [JsonProperty(PropertyName = "createdUserId")]
+        public string CreatedUserId { get; set; }
         public NewsProxy()
         {
 
@@ -43,6 +45,7 @@ namespace Swu.Portal.Web.Api.Proxy
             this.Description_EN = news.FullDescription_EN;
             this.Description_TH = news.FullDescription_TH;
             this.CreatedBy = news.ApplicationUser.FirstName_EN + " " + news.ApplicationUser.LastName_EN;
+            this.CreatedUserId = news.ApplicationUser.Id;
             this.IsActive = news.IsActive;
         }
     }
