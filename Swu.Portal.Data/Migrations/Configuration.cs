@@ -112,27 +112,27 @@ namespace Swu.Portal.Data.Migrations
                 Department = d1,
                 University = u1
             };
-            var student = new ApplicationUser
-            {
-                UserName = "std1",
-                FirstName_EN = "Alex",
-                LastName_EN = "Rendal",
-                FirstName_TH = "",
-                LastName_TH = "",
-                Email = "chansakcsc@gmail.com.com",
-                CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now,
-            };
+            //var student = new ApplicationUser
+            //{
+            //    UserName = "std1",
+            //    FirstName_EN = "Alex",
+            //    LastName_EN = "Rendal",
+            //    FirstName_TH = "",
+            //    LastName_TH = "",
+            //    Email = "chansakcsc@gmail.com.com",
+            //    CreatedDate = DateTime.Now,
+            //    UpdatedDate = DateTime.Now,
+            //};
             userManager.Create(admin, "password");
-            userManager.Create(student, "password");
+            //userManager.Create(student, "password");
             foreach (var roleName in roleNames)
             {
                 roleManager.Create(new IdentityRole { Name = roleName });
             }
             var user = userManager.FindByName(admin.UserName);
-            userManager.AddToRole(user.Id, "Teacher");
-            var std1 = userManager.FindByName(student.UserName);
-            userManager.AddToRole(student.Id, "Student");
+            userManager.AddToRole(user.Id, "Admin");
+            //var std1 = userManager.FindByName(student.UserName);
+            //userManager.AddToRole(student.Id, "Student");
             #endregion
 
             //            #region Curriculum

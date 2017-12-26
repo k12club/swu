@@ -107,25 +107,6 @@
         <div class="row clearfix">
             <div class="col-sm-12 clearfix">
                 <div class="row clearfix">
-
-                    <!--<div class="irs-cl-list" ng-repeat="c in committee">
-                        <div class="col-xs-12 col-lg-2">
-                            <div class="irs-ctds-thumb">
-                                <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}">
-                                <div class="irs-cl-overlay"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-10">
-                            <div class="irs-cl-details">
-                                <div class="irs-courses-td-sngle-dtls">
-                                    <ul class="list-inline">
-                                        <li class="irs-name-tdsd">{{c.position}}</li>
-                                    </ul>
-                                    <h2>{{c.name}}</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="row-fluid">
                         <div class="accordion-option">
                             <a href="javascript:void(0)" class="toggle-accordion active" accordion-id="#accordion"></a>
@@ -139,10 +120,10 @@
                                     </div>
                                     <div id="c1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h1">
                                         <div class="panel-body">
-                                            <div class="row">
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Advisory Board'">
                                                 <div class="col-xs-12 col-lg-2">
                                                     <div class="irs-ctds-thumb">
-                                                        <img class="img-responsive img-fluid" ng-src="../../../Content/images/team/1.jpg" src="../../../Content/images/team/1.jpg">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
                                                         <div class="irs-cl-overlay"></div>
                                                     </div>
                                                 </div>
@@ -150,27 +131,9 @@
                                                     <div class="irs-cl-details">
                                                         <div class="irs-courses-td-sngle-dtls">
                                                             <ul class="list-inline">
-                                                                <li class="irs-name-tdsd ng-binding">Advisory Board</li>
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
                                                             </ul>
-                                                            <h2 class="ng-binding">Prof.Pansiri Phunsuwan, PhD. (Vice President of Academic Affairs)</h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-12 col-lg-2">
-                                                    <div class="irs-ctds-thumb">
-                                                        <img class="img-responsive img-fluid" ng-src="../../../Content/images/team/2.jpg" src="../../../Content/images/team/2.jpg">
-                                                        <div class="irs-cl-overlay"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-lg-10">
-                                                    <div class="irs-cl-details">
-                                                        <div class="irs-courses-td-sngle-dtls">
-                                                            <ul class="list-inline">
-                                                                <li class="irs-name-tdsd ng-binding">Advisory Board</li>
-                                                            </ul>
-                                                            <h2 class="ng-binding">Prof.Chairat Neruntarat MD. (Dean, Faculty of Medicine)</h2>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -186,7 +149,24 @@
                                     </div>
                                     <div id="c2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h2">
                                         <div class="panel-body">
-
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Vice Dean of Academic Affairs'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +178,24 @@
                                     </div>
                                     <div id="c3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h3">
                                         <div class="panel-body">
-
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Programme Director'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +207,24 @@
                                     </div>
                                     <div id="c4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h4">
                                         <div class="panel-body">
-
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Deputy Director'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +236,24 @@
                                     </div>
                                     <div id="c5" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h5">
                                         <div class="panel-body">
-
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Programme Secretary and Commitee'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

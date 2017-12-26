@@ -347,5 +347,71 @@ namespace Swu.Portal.Web.Api
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+
+        [HttpGet, Route("allAlbums")]
+        public List<PhotoAlbumProxy> GetAllAlbums()
+        {
+            if (ModelState.IsValid)
+            {
+                var albums = this._photoAlbumRepository.List
+                    .Where(i => i.CourseId == this._configRepository.dummyCourse)
+                    .Select(i => new PhotoAlbumProxy
+                    {
+                        Id = i.Id,
+                        Title = i.Name,
+                        DisplayImage = i.Photos.FirstOrDefault().ImageUrl,
+                        UploadBy = i.ApplicationUser.FirstName_EN + " " + i.ApplicationUser.LastName_EN,
+                        PublishedDate = i.CreatedDate
+                    })
+                    .OrderByDescending(o => o.PublishedDate)
+                    .ToList();
+                return albums;
+            }
+            return null;
+        }
+        [HttpGet, Route("getAlbumById")]
+        public PhotoAlbumProxy GetAlbumById(string id)
+        {
+            var albums = this._photoAlbumRepository.List
+                   .Where(i => i.Id == id)
+                   .FirstOrDefault();
+            return new PhotoAlbumProxy
+            {
+                Id = albums.Id,
+                Title = albums.Name,
+                DisplayImage = albums.Photos.FirstOrDefault().ImageUrl,
+                UploadBy = albums.ApplicationUser.FirstName_EN + " " + albums.ApplicationUser.LastName_EN,
+                PublishedDate = albums.CreatedDate
+            };
+        }
+        [HttpGet, Route("deleteAlbumById")]
+        public HttpResponseMessage DeleteAlbumById(string id)
+        {
+            try
+            {
+                var a = this._photoAlbumRepository.FindById(id);
+                this._photoAlbumRepository.Delete(a);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpPost, Route("updatePhotoAlbum")]
+        public HttpResponseMessage UpdatePhotoAlbum(PhotoAlbumProxy album)
+        {
+            try
+            {
+                var a = this._photoAlbumRepository.FindById(album.Id);
+                a.Name = album.Title;
+                this._photoAlbumRepository.Update(a);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
     }
 }
