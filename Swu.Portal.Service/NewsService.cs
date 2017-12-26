@@ -45,7 +45,10 @@ namespace Swu.Portal.Service
                 existing.ApplicationUser = creator;
                 existing.Title_EN = n.Title_EN;
                 existing.Title_TH = n.Title_TH;
-                existing.ImageUrl = n.ImageUrl;
+                if (string.IsNullOrEmpty(n.ImageUrl))
+                {
+                    existing.ImageUrl = n.ImageUrl;
+                }
                 existing.StartDate = n.StartDate;
                 existing.FullDescription_EN = n.FullDescription_EN;
                 existing.FullDescription_TH = n.FullDescription_TH;
