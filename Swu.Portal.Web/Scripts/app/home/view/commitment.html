@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
                 <div class="irs-commitment-title text-center">
-                    <h2><span translate="commitments.title"></span></h2>
+                    <h1><span translate="commitments.title"></span></h1>
                     <img class="img-responsive" src="../../../Content/images/resource/commitment-title-img.png" alt="commitment-title-img.png">
                 </div>
             </div>
@@ -15,11 +15,11 @@
                         <div ng-hide="c.isImgContent">
                             <div class="irs-cmmt-icon">
                                 <!--<span class="{{c.iconCss}}"></span>-->
-                                <i class="{{c.iconCss}}  style="color:red" aria-hidden="true"></i>
+                                <i class="{{c.iconCss}}" style="color:red" aria-hidden="true"></i>
                             </div>
                             <div class="{{c.commentCss}}">
-                                <h2>{{c.title}}</h2>
-                                <h4>{{c.description}}</h4>
+                                <h3>{{c.title}}</h3>
+                                <h5>{{c.description}}</h5>
                             </div>
                         </div>
                         <div ng-show="c.isImgContent">
@@ -31,4 +31,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>

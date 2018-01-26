@@ -40,7 +40,7 @@
     <WarningLevel>4</WarningLevel>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
@@ -61,6 +61,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>False</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -236,6 +249,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="additional config.txt" />
     <Content Include="Content\angular-material.css" />
     <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\angular-toastr.css" />
@@ -465,6 +479,8 @@
     <Content Include="Content\images\home\h4.jpg" />
     <Content Include="Content\images\home\h5.jpg" />
     <Content Include="Content\images\home\h6.jpg" />
+    <Content Include="Content\images\home\objective.jpg" />
+    <Content Include="Content\images\home\Objective.png" />
     <Content Include="Content\images\icons\basin.jpg" />
     <Content Include="Content\images\icons\basin.png" />
     <Content Include="Content\images\icons\basin2.jpg" />
@@ -642,18 +658,11 @@
     <Content Include="Content\MaterialIcons-Regular.svg" />
     <Content Include="favicon.ico" />
     <Content Include="FileUpload\banner\h4.jpg" />
-    <Content Include="FileUpload\personalFile\009064b7-deda-4d5a-91ed-b9d96ee05118\elink-default.jpg" />
-    <Content Include="FileUpload\personalFile\009064b7-deda-4d5a-91ed-b9d96ee05118\president-default.jpg" />
-    <Content Include="FileUpload\personalFile\13539c1e-4e38-4281-aa20-52dc99d8bdb7\Lighthouse.jpg" />
-    <Content Include="FileUpload\personalFile\15ef80ed-980f-4995-8e92-c46e2f97f5c2\Tulips.jpg" />
-    <Content Include="FileUpload\personalFile\1b42794b-45d3-4781-a874-9aa1572d7ff8\Jellyfish.jpg" />
-    <Content Include="FileUpload\personalFile\65f69c85-92a3-444c-9a87-4dea54c594c6\Chrysanthemum.jpg" />
-    <Content Include="FileUpload\personalFile\e0425f10-91d4-4e64-99c1-bc2827528e61\Chrysanthemum.jpg" />
-    <Content Include="FileUpload\personalFile\e0425f10-91d4-4e64-99c1-bc2827528e61\Desert.jpg" />
-    <Content Include="FileUpload\personalFile\e0425f10-91d4-4e64-99c1-bc2827528e61\elink-default.jpg" />
-    <Content Include="FileUpload\personalFile\e0425f10-91d4-4e64-99c1-bc2827528e61\Jellyfish.jpg" />
-    <Content Include="FileUpload\personalFile\f3a95ed2-ecc2-487b-92ec-047a49cae4f3\Penguins.jpg" />
-    <Content Include="FileUpload\personalFile\fec583a4-657c-4cd0-82d0-92fe3bad968c\Lighthouse.jpg" />
+    <Content Include="FileUpload\banner\image1.jpeg" />
+    <Content Include="FileUpload\banner\image2.jpg" />
+    <Content Include="FileUpload\news\1.jpg" />
+    <Content Include="FileUpload\news\20171_547e50695bacd.imageo-900x675.jpg" />
+    <Content Include="FileUpload\news\know-1 %281%29.jpg" />
     <Content Include="FileUpload\photo\01b12b18-85ff-4e34-a98f-c1ba32bd690b\รับนิสิต 61_๑๗๑๒๑๓_0001.jpg" />
     <Content Include="FileUpload\photo\01b12b18-85ff-4e34-a98f-c1ba32bd690b\รับนิสิต 61_๑๗๑๒๑๓_0002.jpg" />
     <Content Include="FileUpload\photo\01b12b18-85ff-4e34-a98f-c1ba32bd690b\รับนิสิต 61_๑๗๑๒๑๓_0003.jpg" />
@@ -742,7 +751,7 @@
     <Content Include="FileUpload\photo\3eff5317-a4b4-4916-8f8f-9a4ccbc12370\รับนิสิต 61_๑๗๑๒๑๓_0020.jpg" />
     <Content Include="FileUpload\photo\3eff5317-a4b4-4916-8f8f-9a4ccbc12370\รับนิสิต 61_๑๗๑๒๑๓_0021.jpg" />
     <Content Include="FileUpload\photo\3eff5317-a4b4-4916-8f8f-9a4ccbc12370\รับนิสิต 61_๑๗๑๒๑๓_0022.jpg" />
-    <Content Include="FileUpload\photo\66d77ba7-a6c6-43c7-b023-fe502ce3ddaa\852440f5-98ae-4fa2-94f6-78d54b03ef0b.jpg" />
+    <Content Include="FileUpload\photo\5.jpg" />
     <Content Include="FileUpload\photo\6b77ec6e-53c4-4bd7-8f13-40579dae0d59\รับนิสิต 61_๑๗๑๒๑๓_0001.jpg" />
     <Content Include="FileUpload\photo\6b77ec6e-53c4-4bd7-8f13-40579dae0d59\รับนิสิต 61_๑๗๑๒๑๓_0002.jpg" />
     <Content Include="FileUpload\photo\6b77ec6e-53c4-4bd7-8f13-40579dae0d59\รับนิสิต 61_๑๗๑๒๑๓_0003.jpg" />
@@ -761,8 +770,6 @@
     <Content Include="FileUpload\photo\6b77ec6e-53c4-4bd7-8f13-40579dae0d59\รับนิสิต 61_๑๗๑๒๑๓_0016.jpg" />
     <Content Include="FileUpload\photo\6b77ec6e-53c4-4bd7-8f13-40579dae0d59\รับนิสิต 61_๑๗๑๒๑๓_0017.jpg" />
     <Content Include="FileUpload\photo\6b77ec6e-53c4-4bd7-8f13-40579dae0d59\รับนิสิต 61_๑๗๑๒๑๓_0018.jpg" />
-    <Content Include="FileUpload\photo\7f9d2da3-d894-460d-a337-7f8b3c069f29\26a0536a-4ac2-477f-8dd5-65bd7cdfc144.jpg" />
-    <Content Include="FileUpload\photo\7f9d2da3-d894-460d-a337-7f8b3c069f29\2b4289fb-a94c-4aa4-a607-f949126aa46e.jpg" />
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0001.jpg" />
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0002.jpg" />
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0003.jpg" />
@@ -785,8 +792,6 @@
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0020.jpg" />
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0021.jpg" />
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0022.jpg" />
-    <Content Include="FileUpload\photo\b5f20fc6-f9ed-4fe9-bed4-2d4e86631426\74755c32-4328-4d20-911b-ab9f463e043f.jpg" />
-    <Content Include="FileUpload\photo\b5f20fc6-f9ed-4fe9-bed4-2d4e86631426\d7a6e2a2-a235-4d58-8878-20ca2f3c528b.jpg" />
     <Content Include="FileUpload\photo\d6dde70d-710d-4228-a64d-1f3386f309b8\14931.jpg" />
     <Content Include="FileUpload\photo\d6dde70d-710d-4228-a64d-1f3386f309b8\14932.jpg" />
     <Content Include="FileUpload\photo\d6dde70d-710d-4228-a64d-1f3386f309b8\14933.jpg" />
@@ -843,22 +848,9 @@
     <Content Include="FileUpload\photo\d93e9a70-428c-4daa-842c-911b3b1d52be\รับนิสิต 61_๑๗๑๒๑๓_0020.jpg" />
     <Content Include="FileUpload\photo\d93e9a70-428c-4daa-842c-911b3b1d52be\รับนิสิต 61_๑๗๑๒๑๓_0021.jpg" />
     <Content Include="FileUpload\photo\d93e9a70-428c-4daa-842c-911b3b1d52be\รับนิสิต 61_๑๗๑๒๑๓_0022.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\1b8519c3-06d6-4a97-abd1-3c799849cadb.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\39f6a0a2-3982-4400-8df4-cb0d9f4c863b.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\409a498c-f1e3-4260-8ebc-9d1257778a34.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\41b27962-e007-4444-be56-9f1147983cdc.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\6e0f9cab-81d8-42bf-b27b-688531922d10.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\9bc0a90d-3dc7-4681-80cb-0d76fbcd5820.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\aaac74b9-b996-4d87-bb22-88726afb1bd0.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\ace52191-3271-43e4-b3c9-d6b7cb801d71.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\b15b4a9a-13f7-4f61-a473-e55beef1c9a5.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\bf063297-b694-491b-9f7e-a120a6ddbecb.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\bf3d6710-9268-41b0-a80a-150dbf639d8b.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\c9a0a2ee-3a28-450f-825d-fbaa7d9e5a65.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\d9547f37-215a-472f-8fcd-db22195b26d0.jpg" />
-    <Content Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\f924750b-9824-4269-b01f-f917db22ff2e.jpg" />
     <Content Include="FileUpload\users\14031768-88b9-463a-ab06-b69a1b4717bc.jpg" />
     <Content Include="FileUpload\users\54cc98b1-aa85-4319-b7cb-494a0ecbf857.jpg" />
+    <Content Include="FileUpload\users\ee6858ed-21a3-47e9-9d8c-5844aed9935a.png" />
     <Content Include="FileUpload\video\ss1.png" />
     <Content Include="FileUpload\video\ss2.png" />
     <Content Include="FileUpload\video\ss3.png" />
@@ -993,7 +985,9 @@
     <Content Include="Scripts\utilities\moment.min.js" />
     <Content Include="Scripts\bootstrap\respond.js" />
     <Content Include="Scripts\bootstrap\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1008,8 +1002,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="FileUpload\course\" />
-    <Folder Include="FileUpload\news\" />
+    <Folder Include="FileUpload\personalFile\009064b7-deda-4d5a-91ed-b9d96ee05118\" />
+    <Folder Include="FileUpload\personalFile\13539c1e-4e38-4281-aa20-52dc99d8bdb7\" />
+    <Folder Include="FileUpload\personalFile\15ef80ed-980f-4995-8e92-c46e2f97f5c2\" />
+    <Folder Include="FileUpload\personalFile\1b42794b-45d3-4781-a874-9aa1572d7ff8\" />
     <Folder Include="FileUpload\personalFile\49f03f36-fdc7-44ec-b082-9713298422a3\" />
+    <Folder Include="FileUpload\personalFile\65f69c85-92a3-444c-9a87-4dea54c594c6\" />
+    <Folder Include="FileUpload\personalFile\707c783b-144a-40de-abeb-d4b48e8d1909\" />
+    <Folder Include="FileUpload\personalFile\e0425f10-91d4-4e64-99c1-bc2827528e61\" />
+    <Folder Include="FileUpload\personalFile\f3a95ed2-ecc2-487b-92ec-047a49cae4f3\" />
+    <Folder Include="FileUpload\personalFile\fec583a4-657c-4cd0-82d0-92fe3bad968c\" />
     <Folder Include="FileUpload\photo\01413764-27f8-4913-9fe1-2736732b465a\" />
     <Folder Include="FileUpload\photo\1864c48b-f336-440d-a598-a0a82fbca9b4\" />
     <Folder Include="FileUpload\photo\245309ef-f2c5-49b2-b4ec-ae984ed254c1\" />
@@ -1017,9 +1019,13 @@
     <Folder Include="FileUpload\photo\3965b338-0087-4c1d-a8af-865a0f56e8e7\" />
     <Folder Include="FileUpload\photo\3b3721f2-5c69-4b1d-a642-f6241405d471\" />
     <Folder Include="FileUpload\photo\41f44800-06cf-4f3f-bf3c-e1a12e474661\" />
+    <Folder Include="FileUpload\photo\66d77ba7-a6c6-43c7-b023-fe502ce3ddaa\" />
+    <Folder Include="FileUpload\photo\7f9d2da3-d894-460d-a337-7f8b3c069f29\" />
     <Folder Include="FileUpload\photo\aab01cdc-16b6-406b-a30e-83f5106fdfd8\" />
+    <Folder Include="FileUpload\photo\b5f20fc6-f9ed-4fe9-bed4-2d4e86631426\" />
     <Folder Include="FileUpload\photo\cd3fc17c-f775-47d2-bcbe-de81f178f46c\" />
     <Folder Include="FileUpload\photo\e69e5b9f-0b97-4cf6-827b-ab987f7c2a95\" />
+    <Folder Include="FileUpload\photo\f0271754-7b27-4b2f-87df-96b5354522ac\" />
     <Folder Include="FileUpload\photo\f555919c-f7d7-4f84-9223-c0ce1ac60194\" />
     <Folder Include="FileUpload\research\" />
     <Folder Include="Models\" />
@@ -1061,7 +1067,6 @@
     <Content Include="Content\MaterialIcons-Regular.ttf" />
     <Content Include="Content\MaterialIcons-Regular.woff" />
     <Content Include="Content\MaterialIcons-Regular.woff2" />
-    <Content Include="FileUpload\personalFile\707c783b-144a-40de-abeb-d4b48e8d1909\PSIG WRONG.docx" />
     <Content Include="FileUpload\photo\BodyPart_1ec65b96-b850-4edc-a8f5-50788b6b735c" />
     <Content Include="FileUpload\photo\BodyPart_3a5a4b17-614b-4e7d-b778-2387b7c3e093" />
     <Content Include="FileUpload\photo\BodyPart_43fd607f-c04d-4553-be93-04f8db120e80" />
@@ -1244,6 +1249,7 @@
     <TypeScriptCompile Include="Scripts\typings\swiper\swiper.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />
+    <!--<TypeScriptCompile Include="Scripts\_references.ts" />-->
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -27,7 +27,7 @@
             this.$scope.edit = (id: string): void => {
                 this.albumManagementService.getById(id).then((response) => {
                     this.$scope.data = response;
-                    this.$scope.data.link = config.web.protocal + "://" + config.web.ip + ":" + config.web.port + "/" + $state.href('photo', { "id": this.$scope.data.id, "title": this.$scope.data.title });
+                    this.$scope.data.link = config.web.protocal + "://" + config.web.ip + "/" + $state.href('photo', { "id": this.$scope.data.id, "title": this.$scope.data.title });
                 }, (error) => { });
             }
             this.$scope.validate = (): void => {

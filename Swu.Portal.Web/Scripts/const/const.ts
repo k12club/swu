@@ -11,13 +11,11 @@ module Swu {
         defaultLang = "en";
         web = {
             protocal: "http",
-            ip: "localhost",
-            port: "2255",
+            ip: "103.35.98.102"
         };
         api = {
             protocal: "http",
-            ip: "localhost",
-            port: "2255",
+            ip: "localhost:2255",
             versionName: "V1",
         };
         exceptGotoTopStateList = [

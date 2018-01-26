@@ -773,13 +773,11 @@ var Swu;
             this.defaultLang = "en";
             this.web = {
                 protocal: "http",
-                ip: "localhost",
-                port: "2255"
+                ip: "103.35.98.102"
             };
             this.api = {
                 protocal: "http",
-                ip: "localhost",
-                port: "2255",
+                ip: "localhost:2255",
                 versionName: "V1"
             };
             this.exceptGotoTopStateList = [
@@ -2554,7 +2552,7 @@ var Swu;
                                 </div>\
                             </div>\
                             <div class="input-group" ng-show="isLoggedIn()">\
-                                    <input type= "text" id="' + value.id + '" class="form-control" value= "' + config.web.protocal + "://" + config.web.ip + ":" + config.web.port + $state.href('photo', { "id": value.id, "title": value.title }) + '" placeholder= "Photo gallery url" id= "copy-input" >\
+                                    <input type= "text" id="' + value.id + '" class="form-control" value= "' + config.web.protocal + "://" + config.web.ip + $state.href('photo', { "id": value.id, "title": value.title }) + '" placeholder= "Photo gallery url" id= "copy-input" >\
                                     <span class="input-group-btn" >\
                                         <button class="btn btn-default" type= "button" id= "copy-button" data- toggle="tooltip" data- placement="bottom" title= "" data- original - title="Copy to Clipboard" ng-click="copyUrlToClipboard(\'' + value.id + '\'\,\'' + value.title + '\')">Copy</button>\
                                     </span>\
@@ -6550,7 +6548,7 @@ var Swu;
             this.$scope.edit = function (id) {
                 _this.albumManagementService.getById(id).then(function (response) {
                     _this.$scope.data = response;
-                    _this.$scope.data.link = config.web.protocal + "://" + config.web.ip + ":" + config.web.port + "/" + $state.href('photo', { "id": _this.$scope.data.id, "title": _this.$scope.data.title });
+                    _this.$scope.data.link = config.web.protocal + "://" + config.web.ip + "/" + $state.href('photo', { "id": _this.$scope.data.id, "title": _this.$scope.data.title });
                 }, function (error) { });
             };
             this.$scope.validate = function () {
