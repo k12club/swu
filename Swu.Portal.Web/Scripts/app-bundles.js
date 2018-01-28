@@ -235,7 +235,7 @@ var Swu;
             phone: "+66 2 649 5934 or +66 2 260 2233-4 ext. 4919, 4409"
         },
         login: {
-            anyQuestions: "Any Questions?",
+            anyQuestions: "",
             callUs: "Call Us",
             login: "Login",
             register: "Register",
@@ -345,8 +345,8 @@ var Swu;
             phone: "02 649 5934 02 260 2122-4 ต่อ 4919, 4409"
         },
         login: {
-            anyQuestions: "มีคำถามใช่ไหม?",
-            callUs: "โทรมาหาเรา",
+            anyQuestions: "",
+            callUs: "ติดต่อเรา",
             login: "เข้าสู่ระบบ",
             register: "ลงทะเบียนสมาชิก",
             loginAs: "",
@@ -1551,7 +1551,22 @@ var Swu;
             $stateProvider
                 .state("alumni", {
                 url: "/alumni",
-                templateUrl: "/Scripts/app/alumni/view/alumni.html"
+                views: {
+                    '': { templateUrl: '/Scripts/app/alumni/main.html' },
+                    'subContent@alumni': {
+                        templateUrl: '/Scripts/app/alumni/view/default.html'
+                    }
+                }
+            })
+                .state("alumni.year", {
+                parent: "alumni",
+                url: "/year/:year",
+                views: {
+                    'subContent@alumni': {
+                        templateUrl: '/Scripts/app/alumni/view/alumni.html',
+                        controller: 'AlumniByYearController as vm'
+                    }
+                }
             });
         }
         StateConfig.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider"];
@@ -2099,6 +2114,8 @@ var Swu;
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
                 eventService.getActiveEvents().then(function (response) {
+                    if (response.length > 0)
+                        $scope.events = [];
                     _.forEach(response, function (value, key) {
                         $scope.events.push({
                             title_en: value.title_en,
@@ -2342,6 +2359,8 @@ var Swu;
             };
             this.$rootScope.$watch("lang", function (newValue, oldValue) {
                 newsService.getActiveNews().then(function (response) {
+                    if (response.length > 0)
+                        $scope.news = [];
                     _.forEach(response, function (value, key) {
                         $scope.news.push({
                             id: value.id,
@@ -7043,6 +7062,87 @@ var Swu;
             Swu.Factory({ name: "forumService" })
         ], forumService);
         return forumService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var AlumniController = (function () {
+        function AlumniController($scope, $state, auth, AppConstant, alumniService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.auth = auth;
+            this.AppConstant = AppConstant;
+            this.alumniService = alumniService;
+            this.$scope.menus = [];
+            this.$scope.init = function () {
+                _this.alumniService.getYear().then(function (response) {
+                    console.log(response);
+                    _.forEach(response, function (value, key) {
+                        _this.$scope.menus.push({ id: key, title: value, link: "alumni.year({year:" + value + "})", icon: "flaticon-arrows-3" });
+                    });
+                    $state.go('alumni.year', { 'year': _.first($scope.menus).title });
+                }, function (error) { });
+            };
+            this.$scope.init();
+        }
+        AlumniController.$inject = ["$scope", "$state", "AuthServices", "AppConstant", "alumniService"];
+        AlumniController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "AlumniController" })
+        ], AlumniController);
+        return AlumniController;
+    }());
+    Swu.AlumniController = AlumniController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var AlumniByYearController = (function () {
+        function AlumniByYearController($scope, $state, $stateParams, auth, AppConstant, alumniService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.$stateParams = $stateParams;
+            this.auth = auth;
+            this.AppConstant = AppConstant;
+            this.alumniService = alumniService;
+            this.$scope.year = this.$stateParams["year"];
+            this.$scope.init = function () {
+                _this.alumniService.getStudentByYear(_this.$scope.year).then(function (response) {
+                    _this.$scope.students = response;
+                    console.log(response);
+                }, function (error) { });
+            };
+            this.$scope.init();
+        }
+        AlumniByYearController.$inject = ["$scope", "$state", "$stateParams", "AuthServices", "AppConstant", "alumniService"];
+        AlumniByYearController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "AlumniByYearController" })
+        ], AlumniByYearController);
+        return AlumniByYearController;
+    }());
+    Swu.AlumniByYearController = AlumniByYearController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var alumniService = (function () {
+        function alumniService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        alumniService.prototype.getYear = function () {
+            return this.apiService.getData("shared/alumniYear");
+        };
+        alumniService.prototype.getStudentByYear = function (year) {
+            return this.apiService.getData("shared/getStudentByYear?year=" + year);
+        };
+        alumniService.$inject = ['apiService', 'AppConstant'];
+        alumniService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "alumniService" })
+        ], alumniService);
+        return alumniService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

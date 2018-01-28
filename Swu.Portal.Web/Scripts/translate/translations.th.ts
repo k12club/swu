@@ -7,8 +7,8 @@
             phone: "02 649 5934 02 260 2122-4 ต่อ 4919, 4409"
         },
         login: {
-            anyQuestions: "มีคำถามใช่ไหม?",
-            callUs: "โทรมาหาเรา",
+            anyQuestions: "",
+            callUs: "ติดต่อเรา",
             login: "เข้าสู่ระบบ",
             register: "ลงทะเบียนสมาชิก",
             loginAs: "",

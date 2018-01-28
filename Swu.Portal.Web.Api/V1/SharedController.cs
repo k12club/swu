@@ -413,5 +413,80 @@ namespace Swu.Portal.Web.Api
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+
+        [HttpGet, Route("alumniYear")]
+        public List<string> GetYears()
+        {
+            return new List<String>{
+                "2015","2016","2017","2018"
+            };
+        }
+        [HttpGet, Route("getStudentByYear")]
+        public List<Alumni> GetStudentByYear(string year)
+        {
+            var allAlumni = new List<Alumni> {
+                new Alumni {
+                    StudentId="11",
+                    FullName="TEST TEST",
+                    GraduatedYear="2015"
+                },
+                new Alumni {
+                    StudentId="12",
+                    FullName="TEST TEST",
+                    GraduatedYear="2015"
+                },
+                new Alumni {
+                    StudentId="13",
+                    FullName="TEST TEST",
+                    GraduatedYear="2015"
+                },
+                new Alumni {
+                    StudentId="14",
+                    FullName="TEST TEST",
+                    GraduatedYear="2015"
+                },
+                new Alumni {
+                    StudentId="15",
+                    FullName="TEST TEST",
+                    GraduatedYear="2015"
+                },
+                new Alumni {
+                    StudentId="21",
+                    FullName="TEST TEST",
+                    GraduatedYear="2016"
+                },
+                new Alumni {
+                    StudentId="22",
+                    FullName="TEST TEST",
+                    GraduatedYear="2017"
+                },
+                new Alumni {
+                    StudentId="23",
+                    FullName="TEST TEST",
+                    GraduatedYear="2017"
+                },
+                new Alumni {
+                    StudentId="24",
+                    FullName="TEST TEST",
+                    GraduatedYear="2017"
+                },
+                new Alumni {
+                    StudentId="31",
+                    FullName="TEST TEST",
+                    GraduatedYear="2018"
+                },
+                new Alumni {
+                    StudentId="32",
+                    FullName="TEST TEST",
+                    GraduatedYear="2018"
+                },
+                new Alumni {
+                    StudentId="33",
+                    FullName="TEST TEST",
+                    GraduatedYear="2018"
+                },
+            };
+            return allAlumni.Where(i => i.GraduatedYear == year).ToList();
+        }
     }
 }

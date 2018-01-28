@@ -10,12 +10,14 @@ D:\Git\swu\Swu.Portal.Service\bin\Release\Microsoft.AspNet.Identity.EntityFramew
 D:\Git\swu\Swu.Portal.Service\bin\Release\SharpRepository.Ioc.Autofac.dll
 D:\Git\swu\Swu.Portal.Service\bin\Release\SharpRepository.Repository.dll
 D:\Git\swu\Swu.Portal.Service\bin\Release\Swu.Portal.Data.dll
+D:\Git\swu\Swu.Portal.Service\bin\Release\Swu.Portal.Core.dll
 D:\Git\swu\Swu.Portal.Service\bin\Release\Swu.Portal.Data.pdb
 D:\Git\swu\Swu.Portal.Service\bin\Release\Autofac.xml
 D:\Git\swu\Swu.Portal.Service\bin\Release\EntityFramework.xml
 D:\Git\swu\Swu.Portal.Service\bin\Release\EntityFramework.SqlServer.xml
 D:\Git\swu\Swu.Portal.Service\bin\Release\Microsoft.AspNet.Identity.Core.xml
 D:\Git\swu\Swu.Portal.Service\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Git\swu\Swu.Portal.Service\bin\Release\Swu.Portal.Core.pdb
 D:\Git\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.dll
 D:\Git\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.pdb

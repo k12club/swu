@@ -7,7 +7,6 @@
             this.init();
         }
         init(): void {
-
         };
 
     }

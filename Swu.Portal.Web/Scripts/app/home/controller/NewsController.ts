@@ -120,6 +120,8 @@
             };
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
                 newsService.getActiveNews().then((response) => {
+                    if (response.length > 0)
+                        $scope.news = [];
                     _.forEach(response, (value, key) => {
                         $scope.news.push(
                             {

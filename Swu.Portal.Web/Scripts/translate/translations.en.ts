@@ -7,7 +7,7 @@
             phone: "+66 2 649 5934 or +66 2 260 2233-4 ext. 4919, 4409"
         },
         login: {
-            anyQuestions: "Any Questions?",
+            anyQuestions: "",
             callUs: "Call Us",
             login: "Login",
             register: "Register",

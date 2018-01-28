@@ -40,7 +40,7 @@
     <WarningLevel>4</WarningLevel>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
@@ -63,7 +63,7 @@
     <WarningLevel>4</WarningLevel>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
@@ -350,6 +350,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\Linearicons-Free.svg" />
     <Content Include="Content\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="Content\images\alumni\default.jpg" />
     <Content Include="Content\images\bg\bcome-teacher-bg.jpg" />
     <Content Include="Content\images\bg\call-tobg.jpg" />
     <Content Include="Content\images\bg\ip-bg.jpg" />
@@ -905,6 +906,8 @@
     <Content Include="Scripts\angular\underscore.js" />
     <Content Include="Scripts\app-bundles.js" />
     <Content Include="Scripts\app\alumni\view\alumni.html" />
+    <Content Include="Scripts\app\alumni\view\default.html" />
+    <Content Include="Scripts\app\alumni\main.html" />
     <Content Include="Scripts\app\board\view\board-course.html" />
     <Content Include="Scripts\app\board\view\board-general.html" />
     <Content Include="Scripts\app\board\view\board-research.html" />
@@ -985,6 +988,7 @@
     <Content Include="Scripts\utilities\moment.min.js" />
     <Content Include="Scripts\bootstrap\respond.js" />
     <Content Include="Scripts\bootstrap\respond.min.js" />
+    <Content Include="tsconfig.json" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1082,10 +1086,12 @@
     <Content Include="Scripts\jquery\jquery-2.2.1.min.map" />
     <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\typings\angularjs\WebEssentials2013.vsix" />
-    <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\alumni\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\alumni\controller\AlumniByYearController.ts" />
+    <TypeScriptCompile Include="Scripts\app\alumni\controller\AlumniController.ts" />
+    <TypeScriptCompile Include="Scripts\app\alumni\service\alumniService.ts" />
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\board\app_routing.ts" />
@@ -1178,6 +1184,7 @@
     <TypeScriptCompile Include="Scripts\app\teacher\service\teacherService.ts" />
     <TypeScriptCompile Include="Scripts\directive\fileUpload.ts" />
     <TypeScriptCompile Include="Scripts\filter\range.ts" />
+    <TypeScriptCompile Include="Scripts\model\alumni.ts" />
     <TypeScriptCompile Include="Scripts\model\baseControllerScope.ts" />
     <TypeScriptCompile Include="Scripts\model\baseUser.ts" />
     <TypeScriptCompile Include="Scripts\model\boardType.ts" />
@@ -1249,6 +1256,7 @@
     <TypeScriptCompile Include="Scripts\typings\swiper\swiper.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />
+    <TypeScriptCompile Include="Scripts\_references.ts" />
     <!--<TypeScriptCompile Include="Scripts\_references.ts" />-->
   </ItemGroup>
   <ItemGroup>

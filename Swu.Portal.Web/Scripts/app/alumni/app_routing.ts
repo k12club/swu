@@ -12,7 +12,22 @@
             $stateProvider
                 .state("alumni", {
                     url: "/alumni",
-                    templateUrl: "/Scripts/app/alumni/view/alumni.html"
+                    views: {
+                        '': { templateUrl: '/Scripts/app/alumni/main.html' },
+                        'subContent@alumni': {
+                            templateUrl: '/Scripts/app/alumni/view/default.html'
+                        },
+                    }
+                })
+                .state("alumni.year", {
+                    parent: "alumni",
+                    url: "/year/:year",
+                    views: {
+                        'subContent@alumni': {
+                            templateUrl: '/Scripts/app/alumni/view/alumni.html',
+                            controller: 'AlumniByYearController as vm'
+                        },
+                    }
                 });
         }
     }

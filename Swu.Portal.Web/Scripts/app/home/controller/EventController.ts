@@ -111,6 +111,8 @@
             };
             this.$rootScope.$watch("lang", function (newValue: string, oldValue: string) {
                 eventService.getActiveEvents().then((response) => {
+                    if (response.length > 0)
+                        $scope.events = [];
                     _.forEach(response, (value, key) => {
                         $scope.events.push(
                             {
