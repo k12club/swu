@@ -97,6 +97,16 @@
                             controller: 'AlbumManagementController as vm'
                         },
                     }
+                })
+                .state("settings.alumni", {
+                    parent: "settings",
+                    url: "/alumni",
+                    views: {
+                        'subContent@settings': {
+                            templateUrl: '/Scripts/app/settings/view/alumni.html',
+                            controller: 'AlumniManagementController as vm'
+                        },
+                    }
                 });
         }
     }

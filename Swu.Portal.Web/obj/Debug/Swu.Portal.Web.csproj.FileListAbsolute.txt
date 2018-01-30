@@ -94,3 +94,7 @@ D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.xml
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.pdb
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.DataSet.dll
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.dll
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.xml
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.DataSet.xml

@@ -830,6 +830,10 @@ var Swu;
                 {
                     name: "settings.album",
                     roles: ["Admin", "Officer"]
+                },
+                {
+                    name: "settings.alumni",
+                    roles: ["Admin", "Officer"]
                 }
             ];
         }
@@ -1395,6 +1399,16 @@ var Swu;
                     'subContent@settings': {
                         templateUrl: '/Scripts/app/settings/view/album.html',
                         controller: 'AlbumManagementController as vm'
+                    }
+                }
+            })
+                .state("settings.alumni", {
+                parent: "settings",
+                url: "/alumni",
+                views: {
+                    'subContent@settings': {
+                        templateUrl: '/Scripts/app/settings/view/alumni.html',
+                        controller: 'AlumniManagementController as vm'
                     }
                 }
             });
@@ -4580,6 +4594,7 @@ var Swu;
             this.$scope.menus.push({ stateName: "settings.news", name: "News", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.banners", name: "Banners", icon: "flaticon-arrows-3" });
             this.$scope.menus.push({ stateName: "settings.album", name: "Albums", icon: "flaticon-arrows-3" });
+            this.$scope.menus.push({ stateName: "settings.alumni", name: "Alumni Upload", icon: "flaticon-arrows-3" });
             this.$scope.displayMenus = _.filter(this.$scope.menus, function (menu, index) {
                 var currentUserRole = _this.auth.getCurrentUser().selectedRoleName;
                 var permission = _.filter(_this.AppConstant.authorizeStateList, function (item, index) {
@@ -6616,6 +6631,43 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var AlumniManagementController = (function () {
+        function AlumniManagementController($scope, $state, auth, toastr, alumniManagementService) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.auth = auth;
+            this.toastr = toastr;
+            this.alumniManagementService = alumniManagementService;
+            this.$scope.save = function () {
+                if (_this.auth.isLoggedIn()) {
+                    var models = [];
+                    models.push({ name: "file", value: _this.$scope.file });
+                    _this.alumniManagementService.import(models).then(function (response) {
+                        _this.toastr.success("Success");
+                    }, function (error) { });
+                }
+                else {
+                    _this.toastr.error("Time out expired");
+                    _this.$state.go("app", { reload: true });
+                }
+            };
+            this.init();
+        }
+        AlumniManagementController.prototype.init = function () {
+        };
+        ;
+        AlumniManagementController.$inject = ["$scope", "$state", "AuthServices", "toastr", "alumniManagementService"];
+        AlumniManagementController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "AlumniManagementController" })
+        ], AlumniManagementController);
+        return AlumniManagementController;
+    }());
+    Swu.AlumniManagementController = AlumniManagementController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
     var userService = (function () {
         function userService(apiService, constant) {
             this.apiService = apiService;
@@ -6888,6 +6940,24 @@ var Swu;
             Swu.Factory({ name: "albumManagementService" })
         ], albumManagementService);
         return albumManagementService;
+    }());
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var alumniManagementService = (function () {
+        function alumniManagementService(apiService, constant) {
+            this.apiService = apiService;
+            this.constant = constant;
+        }
+        alumniManagementService.prototype.import = function (models) {
+            return this.apiService.postWithFormData(models, "shared/importAlumni");
+        };
+        alumniManagementService.$inject = ['apiService', 'AppConstant'];
+        alumniManagementService = __decorate([
+            Swu.Module("app"),
+            Swu.Factory({ name: "alumniManagementService" })
+        ], alumniManagementService);
+        return alumniManagementService;
     }());
 })(Swu || (Swu = {}));
 var Swu;

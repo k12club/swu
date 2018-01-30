@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Swu.Portal.Web.Api.Proxy
 {
-    public class Alumni
+    public class AlumniProxy
     {
         [JsonProperty(PropertyName = "studentId")]
         public string StudentId { get; set; }
@@ -15,7 +15,7 @@ namespace Swu.Portal.Web.Api.Proxy
         public string FullName { get; set; }
         [JsonProperty(PropertyName = "graduatedYear")]
         public string GraduatedYear { get; set; }
-        public Alumni()
+        public AlumniProxy()
         {
 
         }

@@ -100,6 +100,14 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.3.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.3.0\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.3.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.3.0\lib\net45\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -121,6 +129,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -946,6 +955,7 @@
     <Content Include="Scripts\app\photo\view\photo.html" />
     <Content Include="Scripts\app\settings\view\album.html" />
     <Content Include="Scripts\app\settings\view\album.tmpl.html" />
+    <Content Include="Scripts\app\settings\view\alumni.html" />
     <Content Include="Scripts\app\settings\view\category.html" />
     <Content Include="Scripts\app\settings\view\category.tmpl.html" />
     <Content Include="Scripts\app\settings\view\courses.html" />
@@ -1005,6 +1015,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FileUpload\alumni\" />
     <Folder Include="FileUpload\course\" />
     <Folder Include="FileUpload\personalFile\009064b7-deda-4d5a-91ed-b9d96ee05118\" />
     <Folder Include="FileUpload\personalFile\13539c1e-4e38-4281-aa20-52dc99d8bdb7\" />
@@ -1155,6 +1166,7 @@
     <TypeScriptCompile Include="Scripts\app\photo\controller\PhotoController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\AlbumManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\AlbumManagementModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\controller\AlumniManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CategoryManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CategoryMangementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementModalController.ts" />
@@ -1173,6 +1185,7 @@
     <TypeScriptCompile Include="Scripts\app\settings\controller\VideoManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\VideoManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\albumManagementService.ts" />
+    <TypeScriptCompile Include="Scripts\app\settings\service\alumniManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\categoryManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\eventManagementService.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\service\bannerManagementService.ts" />

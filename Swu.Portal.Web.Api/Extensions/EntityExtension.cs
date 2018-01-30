@@ -59,7 +59,7 @@ namespace Swu.Portal.Web.Api
             //user.ReferenceUser = (u.ReferenceUser != null) ? new UserProfile(u.ReferenceUser) : new UserProfile();
             //user.ReferenceUserId = (u.ReferenceUser != null) ? u.ReferenceUser.Id : "";
 
-            user.PersonalFiles = (u.PersonalFile != null)? u.PersonalFile.Select(f=>new AttachFilesProxy(f)).ToList() : new List<AttachFilesProxy>();
+            user.PersonalFiles = (u.PersonalFile != null) ? u.PersonalFile.Select(f => new AttachFilesProxy(f)).ToList() : new List<AttachFilesProxy>();
             return user;
         }
         public static ApplicationUser ToEntity(this UserProfile u)
@@ -129,6 +129,24 @@ namespace Swu.Portal.Web.Api
                 Name = photo.Name,
                 ImageUrl = photo.ImageUrl,
                 PublishedDate = photo.PublishedDate
+            };
+        }
+        public static Alumni ToEntity(this AlumniProxy a)
+        {
+            return new Data.Models.Alumni
+            {
+                StudentId = a.StudentId,
+                FullName = a.FullName,
+                GraduatedYear = a.GraduatedYear
+            };
+        }
+        public static AlumniProxy ToViewModel(this Alumni a)
+        {
+            return new AlumniProxy
+            {
+                StudentId = a.StudentId,
+                FullName = a.FullName,
+                GraduatedYear = a.GraduatedYear
             };
         }
     }

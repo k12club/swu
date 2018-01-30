@@ -33,6 +33,7 @@ namespace Swu.Portal.Data.Context
         public DbSet<PersonalFile> PersonalFiles { get; set; }
         public DbSet<CurriculumDocument> CurriculumDocuments { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<Alumni> Alumni { get; set; }
         public SwuDBContext() : base("DefaultConnection")
         {
             Configuration.ProxyCreationEnabled = false;

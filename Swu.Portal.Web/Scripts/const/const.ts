@@ -68,6 +68,10 @@ module Swu {
             {
                 name: "settings.album",
                 roles: ["Admin", "Officer"]
+            },
+            {
+                name: "settings.alumni",
+                roles: ["Admin", "Officer"]
             }
         ];
     }

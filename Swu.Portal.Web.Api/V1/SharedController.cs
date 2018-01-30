@@ -1,10 +1,12 @@
 ﻿
+using ExcelDataReader;
 using Newtonsoft.Json;
 using Swu.Portal.Core.Dependencies;
 using Swu.Portal.Data.Models;
 using Swu.Portal.Data.Repository;
 using Swu.Portal.Service;
 using Swu.Portal.Web.Api;
+using Swu.Portal.Web.Api.Enum;
 using Swu.Portal.Web.Api.Proxy;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,7 @@ namespace Swu.Portal.Web.Api
     {
         private const string UPLOAD_DIR = "FileUpload/photo/";
         private const string UPLOAD_BANNER_DIR = "FileUpload/banner/";
+        private const string UPLOAD_ALUMNI_DIR = "FileUpload/alumni/";
 
         private readonly IEmailSender _emailSender;
         private readonly IRepository<Photo> _photoRepository;
@@ -33,6 +36,8 @@ namespace Swu.Portal.Web.Api
         private readonly IPhotoAlbumService _photoAlbumService;
         private readonly IRepository<Banner> _bannerRepository;
         private readonly IBannerService _bannerService;
+        private readonly IAlumniService _alumniService;
+        private readonly IRepository<Alumni> _alumniRepository;
         public SharedController(
             IEmailSender emailSender,
             IRepository<Photo> photoRepository,
@@ -41,7 +46,9 @@ namespace Swu.Portal.Web.Api
             IConfigurationRepository configRepository,
             IPhotoAlbumService photoAlbumService,
             IRepository<Banner> bannerRepository,
-            IBannerService bannerService)
+            IBannerService bannerService,
+            IAlumniService alumniService,
+            IRepository<Alumni> alumniRepository)
         {
             this._emailSender = emailSender;
             this._photoRepository = photoRepository;
@@ -51,6 +58,8 @@ namespace Swu.Portal.Web.Api
             this._photoAlbumService = photoAlbumService;
             this._bannerRepository = bannerRepository;
             this._bannerService = bannerService;
+            this._alumniService = alumniService;
+            this._alumniRepository = alumniRepository;
         }
         [HttpGet, Route("commitments")]
         public List<CommitmentProxy> GetCommitment()
@@ -417,76 +426,94 @@ namespace Swu.Portal.Web.Api
         [HttpGet, Route("alumniYear")]
         public List<string> GetYears()
         {
-            return new List<String>{
-                "2015","2016","2017","2018"
-            };
+            return this._alumniRepository.List
+                .Select(i => int.Parse(i.GraduatedYear))
+                .Distinct()
+                .OrderBy(i => i)
+                .Select(i => i.ToString())
+                .ToList();
         }
         [HttpGet, Route("getStudentByYear")]
-        public List<Alumni> GetStudentByYear(string year)
+        public List<AlumniProxy> GetStudentByYear(string year)
         {
-            var allAlumni = new List<Alumni> {
-                new Alumni {
-                    StudentId="11",
-                    FullName="TEST TEST",
-                    GraduatedYear="2015"
-                },
-                new Alumni {
-                    StudentId="12",
-                    FullName="TEST TEST",
-                    GraduatedYear="2015"
-                },
-                new Alumni {
-                    StudentId="13",
-                    FullName="TEST TEST",
-                    GraduatedYear="2015"
-                },
-                new Alumni {
-                    StudentId="14",
-                    FullName="TEST TEST",
-                    GraduatedYear="2015"
-                },
-                new Alumni {
-                    StudentId="15",
-                    FullName="TEST TEST",
-                    GraduatedYear="2015"
-                },
-                new Alumni {
-                    StudentId="21",
-                    FullName="TEST TEST",
-                    GraduatedYear="2016"
-                },
-                new Alumni {
-                    StudentId="22",
-                    FullName="TEST TEST",
-                    GraduatedYear="2017"
-                },
-                new Alumni {
-                    StudentId="23",
-                    FullName="TEST TEST",
-                    GraduatedYear="2017"
-                },
-                new Alumni {
-                    StudentId="24",
-                    FullName="TEST TEST",
-                    GraduatedYear="2017"
-                },
-                new Alumni {
-                    StudentId="31",
-                    FullName="TEST TEST",
-                    GraduatedYear="2018"
-                },
-                new Alumni {
-                    StudentId="32",
-                    FullName="TEST TEST",
-                    GraduatedYear="2018"
-                },
-                new Alumni {
-                    StudentId="33",
-                    FullName="TEST TEST",
-                    GraduatedYear="2018"
-                },
-            };
-            return allAlumni.Where(i => i.GraduatedYear == year).ToList();
+            return this._alumniRepository.List
+                .Where(i => i.GraduatedYear == year)
+                .Select(i => i.ToViewModel())
+                .ToList();
+        }
+
+        [HttpPost, Route("importAlumni")]
+        public async Task<HttpResponseMessage> ImportAlumni()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_ALUMNI_DIR);
+            var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                SliderProxy slider = new SliderProxy();
+                string path = string.Empty;
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string fileName = file.Headers.ContentDisposition.FileName;
+                    if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                    {
+                        fileName = fileName.Trim('"');
+                    }
+                    if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                    {
+                        fileName = Path.GetFileName(fileName);
+                    }
+                    path = string.Format("{0}{1}", UPLOAD_ALUMNI_DIR, fileName);
+                    var moveTo = Path.Combine(root, fileName);
+                    if (File.Exists(moveTo))
+                    {
+                        File.Delete(moveTo);
+                    }
+                    File.Move(file.LocalFileName, moveTo);
+
+                    using (FileStream stream = System.IO.File.Open(moveTo, FileMode.Open, FileAccess.Read))
+                    {
+                        var importData = new List<AlumniProxy>();
+                        using (var reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            var result = reader.AsDataSet();
+                            var data = result.Tables[0];
+                            for (var row = 0; row < data.Rows.Count; row++)
+                            {
+                                if (row == 0) continue;
+                                importData.Add(new AlumniProxy
+                                {
+                                    StudentId = data.Rows[row].ItemArray[AlumniColumn.StudentID].ToString(),
+                                    FullName = data.Rows[row].ItemArray[AlumniColumn.FullName].ToString(),
+                                    GraduatedYear = data.Rows[row].ItemArray[AlumniColumn.GraduatedYear].ToString(),
+                                });
+                            }
+                        }
+                        if (importData.Count() > 0)
+                        {
+                            this._alumniService.ClearAll(importData.FirstOrDefault().GraduatedYear);
+                            foreach (var alumni in importData)
+                            {
+                                this._alumniService.CreateNew(new Alumni
+                                {
+                                    StudentId = alumni.StudentId,
+                                    FullName = alumni.FullName,
+                                    GraduatedYear = alumni.GraduatedYear
+                                });
+                            }
+                        }
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
     }
 }
