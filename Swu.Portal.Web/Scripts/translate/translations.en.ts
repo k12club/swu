@@ -75,22 +75,24 @@
         testimonials: {
             title: "Our Happy Students",
             description: "Our alumni are very content with our classes and 99% of them managed to find a job in their field. Check out our full testimonials from our best students worldwide.",
-            checkfaq:"Check our FAQ’s",
+            checkfaq: "Check our FAQ’s",
             thumb1: {
-                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
-                by: "Jaqueline Smith",
-                position:"BA Hons Business Management"
+                quote: "“หลักสูตรนี้มีประโยชน์ในการเพิ่มความมั่นใจและความสามารถในการปฏิสัมพันธ์กับคนใข้”",
+                by: "นายภาคภูมิ  จันทราพิทักษ์",
+                position: "นักศึกษา",
+                profileImage: "59107010014.png",
             },
             thumb2: {
-                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
-                by: "Jaqueline Smith",
-                position: "BA Hons Business Management"
-
+                quote: "“รู้สึกอบอุ่น ทุกคนคอยดูแลกัน เป็นกันเอง เหมือนเป็นครอบครัวเดียวกันค่ะ”",
+                by: "นางสาวช่อณพัชร สุวรรณรักษ์",
+                position: "นักศึกษา",
+                profileImage: "60107010009.png",
             },
             thumb3: {
-                quote: "“The lectures & tutorials are interesting academically stimulating, and applied to real-world case studies which is extremely useful.”",
-                by: "Jaqueline Smith",
-                position: "BA Hons Business Management"
+                quote: "“การที่ได้เรียนในหลักสูตรโครงการร่วมฯ เป็นโอกาสที่ดีที่จะได้ศึกษาวิชาแพทยศาสตร์ทั้งในระบบไทยและระบบต่างประเทศ ทำให้ได้สัมผัสถึงวิธีการเรียนการสอน นวัตกรรมทางการแพทย์ และระบบสาธารณสุขของทั้งในประเทศไทยและในต่างประเทศ ซึ่งพอเรียนจบแล้ว สามารถนำข้อดีและข้อเสียของทั้งสองระบบมาปรับใช้ในอนาคตได้ นอกจากนี้ การได้ทำงานวิจัยเบื้องต้นซึ่งเป็นส่วนหนึ่งของปริญญา Bachelor of Medical Sciences ทำให้เราได้พัฒนาทักษะที่ต้องใช้ในการทำงานวิจัย การเรียนในชั้นพรีคลินิกที่มหาวิทยาลัยนอตติงแฮมนั้น ยังได้ฝึกทักษะทางคลินิกเบื้องต้นและทักษะการสื่อสารกับผู้ป่วยด้วย ซึ่งจะทำให้เพิ่มความมั่นใจตอนศึกษาในชั้นคลินิก”",
+                by: "นาย สุภวิช  อยู่เป็นสุข",
+                position: "นักศึกษา",
+                profileImage: "58107010017.png",
             }
         },
         committee: {

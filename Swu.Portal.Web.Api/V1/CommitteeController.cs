@@ -98,7 +98,7 @@ namespace Swu.Portal.Web.Api
                 new CommitteeProxy {
                     ImageUrl = "Content/images/team/7.jpg",
                     Name_EN = "Assist.Prof.Manapol Kulpraneet, MD.",
-                    Position_EN = "Deputy Director ",
+                    Position_EN = "Deputy Director",
                     Description_EN = "",
                     Name_TH = "ผศ.นพ.มนะพล กุลปราณีต",
                     Position_TH = "รองประธานฯ",
@@ -122,7 +122,7 @@ namespace Swu.Portal.Web.Api
                 new CommitteeProxy {
                     ImageUrl = "Content/images/team/9.jpg",
                     Name_EN = "Dr.Pichaya Petborom, MD.",
-                    Position_EN = "Programme Commitee ",
+                    Position_EN = "Programme Commitee",
                     Description_EN = "",
                     Name_TH = "พญ. พิชญา เพชรบรม",
                     Position_TH = "กรรมการ",

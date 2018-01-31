@@ -421,7 +421,7 @@
     <Content Include="Content\images\courses\7.jpg" />
     <Content Include="Content\images\courses\8.jpg" />
     <Content Include="Content\images\courses\9.jpg" />
-    <Content Include="Content\images\courses\cd1.jpg" />
+    <Content Include="Content\images\courses\cd1-backup.jpg" />
     <Content Include="Content\images\courses\cl1.png" />
     <Content Include="Content\images\courses\cl2.png" />
     <Content Include="Content\images\courses\cl3.png" />
@@ -629,7 +629,10 @@
     <Content Include="Content\images\testimonial\3.png" />
     <Content Include="Content\images\testimonial\4.png" />
     <Content Include="Content\images\testimonial\5.png" />
+    <Content Include="Content\images\testimonial\58107010017.png" />
+    <Content Include="Content\images\testimonial\59107010014.png" />
     <Content Include="Content\images\testimonial\6.png" />
+    <Content Include="Content\images\testimonial\60107010009.png" />
     <Content Include="Content\images\testimonial\7.png" />
     <Content Include="Content\js\angular-summernote.min.js" />
     <Content Include="Content\js\bootsnav.js" />
