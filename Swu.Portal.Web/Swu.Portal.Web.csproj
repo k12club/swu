@@ -931,6 +931,7 @@
     <Content Include="Scripts\app\course\view\course_list.html" />
     <Content Include="Scripts\app\course\view\course_detail.html" />
     <Content Include="Scripts\app\course\view\curriculum.tmpl.html" />
+    <Content Include="Scripts\app\course\view\handout.tmpl.html" />
     <Content Include="Scripts\app\course\view\photo.tmpl.html" />
     <Content Include="Scripts\app\course\view\quizeResult.tmpl.html" />
     <Content Include="Scripts\app\board\view\forum.tmpl.html" />
@@ -1175,6 +1176,7 @@
     <TypeScriptCompile Include="Scripts\app\settings\controller\CourseManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\EventManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\EventManagementModalController.ts" />
+    <TypeScriptCompile Include="Scripts\app\course\controller\HandoutModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\MainSettingController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\BannerManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\NewsManagementController.ts" />
@@ -1215,6 +1217,7 @@
     <TypeScriptCompile Include="Scripts\model\exam.ts" />
     <TypeScriptCompile Include="Scripts\model\forumAndComments.ts" />
     <TypeScriptCompile Include="Scripts\model\actionMode.ts" />
+    <TypeScriptCompile Include="Scripts\model\handout.ts" />
     <TypeScriptCompile Include="Scripts\model\HttpStatusCode.ts" />
     <TypeScriptCompile Include="Scripts\model\nameValue.ts" />
     <TypeScriptCompile Include="Scripts\model\news.ts" />

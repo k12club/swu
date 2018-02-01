@@ -26,6 +26,7 @@ namespace Swu.Portal.Web.Api
     public class CourseController : ApiController
     {
         private const string UPLOAD_DIR = "FileUpload/photo/";
+        private const string UPLOAD_HANDOUT_DIR = "FileUpload/handout/";
         private readonly IDateTimeRepository _datetimeRepository;
         private readonly IRepository2<Course> _courseRepository;
         private readonly IRepository2<PhotoAlbum> _photoAlbumRepository;
@@ -42,6 +43,8 @@ namespace Swu.Portal.Web.Api
         private readonly IStudentScoreService _studentScoreService;
         private readonly IRepository<Banner> _bannerRepository;
         private readonly IBannerService _bannerService;
+        private readonly IRepository<Handout> _handoutRepository;
+        private readonly IHandoutService _handoutService;
         public CourseController(
             IDateTimeRepository datetimeRepository,
             IRepository2<Course> courseRepository,
@@ -58,7 +61,9 @@ namespace Swu.Portal.Web.Api
             IStudentCourseService studentCourseService,
             IStudentScoreService studentScoreService,
             IBannerService bannerService,
-            IRepository<Banner> bannerRepository)
+            IRepository<Banner> bannerRepository,
+            IRepository<Handout> handoutRepository,
+            IHandoutService handoutService)
         {
             this._datetimeRepository = datetimeRepository;
             this._courseRepository = courseRepository;
@@ -76,6 +81,8 @@ namespace Swu.Portal.Web.Api
             this._studentScoreService = studentScoreService;
             this._bannerService = bannerService;
             this._bannerRepository = bannerRepository;
+            this._handoutRepository = handoutRepository;
+            this._handoutService = handoutService;
         }
         [HttpGet, Route("all")]
         public List<CourseCardProxy> GetAll()
@@ -566,6 +573,83 @@ namespace Swu.Portal.Web.Api
                     });
                 }
                 this._studentScoreService.UpdateScores(updateList);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpPost, Route("uploadHandout")]
+        public async Task<HttpResponseMessage> UploadHandout()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            string root = HttpContext.Current.Server.MapPath("~/" + UPLOAD_HANDOUT_DIR);
+            var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                string path = string.Empty;
+                var courseId = "";
+                foreach (var key in provider.FormData)
+                {
+                    if (key.Equals("course"))
+                    {
+                        courseId = JsonConvert.DeserializeObject<string>(provider.FormData[key.ToString()]);
+                    }
+                }
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string fileName = file.Headers.ContentDisposition.FileName;
+                    if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                    {
+                        fileName = fileName.Trim('"');
+                    }
+                    if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                    {
+                        fileName = Path.GetFileName(fileName);
+                    }
+                    path = string.Format("{0}{1}", UPLOAD_HANDOUT_DIR, fileName);
+                    var moveTo = Path.Combine(root, fileName);
+                    if (File.Exists(moveTo))
+                    {
+                        File.Delete(moveTo);
+                    }
+                    File.Move(file.LocalFileName, moveTo);
+                    this._handoutService.CreateNew(new Handout
+                    {
+                        FilePath = path,
+                        CourseId = courseId
+                    });
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+        [HttpGet, Route("getHandouts")]
+        public List<HandoutProxy> GetHandouts(string courseId)
+        {
+            return this._handoutRepository.List.Where(i => i.CourseId == courseId)
+                .Select(i => new HandoutProxy
+                {
+                    Id = i.Id,
+                    FilePath = i.FilePath
+                }).ToList();
+        }
+        [HttpGet, Route("removeHandout")]
+        public HttpResponseMessage RemoveHandout(int id)
+        {
+            try
+            {
+                var handout = this._handoutRepository.FindById(id);
+                this._handoutService.Delete(handout);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception e)

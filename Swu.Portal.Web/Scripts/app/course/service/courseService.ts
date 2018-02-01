@@ -13,6 +13,9 @@
         savePhoto(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
         removePhoto(photoId: number): ng.IPromise<HttpStatusCode>;
         saveStudentScores(scores: StudentScore[]): ng.IPromise<HttpStatusCode>;
+        addNewHandout(models: NamePairValue[]): ng.IPromise<HttpStatusCode>;
+        getHandouts(courseId: number): ng.IPromise<IHandout[]>;
+        removeHandout(id: number): ng.IPromise<HttpStatusCode>;
     }
     @Module("app")
     @Factory({ name: "courseService" })
@@ -50,6 +53,15 @@
         }
         saveStudentScores(scores: StudentScore[]): ng.IPromise<HttpStatusCode> {
             return this.apiService.postData<HttpStatusCode>(scores, "course/updateScores");
+        }
+        addNewHandout(models: NamePairValue[]): ng.IPromise<HttpStatusCode> {
+            return this.apiService.postWithFormData(models, "Course/uploadHandout");
+        }
+        getHandouts(courseId: number): ng.IPromise<IHandout[]> {
+            return this.apiService.getData<IHandout[]>("Course/getHandouts?courseId=" + courseId);
+        }
+        removeHandout(id: number): ng.IPromise<HttpStatusCode> {
+            return this.apiService.getData<HttpStatusCode>("course/removeHandout?id=" + id);
         }
     }
 }

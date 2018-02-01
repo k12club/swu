@@ -3127,6 +3127,51 @@ var Swu;
                     _this.toastr.error("Error");
                 });
             };
+            this.$scope.addNewHandout = function (id) {
+                var options = {
+                    templateUrl: '/Scripts/app/course/view/handout.tmpl.html',
+                    controller: Swu.HandoutModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        courseId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.currentUser.id;
+                        },
+                        mode: function () {
+                            return Swu.actionMode.addNew;
+                        }
+                    },
+                    size: "md",
+                    backdrop: false
+                };
+                _this.$uibModal.open(options).result.then(function () {
+                    _this.$scope.getCourse(_this.$scope.id);
+                    _this.$scope.getHandouts(_this.$scope.id);
+                });
+            };
+            this.$scope.getHandouts = function (id) {
+                var courseId = _this.$scope.id;
+                _this.courseService.getHandouts(courseId).then(function (response) {
+                    _this.$scope.handouts = response;
+                    console.log(response);
+                    _.map(_this.$scope.handouts, function (h) {
+                        h.name = h.path.split('\\').pop().split('/').pop();
+                    });
+                }, function (error) { });
+            };
+            this.$scope.removeHandout = function (id) {
+                _this.courseService.removeHandout(id).then(function (response) {
+                    _this.$scope.getCourse(_this.$scope.id);
+                    _this.$scope.getHandouts(_this.$scope.id);
+                    _this.toastr.success("Success");
+                }, function (error) {
+                    _this.toastr.error("Error");
+                });
+            };
             $scope.survey = function (link) {
                 var prefix = 'http://';
                 if (link.substr(0, prefix.length) !== prefix) {
@@ -3141,6 +3186,7 @@ var Swu;
             this.$scope.splitStudents2 = [];
             this.$scope.hasPermission = false;
             this.$scope.getCourse(this.$scope.id);
+            this.$scope.getHandouts(this.$scope.id);
         };
         ;
         CourseController.$inject = ["$scope", "$state", "courseService", "$stateParams", "$sce", "$uibModal", "AuthServices", "toastr"];
@@ -3151,6 +3197,73 @@ var Swu;
         return CourseController;
     }());
     Swu.CourseController = CourseController;
+})(Swu || (Swu = {}));
+var Swu;
+(function (Swu) {
+    var HandoutModalController = (function () {
+        function HandoutModalController($scope, $state, courseService, toastr, $modalInstance, profileService, auth, id, courseId, userId, mode) {
+            var _this = this;
+            this.$scope = $scope;
+            this.$state = $state;
+            this.courseService = courseService;
+            this.toastr = toastr;
+            this.$modalInstance = $modalInstance;
+            this.profileService = profileService;
+            this.auth = auth;
+            this.id = id;
+            this.courseId = courseId;
+            this.userId = userId;
+            this.mode = mode;
+            this.$scope.id = id;
+            this.$scope.courseId = courseId;
+            this.$scope.currentUserId = userId;
+            this.$scope.mode = mode;
+            this.$scope.edit = function (id) {
+            };
+            this.$scope.validate = function () {
+                $('form').validator();
+            };
+            this.$scope.isValid = function () {
+                return ($('#form').validator('validate').has('.has-error').length === 0);
+            };
+            this.$scope.cancel = function () {
+                _this.$modalInstance.dismiss("");
+            };
+            this.$scope.save = function () {
+                if (_this.$scope.isValid()) {
+                    var models = [];
+                    models.push({ name: "file", value: _this.$scope.file });
+                    models.push({ name: "course", value: _this.$scope.courseId });
+                    console.log(models);
+                    _this.courseService.addNewHandout(models).then(function (response) {
+                        _this.$modalInstance.close(response);
+                    }, function (error) { });
+                }
+            };
+            $scope.delete = function () {
+            };
+            this.init();
+        }
+        HandoutModalController.prototype.init = function () {
+            if (this.$scope.mode == 1) {
+                this.$scope.mode = Swu.actionMode.addNew;
+                this.$scope.title = "Add New File";
+            }
+            else if (this.$scope.mode == 2) {
+                this.$scope.title = "Edit File";
+                this.$scope.mode = Swu.actionMode.edit;
+                this.$scope.edit(this.$scope.id);
+            }
+        };
+        ;
+        HandoutModalController.$inject = ["$scope", "$state", "courseService", "toastr", "$modalInstance", "profileService", "AuthServices", "id", "courseId", "userId", "mode"];
+        HandoutModalController = __decorate([
+            Swu.Module("app"),
+            Swu.Controller({ name: "HandoutModalController" })
+        ], HandoutModalController);
+        return HandoutModalController;
+    }());
+    Swu.HandoutModalController = HandoutModalController;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
@@ -3458,6 +3571,15 @@ var Swu;
         };
         courseService.prototype.saveStudentScores = function (scores) {
             return this.apiService.postData(scores, "course/updateScores");
+        };
+        courseService.prototype.addNewHandout = function (models) {
+            return this.apiService.postWithFormData(models, "Course/uploadHandout");
+        };
+        courseService.prototype.getHandouts = function (courseId) {
+            return this.apiService.getData("Course/getHandouts?courseId=" + courseId);
+        };
+        courseService.prototype.removeHandout = function (id) {
+            return this.apiService.getData("course/removeHandout?id=" + id);
         };
         courseService.$inject = ['apiService', 'AppConstant'];
         courseService = __decorate([

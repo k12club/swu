@@ -5,6 +5,7 @@
         courseDetail: ICourseAllDetail;
         splitStudents1: IStudentDetail[];
         splitStudents2: IStudentDetail[];
+        handouts: IHandout[];
         getCourse(id: number): void;
         render(photos: IPhoto[]): void;
         registerScript(): void;
@@ -12,6 +13,7 @@
         canSeeQuizeResult: boolean;
         canTakeCourse: boolean;
         html: string;
+        file: any;
 
         addNew(): void;
         edit(id: number): void;
@@ -24,6 +26,9 @@
         addNewPhoto(id: string): void;
         removePhoto(id: number): void;
         survey(link: string): void;
+        addNewHandout(id: string): void;
+        getHandouts(id: number): void;
+        removeHandout(id: number): void;
     }
     @Module("app")
     @Controller({ name: "CourseController" })
@@ -256,6 +261,51 @@
                     this.toastr.error("Error");
                 });
             };
+            this.$scope.addNewHandout = (id: string): void => {
+                var options: ng.ui.bootstrap.IModalSettings = {
+                    templateUrl: '/Scripts/app/course/view/handout.tmpl.html',
+                    controller: HandoutModalController,
+                    resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        courseId: function () {
+                            return $scope.id;
+                        },
+                        userId: function () {
+                            return $scope.currentUser.id;
+                        },
+                        mode: function () {
+                            return actionMode.addNew;
+                        }
+                    },
+                    size: "md",
+                    backdrop: false
+                };
+                this.$uibModal.open(options).result.then(() => {
+                    this.$scope.getCourse(this.$scope.id);
+                    this.$scope.getHandouts(this.$scope.id);
+                });
+            };
+            this.$scope.getHandouts = (id: number): void => {
+                var courseId = this.$scope.id;
+                this.courseService.getHandouts(courseId).then((response) => {
+                    this.$scope.handouts = response;
+                    console.log(response);
+                    _.map(this.$scope.handouts, function (h) {
+                        h.name = h.path.split('\\').pop().split('/').pop()
+                    });
+                }, (error) => { });
+            };
+            this.$scope.removeHandout = (id: number): void => {
+                this.courseService.removeHandout(id).then((response) => {
+                    this.$scope.getCourse(this.$scope.id);
+                    this.$scope.getHandouts(this.$scope.id);
+                    this.toastr.success("Success");
+                }, (error) => {
+                    this.toastr.error("Error");
+                });
+            };
             $scope.survey = (link: string) => {
                 var prefix = 'http://';
                 if (link.substr(0, prefix.length) !== prefix) {
@@ -270,6 +320,7 @@
             this.$scope.splitStudents2 = [];
             this.$scope.hasPermission = false;
             this.$scope.getCourse(this.$scope.id);
+            this.$scope.getHandouts(this.$scope.id);
         };
 
     }

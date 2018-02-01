@@ -182,6 +182,7 @@
     <Compile Include="Proxy\ExamRegistrationProxy.cs" />
     <Compile Include="Proxy\ForumProxy.cs" />
     <Compile Include="Proxy\ForumDetailProxy.cs" />
+    <Compile Include="Proxy\HandoutProxy.cs" />
     <Compile Include="Proxy\IMultimedia.cs" />
     <Compile Include="Proxy\MoreDetail.cs" />
     <Compile Include="Proxy\NewsProxy.cs" />

@@ -56,9 +56,11 @@ namespace Swu.Portal.Web
             builder.RegisterType<BannerService>().As<IBannerService>().InstancePerRequest();
             builder.RegisterType<BannerRepository>().As<IRepository<Banner>>().InstancePerRequest();
             builder.RegisterType<NewsService>().As<INewsService>().InstancePerRequest();
-
             builder.RegisterType<AlumniService>().As<IAlumniService>().InstancePerRequest();
             builder.RegisterType<AlumniRepository>().As<IRepository<Alumni>>().InstancePerRequest();
+
+            builder.RegisterType<HandoutService>().As<IHandoutService>().InstancePerRequest();
+            builder.RegisterType<HandoutRepository>().As<IRepository<Handout>>().InstancePerRequest();
 
             builder.RegisterType<ReferenceUserService>().As<IReferenceUserService>().InstancePerRequest();
             //builder.RegisterType<ReferenceUserRepository>().As<IRepository<ReferenceUser>>().InstancePerRequest();

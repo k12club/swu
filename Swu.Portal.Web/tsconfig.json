@@ -56,9 +56,11 @@
     "Scripts/app/home/model/course-card.ts",
     "Scripts/app/home/model/slider.ts",
     "Scripts/app/home/model/exam-clock.ts",
+
     "Scripts/app/home/service/albumService.ts",
 
     "Scripts/app/course/controller/CourseController.ts",
+    "Scripts/app/course/controller/HandoutModalController.ts",
     "Scripts/app/course/controller/CourseListController.ts",
     "Scripts/app/course/controller/CurriculumModalController.ts",
     "Scripts/app/course/controller/PhotoModalController.ts",
@@ -155,7 +157,8 @@
     "Scripts/model/nameValue.ts",
     "Scripts/model/HttpStatusCode.ts",
     "Scripts/model/studentScore.ts",
-    "Scripts/model/email.ts"
+    "Scripts/model/email.ts",
+    "Scripts/model/handout.ts"
 
   ],
   "exclude": [

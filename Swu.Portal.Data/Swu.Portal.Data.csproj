@@ -78,6 +78,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ForumCategory.cs" />
+    <Compile Include="Models\Handout.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\ParentProfile.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\CurriculumRepository.cs" />
     <Compile Include="Repository\EventRepository.cs" />
+    <Compile Include="Repository\HandoutRepository.cs" />
     <Compile Include="Repository\NewsRepository.cs" />
     <Compile Include="Repository\ForumCategoryRepository.cs" />
     <Compile Include="Repository\CourseCategoryRepository.cs" />

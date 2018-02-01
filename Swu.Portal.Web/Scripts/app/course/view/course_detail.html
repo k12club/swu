@@ -56,6 +56,7 @@
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active"><a data-target="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
                                     <li role="presentation"><a data-target="#curriculum" aria-controls="curriculum" role="tab" data-toggle="tab">Curriculum</a></li>
+                                    <li role="presentation"><a data-target="#handout" aria-controls="handout" role="tab" data-toggle="tab">Handout</a></li>
                                     <li role="presentation"><a data-target="#teachers" aria-controls="teachers" role="tab" data-toggle="tab">Teachers</a></li>
                                     <li role="presentation"><a data-target="#students" aria-controls="students" role="tab" data-toggle="tab">Students</a></li>
                                     <li role="presentation"><a data-target="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photo Album</a></li>
@@ -106,7 +107,7 @@
                                                                 <li ng-click="edit(c.id)"><span class="flaticon-business text-thm2"></span>&nbsp;<b>{{c.name}}</b></li>
                                                                 <li>&nbsp;&nbsp;When: {{c.startDate|date:'dd/MM/yyyy'}}</li>
                                                                 <li>&nbsp;&nbsp;at: {{c.room}}</li>
-                                                                <li><span class="btn btn-sm irs-btn-thm3"  ng-show="canSeeQuizeResult || hasPermission"  ng-click="survey(c.surveyLink)">Survey</span></li>
+                                                                <li><span class="btn btn-sm irs-btn-thm3" ng-show="canSeeQuizeResult || hasPermission" ng-click="survey(c.surveyLink)">Survey</span></li>
                                                                 <li class="pull-right">{{c.numberOfTime}} hrs</li>
                                                             </ul>
                                                             <ul class="list-inline" ng-show="!hasPermission">
@@ -139,6 +140,23 @@
                                                         </a>
                                                     </li>
                                                 </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="handout">
+                                        <div class="col-md-12">
+                                            <div class="irs-cdtls-feture-bot2">
+                                                <div class="row" ng-show="hasPermission">
+                                                    <button type="button" class="btn btn-link pull-left" ng-click="addNewHandout()"><span class="glyphicon glyphicon-plus text-success" aria-hidden="true"></span> Add</button>
+                                                </div>
+                                                <div class="row">
+                                                    <form class="form form-inline">
+                                                        <div class="form-group" ng-show="handouts.length>0" ng-repeat="f in handouts" style="padding:0px 10px 0px 10px">
+                                                            <a href="{{f.path}}"><u>{{f.name}}</u></a>
+                                                            <button title='Remove' type='button' class='mfp-close3' ng-click="removeHandout(f.id)" ng-show="hasPermission">×</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
