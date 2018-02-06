@@ -614,16 +614,20 @@
     <Content Include="Content\images\team\7.jpg" />
     <Content Include="Content\images\team\8.jpg" />
     <Content Include="Content\images\team\9.jpg" />
+    <Content Include="Content\images\team\default.jpg" />
     <Content Include="Content\images\team\event-participater1.jpg" />
     <Content Include="Content\images\team\event-participater2.jpg" />
     <Content Include="Content\images\team\event-participater3.jpg" />
     <Content Include="Content\images\team\event-participater4.jpg" />
     <Content Include="Content\images\team\s1.png" />
+    <Content Include="Content\images\team\Susan.jpg" />
     <Content Include="Content\images\team\tmd1.png" />
     <Content Include="Content\images\team\tsm1.png" />
     <Content Include="Content\images\team\tsm2.png" />
     <Content Include="Content\images\team\tsm3.png" />
+    <Content Include="Content\images\team\Vincent.jpg" />
     <Content Include="Content\images\team\xs1.png" />
+    <Content Include="Content\images\team\Yvonne.jpg" />
     <Content Include="Content\images\testimonial\1.png" />
     <Content Include="Content\images\testimonial\2.png" />
     <Content Include="Content\images\testimonial\3.png" />
@@ -957,6 +961,7 @@
     <Content Include="Scripts\app\login\view\login.html" />
     <Content Include="Scripts\app\menu\view\nav.html" />
     <Content Include="Scripts\app\photo\view\photo.html" />
+    <Content Include="Scripts\app\qualification\view\qualification.html" />
     <Content Include="Scripts\app\settings\view\album.html" />
     <Content Include="Scripts\app\settings\view\album.tmpl.html" />
     <Content Include="Scripts\app\settings\view\alumni.html" />
@@ -1050,6 +1055,7 @@
     <Folder Include="Models\" />
     <Folder Include="Scripts\app\forum\model\" />
     <Folder Include="Scripts\app\photo\service\" />
+    <Folder Include="Scripts\app\qualification\service\" />
     <Folder Include="Scripts\app\student\" />
     <Folder Include="Scripts\config\" />
     <Folder Include="Scripts\run\" />
@@ -1168,6 +1174,8 @@
     <TypeScriptCompile Include="Scripts\app\menu\controller\NavController.ts" />
     <TypeScriptCompile Include="Scripts\app\photo\app_routing.ts" />
     <TypeScriptCompile Include="Scripts\app\photo\controller\PhotoController.ts" />
+    <TypeScriptCompile Include="Scripts\app\qualification\app_routing.ts" />
+    <TypeScriptCompile Include="Scripts\app\qualification\controller\QualificationController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\AlbumManagementController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\AlbumManagementModalController.ts" />
     <TypeScriptCompile Include="Scripts\app\settings\controller\AlumniManagementController.ts" />

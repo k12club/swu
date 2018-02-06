@@ -31,6 +31,7 @@
     "Scripts/app/faq/app_routing.ts",
     "Scripts/app/alumni/app_routing.ts",
     "Scripts/app/photo/app_routing.ts",
+    "Scripts/app/qualification/app_routing.ts",
 
     "Scripts/app/menu/controller/NavController.ts",
     "Scripts/app/home/controller/HomeController.ts",
@@ -90,6 +91,8 @@
     "Scripts/app/contact/service/contractService.ts",
 
     "Scripts/app/photo/controller/PhotoController.ts",
+
+    "Scripts/app/qualification/controller/QualificationController.ts",
 
     "Scripts/app/settings/controller/MainSettingController.ts",
     "Scripts/app/settings/controller/ProfileController.ts",
