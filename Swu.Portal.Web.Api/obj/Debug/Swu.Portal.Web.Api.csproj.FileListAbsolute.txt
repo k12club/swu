@@ -64,6 +64,8 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Autofac.Integration.WebApi.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\AutoMapper.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.SqlServer.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.DataSet.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.Core.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
@@ -96,6 +98,8 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Autofac.Integration.WebApi.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\AutoMapper.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\EntityFramework.SqlServer.xml
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.xml
+D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.DataSet.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
@@ -116,7 +120,3 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Razor.xml
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.dll
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.pdb
-D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.DataSet.dll
-D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.dll
-D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.xml
-D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\ExcelDataReader.DataSet.xml

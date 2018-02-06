@@ -72,15 +72,26 @@
     </div>
 </section>
 <script>
-        if($('#map-location').length){
+    if ($('#map-location').length) {
         var map;
         map = new GMaps({
             el: '#map-location',
             zoom: 15,
-            scrollwheel:false,
+            scrollwheel: false,
             //Set Latitude and Longitude Here
             lat: 13.745429,
             lng: 100.565277
+        });
+        map.addMarker({
+            lat: 13.745429,
+            lng: 100.565277,
+            title: 'Srinakharinwirot University',
+            click: function (e) {
+                //alert('You clicked in this marker');
+            },
+            infoWindow: {
+                content: '<div>4th Floor, Faculty of Medicine Srinakharinwirot UniversitSukhumvit 23</div><div>Bangkok 10110 THAILAND</div>'
+            }
         });
     }
 </script>

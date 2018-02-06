@@ -20,6 +20,8 @@ D:\Git\swu\Swu.Portal.Web\bin\Autofac.Integration.Owin.dll
 D:\Git\swu\Swu.Portal.Web\bin\Autofac.Integration.WebApi.dll
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.dll
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.SqlServer.dll
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.DataSet.dll
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.dll
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.Core.dll
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.AspNet.Identity.Owin.dll
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -65,6 +67,8 @@ D:\Git\swu\Swu.Portal.Web\bin\Autofac.Integration.Owin.xml
 D:\Git\swu\Swu.Portal.Web\bin\Autofac.Integration.WebApi.xml
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.xml
 D:\Git\swu\Swu.Portal.Web\bin\EntityFramework.SqlServer.xml
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.xml
+D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.DataSet.xml
 D:\Git\swu\Swu.Portal.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Git\swu\Swu.Portal.Web\bin\System.Net.Http.Formatting.xml
 D:\Git\swu\Swu.Portal.Web\bin\System.Web.Http.xml
@@ -94,7 +98,3 @@ D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.xml
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.pdb
-D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.DataSet.dll
-D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.dll
-D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.xml
-D:\Git\swu\Swu.Portal.Web\bin\ExcelDataReader.DataSet.xml
