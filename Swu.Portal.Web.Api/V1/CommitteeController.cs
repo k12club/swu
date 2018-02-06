@@ -152,15 +152,51 @@ namespace Swu.Portal.Web.Api
             return new List<CommitteeProxy> {
                 new CommitteeProxy {
                     ImageUrl = "Content/images/team/Susan.jpg",
-                    Name_EN = "Associate Professor Dr. Susan Anderson",
-                    Position_EN = "Programme Director",
+                    Name_EN = "Dr. Susan Anderson",
+                    Position_EN = "Associate Professor",
                     Description_EN = "",
-                    Name_TH = "Associate Professor Dr. Susan Anderson",
-                    Position_TH = "Programme Director",
+                    Name_TH = "Dr. Susan Anderson",
+                    Position_TH = "Associate Professor",
                     Description_TH = "",
                     Phone = "01332 724 609",
                     Room="",
                     Email="susan.anderson@nottingham.ac.uk"
+                },
+                new CommitteeProxy {
+                    ImageUrl = "Content/images/team/Vincent.jpg",
+                    Name_EN = "Dr. Vincent Wilson",
+                    Position_EN = "Associate Professor",
+                    Description_EN = "",
+                    Name_TH = "Dr. Vincent Wilson",
+                    Position_TH = "Associate Professor",
+                    Description_TH = "",
+                    Phone = "0115 82 30189, 0115 82 30142",
+                    Room="",
+                    Email="vince.wilson@nottingham.ac.uk"
+                },
+                new CommitteeProxy {
+                    ImageUrl = "Content/images/team/Yvonne.jpg",
+                    Name_EN = "Dr. Yvonne Mbaki",
+                    Position_EN = "Associate Professor",
+                    Description_EN = "",
+                    Name_TH = "Dr. Yvonne Mbaki",
+                    Position_TH = "Associate Professor",
+                    Description_TH = "",
+                    Phone = "0115 823 0160",
+                    Room="",
+                    Email="Yvonne.Mbaki@nottingham.ac.uk"
+                },
+                new CommitteeProxy {
+                    ImageUrl = "Content/images/team/default.jpg",
+                    Name_EN = "Dr. William Dunn",
+                    Position_EN = "Associate Professor",
+                    Description_EN = "",
+                    Name_TH = "Dr. William Dunn",
+                    Position_TH = "Associate Professor",
+                    Description_TH = "",
+                    Phone = "0115 82 30188, 0115 82 30142",
+                    Room="",
+                    Email="william.dunn@nottingham.ac.uk"
                 },
             };
         }
