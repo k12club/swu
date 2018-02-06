@@ -258,7 +258,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="additional config.txt" />
+    <Content Include="additional config for dev.txt" />
+    <Content Include="additional config for deployment.txt" />
     <Content Include="Content\angular-material.css" />
     <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\angular-toastr.css" />
