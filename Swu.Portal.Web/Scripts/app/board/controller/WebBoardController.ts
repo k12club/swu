@@ -130,15 +130,20 @@
                 this.$scope.search();
             };
             this.$scope.search = () => {
+                var _first = 0;
                 switch (this.$scope.type) {
                     case 1: {
                         this.$scope.categoryName = "Forums";
                         this.webboardService.getForumsCategory().then((response) => {
                             this.$scope.categorys = response;
+                            if (this.$scope.categorys.length > 0)
+                            {
+                                _first = _.first($scope.categorys).id;
+                            }
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.forum({id:" + c.id + "})";
                             });
-                            $state.go('board.forum', { 'id': _.first($scope.categorys).id });
+                            $state.go('board.forum', { 'id': _first });
                         }, (error) => { });
                         break;
                     }
@@ -146,10 +151,13 @@
                         this.$scope.categoryName = "Group Courses";
                         this.webboardService.getCourseCategory().then((response) => {
                             this.$scope.categorys = response;
+                            if (this.$scope.categorys.length > 0) {
+                                _first = _.first($scope.categorys).id;
+                            }
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.course({id:" + c.id + "})";
                             });
-                            $state.go('board.course', { 'id': _.first($scope.categorys).id });
+                            $state.go('board.course', { 'id': _first });
                         }, (error) => { });
                         break;
                     }
@@ -157,10 +165,13 @@
                         this.$scope.categoryName = "Research Type";
                         this.webboardService.getResearchCategory().then((response) => {
                             this.$scope.categorys = response;
+                            if (this.$scope.categorys.length > 0) {
+                                _first = _.first($scope.categorys).id;
+                            }
                             _.map(this.$scope.categorys, function (c) {
                                 c.link = "board.research({id:" + c.id + "})";
                             });
-                            $state.go('board.research', { 'id': _.first($scope.categorys).id });
+                            $state.go('board.research', { 'id': _first });
                         }, (error) => { });
                         break;
                     }

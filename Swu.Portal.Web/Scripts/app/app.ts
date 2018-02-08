@@ -365,7 +365,17 @@ module Swu {
             };
         })
         .run(["$state", "$http", "$rootScope", "AppConstant", "AuthServices", "$window", function ($state: ng.ui.IStateService, $http: ng.IHttpService, $rootScope: IRootScope, AppConstant: AppConstant, auth: IAuthServices, $window: ng.IWindowService) {
+            $rootScope.$on('$stateChangeStart', function (evt, to, params) {
+                console.log('next state:' + to.name);
+                console.log(params);
+                if ($state.current.name == 'board' && to.name == 'app') {
+                    console.log('hit');
+                    evt.preventDefault();
+                    //$state.go(to.redirectTo, params)
+                }
+            });
             $rootScope.$on("$stateChangeSuccess", function () {
+                console.log('current state:' + $state.current.name);
                 var exceptGotoTopStateList = AppConstant.exceptGotoTopStateList;
                 var result = _.contains(exceptGotoTopStateList, $state.current.name);
                 if (!result) {

@@ -675,9 +675,16 @@
     <Content Include="Content\MaterialIcons-Regular.ijmap.txt" />
     <Content Include="Content\MaterialIcons-Regular.svg" />
     <Content Include="favicon.ico" />
+    <Content Include="FileUpload\alumni 2008.xlsx" />
+    <Content Include="FileUpload\alumni\alumni 2007 - Copy.xlsx" />
+    <Content Include="FileUpload\alumni\alumni 2008.xlsx" />
+    <Content Include="FileUpload\alumni\alumni 2009.xlsx" />
+    <Content Include="FileUpload\banner\banner1.jpg" />
     <Content Include="FileUpload\banner\h4.jpg" />
     <Content Include="FileUpload\banner\image1.jpeg" />
     <Content Include="FileUpload\banner\image2.jpg" />
+    <Content Include="FileUpload\banner\รูปจากมศวค่ะ_๑๗๑๒๒๕_0003.jpg" />
+    <Content Include="FileUpload\banner\รูปจากมศวค่ะ_๑๗๑๒๒๕_0007.jpg" />
     <Content Include="FileUpload\news\1.jpg" />
     <Content Include="FileUpload\news\20171_547e50695bacd.imageo-900x675.jpg" />
     <Content Include="FileUpload\news\know-1 %281%29.jpg" />
@@ -725,6 +732,7 @@
     <Content Include="FileUpload\photo\0215d545-0bdf-4d4d-bc92-418f97b6758e\รับนิสิต 61_๑๗๑๒๑๓_0020.jpg" />
     <Content Include="FileUpload\photo\0215d545-0bdf-4d4d-bc92-418f97b6758e\รับนิสิต 61_๑๗๑๒๑๓_0021.jpg" />
     <Content Include="FileUpload\photo\0215d545-0bdf-4d4d-bc92-418f97b6758e\รับนิสิต 61_๑๗๑๒๑๓_0022.jpg" />
+    <Content Include="FileUpload\photo\1.jpg" />
     <Content Include="FileUpload\photo\2a682751-ff56-4c56-9022-b956108927b9\รับนิสิต 61_๑๗๑๒๑๓_0001.jpg" />
     <Content Include="FileUpload\photo\2a682751-ff56-4c56-9022-b956108927b9\รับนิสิต 61_๑๗๑๒๑๓_0002.jpg" />
     <Content Include="FileUpload\photo\2a682751-ff56-4c56-9022-b956108927b9\รับนิสิต 61_๑๗๑๒๑๓_0003.jpg" />
@@ -810,6 +818,10 @@
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0020.jpg" />
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0021.jpg" />
     <Content Include="FileUpload\photo\8314cf82-266b-45a0-9f5e-365e2360bd31\รับนิสิต 61_๑๗๑๒๑๓_0022.jpg" />
+    <Content Include="FileUpload\photo\BodyPart_1ec65b96-b850-4edc-a8f5-50788b6b735c" />
+    <Content Include="FileUpload\photo\BodyPart_3a5a4b17-614b-4e7d-b778-2387b7c3e093" />
+    <Content Include="FileUpload\photo\BodyPart_43fd607f-c04d-4553-be93-04f8db120e80" />
+    <Content Include="FileUpload\photo\BodyPart_834e636a-0ac3-4b1a-aca2-c0aae620c4df" />
     <Content Include="FileUpload\photo\d6dde70d-710d-4228-a64d-1f3386f309b8\14931.jpg" />
     <Content Include="FileUpload\photo\d6dde70d-710d-4228-a64d-1f3386f309b8\14932.jpg" />
     <Content Include="FileUpload\photo\d6dde70d-710d-4228-a64d-1f3386f309b8\14933.jpg" />
@@ -868,6 +880,10 @@
     <Content Include="FileUpload\photo\d93e9a70-428c-4daa-842c-911b3b1d52be\รับนิสิต 61_๑๗๑๒๑๓_0022.jpg" />
     <Content Include="FileUpload\users\14031768-88b9-463a-ab06-b69a1b4717bc.jpg" />
     <Content Include="FileUpload\users\54cc98b1-aa85-4319-b7cb-494a0ecbf857.jpg" />
+    <Content Include="FileUpload\users\5b1d0528-6467-4650-9a04-2dfc1a41a0b3.jpg" />
+    <Content Include="FileUpload\users\a13648e5-4a35-44d6-aabd-35295ec2d8fa.jpg" />
+    <Content Include="FileUpload\users\c0dc5b50-eb13-4764-bc05-a46ca7ac6666.jpg" />
+    <Content Include="FileUpload\users\c5e09aae-69cb-4d34-a368-ca8d4410b4ca.jpg" />
     <Content Include="FileUpload\users\ee6858ed-21a3-47e9-9d8c-5844aed9935a.png" />
     <Content Include="FileUpload\video\ss1.png" />
     <Content Include="FileUpload\video\ss2.png" />
@@ -921,7 +937,6 @@
     <Content Include="Scripts\angular\ui-bootstrap.js" />
     <Content Include="Scripts\angular\ui-date.js" />
     <Content Include="Scripts\angular\underscore.js" />
-    <Content Include="Scripts\app-bundles.js" />
     <Content Include="Scripts\app\alumni\view\alumni.html" />
     <Content Include="Scripts\app\alumni\view\default.html" />
     <Content Include="Scripts\app\alumni\main.html" />
@@ -1025,8 +1040,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="FileUpload\alumni\" />
     <Folder Include="FileUpload\course\" />
+    <Folder Include="FileUpload\handout\" />
     <Folder Include="FileUpload\personalFile\009064b7-deda-4d5a-91ed-b9d96ee05118\" />
     <Folder Include="FileUpload\personalFile\13539c1e-4e38-4281-aa20-52dc99d8bdb7\" />
     <Folder Include="FileUpload\personalFile\15ef80ed-980f-4995-8e92-c46e2f97f5c2\" />
@@ -1093,10 +1108,6 @@
     <Content Include="Content\MaterialIcons-Regular.ttf" />
     <Content Include="Content\MaterialIcons-Regular.woff" />
     <Content Include="Content\MaterialIcons-Regular.woff2" />
-    <Content Include="FileUpload\photo\BodyPart_1ec65b96-b850-4edc-a8f5-50788b6b735c" />
-    <Content Include="FileUpload\photo\BodyPart_3a5a4b17-614b-4e7d-b778-2387b7c3e093" />
-    <Content Include="FileUpload\photo\BodyPart_43fd607f-c04d-4553-be93-04f8db120e80" />
-    <Content Include="FileUpload\photo\BodyPart_834e636a-0ac3-4b1a-aca2-c0aae620c4df" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\angular\angular-animate.min.js.map" />
     <Content Include="Scripts\angular\angular-resource.min.js.map" />
