@@ -488,7 +488,8 @@ namespace Swu.Portal.Web.Api
                                 importData.Add(new AlumniProxy
                                 {
                                     StudentId = data.Rows[row].ItemArray[AlumniColumn.StudentID].ToString(),
-                                    FullName = data.Rows[row].ItemArray[AlumniColumn.FullName].ToString(),
+                                    FullName_TH = data.Rows[row].ItemArray[AlumniColumn.FullName_TH].ToString(),
+                                    FullName_EN = data.Rows[row].ItemArray[AlumniColumn.FullName_EN].ToString(),
                                     GraduatedYear = data.Rows[row].ItemArray[AlumniColumn.GraduatedYear].ToString(),
                                 });
                             }
@@ -501,7 +502,8 @@ namespace Swu.Portal.Web.Api
                                 this._alumniService.CreateNew(new Alumni
                                 {
                                     StudentId = alumni.StudentId,
-                                    FullName = alumni.FullName,
+                                    FullName = alumni.FullName_TH,
+                                    FullName_EN = alumni.FullName_EN,
                                     GraduatedYear = alumni.GraduatedYear
                                 });
                             }

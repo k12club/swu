@@ -977,6 +977,8 @@
     <Content Include="Scripts\app\login\view\login.html" />
     <Content Include="Scripts\app\menu\view\nav.html" />
     <Content Include="Scripts\app\photo\view\photo.html" />
+    <Content Include="Scripts\app\qualification\view\qen.html" />
+    <Content Include="Scripts\app\qualification\view\qth.html" />
     <Content Include="Scripts\app\qualification\view\qualification.html" />
     <Content Include="Scripts\app\settings\view\album.html" />
     <Content Include="Scripts\app\settings\view\album.tmpl.html" />

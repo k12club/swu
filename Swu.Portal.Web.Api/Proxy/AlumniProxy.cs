@@ -11,8 +11,10 @@ namespace Swu.Portal.Web.Api.Proxy
     {
         [JsonProperty(PropertyName = "studentId")]
         public string StudentId { get; set; }
-        [JsonProperty(PropertyName = "fullName")]
-        public string FullName { get; set; }
+        [JsonProperty(PropertyName = "fullName_th")]
+        public string FullName_TH { get; set; }
+        [JsonProperty(PropertyName = "fullName_en")]
+        public string FullName_EN { get; set; }
         [JsonProperty(PropertyName = "graduatedYear")]
         public string GraduatedYear { get; set; }
         public AlumniProxy()

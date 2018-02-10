@@ -60,3 +60,7 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Release\System.Web.WebPages.Razor.xml
 D:\Git\swu\Swu.Portal.Web.Api\obj\Release\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\obj\Release\Swu.Portal.Web.Api.dll
 D:\Git\swu\Swu.Portal.Web.Api\obj\Release\Swu.Portal.Web.Api.pdb
+D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.DataSet.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.dll
+D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.xml
+D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.DataSet.xml

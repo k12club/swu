@@ -60,30 +60,6 @@ namespace Swu.Portal.Web.Api
                     Email=""
                 },
                 new CommitteeProxy {
-                    ImageUrl = "Content/images/team/4.jpg",
-                    Name_EN = "Dr.Nantana Chumchui, MD.",
-                    Position_EN = "Vice Dean of Academic Affairs",
-                    Description_EN = "",
-                    Name_TH = "ผศ.พญ.นันทนา ชุมช่วย (รองคณบดีฝ่ายการศึกษา)",
-                    Position_TH = "ที่ปรึกษา",
-                    Description_TH = "",
-                    Phone = "",
-                    Room="",
-                    Email=""
-                },
-                new CommitteeProxy {
-                    ImageUrl = "Content/images/team/5.jpg",
-                    Name_EN = "Assoc.Prof.Watchareewan Thongsaard, PhD.",
-                    Position_EN = "visory Board ",
-                    Description_EN = "",
-                    Name_TH = "รศ.ดร.วัชรีวรรณ ทองสะอาด",
-                    Position_TH = "ที่ปรึกษา",
-                    Description_TH = "",
-                    Phone = "",
-                    Room="",
-                    Email=""
-                },
-                new CommitteeProxy {
                     ImageUrl = "Content/images/team/6.jpg",
                     Name_EN = " Assoc.Prof.Ramida Wattanapokasin, PhD.",
                     Position_EN = "Programme Director",
@@ -102,6 +78,18 @@ namespace Swu.Portal.Web.Api
                     Description_EN = "",
                     Name_TH = "ผศ.นพ.มนะพล กุลปราณีต",
                     Position_TH = "รองประธานฯ",
+                    Description_TH = "",
+                    Phone = "",
+                    Room="",
+                    Email=""
+                },
+                new CommitteeProxy {
+                    ImageUrl = "Content/images/team/10.jpg",
+                    Name_EN = "Dr.Amarin Narkwichean",
+                    Position_EN = "Programme Secretary and Commitee",
+                    Description_EN = "",
+                    Name_TH = "นพ.อมรินทร์ นาควิเชียร",
+                    Position_TH = "กรรมการ และเลขานุการ",
                     Description_TH = "",
                     Phone = "",
                     Room="",
@@ -132,17 +120,17 @@ namespace Swu.Portal.Web.Api
                     Email=""
                 },
                 new CommitteeProxy {
-                    ImageUrl = "Content/images/team/10.jpg",
-                    Name_EN = "Dr.Amarin Narkwichean",
-                    Position_EN = "Programme Secretary and Commitee",
+                    ImageUrl = "Content/images/team/11.jpg",
+                    Name_EN = "ASSO.PROF. NARONGCHAI  YINGSAKMONGKOL, M.D.",
+                    Position_EN = "Vice Dean of Academic Affairs",
                     Description_EN = "",
-                    Name_TH = "นพ.อมรินทร์ นาควิเชียร",
-                    Position_TH = "กรรมการ และเลขานุการ",
+                    Name_TH = "ASSO.PROF. NARONGCHAI  YINGSAKMONGKOL, M.D.",
+                    Position_TH = "Vice Dean of Academic Affairs",
                     Description_TH = "",
                     Phone = "",
                     Room="",
                     Email=""
-                }
+                },
             };
         }
 
@@ -151,16 +139,16 @@ namespace Swu.Portal.Web.Api
         {
             return new List<CommitteeProxy> {
                 new CommitteeProxy {
-                    ImageUrl = "Content/images/team/Susan.jpg",
-                    Name_EN = "Dr. Susan Anderson",
+                    ImageUrl = "Content/images/team/William.jpg",
+                    Name_EN = "Dr. William Dunn",
                     Position_EN = "Associate Professor",
                     Description_EN = "",
-                    Name_TH = "Dr. Susan Anderson",
+                    Name_TH = "Dr. William Dunn",
                     Position_TH = "Associate Professor",
                     Description_TH = "",
-                    Phone = "01332 724 609",
+                    Phone = "0115 82 30188, 0115 82 30142",
                     Room="",
-                    Email="susan.anderson@nottingham.ac.uk"
+                    Email="william.dunn@nottingham.ac.uk"
                 },
                 new CommitteeProxy {
                     ImageUrl = "Content/images/team/Vincent.jpg",
@@ -174,6 +162,20 @@ namespace Swu.Portal.Web.Api
                     Room="",
                     Email="vince.wilson@nottingham.ac.uk"
                 },
+
+                new CommitteeProxy {
+                    ImageUrl = "Content/images/team/Susan.jpg",
+                    Name_EN = "Dr. Susan Anderson",
+                    Position_EN = "Associate Professor",
+                    Description_EN = "",
+                    Name_TH = "Dr. Susan Anderson",
+                    Position_TH = "Associate Professor",
+                    Description_TH = "",
+                    Phone = "01332 724 609",
+                    Room="",
+                    Email="susan.anderson@nottingham.ac.uk"
+                },
+                
                 new CommitteeProxy {
                     ImageUrl = "Content/images/team/Yvonne.jpg",
                     Name_EN = "Dr. Yvonne Mbaki",
@@ -185,18 +187,6 @@ namespace Swu.Portal.Web.Api
                     Phone = "0115 823 0160",
                     Room="",
                     Email="Yvonne.Mbaki@nottingham.ac.uk"
-                },
-                new CommitteeProxy {
-                    ImageUrl = "Content/images/team/default.jpg",
-                    Name_EN = "Dr. William Dunn",
-                    Position_EN = "Associate Professor",
-                    Description_EN = "",
-                    Name_TH = "Dr. William Dunn",
-                    Position_TH = "Associate Professor",
-                    Description_TH = "",
-                    Phone = "0115 82 30188, 0115 82 30142",
-                    Room="",
-                    Email="william.dunn@nottingham.ac.uk"
                 },
             };
         }

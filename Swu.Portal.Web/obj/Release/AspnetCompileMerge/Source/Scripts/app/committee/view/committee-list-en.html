@@ -1,9 +1,88 @@
-﻿<!-- Breadcrumbs Styles -->
+﻿<style>
+    /*Accordion*/
+    .accordion-option {
+        width: 100%;
+        float: left;
+        clear: both;
+        margin: 15px 0;
+    }
+
+        .accordion-option .title {
+            font-size: 20px;
+            font-weight: bold;
+            float: left;
+            padding: 0;
+            margin: 0;
+        }
+
+        .accordion-option .toggle-accordion {
+            float: right;
+            font-size: 16px;
+            color: #6a6c6f;
+        }
+
+            .accordion-option .toggle-accordion:before {
+                content: "Expand All";
+            }
+
+            .accordion-option .toggle-accordion.active:before {
+                content: "Collapse All";
+            }
+
+    .panel-default.expend > .panel-heading {
+        color: #333;
+        background-color: #fff;
+        border-color: #e4e5e7;
+        padding: 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        .panel-default.expend > .panel-heading span {
+            display: block;
+            padding: 10px 15px;
+        }
+
+            .panel-default.expend > .panel-heading span:after {
+                content: "";
+                position: relative;
+                top: 1px;
+                display: inline-block;
+                font-family: 'Glyphicons Halflings';
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                float: right;
+                transition: transform .25s linear;
+                -webkit-transition: -webkit-transform .25s linear;
+            }
+
+            .panel-default.expend > .panel-heading span[aria-expanded="true"] {
+                background-color: #eee;
+            }
+
+                .panel-default.expend > .panel-heading span[aria-expanded="true"]:after {
+                    content: "\2212";
+                    -webkit-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                }
+
+            .panel-default.expend > .panel-heading span[aria-expanded="false"]:after {
+                content: "\002b";
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+</style>
+<!-- Breadcrumbs Styles -->
 <section class="irs-ip-breadcrumbs">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3 text-center">
-                <h1 class="irs-bc-title">Program Committee (ENG)</h1>
+                <h1 class="irs-bc-title">Program Committee (TH)</h1>
             </div>
         </div>
     </div>
@@ -17,7 +96,7 @@
                 <ul class="list-inline irs-brdcrmb">
                     <li><a ui-sref="app">Home</a></li>
                     <li><a href="#"> > </a></li>
-                    <li><a class="active">Program Committee (ENG)</a></li>
+                    <li><a class="active">Program Committee (TH)</a></li>
                 </ul>
             </div>
         </div>
@@ -28,26 +107,216 @@
         <div class="row clearfix">
             <div class="col-sm-12 clearfix">
                 <div class="row clearfix">
-                    <!--<div class="irs-cl-list" ng-repeat="c in committee">
-                        <div class="col-xs-12 col-lg-2">
-                            <div class="irs-ctds-thumb">
-                                <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}">
-                                <div class="irs-cl-overlay"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-10">
-                            <div class="irs-cl-details">
-                                <div class="irs-courses-td-sngle-dtls">
-                                    <ul class="list-inline">
-                                        <li class="irs-name-tdsd">{{c.position}}</li>
-                                    </ul>
-                                    <h2>{{c.name}}</h2>
+                    <div class="row-fluid">
+                        <div class="accordion-option">
+                            <a href="javascript:void(0)" class="toggle-accordion active" accordion-id="#accordion"></a>
+                            <div class="clearfix"></div>
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default expend">
+                                    <div class="panel-heading" role="tab" id="h1">
+                                        <h4 class="panel-title">
+                                            <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c1" aria-expanded="true" aria-controls="c1">Associate Professor</span>
+                                        </h4>
+                                    </div>
+                                    <div id="c1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h1">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Associate Professor'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!--<div class="panel panel-default expend">
+                                    <div class="panel-heading" role="tab" id="h1">
+                                        <h4 class="panel-title">
+                                            <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c1" aria-expanded="true" aria-controls="c1">Advisory Board</span>
+                                        </h4>
+                                    </div>
+                                    <div id="c1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h1">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Advisory Board'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default expend">
+                                    <div class="panel-heading" role="tab" id="h2">
+                                        <h4 class="panel-title">
+                                            <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c2" aria-expanded="true" aria-controls="c2">Vice Dean of Academic Affairs</span>
+                                        </h4>
+                                    </div>
+                                    <div id="c2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h2">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Vice Dean of Academic Affairs'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default expend">
+                                    <div class="panel-heading" role="tab" id="h3">
+                                        <h4 class="panel-title">
+                                            <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c3" aria-expanded="true" aria-controls="c3">Programme Director</span>
+                                        </h4>
+                                    </div>
+                                    <div id="c3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h3">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Programme Director'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default expend">
+                                    <div class="panel-heading" role="tab" id="h4">
+                                        <h4 class="panel-title">
+                                            <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c4" aria-expanded="true" aria-controls="c4">Deputy Director</span>
+                                        </h4>
+                                    </div>
+                                    <div id="c4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h4">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Deputy Director'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default expend">
+                                    <div class="panel-heading" role="tab" id="h5">
+                                        <h4 class="panel-title">
+                                            <span role="button" data-toggle="collapse" data-parent="#accordion" href="#c5" aria-expanded="true" aria-controls="c5">Programme Secretary and Commitee</span>
+                                        </h4>
+                                    </div>
+                                    <div id="c5" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="h5">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding:5px;" ng-repeat="c in committee|filter:'Programme Secretary and Commitee'">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <div class="irs-ctds-thumb">
+                                                        <img class="img-responsive img-fluid" ng-src="../../../{{c.imageUrl}}" src="../../../Content/images/team/1.jpg">
+                                                        <div class="irs-cl-overlay"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-10">
+                                                    <div class="irs-cl-details">
+                                                        <div class="irs-courses-td-sngle-dtls">
+                                                            <ul class="list-inline">
+                                                                <li class="irs-name-tdsd ng-binding">{{c.position}}</li>
+                                                            </ul>
+                                                            <h2 class="ng-binding">{{c.name}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function () {
+        //Script registration for accordion
+        $(".toggle-accordion").on("click", function () {
+            var accordionId = $(this).attr("accordion-id"),
+              numPanelOpen = $(accordionId + ' .collapse.in').length;
+
+            $(this).toggleClass("active");
+
+            if (numPanelOpen == 0) {
+                openAllPanels(accordionId);
+            } else {
+                closeAllPanels(accordionId);
+            }
+        });
+        openAllPanels = function (aId) {
+            console.log("setAllPanelOpen");
+            $(aId + ' .panel-collapse:not(".in")').collapse('show');
+        }
+        closeAllPanels = function (aId) {
+            console.log("setAllPanelclose");
+            $(aId + ' .panel-collapse.in').collapse('hide');
+        }
+        $(".toggle-accordion").click();
+    });
+</script>

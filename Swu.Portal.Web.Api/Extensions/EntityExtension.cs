@@ -136,7 +136,7 @@ namespace Swu.Portal.Web.Api
             return new Data.Models.Alumni
             {
                 StudentId = a.StudentId,
-                FullName = a.FullName,
+                FullName = a.FullName_TH,
                 GraduatedYear = a.GraduatedYear
             };
         }
@@ -145,7 +145,8 @@ namespace Swu.Portal.Web.Api
             return new AlumniProxy
             {
                 StudentId = a.StudentId,
-                FullName = a.FullName,
+                FullName_TH = a.FullName,
+                FullName_EN = a.FullName_EN,
                 GraduatedYear = a.GraduatedYear
             };
         }

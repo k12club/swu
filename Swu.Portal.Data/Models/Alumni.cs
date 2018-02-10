@@ -15,6 +15,7 @@ namespace Swu.Portal.Data.Models
         public int Id { get; set; }
         public string StudentId { get; set; }
         public string FullName { get; set; }
+        public string FullName_EN { get; set; }
         public string GraduatedYear { get; set; }
     }
 }
