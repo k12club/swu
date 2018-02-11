@@ -404,7 +404,7 @@ section {
 
 .header-nav {
     left: 0;
-    position: absolute;
+    /*position: absolute;*/
     right: 0;
 }
 
@@ -548,7 +548,7 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
 }
 
     .irs-main-slider .item::before {
-        background-color: rgba(0, 0, 0, 0.8);
+        /*background-color: rgba(0, 0, 0, 0.8);*/
         content: "";
         height: 100%;
         left: 0;
@@ -563,7 +563,7 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
     }
 
     .irs-main-slider .irs-text-one {
-        color: #fff;
+        color: #000;
         font-size: 60px;
         font-weight: 500;
         line-height: 60px;
@@ -571,7 +571,7 @@ nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
     }
 
     .irs-main-slider .irs-text-three p {
-        color: #fff;
+        color: #000;
         font-size: 24px;
         font-weight: 300;
         margin-top: 35px;
