@@ -40,6 +40,7 @@ namespace Swu.Portal.Web.Api
             return this._videoRepository
                 .List
                 .Where(i=>i.IsActive)
+                .OrderBy(i=>i.CreatedDate)
                 .Select(i => new VideoProxy(i)).ToList();
         }
         [HttpGet, Route("getById")]

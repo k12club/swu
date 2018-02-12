@@ -44,6 +44,7 @@ namespace Swu.Portal.Web.Api
             return 
                 this._eventRepository.List
                 .Where(i => i.IsActive)
+                .OrderBy(i=>i.StartDate)
                 .Select(i => new EventProxy(i)).ToList();
         }
         [HttpGet, Route("allEvents")]

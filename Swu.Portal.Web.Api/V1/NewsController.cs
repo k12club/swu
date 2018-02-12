@@ -42,6 +42,7 @@ namespace Swu.Portal.Web.Api
             return this._newsRepository
                 .List
                 .Where(i => i.IsActive)
+                .OrderBy(i=>i.StartDate)
                 .Select(i => new NewsProxy(i)).ToList();
         }
         [HttpGet, Route("getById")]
