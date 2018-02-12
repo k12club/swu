@@ -180,7 +180,8 @@ namespace Swu.Portal.Data.Migrations
                 Description_TH = "",
                 Place_TH = "http://admission.swu.acth",
                 ImageUrl = "images/event/1.jpg",
-                StartDate = new DateTime(2017, 8, 14, 9, 0, 0).ToUniversalTime()
+                StartDate = new DateTime(2017, 8, 14, 9, 0, 0).ToUniversalTime(),
+                ApplicationUser = defaultUser
             };
             var e2 = new Event
             {
@@ -191,7 +192,8 @@ namespace Swu.Portal.Data.Migrations
                 Description_TH = "",
                 Place_TH = "http://admission.swu.acth",
                 ImageUrl = "images/event/1.jpg",
-                StartDate = new DateTime(2017, 8, 24, 9, 30, 0).ToUniversalTime()
+                StartDate = new DateTime(2017, 8, 24, 9, 30, 0).ToUniversalTime(),
+                ApplicationUser = defaultUser
             };
             var e3 = new Event
             {
@@ -204,7 +206,8 @@ namespace Swu.Portal.Data.Migrations
                 คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
                 Place_TH = "คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
                 ImageUrl = "images/event/1.jpg",
-                StartDate = new DateTime(2018, 1, 10, 9, 0, 0).ToUniversalTime()
+                StartDate = new DateTime(2018, 1, 10, 9, 0, 0).ToUniversalTime(),
+                ApplicationUser = defaultUser
             };
             var e4 = new Event
             {
@@ -215,7 +218,8 @@ namespace Swu.Portal.Data.Migrations
                 Description_TH = "",
                 Place_TH = "คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
                 ImageUrl = "images/event/1.jpg",
-                StartDate = new DateTime(2018, 1, 21, 9, 0, 0).ToUniversalTime()
+                StartDate = new DateTime(2018, 1, 21, 9, 0, 0).ToUniversalTime(),
+                ApplicationUser = defaultUser
             };
             var e5 = new Event
             {
@@ -226,7 +230,8 @@ namespace Swu.Portal.Data.Migrations
                 Description_TH = "",
                 Place_TH = "คณะแพทย์ศาตร์ มศว ประสานมิตร กรุงเทพฯ",
                 ImageUrl = "images/event/1.jpg",
-                StartDate = new DateTime(2018, 1, 21, 9, 0, 0).ToUniversalTime()
+                StartDate = new DateTime(2018, 1, 21, 9, 0, 0).ToUniversalTime(),
+                ApplicationUser = defaultUser
             };
             events.AddRange(new List<Event> { e1, e2, e3, e4, e5 });
             context.Events.AddRange(events);
