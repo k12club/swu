@@ -26,6 +26,7 @@ Check out
 * [moment]
 
 ## Versioning
+* version: v 2.0.0.0 , 15/02/2018 : UI and content updated, ready for release
 * version: v 1.2.0.0 , 13/09/2017 : authentication, authorization, user management and course management
 * version: v 1.1.0.0 , 20/08/2017 : multi language support
 * version: v 1.0.0 , 1/08/2017
