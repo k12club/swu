@@ -14,3 +14,5 @@ D:\Git\swu\Swu.Portal.Data\bin\Release\Microsoft.AspNet.Identity.EntityFramework
 D:\Git\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.dll
 D:\Git\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.pdb
+F:\Template\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.csprojAssemblyReference.cache
+F:\Template\swu\Swu.Portal.Data\obj\Release\Swu.Portal.Data.csproj.CoreCompileInputs.cache

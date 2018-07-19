@@ -2,3 +2,9 @@ D:\Git\swu\Swu.Portal.Core\bin\Release\Swu.Portal.Core.dll
 D:\Git\swu\Swu.Portal.Core\bin\Release\Swu.Portal.Core.pdb
 D:\Git\swu\Swu.Portal.Core\obj\Release\Swu.Portal.Core.dll
 D:\Git\swu\Swu.Portal.Core\obj\Release\Swu.Portal.Core.pdb
+F:\Template\swu\Swu.Portal.Core\bin\Release\Swu.Portal.Core.dll
+F:\Template\swu\Swu.Portal.Core\bin\Release\Swu.Portal.Core.pdb
+F:\Template\swu\Swu.Portal.Core\obj\Release\Swu.Portal.Core.csprojAssemblyReference.cache
+F:\Template\swu\Swu.Portal.Core\obj\Release\Swu.Portal.Core.csproj.CoreCompileInputs.cache
+F:\Template\swu\Swu.Portal.Core\obj\Release\Swu.Portal.Core.dll
+F:\Template\swu\Swu.Portal.Core\obj\Release\Swu.Portal.Core.pdb

@@ -64,3 +64,5 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.DataSet.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.dll
 D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.xml
 D:\Git\swu\Swu.Portal.Web.Api\bin\Release\ExcelDataReader.DataSet.xml
+F:\Template\swu\Swu.Portal.Web.Api\obj\Release\Swu.Portal.Web.Api.csprojAssemblyReference.cache
+F:\Template\swu\Swu.Portal.Web.Api\obj\Release\Swu.Portal.Web.Api.csproj.CoreCompileInputs.cache

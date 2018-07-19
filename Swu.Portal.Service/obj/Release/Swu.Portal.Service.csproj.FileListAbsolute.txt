@@ -21,3 +21,5 @@ D:\Git\swu\Swu.Portal.Service\bin\Release\Swu.Portal.Core.pdb
 D:\Git\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.dll
 D:\Git\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.pdb
+F:\Template\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.csprojAssemblyReference.cache
+F:\Template\swu\Swu.Portal.Service\obj\Release\Swu.Portal.Service.csproj.CoreCompileInputs.cache

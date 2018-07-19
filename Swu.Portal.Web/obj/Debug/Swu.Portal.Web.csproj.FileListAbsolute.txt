@@ -98,3 +98,4 @@ D:\Git\swu\Swu.Portal.Web\bin\AutoMapper.xml
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.dll
 D:\Git\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.pdb
+F:\Template\swu\Swu.Portal.Web\obj\Debug\Swu.Portal.Web.csprojAssemblyReference.cache

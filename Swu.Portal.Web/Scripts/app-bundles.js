@@ -148,7 +148,7 @@ var ngAnnotations;
         inlineArrayAnnotation.push(function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i - 0] = arguments[_i];
+                args[_i] = arguments[_i];
             }
             args.unshift(this);
             var instance = new (Function.prototype.bind.apply(constrFn, args));
@@ -200,7 +200,7 @@ var ngAnnotations;
         inlineArrayAnnotation.push(function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i - 0] = arguments[_i];
+                args[_i] = arguments[_i];
             }
             args.unshift(null, this);
             var instance = new (Function.prototype.bind.apply(config.service, args));
@@ -3272,7 +3272,7 @@ var Swu;
                     }, function (error) { });
                 }
             };
-            $scope.delete = function () {
+            $scope["delete"] = function () {
             };
             this.init();
         }
@@ -3407,7 +3407,7 @@ var Swu;
                     }, function (error) { });
                 }
             };
-            $scope.delete = function () {
+            $scope["delete"] = function () {
             };
             this.init();
         }
@@ -3480,7 +3480,7 @@ var Swu;
                     }, function (error) { });
                 }
             };
-            $scope.delete = function () {
+            $scope["delete"] = function () {
             };
             this.init();
         }
@@ -4273,7 +4273,7 @@ var Swu;
                     }, function (error) { });
                 }
             };
-            $scope.delete = function () {
+            $scope["delete"] = function () {
             };
             this.init();
         }
@@ -4347,7 +4347,7 @@ var Swu;
                     }, function (error) { });
                 }
             };
-            this.$scope.delete = function () {
+            this.$scope["delete"] = function () {
             };
             this.init();
         }
@@ -5562,7 +5562,7 @@ var Swu;
                     _this.$state.go("app", { reload: true });
                 }
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
                 _this.courseManagementService.deleteById(id).then(function (response) {
                     _this.$modalInstance.close();
                     _this.toastr.success("Success");
@@ -5734,7 +5734,7 @@ var Swu;
                     _this.$state.go("app", { reload: true });
                 }
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
                 _this.eventManagementService.deleteById(id).then(function (response) {
                     _this.$modalInstance.close();
                     _this.toastr.success("Success");
@@ -5901,7 +5901,7 @@ var Swu;
                     _this.$state.go("app", { reload: true });
                 }
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
                 _this.videoManagementService.deleteById(id).then(function (response) {
                     _this.$modalInstance.close();
                     _this.toastr.success("Success");
@@ -6070,7 +6070,7 @@ var Swu;
                     _this.$state.go("app", { reload: true });
                 }
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
                 _this.newsManagementService.deleteById(id).then(function (response) {
                     _this.$modalInstance.close();
                     _this.toastr.success("Success");
@@ -6409,7 +6409,7 @@ var Swu;
                     else { }
                 }
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
                 if (_this.$scope.type == 1) {
                     _this.categoryManagementService.deleteById1(id).then(function (response) {
                         _this.$modalInstance.close();
@@ -6490,7 +6490,7 @@ var Swu;
                     _this.$modalInstance.close();
                 }, function (error) { });
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
             };
             this.init();
         }
@@ -6647,7 +6647,7 @@ var Swu;
                     _this.$state.go("app", { reload: true });
                 }
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
                 _this.bannerManagementService.deleteById(id).then(function (response) {
                     _this.$modalInstance.close();
                     _this.toastr.success("Success");
@@ -6805,7 +6805,7 @@ var Swu;
                     _this.toastr.success("Success");
                 }, function (error) { });
             };
-            this.$scope.delete = function (id) {
+            this.$scope["delete"] = function (id) {
                 _this.albumManagementService.deleteById(id).then(function (response) {
                     _this.$modalInstance.close();
                     _this.toastr.success("Success");
@@ -6848,7 +6848,7 @@ var Swu;
                 if (_this.auth.isLoggedIn()) {
                     var models = [];
                     models.push({ name: "file", value: _this.$scope.file });
-                    _this.alumniManagementService.import(models).then(function (response) {
+                    _this.alumniManagementService["import"](models).then(function (response) {
                         _this.toastr.success("Success");
                     }, function (error) { });
                 }
@@ -7154,7 +7154,7 @@ var Swu;
             this.apiService = apiService;
             this.constant = constant;
         }
-        alumniManagementService.prototype.import = function (models) {
+        alumniManagementService.prototype["import"] = function (models) {
             return this.apiService.postWithFormData(models, "shared/importAlumni");
         };
         alumniManagementService.$inject = ['apiService', 'AppConstant'];
@@ -7287,7 +7287,7 @@ var Swu;
                     }, function (error) { });
                 }
             };
-            $scope.delete = function () {
+            $scope["delete"] = function () {
             };
             this.init();
         }
@@ -7456,41 +7456,42 @@ var Swu;
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var CardType;
     (function (CardType) {
         CardType[CardType["topRate"] = 1] = "topRate";
         CardType[CardType["popular"] = 2] = "popular";
         CardType[CardType["recently"] = 3] = "recently";
-    })(Swu.CardType || (Swu.CardType = {}));
-    var CardType = Swu.CardType;
+    })(CardType = Swu.CardType || (Swu.CardType = {}));
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var CurriculumType;
     (function (CurriculumType) {
         CurriculumType[CurriculumType["lecture"] = 1] = "lecture";
         CurriculumType[CurriculumType["exam"] = 2] = "exam";
-    })(Swu.CurriculumType || (Swu.CurriculumType = {}));
-    var CurriculumType = Swu.CurriculumType;
+    })(CurriculumType = Swu.CurriculumType || (Swu.CurriculumType = {}));
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var BoardType;
     (function (BoardType) {
         BoardType[BoardType["forums"] = 1] = "forums";
         BoardType[BoardType["course"] = 2] = "course";
         BoardType[BoardType["research"] = 3] = "research";
-    })(Swu.BoardType || (Swu.BoardType = {}));
-    var BoardType = Swu.BoardType;
+    })(BoardType = Swu.BoardType || (Swu.BoardType = {}));
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var actionMode;
     (function (actionMode) {
         actionMode[actionMode["addNew"] = 1] = "addNew";
         actionMode[actionMode["edit"] = 2] = "edit";
         actionMode[actionMode["approve"] = 3] = "approve";
-    })(Swu.actionMode || (Swu.actionMode = {}));
-    var actionMode = Swu.actionMode;
+    })(actionMode = Swu.actionMode || (Swu.actionMode = {}));
 })(Swu || (Swu = {}));
 var Swu;
 (function (Swu) {
+    var HttpStatusCode;
     (function (HttpStatusCode) {
         HttpStatusCode[HttpStatusCode["Continue"] = 100] = "Continue";
         HttpStatusCode[HttpStatusCode["SwitchingProtocols"] = 101] = "SwitchingProtocols";
@@ -7539,12 +7540,11 @@ var Swu;
         HttpStatusCode[HttpStatusCode["ServiceUnavailable"] = 503] = "ServiceUnavailable";
         HttpStatusCode[HttpStatusCode["GatewayTimeout"] = 504] = "GatewayTimeout";
         HttpStatusCode[HttpStatusCode["HttpVersionNotSupported"] = 505] = "HttpVersionNotSupported";
-    })(Swu.HttpStatusCode || (Swu.HttpStatusCode = {}));
-    var HttpStatusCode = Swu.HttpStatusCode;
+    })(HttpStatusCode = Swu.HttpStatusCode || (Swu.HttpStatusCode = {}));
+    var EmployeeType;
     (function (EmployeeType) {
         EmployeeType[EmployeeType["NotEmployee"] = 0] = "NotEmployee";
         EmployeeType[EmployeeType["Permanent"] = 1] = "Permanent";
         EmployeeType[EmployeeType["Guest"] = 2] = "Guest";
-    })(Swu.EmployeeType || (Swu.EmployeeType = {}));
-    var EmployeeType = Swu.EmployeeType;
+    })(EmployeeType = Swu.EmployeeType || (Swu.EmployeeType = {}));
 })(Swu || (Swu = {}));

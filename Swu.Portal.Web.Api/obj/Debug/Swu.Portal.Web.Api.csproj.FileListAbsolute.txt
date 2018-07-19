@@ -120,3 +120,5 @@ D:\Git\swu\Swu.Portal.Web.Api\bin\Debug\System.Web.WebPages.Razor.xml
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojResolveAssemblyReference.cache
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.dll
 D:\Git\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.pdb
+F:\Template\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csprojAssemblyReference.cache
+F:\Template\swu\Swu.Portal.Web.Api\obj\Debug\Swu.Portal.Web.Api.csproj.CoreCompileInputs.cache
